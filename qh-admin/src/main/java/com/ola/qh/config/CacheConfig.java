@@ -38,7 +38,7 @@ public class CacheConfig {
 		@Override
 		public Object generate(Object target, Method method, Object... params) {
 			String signature = target.getClass().getName()+"."+method.getName();
-			signature = "oula" + signature ;
+			signature = "zhongshi" + signature ;
 			if (params.length == 0) {
 				return signature;
 			}
