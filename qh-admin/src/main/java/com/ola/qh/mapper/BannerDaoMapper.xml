@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.BannerDao">
+	<resultMap type="com.ola.qh.entity.Banner" id="BannerMap">
+		<result column="id" property="id" />
+		<result column="imageurl" property="imageurl" />
+		<result column="type" property="type" />
+		<result column="out_links" property="outLinks" />
+		<result column="isshow" property="isshow" />
+	</resultMap>
+	<select id="selectBanner" resultMap="BannerMap">
+		select imageurl,out_links from banner where type=#{type} and isshow=1
+	</select>
+	
+	
+</mapper>
