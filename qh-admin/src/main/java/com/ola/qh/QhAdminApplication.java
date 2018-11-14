@@ -15,14 +15,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableScheduling
 @EnableSwagger2
-public class OlaTradeApplication extends SpringBootServletInitializer {
+public class QhAdminApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) 
 	{
-		return application.sources(OlaTradeApplication.class);
+		return application.sources(QhAdminApplication.class);
 	}
 
 	public static void main(String[] args) throws IOException {
-		SpringApplication.run(OlaTradeApplication.class, args);
+		SpringApplication.run(QhAdminApplication.class, args);
 	}
 }
