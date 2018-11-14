@@ -8,11 +8,14 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -35,6 +38,22 @@ public class DataConfig
 	prop.load(DataConfig.class.getClassLoader().getResourceAsStream("application.properties"));
 	return prop.getProperty(key);
     }
+    
+    
+    @Bean
+	public SqlSessionFactoryBean mybatisSqlSession() throws Exception{
+		SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
+		ssfb.setDataSource(dataSource());
+		ssfb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/ola/qh/**/mapper/*Mapper.xml"));
+		return ssfb;
+	}
+    
+    @Bean
+	public MapperScannerConfigurer mapperScanner(){
+		MapperScannerConfigurer msc = new MapperScannerConfigurer();
+		msc.setBasePackage("com.ola.qh.**.dao");
+		return msc;
+	}
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
