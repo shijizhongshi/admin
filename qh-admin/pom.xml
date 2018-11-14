@@ -1,0 +1,316 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ola</groupId>
+	<artifactId>qh-admin</artifactId>
+	<version>1.0.0-RELEASE</version>
+	<packaging>jar</packaging>
+
+	<name>qh-admin</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- Inherit defaults from Spring Boot -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.0.RELEASE</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<druid.version>1.0.10</druid.version>
+	</properties>
+
+	<dependencies>
+		<!-- spring boot start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+		</dependency> -->
+		<dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-jdbc</artifactId>
+    	<exclusions>
+	        <exclusion>
+	            <groupId>org.apache.tomcat</groupId>
+	            <artifactId>tomcat-jdbc</artifactId>
+	        </exclusion>
+    	</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        <dependency>
+    		<groupId>org.springframework</groupId>
+   		 	<artifactId>spring-jdbc</artifactId>
+    		<!-- <version>4.3.0.RELEASE</version> -->
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-tx</artifactId>
+    		<!-- <version>4.3.0.RELEASE</version> -->
+		</dependency>
+        <!-- http://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		 <dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.1</version>
+		</dependency>
+        
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+        </dependency>
+        <!-- spring boot end -->
+        <!-- https://mvnrepository.com/artifact/com.sun.org.apache/jaxp-ri -->
+		<dependency>
+		    <groupId>com.sun.org.apache</groupId>
+		    <artifactId>jaxp-ri</artifactId>
+		    <version>1.4</version>
+		</dependency>
+        
+        <dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>core</artifactId>
+		    <version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+	    	<groupId>commons-dbcp</groupId>
+	    	<artifactId>commons-dbcp</artifactId>
+	    	<version>1.4</version>
+		</dependency>
+		
+		
+		<!-- db start -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		
+		
+		<dependency>
+       <groupId>io.springfox</groupId>
+       <artifactId>springfox-swagger2</artifactId>
+       <version>2.2.2</version>
+    </dependency>
+    <dependency>
+       <groupId>io.springfox</groupId>
+       <artifactId>springfox-swagger-ui</artifactId>
+       <version>2.2.2</version>
+    </dependency>
+	<dependency>
+	   <groupId>com.aliyun.oss</groupId>
+	   <artifactId>aliyun-sdk-oss</artifactId>
+	   <version>2.1.0</version>
+	</dependency>
+	  
+	   <dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+	    
+	    <!-- test scope dependency -->
+	    <dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<!-- test scope dependency -->        
+        
+		<!-- json start -->
+        <dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.30</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- json end -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-resources-plugin</artifactId>
+		    <version>2.4.3</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>co.legu</groupId>
+			<artifactId>legu-alidayu-sms</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.oula</groupId>
+		  <artifactId>alidayu</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.oula</groupId>
+		  <artifactId>alipay</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.oula</groupId>
+		  <artifactId>alicommon</artifactId>
+		  <version>1.0</version>
+		</dependency>-->
+		
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+		<dependency>
+		    <groupId>com.google.zxing</groupId>
+		    <artifactId>javase</artifactId>
+		    <version>3.2.1</version>
+		</dependency>
+
+		
+	</dependencies>
+	<build>
+   <plugins>
+      <plugin>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+         </configuration>
+      </plugin>
+   </plugins>
+   <defaultGoal>compile</defaultGoal>
+</build>
+<pluginRepositories>
+   <pluginRepository> 
+	        <id>spring-snapshots</id>
+			<url>http://repo.spring.io/libs-snapshot</url>
+	    </pluginRepository>
+</pluginRepositories>
+	 <profiles>
+        
+        <profile>
+            <id>release</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${project.basedir}/src/main/resources</directory>
+                        <excludes>
+                            <exclude>application.properties</exclude>
+                            <exclude>config.properties</exclude>
+                        </excludes>
+                    </resource>
+                    <resource>
+                        <directory>${project.basedir}/src/main/resources</directory>
+                        <includes>
+                            <include>application.properties</include>
+                            <include>config.properties</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<url>http://repo.spring.io/libs-snapshot</url>
+		</repository>
+		<!--<repository>
+			<id>nexus</id>
+			<name>Nexus Repository</name>
+			<url>http://nexus.qinghuodashi.com/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>-->
+	</repositories>
+	<!--<distributionManagement>
+		 两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致 
+		<repository>
+			<id>nexus-releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://nexus.qinghuodashi.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://nexus.qinghuodashi.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>-->
+	
+</project>
