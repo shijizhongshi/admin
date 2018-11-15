@@ -1,7 +1,15 @@
 package com.ola.qh.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
+/**
+ * 
+ * 
+* @ClassName: Banner
+* @Description:  Banner对象get,set
+* @author guozihan
+* @date   2018年11月15日
+*
+ */
 public class Banner {
 
 	/* 图片ID */
