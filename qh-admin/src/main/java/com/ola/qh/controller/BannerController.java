@@ -22,10 +22,10 @@ import com.ola.qh.util.Results;
 /**
  * 
  * 
- * @ClassName:
- * @Description:
+ * @ClassName:BannerController
+ * @Description:Banner增刪改查
  * @author guozihan
- * @date
+ * @date 2018年11月15日
  *
  */
 @RestController
