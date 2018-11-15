@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ola.qh.dao.NewsDao">
 
-	<resultMap type="com.ola.qh.News" id="NewsMap">
+	<resultMap type="com.ola.qh.entity.News" id="NewsMap">
 	<result column="id" property="id"/>
 	<result column="types" property="types"/>
 	<result column="title" property="title"/>
