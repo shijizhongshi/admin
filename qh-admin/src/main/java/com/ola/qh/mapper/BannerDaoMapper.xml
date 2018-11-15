@@ -11,8 +11,31 @@
 		<result column="isshow" property="isshow" />
 	</resultMap>
 	<select id="selectBanner" resultMap="BannerMap">
-		select imageurl,out_links from banner where type=#{type} and isshow=1
+		select * from banner where type=#{type} and isshow=1
 	</select>
+	<insert id="saveBanner" parameterType="com.ola.qh.entity.Banner">
+		insert into banner(id,imageurl,type,out_links,isshow) values(#{id},#{imageurl},#{type},#{outLinks},#{isshow})
+	</insert>
 	
+	<update id="updateBanner" parameterType="com.ola.qh.entity.Banner">
+		update banner set 
+		<if test="type!=0">
+		type=#{type},
+		</if>
+		<if test="imageurl!=null">
+		imageurl=#{imageurl},
+		</if>
+		<if test="outLinks!=null">
+		out_links=#{outLinks},
+		</if>
+		<if test="isshow!=0">
+		isshow=#{isshow},
+		</if>
+		 id=#{id} where id=#{id}
+	</update>
+	
+	<delete id="deleteBanner" parameterType="com.ola.qh.entity.Banner">
+		delete from banner where id=#{id}
+	</delete>
 	
 </mapper>

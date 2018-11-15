@@ -16,10 +16,32 @@ public class BannerService implements IBannerService {
 	private BannerDao bannerDao;
 
 	@Override
-	public List<Banner> selectBanner(String type) {
+	public List<Banner> selectBanner(int type) {
 		
 		return bannerDao.selectBanner(type);
 	}
+
+	@Override
+	public int saveBanner(Banner banner) {
+		
+		return bannerDao.saveBanner(banner);
+	}
+
+	@Override
+	public int updateBanner(Banner banner) {
+		
+		return bannerDao.updateBanner(banner);
+	}
+
+	@Override
+	public int deleteBanner(String id) {
+		
+		return bannerDao.deleteBanner(id);
+	}
+
+	
+
+	
 	
 	
 
