@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.NewsDao">
+
+	<resultMap type="com.ola.qh.News" id="NewsMap">
+	<result column="id" property="id"/>
+	<result column="types" property="types"/>
+	<result column="title" property="title"/>
+	<result column="img_url" property="imgUrl"/>
+	<result column="content" property="content"/>
+	<result column="addtime" property="addtime"/>
+	<result column="isstick" property="isstick"/>
+	</resultMap>
+
+
+	<select id="selectNewList" resultMap="NewsMap">
+	
+	select * from news
+	  
+	
+	</select>
+
+
+</mapper>
