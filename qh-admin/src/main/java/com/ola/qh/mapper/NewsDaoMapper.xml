@@ -20,7 +20,7 @@
 	</sql>
 	<insert id="saveNews" parameterType="com.ola.qh.entity.News">
 	insert into news(id,types,title,img_url,content,addtime,isstick)values
-	(#{id},#{types},#{title},#{imgUrl},#{content},new Date(),#{isstick})
+	(#{id},#{types},#{title},#{imgUrl},#{content},#{addtime},#{isstick})
 	</insert>
 
 	<update id="updateNews" parameterType="com.ola.qh.entity.News">

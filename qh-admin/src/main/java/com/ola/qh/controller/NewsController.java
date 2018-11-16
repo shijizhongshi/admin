@@ -1,5 +1,6 @@
 package com.ola.qh.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -84,6 +85,7 @@ public class NewsController {
 			return result;
 		}
 		news.setId(KeyGen.uuid());
+		news.setAddtime(new Date());
 		int num = newsService.saveNews(news);
 		if(num>0){
 			result.setStatus("0");
