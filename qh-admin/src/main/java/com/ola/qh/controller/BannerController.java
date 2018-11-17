@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.zxing.Result;
 import com.ola.qh.entity.Banner;
 import com.ola.qh.service.IBannerService;
-import com.ola.qh.service.imp.BannerService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
