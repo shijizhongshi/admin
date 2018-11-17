@@ -15,12 +15,50 @@
 	</resultMap>
 
 
-	<select id="selectNewList" resultMap="NewsMap">
+	<sql id="sql_base">
+	id,types,title,img_url,addtime,isstick
+	</sql>
+	<insert id="saveNews" parameterType="com.ola.qh.entity.News">
+	insert into news(id,types,title,img_url,content,addtime,isstick)values
+	(#{id},#{types},#{title},#{imgUrl},#{content},#{addtime},#{isstick})
+	</insert>
+
+	<update id="updateNews" parameterType="com.ola.qh.entity.News">
+	update news set
+	<if test="types!=null">
+	types=#{types},
+	</if>
+	<if test="title!=null">
+	title=#{title},
+	</if>
+	<if test="imgUrl!=null">
+	img_url=#{imgUrl},
+	</if>
+	<if test="content!=null">
+	content=#{content},
+	</if>
+	<if test="isstick!=0">
+	isstick=#{isstick},
+	</if>
+	id=#{id}
+	where id=#{id}
+	</update>
 	
-	select * from news
-	  
-	
+	<select id="selectNewList" resultMap="NewsMap" parameterType="int">
+		select <include refid="sql_base"></include> from news
+		<if test="pageNo!=0">
+			where limit #{pageNo},#{pageSize}
+		</if>
 	</select>
+
+
+	<select id="singlenews" parameterType="String" resultType="com.ola.qh.entity.News">
+		select * from news
+		where id=#{id}
+	</select>
+	
+	
+	
 
 
 </mapper>

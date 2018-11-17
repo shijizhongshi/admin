@@ -14,11 +14,11 @@ import com.ola.qh.util.FileStore;
 @Service
 public class StoreService implements IStoreService {
 
-	private static String accesskey = "LTAIqoxWjtmP4y1A";
-	private static String accesskeysecret = "Zp3vDWNXuXx3V7A77lyrT67whaMlyo";
+	private static String accesskey = "LTAIvYOv6NLHmNnA";
+	private static String accesskeysecret = "oVZqnj6eQqKIUkdLylp04PMIIzYP9Y";
 	private static String endpoint = "oss-cn-qingdao.aliyuncs.com";
-	private static String bucketname = "zhongshi-image";
-	private static String domain = "https://zhongshi-image.oss-cn-qingdao.aliyuncs.com/";
+	private static String bucketname = "shijizhongshi-image";
+	private static String domain = "https://shijizhongshi-image.oss-cn-qingdao.aliyuncs.com/";
 
 	@Override
 	public String storeUrl(String fname, byte[] content) throws FileStorageException {
