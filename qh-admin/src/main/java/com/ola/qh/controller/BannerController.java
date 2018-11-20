@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.zxing.Result;
 import com.ola.qh.entity.Banner;
 import com.ola.qh.service.IBannerService;
-import com.ola.qh.service.imp.BannerService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
@@ -48,7 +46,6 @@ public class BannerController {
 
 		}
 
-		
 		results.setMessage("图片为空");
 		results.setStatus("1");
 		return results;
@@ -66,14 +63,13 @@ public class BannerController {
 		}
 		banner.setId(KeyGen.uuid());
 		int success = bannerService.saveBanner(banner);
-		if (success > 0) {
-			results.setStatus("0");
+		if (success <= 0) {
+			results.setMessage("图片插入有误");
+			results.setStatus("1");
 			return results;
 		}
-		results.setMessage("图片插入有误");
-		results.setStatus("1");
+		results.setStatus("0");
 		return results;
-
 	}
 
 	@RequestMapping(value = "/updateBanner", method = RequestMethod.POST)
@@ -82,14 +78,15 @@ public class BannerController {
 		Results<String> results = new Results<String>();
 
 		int success = bannerService.updateBanner(banner);
-		if (success > 0) {
-			results.setStatus("0");
-			return results;
-		}
-		results.setMessage("图片信息修改有误");
-		results.setStatus("1");
-		return results;
+		if (success <= 0) {
 
+			results.setMessage("图片信息修改有误");
+			results.setStatus("1");
+			return results;
+
+		}
+		results.setStatus("0");
+		return results;
 	}
 
 	@RequestMapping(value = "/deleteBanner", method = RequestMethod.GET)
@@ -98,14 +95,15 @@ public class BannerController {
 		Results<String> results = new Results<String>();
 
 		int success = bannerService.deleteBanner(id);
-		if (success > 0) {
-			results.setStatus("0");
-			return results;
-		}
-		results.setMessage("图片删除失败");
-		results.setStatus("1");
-		return results;
+		if (success <= 0) {
 
+			results.setMessage("图片删除失败");
+			results.setStatus("1");
+			return results;
+
+		}
+		results.setStatus("0");
+		return results;
 	}
 
 }
