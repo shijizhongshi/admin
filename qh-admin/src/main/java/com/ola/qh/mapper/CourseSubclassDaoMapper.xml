@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+
+<!-- 课程章的查询 -->
+	
+	<!-- 课程章的映射 -->
+	<resultMap type="com.ola.qh.entity.CourseChapter" id="CourseChapterMap">
+	<result column="id" property="id"/>
+	<result column="course_id" property="courseId"/>
+	<result column="course_lecturer" property="courseLecturer"/>
+	<result column="ispay" property="ispay"/><!-- 是否付费 -->
+	<result column="course_chapter_category" property="courseChapterCategory"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	<select id="courseChapterList" resultMap="CourseChapterMap">
+	select id,course_id,course_lecturer,ispay,course_chapter_category,addtime from course_chapter
+	where  course_id=#{courseId}
+	</select>
+	
+	<!-- 课程节的查询 -->
+	<resultMap type="com.ola.qh.entity.CourseSection" id="CourseSectionMap">
+	<result column="id" property="id"/>
+	<result column="course_chapter_id" property="courseChapterId"/>
+	<result column="section_name" property="sectionName"/>
+	<result column="aliyunId" property="aliyunId"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	<select id="courseSectionList" resultMap="CourseSectionMap">
+	select id,course_chapter_id,section_name,aliyunId,addtime from course_section
+	where  course_chapter_id=#{courseChapterId}
+	</select>
+</mapper>
