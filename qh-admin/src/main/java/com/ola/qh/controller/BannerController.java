@@ -46,7 +46,6 @@ public class BannerController {
 
 		}
 
-		
 		results.setMessage("图片为空");
 		results.setStatus("1");
 		return results;
@@ -64,14 +63,13 @@ public class BannerController {
 		}
 		banner.setId(KeyGen.uuid());
 		int success = bannerService.saveBanner(banner);
-		if (success > 0) {
-			results.setStatus("0");
+		if (success <= 0) {
+			results.setMessage("图片插入有误");
+			results.setStatus("1");
 			return results;
 		}
-		results.setMessage("图片插入有误");
-		results.setStatus("1");
+		results.setStatus("0");
 		return results;
-
 	}
 
 	@RequestMapping(value = "/updateBanner", method = RequestMethod.POST)
@@ -80,14 +78,15 @@ public class BannerController {
 		Results<String> results = new Results<String>();
 
 		int success = bannerService.updateBanner(banner);
-		if (success > 0) {
-			results.setStatus("0");
-			return results;
-		}
-		results.setMessage("图片信息修改有误");
-		results.setStatus("1");
-		return results;
+		if (success <= 0) {
 
+			results.setMessage("图片信息修改有误");
+			results.setStatus("1");
+			return results;
+
+		}
+		results.setStatus("0");
+		return results;
 	}
 
 	@RequestMapping(value = "/deleteBanner", method = RequestMethod.GET)
@@ -96,14 +95,15 @@ public class BannerController {
 		Results<String> results = new Results<String>();
 
 		int success = bannerService.deleteBanner(id);
-		if (success > 0) {
-			results.setStatus("0");
-			return results;
-		}
-		results.setMessage("图片删除失败");
-		results.setStatus("1");
-		return results;
+		if (success <= 0) {
 
+			results.setMessage("图片删除失败");
+			results.setStatus("1");
+			return results;
+
+		}
+		results.setStatus("0");
+		return results;
 	}
 
 }

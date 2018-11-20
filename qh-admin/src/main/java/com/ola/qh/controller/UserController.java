@@ -23,13 +23,13 @@ public class UserController {
 		Results<String> results = new Results<String>();
 
 		int user = userService.updateUser(userrole, id);
-		if (user >0) {
-			results.setStatus("0");
+		if (user <= 0) {
+			results.setMessage("更改异常");
+			results.setStatus("1");
 			return results;
 		}
-		results.setMessage("更改异常");
-		results.setStatus("1");
+		results.setStatus("0");
 		return results;
 	}
-	
+
 }
