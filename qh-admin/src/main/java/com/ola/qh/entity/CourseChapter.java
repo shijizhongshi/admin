@@ -2,6 +2,8 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 
 * @ClassName: CourseChapter  
@@ -14,16 +16,18 @@ public class CourseChapter {
 	
 	private String id;
 	
+	@NotEmpty(message="课程的id不能为空")
 	private String courseId;///课程的id
 	
+	@NotEmpty(message="章名称不能为空")
 	private String courseChapterName;//课程章的名称
 	
 	private String courseTypeName;////课程类别的名称
 	
 	private String courseTypeSubclassName;///课程子类别的名称
-	
+	@NotEmpty(message="主讲人不能为空")
 	private String courseLecturer;////课程的主讲人
-	
+	@NotEmpty(message="章类别不能为空")
 	private String courseChapterCategory;////课程的章类别
 	
 	private int ispay;////1:付费的章节  0:免费的章节

@@ -20,11 +20,30 @@
 	insert into course_chapter(id,course_id,course_lecturer,ispay,course_chapter_category,addtime)
 	 values(#{id},#{courseId},#{courseLecturer},#{ispay},#{courseChapterCategory},#{addtime})
 	</insert>
+	<update id="updateCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
+	update course_chapter set 
+	<if test="courseId!=null">
+		course_id=#{courseId},
+	</if>
+	<if test="courseLecturer!=null">
+		course_lecturer=#{courseLecturer},
+	</if>
+	<if test="ispay!=0">
+		ispay=#{ispay},
+	</if>
+	<if test="courseChapterCategory!=null">
+		course_chapter_category=#{courseChapterCategory},
+	</if>
+	updatetime=#{updatetime} where id=#{id}
+	</update>
 	<!-- 课程章的查询 -->
 	<select id="courseChapterList" resultMap="CourseChapterMap">
 	select id,course_id,course_lecturer,ispay,course_chapter_category,addtime from course_chapter
 	<if test="courseId!=null">
 	where  course_id=#{courseId}
+	</if>
+	<if test="pageSize!=0">
+	limit #{pageNo},#{pageSize}
 	</if>
 	</select>
 	
@@ -47,11 +66,28 @@
 	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{addtime})
 	</insert>
 	
+	<update id="updateCourseSection" parameterType="com.ola.qh.entity.CourseSection">
+	update course_section set
+	<if test="courseChapterId!=null">
+	course_chapter_id=#{courseChapterId},
+	</if>
+	<if test="sectionName!=null">
+	section_name=#{sectionName},
+	</if>
+	<if test="aliyunId!=null">
+	aliyunId=#{aliyunId},
+	</if>
+	updatetime=#{updatetime} where id=#{id}
+	</update>
+	
 	<!-- 课程节的查询 -->
 	<select id="courseSectionList" resultMap="CourseSectionMap">
 	select id,course_chapter_id,section_name,aliyunId,addtime from course_section
 	<if test="courseChapterId!=null">
 	where  course_chapter_id=#{courseChapterId}
+	</if>
+	<if test="pageSize!=0">
+	limit #{pageNo},#{pageSize}
 	</if>
 	</select>
 	

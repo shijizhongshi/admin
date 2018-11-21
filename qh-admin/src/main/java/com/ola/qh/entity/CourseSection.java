@@ -2,6 +2,8 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 
 * @ClassName: CourseSection  
@@ -14,12 +16,13 @@ public class CourseSection {
 
 	private String id;
 	
+	@NotEmpty(message="章的id不能为空")
 	private String courseChapterId;//////一章多个节
-	
+	@NotEmpty(message="节的名称不能为空")
 	private String sectionName;
 	
 	private int isshow;
-	
+	@NotEmpty(message="视频连接不能为空")
 	private String aliyunId;
 	
 	private Date addtime;
