@@ -11,7 +11,14 @@ import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseSection;
 import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.util.Results;
-
+/**
+ * 
+* @ClassName: CourseSubclassController  
+* @Description: 课程的章和课程的节的处理  
+* @author guoyuxue  
+* @date 2018年11月20日  
+*
+ */
 @RestController
 @RequestMapping("/api/course/subclass")
 public class CourseSubclassController {

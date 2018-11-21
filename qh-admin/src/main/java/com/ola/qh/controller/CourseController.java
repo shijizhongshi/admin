@@ -2,8 +2,13 @@ package com.ola.qh.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /**
@@ -23,7 +28,14 @@ import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
-
+/**
+ * 
+* @ClassName: CourseController  
+* @Description:课程的类别和课程的处理  
+* @author guoyuxue  
+* @date 2018年11月20日  
+*
+ */
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
@@ -39,14 +51,67 @@ public class CourseController {
 	 */
 	@RequestMapping("/courseTypeList")
 	public Results<List<CourseType>> listCourseType() {
-
 		Results<List<CourseType>> result = new Results<List<CourseType>>();
 		List<CourseType> list = courseService.courseTypeList();
 		result.setData(list);
 		result.setStatus("0");
 		return result;
-
 	}
+	
+	
+	/**
+	 * 保存大类别或者是小类别简单保存
+	 * <p>Title: saveCourseType</p>  
+	 * <p>Description: </p>  
+	 * @param id
+	 * @param courseTypeName
+	 * @param courseTypeId
+	 * @return
+	 */
+	@RequestMapping("/courseTypeSave")
+	public Results<String> saveCourseType(
+			@RequestParam(name="courseTypeName",required=true)String courseTypeName,
+			@RequestParam(name="courseTypeId",required=false)String courseTypeId
+			){
+		Results<String> result=new Results<String>();
+		int num= courseService.insertCourseType(courseTypeName,courseTypeId);
+		if(num>0){
+			result.setStatus("0");
+			return result;
+		}
+		result.setStatus("1");
+		result.setMessage("保存失败");
+		return result;
+	}
+	/**
+	 * 修改大类别和小类别
+	 * <p>Title: updateCourseType</p>  
+	 * <p>Description: </p>  
+	 * @param id
+	 * @param courseTypeName
+	 * @param courseTypeId
+	 * @return
+	 */
+	@RequestMapping("/courseTypeUpdate")
+	public Results<String> updateCourseType(
+			@RequestParam(name="id",required=true)String id,
+			@RequestParam(name="courseTypeName",required=true)String courseTypeName,
+			@RequestParam(name="courseTypeId",required=false)String courseTypeId
+			){
+		Results<String> result = new Results<String>();
+		int num= courseService.updateCourseType(courseTypeName, id, courseTypeId);
+		if(num>0){
+			result.setStatus("0");
+			return result;
+		}
+		result.setStatus("1");
+		result.setMessage("修改失败");
+		return result;
+	}
+	
+	
+	
+	
 
 	/**
 	 * 子类别的集合
@@ -66,6 +131,8 @@ public class CourseController {
 		return result;
 
 	}
+	
+	
 
 	/**
 	 * 
@@ -91,7 +158,6 @@ public class CourseController {
 			@RequestParam(name = "courseExcellent", required = false,defaultValue="0") int courseExcellent) {
 
 		Results<List<Course>> result = new Results<List<Course>>();
-
 		Course course = new Course();
 		course.setCourseTypeName(courseTypeName);
 		course.setCourseTypeSubclassName(courseTypeSubclassName);
@@ -102,6 +168,37 @@ public class CourseController {
 		result.setData(courseService.courseList(course));
 		result.setStatus("0");
 		return result;
+	}
+	
+	/**
+	 * 课程的保存和修改
+	 * <p>Title: courseSaveUpdate</p>  
+	 * <p>Description: </p>  
+	 * @param course
+	 * @param valid
+	 * @return
+	 */
+	@RequestMapping(value="/courseSaveUpdate",method=RequestMethod.POST)
+	public Results<String> courseSaveUpdate(@RequestBody @Valid Course course,BindingResult valid){
+		
+		Results<String> result=new Results<String>();
+		if(course.getId()==null || "".equals(course.getId())){
+			////修改课程的基本信息
+			if(valid.hasErrors()){
+				result.setStatus("1");
+				result.setMessage("添加课程信息不完整");
+				return result;
+			}
+		}
+		int num = courseService.insertUpdateCourse(course);
+		if(num>0){
+			result.setStatus("0");
+			return result;
+		}
+		result.setStatus("1");
+		result.setMessage("操作失败");
+		return result;
+
 	}
 	
 	

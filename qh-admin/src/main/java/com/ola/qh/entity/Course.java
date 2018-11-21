@@ -1,6 +1,8 @@
 package com.ola.qh.entity;
 
 import java.util.Date;
+
+import org.hibernate.validator.constraints.NotEmpty;
 /**
  * 
 * @ClassName: Course  
@@ -13,26 +15,28 @@ public class Course {
 	
 	private String id;
 
+	@NotEmpty(message="课程名称不能为空")
 	private String courseName;//课程名称
 	
+	@NotEmpty(message="课程类别不能为空")
 	private String courseTypeName;///课程类别的名称
-	
+	@NotEmpty(message="课程子类别不能为空")
 	private String courseTypeSubclassName;////课程子类别的名称
 	
-	private String courseChapterSize;////课程的章节数
+	private int courseChapterSize;////课程的章节数
 	
-	private String coursePrice;////课程的价格
+	private double coursePrice;////课程的价格
 	
-	private String courseDiscountPrice;////课程折扣价格
+	private double courseDiscountPrice;////课程折扣价格
 	
 	private String courseYear;////课程年限
 	
-	private String courseShow;////课程是否展示
+	private int courseShow;////课程是否展示
 	
 	private int courseExcellent;///是否是优秀课程
-	
+	@NotEmpty(message="资源类别不能为空")
 	private String courseResourceType;/////课程资源类别
-	
+	@NotEmpty(message="用途类别不能为空")
 	private String courseUseDifference;/////课程用途类别
 	
 	private String courseImg;////课程的图片
@@ -69,27 +73,30 @@ public class Course {
 		this.courseTypeSubclassName = courseTypeSubclassName;
 	}
 
-	public String getCourseChapterSize() {
+
+	public int getCourseChapterSize() {
 		return courseChapterSize;
 	}
 
-	public void setCourseChapterSize(String courseChapterSize) {
+	public void setCourseChapterSize(int courseChapterSize) {
 		this.courseChapterSize = courseChapterSize;
 	}
 
-	public String getCoursePrice() {
+	
+
+	public double getCoursePrice() {
 		return coursePrice;
 	}
 
-	public void setCoursePrice(String coursePrice) {
+	public void setCoursePrice(double coursePrice) {
 		this.coursePrice = coursePrice;
 	}
 
-	public String getCourseDiscountPrice() {
+	public double getCourseDiscountPrice() {
 		return courseDiscountPrice;
 	}
 
-	public void setCourseDiscountPrice(String courseDiscountPrice) {
+	public void setCourseDiscountPrice(double courseDiscountPrice) {
 		this.courseDiscountPrice = courseDiscountPrice;
 	}
 
@@ -101,13 +108,15 @@ public class Course {
 		this.courseYear = courseYear;
 	}
 
-	public String getCourseShow() {
+	
+	public int getCourseShow() {
 		return courseShow;
 	}
 
-	public void setCourseShow(String courseShow) {
+	public void setCourseShow(int courseShow) {
 		this.courseShow = courseShow;
 	}
+
 	public int getCourseExcellent() {
 		return courseExcellent;
 	}
