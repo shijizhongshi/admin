@@ -27,7 +27,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
-@EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class DataConfig
 {
@@ -48,12 +47,12 @@ public class DataConfig
 		return ssfb;
 	}
     
-    @Bean
+   /* @Bean
 	public MapperScannerConfigurer mapperScanner(){
 		MapperScannerConfigurer msc = new MapperScannerConfigurer();
 		msc.setBasePackage("com.ola.qh.**.dao");
 		return msc;
-	}
+	}*/
 
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
