@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ShopDrugDao">
+	<resultMap type="com.ola.qh.entity.ShopDrug" id="ShopDrugMap">
+	<result column="id" property="id"/>
+	<result column="user_id" property="userId"/>
+	<result column="shop_id" property="shopId"/>
+	<result column="drug_name" property="drugName"/>
+	<result column="healing_powers" property="healingPowers"/>
+	<result column="specification" property="specification"/>
+	<result column="original_price" property="originalPrice"/>
+	<result column="discount_price" property="discountPrice"/>
+	<result column="price" property="price"/>
+	<result column="drug_detail" property="drugDetail"/>
+	<result column="specification_params" property="specificationParams"/>
+	<result column="product_name" property="productName"/>
+	<result column="manufacturer" property="manufacturer"/>
+	<result column="drug_sign" property="drugSign"/>
+	<result column="approval_number" property="approvalNumber"/>
+	<result column="period_validity" property="periodValidity"/>
+	<result column="storages" property="storages"/>
+	<result column="units" property="units"/>
+	<result column="proper_people" property="properPeople"/>
+	<result column="elements" property="elements"/>
+	<result column="characters" property="characters"/>
+	<result column="packagings" property="packagings"/>
+	<result column="indication" property="indication"/>
+	<result column="dosage" property="dosage"/>
+	<result column="bad_symptom" property="badSymptom"/>
+	<result column="taboo" property="taboo"/>
+	<result column="attention_matter" property="attentionMatter"/>
+	<result column="drug_interactions" property="drugInteractions"/>
+	<result column="drug_action" property="drugAction"/>
+	<result column="shap_code" property="shapCode"/>
+	<result column="friendly_hint" property="friendlyHint"/>
+	<result column="img_url" property="imgUrl"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap> 
+	
+	<sql id="sql_base">
+	id,user_id,shop_id,drug_name,healing_powers,specification,original_price,
+	discount_price,price,drug_detail
+	</sql>
+	
+	<update id="updateDrug">
+	update shop_drug set 
+	<if test="status!=0">
+	status=#{status},
+	</if>
+	<if test="ishot!=0">
+	ishot=#{ishot},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+	
+	<!-- 通过产品的id查详情页 -->
+	<select id="selectById" resultType="com.ola.qh.entity.ShopDrug">
+	select <include refid="sql_base"></include> from shop_drug where id=#{id}
+	</select>
+	
+	<!-- 查集合的时候记得展示店铺的信息(图片的集合) 添加不同条件的查询~-->
+	<select id="selectDrugList" resultMap="ShopDrugMap">
+	select <include refid="sql_base"></include>,img_url from shop_drug 
+	where 1=1
+	<if test="shopName!=null">
+	and shop_name=#{shopName}
+	</if>
+	<if test="ishot!=0">
+	and ishot=#{ishot}
+	</if>
+	order by addtime desc
+	limit #{pageNo},#{pageSize}
+	</select>
+</mapper>
