@@ -57,7 +57,7 @@
 	</update>
 	
 	<!-- 通过产品的id查详情页 -->
-	<select id="selectById" resultType="com.ola.qh.entity.ShopDrug">
+	<select id="selectById" resultMap="ShopDrugMap">
 	select <include refid="sql_base"></include> from shop_drug where id=#{id}
 	</select>
 	

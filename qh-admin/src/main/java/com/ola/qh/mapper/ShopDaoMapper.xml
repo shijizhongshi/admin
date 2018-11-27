@@ -30,8 +30,8 @@
 	 limit #{pageNo},#{pageSize}
 	</select>
 	<!-- 店铺详细信息的展示 -->
-	<select id="selectShopSingle" resultType="com.ola.qh.entity.Shop">
-	select * from shop where id#{id}
+	<select id="selectShopSingle" resultMap="ShopMap">
+	select * from shop where id=#{id}
 	</select>
 	<!-- 开通开通店铺的权限 -->
 	<update id="updateShop" parameterType="String">
