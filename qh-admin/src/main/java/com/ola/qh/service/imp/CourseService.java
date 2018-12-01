@@ -78,6 +78,7 @@ public class CourseService implements ICourseService{
 		}
 		course.setId(KeyGen.uuid());
 		course.setAddtime(new Date());
+		course.setUserId("1");
 		return courseDao.insertCourse(course);
 	}
 
