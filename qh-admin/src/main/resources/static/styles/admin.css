@@ -8,8 +8,8 @@
 .classify ul{width: 267px;height:55px;line-height:55px;text-align: center;}
 .classify ul li{color: white;font-size:16px;margin-top:-8px;}
 .classify ul:nth-child(1) li{background: url(./images/sjk-compass.png) no-repeat;}
-.details{width: 83%;height:1244px;float: left;}
-.details-nav{width:90%;height: 55px;background: white;padding:20px}
+.details{width: 83%;height:1244px;float:right;overflow: hidden;}
+.details-nav{width:83%;height: 55px;background: white;padding:20px}
 .details-nav ul li{float: left;font-size:12px;color: #777777;margin-right:10px}
 .details-nav ul li img{margin-right:5px;vertical-align: middle;}
 .details-frame{width:1595px;padding: 29px;background:#EDEEF2;height:990px;backround:#FFFFFF;}
