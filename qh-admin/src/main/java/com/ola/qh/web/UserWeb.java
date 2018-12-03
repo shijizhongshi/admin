@@ -7,8 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserWeb {
 
-	@RequestMapping(value="/admin",method=RequestMethod.GET)
+	@RequestMapping(value="/course",method=RequestMethod.GET)
 	public String UserWeb(){
+		return "course";
+	}
+	
+	@RequestMapping(value="/admin",method=RequestMethod.GET)
+	public String UserWebq(){
 		return "admin";
 	}
+	
 }
