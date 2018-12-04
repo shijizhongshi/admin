@@ -50,7 +50,7 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping("/courseTypeList")
-	public Results<List<CourseType>> listCourseType() {
+	public Results<List<CourseType>> listCourseType(@RequestParam(name="title",required=true)String title) {
 		Results<List<CourseType>> result = new Results<List<CourseType>>();
 		List<CourseType> list = courseService.courseTypeList();
 		result.setData(list);
