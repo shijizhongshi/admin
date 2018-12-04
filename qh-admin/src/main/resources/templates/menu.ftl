@@ -1,10 +1,3 @@
-<#import "/layout/header.ftl" as h/>
-<!DOCTYPE html>
-<html lang="en">
-<@h.header title="课程管理页面"/>
-<link rel="stylesheet" href="./styles/course.css" />
-<body>
-
 <div class="top">
 	<div class="col-md-7">
 		<img src="./images/sjk-gd.png" />
@@ -42,10 +35,9 @@
       </ul>
       </li>
       </ul>
-</div>
-
-</body>
- <script type="text/javascript">  
+      
+      
+       <script type="text/javascript">  
  
 var list = document.querySelectorAll('.list');
 
@@ -69,5 +61,6 @@ for (i = 0; i < list.length; i++) {
     list[i].addEventListener('click', accordion);
 }
 </script>
+</div>
 
-</html>
+

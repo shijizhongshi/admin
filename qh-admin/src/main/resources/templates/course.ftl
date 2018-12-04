@@ -1,6 +1,12 @@
-<#import "/course-head.ftl" as d />
+<#import "/layout/header.ftl" as h/>
+
+<!DOCTYPE html>
+<html lang="en">
+<@h.header title="课程管理页面"/>
 <script src="/scripts/course.js"></script>
-<@d.course-head>
+<link rel="stylesheet" href="./styles/course.css" />
+<body>
+ <#include "/menu.ftl"/>
 <div class="details">
 	<div class="details-nav">
 		<ul>
@@ -305,7 +311,5 @@
 
 </div>
 </div>
-
-
-</@d.course-head>
- 
+</body>
+ </html>
