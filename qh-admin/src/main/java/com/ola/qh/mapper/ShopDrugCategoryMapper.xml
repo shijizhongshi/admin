@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ShopDrugCategoryDao">
+	<resultMap type="com.ola.qh.entity.ShopDrugCategory"  id="ShopDrugCategoryMap">
+		<result column="id" property="id" />
+		<result column="category_name" property="categoryName" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	
+	<select id="selectShopDrugCategory" resultMap="ShopDrugCategoryMap">
+		select id,category_name,addtime from shop_drug_category
+	</select>
+
+	<insert id="insertShopDrugCategory" parameterType="com.ola.qh.entity.ShopDrugCategory">
+		insert into shop_drug_category(id,category_name,addtime) values(#{id},#{categoryName},#{addtime})
+	</insert>
+	
+	<update id="updateShopDrugCategory" parameterType="com.ola.qh.entity.ShopDrugCategory">
+		update shop_drug_category set 
+		<if test="categoryName!=null">
+		category_name=#{categoryName},
+		</if>
+		updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteShopDrugCategory">
+		delete from shop_drug_category where id=#{id}
+	</delete>
+</mapper>

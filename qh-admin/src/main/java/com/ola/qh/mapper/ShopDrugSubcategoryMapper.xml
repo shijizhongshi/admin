@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ShopDrugSubcategoryDao">
+	<resultMap type="com.ola.qh.entity.ShopDrugSubcategory"  id="ShopDrugSubcategoryMap">
+		<result column="id" property="id" />
+		<result column="category_id" property="categoryId" />
+		<result column="sub_name" property="subName" />
+		<result column="addtime" property="addtime" />
+	</resultMap>
+	
+	<select id="selectShopDrugSubcategory" resultMap="ShopDrugSubcategoryMap">
+		select id,category_id,sub_name,addtime from shop_drug_subcategory where category_id=#{categoryId}
+	</select>
+
+	<insert id="insertShopDrugSubcategory" parameterType="com.ola.qh.entity.ShopDrugSubcategory">
+		insert into shop_drug_subcategory(id,category_id,sub_name,addtime) values(#{id},#{categoryId},#{subName},#{addtime})
+	</insert>
+	
+	<update id="updateShopDrugSubcategory" parameterType="com.ola.qh.entity.ShopDrugSubcategory">
+		update shop_drug_subcategory set sub_name=#{subName} where id=#{id}
+	</update>
+	
+	<delete id="deleteShopDrugSubcategory">
+		delete from shop_drug_subcategory where id=#{id}
+	</delete>
+	
+	<delete id="deleteAllShopDrugSubcategory">
+		delete from shop_drug_subcategory where category_id=#{categoryId}
+	</delete>
+</mapper>
