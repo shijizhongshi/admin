@@ -1,10 +1,12 @@
 <#import "/layout/header.ftl" as h/>
+
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="后台管理页面"/>
+<@h.header title="课程管理页面"/>
+<script src="/scripts/course.js"></script>
 <link rel="stylesheet" href="./styles/course.css" />
-<script src="/scripts/course-head.js"></script>
 <body>
+ <#include "/menu.ftl"/>
 <div class="details">
 	<div class="details-nav">
 		<ul>
@@ -15,9 +17,9 @@
 		
 		</ul>
 	</div>
-<div class="details-frame">
+<div class="details-frame" >
 	<div class="details-frame-content">
-		<div class=" select">
+		<div class=" select" ng-model="title">
 			专业选择<br />
 			<select>
 				<option></option>
@@ -37,7 +39,7 @@
 		</div>
 		
 		
-	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索" style="background:#E9484D"/></div></div>
+	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索"  style="background:#E9484D"/></div></div>
 <div class="manage">
 	<ul style="height: 80px;">
 		<div class="switch">
@@ -64,7 +66,7 @@
 			</select>
 		</div>
 		<div class=" select"style="width: 425px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称"style="width: 230px;text-indent: 2em;" />
+			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
 			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
 		</div>
 		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
@@ -136,7 +138,8 @@
 	<li  class="col-md-1">资源类别</li>
 	<li  class="col-md-1">章类别</li>
 	</ol>
-<ol >
+ <for:each>
+ <ol >
 		<li class="col-md-2">章名称</li>
 	<li class="col-md-1">章总数</li>
 	<li class="col-md-1">课程价格</li>
@@ -147,6 +150,7 @@
 	<li  class="col-md-1">资源类别</li>
 	<li  class="col-md-1">章类别</li>
 	</ol>
+	
 	<ol >
 		<li class="col-md-2">章名称</li>
 	<li class="col-md-1">章总数</li>
@@ -308,14 +312,4 @@
 </div>
 </div>
 </body>
- <script type="text/javascript">  
-        function showDiv(){
-        document.getElementById('poop').style.display="block"; 
-        }
-function CloseDiv()
-{
-document.getElementById('poop').style.display='none';
-
-};
-
-</script>
+ </html>

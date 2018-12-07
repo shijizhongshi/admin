@@ -16,5 +16,9 @@ public class UserWeb {
 	public String UserWebq(){
 		return "admin";
 	}
+	@RequestMapping(value="/course-head",method=RequestMethod.GET)
+	public String UserWebw(){
+		return "course-head";
+	}
 	
 }

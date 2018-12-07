@@ -12,5 +12,4 @@ app.controller("CourseController", function($scope, $http){
             }).error(function(data){
             	alert(data.message);
             });
-    };
 });
