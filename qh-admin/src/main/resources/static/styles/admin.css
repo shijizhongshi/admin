@@ -136,7 +136,7 @@ select{width:180px;height: 40px;position: relative;background:#EDEEF0;border-rad
 .admin-table ol:nth-child(2n-1){background:#F0F1F3;}
 .fanye{width:355px;margin: 0 auto;}
 
-/*µ¯´°*/
+/*ï¿½ï¿½ï¿½ï¿½*/
 .poop{display: none;z-index:50;width: 493px;height: 520px;padding:20px 30px;background: red;box-shadow: 5px 5px 5px 5px #9999;box-shadow: -5px -5px -5px -5px #9999;position: absolute;left:500px;top: 200px;}
 .poop .end{width: 200px;float: right;}
 .poop .end input {width:68px;height: 36px;border-radius:10px ;}
