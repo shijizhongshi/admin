@@ -46,10 +46,11 @@ public class ShopController {
 	@RequestMapping("/updateShop")
 	public Results<String> singleShop(
 			@RequestParam(name="id",required=true)String id,
-			@RequestParam(name="islimits",required=true)int islimits){
+			@RequestParam(name="islimits",required=true)int islimits,
+			@RequestParam(name="isrecommend",required=true)int isrecommend){
 		
 		Results<String> result = new Results<String>();
-		int num = shopService.updateShop(id, islimits);
+		int num = shopService.updateShop(id, islimits,isrecommend);
 		if(num>0){
 			result.setStatus("0");
 			return result;

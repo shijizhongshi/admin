@@ -40,6 +40,8 @@ public class Shop {
 	
 	private int islimits;/////查看是否已经审核通过了
 	
+	private int isrecommend;/////是否推荐
+	
 	private Date addtime;
 	
 	private Date updatetime;
@@ -170,6 +172,14 @@ public class Shop {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public int getIsrecommend() {
+		return isrecommend;
+	}
+
+	public void setIsrecommend(int isrecommend) {
+		this.isrecommend = isrecommend;
 	}
 	
 	

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ShopServeTypeDao">
+	<resultMap type="com.ola.qh.entity.ShopServeType" id="ShopServeTypeMap">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<select id="selectShopServeType" resultMap="ShopServeTypeMap">
+		select * from	shop_serve_type
+	</select>
+	
+	<insert id="insertShopServeType" parameterType="com.ola.qh.entity.ShopServeType">
+		insert into shop_serve_type(id,name,addtime) values(#{id},#{name},#{addtime})
+	</insert>
+	
+	<update id="updateShopServeType" parameterType="com.ola.qh.entity.ShopServeType">
+		update shop_serve_type set name=#{name},updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteShopServeType" >
+		delete from shop_serve_type where id=#{id}
+	</delete>
+	
+</mapper>
