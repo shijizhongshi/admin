@@ -4,7 +4,7 @@ app.controller("CourseController", function($scope, $http){
 	$http.get("/api/course/courseTypeList", $scope.course, {'Content-Type': 'application/json;charset=UTF-8'})
             .success(function(data){
                 if(data.status=="0"){
-                	$scope.courseType=data.data;
+                	$scope.courseType=data.dat                                                                                                       a;
                     return;
                 }else{
                     alert(data.message);

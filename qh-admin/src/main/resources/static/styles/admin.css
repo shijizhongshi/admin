@@ -117,8 +117,6 @@ ul.menu .active .list a {
   padding: 10px 0px 17px 45px;
 }
 
-.classify ul li:first-child {margin-top:0px;}
-.classify ul:nth-child(1) li{background: url(./images/sjk-compass.png) no-repeat;}
 .details{width: 86%;height:auto;float:left;overflow: hidden;}
 .details-nav{width:86%;height: 55px;background: white;padding:20px}
 .details-nav ul li{float: left;font-size:12px;color: #777777;margin-right:10px}
@@ -136,12 +134,15 @@ select{width:180px;height: 40px;position: relative;background:#EDEEF0;border-rad
 .admin-table ol {width: 1397px;height: 42px;margin-bottom:0;}
 .admin-table ol:nth-child(2n){background:white;}
 .admin-table ol:nth-child(2n-1){background:#F0F1F3;}
-.fanye{}
+.fanye{width:355px;margin: 0 auto;}
+
 /*µ¯´°*/
-.poop{z-index:99;width: 493px;height: 520px;padding:20px 30px;background: white;box-shadow: 5px 5px 5px 5px #9999;box-shadow: -5px -5px -5px -5px #9999;position: absolute;left:500px;top: 200px;}
+.poop{display: none;z-index:50;width: 493px;height: 520px;padding:20px 30px;background: red;box-shadow: 5px 5px 5px 5px #9999;box-shadow: -5px -5px -5px -5px #9999;position: absolute;left:500px;top: 200px;}
 .poop .end{width: 200px;float: right;}
 .poop .end input {width:68px;height: 36px;border-radius:10px ;}
-.poop {display: none;}
 
-body{position: relative;}
-.ww{position: absolute;right:0;}
+
+.poop-revise{display: none;z-index:50;width: 493px;height: 520px;padding:20px 30px;background: white;box-shadow: 5px 5px 5px 5px #9999;box-shadow: -5px -5px -5px -5px #9999;position: absolute;left:0px;top: 0px;}
+.poop-revise .end{width: 200px;float: right;}
+.poop-revise .end input {width:68px;height: 36px;border-radius:10px ;}
+

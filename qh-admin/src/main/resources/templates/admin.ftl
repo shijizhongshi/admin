@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <@h.header title="课程管理页面"/>
-<link rel="stylesheet" href="./styles/course.css" />
+<link rel="stylesheet" href="./styles/admin.css" />
 <script src="/scripts/course.js"></script>
 <body>
 <div class="container-fluid" ng-controller="CourseController">

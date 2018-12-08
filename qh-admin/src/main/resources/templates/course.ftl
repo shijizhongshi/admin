@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <@h.header title="课程管理页面"/>
+<link rel="stylesheet" href="./styles/admin.css" />
 <script src="/scripts/course.js"></script>
-<link rel="stylesheet" href="./styles/course.css" />
+
 <body>
  <#include "/menu.ftl"/>
 <div class="details">
@@ -39,86 +40,17 @@
 		</div>
 		
 		
-	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索"  style="background:#E9484D"/></div></div>
+	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索"  style="background:#E9484D"/></div>
+	<div class="select" style="float: right;margin-right:15px;">搜索课程<br />
+	<input type="text" name="sousuo" style=" text-indent:2em;"/>
+	</div>
+	</div>
 <div class="manage">
 	<ul style="height: 80px;">
-		<div class="switch">
-			<li  onclick="showDiv()"><img src="./images/sjk-add.png"/></li>
-			<!--弹窗-->
-		<div class="poop" id="poop">
-	<h3>添加课程</h3>
-	<div class="select">
-		
-			专业类型<br />
-			<select>
-				<option></option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class="select">
-		
-			专业类型<br />
-			<select>
-				<option></option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class=" select"style="width: 425px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
-			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
-		</div>
-		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
-			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
-			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
-		</div>
-		<div class=" select"style="width: 425px;height:53px;margin-top: 10px;">
-		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
-		<div class=" select" style="height:66px;">
-			是否显示<br />
-			<select style="width:120px ;" >
-			<option></option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		<div class=" select" style="height:66px;">
-			是否精品<br />
-			<select style="width:120px ;">
-			<option></option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		<p style="float: left;width: 426px;height: 1px;background:#F5F6F8;"></p>
-<div class="select">
-		
-			课程资源类别<br />
-			<select>
-				<option></option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
 
-			<div class="select">
-		
-			课程用途分类<br />
-			<select>
-				<option></option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class="end">
-			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="submit" value="取消" id="esc" onclick="CloseDiv()"/>
-		</div>
-		
+			<li  onclick="showDiv()"><img src="./images/sjk-add.png"/></li>
 	
-		</div>
-		<li><img src="./images/sjk-xiugai.png" name="xiugai"/></li>
+		<li onclick="showDiv2()" ><img src="./images/sjk-xiugai.png" /></li>
 		<li><img src="./images/sjk-delete.png" name="shanchu"/></li>
 		<li><img src="./images/sjk-up.png" name="changyi"/></li>
 		<li><img src="./images/sjk-down.png" name="changyi"/></li>
@@ -307,9 +239,178 @@
 		<li><a href="#">&raquo;</a></li>
 	</ul>
 </div>
+
+	<!--弹窗-->
+		<!--<div class="poop" id="poop-add">
+		<form id="myform">
+	<h3>添加课程</h3>
+	<div class="select">
+		
+			专业类型<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class="select">
+		
+			专业类型<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class=" select"style="width: 425px;height:53px;border-bottom: 1px solid #F5F6F8;">
+			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
+			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
+		</div>
+		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
+			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
+			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
+		</div>
+		<div class=" select"style="width: 425px;height:53px;margin-top: 10px;">
+		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
+		<div class=" select" style="height:66px;">
+			是否显示<br />
+			<select style="width:120px ;" >
+			<option></option>
+				<option>是</option>
+				<option>否</option>
+			</select>
+		</div>
+		<div class=" select" style="height:66px;">
+			是否精品<br />
+			<select style="width:120px ;">
+			<option></option>
+				<option>是</option>
+				<option>否</option>
+			</select>
+		</div>
+		<p style="float: left;width: 426px;height: 1px;background:#F5F6F8;"></p>
+<div class="select">
+		
+			课程资源类别<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+
+			<div class="select">
+		
+			课程用途分类<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class="end">
+			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			</form>
+		</div>
+		-->
+		<div class="poop" id="poop-revise"  >
+		<form id="myform2">
+	<h3>添加课程</h3>
+	<div class="select">
+		
+			专业类型<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class="select">
+		
+			专业类型<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class=" select"style="width: 425px;height:53px;border-bottom: 1px solid #F5F6F8;">
+			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
+			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
+		</div>
+		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
+			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
+			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
+		</div>
+		<div class=" select"style="width: 425px;height:53px;margin-top: 10px;">
+		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
+		<div class=" select" style="height:66px;">
+			是否显示<br />
+			<select style="width:120px ;" >
+			<option></option>
+				<option>是</option>
+				<option>否</option>
+			</select>
+		</div>
+		<div class=" select" style="height:66px;">
+			是否精品<br />
+			<select style="width:120px ;">
+			<option></option>
+				<option>是</option>
+				<option>否</option>
+			</select>
+		</div>
+		<p style="float: left;width: 426px;height: 1px;background:#F5F6F8;"></p>
+<div class="select">
+		
+			课程资源类别<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+
+			<div class="select">
+		
+			课程用途分类<br />
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class="end">
+			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset()" class="esc" />
+			</form>
+		</div>
+
+	
 </div>
 
 </div>
 </div>
 </body>
+ <script type="text/javascript">  
+        function showDiv(){
+        document.getElementById('poop-add').style.display="block"; 
+        }
+function CloseDiv()
+{
+document.getElementById('poop-add').style.display='none';
+}
+function formReset()
+  {
+  document.getElementById("myform").reset()
+  }
+  function showDiv2(){
+        document.getElementById('poop-revise').style.display="block"; 
+        }
+function CloseDiv2()
+{
+document.getElementById('poop-revise').style.display='none';
+}
+</script>
  </html>
