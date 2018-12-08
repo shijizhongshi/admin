@@ -28,9 +28,9 @@ public class ShopService implements IShopService{
 	}
 
 	@Override
-	public int updateShop(String id, int islimits) {
+	public int updateShop(String id, int islimits,int isrecommend) {
 		// TODO Auto-generated method stub
-		return shopDao.updateShop(id, islimits);
+		return shopDao.updateShop(id, islimits,isrecommend);
 	}
 
 }

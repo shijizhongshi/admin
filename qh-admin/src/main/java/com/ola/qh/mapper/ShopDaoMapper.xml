@@ -17,6 +17,7 @@
 	<result column="business_environment_url" property="businessEnvironmentUrl"/>
 	<result column="shop_logo" property="shopLogo"/>
 	<result column="licence_url" property="licenceUrl"/>
+	<result column="isrecommend" property="isrecommend"/>
 	<result column="islimits" property="islimits"/>
 	<result column="addtime" property="addtime"/>
 	<result column="updatetime" property="updatetime"/>
@@ -35,7 +36,7 @@
 	</select>
 	<!-- 开通开通店铺的权限 -->
 	<update id="updateShop" parameterType="String">
-	update shop set islimits=#{islimits} where id=#{id}
+	update shop set isrecommend=#{isrecommend},islimits=#{islimits} where id=#{id}
 	</update>
 
 </mapper>

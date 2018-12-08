@@ -12,5 +12,5 @@ public interface IShopService {
 	
 	public Shop selectShopSingle(String id);
 	
-	public int updateShop(String id,int islimits);
+	public int updateShop(String id,int islimits,int isrecommend);
 }

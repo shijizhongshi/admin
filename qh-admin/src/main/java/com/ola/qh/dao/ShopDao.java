@@ -12,5 +12,5 @@ public interface ShopDao {
 	
 	public Shop selectShopSingle(String id);
 	
-	public int updateShop(@Param("id")String id,@Param("islimits")int islimits);
+	public int updateShop(@Param("id")String id,@Param("islimits")int islimits,@Param("isrecommend")int isrecommend);
 }
