@@ -4,8 +4,8 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="./styles/admin.css" />
-<script src="/scripts/course.js"></script>
-
+<script src="./scripts/course.js"></script>
+<script src="./scripts/admin.js"></script>
 <body>
  <#include "/menu.ftl"/>
 <div class="details">
@@ -60,8 +60,8 @@
 	<div class="admin-table">
 
 	<ol style="background: #CBD2D8;font-weight: bold;">
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
+		<li class="col-md-2">课程名称</li>
+	<li class="col-md-1">课程总数</li>
 	<li class="col-md-1">课程价格</li>
 	<li  class="col-md-1">课程折扣</li>
 	<li class="col-md-1">年份</li>
@@ -241,7 +241,7 @@
 </div>
 
 	<!--弹窗-->
-		<!--<div class="poop" id="poop-add">
+		<div class="poop" id="add">
 		<form id="myform">
 	<h3>添加课程</h3>
 	<div class="select">
@@ -270,9 +270,9 @@
 			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
 			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
 		</div>
-		<div class=" select"style="width: 425px;height:53px;margin-top: 10px;">
+		<div class=" select"style="width: 425px;height:43px;margin-top: 10px;">
 		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
-		<div class=" select" style="height:66px;">
+		<div class=" select" style="height:66px;width:150px">
 			是否显示<br />
 			<select style="width:120px ;" >
 			<option></option>
@@ -313,9 +313,10 @@
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
 			</form>
 		</div>
-		-->
-		<div class="poop" id="poop-revise"  >
+	
+		<div class="poop-revise" id="revise"  >
 		<form id="myform2">
+			<div class="revise-left">
 	<h3>添加课程</h3>
 	<div class="select">
 		
@@ -335,15 +336,15 @@
 				<option></option>
 			</select>
 		</div>
-		<div class=" select"style="width: 425px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
+		<div class=" select"style="width: 405px;height:53px;border-bottom: 1px solid #F5F6F8;">
+			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 210px;text-indent: 2em;" />
 			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
 		</div>
-		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
+		<div class=" select"style="width: 405px;height:48px;margin-top: 10px;">
 			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
 			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
 		</div>
-		<div class=" select"style="width: 425px;height:53px;margin-top: 10px;">
+		<div class=" select"style="width: 405px;height:43px;margin-top: 10px;">
 		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
 		<div class=" select" style="height:66px;">
 			是否显示<br />
@@ -384,6 +385,27 @@
 		<div class="end">
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset()" class="esc" />
+			</div>
+</div>			
+<div class="revise-right">
+				<h3>显示章节</h3>
+				<ul class="section"><form>
+					<li><label for="chapter">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter" /></li>
+					<li><label for="chapter2">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>
+					<li><label for="chapter3">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter3" /></li>
+					<li><label for="chapter4">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter4" /></li>
+					<li><label for="chapter5">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter5" /></li>
+					<li><label for="chapter6">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter6" /></li>
+					<li><label for="chapter7">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter7" /></li>
+					<li><label for="chapter8">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter8" /></li>
+					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
+					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
+					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
+					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
+					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
+					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
+				</form></ul>
+			</div>
 			</form>
 		</div>
 
@@ -393,24 +415,5 @@
 </div>
 </div>
 </body>
- <script type="text/javascript">  
-        function showDiv(){
-        document.getElementById('poop-add').style.display="block"; 
-        }
-function CloseDiv()
-{
-document.getElementById('poop-add').style.display='none';
-}
-function formReset()
-  {
-  document.getElementById("myform").reset()
-  }
-  function showDiv2(){
-        document.getElementById('poop-revise').style.display="block"; 
-        }
-function CloseDiv2()
-{
-document.getElementById('poop-revise').style.display='none';
-}
-</script>
+ 
  </html>
