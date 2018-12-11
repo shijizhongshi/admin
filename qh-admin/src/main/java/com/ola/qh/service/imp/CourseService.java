@@ -5,13 +5,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.CourseDao;
+import com.ola.qh.dao.UserFavoriteDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.KeyGen;
+import com.ola.qh.util.Results;
 /**
  * 
 * @ClassName: CourseService  
@@ -26,6 +30,8 @@ public class CourseService implements ICourseService{
 	
 	@Autowired
 	private CourseDao courseDao;
+	@Autowired
+	private UserFavoriteDao userFavoriteDao;
 	
 	@Override
 	public List<CourseType> courseTypeList() {
@@ -69,19 +75,21 @@ public class CourseService implements ICourseService{
 		// TODO Auto-generated method stub
 		return courseDao.courseList(course);
 	}
+	
 	@Override
 	public int insertUpdateCourse(Course course) {
 		// TODO Auto-generated method stub
 		if(course.getId()!=null && !"".equals(course.getId())){
 			course.setUpdatetime(new Date());
+			userFavoriteDao.insertUpdateFavorite(course.getId());
 			return courseDao.updateCourese(course);
+			
 		}
 		course.setId(KeyGen.uuid());
 		course.setAddtime(new Date());
 		course.setUserId("1");
 		return courseDao.insertCourse(course);
+		
 	}
-
-	
 
 }
