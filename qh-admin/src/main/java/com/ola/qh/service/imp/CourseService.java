@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.CourseDao;
-import com.ola.qh.dao.UserFavoriteDao;
+import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
@@ -30,7 +30,7 @@ public class CourseService implements ICourseService{
 	@Autowired
 	private CourseDao courseDao;
 	@Autowired
-	private UserFavoriteDao userFavoriteDao;
+	private  UserDao userDao;
 	
 	@Override
 	public List<CourseType> courseTypeList() {
@@ -82,7 +82,7 @@ public class CourseService implements ICourseService{
 			
 		if(course.getId()!=null && !"".equals(course.getId())){
 			course.setUpdatetime(new Date());
-			userFavoriteDao.insertUpdateFavorite(course.getId());
+			userDao.updateFavorite(course.getId());
 			return courseDao.updateCourese(course);
 			
 		}
@@ -90,6 +90,7 @@ public class CourseService implements ICourseService{
 		course.setAddtime(new Date());
 		course.setUserId("1");
 		return courseDao.insertCourse(course);
+		
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return 0;

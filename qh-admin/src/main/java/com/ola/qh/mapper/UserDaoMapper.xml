@@ -22,5 +22,8 @@
 		id=#{id} where id=#{id} 
 	</update>
 	
+	<update id="updateFavorite" parameterType="String">
+		update user_favorite set status=1 where product_id=#{productId}
+	</update>
 	
 </mapper>
