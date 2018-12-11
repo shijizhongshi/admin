@@ -22,16 +22,18 @@
 	<div class="details-frame-content">
 		<div class=" select" ng-model="title">
 			专业选择<br />
+					<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
 				<option></option>
 			</select>
+	
 		</div>
 		
 		<div class="select">
-		
 			专业类型<br />
+				<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -245,8 +247,8 @@
 		<form id="myform">
 	<h3>添加课程</h3>
 	<div class="select">
-		
 			专业类型<br />
+				<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -254,16 +256,16 @@
 			</select>
 		</div>
 		<div class="select">
-		
 			专业类型<br />
+				<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
 				<option></option>
 			</select>
 		</div>
-		<div class=" select"style="width: 425px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
+		<div class=" select"style="width: 385px;height:53px;border-bottom: 1px solid #F5F6F8;">
+			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width:190px;text-indent: 2em;" />
 			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
 		</div>
 		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
@@ -272,16 +274,18 @@
 		</div>
 		<div class=" select"style="width: 425px;height:43px;margin-top: 10px;">
 		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
-		<div class=" select" style="height:66px;width:150px">
+		<div class=" select" style="height:66px;width:120px;margin-left: 20px;">
 			是否显示<br />
+				<img src="./images/sjk-xl.png"/>
 			<select style="width:120px ;" >
 			<option></option>
 				<option>是</option>
 				<option>否</option>
 			</select>
 		</div>
-		<div class=" select" style="height:66px;">
+		<div class=" select" style="height:66px;width:120px">
 			是否精品<br />
+				<img src="./images/sjk-xl.png"/>
 			<select style="width:120px ;">
 			<option></option>
 				<option>是</option>
@@ -290,8 +294,8 @@
 		</div>
 		<p style="float: left;width: 426px;height: 1px;background:#F5F6F8;"></p>
 <div class="select">
-		
 			课程资源类别<br />
+				<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -300,8 +304,8 @@
 		</div>
 
 			<div class="select">
-		
 			课程用途分类<br />
+			<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -311,16 +315,16 @@
 		<div class="end">
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
-			</form>
 		</div>
-	
+		</form>
+	</div>
 		<div class="poop-revise" id="revise"  >
 		<form id="myform2">
 			<div class="revise-left">
 	<h3>添加课程</h3>
 	<div class="select">
-		
 			专业类型<br />
+			<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -328,34 +332,37 @@
 			</select>
 		</div>
 		<div class="select">
-		
 			专业类型<br />
+			<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
 				<option></option>
+			<img src="./images/sjk-xl.png" />
 			</select>
 		</div>
-		<div class=" select"style="width: 405px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 210px;text-indent: 2em;" />
+		<div class=" select"style="width: 385px;height:53px;border-bottom: 1px solid #F5F6F8;">
+			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 190px;text-indent: 2em;" />
 			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
 		</div>
 		<div class=" select"style="width: 405px;height:48px;margin-top: 10px;">
-			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
-			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
+			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;"/>
+			<input type="text" placeholder="输入折扣价格" style="width:130px ;text-indent: 2em;"/>
 		</div>
 		<div class=" select"style="width: 405px;height:43px;margin-top: 10px;">
 		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
-		<div class=" select" style="height:66px;">
+		<div class=" select" style="height:66px;width:120px;margin-right:15px;">
 			是否显示<br />
+			<img src="./images/sjk-xl.png"/>
 			<select style="width:120px ;" >
 			<option></option>
 				<option>是</option>
 				<option>否</option>
 			</select>
 		</div>
-		<div class=" select" style="height:66px;">
+		<div class=" select" style="height:66px;width:120px ;">
 			是否精品<br />
+			<img src="./images/sjk-xl.png"/>
 			<select style="width:120px ;">
 			<option></option>
 				<option>是</option>
@@ -366,6 +373,7 @@
 <div class="select">
 		
 			课程资源类别<br />
+			<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -376,6 +384,7 @@
 			<div class="select">
 		
 			课程用途分类<br />
+			<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
 				<option></option>
@@ -384,14 +393,15 @@
 		</div>
 		<div class="end">
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset2()" class="esc" />
 			</div>
 </div>			
 <div class="revise-right">
 				<h3>显示章节</h3>
+				<div style="width: 290px;height:auto ;overflow: hidden;border-radius:20px;">
 				<ul class="section"><form>
 					<li><label for="chapter">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter" /></li>
-					<li><label for="chapter2">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>
+					<li><label for="chapter2">传染病 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>
 					<li><label for="chapter3">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter3" /></li>
 					<li><label for="chapter4">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter4" /></li>
 					<li><label for="chapter5">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter5" /></li>
@@ -400,11 +410,11 @@
 					<li><label for="chapter8">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter8" /></li>
 					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
 					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
-					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
-					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
-					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
-					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
-				</form></ul>
+					<li><label for="chapter11">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter11" /></li>
+					<li><label for="chapter12">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter12" /></li>
+					<li><label for="chapter13">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter13" /></li>
+					<li><label for="chapter14">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter14" /></li>
+				</form></ul></div>
 			</div>
 			</form>
 		</div>

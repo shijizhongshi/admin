@@ -14,7 +14,7 @@ function formReset() {
 function CloseDiv2(){
 document.getElementById('revise').style.display='none';
 }
-function formReset() {
-	  document.getElementById("myform").reset()
+function formReset2() {
+	  document.getElementById("myform2").reset()
 	  }
 	  
