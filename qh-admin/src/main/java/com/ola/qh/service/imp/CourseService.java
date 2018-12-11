@@ -15,7 +15,6 @@ import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.KeyGen;
-import com.ola.qh.util.Results;
 /**
  * 
 * @ClassName: CourseService  
@@ -75,10 +74,12 @@ public class CourseService implements ICourseService{
 		// TODO Auto-generated method stub
 		return courseDao.courseList(course);
 	}
-	
+	@Transactional
 	@Override
 	public int insertUpdateCourse(Course course) {
 		// TODO Auto-generated method stub
+		try {
+			
 		if(course.getId()!=null && !"".equals(course.getId())){
 			course.setUpdatetime(new Date());
 			userFavoriteDao.insertUpdateFavorite(course.getId());
@@ -89,7 +90,10 @@ public class CourseService implements ICourseService{
 		course.setAddtime(new Date());
 		course.setUserId("1");
 		return courseDao.insertCourse(course);
-		
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return 0;
+		}
 	}
 
 }
