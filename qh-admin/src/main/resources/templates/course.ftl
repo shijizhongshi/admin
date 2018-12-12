@@ -44,7 +44,8 @@
 		
 	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索"  style="background:#E9484D"/></div>
 	<div class="select" style="float: right;margin-right:15px;">搜索课程<br />
-	<input type="text" name="sousuo" style=" text-indent:2em;"/>
+	<form id="search">
+	<input type="text" name="search" style=" text-indent:2em;"/></form>
 	</div>
 	</div>
 <div class="manage">
@@ -73,7 +74,7 @@
 	<li  class="col-md-1">章类别</li>
 	</ol>
  <for:each>
- <ol >
+ <ol style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
 		<li class="col-md-2">章名称</li>
 	<li class="col-md-1">章总数</li>
 	<li class="col-md-1">课程价格</li>
@@ -247,67 +248,64 @@
 		<form id="myform">
 	<h3>添加课程</h3>
 	<div class="select">
-			专业类型<br />
-				<img src="./images/sjk-xl.png"/>
+			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+				<option disabled selected style='display:none;'>选择专业</option>
 				<option></option>
 				<option></option>
 			</select>
 		</div>
 		<div class="select">
-			专业类型<br />
-				<img src="./images/sjk-xl.png"/>
+			<img src="./images/sjk-xl.png"/>
 			<select>
+				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
 				<option></option>
 				<option></option>
-				<option></option>
+			<img src="./images/sjk-xl.png" />
 			</select>
 		</div>
-		<div class=" select"style="width: 385px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width:190px;text-indent: 2em;" />
-			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
+		<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
+			<input type="text" placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
+			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;width:122px;"/>
 		</div>
-		<div class=" select"style="width: 425px;height:48px;margin-top: 10px;">
-			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:120px ;text-indent: 2em;"/>
-			<input type="text" placeholder="输入折扣价格" style="width:120px ;text-indent: 2em;"/>
+		<div class="centre-border">
+		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
+			<input type="text"  class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;margin-right:15px;"/>
+			<input type="text" placeholder="输入折扣价格" style="width:130px ;text-indent: 2em;"/>
 		</div>
-		<div class=" select"style="width: 425px;height:43px;margin-top: 10px;">
-		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
-		<div class=" select" style="height:66px;width:120px;margin-left: 20px;">
-			是否显示<br />
-				<img src="./images/sjk-xl.png"/>
-			<select style="width:120px ;" >
-			<option></option>
+		<div class=" select"style="width: 405px;">
+		<input type="text" placeholder="输入课程年份" style="width:130px ;text-indent: 2em;"/></div>
+		<div class=" select" style="margin-right:15px;">
+			<img src="./images/sjk-xl.png"/>
+			<select>
+			<option  disabled selected style='display:none;'>是否显示</option>
 				<option>是</option>
 				<option>否</option>
 			</select>
 		</div>
-		<div class=" select" style="height:66px;width:120px">
-			是否精品<br />
-				<img src="./images/sjk-xl.png"/>
-			<select style="width:120px ;">
-			<option></option>
+		<div class=" select">
+			<img src="./images/sjk-xl.png"/>
+			<select>
+			<option  disabled selected style='display:none;'>是否精品</option>
 				<option>是</option>
 				<option>否</option>
 			</select>
 		</div>
-		<p style="float: left;width: 426px;height: 1px;background:#F5F6F8;"></p>
+		</div>
+	
 <div class="select">
-			课程资源类别<br />
-				<img src="./images/sjk-xl.png"/>
+			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+				<option  disabled selected style='display:none;'>课程资源类别</option>
 				<option></option>
 				<option></option>
 			</select>
 		</div>
 
 			<div class="select">
-			课程用途分类<br />
 			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+				<option  disabled selected style='display:none;'>课程用途分类</option>
 				<option></option>
 				<option></option>
 			</select>
@@ -323,70 +321,64 @@
 			<div class="revise-left">
 	<h3>添加课程</h3>
 	<div class="select">
-			专业类型<br />
 			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+				<option disabled selected style='display:none;'>选择专业</option>
 				<option></option>
 				<option></option>
 			</select>
 		</div>
 		<div class="select">
-			专业类型<br />
 			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
 				<option></option>
 				<option></option>
 			<img src="./images/sjk-xl.png" />
 			</select>
 		</div>
-		<div class=" select"style="width: 385px;height:53px;border-bottom: 1px solid #F5F6F8;">
-			<input type="text" name="majior" class=""placeholder="请输入课程名称" style="width: 190px;text-indent: 2em;" />
-			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;"/>
+		<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
+			<input type="text" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
+			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;width:122px;"/>
 		</div>
-		<div class=" select"style="width: 405px;height:48px;margin-top: 10px;">
-			<input type="text" name="majior" class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;"/>
+		<div class="centre-border">
+		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
+			<input type="text"  class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;margin-right:15px;"/>
 			<input type="text" placeholder="输入折扣价格" style="width:130px ;text-indent: 2em;"/>
 		</div>
-		<div class=" select"style="width: 405px;height:43px;margin-top: 10px;">
-		<input type="text" placeholder="输入课程年份" style="width:120px ;text-indent: 2em;"/></div>
-		<div class=" select" style="height:66px;width:120px;margin-right:15px;">
-			是否显示<br />
-			<img src="./images/sjk-xl.png"/>
-			<select style="width:120px ;" >
-			<option></option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		<div class=" select" style="height:66px;width:120px ;">
-			是否精品<br />
-			<img src="./images/sjk-xl.png"/>
-			<select style="width:120px ;">
-			<option></option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		<p style="float: left;width: 426px;height: 1px;background:#F5F6F8;"></p>
-<div class="select">
-		
-			课程资源类别<br />
+		<div class=" select"style="width: 405px;">
+		<input type="text" placeholder="输入课程年份" style="width:130px ;text-indent: 2em;"/></div>
+		<div class=" select" style="margin-right:15px;">
 			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+			<option  disabled selected style='display:none;'>是否显示</option>
+				<option>是</option>
+				<option>否</option>
+			</select>
+		</div>
+		<div class=" select">
+			<img src="./images/sjk-xl.png"/>
+			<select>
+			<option  disabled selected style='display:none;'>是否精品</option>
+				<option>是</option>
+				<option>否</option>
+			</select>
+		</div>
+		</div>
+	
+<div class="select">
+			<img src="./images/sjk-xl.png"/>
+			<select>
+				<option  disabled selected style='display:none;'>课程资源类别</option>
 				<option></option>
 				<option></option>
 			</select>
 		</div>
 
 			<div class="select">
-		
-			课程用途分类<br />
 			<img src="./images/sjk-xl.png"/>
 			<select>
-				<option></option>
+				<option  disabled selected style='display:none;'>课程用途分类</option>
 				<option></option>
 				<option></option>
 			</select>
@@ -398,7 +390,7 @@
 </div>			
 <div class="revise-right">
 				<h3>显示章节</h3>
-				<div style="width: 290px;height:auto ;overflow: hidden;border-radius:20px;">
+				<div class="hidden-scoll" >
 				<ul class="section"><form>
 					<li><label for="chapter">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter" /></li>
 					<li><label for="chapter2">传染病 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>

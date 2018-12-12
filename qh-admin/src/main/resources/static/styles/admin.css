@@ -123,14 +123,26 @@ ul.menu .active .list a {
 .details-nav ul li img{margin-right:5px;vertical-align: middle;}
 .details-frame{width:86;padding: 29px;background:#EDEEF2;height:990px;backround:#FFFFFF;}
 .details-frame-content{width:1535px;padding: 30px;background: white;height:120px;border-bottom: solid 1px #EEEFF1;}
-.select{width:180px;height:60px;float:left;margin-left:10px;margin-bottom:5px;position: relative;}
-.select img{position: absolute;right:10px;top:35px;}
-select{width:180px;height: 40px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
+.centre-border{width:370px;height:170px;border-bottom: 1px solid #F5F6F8;clear:both;margin-bottom:15px;}
+.centre-border select,.centre-border .select{width:130px;}
+.select{width:180px;height:50px;float:left;margin-left:10px;margin-bottom:5px;position: relative;}
+.details-frame-content .select img{position: absolute;right:10px;bottom:8px;}
+.manage .select img{position: absolute;right:10px;top:17px;}
+select{padding-left:18px ;width:180px;height: 40px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
+select[disabled='disabled']::-webkit-value {
+color:red;
+}
+select[selected]::-webkit-value {
+color:red;
+}
+select[disabled]{
+color:red;
+}
 .select input{width: 180px;height: 40px;background:#EDEEF0;border-radius:20px;}
 .im-key{background: #E8474D;color: white;border-radius:20px;margin: 19px;}
 .manage{width: 1535px;height:800px;padding-top:23px;background:white; position: relative;}
 .manage li{float: left;margin-left: 18px;cursor: pointer;}
-.admin-table{width:1400px;height:641px;border: 1px solid #B1B1B1;box-shadow: 5px 10px 10px 10px #9999;box-shadow: -5px -10px -10px -10px #9999;margin:0 auto;border-radius:10px;overflow: hidden;}
+.admin-table{width:1400px;height:641px;border: 1px solid #B1B1B1;margin:0 auto;border-radius:10px;overflow: hidden;}
 .admin-table ol li{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;}
 .admin-table ol {width: 1397px;height: 42px;margin-bottom:0;}
 .admin-table ol:nth-child(2n){background:white;}
@@ -139,15 +151,16 @@ select{width:180px;height: 40px;background:#EDEEF0;border-radius:20px; appearanc
 
 /**/
 .poop{position: absolute;left:500px;top: 200px;}
-.poop,.poop-revise{display: none;z-index:50;width: 493px;height: 520px;padding:20px 30px;background: white;box-shadow: 5px 5px 5px 5px #9999;box-shadow: -5px -5px -5px -5px #9999;}
+.poop,.poop-revise{display: none;z-index:50;width: 463px;height: 520px;padding:20px 30px;background: white;box-shadow:1px 1px 4px 4px #D8D6D6;}
 .poop .end,.poop-revise .end{width: 200px;float: right;}
-.poop .end input,.poop-revise .end input {width:68px;height: 36px;border-radius:10px ;}
+.poop .end input,.poop-revise .end input {width:78px;height: 36px;border-radius:20px;margin-top:5px;color: white;font-size:16px;}
 
 
 .poop-revise{width:790px;position: absolute;left:330px;top: 200px;}
 .revise-left{float: left;width:420px;}
 .revise-right{float: right;width:300px;}
-.section{width:310px;height:380px;font-size:15px;margin-top:20px;overflow-y:auto;overflow-x: hidden;}
+.hidden-scoll{width: 290px;height:400px; overflow: hidden;border-radius:10px;}
+.section{width:310px;height:400px;font-size:15px;overflow-y:auto;overflow-x: hidden;}
 .section li{width:290px;height: 30px;line-height: 30px;padding:0 15px;margin:0;}
 .section li:nth-child(2n){background:#F7F8FA;}
 .section li:nth-child(2n-1){background:#F0F1F3;}
