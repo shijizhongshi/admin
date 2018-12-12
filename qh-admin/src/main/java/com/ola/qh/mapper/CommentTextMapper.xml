@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CommentTextDao">
+	<resultMap type="com.ola.qh.entity.CommentText" id="CommentTextMap">
+		<result column="id" property="id" />
+		<result column="text_name" property="textName" />
+		<result column="text_status" property="textStatus" />
+		
+	</resultMap>
+	<select id="selectCommentText" resultMap="CommentTextMap">
+		select text_name,text_status from comment_text
+	</select>
+	
+	<insert id="insertCommentText" parameterType="com.ola.qh.entity.CommentText">
+		insert into comment_text(id,text_name,text_status) values(#{id},#{textName},#{textStatus})
+	</insert>
+	
+	<update id="updateCommentText" parameterType="com.ola.qh.entity.CommentText">
+		update comment_text set 
+		<if test="textName!=null">
+		text_name=#{textName},
+		</if>
+		text_status=#{textStatus} where id=#{id}
+	</update>
+	
+	<delete id="deleteCommentText" >
+		delete from comment_text where id=#{id}
+	</delete>
+	
+</mapper>
