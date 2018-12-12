@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.CourseDao;
+import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
@@ -26,6 +29,8 @@ public class CourseService implements ICourseService{
 	
 	@Autowired
 	private CourseDao courseDao;
+	@Autowired
+	private  UserDao userDao;
 	
 	@Override
 	public List<CourseType> courseTypeList() {
@@ -69,19 +74,27 @@ public class CourseService implements ICourseService{
 		// TODO Auto-generated method stub
 		return courseDao.courseList(course);
 	}
+	@Transactional
 	@Override
 	public int insertUpdateCourse(Course course) {
 		// TODO Auto-generated method stub
+		try {
+			
 		if(course.getId()!=null && !"".equals(course.getId())){
 			course.setUpdatetime(new Date());
+			userDao.updateFavorite(course.getId());
 			return courseDao.updateCourese(course);
+			
 		}
 		course.setId(KeyGen.uuid());
 		course.setAddtime(new Date());
 		course.setUserId("1");
 		return courseDao.insertCourse(course);
+		
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			return 0;
+		}
 	}
-
-	
 
 }
