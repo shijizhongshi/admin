@@ -17,6 +17,16 @@ import com.ola.qh.service.ICommentTextService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
+/**
+ * 
+ * 
+* @ClassName: CommentTextController
+* @Description:  评论添加固定信息
+* @author guozihan
+* @date   2018/12/12
+*
+ */
+
 @RestController
 @RequestMapping(value="/api/commenttext")
 public class CommentTextController {

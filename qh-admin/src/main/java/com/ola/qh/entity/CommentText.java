@@ -12,7 +12,7 @@ public class CommentText {
 	private String textName;
 	
 	@NotNull
-	private int textStatus;
+	private int textStatus;//文本类型(手法专业，价格优惠.....)
 
 	public String getTextName() {
 		return textName;
