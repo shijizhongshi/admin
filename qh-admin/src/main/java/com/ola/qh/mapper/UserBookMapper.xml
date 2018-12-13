@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.UserBookDao">
+
+	<resultMap type="com.ola.qh.entity.UserBook"  id="UserBookMap">
+		<result column="id" property="id" />
+		<result column="user_id"  property="userId" />
+		<result column="account_money"  property="accountMoney" />
+		<result column="addtime"  property="addtime" />
+		<result column="updatetime"  property="updatetime" />
+		<result column="finish_money"  property="finishMoney" />
+		<result column="on_money"  property="onMoney" />
+		<result column="forthe_money"  property="fortheMoney" />
+	</resultMap>
+
+	<select id="selectUserBook" resultMap="UserBookMap">
+		select * from user_book where user_id=#{userId}
+	</select>
+	<insert id="saveUserBook" parameterType="com.ola.qh.entity.UserBook">
+		insert into user_book(id,user_id,account_money,addtime,finish_money,on_money,forthe_money) values(#{id},#{userId},#{accountMoney},#{addtime},#{finishMoney},#{onMoney},#{fortheMoney})
+	</insert>
+	<update id="updateUserBook" parameterType="com.ola.qh.entity.UserBook">
+		update user_book set 
+		<if test="accountMoney!=null">
+		account_money=#{accountMoney},
+		</if>
+		<if test="finishMoney!=null">
+		finish_money=#{finishMoney},
+		</if>
+		<if test="onMoney!=null">
+		on_money=#{onMoney},
+		</if>
+		<if test="fortheMoney!=null">
+		forthe_money=#{fortheMoney},
+		</if>
+		updatetime=#{updatetime} where user_id=#{userId}
+	</update>
+
+
+</mapper>

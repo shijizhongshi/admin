@@ -1,6 +1,9 @@
 package com.ola.qh.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
+
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,23 +12,29 @@ public class UserWithdrawHistory {
 	@NotEmpty(message="ID不能为空")
 	private String id;
 	
+	@NotEmpty(message="用户ID不能为空")
 	private String userId;
 	
-	private String withdrawTypes;
+	@NotEmpty(message="提现的方式不能为空")
+	private String withdrawTypes;/////支付宝或者是微信
 	
-	private double money;
+	@NotEmpty(message="真实姓名不能为空")
+	private String realname;
 	
-	private int payStatus;
+	@NotNull
+	private BigDecimal money;
 	
-	@NotEmpty(message="审核原因不能为空")
-	private String payMessage;
+	@NotNull
+	private int payStatus;//审核是否通过
+	
+	private String payMessage;//审核失败的原因
 	
 	private Date addtime;
 	
 	private Date updatetime;
 	
-	private int zupageSize;
-
+	private int status;
+	
 	public String getId() {
 		return id;
 	}
@@ -50,11 +59,12 @@ public class UserWithdrawHistory {
 		this.withdrawTypes = withdrawTypes;
 	}
 
-	public double getMoney() {
+	
+	public BigDecimal getMoney() {
 		return money;
 	}
 
-	public void setMoney(double money) {
+	public void setMoney(BigDecimal money) {
 		this.money = money;
 	}
 
@@ -90,14 +100,26 @@ public class UserWithdrawHistory {
 		this.updatetime = updatetime;
 	}
 
-
-	public int getZupageSize() {
-		return zupageSize;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setZupageSize(int zupageSize) {
-		this.zupageSize = zupageSize;
+	public void setStatus(int status) {
+		this.status = status;
 	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	
+
+
+	
 	
 	
 }
