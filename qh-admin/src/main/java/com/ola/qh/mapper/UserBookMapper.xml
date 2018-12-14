@@ -19,7 +19,7 @@
 		select * from user_book where user_id=#{userId}
 	</select>
 	<insert id="saveUserBook" parameterType="com.ola.qh.entity.UserBook">
-		insert into user_book(id,user_id,account_money,addtime,finish_money,on_money,forthe_money) values(#{id},#{userId},#{accountMoney},#{addtime},#{finishMoney},#{onMoney},#{fortheMoney})
+		insert into user_book(id,user_id,account_money,addtime,finish_money,on_money,forthe_money,can_withdraw) values(#{id},#{userId},#{accountMoney},#{addtime},#{finishMoney},#{onMoney},#{fortheMoney},#{canWithdraw})
 	</insert>
 	<update id="updateUserBook" parameterType="com.ola.qh.entity.UserBook">
 		update user_book set 
@@ -34,6 +34,9 @@
 		</if>
 		<if test="fortheMoney!=null">
 		forthe_money=#{fortheMoney},
+		</if>
+		<if test="canWithdraw!=null">
+		can_withdraw=#{canWithdraw},
 		</if>
 		updatetime=#{updatetime} where user_id=#{userId}
 	</update>

@@ -58,8 +58,8 @@ public class UserWithdrawHistoryService implements IUserWithdrawHistoryService{
 			results.setStatus("0");
 			return results;
 		}
-		BigDecimal accountMoney=userbooks.getAccountMoney();
-		BigDecimal AccountMoney =accountMoney.add(money);
+		BigDecimal canWithdraw=userbooks.getCanWithdraw();
+		BigDecimal CanWithdraw =canWithdraw.add(money);
 		
 		userwithdrawhistory.setUpdatetime(new Date());
 		userWithdrawHistoryDao.updateUserWithdrawHistory(userwithdrawhistory);
@@ -67,7 +67,7 @@ public class UserWithdrawHistoryService implements IUserWithdrawHistoryService{
 		UserBook userbook=new UserBook();
 		userbook.setUserId(userwithdrawhistory.getUserId());
 		userbook.setOnMoney(onMoney);
-		userbook.setAccountMoney(AccountMoney);
+		userbook.setCanWithdraw(CanWithdraw);
 		userBookDao.updateUserBook(userbook);
 
 		results.setStatus("0");

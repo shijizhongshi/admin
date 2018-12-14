@@ -9,7 +9,7 @@ public class UserBook {
 
 	private String userId;
 
-	private BigDecimal accountMoney;//账户金额
+	private BigDecimal accountMoney;//账户累计总金额
 
 	private Date addtime;
 
@@ -20,6 +20,8 @@ public class UserBook {
 	private BigDecimal onMoney;//提现中金额
 	
 	private BigDecimal fortheMoney;//待结算金额
+	
+	private BigDecimal canWithdraw;//可提现金额
 
 	public String getId() {
 		return id;
@@ -83,6 +85,14 @@ public class UserBook {
 
 	public void setFortheMoney(BigDecimal fortheMoney) {
 		this.fortheMoney = fortheMoney;
+	}
+
+	public BigDecimal getCanWithdraw() {
+		return canWithdraw;
+	}
+
+	public void setCanWithdraw(BigDecimal canWithdraw) {
+		this.canWithdraw = canWithdraw;
 	}
 
 	
