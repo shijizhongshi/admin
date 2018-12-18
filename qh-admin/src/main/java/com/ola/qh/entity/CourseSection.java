@@ -2,6 +2,8 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -20,7 +22,7 @@ public class CourseSection {
 	private String courseChapterId;//////一章多个节
 	@NotEmpty(message="节的名称不能为空")
 	private String sectionName;
-	
+	@NotNull
 	private int isshow;
 	@NotEmpty(message="视频连接不能为空")
 	private String aliyunId;

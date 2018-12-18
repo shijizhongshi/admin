@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CourseSectionDao">
+	<resultMap type="com.ola.qh.entity.CourseSection" id="CourseSectionMap">
+		<result column="id" property="id" />
+		<result column="course_chapter_id" property="courseChapterId" />
+		<result column="section_name" property="sectionName" />
+		<result column="isshow" property="isshow" />
+		<result column="aliyunId" property="aliyunId" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<select id="selectCourseSection" resultMap="CourseSectionMap">
+		select id,course_chapter_id,section_name,isshow,aliyunId,addtime from course_section order by addtime ASC limit #{pageNo},#{pageSize}
+	</select>
+	
+	<insert id="insertCourseSection" parameterType="com.ola.qh.entity.CourseSection">
+		insert into course_section(id,course_chapter_id,section_name,isshow,aliyunId,addtime) values(#{id},#{courseChapterId},#{sectionName},#{isshow},#{aliyunId},#{addtime})
+	</insert>
+	
+	<update id="updateCourseSection" parameterType="com.ola.qh.entity.CourseSection">
+		update course_section set 
+		<if test="courseChapterId!=null">
+		course_chapter_id=#{courseChapterId},
+		</if>
+		<if test="sectionName!=null">
+		section_name=#{sectionName},
+		</if>
+		<if test="isshow!=null">
+		isshow=#{isshow},
+		</if>
+		<if test="aliyunId!=null">
+		aliyunId=#{aliyunId},
+		</if>
+		updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteCourseSection" >
+		delete from course_section where id=#{id}
+	</delete>
+	
+</mapper>
