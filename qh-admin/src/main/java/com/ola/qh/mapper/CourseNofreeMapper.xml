@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CourseNofreeDao">
+	<resultMap type="com.ola.qh.entity.CourseNofree" id="CourseNofreeMap">
+		<result column="id" property="id" />
+		<result column="course_type_name" property="courseTypeName" />
+		<result column="course_type_subclass_name" property="courseTypeSubclassName" />
+		<result column="course_resource_type" property="courseResourceType" />
+		<result column="course_use_difference" property="courseUseDifference" />
+		<result column="course_name" property="courseName" />
+		<result column="teachers" property="teachers" />
+		<result column="paly_time" property="palyTime" />
+		<result column="describes" property="describes" />
+		<result column="aliyunId" property="aliyunId" />
+		<result column="isremmend" property="isremmend" />
+		<result column="img_url" property="imgUrl" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<sql id="sql_coursenofree">
+		id,course_type_name,course_type_subclass_name,course_resource_type,course_use_difference,course_name,teachers,paly_time,describes,aliyunId,isremmend,img_url,addtime
+	</sql>
+	<select id="selectCourseNofree" resultMap="CourseNofreeMap">
+		select <include refid="sql_coursenofree"></include> from course_nofree 
+		<where>
+		<if test="id!=null">
+		id=#{id}
+		</if>
+		</where>
+	</select>
+	
+	<insert id="insertCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">
+		insert into course_nofree(<include refid="sql_coursenofree"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{courseResourceType},#{courseUseDifference},#{courseName},#{teachers},#{palyTime},#{describes},#{aliyunId},#{isremmend},#{imgUrl},#{addtime})
+	</insert>
+	
+	<update id="updateCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">
+		update course_nofree set 
+		<if test="courseTypeName!=null">
+		course_type_name=#{courseTypeName},
+		</if>
+		
+		<if test="courseTypeSubclassName!=null">
+		course_type_subclass_name=#{courseTypeSubclassName},
+		</if>
+		
+		<if test="courseResourceType!=null">
+		course_resource_type=#{courseResourceType},
+		</if>
+		
+		<if test="courseUseDifference!=null">
+		course_use_difference=#{courseUseDifference},
+		</if>
+		
+		<if test="courseName!=null">
+		course_name=#{courseName},
+		</if>
+		
+		<if test="teachers!=null">
+		teachers=#{teachers},
+		</if>
+		
+		<if test="palyTime!=null">
+		paly_time=#{palyTime},
+		</if>
+		
+		<if test="describes!=null">
+		describes=#{describes},
+		</if>
+		
+		<if test="aliyunId!=null">
+		aliyunId=#{aliyunId},
+		</if>
+		
+		<if test="isremmend!=null">
+		isremmend=#{isremmend},
+		</if>
+		
+		<if test="imgUrl!=null">
+		img_url=#{imgUrl},
+		</if>
+		
+		updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteCourseNofree" >
+		delete from course_nofree where id=#{id}
+	</delete>
+	
+</mapper>
