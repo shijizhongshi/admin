@@ -18,7 +18,8 @@
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
 	</resultMap>
-	<sql id="sql_teacher">id,name,isshow,isremmend,img_url,prizes,features,describes,details,course_type_names,course_type_subclass_names,addtime
+	<sql id="sql_teacher">
+	id,name,isshow,isremmend,img_url,prizes,features,describes,details,course_type_names,course_type_subclass_names,addtime
 	</sql>
 	<select id="selectCourseTeacher" resultMap="CourseTeacherMap">
 		select <include refid="sql_teacher"></include> from course_teacher order by addtime ASC limit #{pageNo},#{pageSize}

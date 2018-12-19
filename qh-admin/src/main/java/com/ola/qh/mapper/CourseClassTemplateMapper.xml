@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CourseClassTemplateDao">
+	<resultMap type="com.ola.qh.entity.CourseClassTemplate" id="CourseClassTemplateMap">
+		<result column="id" property="id" />
+		<result column="template_name" property="templateName" />
+		<result column="class_name" property="className" />
+		<result column="class_price" property="classPrice" />
+		<result column="class_discount_price" property="classDiscountPrice" />
+		<result column="class_url" property="classUrl" />
+		<result column="proper_people" property="properPeople" />
+		<result column="promises" property="promises" />
+		<result column="features" property="features" />
+		<result column="introduce" property="introduce" />
+		<result column="detail" property="detail" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<sql id="sql_classtemplate">
+		id,template_name,class_name,class_price,class_discount_price,class_url,proper_people,promises,features,introduce,detail,addtime
+	</sql>
+	<select id="selectCourseClassTemplate" resultMap="CourseClassTemplateMap">
+		select <include refid="sql_classtemplate"></include> from course_class_template 
+		<where>
+		<if test="templateName!=null">
+		template_name=#{templateName}
+		</if>
+		</where>
+	</select>
+	
+	<insert id="insertCourseClassTemplate" parameterType="com.ola.qh.entity.CourseClassTemplate">
+		insert into course_class_template(<include refid="sql_classtemplate"></include>) values(#{id},#{templateName},#{className},#{classPrice},#{classDiscountPrice},#{classUrl},#{properPeople},#{promises},#{features},#{introduce},#{detail},#{addtime})
+	</insert>
+	
+	<update id="updateCourseClassTemplate" parameterType="com.ola.qh.entity.CourseClassTemplate">
+		update course_class_template set
+		<if test="templateName!=null">
+			template_name=#{templateName},
+		</if>
+		
+		<if test="className!=null">
+			class_name=#{className},
+		</if>
+		
+		<if test="classPrice!=null">
+			class_price=#{classPrice},
+		</if>
+		
+		<if test="classDiscountPrice!=null">
+			class_discount_price=#{classDiscountPrice},
+		</if>
+		
+		<if test="classUrl!=null">
+			class_url=#{classUrl},
+		</if>
+		
+		<if test="properPeople!=null">
+			proper_people=#{properPeople},
+		</if>
+		
+		<if test="promises!=null">
+			promises=#{promises},
+		</if>
+		
+		<if test="features!=null">
+			features=#{features},
+		</if>
+		
+		<if test="introduce!=null">
+			introduce=#{introduce},
+		</if>
+		
+		<if test="detail!=null">
+			detail=#{detail},
+		</if>
+		
+		updatetime=#{updatetime} where template_name=#{templateName}
+		
+	</update>
+	
+	<delete id="deleteCourseClassTemplate">
+		delete from course_class_template where template_name=#{templateName}
+	</delete>
+</mapper>
