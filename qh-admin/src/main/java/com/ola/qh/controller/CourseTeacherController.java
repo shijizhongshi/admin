@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.CourseTeacher;
 import com.ola.qh.service.ICourseTeacherService;
-import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
@@ -39,11 +38,31 @@ public class CourseTeacherController {
 		if(list==null || list.size()==0){
 			
 			results.setStatus("1");
-			results.setMessage("当前没有试听课程");
+			results.setMessage("当前没有教师信息");
 			return results;
 		}
 		results.setStatus("0");
 		results.setData(list);
+		return results;
+		
+		
+	}
+	
+	@RequestMapping(value="/selectdetails",method=RequestMethod.GET)
+	public Results<CourseTeacher> selectCourseTeacherDetails(@RequestParam(name="id",required=true)String id){
+		
+		Results<CourseTeacher> results=new Results<CourseTeacher>();
+		
+		CourseTeacher courseTeacher=courseTeacherService.selectCourseTeacherDetails(id);
+		
+		if(courseTeacher==null){
+			
+			results.setStatus("1");
+			results.setMessage("当前没有教师信息");
+			return results;
+		}
+		results.setStatus("0");
+		results.setData(courseTeacher);
 		return results;
 		
 		
@@ -53,17 +72,12 @@ public class CourseTeacherController {
 		
 		Results<String> results=new Results<String>();
 		
-		courseTeacher.setId(KeyGen.uuid());
-		courseTeacher.setAddtime(new Date());
-		int insert=courseTeacherService.insertCourseTeacher(courseTeacher);
-		
-		if(insert==0){
-			
+		if (valid.hasErrors()) {
+			results.setMessage("信息填写不完整,请检查");
 			results.setStatus("1");
 			return results;
 		}
-		results.setStatus("0");
-		return results;
+		return courseTeacherService.insertCourseTeacher(courseTeacher);
 		
 	}
 	

@@ -22,7 +22,15 @@
 	id,name,isshow,isremmend,img_url,prizes,features,describes,details,course_type_names,course_type_subclass_names,addtime
 	</sql>
 	<select id="selectCourseTeacher" resultMap="CourseTeacherMap">
-		select <include refid="sql_teacher"></include> from course_teacher order by addtime ASC limit #{pageNo},#{pageSize}
+		select id,name,isshow,isremmend,img_url from course_teacher order by addtime ASC limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="selectCourseTeacherDetails" resultMap="CourseTeacherMap">
+		select <include refid="sql_teacher"></include> from course_teacher where id=#{id}
+	</select>
+	
+	<select id="selectName" resultMap="CourseTeacherMap">
+		select name from course_teacher where id=#{id}
 	</select>
 	
 	<insert id="insertCourseTeacher" parameterType="com.ola.qh.entity.CourseTeacher">

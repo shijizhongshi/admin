@@ -37,8 +37,6 @@ public class CourseTeacher {
 	@NotEmpty(message="小类别不能为空")
 	private String courseTypeSubclassNames;//子专业
 	
-	private String classId;//课程id
-	
 	private Date addtime;
 	
 	private Date updatetime;
@@ -147,13 +145,6 @@ public class CourseTeacher {
 		this.courseTypeSubclassNames = courseTypeSubclassNames;
 	}
 
-	public String getClassId() {
-		return classId;
-	}
-
-	public void setClassId(String classId) {
-		this.classId = classId;
-	}
 	
 	
 }

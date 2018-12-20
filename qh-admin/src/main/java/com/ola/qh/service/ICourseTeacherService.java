@@ -3,12 +3,15 @@ package com.ola.qh.service;
 import java.util.List;
 
 import com.ola.qh.entity.CourseTeacher;
+import com.ola.qh.util.Results;
 
 public interface ICourseTeacherService {
 
 	public List<CourseTeacher> selectCourseTeacher(int pageNo,int pageSize);
 	
-	public int insertCourseTeacher(CourseTeacher courseTeacher);
+	public CourseTeacher selectCourseTeacherDetails(String id);
+	
+	public Results<String> insertCourseTeacher(CourseTeacher courseTeacher);
 	
 	public int updateCourseTeacher(CourseTeacher courseTeacher);
 	
