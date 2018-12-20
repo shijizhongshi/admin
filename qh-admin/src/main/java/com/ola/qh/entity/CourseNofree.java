@@ -9,32 +9,32 @@ public class CourseNofree {
 	private String id;
 	
 	@NotEmpty
-	private String courseTypeName;
+	private String courseTypeName;//专业
 	
 	@NotEmpty
-	private String courseTypeSubclassName;
+	private String courseTypeSubclassName;//子专业
 	
 	@NotEmpty
-	private String courseResourceType;
+	private String courseResourceType;//资源类别
 	
 	@NotEmpty
-	private String courseUseDifference;
+	private String courseUseDifference;//资源用途
 	
 	@NotEmpty
-	private String courseName;
+	private String courseName;//课程名称
 	
 	@NotEmpty
-	private String teachers;
+	private String teachers;//老师
 	
-	private int palyTime;
-	
-	@NotEmpty
-	private String describes;
+	private int palyTime;//播放时间
 	
 	@NotEmpty
-	private String aliyunId;
+	private String describes;//描述
 	
-	private int isremmend;
+	@NotEmpty
+	private String aliyunId;//阿里云id
+	
+	private int isremmend;//1:推荐
 	
 	@NotEmpty
 	private String imgUrl;

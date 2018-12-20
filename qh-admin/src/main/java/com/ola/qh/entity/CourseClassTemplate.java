@@ -12,29 +12,29 @@ public class CourseClassTemplate {
 	private String id;
 	
 	@NotEmpty(message="模板名称不能为空")
-	private String templateName;
+	private String templateName;//;模板的名称
 	
-	@NotEmpty(message="课程名称不能为空")
-	private String className;
+	@NotEmpty(message="班级名称不能为空")
+	private String className;//班级名称
 	
 	@NotNull
-	private BigDecimal classPrice;
+	private BigDecimal classPrice;//课程价格
 	
-	private BigDecimal classDiscountPrice;
+	private BigDecimal classDiscountPrice;//课程优惠价格
 	
 	@NotEmpty(message="课程图片不能为空")
 	private String classUrl;
 	
 	@NotEmpty(message="适合人群不能为空")
-	private String properPeople;
+	private String properPeople;//适合人群
 	
-	private String promises;
+	private String promises;//班级承诺
 	
-	private String features;
+	private String features;//班级特色
 	
-	private String introduce;
+	private String introduce;//班级介绍
 	
-	private String detail;
+	private String detail;//班级详情
 	
 	private Date addtime;
 	

@@ -28,6 +28,7 @@
 		template_name=#{templateName}
 		</if>
 		</where>
+		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	
 	<insert id="insertCourseClassTemplate" parameterType="com.ola.qh.entity.CourseClassTemplate">

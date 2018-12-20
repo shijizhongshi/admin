@@ -9,35 +9,35 @@ public class CourseTeacher {
 	private String id;
 	
 	@NotEmpty(message="讲师姓名不能为空")
-	private String name;
+	private String name;//教师姓名
 	
 	@NotEmpty(message="不能为空")
-	private String isshow;
+	private String isshow;//1:展示   2:不展示
 	
 	@NotEmpty(message="是否推荐不能为空")
 	private String isremmend;//0不推荐1推荐
 	
 	@NotEmpty(message="图片不能为空")
-	private String imgUrl;
+	private String imgUrl;//老师的图片
 	
-	private String prizes;
+	private String prizes;//获奖情况
 	
 	@NotEmpty(message="特色不能为空")
-	private String features;
+	private String features;//特色
 	
 	@NotEmpty(message="老师描述不能为空")
-	private String describes;
+	private String describes;//老师描述
 	
 	@NotEmpty(message="详细介绍不能为空")
-	private String details;
+	private String details;//详细介绍
 	
 	@NotEmpty(message="大类别不能为空")
-	private String courseTypeNames;
+	private String courseTypeNames;//专业
 	
 	@NotEmpty(message="小类别不能为空")
-	private String courseTypeSubclassNames;
+	private String courseTypeSubclassNames;//子专业
 	
-	private String classId;
+	private String classId;//课程id
 	
 	private Date addtime;
 	

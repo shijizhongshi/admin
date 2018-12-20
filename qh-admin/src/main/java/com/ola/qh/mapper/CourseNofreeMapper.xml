@@ -29,6 +29,7 @@
 		id=#{id}
 		</if>
 		</where>
+		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	
 	<insert id="insertCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">

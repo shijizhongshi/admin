@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CourseClassDao">
+	<resultMap type="com.ola.qh.entity.CourseClass" id="CourseClassMap">
+		<result column="id" property="id" />
+		<result column="course_type_name" property="courseTypeName" />
+		<result column="course_type_subclass_name" property="courseTypeSubclassName" />
+		<result column="template_id" property="templateId" />
+		<result column="class_name" property="className" />
+		<result column="class_price" property="classPrice" />
+		<result column="class_discount_price" property="classDiscountPrice" />
+		<result column="class_year" property="classYear" />
+		<result column="course_lecturer" property="courseLecturer" />
+		<result column="all_time" property="allTime" />
+		<result column="grade" property="grade" />
+		<result column="isremmend" property="isremmend" />
+		<result column="isshow" property="isshow" />
+		<result column="img_url" property="imgUrl" />
+		<result column="proper_people" property="properPeople" />
+		<result column="promises" property="promises" />
+		<result column="features" property="features" />
+		<result column="introduce" property="introduce" />
+		<result column="detail" property="detail" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<sql id="sql_courseclass">
+		id,course_type_name,course_type_subclass_name,template_id,class_name,class_price,class_discount_price,class_year,course_lecturer,all_time,
+		grade,isremmend,isshow,img_url,proper_people,promises,features,introduce,detail,addtime
+	</sql>
+	<select id="selectCourseClass" resultMap="CourseClassMap">
+		select <include refid="sql_courseclass"></include> from course_class 
+		<where>
+		<if test="id!=null">
+			id=#{id}
+		</if>
+		</where>
+		order by addtime ASC limit #{pageNo},#{pageSize}
+	</select>
+	
+	<insert id="insertCourseClass" parameterType="com.ola.qh.entity.CourseClass">
+		insert into course_class(<include refid="sql_courseclass"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{templateId},
+		#{className},#{classPrice},#{classDiscountPrice},#{classYear},#{courseLecturer},#{allTime},#{grade},#{isremmend},#{isshow},#{imgUrl},#{properPeople},
+		#{promises},#{features},#{introduce},#{detail},#{addtime})
+	</insert>
+	
+	<update id="updateCourseClass" parameterType="com.ola.qh.entity.CourseClass">
+		update course_class set 
+		<if test="courseTypeName!=null">
+			course_type_name=#{courseTypeName},
+		</if>
+		<if test="courseTypeSubclassName!=null">
+			course_type_subclass_name=#{courseTypeSubclassName},
+		</if>
+		<if test="templateId!=null">
+			template_id=#{templateId},
+		</if>
+		<if test="className!=null">
+			class_name=#{className},
+		</if>
+		<if test="classPrice!=null">
+			class_price=#{classPrice},
+		</if>
+		<if test="classDiscountPrice!=null">
+			class_discount_price=#{classDiscountPrice},
+		</if>
+		<if test="classYear!=null">
+			class_year=#{classYear},
+		</if>
+		<if test="courseLecturer!=null">
+			course_lecturer=#{courseLecturer},
+		</if>
+		<if test="allTime!=null">
+			all_time=#{allTime},
+		</if>
+		<if test="grade!=null">
+			grade=#{grade},
+		</if>
+		<if test="isremmend!=null">
+			isremmend=#{isremmend},
+		</if>
+		<if test="isshow!=null">
+			isshow=#{isshow},
+		</if>
+		<if test="imgUrl!=null">
+			img_url=#{imgUrl},
+		</if>
+		<if test="properPeople!=null">
+			proper_people=#{properPeople},
+		</if>
+		<if test="promises!=null">
+			promises=#{promises},
+		</if>
+		<if test="features!=null">
+			features=#{features},
+		</if>
+		<if test="introduce!=null">
+			introduce=#{introduce},
+		</if>
+		<if test="detail!=null">
+			detail=#{detail},
+		</if>
+		updatetime=#{updatetime} where id=#{id}
+		
+	</update>
+	
+	<delete id="deleteCourseClass" >
+		delete from course_class where id=#{id}
+	</delete>
+	
+</mapper>
