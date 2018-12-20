@@ -8,35 +8,34 @@ public class CourseNofree {
 
 	private String id;
 	
-	@NotEmpty
+	@NotEmpty(message="专业不能为空")
 	private String courseTypeName;//专业
 	
-	@NotEmpty
+	@NotEmpty(message="子专业不能为空")
 	private String courseTypeSubclassName;//子专业
 	
-	@NotEmpty
+	@NotEmpty(message="资源类别不能为空")
 	private String courseResourceType;//资源类别
 	
-	@NotEmpty
+	@NotEmpty(message="资源用途不能为空")
 	private String courseUseDifference;//资源用途
 	
-	@NotEmpty
+	@NotEmpty(message="课程名称不能为空")
 	private String courseName;//课程名称
 	
-	@NotEmpty
+	@NotEmpty(message="老师不能为空")
 	private String teachers;//老师
 	
 	private int palyTime;//播放时间
 	
-	@NotEmpty
 	private String describes;//描述
 	
-	@NotEmpty
+	@NotEmpty(message="阿里云id不能为空")
 	private String aliyunId;//阿里云id
 	
 	private int isremmend;//1:推荐
 	
-	@NotEmpty
+	@NotEmpty(message="图片不能为空")
 	private String imgUrl;
 	
 	private Date addtime;
