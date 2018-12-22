@@ -8,7 +8,7 @@ import com.ola.qh.entity.CourseNofree;
 
 public interface CourseNofreeDao {
 
-	public List<CourseNofree> selectCourseNofree(@Param("id")String id,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<CourseNofree> selectCourseNofree(@Param("courseTypeName")String courseTypeName,@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
 	public int insertCourseNofree(CourseNofree courseNofree);
 	

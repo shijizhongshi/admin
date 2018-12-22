@@ -24,11 +24,13 @@
 	</sql>
 	<select id="selectCourseNofree" resultMap="CourseNofreeMap">
 		select <include refid="sql_coursenofree"></include> from course_nofree 
-		<where>
-		<if test="id!=null">
-		id=#{id}
+		where 1=1
+		<if test="courseTypeName!=null">
+		and course_type_name=#{courseTypeName}
 		</if>
-		</where>
+		<if test="courseTypeSubclassName!=null">
+		and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
 		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	

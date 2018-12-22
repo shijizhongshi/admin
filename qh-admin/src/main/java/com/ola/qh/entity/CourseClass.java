@@ -1,34 +1,50 @@
 package com.ola.qh.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class CourseClass {
 
 	private String id;
 	
+	@NotEmpty(message="专业不能为空")
 	private String courseTypeName;//专业
 	
+	@NotEmpty(message="子专业不能为空")
 	private String courseTypeSubclassName;//子专业
 	
 	private String templateId;//模板的id
 	
-	private String className;//课程优惠价格
+	@NotEmpty(message="班级名称不能为空")
+	private String className;
 	
+	@NotEmpty(message="课程价格不能为空")
 	private BigDecimal classPrice;//课程价格
 	
-	private BigDecimal classDiscountPrice;//
+	@NotEmpty(message="课程优惠价格不能为空")
+	private BigDecimal classDiscountPrice;////课程优惠价格
 	
+	@NotEmpty(message="年份不能为空")
 	private String classYear;//年份
 	
+	@NotEmpty(message="课程主讲人不能为空")
 	private String courseLecturer;//课程主讲人
 	
+	@NotNull
 	private int allTime;//所有的课时
 	
 	private String grade;//显示级别
 	
+	@NotNull
 	private int isremmend;//1推荐 0:不推荐
 	
+	@NotNull
 	private int isshow;//1:显示  0:关闭
 	
 	private String imgUrl;//班级图片
@@ -46,7 +62,11 @@ public class CourseClass {
 	private Date addtime;//
 	
 	private Date updatetime;//
-
+	
+	private List<CourseTeacher> listTeacher=new ArrayList<CourseTeacher>();//
+	
+	private List<Course> listCourse=new ArrayList<Course>();//
+	
 	public String getId() {
 		return id;
 	}
@@ -214,6 +234,25 @@ public class CourseClass {
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
 	}
+
+	public List<CourseTeacher> getListTeacher() {
+		return listTeacher;
+	}
+
+	public void setListTeacher(List<CourseTeacher> listTeacher) {
+		this.listTeacher = listTeacher;
+	}
+
+	public List<Course> getListCourse() {
+		return listCourse;
+	}
+
+	public void setListCourse(List<Course> listCourse) {
+		this.listCourse = listCourse;
+	}
+
 	
+	
+
 	
 }

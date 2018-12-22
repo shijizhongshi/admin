@@ -12,7 +12,9 @@ public interface CourseTeacherDao {
 	
 	public CourseTeacher selectCourseTeacherDetails(@Param("id")String id);
 	
-	public CourseTeacher selectName(@Param("id")String id);
+	public List<CourseTeacher> selectName(@Param("id")String id);
+	
+	public List<CourseTeacher> selectNameFromType(@Param("courseTypeNames")String courseTypeNames,@Param("courseTypeSubclassNames")String courseTypeSubclassNames);
 	
 	public int insertCourseTeacher(CourseTeacher courseTeacher);
 	

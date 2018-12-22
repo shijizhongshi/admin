@@ -121,4 +121,26 @@ public class CourseTeacherController {
 		
 		
 	}
+	
+	@RequestMapping(value="/selectname",method=RequestMethod.GET)
+	public Results<List<CourseTeacher>>selectName(@RequestParam(name="id",required=true)String id){
+		
+		Results<List<CourseTeacher>> results=new Results<List<CourseTeacher>>();
+		
+		List<CourseTeacher> selectName=courseTeacherService.selectName(id);
+		
+		if(selectName==null){
+			
+			results.setStatus("1");
+			results.setMessage("教师信息不存在");
+			return results;
+		}
+		results.setStatus("0");
+		results.setData(selectName);
+		return results;
+		
+		
+	}
+	
+	
 }

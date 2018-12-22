@@ -6,7 +6,7 @@ import com.ola.qh.entity.CourseNofree;
 
 public interface ICourseNofreeService {
 
-	public List<CourseNofree> selectCourseNofree(String id,int pageNo,int pageSize);
+	public List<CourseNofree> selectCourseNofree(String courseTypeName,String courseTypeSubclassName,int pageNo,int pageSize);
 	
 	public int insertCourseNofree(CourseNofree courseNofree);
 	

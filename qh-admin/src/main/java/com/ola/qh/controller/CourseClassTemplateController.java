@@ -55,6 +55,12 @@ public class CourseClassTemplateController {
 		
 		Results<String> results=new Results<String>();
 		
+		if (valid.hasErrors()) {
+			results.setMessage("信息填写不完整,请检查");
+			results.setStatus("1");
+			return results;
+		}
+		
 		courseClassTemplate.setAddtime(new Date());
 		courseClassTemplate.setId(KeyGen.uuid());
 		int insert=courseClassTemplateService.insertCourseClassTemplate(courseClassTemplate);

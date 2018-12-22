@@ -27,7 +27,8 @@ public class CourseNofreeController {
 	private ICourseNofreeService courseNofreeService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<CourseNofree>> selectCourseNofree(@RequestParam(name="id",required=false)String id,
+	public Results<List<CourseNofree>> selectCourseNofree(@RequestParam(name="courseTypeName",required=false)String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
 			@RequestParam(name="page",required=true)int page){
 		
 		Results<List<CourseNofree>> results=new Results<List<CourseNofree>>();
@@ -35,7 +36,7 @@ public class CourseNofreeController {
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		
-		List<CourseNofree> list=courseNofreeService.selectCourseNofree(id, pageNo, pageSize);
+		List<CourseNofree> list=courseNofreeService.selectCourseNofree(courseTypeName, courseTypeSubclassName, pageNo, pageSize);
 		
 		if(list==null || list.size()==0){
 			
@@ -54,6 +55,11 @@ public class CourseNofreeController {
 		
 		Results<String> results=new Results<String>();
 		
+		if (valid.hasErrors()) {
+			results.setMessage("信息填写不完整,请检查");
+			results.setStatus("1");
+			return results;
+		}
 		courseNofree.setAddtime(new Date());
 		courseNofree.setId(KeyGen.uuid());
 		int insert=courseNofreeService.insertCourseNofree(courseNofree);

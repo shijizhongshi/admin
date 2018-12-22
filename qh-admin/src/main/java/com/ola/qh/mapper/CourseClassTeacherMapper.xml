@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ola.qh.dao.CourseClassTeacherDao">
-	<resultMap type="com.ola.qh.entity.CourseClassTeacher" id="CourseClassTeacherMap">
+<resultMap type="com.ola.qh.entity.CourseClassTeacher" id="CourseClassTeacherMap">
 		<result column="id" property="id" />
 		<result column="class_id" property="classId" />
 		<result column="teacher_id" property="teacherId" />
@@ -12,13 +12,14 @@
 	</resultMap>
 	<select id="selectCourseClassTeacher" resultMap="CourseClassTeacherMap">
 		select id,class_id,teacher_id,addtime from course_class_teacher where 1=1
+		
 		<if test="classId!=null">
-			and class_id=#{classId}
+		and class_id=#{classId}
 		</if>
 		<if test="teacherId!=null">
-			and teacher_id=#{teacherId}
+		and teacher_id=#{teacherId}
 		</if>
-		order by addtime ASC limit #{pageNo},#{pageSize}
+		 
 	</select>
 	
 	<insert id="insertCourseClassTeacher" parameterType="com.ola.qh.entity.CourseClassTeacher">
@@ -28,5 +29,4 @@
 	<delete id="deleteCourseClassTeacher" >
 		delete from course_class_teacher where class_id=#{classId} and teacher_id=#{teacherId}
 	</delete>
-	
 </mapper>

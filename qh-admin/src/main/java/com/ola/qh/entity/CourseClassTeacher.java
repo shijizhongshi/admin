@@ -2,16 +2,12 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class CourseClassTeacher {
 
 	private String id;
 	
-	@NotEmpty(message="课程名称不能为空")
 	private String classId;
 	
-	@NotEmpty(message="教师姓名不能为空")
 	private String teacherId;
 	
 	private Date addtime;
@@ -57,6 +53,7 @@ public class CourseClassTeacher {
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
 	}
+	
 	
 	
 }

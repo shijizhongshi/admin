@@ -20,12 +20,11 @@ public class CourseClassTemplate {
 	@NotNull
 	private BigDecimal classPrice;//课程价格
 	
+	@NotNull
 	private BigDecimal classDiscountPrice;//课程优惠价格
 	
-	@NotEmpty(message="课程图片不能为空")
 	private String classUrl;
 	
-	@NotEmpty(message="适合人群不能为空")
 	private String properPeople;//适合人群
 	
 	private String promises;//班级承诺

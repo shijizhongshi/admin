@@ -32,6 +32,12 @@ public class CourseTeacherService implements ICourseTeacherService{
 		
 		return courseTeacherDao.selectCourseTeacherDetails(id);
 	}
+	
+	@Override
+	public List<CourseTeacher> selectName(String id) {
+		
+		return courseTeacherDao.selectName(id);
+	}
 
 	@Transactional
 	@Override
@@ -66,8 +72,5 @@ public class CourseTeacherService implements ICourseTeacherService{
 		return courseTeacherDao.deleteCourseTeacher(id);
 	}
 
-	
-	
-	
 	
 }

@@ -33,6 +33,18 @@
 		select name from course_teacher where id=#{id}
 	</select>
 	
+	<select id="selectNameFromType" resultMap="CourseTeacherMap">
+		select id,name from course_teacher where 1=1
+		
+		<if test="courseTypeNames!=null">
+		and course_type_names=#{courseTypeNames}
+		</if>
+		<if test="courseTypeSubclassNames!=null">
+		and course_type_subclass_names=#{courseTypeSubclassNames}
+		</if>
+		
+	</select>
+	
 	<insert id="insertCourseTeacher" parameterType="com.ola.qh.entity.CourseTeacher">
 		insert into course_teacher(<include refid="sql_teacher"></include>) values(#{id},#{name},#{isshow},#{isremmend},#{imgUrl},#{prizes},#{features},#{describes},#{details},#{courseTypeNames},#{courseTypeSubclassNames},#{addtime})
 	</insert>

@@ -1,6 +1,5 @@
 package com.ola.qh.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.CourseClass;
 import com.ola.qh.service.ICourseClassService;
-import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
@@ -53,34 +51,20 @@ public class CourseClassController {
 		
 		Results<String> results=new Results<String>();
 		
-		courseClass.setAddtime(new Date());
-		courseClass.setId(KeyGen.uuid());
-		int insert=courseClassService.insertCourseClass(courseClass);
-		
-		if(insert==0){
-			
+		if (valid.hasErrors()) {
+			results.setMessage("信息填写不完整,请检查");
 			results.setStatus("1");
 			return results;
 		}
-		results.setStatus("0");
-		return results;
+		
+		return courseClassService.insertCourseClass(courseClass);
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public Results<String> updateCourseClass(@RequestBody CourseClass courseClass){
 		
-		Results<String> results=new Results<String>();
 		
-		courseClass.setUpdatetime(new Date());
-		int update=courseClassService.updateCourseClass(courseClass);
-		
-		if(update==0){
-			
-			results.setStatus("1");
-			return results;
-		}
-		results.setStatus("0");
-		return results;
+		return courseClassService.updateCourseClass(courseClass);
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.GET)

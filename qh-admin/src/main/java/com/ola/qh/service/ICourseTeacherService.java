@@ -11,6 +11,8 @@ public interface ICourseTeacherService {
 	
 	public CourseTeacher selectCourseTeacherDetails(String id);
 	
+	public List<CourseTeacher> selectName(String id);
+	
 	public Results<String> insertCourseTeacher(CourseTeacher courseTeacher);
 	
 	public int updateCourseTeacher(CourseTeacher courseTeacher);

@@ -110,4 +110,6 @@
 		delete from course_class where id=#{id}
 	</delete>
 	
+	
+	
 </mapper>

@@ -16,9 +16,10 @@ public class CourseNofreeService implements ICourseNofreeService {
 	private CourseNofreeDao courseNofreeDao;
 	
 	@Override
-	public List<CourseNofree> selectCourseNofree(String id, int pageNo, int pageSize) {
+	public List<CourseNofree> selectCourseNofree(String courseTypeName, String courseTypeSubclassName, int pageNo,
+			int pageSize) {
 		
-		return courseNofreeDao.selectCourseNofree(id, pageNo, pageSize);
+		return courseNofreeDao.selectCourseNofree(courseTypeName, courseTypeSubclassName, pageNo, pageSize);
 	}
 
 	@Override
@@ -38,5 +39,7 @@ public class CourseNofreeService implements ICourseNofreeService {
 		
 		return courseNofreeDao.deleteCourseNofree(id);
 	}
+
+	
 
 }
