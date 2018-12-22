@@ -23,11 +23,9 @@ public class CourseClass {
 	
 	@NotEmpty(message="班级名称不能为空")
 	private String className;
-	
-	@NotEmpty(message="课程价格不能为空")
+	@NotNull
 	private BigDecimal classPrice;//课程价格
-	
-	@NotEmpty(message="课程优惠价格不能为空")
+	@NotNull
 	private BigDecimal classDiscountPrice;////课程优惠价格
 	
 	@NotEmpty(message="年份不能为空")
