@@ -36,11 +36,11 @@ public class CommentTextController {
 	
 	
 	@RequestMapping(value="/select")
-	public Results<List<CommentText>> selectCommentText(){
+	public Results<List<CommentText>> selectCommentText(@RequestParam(name="textStatus",required=true)int textStatus){
 		
 		Results<List<CommentText>> results=new Results<List<CommentText>>();
 		
-		List<CommentText> list=commentTextService.selectCommentText();
+		List<CommentText> list=commentTextService.selectCommentText(textStatus);
 		
 		if(list==null || "".equals(list)){
 			
