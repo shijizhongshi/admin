@@ -30,9 +30,9 @@
 			</select>
 	
 		</div>
-		
+	
 		<div class="select">
-			专业类型<br />
+				专业类型<br />
 				<img src="./images/sjk-xl.png"/>
 			<select>
 				<option></option>
@@ -49,29 +49,28 @@
 	</div>
 	</div>
 <div class="manage">
-	<ul style="height: 80px;">
+	<ul style="height: 80px;" class="show">
 
-			<li  onclick="showDiv()"><img src="./images/sjk-add.png"/></li>
-	
-		<li onclick="showDiv2()" ><img src="./images/sjk-xiugai.png" /></li>
-		<li><img src="./images/sjk-delete.png" name="shanchu"/></li>
-		<li><img src="./images/sjk-up.png" name="changyi"/></li>
-		<li><img src="./images/sjk-down.png" name="changyi"/></li>
-		<li><img src="./images/guanli.png" name="guanli"/></li>
-         <li style="float: right;margin-right: 100px;"><img src="./images/sjk-f5.png" name="changyi"/></li>
+			<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加课程</li>
+		<li onclick="showDiv2()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改课程</li>
+		<li  style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除课程</li>
+		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
+		<li  onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;资源章节管理</li>
+         <li style="float: right;margin-right: 100px;background:none;"><img src="./images/sjk-f5.png" name="changyi"/></li>
 	</ul>
 	<div class="admin-table">
 
 	<ol style="background: #CBD2D8;font-weight: bold;">
-		<li class="col-md-2">课程名称</li>
-	<li class="col-md-1">课程总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
+		<li>课程名称</li>
+	<li >课程总数</li>
+	<li >课程价格</li>
+	<li>课程折扣</li>
+	<li>年份</li>
+	<li>课时数</li>
+	<li>是否显示</li>
+	<li>资源类别</li>
+	<li>章类别</li>
 	</ol>
  <for:each>
  <ol style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
@@ -410,7 +409,146 @@
 			</div>
 			</form>
 		</div>
-
+<div class="resource" id="resource">
+	<h3>资源管理器</h3>
+	<p>所属专业：临床执业助理医师</p>
+	<p>课程资源名：2018临床-基础课程</p>
+	<div style="width:700px;height: 340px;border-radius: 20px;overflow: hidden;border: 1px solid #B1B1B1;">
+	<form id="myform3">
+	<div class="resource-table">
+		<ul style="background: #CBD2D8;font-weight: bold;">
+			<li>章名称</li>
+			<li>主讲老师</li>
+			<li>小结数量</li>
+			<li>用途分类</li>
+			<li>是否显示</li>
+		</ul>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+			<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>	
+	</div>
+	</form>
+	</div>
+	<div class="end">
+			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv3();formReset3()" class="esc" />
+		</div>
+</div>
 	
 </div>
 
