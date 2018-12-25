@@ -8,7 +8,7 @@ import com.ola.qh.entity.CommentText;
 
 public interface CommentTextDao {
 
-	public List<CommentText> selectCommentText();
+	public List<CommentText> selectCommentText(@Param("textStatus")int textStatus);
 	
 	public int updateCommentText(CommentText commentText);
 	

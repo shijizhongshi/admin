@@ -6,7 +6,7 @@ import com.ola.qh.entity.CommentText;
 
 public interface ICommentTextService {
 	
-	public List<CommentText> selectCommentText();
+	public List<CommentText> selectCommentText(int textStatus);
 	
 	public int updateCommentText(CommentText commentText);
 	

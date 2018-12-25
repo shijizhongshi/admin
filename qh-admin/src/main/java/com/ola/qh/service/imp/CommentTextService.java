@@ -16,9 +16,9 @@ public class CommentTextService implements ICommentTextService{
 	private CommentTextDao commentTextDao;
 
 	@Override
-	public List<CommentText> selectCommentText() {
+	public List<CommentText> selectCommentText(int textStatus) {
 		
-		return commentTextDao.selectCommentText();
+		return commentTextDao.selectCommentText(textStatus);
 	}
 
 	@Override
