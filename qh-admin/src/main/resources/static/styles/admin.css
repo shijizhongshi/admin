@@ -36,11 +36,11 @@ ul.menu .active .list a { padding: 10px 0px 17px 45px;}
 .details-frame-content{width:97%;padding: 30px;background: white;height:120px;border-bottom: solid 1px #EEEFF1;}
 .centre-border{width:370px;height:170px;border-bottom: 1px solid #F5F6F8;clear:both;margin-bottom:15px;}
 .centre-border select,.centre-border .select{width:130px;}
-.select{width:180px;height:50px;float:left;margin-left:10px;margin-bottom:5px;position: relative;}
+.select{width:160px;height:50px;float:left;margin-left:10px;margin-bottom:5px;position: relative;}
 .details-frame-content .select img{position: absolute;right:10px;bottom:8px;}
 .manage .select img{position: absolute;right:10px;top:17px;}
 
-select{padding-left:18px ;width:180px;height: 40px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
+select{padding-left:18px ;width:160px;height: 40px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
 select[disabled='disabled']::-webkit-value {
 color:red;
 }
@@ -108,3 +108,4 @@ color:red;
 .add-jie-radio span:nth-child(1){float: left;font-size:16px;}
 .add-jie-radio span:nth-child(2){float: right;font-size:16px;}
 .add-jie-right{width:400px;float: right;}
+

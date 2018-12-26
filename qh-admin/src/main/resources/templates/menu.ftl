@@ -20,14 +20,14 @@
          <li><a href="#"> 课程节管理</a></li>
       </ul>
    </li>
-   <li class="list"><a href="#">List 2</a> 
+   <li class="list"><a href="#">资源章管理</a> 
       <ul class="items">
          <li> <a href="#" > Item 2-1 </a></li>
          <li> <a href="#" > Item 2-2 </a></li>
          <li> <a href="#" > Item 2-3 </a></li>
       </ul>
       </li>
-       <li class="list"><a href="#">List 2</a> 
+       <li class="list"><a href="#">资源节管理</a> 
       <ul class="items">
          <li> <a href="#" > Item 2-1 </a></li>
          <li> <a href="#" > Item 2-2 </a></li>

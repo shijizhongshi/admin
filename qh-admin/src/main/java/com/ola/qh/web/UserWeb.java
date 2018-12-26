@@ -17,7 +17,11 @@ public class UserWeb {
 	public String UserWebq(){
 		return "coursee";
 	}
-	
+
+	@RequestMapping(value="/chapter-manage",method=RequestMethod.GET)
+	public String UserWebw(){
+		return "chapter-manage";
+	}
 	
 	
 }
