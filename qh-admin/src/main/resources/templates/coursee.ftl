@@ -117,17 +117,56 @@
 </div>
 
 	<!--弹窗-->
-		<div class="poop" id="add" style="width: 700px;">
-		<form id="myform">
+		<div class="poop" id="add" style="width: 790px;position: absolute;left: 20%;">
+			<form id="myform">
+			<div class="add-jie-left">
 	<h3>添加节</h3>
+	<p><span style="float: left;">章名称：</span><span style="float: right;">冲刺课-中医妇科冲刺习题</span></p>
+	
+		
+		<div class=" select">
+			<input type="text" placeholder="节名称" style="width: 230px;text-indent: 2em;" />
+		</div>
+		
+		<div class="select">
+		
+			<input type="text" placeholder="七牛云链接" style="width:130px ;text-indent: 2em;"/>
+		</div>
+	
+		<div class="select">
+			<input type="text" placeholder="阿里云ID" style="width:130px ;text-indent: 2em;"/>
+		</div>
+		<div class="select">
+			<input type="text" placeholder="视频3URL3" style="width:130px ;text-indent: 2em;"/>
+		</div>
+			<div class="add-jie-radio" style="clear: both;">
+			<span>是否可见</span><span><input type="radio" name="visible" id="" value="" />是
+				<input type="radio" name="visible" id="" value="" />否</span>
+		</div>
+</div>			
+
+			<div class="end">
+			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			</div>
+			</form>
+	</div>
+	
+	
+	
+		
+		
+		<div class="poop-revise" id="revise"  style="width: 790px;position: absolute;left: 20%;" >
+			<form id="myform2">
+	<h3>关联题库ID</h3>
 	<p>关联章节练习</p>
 	<div class="add-section">
 		<ul id="section-tab" >
-			<li>第一部分&nbsp;医学人文</li>
-			<li>第二部分&nbsp;医学人文公共卫生</li>
-			<li>第三部分&nbsp;中西医（执业）助理医师</li>
+			<li onmousedown="setTab(0)">第一部分&nbsp;医学人文</li>
+			<li onmousedown="setTab(1)">第二部分&nbsp;医学人文公共卫生</li>
+			<li onmousedown="setTab(2)">第三部分&nbsp;中西医（执业）助理医师</li>
 		</ul>
-		<div style="width: 400px;height: 350px;border-radius: 20px;overflow: hidden;border: 1px solid #B1B1B1;float: right;">
+		<div style="width: 400px;height: 350px;border-radius: 20px;overflow: hidden;border: 1px solid #B1B1B1;float: right;" id="tab">
 		<div class="section-table">
 			<ul style="background:#E9EAEE;font-weight: bold;">
 				<li>选择</li>
@@ -141,113 +180,47 @@
 				<li><input  type="radio"></li>
 				<li>节名称</li>
 			</ul>
-		
+			
+		</div>
+		<div class="section-table" style="display: none;">
+			<ul style="background:#E9EAEE;font-weight: bold;">
+				<li>1</li>
+				<li>2</li>
+			</ul>
+			<ul>
+				<li><input  type="radio"></li>
+				<li>节名称</li>
+			</ul>
+			<ul>
+				<li><input  type="radio"></li>
+				<li>节名称</li>
+			</ul>
+			
+		</div>
+				<div class="section-table" style="display: none;">
+			<ul style="background:#E9EAEE;font-weight: bold;">
+				<li>555</li>
+				<li>777</li>
+			</ul>
+			<ul>
+				<li><input  type="radio"></li>
+				<li>节名称</li>
+			</ul>
+			<ul>
+				<li><input  type="radio"></li>
+				<li>节名称</li>
+			</ul>
+			
 		</div>
 	</div></div>
 	
 	
 		<div class="end">
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset2()" class="esc" />
 		</div>
 		</form>
-	</div>
 	
-	
-	
-		<div class="poop-revise" id="revise"  >
-		<form id="myform2">
-			<div class="revise-left">
-	<h3>添加课程</h3>
-	<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option disabled selected style='display:none;'>选择专业</option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
-				<option></option>
-				<option></option>
-			<img src="./images/sjk-xl.png" />
-			</select>
-		</div>
-		<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
-			<input type="text" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
-			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;width:122px;"/>
-		</div>
-		<div class="centre-border">
-		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
-			<input type="text"  class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;margin-right:15px;"/>
-			<input type="text" placeholder="输入折扣价格" style="width:130px ;text-indent: 2em;"/>
-		</div>
-		<div class=" select"style="width: 405px;">
-		<input type="text" placeholder="输入课程年份" style="width:130px ;text-indent: 2em;"/></div>
-		<div class=" select" style="margin-right:15px;">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-			<option  disabled selected style='display:none;'>是否显示</option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		<div class=" select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-			<option  disabled selected style='display:none;'>是否精品</option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		</div>
-	
-<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option  disabled selected style='display:none;'>课程资源类别</option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-
-			<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option  disabled selected style='display:none;'>课程用途分类</option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class="end">
-			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset2()" class="esc" />
-			</div>
-</div>			
-<div class="revise-right">
-				<h3>显示章节</h3>
-				<div class="hidden-scoll" >
-				<ul class="section"><form>
-					<li><label for="chapter">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter" /></li>
-					<li><label for="chapter2">传染病 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>
-					<li><label for="chapter3">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter3" /></li>
-					<li><label for="chapter4">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter4" /></li>
-					<li><label for="chapter5">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter5" /></li>
-					<li><label for="chapter6">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter6" /></li>
-					<li><label for="chapter7">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter7" /></li>
-					<li><label for="chapter8">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter8" /></li>
-					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
-					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
-					<li><label for="chapter11">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter11" /></li>
-					<li><label for="chapter12">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter12" /></li>
-					<li><label for="chapter13">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter13" /></li>
-					<li><label for="chapter14">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter14" /></li>
-				</form></ul></div>
-			</div>
-			</form>
 		</div>
 <div class="resource" id="resource">
 	<h3>资源管理器</h3>
@@ -255,25 +228,6 @@
 	<p>课程资源名：2018临床-基础课程</p>
 	<div style="width:700px;height: 340px;border-radius: 20px;overflow: hidden;border: 1px solid #B1B1B1;">
 	<form id="myform3">
-		<div id="#section-tab">
-		<ul style="background: #CBD2D8;font-weight: bold;" id="">
-			<li>章名称</li>
-			<li>主讲老师</li>
-			<li>小结数量</li>
-			<li>用途分类</li>
-			<li>是否显示</li>
-		</ul></div>
-		<div id="tab">
-	<div class="resource-table">
-		
-		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-	</div>
 	<div class="resource-table">
 		<ul style="background: #CBD2D8;font-weight: bold;">
 			<li>章名称</li>
@@ -289,15 +243,19 @@
 	<li>自用课程</li>
 	<li><input  type="radio"> </li>
 		</ul>
-		
-	</div>
-	<div class="resource-table">
-		<ul style="background: #CBD2D8;font-weight: bold;">
-			<li>章名称</li>
-			<li>主讲老师</li>
-			<li>小结数量</li>
-			<li>用途分类</li>
-			<li>是否显示</li>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
 		</ul>
 		<ul>
 	<li>章节名称</li>	
@@ -306,9 +264,98 @@
 	<li>自用课程</li>
 	<li><input  type="radio"> </li>
 		</ul>
-		
+		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+			<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>		<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input  type="radio"> </li>
+		</ul>
+				<ul>
+	<li>章节名称</li>	
+	<li>主讲老师</li>
+	<li>5</li>
+	<li>自用课程</li>
+	<li><input type="radio"> </li>
+		</ul>	
 	</div>
-	</div></form>
+	</form>
 	</div>
 	<div class="end">
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
@@ -320,6 +367,24 @@
 
 </div>
 </div>
+<script type="text/javascript">
+	 function setTab(n){
+ 			var tabs=document.getElementById("section-tab").getElementsByTagName("li");
+ 			var show=document.getElementById("tab").getElementsByTagName("div");
+            for(var i=0;i<tabs.length;i++){
+            	show[i].style.display='none';
+            	tabs[i].style.color='black';
+                if(i==n){
+                		tabs[i].style.color='red';
+                    show[i].style.display='block';
+                }
+
+            }
+
+
+        }
+ 
+</script>
 </body>
  
  </html>

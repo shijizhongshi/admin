@@ -89,8 +89,8 @@ color:red;
 .resource-table ul:nth-child(2n-1){background:white;}
 .resource-table ul:nth-child(2n){background:#F0F1F3;}
 
-
-/**/
+/*jieguanli*/
+/*guanliantikuID*/
 .add-section{width: 100%;}
 #section-tab{width: 37%;float: left;height:350px;border-top:1px solid #F2F2F2;}
 #section-tab li{margin-top:20px;cursor: pointer;}
@@ -98,7 +98,13 @@ color:red;
 .section-table ul{width:400px;height: 30px;margin: 0;}
 .section-table ul:nth-child(2n-1){background:#F7F8FA;}
 .section-table ul:nth-child(2n){background:#F0F1F3;}
-
+/*tianjiajie*/
 .section-table ul li{line-height: 30px;text-align: center;}
 .section-table ul li:nth-child(1){width: 25%;float: left;border-right: 1px solid #EFEFF1;margin:0;}
 .section-table ul li:nth-child(2){width: 74%;float: left;margin:0;}
+.add-jie-left{width:300px;float: left;}
+.add-jie-left p{width:100%;height: 50px;line-height: 50px;border-bottom: 1px solid #F2F2F2;}
+.add-jie-radio {width: 230px;height: 50px;line-height: 50px;clear: both;}
+.add-jie-radio span:nth-child(1){float: left;font-size:16px;}
+.add-jie-radio span:nth-child(2){float: right;font-size:16px;}
+.add-jie-right{width:400px;float: right;}
