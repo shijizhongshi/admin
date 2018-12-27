@@ -1,4 +1,4 @@
-<div class="top">
+<div class="top" ng-app="app">
 	<div class="col-md-7">
 		<img src="./images/sjk-gd.png" />
 		<img src="./images/sjk-.png" />
