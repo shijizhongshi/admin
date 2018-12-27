@@ -8,7 +8,7 @@
 <script src="./scripts/admin.js"></script>
 <body>
  <#include "/menu.ftl"/>
-<div class="details">
+<div class="details" id="details">
 	<div class="details-nav">
 		<ul>
 			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
