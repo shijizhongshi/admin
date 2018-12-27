@@ -13,6 +13,7 @@
 	<result column="content" property="content"/>
 	<result column="addtime" property="addtime"/>
 	<result column="isstick" property="isstick"/>
+	<result column="isrecommend" property="isrecommend"/>
 	</resultMap>
 
 
@@ -20,8 +21,8 @@
 	id,types,title,img_url,addtime,isstick
 	</sql>
 	<insert id="saveNews" parameterType="com.ola.qh.entity.News">
-	insert into news(id,types,content_types,title,img_url,content,addtime,isstick)values
-	(#{id},#{types},#{contentTypes},#{title},#{imgUrl},#{content},#{addtime},#{isstick})
+	insert into news(id,types,content_types,title,img_url,content,addtime,isstick,isrecommend)values
+	(#{id},#{types},#{contentTypes},#{title},#{imgUrl},#{content},#{addtime},#{isstick},#{isrecommend})
 	</insert>
 
 	<update id="updateNews" parameterType="com.ola.qh.entity.News">
@@ -43,6 +44,9 @@
 	</if>
 	<if test="isstick!=0">
 	isstick=#{isstick},
+	</if>
+	<if test="isrecommend!=0">
+	isrecommend=#{isrecommend},
 	</if>
 	id=#{id}
 	where id=#{id}

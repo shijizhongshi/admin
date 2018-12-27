@@ -11,6 +11,10 @@ public class UserWeb {
 	public String UserWeb(){
 		return "course";
 	}
+	@RequestMapping("/questionBank")
+	public String questionBank(){
+		return "questionBank";
+	}
 	
 
 	@RequestMapping(value="/coursee",method=RequestMethod.GET)

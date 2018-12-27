@@ -40,18 +40,12 @@ public class DoctorsController {
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
 	public Results<String> updateDoctors(@RequestParam(name="islimit",required=true)int islimit,
+			@RequestParam(name="isrecommend",required=true)int isrecommend,
 			@RequestParam(name="id",required=true)String id){
 		
-		Results<String> results=new Results<String>();
-		int update=doctorsService.updateDoctors(id, islimit);
-		if(update==0){
-			
-			results.setStatus("1");
-			return results;
-		}
 		
-		results.setStatus("0");
-		return results;
+		return doctorsService.updateDoctors(id, islimit, isrecommend);
+				
 		
 	}
 }
