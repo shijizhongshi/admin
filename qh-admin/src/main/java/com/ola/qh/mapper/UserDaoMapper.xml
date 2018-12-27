@@ -11,6 +11,7 @@
 		<result column="head_img_url" property="headimg" />
 		<result column="userrole" property="userrole" />
 		<result column="mobile" property="mobile" />
+		<result column="isdoctor" property="isdoctor" />
 	</resultMap>
 
 
@@ -20,6 +21,10 @@
 		userrole=#{userrole},
 		</if>
 		id=#{id} where id=#{id} 
+	</update>
+	
+	<update id="updateIsdoctor" parameterType="com.ola.qh.entity.User" >
+		update user set isdoctor=#{isdoctor} where id=#{id} 
 	</update>
 	
 	<update id="updateFavorite" parameterType="String">

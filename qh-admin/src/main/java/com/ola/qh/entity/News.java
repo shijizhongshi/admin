@@ -20,6 +20,8 @@ public class News {
 	
 	private int isstick;////是否置顶
 	
+	private int isrecommend;////是否推荐
+	
 	private int contentTypes;
 	
 	public String getId() {
@@ -84,6 +86,14 @@ public class News {
 
 	public void setContentTypes(int contentTypes) {
 		this.contentTypes = contentTypes;
+	}
+
+	public int getIsrecommend() {
+		return isrecommend;
+	}
+
+	public void setIsrecommend(int isrecommend) {
+		this.isrecommend = isrecommend;
 	}
 
 

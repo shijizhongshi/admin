@@ -47,6 +47,8 @@ public class Doctors {
 	private Date updatetime;
 	
 	private int islimit;
+	
+	private int isrecommend;
 
 	public int getIslimit() {
 		return islimit;
@@ -214,6 +216,14 @@ public class Doctors {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public int getIsrecommend() {
+		return isrecommend;
+	}
+
+	public void setIsrecommend(int isrecommend) {
+		this.isrecommend = isrecommend;
 	}
 	
 	

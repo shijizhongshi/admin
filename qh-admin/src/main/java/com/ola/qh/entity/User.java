@@ -22,6 +22,8 @@ public class User {
 	
 	private int userrole;
 	
+	private int isdoctor;
+	
 	@NotEmpty(message="手机号不能为空")
 	private String mobile;
 	
@@ -87,6 +89,14 @@ public class User {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public int getIsdoctor() {
+		return isdoctor;
+	}
+
+	public void setIsdoctor(int isdoctor) {
+		this.isdoctor = isdoctor;
 	}
 	
 	
