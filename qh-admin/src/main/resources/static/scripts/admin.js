@@ -18,3 +18,13 @@ function formReset2() {
 	  document.getElementById("myform2").reset()
 	  }
 	  
+ function showDiv3(){
+	        document.getElementById('resource').style.display="block"; 
+	        }
+	function CloseDiv3(){
+	document.getElementById('resource').style.display='none';
+	}
+	function formReset3() {
+		  document.getElementById("myform3").reset()
+		  }
+		  

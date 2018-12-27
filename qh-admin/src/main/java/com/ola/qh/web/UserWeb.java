@@ -12,6 +12,12 @@ public class UserWeb {
 		return "course";
 	}
 	
+
+	@RequestMapping(value="/coursee",method=RequestMethod.GET)
+	public String UserWebq(){
+		return "coursee";
+	}
+	
 	
 	
 }
