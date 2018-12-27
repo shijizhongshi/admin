@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CourseClassTeacherDao">
+<resultMap type="com.ola.qh.entity.CourseClassTeacher" id="CourseClassTeacherMap">
+		<result column="id" property="id" />
+		<result column="class_id" property="classId" />
+		<result column="teacher_id" property="teacherId" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<select id="selectCourseClassTeacher" resultMap="CourseClassTeacherMap">
+		select id,class_id,teacher_id,addtime from course_class_teacher where 1=1
+		
+		<if test="classId!=null">
+		and class_id=#{classId}
+		</if>
+		<if test="teacherId!=null">
+		and teacher_id=#{teacherId}
+		</if>
+		 
+	</select>
+	
+	<insert id="insertCourseClassTeacher" parameterType="com.ola.qh.entity.CourseClassTeacher">
+		insert into course_class_teacher(id,class_id,teacher_id,addtime) values(#{id},#{classId},#{teacherId},#{addtime})
+	</insert>
+	
+	<delete id="deleteCourseClassTeacher" >
+		delete from course_class_teacher where class_id=#{classId} and teacher_id=#{teacherId}
+	</delete>
+</mapper>

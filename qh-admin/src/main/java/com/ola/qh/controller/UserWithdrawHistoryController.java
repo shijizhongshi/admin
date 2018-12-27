@@ -1,6 +1,5 @@
 package com.ola.qh.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,14 +24,14 @@ public class UserWithdrawHistoryController {
 	private IUserWithdrawHistoryService userWithdrawHistoryService;
 	
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public Results<List<UserWithdrawHistory>> selectUserWithdrawHistory(@RequestParam(name = "userId", required = true) String userId,
+	public Results<List<UserWithdrawHistory>> selectUserWithdrawHistory(@RequestParam(name = "id", required = false) String id,
 			@RequestParam(name = "page", required = true) int page) {
 
 		Results<List<UserWithdrawHistory>> results = new Results<List<UserWithdrawHistory>>();
 
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		List<UserWithdrawHistory> select = userWithdrawHistoryService.selectUserWithdrawHistory(userId, pageNo, pageSize);
+		List<UserWithdrawHistory> select = userWithdrawHistoryService.selectUserWithdrawHistory(id, pageNo, pageSize);
 
 		
 				
@@ -57,22 +56,7 @@ public class UserWithdrawHistoryController {
 			results.setStatus("1");
 			return results;
 		}
-		if(userwithdrawhistory.getPayStatus()==0){
-			results.setMessage("缺少审核状态");
-			results.setStatus("1");
-			return results;
-		}
-		userwithdrawhistory.setUpdatetime(new Date());
-		int update = userWithdrawHistoryService.updateUserWithdrawHistory(userwithdrawhistory);
+		return userWithdrawHistoryService.updateUserWithdrawHistory(userwithdrawhistory);
 
-		if (update <= 0) {
-			results.setMessage("添加失败");
-			results.setStatus("1");
-			return results;
-		}
-		results.setStatus("0");
-		return results;
 	}
-
-	
 }

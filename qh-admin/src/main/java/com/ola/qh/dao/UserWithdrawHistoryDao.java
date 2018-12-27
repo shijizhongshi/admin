@@ -8,7 +8,7 @@ import com.ola.qh.entity.UserWithdrawHistory;
 
 public interface UserWithdrawHistoryDao {
 
-	public List<UserWithdrawHistory> selectUserWithdrawHistory(@Param("userId")String userId,@Param("pageNo")int page,@Param("pageSize")int zupageSize);
+	public List<UserWithdrawHistory> selectUserWithdrawHistory(@Param("id")String id,@Param("pageNo")int page,@Param("pageSize")int zupageSize);
 	
 	public int updateUserWithdrawHistory(UserWithdrawHistory userwithdrawhistory);
 	

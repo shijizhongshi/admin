@@ -16,5 +16,12 @@ public class UserWeb {
 		return "questionBank";
 	}
 	
+
+	@RequestMapping(value="/coursee",method=RequestMethod.GET)
+	public String UserWebq(){
+		return "coursee";
+	}
+	
+	
 	
 }

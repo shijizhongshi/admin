@@ -77,6 +77,7 @@
 	<result column="course_use_difference" property="courseUseDifference"/>
 	<result column="addtime" property="addtime" />
 	<result column="updatetime" property="updatetime"/>
+	<result column="class_id" property="classId"/>
 	</resultMap>
 	
 	<sql id="sql_base">
@@ -136,7 +137,7 @@
 	<!--课程按照不同的条件进行查询-->
 	<select id="courseList" resultMap="CourseMap" parameterType="com.ola.qh.entity.Course">
 	
-	select <include refid="sql_base"></include> from course where course_show=1
+	select <include refid="sql_base"></include>from course where course_show=1
 	<if test="courseExcellent!=0">
 	 and course_excellent=#{courseExcellent}
 	</if>
@@ -149,6 +150,17 @@
 	order by addtime desc 
 	limit #{pageNo},#{pageSize}
 	</select>
+	
+	<select id="existCourse" resultType="com.ola.qh.entity.Course">
+		select <include refid="sql_base"></include>,class_id from course where id=#{id}
+	</select>
+	<select id="existCourseList" resultMap="CourseMap">
+		select id,class_id from course where class_id=#{classId}
+	</select>
+	<update id="updateClass" parameterType="com.ola.qh.entity.Course">
+		update course set class_id='' where class_id=#{classId}
+		
+	</update>
 	<!-- 课程的处理结束*************************************************** -->
 	
 	

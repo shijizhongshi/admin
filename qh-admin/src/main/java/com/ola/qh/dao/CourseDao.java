@@ -33,4 +33,10 @@ public interface CourseDao {
 	
 	public int updateCourese(Course course);
 	
+	public Course existCourse(@Param("id")String id);
+	
+	public List<Course> existCourseList(@Param("classId")String classId);
+	
+	public int updateClass(@Param("classId")String classId);
+	
 }

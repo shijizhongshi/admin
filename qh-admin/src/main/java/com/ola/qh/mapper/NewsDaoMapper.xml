@@ -7,11 +7,13 @@
 	<resultMap type="com.ola.qh.entity.News" id="NewsMap">
 	<result column="id" property="id"/>
 	<result column="types" property="types"/>
+	<result column="content_types" property="contentTypes"/>
 	<result column="title" property="title"/>
 	<result column="img_url" property="imgUrl"/>
 	<result column="content" property="content"/>
 	<result column="addtime" property="addtime"/>
 	<result column="isstick" property="isstick"/>
+	<result column="isrecommend" property="isrecommend"/>
 	</resultMap>
 
 
@@ -19,14 +21,17 @@
 	id,types,title,img_url,addtime,isstick
 	</sql>
 	<insert id="saveNews" parameterType="com.ola.qh.entity.News">
-	insert into news(id,types,title,img_url,content,addtime,isstick)values
-	(#{id},#{types},#{title},#{imgUrl},#{content},#{addtime},#{isstick})
+	insert into news(id,types,content_types,title,img_url,content,addtime,isstick,isrecommend)values
+	(#{id},#{types},#{contentTypes},#{title},#{imgUrl},#{content},#{addtime},#{isstick},#{isrecommend})
 	</insert>
 
 	<update id="updateNews" parameterType="com.ola.qh.entity.News">
 	update news set
 	<if test="types!=null">
 	types=#{types},
+	</if>
+	<if test="contentTypes!=null">
+	content_types=#{contentTypes},
 	</if>
 	<if test="title!=null">
 	title=#{title},
@@ -40,6 +45,9 @@
 	<if test="isstick!=0">
 	isstick=#{isstick},
 	</if>
+	<if test="isrecommend!=0">
+	isrecommend=#{isrecommend},
+	</if>
 	id=#{id}
 	where id=#{id}
 	</update>
@@ -47,7 +55,7 @@
 	<select id="selectNewList" resultMap="NewsMap" parameterType="int">
 		select <include refid="sql_base"></include> from news
 		<if test="pageNo!=0">
-			where limit #{pageNo},#{pageSize}
+			where content_types=#{contentTypes} limit #{pageNo},#{pageSize}  
 		</if>
 	</select>
 

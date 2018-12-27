@@ -50,6 +50,8 @@ public class Course {
 	private int pageNo;////分页用的
 	
 	private int pageSize;
+	
+	private String classId;
 
 	public String getUserId() {
 		return userId;
@@ -197,6 +199,14 @@ public class Course {
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getClassId() {
+		return classId;
+	}
+
+	public void setClassId(String classId) {
+		this.classId = classId;
 	}
 	
 	

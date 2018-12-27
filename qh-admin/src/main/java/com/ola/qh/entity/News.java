@@ -8,7 +8,6 @@ public class News {
 
 	private String id;
 	
-	@NotEmpty(message="新闻类别不能为空")
 	private String types;
 	@NotEmpty(message="新闻标题不能为空")
 	private String title;///标题
@@ -20,7 +19,11 @@ public class News {
 	private Date addtime;
 	
 	private int isstick;////是否置顶
-
+	
+	private int isrecommend;////是否推荐
+	
+	private int contentTypes;
+	
 	public String getId() {
 		return id;
 	}
@@ -76,6 +79,24 @@ public class News {
 	public void setIsstick(int isstick) {
 		this.isstick = isstick;
 	}
+
+	public int getContentTypes() {
+		return contentTypes;
+	}
+
+	public void setContentTypes(int contentTypes) {
+		this.contentTypes = contentTypes;
+	}
+
+	public int getIsrecommend() {
+		return isrecommend;
+	}
+
+	public void setIsrecommend(int isrecommend) {
+		this.isrecommend = isrecommend;
+	}
+
+
 	
 	
 }

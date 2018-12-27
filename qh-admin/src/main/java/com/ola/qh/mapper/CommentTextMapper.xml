@@ -10,7 +10,7 @@
 		
 	</resultMap>
 	<select id="selectCommentText" resultMap="CommentTextMap">
-		select text_name,text_status from comment_text
+		select id,text_name from comment_text where text_status=#{textStatus}
 	</select>
 	
 	<insert id="insertCommentText" parameterType="com.ola.qh.entity.CommentText">

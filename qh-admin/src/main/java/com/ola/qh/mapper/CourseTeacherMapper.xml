@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.CourseTeacherDao">
+	<resultMap type="com.ola.qh.entity.CourseTeacher" id="CourseTeacherMap">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="isshow" property="isshow" />
+		<result column="isremmend" property="isremmend" />
+		<result column="img_url" property="imgUrl" />
+		<result column="prizes" property="prizes" />
+		<result column="features" property="features" />
+		<result column="describes" property="describes" />
+		<result column="details" property="details" />
+		<result column="course_type_names" property="courseTypeNames" />
+		<result column="course_type_subclass_names" property="courseTypeSubclassNames" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	<sql id="sql_teacher">
+	id,name,isshow,isremmend,img_url,prizes,features,describes,details,course_type_names,course_type_subclass_names,addtime
+	</sql>
+	<select id="selectCourseTeacher" resultMap="CourseTeacherMap">
+		select id,name,isshow,isremmend,img_url from course_teacher order by addtime ASC limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="selectCourseTeacherDetails" resultMap="CourseTeacherMap">
+		select <include refid="sql_teacher"></include> from course_teacher where id=#{id}
+	</select>
+	
+	<select id="selectName" resultMap="CourseTeacherMap">
+		select name from course_teacher where id=#{id}
+	</select>
+	
+	<select id="selectNameFromType" resultMap="CourseTeacherMap">
+		select id,name from course_teacher where 1=1
+		
+		<if test="courseTypeNames!=null">
+		and course_type_names=#{courseTypeNames}
+		</if>
+		<if test="courseTypeSubclassNames!=null">
+		and course_type_subclass_names=#{courseTypeSubclassNames}
+		</if>
+		
+	</select>
+	
+	<insert id="insertCourseTeacher" parameterType="com.ola.qh.entity.CourseTeacher">
+		insert into course_teacher(<include refid="sql_teacher"></include>) values(#{id},#{name},#{isshow},#{isremmend},#{imgUrl},#{prizes},#{features},#{describes},#{details},#{courseTypeNames},#{courseTypeSubclassNames},#{addtime})
+	</insert>
+	
+	<update id="updateCourseTeacher" parameterType="com.ola.qh.entity.CourseTeacher">
+		update course_teacher set
+		<if test="name!=null">
+		name=#{name},
+		</if>
+		<if test="isshow!=null">
+		isshow=#{isshow},
+		</if>
+		<if test="isremmend!=null">
+		isremmend=#{isremmend},
+		</if>
+		<if test="imgUrl!=null">
+		img_url=#{imgUrl},
+		</if>
+		<if test="prizes!=null">
+		prizes=#{prizes},
+		</if>
+		<if test="features!=null">
+		features=#{features},
+		</if>
+		<if test="describes!=null">
+		describes=#{describes},
+		</if>
+		<if test="details!=null">
+		details=#{details},
+		</if>
+		<if test="courseTypeNames!=null">
+		 course_type_names=#{courseTypeNames},
+		</if>
+		<if test="courseTypeSubclassNames!=null">
+		course_type_subclass_names=#{courseTypeSubclassNames},
+		</if>
+		updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteCourseTeacher" >
+		delete from course_teacher where id=#{id}
+	</delete>
+	
+</mapper>

@@ -17,7 +17,11 @@
 
 
 	<select id="selectUserWithdrawHistory"  resultMap="UserWithdrawHistoryMap">
-		select * from user_withdraw_history where user_id=#{userId} order by addtime DESC limit #{pageNo},#{pageSize}
+		select * from user_withdraw_history where pay_status=0 
+		<if test="id!=null">
+		and id=#{id}
+		</if>
+		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	
 	<update id="updateUserWithdrawHistory" parameterType="com.ola.qh.entity.UserWithdrawHistory" >
