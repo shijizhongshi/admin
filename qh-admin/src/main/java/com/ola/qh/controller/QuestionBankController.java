@@ -27,9 +27,10 @@ public class QuestionBankController {
 	 * 
 	 * @param file
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/improtExcel", method = RequestMethod.POST)
-	public Results<String> improtExcel(@RequestParam(value = "file") MultipartFile file) {
+	public Results<String> improtExcel(@RequestParam(value = "file") MultipartFile file) throws Exception {
 		return questionBankService.importExcel(file);
 	}
 

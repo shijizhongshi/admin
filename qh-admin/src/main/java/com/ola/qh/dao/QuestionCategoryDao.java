@@ -11,7 +11,7 @@ public interface QuestionCategoryDao {
 	
 	public int insertSubCategory(QuestionSubCategory qsc);
 	
-	public Integer existCategory(@Param("categoryName")String categoryName,@Param("subclassName")String subclassName);
+	public QuestionCategory singleCategory(@Param("categoryName")String categoryName,@Param("subclassName")String subclassName);
 	
 	public Integer existSubCategory(@Param("categoryId")String categoryId,@Param("subName")String subName);
 }

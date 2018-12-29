@@ -1,20 +1,8 @@
 app.controller("bankController", function($scope, $http){
-/*function importEmp(){    
-    var uploadFile = document.getElementById("uploadFile").value;    
-    if(uploadFile == null || uploadFile == ''){    
-        alert("请选择要上传的Excel文件");    
-        return;    
-    }else{    
-        var fileExtend = uploadFile.substring(uploadFile.lastIndexOf('.')).toLowerCase();     
-        if(fileExtend == '.xls'){    
-        }else{    
-            alert("文件格式需为'.xls'格式");    
-            return;    
-        }    
-    }    
-      var formData = new FormData($("#importModel")[0]);
-    
-}*/
+
+	
+	
+	
 //上传主展示图片
 $scope.uploadmainimage = function(file){
 	
@@ -41,7 +29,7 @@ $scope.uploadmainimage = function(file){
         transformRequest: angular.identity
     })
     .success(function(data){
-    	
+    	alert(data.message);
 	})
 };
 

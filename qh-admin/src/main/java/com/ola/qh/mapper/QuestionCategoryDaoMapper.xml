@@ -16,8 +16,8 @@
 	</insert>
 	
 	
-	<select id="existCategory" resultType="java.lang.Integer">
-	select count(id) from question_bank_category where 1=1
+	<select id="singleCategory" resultType="com.ola.qh.entity.QuestionCategory">
+	select id from question_bank_category where 1=1
 	<if test="categoryName!=null">
 	and `name`=#{categoryName}
 	</if>

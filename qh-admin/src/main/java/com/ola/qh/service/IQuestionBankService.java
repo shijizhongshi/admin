@@ -6,5 +6,5 @@ import com.ola.qh.util.Results;
 
 public interface IQuestionBankService {
 
-	public Results<String> importExcel(MultipartFile file);
+	public Results<String> importExcel(MultipartFile file) throws Exception;
 }

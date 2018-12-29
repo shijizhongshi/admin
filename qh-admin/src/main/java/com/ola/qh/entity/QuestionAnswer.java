@@ -13,8 +13,30 @@ public class QuestionAnswer {
 	private String options;/////A B类似于这种的
 	
 	private Date addtime;
+	
+	private boolean correct;///true:正确   FALSE :错误
+	
+	private int orders;
+	
+	
 
 	
+	public int getOrders() {
+		return orders;
+	}
+
+	public void setOrders(int orders) {
+		this.orders = orders;
+	}
+
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+
 	public String getOptions() {
 		return options;
 	}

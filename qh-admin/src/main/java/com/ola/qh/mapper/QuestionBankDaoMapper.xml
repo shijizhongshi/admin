@@ -24,7 +24,7 @@
 	</insert>
 	
 	<insert id="insertQuestionAnswer" parameterType="com.ola.qh.entity.QuestionAnswer">
-	insert into question_bank_answer(id,bank_unit_id,answers,options,addtime)
-	values(#{id},#{bankUnitId},#{answers},#{options},#{addtime})
+	insert into question_bank_answer(id,bank_unit_id,answers,options,correct,orders,addtime)
+	values(#{id},#{bankUnitId},#{answers},#{options},#{correct},#{orders},#{addtime})
 	</insert>
 	</mapper>
