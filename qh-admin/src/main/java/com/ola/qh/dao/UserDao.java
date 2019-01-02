@@ -2,12 +2,14 @@ package com.ola.qh.dao;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.ola.qh.entity.User;
+
 public interface UserDao {
 
-	public int updateUser(@Param("userrole")int userrole,@Param("id")String id);
-	
-	public int updateIsdoctor(@Param("isdoctor")int isdoctor,@Param("id")String id);
+	public int updateUser(User user);
 	
 	public int updateFavorite(@Param("productId")String productId);
+	
+	public String adminLogin(@Param("username")String username,@Param("password")String password);
 	
 }

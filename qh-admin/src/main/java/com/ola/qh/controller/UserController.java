@@ -17,7 +17,7 @@ public class UserController {
 	private IUserService userService;
 
 	@RequestMapping(value = "/updateuser", method = RequestMethod.GET)
-	public Results<String> updateUser(@RequestParam(name = "userrole", required = true) int userrole,
+	public Results<String> updateUser(@RequestParam(name = "userrole", required = true) String userrole,
 			@RequestParam(name = "id", required = true) String id) {
 
 		Results<String> results = new Results<String>();

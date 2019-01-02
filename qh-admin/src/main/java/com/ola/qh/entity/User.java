@@ -20,12 +20,14 @@ public class User {
 	
 	private String headimg;
 	
-	private int userrole;
+	private String userrole;
 	
-	private int isdoctor;
+	private String isdoctor;
 	
 	@NotEmpty(message="手机号不能为空")
 	private String mobile;
+	
+	private Date updatetime;
 	
 	public String getId() {
 		return id;
@@ -75,13 +77,6 @@ public class User {
 		this.headimg = headimg;
 	}
 
-	public int getUserrole() {
-		return userrole;
-	}
-
-	public void setUserrole(int userrole) {
-		this.userrole = userrole;
-	}
 
 	public String getMobile() {
 		return mobile;
@@ -91,14 +86,22 @@ public class User {
 		this.mobile = mobile;
 	}
 
-	public int getIsdoctor() {
+	public String getUserrole() {
+		return userrole;
+	}
+
+	public void setUserrole(String userrole) {
+		this.userrole = userrole;
+	}
+
+	public String getIsdoctor() {
 		return isdoctor;
 	}
 
-	public void setIsdoctor(int isdoctor) {
+	public void setIsdoctor(String isdoctor) {
 		this.isdoctor = isdoctor;
 	}
-	
+
 	
 	
 	
