@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.QuestionSubcategoryDao">
+	<resultMap type="com.ola.qh.entity.QuestionSubCategory" id="QuestionSubCategoryMap">
+		<result column="id" property="id" />
+		<result column="category_id" property="categoryId" />
+		<result column="name" property="name" />
+		<result column="times" property="times" />
+		<result column="purposes" property="purposes" />
+		<result column="isshow" property="isshow" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	
+	<select id="selectQuestionSubCategory" resultMap="QuestionSubCategoryMap">
+	select id,name,times,purposes,isshow,addtime from question_bank_subcategory where category_id=#{categoryId}
+	</select>
+	
+	<insert id="insertQuestionSubCategory"  parameterType="com.ola.qh.entity.QuestionSubCategory">
+	insert into question_bank_subcategory(id,category_id,name,times,purposes,isshow,addtime) values(#{id},#{categoryId},#{name},#{times},#{purposes},#{isshow},#{addtime})
+	</insert>
+	
+	<update id="updateQuestionSubCategory"  parameterType="com.ola.qh.entity.QuestionSubCategory">
+	update question_bank_subcategory set 
+	<if test="name!=null">
+	name=#{name},
+	</if>
+	<if test="times!=null">
+	times=#{times},
+	</if>
+	<if test="purposes!=null">
+	purposes=#{purposes},
+	</if>
+	<if test="isshow!=null">
+	isshow=#{isshow},
+	</if>
+	updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteQuestionSubCategory">
+	delete from question_bank_subcategory where 1=1
+	<if test="id!=null">
+	and id=#{id}
+	</if>
+	<if test="categoryId!=null">
+	and category_id=#{categoryId}
+	</if>
+	
+	</delete>
+</mapper>

@@ -6,11 +6,13 @@ import static springfox.documentation.builders.PathSelectors.regex;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -46,6 +48,16 @@ public class DataConfig
 		ssfb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:com/ola/qh/**/mapper/*Mapper.xml"));
 		return ssfb;
 	}
+    @Bean
+    public MultipartConfigElement multipartConfigElement(){
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //文件最大KB,MB
+        factory.setMaxFileSize("1024MB");
+        //设置总上传数据总大小
+        factory.setMaxRequestSize("1024MB");
+        return factory.createMultipartConfig();
+    }
+
     
    /* @Bean
 	public MapperScannerConfigurer mapperScanner(){

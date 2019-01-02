@@ -12,7 +12,6 @@ public class Banner {
 	/* 图片类型 */
 	private int type;
 	/* 外部链接 */
-	@NotEmpty(message = "图片链接不能为空")
 	private String outLinks;
 	/* 是否展示 */
 	private int isshow;

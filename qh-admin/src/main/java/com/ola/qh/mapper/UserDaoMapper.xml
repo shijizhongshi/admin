@@ -20,15 +20,19 @@
 		<if test="userrole!=null">
 		userrole=#{userrole},
 		</if>
-		id=#{id} where id=#{id} 
+		<if test="isdoctor!=null">
+		isdoctor=#{isdoctor},
+		</if>
+		updatetime=#{updatetime} where id=#{id} 
 	</update>
 	
-	<update id="updateIsdoctor" parameterType="com.ola.qh.entity.User" >
-		update user set isdoctor=#{isdoctor} where id=#{id} 
-	</update>
+	
 	
 	<update id="updateFavorite" parameterType="String">
 		update user_favorite set status=1 where product_id=#{productId}
 	</update>
 	
+	<select id="adminLogin" resultType="java.lang.String">
+	select nickname from user where nickname=#{username} and password=#{password}
+	</select>
 </mapper>

@@ -14,8 +14,13 @@ import com.ola.qh.util.FileStore;
 @Service
 public class StoreService implements IStoreService {
 
-	private static String accesskey = "LTAIvYOv6NLHmNnA";
+	/*private static String accesskey = "LTAIvYOv6NLHmNnA";
 	private static String accesskeysecret = "oVZqnj6eQqKIUkdLylp04PMIIzYP9Y";
+	private static String endpoint = "oss-cn-qingdao.aliyuncs.com";
+	private static String bucketname = "shijizhongshi-image";
+	private static String domain = "https://shijizhongshi-image.oss-cn-qingdao.aliyuncs.com/";*/
+	private static String accesskey = "LTAI41SWWK79DqP8";
+	private static String accesskeysecret = "xI3xKCGvZLubv0ICOxlBfyyQQNSCIv";
 	private static String endpoint = "oss-cn-qingdao.aliyuncs.com";
 	private static String bucketname = "shijizhongshi-image";
 	private static String domain = "https://shijizhongshi-image.oss-cn-qingdao.aliyuncs.com/";

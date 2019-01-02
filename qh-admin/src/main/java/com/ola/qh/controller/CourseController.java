@@ -11,18 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-/**
- * 
-* @ClassName: CourseController  
-* @Description: 课程类别和课程集合的列表
-* @author guoyuxue  
-* @date 2018年11月19日  
-*
- */
-
 import com.ola.qh.entity.Course;
-import com.ola.qh.entity.CourseChapter;
-import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;

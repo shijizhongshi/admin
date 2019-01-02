@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.ola.qh.dao.QuestionCategoryDao">
+	
+	<insert id="insertCategory" parameterType="com.ola.qh.entity.QuestionCategory">
+	insert into question_bank_category(id,types,course_type_name,course_type_subclass_name,
+	`name`,isshow,addtime)values(#{id},#{types},#{courseTypeName},#{courseTypeSubclassName},
+	#{name},#{isshow},#{addtime})
+	</insert>
+	
+	<insert id="insertSubCategory" parameterType="com.ola.qh.entity.QuestionSubCategory">
+	insert into question_bank_subcategory(id,category_id,`name`,times,purposes,isshow,addtime)
+	values(#{id},#{categoryId},#{name},#{times},#{purposes},#{isshow},#{addtime})
+	</insert>
+	
+	
+	<select id="singleCategory" resultType="com.ola.qh.entity.QuestionCategory">
+	select id from question_bank_category where 1=1
+	<if test="categoryName!=null">
+	and `name`=#{categoryName}
+	</if>
+	<if test="subclassName!=null">
+	and course_type_subclass_name=#{subclassName}
+	</if>
+	</select>
+	
+	<select id="existSubCategory" resultType="java.lang.Integer">
+	select count(id) from question_bank_subcategory where 1=1
+	<if test="categoryId!=null">
+	and category_id=#{categoryId}
+	</if>
+	<if test="subName!=null">
+	and `name`=#{subName}
+	</if>
+	</select>
+	</mapper>

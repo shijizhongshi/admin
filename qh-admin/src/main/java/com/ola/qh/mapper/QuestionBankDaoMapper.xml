@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.ola.qh.dao.QuestionBankDao">
+	<resultMap type="com.ola.qh.entity.QuestionBank" id="QuestionBankMap">
+	<result column="id" property="id"/>
+	<result column="sub_id" property="subId"/>
+	<result column="number_no" property="numberNo"/>
+	<result column="title" property="title"/>
+	<result column="types" property="types"/>
+	<result column="analysis" property="analysis"/>
+	<result column="bankId" property="bankId"/>
+	</resultMap>
+	
+	<insert id="insertQuestionBank" parameterType="com.ola.qh.entity.QuestionBank">
+	insert into question_bank(id,sub_id,number_no,title,types,analysis,correct,addtime)
+	values(#{id},#{subId},#{numberNo},#{title},#{types},#{analysis},#{correct},#{addtime})
+	</insert>
+	
+	<insert id="insertQuestionUnit" parameterType="com.ola.qh.entity.QuestionBank">
+	insert into question_bank_unit(id,bank_id,title,types,analysis,correct,addtime)
+	values(#{id},#{bankId},#{title},#{types},#{analysis},#{correct},#{addtime})
+	</insert>
+	
+	<insert id="insertQuestionAnswer" parameterType="com.ola.qh.entity.QuestionAnswer">
+	insert into question_bank_answer(id,bank_unit_id,answers,options,correct,orders,addtime)
+	values(#{id},#{bankUnitId},#{answers},#{options},#{correct},#{orders},#{addtime})
+	</insert>
+	</mapper>
