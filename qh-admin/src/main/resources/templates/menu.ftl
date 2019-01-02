@@ -77,7 +77,7 @@ for (i = 0; i < list.length; i++) {
         <div class="navBox">
             <ul>
                 <li>
-                    <h2 class="obtain">北京景点 <i></i></h2>
+               <h2 class="obtain">北京景点 <i class="w"></i></h2>
                     <div class="secondary">
                         <h3>故宫</h3>
                         <h3>十三陵</h3>
@@ -88,7 +88,7 @@ for (i = 0; i < list.length; i++) {
                     </div>
                 </li>
                 <li>
-                    <h2 class="obtain">南京景点<i></i></h2>
+                    <h2 class="obtain">南京景点 <i class="w"></i></h2>
                     <div class="secondary">
                         <h3>栖霞寺</h3>
                         <h3>夫子庙</h3>
@@ -97,7 +97,7 @@ for (i = 0; i < list.length; i++) {
                     </div>
                 </li>
                 <li>
-                    <h2 class="obtain">上海景点<i></i></h2>
+                    <h2 class="obtain">上海景点<i class="w"></i></h2>
                     <div class="secondary">
                         <h3>东方明珠</h3>
                         <h3>外滩</h3>
@@ -108,7 +108,7 @@ for (i = 0; i < list.length; i++) {
                     </div>
                 </li>
                 <li>
-                    <h2 class="obtain">深圳景点<i></i></h2>
+                    <h2 class="obtain">深圳景点<i class="w"></i></h2>
                     <div class="secondary">
                         <h3>华侨城</h3>
                         <h3>观澜湖</h3>
@@ -119,7 +119,7 @@ for (i = 0; i < list.length; i++) {
                     </div>
                 </li>
                 <li>
-                    <h2 class="obtain">广州景点<i></i></h2>
+                    <h2 class="obtain">广州景点<i class="w"></i></h2>
                     <div class="secondary">
                         <h3>白云山</h3>
                         <h3>长隆</h3>

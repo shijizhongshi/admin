@@ -52,11 +52,12 @@
         <script src="/scripts/app.js"></script>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
-<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript"  src="/ueditor/ueditor.config.js"></script>
 
-<script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript"  src="/ueditor/ueditor.all.min.js"> </script>
 
-<script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript"  src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+ 
  <script src="/scripts/adapter.js"></script> <!--rem适配js-->
 	
     <link rel="stylesheet" href="/styles/base.css"> <!--初始化文件-->
