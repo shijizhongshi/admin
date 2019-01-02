@@ -2,21 +2,30 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class QuestionSubCategory {
 
 	private String id;
 	
-	private String categoryId;///大类别的id
+	@NotEmpty(message="章id不能为空")
+	private String categoryId;///大类别的id(章id)
 	
-	private String name;////下级名称
+	@NotEmpty(message="节名称不能为空")
+	private String name;////节名称
 	
+	@NotEmpty(message="考试时间不能为空")
 	private String times;///考试时间
 	
+	@NotEmpty(message="章id不能为空")
 	private String purposes;///用途(试卷还是章节联系)
 	
+	@NotEmpty(message="是否可见不能为空")
 	private String isshow;
 	
 	private Date addtime;
+	
+	private Date updatetime;
 
 	public String getId() {
 		return id;
@@ -72,6 +81,14 @@ public class QuestionSubCategory {
 
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
 	}
 	
 	
