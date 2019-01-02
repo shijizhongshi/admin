@@ -4,7 +4,7 @@ app.controller("CourseController", function($scope, $http){
 	$http.get("/api/course/courseTypeList")
             .success(function(data){
                 if(data.status=="0"){
-                	$scope.courseType=data.dat                                                                                                       a;
+                	$scope.courseType=data.dat                                                                                                    
                     return;
                 }else{
                     alert(data.message);

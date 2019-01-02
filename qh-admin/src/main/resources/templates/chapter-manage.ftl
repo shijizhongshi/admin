@@ -8,7 +8,7 @@
 <script src="./scripts/admin.js"></script>
 <body>
  <#include "/menu.ftl"/>
-<div class="details" id="details">
+<div class="details">
 	<div class="details-nav">
 		<ul>
 			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
@@ -20,7 +20,44 @@
 	</div>
 <div class="details-frame" >
 	<div class="details-frame-content">
-<ul style="float:left;padding-top:20px;" class="show">
+		<div class=" select" ng-model="title">
+			专业选择<br />
+					<img src="./images/sjk-xl.png"/>
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+	
+		</div>
+	
+		<div class="select">
+				专业类型<br />
+				<img src="./images/sjk-xl.png"/>
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		<div class="select">
+				章节名称<br />
+				<img src="./images/sjk-xl.png"/>
+			<select>
+				<option></option>
+				<option></option>
+				<option></option>
+			</select>
+		</div>
+		
+	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索"  style="background:#E9484D"/></div>
+	<div class="select" style="float: right;margin-right:15px;">搜索课程<br />
+	<form id="search">
+	<input type="text" name="search" style=" text-indent:2em;"/></form>
+	</div>
+	</div>
+<div class="manage">
+	<ul style="height: 80px;" class="show">
 
 			<li  onclick="showDiv()" style="margin-left: 70px;background:#5ED8A9;width: 100px;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加节</li>
 		<li onclick="showDiv2()" style="background:#F9CD33;width: 100px;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改节</li>
@@ -29,15 +66,8 @@
 		<li style="width: 90px;"><span class="glyphicon glyphicon-sort" ></span>&nbsp;上移</li>
 		<li style="width: 90px;"><span class="glyphicon glyphicon-sort-by-attributes"  ></span>&nbsp;下移</li>
 		<li  onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;导入节内容</li>
-       
+         <li style="float: right;margin-right: 100px;background:none"><img src="./images/sjk-f5.png" name="changyi"/></li>
 	</ul>
-	<div class="select" style="float: right;margin-right:15px;">搜索课程<br />
-	<form id="search">
-	<input type="text" name="search" style=" text-indent:2em;"/></form>
-	</div>
-	</div>
-<div class="manage">
-	
 	<div class="admin-table">
 
 	<ol style="background: #CBD2D8;font-weight: bold;">

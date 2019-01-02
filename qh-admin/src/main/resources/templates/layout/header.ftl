@@ -50,5 +50,17 @@
         <script src="/assets/js/xenon-custom.js"></script>
         <script src="/assets/js/md5-min.js"></script>
         <script src="/scripts/app.js"></script>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+<script type="text/javascript"  src="/ueditor/ueditor.config.js"></script>
+
+<script type="text/javascript"  src="/ueditor/ueditor.all.min.js"> </script>
+
+<script type="text/javascript"  src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+ 
+ <script src="/scripts/adapter.js"></script> <!--rem适配js-->
+	
+    <link rel="stylesheet" href="/styles/base.css"> <!--初始化文件-->
+    <link rel="stylesheet" href="/styles/menu.css"> <!--主样式-->
     </head>
 </#macro>
