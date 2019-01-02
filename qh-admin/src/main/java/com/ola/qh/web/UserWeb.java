@@ -26,9 +26,9 @@ public class UserWeb {
 	public String UserWebw(){
 		return "chapter-manage";
 	}
-	@RequestMapping(value="/load ",method=RequestMethod.GET)
+	@RequestMapping(value="/load",method=RequestMethod.GET)
 	public String UserWebload(){
-		return "load ";
+		return "load";
 	}
 		
 	
