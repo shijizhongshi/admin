@@ -97,7 +97,7 @@ public class QuestionBankService implements IQuestionBankService {
 							qb.setAddtime(new Date());
 							bankId = KeyGen.uuid();
 							qb.setId(bankId);
-							qb.setNumberNo(i);
+							qb.setNumberNo(i-1);
 							qb.setTitle(checkNull(1, row));
 							qb.setTypes(checkNull(0, row));
 							qb.setSubId(subId);
@@ -184,7 +184,7 @@ public class QuestionBankService implements IQuestionBankService {
 							} else {
 								/////// 单纯的单选或者多选的问题
 								qb.setAnalysis(checkNull(8, row));
-								qb.setNumberNo(i);
+								qb.setNumberNo(i-1);
 								questionBankDao.insertQuestionBank(qb);
 							}
 

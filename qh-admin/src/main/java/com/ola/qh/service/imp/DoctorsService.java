@@ -10,20 +10,21 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.ola.qh.dao.DoctorsDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Doctors;
+import com.ola.qh.entity.User;
 import com.ola.qh.service.IDoctorsService;
 import com.ola.qh.util.Results;
 @Service
 public class DoctorsService implements IDoctorsService{
 
 	@Autowired
-	private DoctorsDao coctorsDao;
+	private DoctorsDao doctorsDao;
 	@Autowired
 	private UserDao userDao;
 	
 	@Override 
 	public List<Doctors> selectDoctors(int islimit) {
 		
-		return coctorsDao.selectDoctors(islimit);
+		return doctorsDao.selectDoctors(islimit);
 	}
 
 	@Transactional
@@ -33,13 +34,13 @@ public class DoctorsService implements IDoctorsService{
 		Results<String> results=new Results<String>();
 		try {
 			
-		coctorsDao.updateDoctors(id, islimit, isrecommend);
-		String userId=coctorsDao.selectUserId(id);
+		doctorsDao.updateDoctors(id, islimit, isrecommend);
+		String userId=doctorsDao.selectUserId(id);
 		if(islimit==1){
-		userDao.updateIsdoctor(islimit, userId);
-		}
-		else {
-			userDao.updateIsdoctor(0, userId);
+			User u =new User();
+			u.setId(userId);
+			u.setIsdoctor("1");
+		    userDao.updateUser(u);
 		}
 		results.setStatus("0");
 		return results;

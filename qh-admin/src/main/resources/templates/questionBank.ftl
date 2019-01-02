@@ -9,9 +9,10 @@
 <body ng-app="app">
 <div class="details" ng-controller="bankController">
 
-
+<form name="form">
 
  <input type="file" onchange="angular.element(this).scope().uploadmainimage(this)" />
+ </form>
 </div>
 </body>
  

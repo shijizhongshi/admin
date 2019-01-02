@@ -23,7 +23,7 @@ $scope.uploadmainimage = function(file){
 
     var fd = new FormData();
     fd.append("file", file.files[0]);
-	$http.post("/api/questionbank/improtExcel",fd,{
+	$http.post("/api/upload/single",fd,{
         withCredentials: true,
         headers: {'Content-Type': undefined },
         transformRequest: angular.identity
