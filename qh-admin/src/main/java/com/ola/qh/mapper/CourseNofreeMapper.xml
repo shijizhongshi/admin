@@ -91,4 +91,41 @@
 		delete from course_nofree where id=#{id}
 	</delete>
 	
+	<!-- 热门直播的开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<insert id="insertLive" parameterType="com.ola.qh.entity.CourseLineShow">
+	insert into course_line_show(id,course_type_name,course_type_subclass_name,live_name,
+	img_url,isremmend,isshow,addtime)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
+	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime})
+	</insert>
+	<select id="selectLiveList" resultType="com.ola.qh.entity.CourseLineShow">
+	select id,live_name  liveName, img_url imgUrl,isshow from course_line_show
+	order by addtime desc
+	limit #{pageNo},#{pageSize}
+	</select>
+	<update id="updateLive" parameterType="com.ola.qh.entity.CourseLineShow">
+	update course_line_show set
+	<if test="liveName!=null">
+	live_name=#{liveName},
+	</if>
+	<if test="imgUrl!=null">
+	img_url=#{imgUrl},
+	</if>	
+	<if test="isshow!=null">
+	isshow=#{isshow},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+	
+	<select id="singleLive" resultType="com.ola.qh.entity.CourseLineShow">
+	select id,live_name  liveName, img_url imgUrl,isshow,course_type_name courseTypeName, course_type_subclass_name courseTypeSubclassName from course_line_show where id=#{id}
+	</select>
+	
+	<delete id="deleteLive">
+	delete from course_line_show where id=#{id}
+	</delete>
+	<!-- 热门直播的结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	
+	
+	
 </mapper>
