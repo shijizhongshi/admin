@@ -34,16 +34,28 @@
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-            'directionalityltr', 'directionalityrtl', 'indent', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-            'link', 'unlink', 'anchor',
-            'simpleupload', 'emotion', 'scrawl','blockquote', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage','|',
-            'print', 'preview', 'searchreplace', 'drafts', 'help'
+            undo’, //撤销 
+‘redo’, //重做 
+‘bold’, //加粗 
+‘indent’, //首行缩进 
+italic’, //斜体 
+‘underline’, //下划线 
+‘strikethrough’, //删除线 
+‘subscript’, //下标 
+‘superscript’, //上标 
+‘formatmatch’, //格式刷 
+‘horizontal’, //分隔线 
+‘fontfamily’, //字体 
+‘fontsize’, //字号 
+‘paragraph’, //段落格式 
+‘simpleupload’, //单图上传 
+‘insertimage’, //多图上传 
+‘justifyleft’, //居左对齐 
+‘justifyright’, //居右对齐 
+‘justifycenter’, //居中对齐 
+‘justifyjustify’, //两端对齐 
+‘imagecenter’, //居中 
+‘insertvideo’, //视频 
         ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
@@ -246,7 +258,7 @@
 
         //elementPathEnabled
         //是否启用元素路径，默认是显示
-        //,elementPathEnabled : true
+       ,elementPathEnabled : false
 
         //wordCount
         //,wordCount:true          //是否开启字数统计
