@@ -48,7 +48,7 @@
 	
 	<select id="selectCategory" resultMap="QuestionCategoryMap">
 	select id,course_type_subclass_name,name,isshow,addtime from question_bank_category 
-	where course_type_subclass_name=#{courseTypeSubclassName}
+	where course_type_subclass_name=#{courseTypeSubclassName} and types=#{types}
 	</select>
 	<update id="updateCategory" parameterType="com.ola.qh.entity.QuestionCategory">
 	update question_bank_category set 

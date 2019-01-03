@@ -10,6 +10,7 @@
 	<result column="title" property="title"/>
 	<result column="types" property="types"/>
 	<result column="analysis" property="analysis"/>
+	<result column="correct" property="correct"/>
 	<result column="bankId" property="bankId"/>
 	</resultMap>
 	
@@ -27,4 +28,37 @@
 	insert into question_bank_answer(id,bank_unit_id,answers,options,correct,orders,addtime)
 	values(#{id},#{bankUnitId},#{answers},#{options},#{correct},#{orders},#{addtime})
 	</insert>
+	
+	<select id="selectQuestionBank" resultMap="QuestionBankMap"> 
+	select id,sub_id,number_no,title,types,analysis,correct from question_bank where sub_id=#{subId}
+	</select>
+	
+	
+	<resultMap type="com.ola.qh.entity.QuestionAnswer" id="QuestionAnswerMap">
+	<result column="id" property="id"/>
+	<result column="bank_unit_id" property="bankUnitId"/>
+	<result column="answers" property="answers"/>
+	<result column="options" property="options"/>
+	<result column="correct" property="correct"/>
+	<result column="orders" property="orders"/>
+	</resultMap>
+	
+	<select id="selectQuestionAnswer" resultMap="QuestionAnswerMap"> 
+	select id,bank_unit_id,answers,options,correct,orders from question_bank_answer where bank_unit_id=#{bankUnitId}
+	</select>
+	
+	<resultMap type="com.ola.qh.entity.QuestionUnit" id="QuestionUnitMap">
+	<result column="id" property="id"/>
+	<result column="bank_id" property="bankId"/>
+	<result column="title" property="title"/>
+	<result column="types" property="types"/>
+	<result column="analysis" property="analysis"/>
+	<result column="correct" property="correct"/>
+	</resultMap>
+	
+	
+	<select id="selectQuestionUnit" resultMap="QuestionUnitMap"> 
+	select id,bank_id,title,types,analysis,correct from question_bank_unit where bank_id=#{bankId}
+	</select>
+	
 	</mapper>
