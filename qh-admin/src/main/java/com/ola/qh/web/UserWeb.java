@@ -17,14 +17,14 @@ public class UserWeb {
 	}
 	
 
-	@RequestMapping(value="/coursee",method=RequestMethod.GET)
+	@RequestMapping(value="/course-jie",method=RequestMethod.GET)
 	public String UserWebq(){
-		return "courses/coursee";
+		return "courses/course-jie";
 	}
 
-	@RequestMapping(value="/chapter-manage",method=RequestMethod.GET)
+	@RequestMapping(value="/course-zhang",method=RequestMethod.GET)
 	public String UserWebw(){
-		return "courses/chapter-manage";
+		return "courses/course-zhang";
 	}
 	@RequestMapping(value="/web/login",method=RequestMethod.GET)
 	public String UserWebload(){
@@ -35,5 +35,14 @@ public class UserWeb {
 		return "login";
 	}
 		
+	@RequestMapping(value="/main",method=RequestMethod.GET)
+	public String UserWebmain(){
+		return "main";
+	}
 	
+	
+@RequestMapping(value="subnav",method=RequestMethod.GET)
+public String UserWebsubnav(){
+	return "courses/subnav";
+}
 }

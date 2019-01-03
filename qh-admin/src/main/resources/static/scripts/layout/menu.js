@@ -77,7 +77,7 @@ window.onload = function () {
     	
     	menu.style.marginLeft = "-300px";
 
-        details.style.width = "85%";
+        details.style.width = "100%";
         setTimeout(function () {
             ensconce.style.display = "block";
         }, 10)
@@ -88,7 +88,7 @@ window.onload = function () {
     var details = document.querySelector(".details");
     showC.onclick = function () {
     	menu.style.marginLeft = "0px";
-        details.style.width = "74%";
+        details.style.width = "89%";
         setTimeout(function () {
             ensconce.style.display = "none";
         }, 100)
