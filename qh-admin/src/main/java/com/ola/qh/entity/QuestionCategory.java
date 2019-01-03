@@ -17,6 +17,8 @@ public class QuestionCategory {
 	private String isshow;
 	
 	private Date addtime;
+	
+	private Date udpatetime;
 
 	
 	public String getId() {
@@ -74,5 +76,14 @@ public class QuestionCategory {
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
+
+	public Date getUdpatetime() {
+		return udpatetime;
+	}
+
+	public void setUdpatetime(Date udpatetime) {
+		this.udpatetime = udpatetime;
+	}
+	
 	
 }

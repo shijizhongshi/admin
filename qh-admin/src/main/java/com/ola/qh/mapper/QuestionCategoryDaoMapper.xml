@@ -35,4 +35,29 @@
 	and `name`=#{subName}
 	</if>
 	</select>
+	
+	<resultMap type="com.ola.qh.entity.QuestionCategory" id="QuestionCategoryMap">
+		<result column="id" property="id"/>
+		<result column="types" property="types"/>
+		<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
+		<result column="name" property="name"/>
+		<result column="isshow" property="isshow"/>
+		<result column="addtime" property="addtime"/>
+		<result column="udpatetime" property="udpatetime"/>
+	</resultMap>
+	
+	<select id="selectCategory" resultMap="QuestionCategoryMap">
+	select id,course_type_subclass_name,name,isshow,addtime from question_bank_category 
+	where course_type_subclass_name=#{courseTypeSubclassName}
+	</select>
+	<update id="updateCategory" parameterType="com.ola.qh.entity.QuestionCategory">
+	update question_bank_category set 
+	<if test="name!=null">
+	name=#{name},
+	</if>
+	<if test="isshow!=null">
+	isshow=#{isshow},
+	</if>
+	udpatetime=#{udpatetime} where id=#{id}
+	</update>
 	</mapper>
