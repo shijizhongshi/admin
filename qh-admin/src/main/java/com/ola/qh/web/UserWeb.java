@@ -26,6 +26,10 @@ public class UserWeb {
 	public String UserWebw(){
 		return "courses/course-zhang";
 	}
+	@RequestMapping(value="/grade",method=RequestMethod.GET)
+	public String UserWebgrade(){
+		return "courses/grade";
+	}
 	@RequestMapping(value="/web/login",method=RequestMethod.GET)
 	public String UserWebload(){
 		return "login";
