@@ -16,9 +16,9 @@
 	<ul class="menu">
    <li class="list"><a href="#">网课资源管理 </a> 
       <ul class="items">
-         <li><a href="#"> 课程资源管理</a></li>
-         <li><a href="#">课程章管理</a></li>
-         <li><a href="#"> 课程节管理</a></li>
+         <li><a href="/subnav.ftl" target="subnav"> 课程资源管理</a></li>
+         <li><a href="/subnav.ftl" target="subnav">课程章管理</a></li>
+         <li><a href="/subnav.ftl" target="subnav"> 课程节管理</a></li>
       </ul>
    </li>
    <li class="list"><a href="#">公共资源管理</a> 
@@ -48,7 +48,7 @@ function accordion(e) {
         this.classList.remove('active');
     } else
     if (this.parentElement.parentElement.classList.contains('active')) {
-        this.classList.add('active');
+     
     } else
     {
         for (i = 0; i < list.length; i++) {

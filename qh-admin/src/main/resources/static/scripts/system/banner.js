@@ -65,7 +65,7 @@ $scope.uploadmainimage = function(file){
 		$scope.banner=b;
 		
 	}
-	$scope.showDiv2=function(){
+	$scope.updatebanner=function(){
 		 if($scope.bannerId==null){
 			 alert("请选择信息~")
 		 }else{

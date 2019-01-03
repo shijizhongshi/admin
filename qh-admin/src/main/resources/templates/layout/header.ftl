@@ -57,10 +57,7 @@
 <script type="text/javascript"  src="/assets/js/ueditor/ueditor.all.min.js"> </script>
 
 <script type="text/javascript"  src="/assets/js/ueditor/lang/zh-cn/zh-cn.js"></script>
- 
- <script src="/scripts/adapter.js"></script> <!--rem适配js-->
-	
-    <link rel="stylesheet" href="/styles/base.css"> <!--初始化文件-->
-    <link rel="stylesheet" href="/styles/menu.css"> <!--主样式-->
+
+   <link rel="stylesheet" href="/styles/menu.css"> <!--主样式--> 
     </head>
 </#macro>

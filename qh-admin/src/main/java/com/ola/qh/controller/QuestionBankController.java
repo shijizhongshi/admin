@@ -1,5 +1,7 @@
 package com.ola.qh.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.util.Results;
 
@@ -34,4 +37,9 @@ public class QuestionBankController {
 		return questionBankService.importExcel(file);
 	}
 
+	@RequestMapping(value = "/select", method = RequestMethod.GET)
+	public Results<List<QuestionBank>> selectQuestionBank(@RequestParam(value = "subId") String subId){
+		
+		return questionBankService.selectQuestionBank(subId);
+	}
 }

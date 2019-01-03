@@ -8,15 +8,17 @@ function formReset() {
   document.getElementById("myform").reset()
   }
   
-/*  
+  function showDiv2(){
+        document.getElementById('revise').style.display="block"; 
+        }
 function CloseDiv2(){
 document.getElementById('revise').style.display='none';
 }
 function formReset2() {
 	  document.getElementById("myform2").reset()
-	  }*/
+	  }
 	  
-/* function showDiv3(){
+ function showDiv3(){
 	        document.getElementById('resource').style.display="block"; 
 	        }
 	function CloseDiv3(){
@@ -25,4 +27,4 @@ function formReset2() {
 	function formReset3() {
 		  document.getElementById("myform3").reset()
 		  }
-		  */
+		  

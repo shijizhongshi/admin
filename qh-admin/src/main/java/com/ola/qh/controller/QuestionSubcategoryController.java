@@ -74,6 +74,12 @@ public class QuestionSubcategoryController {
 		
 		Results<String> results=new Results<String>();
 		
+		if(questionSubCategory.getId()==null){
+			
+			results.setStatus("1");
+			return results;
+		}
+		
 		questionSubCategory.setUpdatetime(new Date());
 		int update=questionSubCategoryService.updateQuestionSubCategory(questionSubCategory);
 		

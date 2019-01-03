@@ -45,8 +45,8 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-			<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
-		<li ng-click="showDiv2()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
+		<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
+		<li ng-click="updatebanner()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
 		<li ng-click="deletebanner()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
