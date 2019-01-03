@@ -2,11 +2,15 @@ package com.ola.qh.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ola.qh.entity.Banner;
 
 public interface IBannerService {
 
-	public List<Banner> selectBanner(int type);
+	public List<Banner> selectBanner(int type,int pageNo,int pageSize);
+	
+	public int selectBannerCount(int type);
 	
 	public int saveBanner(Banner banner);
 	
