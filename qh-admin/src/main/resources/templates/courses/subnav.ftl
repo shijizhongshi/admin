@@ -5,7 +5,7 @@
 <@h.header title="后台管理"/>
 <style type="text/css">
 .classify{width:100%; background:#FFFFFF;}
-.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size: 0.26rem;}
+.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
 .classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
 .classify ul.menu .active > .items {background:#FFFFFF;border-bottom:1px solid #939090;}
 .classify ul.menu .list a{color:black}
@@ -19,7 +19,7 @@ ul.menu .active > .items li{border:none;}
    <li class="list"><a href="#">医师资格 </a> 
       <ul class="items">
          <li><a href="/course.ftl" target="main"> 临床(执业)助理医师</a></li>
-         <li><a href="/coursee.ftl" target="main">中西医(执业)助理医师</a></li>
+         <li><a>中西医(执业)助理医师</a></li>
          <li><a href="#"> 中西医(执业)助理医师</a></li>
           <li><a href="#"> 乡村全科助理医师</a></li>
            <li><a href="#"> 中医基础理论</a></li>

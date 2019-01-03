@@ -10,22 +10,15 @@
 		<p class="col-md-2 exit" ><a href="/web/loginout">退出</a></p>
 		
 	</div>
-	 <!--隐藏菜单
-    <div id="ensconce">         
-芝麻开门
-    </div>
-  <div class="navH">
-芝麻关门
-   </div>
--->
+
 	</div>
 <div class="classify">
 	<ul class="menu">
    <li class="list"><a href="#">网课资源管理 </a> 
       <ul class="items">
          <li><a href="/subnav.ftl" target="subnav"> 课程资源管理</a></li>
-         <li><a >课程章管理</a></li>
-         <li><a href="#"> 课程节管理</a></li>
+         <li><a href="/subnav.ftl" target="subnav">课程章管理</a></li>
+         <li><a href="/subnav.ftl" target="subnav"> 课程节管理</a></li>
       </ul>
    </li>
    <li class="list"><a href="#">资源章管理</a> 
@@ -55,7 +48,7 @@ function accordion(e) {
         this.classList.remove('active');
     } else
     if (this.parentElement.parentElement.classList.contains('active')) {
-        this.classList.add('active');
+     
     } else
     {
         for (i = 0; i < list.length; i++) {

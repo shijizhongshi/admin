@@ -20,30 +20,8 @@
 	</div>
 <div class="details-frame" >
 	<div class="details-frame-content">
-		<div class=" select" ng-model="title">
-			专业选择<br />
-					<img src="./images/sjk-xl.png"/>
-			<select>
-				<option></option>
-				<option></option>
-				<option></option>
-			</select>
-	
-		</div>
-	
-		<div class="select">
-				专业类型<br />
-				<img src="./images/sjk-xl.png"/>
-			<select>
-				<option></option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		
-		
-	<div class="select" style="float:left;" ><input type="button" class="btn-lg im-key" value="立即检索"  style="background:#E9484D"/></div>
-	<div class="select" style="float: right;margin-right:15px;">搜索课程<br />
+
+	<div class="select" style="float:left;margin-right:15px;">搜索课程<br />
 	<form id="search">
 	<input type="text" name="search" style=" text-indent:2em;"/></form>
 	</div>
@@ -269,11 +247,11 @@
 		</div>
 		<div class="centre-border">
 		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
-			<input type="text"  class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;margin-right:15px;"/>
-			<input type="text" placeholder="输入折扣价格" style="width:130px ;text-indent: 2em;"/>
+			<input type="text"  class=""placeholder="输入课程价格" style="text-indent: 2em;margin-right:15px;"/>
+			<input type="text" placeholder="输入折扣价格" style="text-indent: 2em;"/>
 		</div>
 		<div class=" select"style="width: 405px;">
-		<input type="text" placeholder="输入课程年份" style="width:130px ;text-indent: 2em;"/></div>
+		<input type="text" placeholder="输入课程年份" style="text-indent: 2em;"/></div>
 		<div class=" select" style="margin-right:15px;">
 			<img src="./images/sjk-xl.png"/>
 			<select>
