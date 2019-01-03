@@ -25,9 +25,9 @@ public class BannerService implements IBannerService {
 	private BannerDao bannerDao;
 
 	@Override
-	public List<Banner> selectBanner(int type) {
+	public List<Banner> selectBanner(int type,int pageNo,int pageSize) {
 		
-		return bannerDao.selectBanner(type);
+		return bannerDao.selectBanner(type,pageNo,pageSize);
 	}
 
 	@Override
@@ -46,6 +46,12 @@ public class BannerService implements IBannerService {
 	public int deleteBanner(String id) {
 		
 		return bannerDao.deleteBanner(id);
+	}
+
+	@Override
+	public int selectBannerCount(int type) {
+		// TODO Auto-generated method stub
+		return bannerDao.selectBannerCount(type);
 	}
 
 	

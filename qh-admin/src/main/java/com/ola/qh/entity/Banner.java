@@ -14,7 +14,7 @@ public class Banner {
 	/* 外部链接 */
 	private String outLinks;
 	/* 是否展示 */
-	private int isshow;
+	private String isshow;
 
 	public String getId() {
 		return id;
@@ -48,12 +48,13 @@ public class Banner {
 		this.outLinks = outLinks;
 	}
 
-	public int getIsshow() {
+	public String getIsshow() {
 		return isshow;
 	}
 
-	public void setIsshow(int isshow) {
+	public void setIsshow(String isshow) {
 		this.isshow = isshow;
 	}
+
 
 }

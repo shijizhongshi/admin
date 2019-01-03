@@ -27,28 +27,26 @@ import com.ola.qh.util.Results;
  *
  */
 @RestController
-@RequestMapping("api/banner")
+@RequestMapping("/api/banner")
 public class BannerController {
 	@Autowired
 	private IBannerService bannerService;
 
 	@RequestMapping(value = "/selectlist", method = RequestMethod.GET)
-	public Results<List<Banner>> selectBanner(@RequestParam(name = "type", required = true) int type) {
+	public Results<List<Banner>> selectBanner(@RequestParam(name = "type", required = false) int type,
+			@RequestParam(name = "pageNo", required = false) int pageNo,
+			@RequestParam(name = "pageSize", required = false) int pageSize) {
 
 		Results<List<Banner>> results = new Results<List<Banner>>();
 
-		List<Banner> bannerlist = bannerService.selectBanner(type);
-		if (bannerlist != null && bannerlist.size() != 0) {
-
-			results.setData(bannerService.selectBanner(type));
+		List<Banner> bannerlist = bannerService.selectBanner(type,pageNo,pageSize);
+		int count = bannerService.selectBannerCount(type);	
+		results.setData(bannerlist);
+		results.setCount(count);
 			results.setStatus("0");
 			return results;
 
-		}
 
-		results.setMessage("图片为空");
-		results.setStatus("1");
-		return results;
 	}
 
 	@RequestMapping(value = "/saveBanner", method = RequestMethod.POST)

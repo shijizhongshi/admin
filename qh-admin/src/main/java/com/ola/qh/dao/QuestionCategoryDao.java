@@ -17,7 +17,7 @@ public interface QuestionCategoryDao {
 	
 	public Integer existSubCategory(@Param("categoryId")String categoryId,@Param("subName")String subName);
 	
-	public List<QuestionCategory> selectCategory(@Param("courseTypeSubclassName")String courseTypeSubclassName);
+	public List<QuestionCategory> selectCategory(@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("types")String types);
 	
 	public int updateCategory(QuestionCategory qc);
 	

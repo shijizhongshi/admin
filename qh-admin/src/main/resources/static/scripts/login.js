@@ -1,4 +1,4 @@
-app.controller("loadController", function($scope, $http){
+app.controller("loginController", function($scope, $http){
 	
 //上传主展示图片
 $scope.login = function(){
@@ -6,6 +6,7 @@ $scope.login = function(){
     .success(function(data){
     	if(data.status=="0"){
     		alert("登录页成功~");
+    		location.href="/web/system/banner";
     	}else{
     		alert(data.message);
     	}

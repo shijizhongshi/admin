@@ -16,9 +16,9 @@ public class QuestionCategoryService implements IQuestionCategoryService{
 	private QuestionCategoryDao questionCategoryDao;
 
 	@Override
-	public List<QuestionCategory> selectCategory(String courseTypeSubclassName) {
+	public List<QuestionCategory> selectCategory(String courseTypeSubclassName,String types) {
 		
-		return questionCategoryDao.selectCategory(courseTypeSubclassName);
+		return questionCategoryDao.selectCategory(courseTypeSubclassName,types);
 	}
 
 	@Override

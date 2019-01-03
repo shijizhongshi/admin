@@ -23,11 +23,12 @@ public class QuestionCategoryController {
 	private IQuestionCategoryService questionCategoryService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<QuestionCategory>> selectCategory(@RequestParam(name="courseTypeSubclassName",required=true)String courseTypeSubclassName){
+	public Results<List<QuestionCategory>> selectCategory(@RequestParam(name="courseTypeSubclassName",required=true)String courseTypeSubclassName,
+			@RequestParam(name="types",required=true)String types){
 		
 		Results<List<QuestionCategory>> results=new Results<List<QuestionCategory>>();
 		
-		List<QuestionCategory> list=questionCategoryService.selectCategory(courseTypeSubclassName);
+		List<QuestionCategory> list=questionCategoryService.selectCategory(courseTypeSubclassName,types);
 		
 		if(list==null ||list.size()==0){
 			

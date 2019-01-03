@@ -1,6 +1,8 @@
 package com.ola.qh.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class QuestionBank {
 
@@ -21,8 +23,10 @@ public class QuestionBank {
 	private Date addtime;
 	
 	private String bankId;/////共用题干类型的题 小单元题
+	 
+	private List<QuestionAnswer> answer=new ArrayList<QuestionAnswer>();
 	
-	
+	private List<QuestionUnit> unit=new ArrayList<QuestionUnit>();
 
 	public String getCorrect() {
 		return correct;
@@ -94,6 +98,22 @@ public class QuestionBank {
 
 	public void setBankId(String bankId) {
 		this.bankId = bankId;
+	}
+
+	public List<QuestionAnswer> getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(List<QuestionAnswer> answer) {
+		this.answer = answer;
+	}
+
+	public List<QuestionUnit> getUnit() {
+		return unit;
+	}
+
+	public void setUnit(List<QuestionUnit> unit) {
+		this.unit = unit;
 	}
 	
 	
