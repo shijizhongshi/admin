@@ -60,7 +60,7 @@ public class CourseNofreeService implements ICourseNofreeService {
 	@Override
 	public int updateLive(CourseLineShow cl) {
 		// TODO Auto-generated method stub
-		cl.setAddtime(new Date());
+		cl.setUpdatetime(new Date());
 		return courseNofreeDao.updateLive(cl);
 	}
 

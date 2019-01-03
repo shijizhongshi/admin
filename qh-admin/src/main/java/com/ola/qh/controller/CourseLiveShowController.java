@@ -40,7 +40,7 @@ public class CourseLiveShowController {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public Results<String> updateLive(@RequestBody CourseLineShow cl) {
 		Results<String> result = new Results<String>();
-		if (cl.getId() == null || "".equals(cl.getId())) {
+		if (cl.getId() != null && !"".equals(cl.getId())) {
 			int num = courseNofreeService.updateLive(cl);
 			if (num < 0) {
 				result.setStatus("1");
