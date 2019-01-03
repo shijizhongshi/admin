@@ -49,7 +49,7 @@
         <!-- JavaScripts initializations and stuff -->
         <script src="/assets/js/xenon-custom.js"></script>
         <script src="/assets/js/md5-min.js"></script>
-        <script src="/scripts/app.js"></script>
+        <script src="/scripts/layout/app.js"></script>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
 <script type="text/javascript"  src="/ueditor/ueditor.config.js"></script>

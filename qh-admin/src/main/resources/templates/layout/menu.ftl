@@ -4,10 +4,10 @@
 		<img src="./images/sjk-.png" />
 	</div>
 	<div class="col-md-4 top-right">
-		<p class="col-md-6">{{name}}你好，欢迎登录中师系统</p>
+		<p class="col-md-6"> ${username!''}你好，欢迎登录中师系统</p>
 		<div class="col-md-2 admin-logo"><img src="./images/sjk-adm.png" /></div>
 		<div  class="col-md-2"></div>
-		<p class="col-md-2 exit">退出</p>
+		<p class="col-md-2 exit" ><a href="/web/loginout">退出</a></p>
 		
 	</div>
 	 <!--隐藏菜单-->
@@ -133,4 +133,4 @@ for (i = 0; i < list.length; i++) {
         </div>
     </div>
 </div>
-<script src="./scripts/menu.js"></script> <!--控制js-->
+<script src="./scripts/layout/menu.js"></script> <!--控制js-->
