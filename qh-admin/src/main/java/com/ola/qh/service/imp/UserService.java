@@ -1,5 +1,7 @@
 package com.ola.qh.service.imp;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +25,13 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public Results<String> adminLogin(String username, String password) {
+	public Results<String> adminLogin(String username, String password,HttpServletRequest request) {
 		String un = userDao.adminLogin(username, password);
 		Results<String> result=new Results<String>();
 		if(un!=null){
 			result.setStatus("0");
 			result.setData(un);
+			request.getSession().setAttribute("username", un);
 			return result;
 		}else{
 			result.setStatus("1");

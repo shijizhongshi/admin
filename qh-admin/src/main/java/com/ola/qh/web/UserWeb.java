@@ -9,7 +9,7 @@ public class UserWeb {
 
 	@RequestMapping(value="/course",method=RequestMethod.GET)
 	public String UserWeb(){
-		return "course";
+		return "courses/course";
 	}
 	@RequestMapping("/questionBank")
 	public String questionBank(){
@@ -19,16 +19,20 @@ public class UserWeb {
 
 	@RequestMapping(value="/coursee",method=RequestMethod.GET)
 	public String UserWebq(){
-		return "coursee";
+		return "courses/coursee";
 	}
 
 	@RequestMapping(value="/chapter-manage",method=RequestMethod.GET)
 	public String UserWebw(){
-		return "chapter-manage";
+		return "courses/chapter-manage";
 	}
-	@RequestMapping(value="/load",method=RequestMethod.GET)
+	@RequestMapping(value="/web/login",method=RequestMethod.GET)
 	public String UserWebload(){
-		return "load";
+		return "login";
+	}
+	@RequestMapping(value="/web/loginout",method=RequestMethod.GET)
+	public String UserLoginout(){
+		return "login";
 	}
 		
 	

@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <@h.header title="登陆"/>
-<body>
- <div class="load">
+<script src="/scripts/load.js"></script>
+<body ng-app="app">
+ <div class="load" ng-controller="loadController">
  	<div class="load-body">
  		<form>
- 			<input type="text" placeholder="请输入用户名"/>
- 			<input type="password" placeholder="请输入密码" />
- 			<input type="submit" value="登陆" />
+ 			<input type="text" ng-model="username" placeholder="请输入用户名"/>
+ 			<input type="password" ng-model="password" placeholder="请输入密码" />
+ 			<input type="submit" value="登陆" ng-click="login()"/>
  		</form>
  	</div>
  </div>
