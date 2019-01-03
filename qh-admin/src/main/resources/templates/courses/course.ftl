@@ -7,7 +7,7 @@
 <script src="./scripts/course.js"></script>
 <script src="./scripts/admin.js"></script>
 <body>
- <#include "/layout/menu.ftl"/>
+
 <div class="details">
 	<div class="details-nav">
 		<ul>

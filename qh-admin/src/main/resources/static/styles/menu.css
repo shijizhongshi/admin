@@ -1,24 +1,5 @@
 *{ margin: 0px; padding: 0px;border:none; list-style: none;font-family: "microsoft yahei";outline:none;text-decoration: none;}
-.navH ,  #ensconce {
-	 height:40px;
-  line-height:40px ;
-    width:130px;
 
-  text-align: center;
-  background-color:#E9484D;
-  font-size: 0.2rem;
-  color:#FFFFFF;
- position: absolute;
-left:300px;
-top:15px;
- cursor: pointer;
-}
- #ensconce {
-  
-  z-index:99; 
-  display:none;
-
-}
 .top{width: 100%;height:76px;background-color:#E9484D;height: 76px;line-height: 76px;overflow: hidden;position: relative;}
 .top-right{color:white;font-size:15px;display: flex;height:76px;}
 .exit{border-left:1px #E8595C solid;text-align: center;height:76px;}

@@ -1,5 +1,5 @@
 
-.details{width:74%;height:auto;float:left;overflow: hidden;}
+.details{width:100%;height:auto;float:left;overflow: hidden;}
 .details-nav{width:86%;height: 55px;background: white;padding:20px}
 .details-nav ul li{float: left;font-size:12px;color: #777777;margin-right:10px}
 .details-nav ul li img{margin-right:5px;vertical-align: middle;}

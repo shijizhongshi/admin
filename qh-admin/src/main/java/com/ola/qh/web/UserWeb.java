@@ -35,5 +35,14 @@ public class UserWeb {
 		return "login";
 	}
 		
+	@RequestMapping(value="/main",method=RequestMethod.GET)
+	public String UserWebmain(){
+		return "main";
+	}
 	
+	
+@RequestMapping(value="subnav",method=RequestMethod.GET)
+public String UserWebsubnav(){
+	return "courses/subnav";
+}
 }
