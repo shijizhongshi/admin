@@ -41,35 +41,31 @@
 	</ul>
 	<div class="admin-table">
 
-	<ol style="background: #CBD2D8;font-weight: bold;">
-		<li>班级名称</li>
-	<li >班级图片</li>
-	<li >班级价格</li>
-	<li>班级折扣价</li>
-	<li>赠送班级网课</li>
-	<li>增送直播班</li>
-	<li>主讲老师</li>
-	<li>班级年限</li>
-	<li>显示级别</li>
-	<li>是否推荐</li>
-	<li>是否关闭</li>
-	</ol>
+<table>
+	<tr style="background: #CBD2D8;font-weight: bold;">
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >年份</th >
+	<th >课时数</th >
+	<th >是否显示</th >
+	<th >资源类别</th >
+	<th >章类别</th >
+	</tr>
  <for:each>
- <ol style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
-		<li>班级名称</li>
-	<li ><div style="width: 80%;height:90%; margin: 0 auto;">
-		<img src="#" style="width: 100%;height: 100%;" />
-	</div></li>
-	<li >班级价格</li>
-	<li>班级折扣价</li>
-	<li>赠送班级网课</li>
-	<li>增送直播班</li>
-	<li>主讲老师</li>
-	<li>班级年限</li>
-	<li>显示级别</li>
-	<li>是否推荐</li>
-	<li>是否关闭</li>
-	</ol>
+ <tr style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >年份</th >
+	<th >课时数</th >
+	<th >是否显示</th >
+	<th >资源类别</th >
+	<th >章类别</th >
+	</tr>
+	</table>
 
 	</div>
 <div class="fanye">
@@ -148,16 +144,14 @@
 <ul><li>是否推荐</li>  <li><input type="radio" name="tuijian"  /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
 <ul><li>是否关闭  </li><li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
 <ul><li>是否试听 </li><li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
-			<div >
-				<form name="form"  method="post" enctype="multipart/form-data">
-     <input type="file" name="upload" id="file_upload"style="display: none;"
-         onchange="document.form.path.value=this.value" multiple="multiple" accept="image/*" />
-     <input name="path" id="path" readonly>
-     <input type="button" value="班级图片" onclick="document.form.file_upload.click()">
-     <div class="image_container" >
-            <img id="preview" style="height:130px;width:117px;border-width:0px;" />
+			<div class="costs-uploadfile-div">   
+				 <input type="file" name="file" id="fileField"  onchange="document.getElementById('textfield').value=this.value"  accept="image/*" /> 
+    <input type='text' id="textfield" style="border: solid 1px #B1B1B1;" /> 
+    <button class="allBtn costs-marl15">班级图片</button>
+    <div style="height:130px;width:45%;border: solid 1px #B1B1B1;margin-top:3px;">
+    <img  /></div>
         </div>
-</form>
+
 	</div>
 			</div>
 		
@@ -182,17 +176,17 @@
 		<div class="grade-right">
 <div>
 <span>课程资源</span>
-<form >
+<label >
 <p><input type="checkbox" name="ziyuan" /> 2018临床-冲刺习题课程</p>
 <p><input type="checkbox" name="ziyuan" />2018临床-冲刺习题课程</p>
-</form>
+</label>
 </div>
 <div>
 			<span>班级教师</span>
-			<form >
-  <p><input type="checkbox" name="teacher" value="Bike" /> 2018临床-冲刺习题课程</p>
-  <p><input type="checkbox" name="teacher" value="Car" checked="checked" />2018临床-冲刺习题课程</p>
-</form>
+			<label >
+  <p><input type="checkbox" name="teacher" /> 2018临床-冲刺习题课程</p>
+  <p><input type="checkbox" name="teacher" />2018临床-冲刺习题课程</p>
+</label>
 		</div>
 		</div>
 <div class="grade-add-bottom">
@@ -207,91 +201,11 @@
 	</div>
 		<div class="poop-revise" id="revise"  >
 		<form id="myform2">
-			<div class="revise-left">
-	<h3>添加课程</h3>
-	<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option disabled selected style='display:none;'>选择专业</option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
-				<option></option>
-				<option></option>
-			<img src="./images/sjk-xl.png" />
-			</select>
-		</div>
-		<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
-			<input type="text" class=""placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
-			<input type="button" value="上传课程图片" style="background: #FDE490;float: right;width:122px;"/>
-		</div>
-		<div class="centre-border">
-		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
-			<input type="text"  class=""placeholder="输入课程价格" style="width:130px ;text-indent: 2em;margin-right:15px;"/>
-			<input type="text" placeholder="输入折扣价格" style="width:130px ;text-indent: 2em;"/>
-		</div>
-		<div class=" select"style="width: 405px;">
-		<input type="text" placeholder="输入课程年份" style="width:130px ;text-indent: 2em;"/></div>
-		<div class=" select" style="margin-right:15px;">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-			<option  disabled selected style='display:none;'>是否显示</option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		<div class=" select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-			<option  disabled selected style='display:none;'>是否精品</option>
-				<option>是</option>
-				<option>否</option>
-			</select>
-		</div>
-		</div>
-	
-<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option  disabled selected style='display:none;'>课程资源类别</option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
 
-			<div class="select">
-			<img src="./images/sjk-xl.png"/>
-			<select>
-				<option  disabled selected style='display:none;'>课程用途分类</option>
-				<option></option>
-				<option></option>
-			</select>
-		</div>
-		<div class="end">
-			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset2()" class="esc" />
-			</div>
-</div>			
-<div class="revise-right">
-				<h3>显示章节</h3>
-				<div class="hidden-scoll" >
-				<ul class="section"><form>
-					<li><label for="chapter">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter" /></li>
-					<li><label for="chapter2">传染病 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>
-					<li><label for="chapter3">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter3" /></li>
-					<li><label for="chapter4">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter4" /></li>
-
-				</form></ul></div>
-			</div>
 			</form>
 		</div>
 <div class="resource" id="resource">
-	<h3>资源管理器</h3>
+	<h3>班级课程及赠送管理</h3>
 	<p>所属专业：临床执业助理医师</p>
 	<p>课程资源名：2018临床-基础课程</p>
 	<div style="width:700px;height: 340px;border-radius: 20px;overflow: hidden;border: 1px solid #B1B1B1;">
@@ -345,6 +259,7 @@
 </div>
 
 </div>
+
 </div>
 </body>
  <style type="text/css">
@@ -359,35 +274,37 @@
 	.grade-left ul li:nth-child(1){margin-right: 10px;}
 	.grade-center .grade-text{width: 80%;}
 	.grade-center .grade-text textarea{width: 100%;height: 160px;font-size:1.5rem}
-	.grade-right form{width: 80%;height: auto;background:#EDEEF0;border-radius:20px;text-indent: 2em;font-size: 1.6rem;}
-	.grade-right form input{margin-right: 5px;width:17px;height: 17px;}
+	.grade-right label{width: 80%;height: auto;background:#EDEEF0;border-radius:20px;text-indent: 2em;font-size: 1.6rem;}
+	.grade-right label input{margin-right: 5px;width:17px;height: 17px;}
 	.grade-add-bottom{width: 100%;clear:both;}
 	.grade-add-bottom textarea{width: 100%;height: 250px;background:#EDEEF0;border-radius:20px;text-indent: 2em;}
+	div.costs-uploadfile-div{
+    position:relative;
+}
+div.costs-uploadfile-div #textfield{
+    width:40%;
+    height:30px;    
+}
+div.costs-uploadfile-div #fileField{
+    width:100%;
+    height:30px;    
+    position: absolute;
+    top: 0;
+    left:0;
+    filter: alpha(opacity:0);
+    opacity: 0;
+}
+div.costs-uploadfile-div .allBtn{
+    padding:0;
+    margin:0;
+    height: 30px;
+    line-height: 30px;
+    width: 35%;
+    background-color: #18b3cf;
+    border: none;
+    color: #fff;
+    }
+	
 </style>
 
-   <script type="text/javascript">
-             $(function () {
-            $("#file_upload").change(function () {
-                var $file = $(this);
-                var fileObj = $file[0];
-                var windowURL = window.URL || window.webkitURL;
-                var dataURL;
-                var $img = $("#preview");
-
-                if (fileObj && fileObj.files && fileObj.files[0]) {
-                    dataURL = windowURL.createObjectURL(fileObj.files[0]);
-                    $img.attr('src', dataURL);
-                } else {
-                    dataURL = $file.val();
-                    var imgObj = document.getElementById("preview");
-                    // 两个坑:
-                    // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-                    // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-                    imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-                    imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
-                }
-            });
-        });
-        </script>
  </html>

@@ -6,7 +6,7 @@
     
     <div class="sidebar-menu toggle-others fixed">
         <div class="sidebar-menu-inner" >
-            <header class="logo-env" style="background-color:red">
+            <header class="logo-env" style="background-color:#e9484d">
                 <!-- logo -->
                 <div class="logo">
                     <a href="/" class="logo-expanded">

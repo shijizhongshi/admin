@@ -1,6 +1,7 @@
 package com.ola.qh.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class QuestionUnit {
@@ -17,9 +18,9 @@ public class QuestionUnit {
 	
 	private String correct;
 	
-	private String addtime;
+	private Date addtime;
 	
-	private String updatetime;
+	private Date updatetime;
 	
 	private List<QuestionAnswer> unitAnswer=new ArrayList<QuestionAnswer>();
 
@@ -71,19 +72,19 @@ public class QuestionUnit {
 		this.correct = correct;
 	}
 
-	public String getAddtime() {
+	public Date getAddtime() {
 		return addtime;
 	}
 
-	public void setAddtime(String addtime) {
+	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
 
-	public String getUpdatetime() {
+	public Date getUpdatetime() {
 		return updatetime;
 	}
 
-	public void setUpdatetime(String updatetime) {
+	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
 	}
 

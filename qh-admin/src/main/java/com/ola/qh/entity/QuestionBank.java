@@ -22,6 +22,8 @@ public class QuestionBank {
 	
 	private Date addtime;
 	
+	private Date updatetime;
+	
 	private String bankId;/////共用题干类型的题 小单元题
 	 
 	private List<QuestionAnswer> answer=new ArrayList<QuestionAnswer>();
@@ -114,6 +116,14 @@ public class QuestionBank {
 
 	public void setUnit(List<QuestionUnit> unit) {
 		this.unit = unit;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
 	}
 	
 	
