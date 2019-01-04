@@ -9,16 +9,6 @@
 <script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
-<style type="text/css">
-.classify{width:100%; background:#FFFFFF;}
-.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
-.classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
-.classify ul.menu .list a{color:black}
-*:after{color:#E5B70D;}
-*:before{color:#E5B70D;}
-.items{display:none;}
-.active{display:block;}
-</style>
 <div ng-controller="CourseController">
 <div class="classify">
 	<ul class="menu">
@@ -87,21 +77,25 @@
 	</ul>
 	<div class="admin-table">
 
-	<ol style="background: #CBD2D8;font-weight: bold;">
-		<li>课程名称</li>
-	<li >课程总数</li>
-	<li >课程价格</li>
-	<li>课程折扣</li>
-	<li>是否显示</li>
-	</ol>
- <ol style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;"  ng-repeat="c in courselist">
-	<li class="col-md-2">{{c.courseName}}</li>
-	<li class="col-md-1">{{c.courseChapterSize}}</li>
-	<li class="col-md-1">{{c.coursePrice}}</li>
-	<li  class="col-md-1">{{c.courseDiscountPrice}}</li>
-	<li  class="col-md-1" ng-show="{{c.courseShow==1}}">是</li>
-	<li  class="col-md-1" ng-show="{{c.courseShow==0}}">否</li>
-	</ol>
+  <table>
+	<tr style="background: #CBD2D8;font-weight: bold;">
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >是否显示</th >
+	</tr>
+
+ <tr style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" ng-repeat="c in courselist">
+	<th>{{c.courseName}}</th>
+	<th >{{c.courseChapterSize}}</th>
+	<th >{{c.coursePrice}}</th >
+	<th >{{c.courseDiscountPrice}}</th >
+	
+	<th ng-show="{{c.courseShow==1}}">是</th >
+	<th ng-show="{{c.courseShow==0}}">否</th >
+	</tr>
+	</table>
 	</div>
 	<div class="col-sm-6"></div>
                     <div class="col-sm-6">
@@ -118,11 +112,13 @@
 		<div class="poop" id="add">
 		<form id="myform">
 	<h3>添加课程</h3>
+
 	<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
 			<input type="text" ng-model="course.courseName" placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
 			<input type="file" value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" style="float: right;width:122px;"/>
 			<input type="hidden" ng-model="course.courseImg"/>
 			<img src="{{course.courseImg}}" ng-show="{{course.courseImg!=null}}">
+
 		</div>
 		<div class="centre-border">
 		<div class="select"style="width: 405px;height:48px;margin-top:5px;">

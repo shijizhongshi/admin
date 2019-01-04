@@ -42,39 +42,32 @@
 	
 	<div class="admin-table">
 
-	<ol style="background: #CBD2D8;font-weight: bold;">
-		<li>节名称</li>
-	<li style="width: 13%;"> 七牛云链接</li>
-	<li style="width: 20%;">阿里云ID</li>
-	<li>视频URL</li>
-	<li>是否可见</li>
-	<li>章节练习</li>
-	<li>用途分类</li>
-	<li>是否考试</li>
-	
-	</ol>
+ <table>
+	<tr style="background: #CBD2D8;font-weight: bold;">
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >年份</th >
+	<th >课时数</th >
+	<th >是否显示</th >
+	<th >资源类别</th >
+	<th >章类别</th >
+	</tr>
  <for:each>
- <ol style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
-		<li></li>
-	<li style="width: 13%;"></li>
-	<li style="width: 20%;"></li>
-	<li></li>
-	<li ></li>
-	<li ></li>
-	<li></li>
-	<li></li>
-	</ol>
-	
-	<ol >
-		<li></li>
-	<li style="width: 13%;"></li>
-	<li style="width: 20%;"></li>
-	<li></li>
-	<li ></li>
-	<li ></li>
-	<li></li>
-	<li></li>
-</ol>
+ <tr style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >年份</th >
+	<th >课时数</th >
+	<th >是否显示</th >
+	<th >资源类别</th >
+	<th >章类别</th >
+	</tr>
+	</table>
+
 	</div>
 <div class="fanye">
 	<ul class="pagination">
