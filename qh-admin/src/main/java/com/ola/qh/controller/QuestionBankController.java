@@ -38,8 +38,14 @@ public class QuestionBankController {
 	}
 
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public Results<List<QuestionBank>> selectQuestionBank(@RequestParam(value = "subId") String subId){
+	public Results<List<QuestionBank>> selectQuestionBank(@RequestParam(value = "subId",required=true) String subId){
 		
 		return questionBankService.selectQuestionBank(subId);
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public Results<String> deleteQuestionBank(@RequestParam(value = "id",required=true) String id){
+		
+		return questionBankService.deleteQuestionBank(id);
 	}
 }

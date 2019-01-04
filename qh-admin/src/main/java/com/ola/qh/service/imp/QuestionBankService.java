@@ -252,4 +252,34 @@ public class QuestionBankService implements IQuestionBankService {
 		
 	}
 
+	@Transactional
+	@Override
+	public Results<String> deleteQuestionBank(String id) {
+		
+		Results<String> results=new Results<String>();
+		
+		try {
+			questionBankDao.deleteQuestionBank(id);
+			questionBankDao.deleteQuestionAnswer(id);
+			
+			List<QuestionUnit> listunit=questionBankDao.selectQuestionUnit(id);
+			
+			for (QuestionUnit questionUnit : listunit) {
+				
+				questionBankDao.deleteQuestionUnit(questionUnit.getId());
+			}
+			
+			results.setStatus("0");
+			return results;
+			
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			results.setStatus("1");
+			return results;
+		}
+		
+	}
+	
+	
+
 }

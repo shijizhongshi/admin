@@ -13,5 +13,7 @@ public interface IQuestionBankService {
 	
 	public Results<List<QuestionBank>> selectQuestionBank(String subId);
 	
+	public Results<String> deleteQuestionBank(String id);
+	
 	
 }
