@@ -1,3 +1,5 @@
+*{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;}
+a{text-decoration: none;color: black;}
 
 .details{width:100%;height:auto;float:left;}
 .details-nav{width:86%;height: 55px;background: white;padding:20px}
