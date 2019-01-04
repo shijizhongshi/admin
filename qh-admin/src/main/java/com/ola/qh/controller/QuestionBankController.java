@@ -3,6 +3,7 @@ package com.ola.qh.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,12 @@ public class QuestionBankController {
 	public Results<List<QuestionBank>> selectQuestionBank(@RequestParam(value = "subId",required=true) String subId){
 		
 		return questionBankService.selectQuestionBank(subId);
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public Results<String> updateQuestionBank(@RequestBody QuestionBank questionBank){
+		
+		return questionBankService.updateQuestionBank(questionBank);
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

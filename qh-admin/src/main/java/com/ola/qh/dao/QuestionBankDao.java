@@ -25,4 +25,10 @@ public interface QuestionBankDao {
 	public int deleteQuestionAnswer(String bankUnitId);
 	
 	public int deleteQuestionUnit(String bankId);
+	
+	public int updateQuestionBank(QuestionBank questionBank);
+	
+	public int updateQuestionAnswer(QuestionAnswer questionAnswer);
+	
+	public int updateQuestionUnit(QuestionUnit questionUnit);
 }
