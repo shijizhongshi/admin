@@ -33,6 +33,9 @@
 	select id,sub_id,number_no,title,types,analysis,correct from question_bank where sub_id=#{subId}
 	</select>
 	
+	<delete id="deleteQuestionBank">
+	delete from question_bank where id=#{id}
+	</delete>
 	
 	<resultMap type="com.ola.qh.entity.QuestionAnswer" id="QuestionAnswerMap">
 	<result column="id" property="id"/>
@@ -47,6 +50,10 @@
 	select id,bank_unit_id,answers,options,correct,orders from question_bank_answer where bank_unit_id=#{bankUnitId}
 	</select>
 	
+	<delete id="deleteQuestionAnswer">
+	delete from question_bank_answer where bank_unit_id=#{bankUnitId}
+	</delete>
+	
 	<resultMap type="com.ola.qh.entity.QuestionUnit" id="QuestionUnitMap">
 	<result column="id" property="id"/>
 	<result column="bank_id" property="bankId"/>
@@ -60,5 +67,9 @@
 	<select id="selectQuestionUnit" resultMap="QuestionUnitMap"> 
 	select id,bank_id,title,types,analysis,correct from question_bank_unit where bank_id=#{bankId}
 	</select>
+	
+	<delete id="deleteQuestionUnit">
+	delete from question_bank_unit where bank_id=#{bankId}
+	</delete>
 	
 	</mapper>

@@ -19,4 +19,10 @@ public interface QuestionBankDao {
 	public List<QuestionAnswer> selectQuestionAnswer(String bankUnitId);
 	
 	public List<QuestionUnit> selectQuestionUnit(String bankId);
+	
+	public int deleteQuestionBank(String id);
+	
+	public int deleteQuestionAnswer(String bankUnitId);
+	
+	public int deleteQuestionUnit(String bankId);
 }
