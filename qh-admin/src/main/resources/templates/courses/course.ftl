@@ -1,16 +1,60 @@
 <#import "/layout/header.ftl" as h/>
-
+<#import "/layout/body.ftl" as b/>
 <!DOCTYPE html>
 <html lang="en">
 <@h.header title="课程管理页面"/>
+<style type="text/css">
+.classify{width:100%; background:#FFFFFF;}
+.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
+.classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
+.classify ul.menu .list a{color:black}
+*:after{color:#E5B70D;}
+*:before{color:#E5B70D;}
+.items{display:none;}
+.active{display:block;}
+</style>
 <link rel="stylesheet" href="/styles/admin.css" />
+<script src="/scripts/course/subnav.js"></script>
 <script src="/scripts/course.js"></script>
 <script src="/scripts/admin.js"></script>
-<body>
-<#include "/courses/subnav.ftl"/>
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
+<div class="classify" ng-controller="CourseSubnavController">
+	<ul class="menu">
+	
+   <li class="list" ng-click="typeList(1)" >医师资格 
+      <ul class="items" ng-class="{'active':active==1}">
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',courseTypeSubclass)">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+   </li>
+   <li class="list" ng-click="typeList(2)">药师资格
+      <ul class="items" ng-class="{'active':active==2}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+      </li>
+       <li class="list" ng-click="typeList(3)">中医基础理论
+      <ul class="items" ng-class="{'active':active==3}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
+       <li class="list" ng-click="typeList(4)">卫生资格 
+      <ul class="items" ng-class="{'active':active==4}">
+        <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+      </li>
+      <li class="list"><a href="#">健康管理师</a> 
+      <ul class="items" ng-class="{'active':active==5}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
+      
+      
+      
+      </ul>
+      </div>
  <div class="details">
- <input type="hidden" value="${courseTypeName}" id="courseTypeName">
- <input type="hidden" value="${courseSubTypeName}" id="courseSubTypeName">
 	<div class="details-nav">
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
@@ -534,6 +578,6 @@
 
 </div>
 </div>
-</body>
+</@b.body>
  
  </html>

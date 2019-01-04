@@ -29,9 +29,7 @@ public class CourseWeb{
 	}
 	
 	@RequestMapping(value="/course",method=RequestMethod.GET)
-	public String UserWeb(@RequestParam(name="courseTypeName") String courseTypeName,@RequestParam(name="courseSubTypeName") String courseSubTypeName,HttpServletRequest request){
-		request.getSession().setAttribute("courseTypeName", courseTypeName);
-		request.getSession().setAttribute("courseSubTypeName", courseSubTypeName);
+	public String UserWeb(){
 		return "courses/course";
 	}
 

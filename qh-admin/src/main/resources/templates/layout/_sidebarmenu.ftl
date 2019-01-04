@@ -59,7 +59,7 @@
                     </a>
                     <ul>
                         <li id="sidebarmenu-course-course">
-                            <a href="/web/course/subnav?type=1">
+                            <a href="/web/course/course">
                                 <span class="title"> 课程管理</span>
                             </a>
                         </li>
