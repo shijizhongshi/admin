@@ -1,7 +1,7 @@
-app.controller("CourseSubnavController", function($scope, $http){
-	$scope.active=1;
+app.controller("CourseController", function($scope, $http){
+
 	
-$scope.typeList=function(typeId){
+/*$scope.typeList=function(typeId){
 
 		$scope.active=typeId;
 
@@ -12,7 +12,15 @@ $http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":typeId
 		$scope.courseTypeSubclass=data.data;
 	}
 })	
-}
+}*/
+	
+	$scope.courseSub=function(typename,sub){
+		////////查课程的集合
+		alert("查对应类别课程的集合")
+		
+	}
+	
+	
 	
 
 });
