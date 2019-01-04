@@ -1,5 +1,6 @@
 package com.ola.qh.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -27,9 +28,9 @@ public class Course {
 	
 	private int courseChapterSize;////课程的章节数
 	
-	private double coursePrice;////课程的价格
+	private BigDecimal coursePrice;////课程的价格
 	
-	private double courseDiscountPrice;////课程折扣价格
+	private BigDecimal courseDiscountPrice;////课程折扣价格
 	
 	private String courseYear;////课程年限
 	
@@ -94,21 +95,19 @@ public class Course {
 		this.courseChapterSize = courseChapterSize;
 	}
 
-	
-
-	public double getCoursePrice() {
+	public BigDecimal getCoursePrice() {
 		return coursePrice;
 	}
 
-	public void setCoursePrice(double coursePrice) {
+	public void setCoursePrice(BigDecimal coursePrice) {
 		this.coursePrice = coursePrice;
 	}
 
-	public double getCourseDiscountPrice() {
+	public BigDecimal getCourseDiscountPrice() {
 		return courseDiscountPrice;
 	}
 
-	public void setCourseDiscountPrice(double courseDiscountPrice) {
+	public void setCourseDiscountPrice(BigDecimal courseDiscountPrice) {
 		this.courseDiscountPrice = courseDiscountPrice;
 	}
 
