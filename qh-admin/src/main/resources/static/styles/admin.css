@@ -1,5 +1,18 @@
+*{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;}
+a{text-decoration: none;color: black;}
+.classify{width:10%; background:#FFFFFF;float:left;}
+.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
+.classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
+.classify ul.menu .list a{color:black}
+*:after{color:#E5B70D;}
+*:before{color:#E5B70D;}
+.items{display:none;}
+.active{display:block;}
 
-.details{width:100%;height:auto;float:left;}
+
+
+
+.details{width:90%;height:auto;float:left;background:#fff;}
 .details-nav{width:86%;height: 55px;background: white;padding:20px}
 .details-nav ul li{float: left;font-size:12px;color: #777777;margin-right:10px}
 .details-nav ul li img{margin-right:5px;vertical-align: middle;}
@@ -82,8 +95,8 @@ color:red;
 
 /**/
 .select-2{width:160px;height: 90px;position: relative;}
-.select-2 span{display: block;margin-bottom: 10px;}
-.select-2 input{width: 160px;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em;}
+.select-2 span , .grade-text span , .grade-right span , .grade-add-bottom{display: block;margin-bottom: 10px;}
+.select-2 input , .grade-text textarea {width: 160px;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em; font-size:1.5rem}
 .select-2 img{position: absolute;right: 10px;bottom: 27px;}
 
 
