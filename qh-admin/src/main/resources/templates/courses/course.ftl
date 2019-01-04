@@ -1,20 +1,32 @@
 <#import "/layout/header.ftl" as h/>
 <#import "/layout/body.ftl" as b/>
+
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="课程管理页面"/>
 
+<@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/subnav.js"></script>
-<script src="/scripts/course.js"></script>
+<script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
+<style type="text/css">
+.classify{width:100%; background:#FFFFFF;}
+.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
+.classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
+.classify ul.menu .list a{color:black}
+*:after{color:#E5B70D;}
+*:before{color:#E5B70D;}
+.items{display:none;}
+.active{display:block;}
+</style>
+
 <div class="classify" ng-controller="CourseSubnavController">
 	<ul class="menu">
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',courseTypeSubclass)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
    </li>
@@ -45,7 +57,7 @@
       
       </ul>
       </div>
- <div class="details">
+ <div class="details" ng-controller="CourseController">
 	<div class="details-nav">
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>

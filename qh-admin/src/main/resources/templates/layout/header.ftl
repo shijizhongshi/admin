@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Xenon Boostrap Admin Panel" />
         <meta name="author" content="" />
-        <title>${title!'欧拉清货管理系统'}</title>
+        <title>${title!'世纪中师管理系统'}</title>
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
         <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
