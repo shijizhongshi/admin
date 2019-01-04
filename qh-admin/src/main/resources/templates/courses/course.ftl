@@ -3,16 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <@h.header title="课程管理页面"/>
-<style type="text/css">
-.classify{width:100%; background:#FFFFFF;}
-.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
-.classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
-.classify ul.menu .list a{color:black}
-*:after{color:#E5B70D;}
-*:before{color:#E5B70D;}
-.items{display:none;}
-.active{display:block;}
-</style>
+
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/subnav.js"></script>
 <script src="/scripts/course.js"></script>
