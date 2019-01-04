@@ -12,6 +12,7 @@
 	<result column="analysis" property="analysis"/>
 	<result column="correct" property="correct"/>
 	<result column="bankId" property="bankId"/>
+	<result column="updatetime" property="updatetime"/>
 	</resultMap>
 	
 	<insert id="insertQuestionBank" parameterType="com.ola.qh.entity.QuestionBank">
@@ -37,6 +38,21 @@
 	delete from question_bank where id=#{id}
 	</delete>
 	
+	<update id="updateQuestionBank" parameterType="com.ola.qh.entity.QuestionBank">
+	update question_bank set
+	<if test="title!=null">
+	title=#{title},
+	</if>
+	<if test="analysis!=null">
+	analysis=#{analysis},
+	</if>
+	<if test="correct!=null">
+	correct=#{correct},
+	</if>
+	updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	
 	<resultMap type="com.ola.qh.entity.QuestionAnswer" id="QuestionAnswerMap">
 	<result column="id" property="id"/>
 	<result column="bank_unit_id" property="bankUnitId"/>
@@ -44,6 +60,7 @@
 	<result column="options" property="options"/>
 	<result column="correct" property="correct"/>
 	<result column="orders" property="orders"/>
+	<result column="updatetime" property="updatetime"/>
 	</resultMap>
 	
 	<select id="selectQuestionAnswer" resultMap="QuestionAnswerMap"> 
@@ -54,6 +71,20 @@
 	delete from question_bank_answer where bank_unit_id=#{bankUnitId}
 	</delete>
 	
+	<update id="updateQuestionAnswer" parameterType="com.ola.qh.entity.QuestionAnswer">
+	update question_bank_answer set
+	<if test="answers!=null">
+	answers=#{answers},
+	</if>
+	<if test="options!=null">
+	options=#{options},
+	</if>
+	<if test="correct!=null">
+	correct=#{correct},
+	</if>
+	updatetime=#{updatetime} where id=#{id}
+	</update>
+	
 	<resultMap type="com.ola.qh.entity.QuestionUnit" id="QuestionUnitMap">
 	<result column="id" property="id"/>
 	<result column="bank_id" property="bankId"/>
@@ -61,6 +92,7 @@
 	<result column="types" property="types"/>
 	<result column="analysis" property="analysis"/>
 	<result column="correct" property="correct"/>
+	<result column="updatetime" property="updatetime"/>
 	</resultMap>
 	
 	
@@ -72,4 +104,17 @@
 	delete from question_bank_unit where bank_id=#{bankId}
 	</delete>
 	
+	<update id="updateQuestionUnit" parameterType="com.ola.qh.entity.QuestionUnit">
+	update question_bank_unit set
+	<if test="title!=null">
+	title=#{title},
+	</if>
+	<if test="analysis!=null">
+	analysis=#{analysis},
+	</if>
+	<if test="correct!=null">
+	correct=#{correct},
+	</if>
+	updatetime=#{updatetime} where id=#{id}
+	</update>
 	</mapper>

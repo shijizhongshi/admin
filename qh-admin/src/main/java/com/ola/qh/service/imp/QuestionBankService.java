@@ -261,13 +261,14 @@ public class QuestionBankService implements IQuestionBankService {
 		try {
 			questionBankDao.deleteQuestionBank(id);
 			questionBankDao.deleteQuestionAnswer(id);
-			
 			List<QuestionUnit> listunit=questionBankDao.selectQuestionUnit(id);
 			
 			for (QuestionUnit questionUnit : listunit) {
 				
 				questionBankDao.deleteQuestionUnit(questionUnit.getId());
+				questionBankDao.deleteQuestionAnswer(questionUnit.getId());
 			}
+			
 			
 			results.setStatus("0");
 			return results;
@@ -279,6 +280,54 @@ public class QuestionBankService implements IQuestionBankService {
 		}
 		
 	}
+
+	@Transactional
+	@Override
+	public Results<String> updateQuestionBank(QuestionBank questionBank) {
+		
+		Results<String> results=new  Results<String>();
+		try {
+			
+			questionBank.setUpdatetime(new Date());
+			questionBankDao.updateQuestionBank(questionBank);
+			
+			List<QuestionAnswer> listanswer=questionBank.getAnswer();
+			List<QuestionUnit> unit=questionBank.getUnit();
+			
+			if(listanswer!=null && !"".equals(listanswer)){
+				
+				for (QuestionAnswer questionAnswer : listanswer) {
+					questionAnswer.setUpdatetime(new Date());
+					questionBankDao.updateQuestionAnswer(questionAnswer);
+				}
+			}
+			
+			if(unit!=null && !"".equals(unit)){
+				
+				for (QuestionUnit questionUnit : unit) {
+					
+					List<QuestionAnswer> unitAnswer=questionUnit.getUnitAnswer();
+					questionUnit.setUpdatetime(new Date());
+					questionBankDao.updateQuestionUnit(questionUnit);
+					
+					for (QuestionAnswer questionAnswer : unitAnswer) {
+						questionAnswer.setUpdatetime(new Date());
+						questionBankDao.updateQuestionAnswer(questionAnswer);
+					}
+				}
+			}
+			
+			results.setMessage("0");
+			return results;
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			results.setMessage("1");
+			return results;
+		}
+		
+	}
+
+	
 	
 	
 

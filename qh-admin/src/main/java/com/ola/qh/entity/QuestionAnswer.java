@@ -14,12 +14,11 @@ public class QuestionAnswer {
 	
 	private Date addtime;
 	
+	private Date updatetime;
+	
 	private boolean correct;///true:正确   FALSE :错误
 	
 	private int orders;
-	
-	
-
 	
 	public int getOrders() {
 		return orders;
@@ -76,6 +75,14 @@ public class QuestionAnswer {
 
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
 	}
 	
 	
