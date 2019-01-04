@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="./styles/admin.css" />
 <script src="./scripts/course.js"></script>
 <script src="./scripts/admin.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <body>
 
 <div class="details">
@@ -89,7 +90,7 @@
 	<h3>班级添加</h3>
 	<span style="margin-right:20px ;">已选专业类型:</span> <span>lin</span>
 		<div class="grade-add">
-			<div class="grade-left">
+			<div class="grade-left" style="padding-right: 5%;">
 		
 				<div class=" select-2">
 						<span>班级名称：</span>
@@ -145,12 +146,64 @@
 		</div>
 
 <ul><li>是否推荐</li>  <li><input type="radio" name="tuijian"  /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
-<ul><li>是否关闭  </li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
-<ul><li>是否试听 </li><input type="radio" name="tuijian" /> </li> <li><input type="radio" name="tuijian" />否</li></ul>
+<ul><li>是否关闭  </li><li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
+<ul><li>是否试听 </li><li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
+			<div >
+				<form name="form"  method="post" enctype="multipart/form-data">
+     <input type="file" name="upload" id="file_upload"style="display: none;"
+         onchange="document.form.path.value=this.value" multiple="multiple" accept="image/*" />
+     <input name="path" id="path" readonly>
+     <input type="button" value="班级图片" onclick="document.form.file_upload.click()">
+     <div class="image_container" >
+            <img id="preview" style="height:130px;width:117px;border-width:0px;" />
+        </div>
+</form>
+	</div>
+			</div>
+		
+		<div class="grade-center">
+			<div  class="grade-text">
+				<span>适宜人群</span>
+			    <textarea></textarea>
+			</div>
+			<div  class="grade-text">
+				<span>班级承诺</span>
+		    <textarea></textarea>
+			</div>
+			<div  class="grade-text">
+				<span>班级特色</span>
+		    <textarea></textarea>
+			</div>
+			<div  class="grade-text">
+				<span>班级介绍</span>
+				    <textarea></textarea>
 			</div>
 		</div>
-
+		<div class="grade-right">
+<div>
+<span>课程资源</span>
+<form >
+<p><input type="checkbox" name="ziyuan" /> 2018临床-冲刺习题课程</p>
+<p><input type="checkbox" name="ziyuan" />2018临床-冲刺习题课程</p>
+</form>
+</div>
+<div>
+			<span>班级教师</span>
+			<form >
+  <p><input type="checkbox" name="teacher" value="Bike" /> 2018临床-冲刺习题课程</p>
+  <p><input type="checkbox" name="teacher" value="Car" checked="checked" />2018临床-冲刺习题课程</p>
+</form>
+		</div>
+		</div>
+<div class="grade-add-bottom">
+	<span>班级详情</span>
+    <textarea></textarea>
+</div>
 		</form>
+		<div class="end">
+			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+		</div>
 	</div>
 		<div class="poop-revise" id="revise"  >
 		<form id="myform2">
@@ -232,16 +285,7 @@
 					<li><label for="chapter2">传染病 </label> <input name="chapter" type="checkbox" id="chapter2" /></li>
 					<li><label for="chapter3">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter3" /></li>
 					<li><label for="chapter4">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter4" /></li>
-					<li><label for="chapter5">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter5" /></li>
-					<li><label for="chapter6">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter6" /></li>
-					<li><label for="chapter7">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter7" /></li>
-					<li><label for="chapter8">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter8" /></li>
-					<li><label for="chapter9">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter9" /></li>
-					<li><label for="chapter10">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter10" /></li>
-					<li><label for="chapter11">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter11" /></li>
-					<li><label for="chapter12">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter12" /></li>
-					<li><label for="chapter13">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter13" /></li>
-					<li><label for="chapter14">传染病、性传播疾病冲刺课 </label> <input name="chapter" type="checkbox" id="chapter14" /></li>
+
 				</form></ul></div>
 			</div>
 			</form>
@@ -288,96 +332,7 @@
 	<li>自用课程</li>
 	<li><input  type="radio"> </li>
 		</ul>
-		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-			<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-				<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input type="radio"> </li>
-		</ul>	
+	
 	</div>
 	</form>
 	</div>
@@ -395,9 +350,44 @@
  <style type="text/css">
 	.admin-table ol li{width: 9%;}
 	.admin-table ol li:nth-child(1){width: 10%;}
+	.poop{overflow-y: scroll;}
 	.poop span{font-size: 2rem;}
 	.grade-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
-	.grade-left{width: 30%;float: left;}
-
+	.grade-left,.grade-center,.grade-right{width: 33%;float: left;height: 800px;}
+	.grade-left ul{height: 50px;line-height: 50px; font-size: 2rem;}
+	.grade-left ul li{float: left;margin-right: 5px;}
+	.grade-left ul li:nth-child(1){margin-right: 10px;}
+	.grade-center .grade-text{width: 80%;}
+	.grade-center .grade-text textarea{width: 100%;height: 160px;font-size:1.5rem}
+	.grade-right form{width: 80%;height: auto;background:#EDEEF0;border-radius:20px;text-indent: 2em;font-size: 1.6rem;}
+	.grade-right form input{margin-right: 5px;width:17px;height: 17px;}
+	.grade-add-bottom{width: 100%;clear:both;}
+	.grade-add-bottom textarea{width: 100%;height: 250px;background:#EDEEF0;border-radius:20px;text-indent: 2em;}
 </style>
+
+   <script type="text/javascript">
+             $(function () {
+            $("#file_upload").change(function () {
+                var $file = $(this);
+                var fileObj = $file[0];
+                var windowURL = window.URL || window.webkitURL;
+                var dataURL;
+                var $img = $("#preview");
+
+                if (fileObj && fileObj.files && fileObj.files[0]) {
+                    dataURL = windowURL.createObjectURL(fileObj.files[0]);
+                    $img.attr('src', dataURL);
+                } else {
+                    dataURL = $file.val();
+                    var imgObj = document.getElementById("preview");
+                    // 两个坑:
+                    // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+                    // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+                    imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+                }
+            });
+        });
+        </script>
  </html>
