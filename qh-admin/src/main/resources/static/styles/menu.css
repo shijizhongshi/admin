@@ -12,15 +12,14 @@
 ul.menu { width:100%;box-shadow: 0px 0px 25px #00000070;display: table;}
 ul.menu .list { border-bottom: 1px solid #324252;position: relative;width: 100%;box-sizing: border-box; background: #3e5165; clear: both;line-height:50px;}
 ul.menu .list:after { content: "\f107";font-family: FontAwesome;position: absolute;right: 17px;top: 0px;}
-ul.menu .list:before { content: '\f07b';font-family: FontAwesome;position: absolute;left: 17px; top: 0px;}
+
 ul.menu .list a { text-decoration: none; color: #fff;display: block; height: 100%;box-sizing: border-box;}
 ul.menu .list a:hover { background-color: #324252;transition: 300ms all; color: #09fbd2;}
 ul.menu .list .items {height: 0px; overflow: hidden;}
 
 ul.menu .list .items a:hover { background-color: #3f5d79;color: #fff;transition: 300ms all;}
 ul.menu .list:last-child { border-bottom: none;}
-ul.menu .active:after {content: "\f106"; font-family: FontAwesome;position: absolute;right: 17px; top: 0px; color: #fff;}
-ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: absolute; left: 17px; top: 0px; color: #fff;}
+
 ul.menu .active > .items { display: block;background: #23313f; padding: 0px; height: auto;color: #fff;transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);transition: all 200ms;
   clear: both;float: left;width: 100%;}
 ul.menu .active > .items li { padding: 0px; border-bottom: 1px solid #324252;list-style: none;}

@@ -702,7 +702,7 @@ body {
   display: table-cell;
   position: relative;
   z-index: 1;
-  padding: 30px;
+  padding: 10px 30px 10px 5px;
   padding-bottom: 0;
   vertical-align: top;
   word-break: break-word;
@@ -1996,7 +1996,7 @@ body.chat-open .user-info-navbar a[data-toggle="chat"] {
   min-height: 0;
   border: 0;
   padding: 0;
-  margin: -30px;
+  margin: -10px;
   margin-bottom: 30px;
 }
 .user-info-navbar .user-info-menu {
@@ -2047,7 +2047,7 @@ body.chat-open .user-info-navbar a[data-toggle="chat"] {
   display: block;
   padding: 30px 20px;
   color: #979898;
-  border-bottom: 1px solid #ffffff;
+
   top: 1px;
   z-index: 5;
 }

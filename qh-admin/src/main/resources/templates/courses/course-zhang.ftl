@@ -1,20 +1,54 @@
 <#import "/layout/header.ftl" as h/>
+<#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="课程章管理"/>
-<link rel="stylesheet" href="./styles/admin.css" />
-<script src="./scripts/course.js"></script>
-<script src="./scripts/admin.js"></script>
-<body>
-
-<#include "/courses/subnav.ftl"/>
+<@h.header title="课程管理页面"/>
+<link rel="stylesheet" href="/styles/admin.css" />
+<script src="/scripts/course/course.js"></script>
+<script src="/scripts/admin.js"></script>
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
+<div class="classify">
+	<ul class="menu">
+	
+   <li class="list" ng-click="typeList(1)" >医师资格 
+      <ul class="items" ng-class="{'active':active==1}">
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+   </li>
+   <li class="list" ng-click="typeList(2)">药师资格
+      <ul class="items" ng-class="{'active':active==2}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+      </li>
+       <li class="list" ng-click="typeList(3)">中医基础理论
+      <ul class="items" ng-class="{'active':active==3}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
+       <li class="list" ng-click="typeList(4)">卫生资格 
+      <ul class="items" ng-class="{'active':active==4}">
+        <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+      </li>
+      <li class="list"><a href="#">健康管理师</a> 
+      <ul class="items" ng-class="{'active':active==5}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
+      
+      
+      
+      </ul>
+      </div>
 <div class="details">
-<input type="hidden" value="${courseTypeName}" id="courseTypeName"/>
-<input type="hidden" value="${courseSubTypeName}" id="courseSubTypeName"/>
+
 	<div class="details-nav">
 		<ul>
-			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
+			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
 		<li>课程章节管理</li>
 
@@ -37,7 +71,9 @@
 		<li  style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除章</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
-         <li style="float: right;margin-right: 100px;background:none;"><img src="./images/sjk-f5.png" name="changyi"/></li>
+		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;资源节管理</li>
+         <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
+
 	</ul>
 	<div class="admin-table">
  <table>
@@ -85,7 +121,7 @@
 		<form id="myform">
 	<h3>添加章</h3>
 	<div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option disabled selected style='display:none;'>选择专业</option>
 				<option></option>
@@ -93,12 +129,12 @@
 			</select>
 		</div>
 		<div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
 				<option></option>
 				<option></option>
-			<img src="./images/sjk-xl.png" />
+			<img src="/images/sjk-xl.png" />
 			</select>
 		</div>
 		<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
@@ -111,7 +147,7 @@
 		</div>
 		<p style="clear: both;">
 		<div class=" select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 			<option  disabled selected style='display:none;'>用途分类</option>
 				<option></option>
@@ -121,7 +157,7 @@
 		</p>
 			<p style="clear: both;">
 <div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled selected style='display:none;'>课程类别</option>
 				<option></option>
@@ -130,7 +166,7 @@
 		</div></p>
 		<p style="clear: both;">
 <div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled selected style='display:none;'>章类别</option>
 				<option></option>
@@ -150,7 +186,7 @@
 		<form id="myform2">
 			<h3>修改章</h3>
 	<div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option disabled selected style='display:none;'>选择专业</option>
 				<option></option>
@@ -158,12 +194,12 @@
 			</select>
 		</div>
 		<div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
 				<option></option>
 				<option></option>
-			<img src="./images/sjk-xl.png" />
+			<img src="/images/sjk-xl.png" />
 			</select>
 		</div>
 		<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
@@ -176,7 +212,7 @@
 		</div>
 		<p style="clear: both;">
 		<div class=" select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 			<option  disabled selected style='display:none;'>自用课程</option>
 				<option></option>
@@ -186,7 +222,7 @@
 		</p>
 			<p style="clear: both;">
 <div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled selected style='display:none;'>基础课</option>
 				<option></option>
@@ -195,7 +231,7 @@
 		</div></p>
 		<p style="clear: both;">
 <div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled selected style='display:none;'>第一部分</option>
 				<option></option>
@@ -221,4 +257,5 @@
 	.admin-table ol li{width: 16% }
 	.admin-table ol li:nth-child(1){width: 20%;}
 </style>
+</@b.body>
  </html>

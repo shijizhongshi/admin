@@ -1,6 +1,6 @@
 *{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;}
 a{text-decoration: none;color: black;}
-.classify{width:10%; background:#FFFFFF;float:left;}
+.classify{width:13%; background:#FFFFFF;float:left;}
 .classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:15px;}
 
 .classify ul.menu .list a{color:black}
@@ -14,13 +14,12 @@ ul.menu .list { border-bottom: 1px solid #324252;position: relative;width: 100%;
 ul.menu .list:after { content: "\f107";font-family: FontAwesome;position: absolute;right: 17px;top: 0px;}
 ul.menu .list:before { content: '\f07b';font-family: FontAwesome;position: absolute;left: 17px; top: 0px;}
 ul.menu .list a { text-decoration: none; color: #fff;display: block; height: 100%;box-sizing: border-box;}
-ul.menu .active:after {content: "\f106"; font-family: FontAwesome;position: absolute;right: 17px; top: 0px; color:#E5B70D;background:white;font-size:16px;}
 ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: absolute; left: 17px; top: 0px; color:#E5B70D;background:white;font-size:16px;}
 
 
 
 
-.details{width:90%;height:auto;float:left;background:#fff;}
+.details{width:87%;height:auto;float:left;background:#fff;}
 .details-nav{width:86%;height: 55px;background: white;padding:20px}
 .details-nav ul li{float: left;font-size:12px;color: #777777;margin-right:10px}
 .details-nav ul li img{margin-right:5px;vertical-align: middle;}
@@ -32,7 +31,7 @@ ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: abs
 .details-frame-content .select img{position: absolute;right:10px;bottom:8px;}
 .manage .select img{position: absolute;right:10px;top:17px;}
 
-select{padding-left:18px ;width:160px;height: 40px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
+select{padding-left:18px ;width:100%;height: 40px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
 select[disabled='disabled']::-webkit-value {
 color:red;
 }
@@ -48,11 +47,14 @@ color:red;
  .show li{float: left;margin-left: 18px;cursor: pointer;width: 130px;height: 40px;border-radius: 30px;color: white; text-align: center;line-height: 40px;font-size:16px;background:#8A959B;}
 
 .admin-table{width:90%;height:auto;border: 1px solid #B1B1B1;margin:0 auto;border-radius:10px;overflow: hidden;}
-.admin-table tr th{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;margin:0;}
+.admin-table table tr th{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;margin:0;}
 .admin-table table{width:100%;}
+
 .admin-table tr{width:100%;height: 42px;margin-bottom:0;}
-/* .admin-table tr:nth-child(2n){background:white;}
-.admin-table tr:nth-child(2n-1){background:#F0F1F3;} */
+ .admin-table table tr{width:100%;height: 42px;margin-bottom:0;}
+
+.admin-table table tr:nth-child(1){background: #CBD2D8;font-weight: bold;}
+.admin-table table tr::nth-child(2){box-shadow:0px 1px 1px 0px #B1B1B1 inset;" ng-repeat="c in courselist}
 
 .fanye{width:405px;margin: 0 auto;}
 .fanye ul{width:405px;}
@@ -102,9 +104,9 @@ color:red;
 .add-jie-right{width:400px;float: right;}
 
 /**/
-.select-2{width:160px;height: 90px;position: relative;}
+.select-2{width:48%;height: 90px;position: relative;}
 .select-2 span , .grade-text span , .grade-right span , .grade-add-bottom{display: block;margin-bottom: 10px;}
-.select-2 input , .grade-text textarea {width: 160px;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em; font-size:1.5rem}
+.select-2 input , .grade-text textarea {width:100%;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em; font-size:1.5rem}
 .select-2 img{position: absolute;right: 10px;bottom: 27px;}
 
 
