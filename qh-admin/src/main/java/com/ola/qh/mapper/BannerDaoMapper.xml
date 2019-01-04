@@ -11,7 +11,18 @@
 		<result column="isshow" property="isshow" />
 	</resultMap>
 	<select id="selectBanner" resultMap="BannerMap">
-		select * from banner where type=#{type} and isshow=1
+		select * from banner where 1=1
+		<if test="type!=0">
+		and type=#{type} 
+		</if>
+		limit #{pageNo},#{pageSize}
+	</select>
+	<select id="selectBannerCount" resultType="int">
+		select count(id) from banner where 1=1
+		<if test="type!=0">
+		and type=#{type} 
+		</if>
+		and isshow=1
 	</select>
 	<insert id="saveBanner" parameterType="com.ola.qh.entity.Banner">
 		insert into banner(id,imageurl,type,out_links,isshow) values(#{id},#{imageurl},#{type},#{outLinks},#{isshow})
@@ -28,7 +39,7 @@
 		<if test="outLinks!=null">
 		out_links=#{outLinks},
 		</if>
-		<if test="isshow!=0">
+		<if test="isshow!=null">
 		isshow=#{isshow},
 		</if>
 		 id=#{id} where id=#{id}

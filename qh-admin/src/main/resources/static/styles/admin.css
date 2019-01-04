@@ -24,7 +24,7 @@ color:red;
 .select input{width: 180px;height: 40px;background:#EDEEF0;border-radius:20px;}
 .im-key{background: #E8474D;color: white;border-radius:20px;margin: 19px;}
 .manage{width: 100%;height:auto;padding-top:23px;background:white; position: relative;}
- .show li{float: left;margin-left: 18px;cursor: pointer;width: 130px;height: 36px;border-radius: 30px;color: white; text-align: center;line-height: 36px;font-size:16px;background:#8A959B;}
+ .show li{float: left;margin-left: 18px;cursor: pointer;width: 130px;height: 40px;border-radius: 30px;color: white; text-align: center;line-height: 40px;font-size:16px;background:#8A959B;}
 
 .admin-table{width:90%;height:auto;border: 1px solid #B1B1B1;margin:0 auto;border-radius:10px;overflow: hidden;}
 .admin-table ol li{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;float:left;width:11%;margin:0;}
@@ -79,6 +79,13 @@ color:red;
 .add-jie-radio span:nth-child(1){float: left;font-size:16px;}
 .add-jie-radio span:nth-child(2){float: right;font-size:16px;}
 .add-jie-right{width:400px;float: right;}
+
+/**/
+.select-2{width:160px;height: 90px;position: relative;}
+.select-2 span{display: block;margin-bottom: 10px;}
+.select-2 input{width: 160px;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em;}
+.select-2 img{position: absolute;right: 10px;bottom: 27px;}
+
 
 
 

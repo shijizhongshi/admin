@@ -7,6 +7,18 @@ public class Results<T> {
 	private T data;
 
 	private String message;
+	
+	private int count;
+	
+	
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public String getStatus() {
 		return status;
