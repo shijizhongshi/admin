@@ -10,7 +10,7 @@
                 <!-- logo -->
                 <div class="logo">
                     <a href="/" class="logo-expanded">
-                         <img src="/images/sjk-.png" width="80" alt=""/>
+                         <img src="/images/sjk-.png" width="100%" alt=""/>
                     </a>
                     <a href="/" class="logo-collapsed">
                         <img src="/assets/images/logo-collapsed@2x.png" width="40" alt=""/>
