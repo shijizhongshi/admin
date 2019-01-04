@@ -7,7 +7,7 @@
         <@sm.sidebarmenu activemenuid="${menu}" activesubmenuid="${submenu}"/>
         <div class="main-content">
             <!-- User Info, Notifications and Menu Bar -->
-            <nav class="navbar user-info-navbar" role="navigation" style="background-color:red">
+            <nav class="navbar user-info-navbar" role="navigation" style="background-color:#e9484d">
                 <!-- Left links for user info navbar -->
                 <ul class="user-info-menu left-links list-inline list-unstyled">
                     <li class="hidden-sm hidden-xs">

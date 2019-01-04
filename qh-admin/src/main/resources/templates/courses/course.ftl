@@ -10,16 +10,7 @@
 <script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
-<style type="text/css">
-.classify{width:100%; background:#FFFFFF;}
-.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
-.classify ul.menu .list a:hover{background:#7489A2;color:#FFFFFF;}
-.classify ul.menu .list a{color:black}
-*:after{color:#E5B70D;}
-*:before{color:#E5B70D;}
-.items{display:none;}
-.active{display:block;}
-</style>
+
 
 <div class="classify" ng-controller="CourseSubnavController">
 	<ul class="menu">
@@ -87,175 +78,32 @@
          <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
 	</ul>
 	<div class="admin-table">
-
-	<ol style="background: #CBD2D8;font-weight: bold;">
-		<li>课程名称</li>
-	<li >课程总数</li>
-	<li >课程价格</li>
-	<li>课程折扣</li>
-	<li>年份</li>
-	<li>课时数</li>
-	<li>是否显示</li>
-	<li>资源类别</li>
-	<li>章类别</li>
-	</ol>
+  <table>
+	<tr style="background: #CBD2D8;font-weight: bold;">
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >年份</th >
+	<th >课时数</th >
+	<th >是否显示</th >
+	<th >资源类别</th >
+	<th >章类别</th >
+	</tr>
  <for:each>
- <ol style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol>
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
-	
-	<ol >
-		<li class="col-md-2">章名称</li>
-	<li class="col-md-1">章总数</li>
-	<li class="col-md-1">课程价格</li>
-	<li  class="col-md-1">课程折扣</li>
-	<li class="col-md-1">年份</li>
-	<li  class="col-md-1">课时数</li>
-	<li  class="col-md-1">是否显示</li>
-	<li  class="col-md-1">资源类别</li>
-	<li  class="col-md-1">章类别</li>
-	</ol>
+ <tr style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
+		<th>课程名称</th>
+	<th >课程总数</th>
+	<th >课程价格</th >
+	<th >课程折扣</th >
+	<th >年份</th >
+	<th >课时数</th >
+	<th >是否显示</th >
+	<th >资源类别</th >
+	<th >章类别</th >
+	</tr>
+	</table>
+
 	</div>
 <div class="fanye">
 	<ul class="pagination">
@@ -282,7 +130,7 @@
 			</select>
 		</div>
 		<div class="select">
-			<img src="./images/sjk-xl.png"/>
+			<img src="/images/sjk-xl.png"/>
 			<select>
 				<option  disabled="disabled"  selected  style='display:none;'>专业类型</option>
 				<option></option>
