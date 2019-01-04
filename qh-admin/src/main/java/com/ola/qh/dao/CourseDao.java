@@ -17,7 +17,7 @@ public interface CourseDao {
 	
 	
 	
-	public List<CourseTypeSubclass> courseTypeSubclassList(String courseTypeId);
+	public List<CourseTypeSubclass> courseTypeSubclassList(@Param("courseTypeId") String courseTypeId);
 	
 	public int insertCourseTypeSubclass(@Param("courseTypeSubclassName")String courseTypeName,
 			@Param("id")String id,@Param("courseTypeId") String courseTypeId);

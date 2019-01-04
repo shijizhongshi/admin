@@ -8,8 +8,9 @@
 <script src="./scripts/admin.js"></script>
 <body>
 
-
+<#include "/layout/menu.ftl"/>
 <div class="details" id="details">
+<input type="hidden" value="${chapterId}" id="chapterId">
 	<div class="details-nav">
 		<ul>
 			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
