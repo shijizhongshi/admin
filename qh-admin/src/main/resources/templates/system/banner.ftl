@@ -1,4 +1,5 @@
 <#import "/layout/header.ftl" as h/>
+<#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +10,7 @@
 <style type="text/css">
 .selected{background-color:red}
 </style>
-<body ng-app="app">
- <#include "/layout/menu.ftl"/>
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
 <div class="details" ng-controller="bannerController">
 	<div class="details-nav">
 		<ul>
@@ -123,7 +123,7 @@
 			<div>图片:</div>
 			<input type="file" onchange="angular.element(this).scope().uploadmainimage(this)" />
 			<input type="hidden" ng-model="banner.imageurl" >
-			<img src="{{banner.imageurl}}" style="width:50px;height:30px;"/>
+			<img src="{{banner.imageurl}}" ng-show="{{banner.imageurl!=null}}" style="width:50px;height:30px;"/>
 	</div>
 		<div>
 		<div>是否显示:</div>
@@ -145,6 +145,6 @@
 
 </div>
 </div>
-</body>
+</@b.body>
  
  </html>

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Xenon Boostrap Admin Panel" />
         <meta name="author" content="" />
-        <title>${title!'中师网校管理系统'}</title>
+        <title>${title!'欧拉清货管理系统'}</title>
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
         <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
@@ -17,14 +17,11 @@
         <link rel="stylesheet" href="/assets/css/custom.css">
         <link rel="stylesheet" href="/assets/js/angular-bootstrap/ui-bootstrap-csp.css">
         <link rel="stylesheet" href="/styles/style.css">
-            
-        
          <!-- Imported styles on this page -->
 		<link rel="stylesheet" href="/assets/js/icheck/skins/all.css">
         <script src="/assets/js/jquery-1.11.1.min.js"></script>
         <script src="/assets/js/angular/angular.js"></script>
         <script src="/assets/js/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        
         <script src="/assets/js/angular-bootstrap/angular-locale_zh.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -50,14 +47,6 @@
         <script src="/assets/js/xenon-custom.js"></script>
         <script src="/assets/js/md5-min.js"></script>
         <script src="/scripts/layout/app.js"></script>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-
-<script type="text/javascript"  src="/assets/js/ueditor/ueditor.config.js"></script>
-
-<script type="text/javascript"  src="/assets/js/ueditor/ueditor.all.min.js"> </script>
-
-<script type="text/javascript"  src="/assets/js/ueditor/lang/zh-cn/zh-cn.js"></script>
-
-   <link rel="stylesheet" href="/styles/menu.css"> <!--主样式--> 
+        
     </head>
 </#macro>

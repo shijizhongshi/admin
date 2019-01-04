@@ -16,9 +16,8 @@
 	<ul class="menu">
    <li class="list"><a href="#">网课资源管理 </a> 
       <ul class="items">
-         <li><a href="/subnav.ftl" target="subnav"> 课程资源管理</a></li>
-         <li><a href="/subnav.ftl" target="subnav">课程章管理</a></li>
-         <li><a href="/subnav.ftl" target="subnav"> 课程节管理</a></li>
+         <li><a href="/web/course/subnav?type=1" target="subnav"> 课程资源管理</a></li>
+         <li><a href="/web/course/subnav?type=2" target="subnav">课程章管理</a></li>
       </ul>
    </li>
    <li class="list"><a href="#">公共资源管理</a> 

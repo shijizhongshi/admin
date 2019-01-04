@@ -8,7 +8,10 @@
 <script src="./scripts/admin.js"></script>
 <body>
 
+<#include "/courses/subnav.ftl"/>
 <div class="details">
+<input type="hidden" value="${courseTypeName}" id="courseTypeName"/>
+<input type="hidden" value="${courseSubTypeName}" id="courseSubTypeName"/>
 	<div class="details-nav">
 		<ul>
 			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
