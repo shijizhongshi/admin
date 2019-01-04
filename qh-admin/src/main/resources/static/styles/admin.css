@@ -1,7 +1,7 @@
 *{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;}
 a{text-decoration: none;color: black;}
 .classify{width:10%; background:#FFFFFF;float:left;}
-.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:18px;}
+.classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:15px;}
 
 .classify ul.menu .list a{color:black}
 .menu .list:after:after{color:#E5B70D;content: "\f107";font-family: FontAwesome;}

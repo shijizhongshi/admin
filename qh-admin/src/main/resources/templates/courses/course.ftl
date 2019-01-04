@@ -10,7 +10,7 @@
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
 <div ng-controller="CourseController">
-<div class="classify">
+<div class="classify" style="width:13%">
 	<ul class="menu">
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
@@ -46,7 +46,7 @@
       
       </ul>
       </div>
- <div class="details">
+ <div class="details" style="width:87%">
 	<div class="details-nav">
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
