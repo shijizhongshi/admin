@@ -15,8 +15,6 @@
 			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
 		<li>课程章节管理</li>
-
-		
 		</ul>
 	</div>
 <div class="details-frame" >
@@ -42,7 +40,7 @@
 	<div class="admin-table">
 
 <table>
-	<tr style="background: #CBD2D8;font-weight: bold;">
+	<tr>
 		<th>课程名称</th>
 	<th >课程总数</th>
 	<th >课程价格</th >
@@ -54,7 +52,7 @@
 	<th >章类别</th >
 	</tr>
  <for:each>
- <tr style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" >
+ <tr >
 		<th>课程名称</th>
 	<th >课程总数</th>
 	<th >课程价格</th >
@@ -81,7 +79,7 @@
 </div>
 
 	<!--弹窗-->
-		<div class="poop" id="add" style="width: 80%;height: 800px;position: absolute;left: 5%;top: 5%;">
+		<div class="poop" id="add" style="width: 80%;height: 600px;position: absolute;left: 5%;top: 5%;">
 		<form id="myform">
 	<h3>班级添加</h3>
 	<span style="margin-right:20px ;">已选专业类型:</span> <span>lin</span>
@@ -203,57 +201,42 @@
 		<form id="myform2">
 
 			</form>
+			<div class="end">
+			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset2()" class="esc" />
+		</div>
 		</div>
 <div class="resource" id="resource">
 	<h3>班级课程及赠送管理</h3>
-	<p>所属专业：临床执业助理医师</p>
-	<p>课程资源名：2018临床-基础课程</p>
-	<div style="width:700px;height: 340px;border-radius: 20px;overflow: hidden;border: 1px solid #B1B1B1;">
 	<form id="myform3">
-	<div class="resource-table">
-		<ul style="background: #CBD2D8;font-weight: bold;">
-			<li>章名称</li>
-			<li>主讲老师</li>
-			<li>小结数量</li>
-			<li>用途分类</li>
-			<li>是否显示</li>
-		</ul>
-		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
-		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input type="radio"> </li>
-		</ul>
-		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input type="radio"> </li>
-		</ul>
-		<ul>
-	<li>章节名称</li>	
-	<li>主讲老师</li>
-	<li>5</li>
-	<li>自用课程</li>
-	<li><input  type="radio"> </li>
-		</ul>
+	<div class="zengsong-left">
+	<p><span>所属专业：</span><span>临床执业助理医师</span></p>
+	<p><span>课程资源名：</span><span>2018临床-基础课程</span></p>
+	<p>班级课程</p>
+	<div class="admin-table">
+	<table>
+		<tr>
+			<th>课程名称</th>
+			<th>课程价格</th>
+			<th>是否显示</th>
+		</tr>
+		<tr>
+			<th>课程名称</th>
+			<th>课程价格</th>
+			<th>显示</th>
+			
+		</tr>
+	</table>
+	</div>
+	</div>
 	
-	</div>
 	</form>
-	</div>
 	<div class="end">
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv3();formReset3()" class="esc" />
 		</div>
+	</div>
+	
 </div>
 	
 </div>
@@ -263,12 +246,11 @@
 </div>
 </body>
  <style type="text/css">
-	.admin-table ol li{width: 9%;}
-	.admin-table ol li:nth-child(1){width: 10%;}
+	
 	.poop{overflow-y: scroll;}
-	.poop span{font-size: 2rem;}
+	.poop span{font-size: 1.5rem;}
 	.grade-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
-	.grade-left,.grade-center,.grade-right{width: 33%;float: left;height: 800px;}
+	.grade-left,.grade-center,.grade-right{width: 33%;float: left;height: 820px;overflow:auto;}
 	.grade-left ul{height: 50px;line-height: 50px; font-size: 2rem;}
 	.grade-left ul li{float: left;margin-right: 5px;}
 	.grade-left ul li:nth-child(1){margin-right: 10px;}

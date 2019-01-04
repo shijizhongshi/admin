@@ -1,19 +1,18 @@
 <#import "/layout/header.ftl" as h/>
+<#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="课程节管理"/>
-<link rel="stylesheet" href="./styles/admin.css" />
-<script src="./scripts/course.js"></script>
-<script src="./scripts/admin.js"></script>
-<body>
+<@h.header title="课程管理页面"/>
+<link rel="stylesheet" href="/styles/admin.css" />
+<script src="/scripts/course/course.js"></script>
+<script src="/scripts/admin.js"></script>
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
 
-<#include "/layout/menu.ftl"/>
 <div class="details" id="details">
-<input type="hidden" value="${chapterId}" id="chapterId">
 	<div class="details-nav">
 		<ul>
-			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
+			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
 		<li>课程章节管理</li>
 
@@ -358,6 +357,6 @@
         }
  
 </script>
-</body>
+</@b.body>
  
  </html>

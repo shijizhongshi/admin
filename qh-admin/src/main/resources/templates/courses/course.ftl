@@ -78,7 +78,7 @@
 	<div class="admin-table">
 
   <table>
-	<tr style="background: #CBD2D8;font-weight: bold;">
+	<tr>
 		<th>课程名称</th>
 	<th >课程总数</th>
 	<th >课程价格</th >
@@ -86,7 +86,7 @@
 	<th >是否显示</th >
 	</tr>
 
- <tr style="box-shadow:0px 1px 1px 0px #B1B1B1 inset;" ng-repeat="c in courselist">
+ <tr>
 	<th>{{c.courseName}}</th>
 	<th >{{c.courseChapterSize}}</th>
 	<th >{{c.coursePrice}}</th >
