@@ -51,8 +51,8 @@ color:red;
 .admin-table tr th{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;margin:0;}
 .admin-table table{width:100%;}
 .admin-table tr{width:100%;height: 42px;margin-bottom:0;}
-.admin-table tr:nth-child(2n){background:white;}
-.admin-table tr:nth-child(2n-1){background:#F0F1F3;}
+/* .admin-table tr:nth-child(2n){background:white;}
+.admin-table tr:nth-child(2n-1){background:#F0F1F3;} */
 
 .fanye{width:405px;margin: 0 auto;}
 .fanye ul{width:405px;}

@@ -96,5 +96,10 @@ public class CourseService implements ICourseService{
 			return 0;
 		}
 	}
+	@Override
+	public int deleteCourse(String id) {
+		// TODO Auto-generated method stub
+		return courseDao.deleteCourse(id);
+	}
 
 }

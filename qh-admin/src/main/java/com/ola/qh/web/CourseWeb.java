@@ -18,8 +18,12 @@ public class CourseWeb{
 		return "courses/course-jie";
 	}
 
+	//////修改章页面里边的参数~~
 	@RequestMapping(value="/chapter",method=RequestMethod.GET)
-	public String chapter(){
+	public String chapter(
+			@RequestParam(name="courseId")String courseId,
+			@RequestParam(name="courseTypeName")String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName){
 		return "courses/course-zhang";
 	}
 	

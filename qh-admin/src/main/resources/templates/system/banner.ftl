@@ -8,7 +8,7 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/system/banner.js"></script>
 <style type="text/css">
-.selected{background-color:red}
+.selected{background-color:#c1ddec}
 </style>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
 <div class="details" ng-controller="bannerController">

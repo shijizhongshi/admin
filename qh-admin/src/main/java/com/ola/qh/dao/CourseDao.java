@@ -25,7 +25,7 @@ public interface CourseDao {
 	public int updateCourseTypeSubclass(@Param("courseTypeSubclassName")String courseTypeName,
 			@Param("id")String id,@Param("courseTypeId") String courseTypeId);
 	
-	
+	public int deleteCourse(@Param("id")String id);
 	
 	public List<Course> courseList(Course course);
 	

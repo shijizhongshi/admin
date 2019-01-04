@@ -24,5 +24,7 @@ public interface ICourseService {
 	
 	public int insertUpdateCourse(Course course);
 	
+	public int deleteCourse(String id);
+	
 	
 }

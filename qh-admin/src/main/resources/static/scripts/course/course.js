@@ -47,6 +47,7 @@ app.controller("CourseController", function($scope, $http){
 	}
 	////////////////以上是通过不同的条件查课程的集合的	
 	$scope.course=null;
+	$scope.courseId=null;
 	$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
 	    var fd = new FormData();
@@ -61,7 +62,68 @@ app.controller("CourseController", function($scope, $http){
 		})
 	};
 	
+	$scope.addCourse=function(){
+		$scope.course.id=$scope.courseId;
+		$scope.course.courseTypeName=$scope.courseTypeName;
+	    $scope.course.courseTypeSubclassName=$scope.courseTypeSubclassName;
+		$http.post("/api/course/courseSaveUpdate",$scope.course,{'Content-Type': 'application/json;charset=UTF-8'})
+	    .success(function(data){
+	    	if(data.status=="0"){
+	    		if($scope.courseId!=null){
+	    			alert("更新成功~");
+	    		}else{
+	    			alert("保存成功~");
+	    		}
+	    		
+	    		document.getElementById('add').style.display="none"; 
+	    		$scope.courseBases();
+	    	}else{
+	    		alert(data.message)
+	    	}
+		})
+	};
+	///////做选中的时候用
+	$scope.checkedCourse=function(c){
+		$scope.selected=c;
+		$scope.course=c;
+		$scope.courseId=c.id;
+	}
+	////点击修改的按钮先看看是否已经选中了
+	$scope.updateCourse=function(){
+		if($scope.courseId!=null){
+			document.getElementById('add').style.display="block"; 
+		}else{
+			alert("请选中信息~");
+		}
+		
+	}
 	
+	$scope.deleteCourse=function(){
+		if($scope.courseId!=null){
+			////删除课程/
+			if(confirm("您确定要删出这个课程吗")){
+				$http.get("/api/course/deleteCourse",{"params": {"courseId":$scope.courseId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=='0'){
+						alert("删除成功~");
+						$scope.courseBases();
+					}else{
+						alert("删除失败~");
+					}
+				})
+			}
+			
+		}else{
+			alert("请选中信息~");
+		}
+	}
 	
+	$scope.chapter=function(){
+		if($scope.courseId!=null){
+			location.href="/web/course/chapter?courseId="+$scope.courseId+"&courseTypeName="+$scope.courseTypeName+"&courseTypeSubclassName="+$scope.courseTypeSubclassName;
+		}else{
+			alert("请选中信息~");
+		}
+	}
 
 });

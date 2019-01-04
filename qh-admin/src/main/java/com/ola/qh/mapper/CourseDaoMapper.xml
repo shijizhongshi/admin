@@ -161,6 +161,10 @@
 		update course set class_id='' where class_id=#{classId}
 		
 	</update>
+	
+	<delete id="deleteCourse">
+	delete from course where id=#{id}
+	</delete>
 	<!-- 课程的处理结束*************************************************** -->
 	
 	
