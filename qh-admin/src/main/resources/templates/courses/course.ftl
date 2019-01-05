@@ -1,9 +1,7 @@
 <#import "/layout/header.ftl" as h/>
 <#import "/layout/body.ftl" as b/>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/course.js"></script>
@@ -49,6 +47,7 @@
       
       </ul>
       </div>
+
  <div class="details" style="width:87%">
 	<div class="details-nav">
 		<ul>
@@ -92,12 +91,11 @@
 	</tr>
 
 
- <tr ng-repeat="c in courselist" ng-click="checkedCourse(c)" ng-class="{'selected':selected==c}>
+ <tr ng-repeat="c in courselist" ng-click="checkedCourse(c)" ng-class="{'selected':selected==c}">
 	<th>{{c.courseName}}</th>
 	<th >{{c.courseChapterSize}}</th>
 	<th >{{c.coursePrice}}</th >
 	<th >{{c.courseDiscountPrice}}</th >
-	
 	<th ng-show="{{c.courseShow==1}}">是</th >
 	<th ng-show="{{c.courseShow==0}}">否</th >
 	</tr>

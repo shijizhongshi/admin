@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
-<@b.body menu="sidebarmenu-audition" submenu="/web/course/audition">
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-audition">
 <div>
 <div class="classify">
 	<ul class="menu">

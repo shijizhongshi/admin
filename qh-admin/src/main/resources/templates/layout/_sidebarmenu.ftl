@@ -49,7 +49,12 @@
                             </a>
                         </li>
                        
-                        
+                        <li id="sidebarmenu-system-teacher">
+                            <a href="/web/system/teacher">
+                                <span class="title">教师管理</span>
+                            </a>
+                        </li>
+                       
                     </ul>
                 </li>
                 <li id="sidebarmenu-course" >
