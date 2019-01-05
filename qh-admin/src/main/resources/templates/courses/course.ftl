@@ -8,11 +8,9 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
-<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-course">
 <div ng-controller="CourseController">
-<style>
-.selected{background-color:#c1ddec}
-</style>
+
 <div class="classify" style="width:13%">
 	<ul class="menu">
 	
@@ -85,21 +83,21 @@
 	<tr>
 		<th>课程名称</th>
 
-	<th >课程总数</th>
-	<th >课程价格</th >
-	<th >课程折扣</th >
-	<th >是否显示</th >
+	<th>课程总数</th>
+	<th>课程价格</th>
+	<th>课程折扣</th>
+	<th>是否显示</th>
 	</tr>
 
 
- <tr ng-repeat="c in courselist" ng-click="checkedCourse(c)" ng-class="{'selected':selected==c}>
+ <tr ng-repeat="c in courselist" ng-click="checkedCourse(c)" ng-class="{'selected':selected==c}">
 	<th>{{c.courseName}}</th>
-	<th >{{c.courseChapterSize}}</th>
-	<th >{{c.coursePrice}}</th >
-	<th >{{c.courseDiscountPrice}}</th >
+	<th>{{c.courseChapterSize}}</th>
+	<th>{{c.coursePrice}}</th >
+	<th>{{c.courseDiscountPrice}}</th>
 	
-	<th ng-show="{{c.courseShow==1}}">是</th >
-	<th ng-show="{{c.courseShow==0}}">否</th >
+	<th ng-show="{{c.courseShow==1}}">是</th>
+	<th ng-show="{{c.courseShow==0}}">否</th>
 	</tr>
 	</table>
 	</div>

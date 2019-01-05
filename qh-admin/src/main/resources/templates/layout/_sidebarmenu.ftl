@@ -52,7 +52,7 @@
                         
                     </ul>
                 </li>
-                <li id="sidebarmenu-course" >
+                <li id="sidebarmenu-course">
                     <a>
                         <i class="linecons-cog"></i>
                         <span class="title">网课资源管理</span>
@@ -64,8 +64,13 @@
                             </a>
                         </li>
                         <li id="sidebarmenu-course-chapter">
-                            <a href="/web/course/subnav?type=2">
+                            <a href="/web/course/chapter?typeId=&courseId=" >
                                 <span class="title">课程章管理</span>
+                            </a>
+                        </li>
+                        <li id="sidebarmenu-course-grade">
+                            <a href="/web/course/grade">
+                                <span class="title">班级管理</span>
                             </a>
                         </li>
                         

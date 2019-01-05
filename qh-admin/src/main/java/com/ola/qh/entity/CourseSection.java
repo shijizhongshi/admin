@@ -21,7 +21,7 @@ public class CourseSection {
 	@NotEmpty(message="节的名称不能为空")
 	private String sectionName;
 	
-	private int isshow;
+	private String isshow;
 	@NotEmpty(message="视频连接不能为空")
 	private String aliyunId;
 	
@@ -45,11 +45,12 @@ public class CourseSection {
 		this.sectionName = sectionName;
 	}
 
-	public int getIsshow() {
+	
+	public String getIsshow() {
 		return isshow;
 	}
 
-	public void setIsshow(int isshow) {
+	public void setIsshow(String isshow) {
 		this.isshow = isshow;
 	}
 
