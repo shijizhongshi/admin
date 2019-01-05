@@ -39,4 +39,8 @@ public class CourseWeb{
 	public String gradetemplate(){
 		return "courses/grade-template";
 	}
+	@RequestMapping(value="/audition",method=RequestMethod.GET)
+	public String audition(){
+		return "courses/audition";
+	}
 }
