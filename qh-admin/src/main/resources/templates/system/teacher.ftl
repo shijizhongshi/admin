@@ -93,7 +93,33 @@
     <div style="height:130px;width:35%;border: solid 1px #B1B1B1;margin-top:3px;">
     <img  /></div>
         </div>
-<p>讲授课程</p>
+<b style="margin: 5px 0;font-size: 1.5rem;">讲授课程</b>
+<!--医师药师复选框-->
+<div class="xuanzekuang"> 
+		<dl> 
+			<dt  onclick="showHide(this,'items0');"><span></span>医师资格</dt> 
+			<dd id="items0"> 
+				<ul>
+					
+					<li><span><input type="checkbox" name="yishi"/></span>临床（执业）助理医师</li>
+					<li><span><input type="checkbox" name="yishi"/></span>中医（执业）助理医师</li>
+					<li><span><input type="checkbox" name="yishi"/></span>中西医（执业）助理医师</li>
+					<li><span><input type="checkbox" name="yishi"/></span>乡村全科助理医师</li>
+					<li><span><input type="checkbox" name="yishi"/></span>中医专长医师</li>
+				</ul>
+			</dd> 
+		</dl> 
+	
+		<dl> 
+			<dt  onclick="showHide(this,'items1');">药师资格</dt> 
+			<dd id="items1" style="display:none;"> 
+				<ul>
+					
+					<li><span><input type="checkbox" name="yaoshi"/></span>执业中药师</li>
+				</ul> 
+			</dd> 
+		</dl>
+	</div>
 
 
 
@@ -142,44 +168,50 @@
 
 </div>
 
-</body>
+<script type="text/javascript">
+function getObject(objectId){
+	if(document.getElementById && document.getElementById(objectId)){
+		return document.getElementById(objectId);
+	}else if(document.all && document.all(objectId)){
+		return document.all(objectId);
+	}else if(document.layers && document.layers[objectId]){
+		return document.layers[objectId];
+	}else{
+		return false;
+	}
+}
+
+function showHide(e,objname){
+	var obj = getObject(objname);
+	if(obj.style.display == "none"){
+		obj.style.display = "block";
+		e.className="minus";
+	}else{
+		obj.style.display = "none";
+		e.className="plus";
+	}
+}
+</script>
  <style type="text/css">
 	
 		.poop{overflow-y: scroll;}
 	.poop span{font-size: 1.5rem;}
 	.template-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
 	.template-left,.template-right{width: 50%;float: left;height: 600px;overflow:auto;}
-	.template-left ul{height: 50px;line-height: 50px; font-size: 2rem;}
-	.template-left ul li{float: left;margin-right: 5px;}
-	.template-left ul li:nth-child(1){margin-right: 10px;}
 	.template-right .grade-text{width: 80%;}
 	.template-right .grade-text textarea{width: 100%;height: 110px;font-size:1.5rem}
-    position:relative;
+    position:relative;}
+div.costs-uploadfile-div #textfield{width:40%; height:30px;}
+div.costs-uploadfile-div #fileField{width:100%;height:30px;     position: absolute; top: 0; left:0;  filter: alpha(opacity:0);opacity: 0;}
+div.costs-uploadfile-div .allBtn{ padding:0; margin:0; height: 30px;  line-height: 30px;   width: 35%;  background-color: #18b3cf; border: none;  color: #fff;}
+.xuanzekuang{width:60%;height: auto;text-align: center;}
+.xuanzekuang dt , .xuanzekuang ul li{font-size: 1.0em;height: 30px;text-align: 30px;width: 100%; cursor: pointer;;}
+.xuanzekuang ul li{font-size:1.2rem ;}
+.xuanzekuang input {
+	text-align：left;
+	width: 15px;height: 15px;
 }
-div.costs-uploadfile-div #textfield{
-    width:40%;
-    height:30px;    
-}
-div.costs-uploadfile-div #fileField{
-    width:100%;
-    height:30px;    
-    position: absolute;
-    top: 0;
-    left:0;
-    filter: alpha(opacity:0);
-    opacity: 0;
-}
-div.costs-uploadfile-div .allBtn{
-    padding:0;
-    margin:0;
-    height: 30px;
-    line-height: 30px;
-    width: 35%;
-    background-color: #18b3cf;
-    border: none;
-    color: #fff;
-    }
-	
+.xuanzekuang span{height: 30px;float: left;}
 </style>
 </@b.body>
  </html>
