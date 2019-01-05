@@ -107,7 +107,7 @@ color:red;
 .select-2{width:48%;height: 90px;position: relative;}
 .select-2 span , .grade-text span , .grade-right span , .grade-add-bottom{display: block;margin-bottom: 10px;}
 .select-2 input , .grade-text textarea {width:100%;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em; font-size:1.5rem}
-.select-2 img{position: absolute;right: 10px;bottom: 27px;}
+.select-2 img{position: absolute;right: 10px;bottom: 33px;}
 
 
 
