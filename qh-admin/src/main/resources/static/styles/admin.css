@@ -43,20 +43,18 @@ select[disabled]{
 color:red;
 }
 .select input{width: 180px;height: 40px;background:#EDEEF0;border-radius:20px;}
-.im-key{background: #E8474D;color: white;border-radius:20px;margin: 19px;}
+.im-key{background: #E8474D;color: white;border-radius:20px;margin: 30px;}
 .manage{width: 100%;height:auto;padding-top:23px;background:white; position: relative;}
  .show li{float: left;margin-left: 18px;cursor: pointer;width: 130px;height: 40px;border-radius: 30px;color: white; text-align: center;line-height: 40px;font-size:16px;background:#8A959B;}
 
 .admin-table{width:90%;height:auto;border: 1px solid #B1B1B1;margin:0 auto;border-radius:10px;overflow: hidden;}
 .admin-table table tr th{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;margin:0;}
-.admin-table table{width:100%;}
-
-.admin-table tr{width:100%;height: 42px;margin-bottom:0;}
- .admin-table table tr{width:100%;height: 42px;margin-bottom:0;}
+.admin-table table{width:100%;border-collapse:collapse;}
+ .admin-table table tr{width:100%;height: 42px;margin-bottom:0;border-bottom:1px solid ##dbdbdb;}
 
 .admin-table table tr:nth-child(1){background: #CBD2D8;font-weight: bold;}
 .admin-table table tr::nth-child(2){box-shadow:0px 1px 1px 0px #B1B1B1 inset;" ng-repeat="c in courselist}
-
+table .selected{background-color:#c1ddec}
 .fanye{width:405px;margin: 0 auto;}
 .fanye ul{width:405px;}
 .fanye  li{margin-left:18px;}
@@ -105,12 +103,13 @@ color:red;
 .add-jie-right{width:400px;float: right;}
 
 /**/
-.select-2{width:48%;height: 90px;position: relative;}
-.select-2 span , .grade-text span , .grade-right span , .grade-add-bottom{display: block;margin-bottom: 10px;}
-.select-2 input , .grade-text textarea {width:100%;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em; font-size:1.5rem}
-.select-2 img{position: absolute;right: 10px;bottom: 27px;}
-
-
-
-
+.select-2 , .select-3 {width:48%;height: 90px;position: relative;}
+.select-2 span  , .select-3 span , .grade-text span , .grade-right span , .grade-add-bottom {display: block;margin-bottom: 10px;}
+.select-2 input , .grade-text textarea{width:100%;height: 40px;background:#EDEEF0;border-radius:20px;text-indent: 2em; font-size:1.5rem}
+.select-2 img , .select-3 img{position: absolute;right: 10px;bottom: 33px;}
+.select-radio{height:50px;}
+.select-radio ul{height: 50px;line-height: 50px; font-size: 2rem;}
+.select-radio ul li{float: left;margin:0 5px;}
+.select-radio ul li input{width:15px;height:15px;}
+.select-3 {width:15%;float:left;}
 
