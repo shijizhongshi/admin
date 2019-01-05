@@ -16,10 +16,7 @@ public class UserWeb {
 		return "questionBank";
 	}
 	
-	@RequestMapping(value="/grade",method=RequestMethod.GET)
-	public String UserWebgrade(){
-		return "courses/grade";
-	}
+
 	@RequestMapping(value="/web/login",method=RequestMethod.GET)
 	public String UserWebload(){
 		return "login";

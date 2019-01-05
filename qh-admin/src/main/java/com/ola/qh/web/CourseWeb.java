@@ -27,4 +27,8 @@ public class CourseWeb{
 	public String courses(){
 		return "courses/course";
 	}
+	@RequestMapping(value="/grade",method=RequestMethod.GET)
+	public String grade(){
+		return "courses/grade";
+	}
 }

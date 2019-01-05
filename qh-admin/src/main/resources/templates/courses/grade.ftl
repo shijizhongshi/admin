@@ -1,18 +1,53 @@
 <#import "/layout/header.ftl" as h/>
+<#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="班级管理"/>
-<link rel="stylesheet" href="./styles/admin.css" />
-<script src="./scripts/course.js"></script>
-<script src="./scripts/admin.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<body>
-
+<@h.header title="课程管理页面"/>
+<link rel="stylesheet" href="/styles/admin.css" />
+<script src="/scripts/course/course.js"></script>
+<script src="/scripts/admin.js"></script>
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
+<div class="classify">
+	<ul class="menu">
+	
+   <li class="list" ng-click="typeList(1)" >医师资格 
+      <ul class="items" ng-class="{'active':active==1}">
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+   </li>
+   <li class="list" ng-click="typeList(2)">药师资格
+      <ul class="items" ng-class="{'active':active==2}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+      </li>
+       <li class="list" ng-click="typeList(3)">中医基础理论
+      <ul class="items" ng-class="{'active':active==3}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
+       <li class="list" ng-click="typeList(4)">卫生资格 
+      <ul class="items" ng-class="{'active':active==4}">
+        <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        
+      </ul>
+      </li>
+      <li class="list"><a href="#">健康管理师</a> 
+      <ul class="items" ng-class="{'active':active==5}">
+         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
+      
+      
+      
+      </ul>
+      </div>
 <div class="details">
 	<div class="details-nav">
 		<ul>
-			<li><img src="./images/sjk-home.png" style="color: red;"/>我的主页</li>
+			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
 		<li>课程章节管理</li>
 		</ul>
@@ -35,7 +70,7 @@
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
 		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>
-         <li style="float: right;margin-right: 100px;background:none;"><img src="./images/sjk-f5.png" name="changyi"/></li>
+         <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
 	</ul>
 	<div class="admin-table">
 
@@ -197,16 +232,7 @@
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
 		</div>
 	</div>
-		<div class="poop-revise" id="revise"  >
-		<form id="myform2">
-
-			</form>
-			<div class="end">
-			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv2();formReset2()" class="esc" />
-		</div>
-		</div>
-<div class="resource" id="resource">
+ <!-- <div class="resource" id="resource">
 	<h3>班级课程及赠送管理</h3>
 	<form id="myform3">
 	<div class="zengsong-left">
@@ -235,15 +261,15 @@
 			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv3();formReset3()" class="esc" />
 		</div>
+		
 	</div>
-	
+	-->
 </div>
 	
 </div>
 
 </div>
 
-</div>
 </body>
  <style type="text/css">
 	
@@ -288,5 +314,5 @@ div.costs-uploadfile-div .allBtn{
     }
 	
 </style>
-
+</@b.body>
  </html>
