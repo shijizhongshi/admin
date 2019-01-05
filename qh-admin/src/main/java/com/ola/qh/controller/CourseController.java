@@ -188,6 +188,19 @@ public class CourseController {
 
 	}
 	
+	@RequestMapping("/deleteCourse")
+	public Results<String> deleteCourse(@RequestParam(name="courseId",required=true)String courseId){
+		Results<String> result=new Results<String>();
+		int num = courseService.deleteCourse(courseId);
+		if(num>0){
+			result.setStatus("0");
+			return result;
+		}
+		result.setStatus("1");
+		result.setMessage("操作失败");
+		return result;
+
+	}
 	
 
 }

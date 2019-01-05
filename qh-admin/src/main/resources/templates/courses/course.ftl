@@ -10,6 +10,9 @@
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
 <div ng-controller="CourseController">
+<style>
+.selected{background-color:#c1ddec}
+</style>
 <div class="classify" style="width:13%">
 	<ul class="menu">
 	
@@ -68,25 +71,28 @@
 	<ul style="height: 80px;" class="show">
 
 			<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加课程</li>
-		<li onclick="showDiv2()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改课程</li>
-		<li  style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除课程</li>
+		<li ng-click="updateCourse()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改课程</li>
+		<li ng-click="deleteCourse()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除课程</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
-		<li  onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;资源章节管理</li>
+		<li  ng-click="chapter()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;资源章节管理</li>
          <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
 	</ul>
 	<div class="admin-table">
 
   <table>
+
 	<tr>
 		<th>课程名称</th>
+
 	<th >课程总数</th>
 	<th >课程价格</th >
 	<th >课程折扣</th >
 	<th >是否显示</th >
 	</tr>
 
- <tr>
+
+ <tr ng-repeat="c in courselist" ng-click="checkedCourse(c)" ng-class="{'selected':selected==c}>
 	<th>{{c.courseName}}</th>
 	<th >{{c.courseChapterSize}}</th>
 	<th >{{c.coursePrice}}</th >
@@ -117,7 +123,7 @@
 			<input type="text" ng-model="course.courseName" placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
 			<input type="file" value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" style="float: right;width:122px;"/>
 			<input type="hidden" ng-model="course.courseImg"/>
-			<img src="{{course.courseImg}}" ng-show="{{course.courseImg!=null}}">
+			<img src="{{course.courseImg}}" ng-show="{{course.courseImg!=null}}" />
 
 		</div>
 		<div class="centre-border">
@@ -171,7 +177,8 @@
 			</select>
 		</div>
 		<div class="end">
-			<input name="git" type="submit" value="提交" ng-click="addCourse()" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" value="提交" ng-show="{{courseId==null}}" ng-click="addCourse()" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" value="修改" ng-show="{{courseId!=null}}" ng-click="addCourse()" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
 		</div>
 		</form>
