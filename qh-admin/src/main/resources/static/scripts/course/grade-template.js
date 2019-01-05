@@ -21,11 +21,46 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	}
 	$scope.courseBases();
 	
-	$scope.courseSub=function(typename,sub){
-			////////查模板的集合
-		$scope.templateName=null;
-		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
-		$scope.courseBases();
-			
+	$scope.classUrl=null;
+	$scope.id=null;
+	
+	$scope.tests=function(){
+	alert("1111");
+}
+
+	
+	
+	$scope.uploadmainimage = function(file){
+		
+		
+		if(!file.files || file.files.length < 1) return;
+
+		
+	    var fd = new FormData();
+	    fd.append("file", file.files[0]);
+		$http.post("/api/upload/single",fd,{
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	        
+	    })
+	    .success(function(data){
+	    	$scope.classUrl=data.data;
+	    	
+		})
+	};
+	
+	$scope.addTemplate=function(){
+		$scope.courseClassTemplate.className="iiii";
+		$http.post("/api/classtemplate/save",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
+	    .success(function(data){
+	    	if(data.status=="0"){
+	    		
+	    			alert("保存成功~");
+	    		
+	    	}else{
+	    		alert("保存失败~");
+	    	}
+	    })
 	}
 });
