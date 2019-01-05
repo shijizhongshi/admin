@@ -68,6 +68,16 @@
                                 <span class="title">课程章管理</span>
                             </a>
                         </li>
+                         <li id="sidebarmenu-grade-template">
+                            <a href="/web/course/grade-template">
+                                <span class="title">班级模板</span>
+                            </a>
+                        </li>
+                         <li id="sidebarmenu-audition">
+                            <a href="/web/course/audition">
+                                <span class="title">试听课程</span>
+                            </a>
+                        </li>
                         
                     </ul>
                 </li>
