@@ -181,7 +181,7 @@
 				 <input type="file" name="file" id="fileField"  onchange="document.getElementById('textfield').value=this.value"  accept="image/*" /> 
     <input type='text' id="textfield" style="border: solid 1px #B1B1B1;" /> 
     <button class="allBtn costs-marl15">班级图片</button>
-    <div style="height:130px;width:45%;border: solid 1px #B1B1B1;margin-top:3px;">
+    <div style="height:130px;width:40%;border: solid 1px #B1B1B1;margin-top:3px;">
     <img  /></div>
         </div>
 
