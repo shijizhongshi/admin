@@ -5,10 +5,10 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/course/course.js"></script>
+<script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
-<@b.body menu="sidebarmenu-grade-template" submenu="/web/course/grade-template">
-
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-grade-template">
+<div ng-controller="CourseClassTemplateController">
 <div class="details" style="width: 100%">
 	<div class="details-nav">
 		<ul>
@@ -43,28 +43,29 @@
 	<th >课程折扣价</th >
 
 	</tr>
- <for:each>
- <tr >
-			<th>模板名称</th>
-	<th >班级名称</th >
-	<th >班级价格</th >
-	<th >课程折扣价</th >
+ 
+ <tr ng-repeat="t in templatelist" >
+			<th>{{t.templateName}}</th>
+	<th >{{t.className}}</th >
+	<th >{{t.classPrice}}</th >
+	<th >{{t.classDiscountPrice}}</th >
 
 	</tr>
 	</table>
 
 	</div>
-<div class="fanye">
-	<ul class="pagination">
-		<li ><a href="#">&laquo;</a></li>
-		<li class="active"><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">&raquo;</a></li>
-	</ul>
-</div>
+
+	 <div class="col-sm-6">
+                        <ul uib-pagination boundary-links="true"
+                            total-items="total" ng-model="page"
+                            items-per-page="pageSize"
+                            max-size="5"
+                            class="pagination-sm" previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
+                        </ul>
+        </div>
+
 
 	<!--弹窗-->
 		<div class="poop" id="add" style="width:60%;height: 600px;position: absolute;left: 15%;top: 5%;">
