@@ -22,13 +22,6 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	$scope.courseBases();
 	
 	$scope.classUrl=null;
-	$scope.id=null;
-	
-	$scope.tests=function(){
-	alert("1111");
-}
-
-	
 	
 	$scope.uploadmainimage = function(file){
 		
@@ -51,7 +44,6 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	};
 	
 	$scope.addTemplate=function(){
-		$scope.courseClassTemplate.className="iiii";
 		$http.post("/api/classtemplate/save",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){

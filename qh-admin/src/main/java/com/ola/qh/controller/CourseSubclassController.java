@@ -39,17 +39,17 @@ public class CourseSubclassController {
 	 * @return
 	 */
 	@RequestMapping("/courseChapterList")
-	public Results<List<CourseChapter>> ListCourseChapter(@RequestParam(name="courseId",required=false)String courseId,@RequestParam(name="page",required=false)int page){
+	public Results<List<CourseChapter>> ListCourseChapter(
+			@RequestParam(name="courseId",required=false)String courseId,
+			@RequestParam(name="pageNo",required=true)int pageNo,
+			@RequestParam(name="pageSize",required=true)int pageSize,
+			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName){
 		
 		Results<List<CourseChapter>> result = new Results<List<CourseChapter>>();
-		int pageNo=(page-1)*Patterns.pageSize;
-		int pageSize;
-		if(page==0){
-			pageSize=0;
-		}else{
-			pageSize=Patterns.pageSize;
-		}
-		result.setData(courseSubclassService.courseChapterList(courseId,pageNo,pageSize));
+		
+		result.setData(courseSubclassService.courseChapterList(courseId,pageNo,pageSize,courseTypeName,courseTypeSubclassName));
+		result.setCount(courseSubclassService.courseChapterListCount(courseId, courseTypeName, courseTypeSubclassName));
 		result.setStatus("0");
 		return result;
 	}
@@ -76,6 +76,19 @@ public class CourseSubclassController {
 		 return  courseSubclassService.courseChapterSaveUpdate(ccp);
 	}
 	
+	@RequestMapping("/courseChapter/delete")
+	public Results<String> chapterdelete(@RequestParam("chapterId")String chapterId){
+		 Results<String> result = new  Results<String>();
+		 int num = courseSubclassService.deleteChapter(chapterId);
+		 if(num>0){
+			 result.setStatus("0");
+			 return result;
+		 }
+		 result.setStatus("1");
+		 result.setMessage("删除失败");
+		 return result;
+	}
+	
 	/**
 	 * 通过章的id查出对应的节的列表
 	 * <p>Title: listCourseSection</p>  
@@ -84,17 +97,16 @@ public class CourseSubclassController {
 	 * @return
 	 */
 	@RequestMapping("/courseSectionList")
-	public Results<List<CourseSection>> listCourseSection(@RequestParam(name="courseChapterId",required=true)String courseChapterId,@RequestParam(name="page",required=false,defaultValue="0")int page){
+	public Results<List<CourseSection>> listCourseSection(@RequestParam(name="courseChapterId",required=true)String courseChapterId,@RequestParam(name="page",required=false)int page){
 		
 		Results<List<CourseSection>> result = new Results<List<CourseSection>>();
 		int pageNo=(page-1)*Patterns.pageSize;
 		int pageSize;
-		if(page==0){
-			pageSize=0;
-		}else{
+		
 			pageSize=Patterns.pageSize;
-		}
+		
 		result.setData(courseSubclassService.courseSectionList(courseChapterId,pageNo,pageSize));
+		result.setCount(courseSubclassService.courseSectionListCount(courseChapterId));
 		result.setStatus("0");
 		return result;
 	}
@@ -119,5 +131,18 @@ public class CourseSubclassController {
 			 }
 		 }
 		 return  courseSubclassService.courseSectionSaveUpdate(cs);
+	}
+	
+	@RequestMapping("/section/delete")
+	public Results<String> sectiondelete(@RequestParam("sectionId")String sectionId){
+		 Results<String> result = new  Results<String>();
+		 int num = courseSubclassService.deleteSerction(sectionId);
+		 if(num>0){
+			 result.setStatus("0");
+			 return result;
+		 }
+		 result.setStatus("1");
+		 result.setMessage("删除失败");
+		 return result;
 	}
 }

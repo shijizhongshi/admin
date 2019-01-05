@@ -27,7 +27,9 @@ public class CourseChapter {
 	private String courseTypeSubclassName;///课程子类别的名称
 	@NotEmpty(message="主讲人不能为空")
 	private String courseLecturer;////课程的主讲人
-	@NotEmpty(message="章类别不能为空")
+	
+	private String courseSectionSize;////小节数量
+	
 	private String courseChapterCategory;////课程的章类别
 	
 	private int ispay;////1:付费的章节  0:免费的章节
@@ -35,6 +37,24 @@ public class CourseChapter {
 	private Date addtime;
 	
 	private Date updatetime;
+	
+	
+
+	public String getCourseSectionSize() {
+		return courseSectionSize;
+	}
+
+	public void setCourseSectionSize(String courseSectionSize) {
+		this.courseSectionSize = courseSectionSize;
+	}
+
+	public int getIspay() {
+		return ispay;
+	}
+
+	public void setIspay(int ispay) {
+		this.ispay = ispay;
+	}
 
 	public String getId() {
 		return id;

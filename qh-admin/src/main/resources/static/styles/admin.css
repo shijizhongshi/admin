@@ -35,6 +35,7 @@ select{padding-left:18px ;width:100%;height: 40px;background:#EDEEF0;border-radi
 select[disabled='disabled']::-webkit-value {
 color:red;
 }
+.selected{background-color:#c1ddec}
 select[selected]::-webkit-value {
 color:red;
 }

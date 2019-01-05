@@ -19,9 +19,9 @@ public class CourseSubclassService implements ICourseSubclassService{
 	private CourseSubclassDao courseSubclassDao;
 	
 	@Override
-	public List<CourseChapter> courseChapterList(String courseId,int pageNo,int pageSize) {
+	public List<CourseChapter> courseChapterList(String courseId,int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName) {
 		// TODO Auto-generated method stub
-		return courseSubclassDao.courseChapterList(courseId,pageNo,pageSize);
+		return courseSubclassDao.courseChapterList(courseId,pageNo,pageSize,courseTypeName,courseTypeSubclassName);
 	}
 
 	@Override
@@ -87,6 +87,31 @@ public class CourseSubclassService implements ICourseSubclassService{
 		result.setStatus("1");
 		result.setMessage("保存失败");
 		return result;
+	}
+
+	@Override
+	public int courseChapterListCount(String courseId, String courseTypeName,
+			String courseTypeSubclassName) {
+		// TODO Auto-generated method stub
+		return courseSubclassDao.courseChapterListCount(courseId, courseTypeName, courseTypeSubclassName);
+	}
+
+	@Override
+	public int deleteChapter(String id) {
+		// TODO Auto-generated method stub
+		return courseSubclassDao.deleteChapter(id);
+	}
+
+	@Override
+	public int courseSectionListCount(String courseChapterId) {
+		// TODO Auto-generated method stub
+		return courseSubclassDao.courseSectionListCount(courseChapterId);
+	}
+
+	@Override
+	public int deleteSerction(String id) {
+		// TODO Auto-generated method stub
+		return courseSubclassDao.deleteSerction(id);
 	}
 	
 }

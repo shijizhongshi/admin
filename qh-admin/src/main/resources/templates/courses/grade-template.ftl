@@ -8,8 +8,8 @@
 <script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-grade-template" submenu="/web/course/grade-template">
-
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-grade-template">
+<div ng-controller="CourseClassTemplateController">
 <div class="details" style="width: 100%">
 	<div class="details-nav">
 		<ul>
@@ -243,6 +243,7 @@ div.costs-uploadfile-div .allBtn {
 	color: #fff;
 }
 </style>
-</@b.body>  
+</@b.body>
+</div>  
 </div>
 </html>
