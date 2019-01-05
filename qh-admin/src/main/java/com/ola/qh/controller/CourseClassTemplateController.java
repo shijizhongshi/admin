@@ -38,13 +38,7 @@ public class CourseClassTemplateController {
 		
 		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(templateName, pageNo, pageSize);
 		
-		if(list==null || list.size()==0){
-			
-			results.setMessage("信息不存在");
-			results.setStatus("1");
-			return results;
-			
-		}
+		
 		results.setData(list);
 		results.setStatus("0");
 		return results;
