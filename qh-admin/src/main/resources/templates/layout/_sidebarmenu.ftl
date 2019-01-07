@@ -78,7 +78,7 @@
                         <li id="sidebarmenu-course-grade">
                             <a href="/web/course/grade">
                                 <span class="title">班级管理</span>
-
+                             </a>
  						</li>
                          <li id="sidebarmenu-grade-template">
                             <a href="/web/course/grade-template">
