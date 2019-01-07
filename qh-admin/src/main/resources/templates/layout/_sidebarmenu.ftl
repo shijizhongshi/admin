@@ -54,7 +54,11 @@
                                 <span class="title">咨询/话题&nbsp;管理</span>
                             </a>
                         </li>
-                       
+                        <li id="sidebarmenu-system-zhuanti">
+                            <a href="/web/system/zhuanti">
+                                <span class="title">专题活动</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li id="sidebarmenu-course">

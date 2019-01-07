@@ -9,6 +9,7 @@
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-teacher">
 
+<div>
 <div class="details" style="width: 100%;">
 	<div class="details-nav">
 		<ul>
@@ -129,19 +130,19 @@
 		
 		<div class="template-right">
 			<div  class="grade-text">
-				<span>适宜人群</span>
+				<span>获奖状况</span>
 			    <textarea></textarea>
 			</div>
 			<div  class="grade-text">
-				<span>班级承诺</span>
+				<span>讲课特点</span>
 		    <textarea></textarea>
 			</div>
 			<div  class="grade-text">
-				<span>班级特色</span>
+				<span>老师描述</span>
 		    <textarea></textarea>
 			</div>
 			<div  class="grade-text">
-				<span>班级介绍</span>
+				<span>详细介绍</span>
 				    <textarea></textarea>
 			</div>
 		</div>
@@ -167,7 +168,9 @@
 </div>
 
 </div>
-
+</div>
+</div>
+</div>
 <script type="text/javascript">
 
 function getObject(objectId){
