@@ -24,8 +24,8 @@
 	<select id="selectCourseClassTemplate" resultMap="CourseClassTemplateMap">
 		select <include refid="sql_classtemplate"></include> from course_class_template 
 		<where>
-		<if test="templateName!=null">
-		template_name=#{templateName}
+		<if test="id!=null">
+		id=#{id}
 		</if>
 		</where>
 		order by addtime ASC 
@@ -81,12 +81,12 @@
 			detail=#{detail},
 		</if>
 		
-		updatetime=#{updatetime} where template_name=#{templateName}
+		updatetime=#{updatetime} where id=#{id}
 		
 	</update>
 	
 	<delete id="deleteCourseClassTemplate">
-		delete from course_class_template where template_name=#{templateName}
+		delete from course_class_template where id=#{id}
 	</delete>
 	
 </mapper>

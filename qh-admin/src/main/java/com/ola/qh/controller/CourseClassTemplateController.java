@@ -27,7 +27,7 @@ public class CourseClassTemplateController {
 	private ICourseClassTemplateService courseClassTemplateService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<CourseClassTemplate>> selectCourseClassTemplate(@RequestParam(name="templateName",required=false)String templateName,
+	public Results<List<CourseClassTemplate>> selectCourseClassTemplate(@RequestParam(name="id",required=false)String id,
 			@RequestParam(name="page",required=true)int page){
 		
 		Results<List<CourseClassTemplate>> results=new Results<List<CourseClassTemplate>>();
@@ -39,7 +39,7 @@ public class CourseClassTemplateController {
 		}
 		
 		
-		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(templateName, pageNo, pageSize);
+		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id, pageNo, pageSize);
 		
 		
 		results.setData(list);
@@ -88,11 +88,11 @@ public class CourseClassTemplateController {
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.GET)
-	public Results<String> deleteCourseClassTemplate(@RequestParam(name="templateName",required=true)String templateName){
+	public Results<String> deleteCourseClassTemplate(@RequestParam(name="id",required=true)String id){
 		
 		Results<String> results=new Results<String>();
 		
-		int delete=courseClassTemplateService.deleteCourseClassTemplate(templateName);
+		int delete=courseClassTemplateService.deleteCourseClassTemplate(id);
 		
 		if(delete==0){
 			results.setStatus("1");

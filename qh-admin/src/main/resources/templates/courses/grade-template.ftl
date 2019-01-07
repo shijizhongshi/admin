@@ -32,11 +32,11 @@
 					<li onclick="showDiv()"
 						style="margin-left: 70px; background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加模板</li>
-					<li onclick="showDiv2()" style="background: #F9CD33;"><span
+					<li ng-click="update()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改模板</li>
-					<li style="background: #F86846;"><span
+					<li ng-click="deletetemplate()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除模板</li>
-					<li style="float: right; margin-right: 100px; background: none;"><img
+					<li ng-click="refresh()" style="float: right; margin-right: 100px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
 				</ul>
 				<div class="admin-table">
@@ -50,7 +50,7 @@
 
 						</tr>
 
-						<tr ng-repeat="t in templatelist">
+						<tr ng-repeat="t in templatelist" ng-click="checkedtemplate(t)" ng-class="{'selected':selected==t}">
 							<th>{{t.templateName}}</th>
 							<th>{{t.className}}</th>
 							<th>{{t.classPrice}}</th>
@@ -106,7 +106,7 @@
 										onchange="angular.element(this).scope().uploadmainimage(this)" />
 									<input type="hidden" ng-model="courseClassTemplate.classUrl"
 										id="textfield" style="border: solid 1px #B1B1B1;" />
-									<button class="allBtn costs-marl15">班级图片</button>
+									
 									<div
 										style="height: 130px; width: 40%; border: solid 1px #B1B1B1; margin-top: 3px;">
 										<img ng-src="{{classUrl}}" />
@@ -142,8 +142,12 @@
 					</form>
 					<div class="end">
 						<input name="git" type="submit" value="提交"
-							ng-show="{{courseId==null}}" ng-click="addTemplate()"
-							style="background: #5ED8A9;" /> <input name="esc" type="reset"
+							ng-if="id==null" ng-click="addTemplate()"
+							style="background: #5ED8A9;" /> 
+						<input name="git" type="submit" value="修改"
+							ng-if="id!=null" ng-click="updateTemplate()"
+							style="background: #5ED8A9;" />
+							<input name="esc" type="reset"
 							value="取消" onclick="CloseDiv();formReset()" class="esc" />
 					</div>
 				</div>

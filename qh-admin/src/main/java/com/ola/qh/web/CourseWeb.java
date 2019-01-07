@@ -46,4 +46,9 @@ public class CourseWeb{
 	public String audition(){
 		return "courses/audition";
 	}
+
+	@RequestMapping(value="/teacher",method=RequestMethod.GET)
+	public String teacher(){
+		return "courses/teacher";
+	}
 }
