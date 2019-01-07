@@ -16,5 +16,8 @@ public class SystemWeb {
 		return "system/zixun";
 	}
 
-
+	@RequestMapping("/zhuanti")
+	public String zhuanti(){
+		return "system/zhuanti";
+	}
 }

@@ -9,6 +9,7 @@
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-teacher" submenu="sidebarmenu-course-teacher">
 
+<div>
 <div class="details" style="width: 100%;">
 	<div class="details-nav">
 		<ul>
@@ -167,7 +168,9 @@
 </div>
 
 </div>
-
+</div>
+</div>
+</div>
 <script type="text/javascript">
 
 function getObject(objectId){

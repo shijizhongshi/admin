@@ -9,7 +9,7 @@
 <script src="/scripts/admin.js"></script>
 
 <@b.body menu="sidebarmenu-system-zixun" submenu="/web/system/zixun">
-<div ng-controller="CourseClassTemplateController">
+<div >
 <div class="details" style="width: 100%">
 	<div class="details-nav">
 		<ul>
@@ -73,15 +73,15 @@
 
 				</div>
 
+				<div class="col-sm-6"></div>
 				<div class="col-sm-6">
 					<ul uib-pagination boundary-links="true" total-items="total"
-						ng-model="page" items-per-page="pageSize" max-size="5"
+						ng-model="current" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 						ng-change="courseBases()">
 					</ul>
 				</div>
-
 
 				<!--弹窗-->
 				<div class="poop" id="add"style="width: 60%; height: 600px; position: absolute; left: 15%; top: 15%;">
@@ -167,7 +167,8 @@
 				</div>
 				</div>
 		</div>
-
+</div>  
+</div>
  
 <style type="text/css">
 .poop {
@@ -234,6 +235,5 @@
 
 </style>
 </@b.body>
-</div>  
-</div>
+
 </html>
