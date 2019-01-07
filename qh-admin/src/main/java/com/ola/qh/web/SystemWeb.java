@@ -11,5 +11,10 @@ public class SystemWeb {
 	public String banner(){
 		return "system/banner";
 	}
+	@RequestMapping("/zixun")
+	public String zixun(){
+		return "system/zixun";
+	}
+
 
 }
