@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
-<@b.body menu="sidebarmenu-system-teacher" submenu="/web/system/teacher">
+<@b.body menu="sidebarmenu-teacher" submenu="sidebarmenu-course-teacher">
 
 <div class="details" style="width: 100%;">
 	<div class="details-nav">
@@ -25,7 +25,7 @@
 	<form id="search">
 	<input type="text" placeholder="请输入教师名称"/></form>
 	</div>
-<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()"  style="background:#E9484D"/></div>	
+<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
 	</div>
 <div class="manage">
 	<ul style="height: 80px;" class="show">
@@ -56,17 +56,17 @@
 	</table>
 
 	</div>
-<div class="fanye">
-	<ul class="pagination">
-		<li ><a href="#">&laquo;</a></li>
-		<li class="active"><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">&raquo;</a></li>
-	</ul>
-</div>
+<div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <ul uib-pagination boundary-links="true"
+                            total-items="total" ng-model="current"
+                            items-per-page="pageSize"
+                            max-size="5"
+                            class="pagination-sm" previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
+                        </ul>
+                    </div>
 
 	<!--弹窗-->
 			<div class="poop" id="add" style="width:60%;height: 600px;position: absolute;left: 15%;top: 5%;" >
@@ -169,6 +169,7 @@
 </div>
 
 <script type="text/javascript">
+
 function getObject(objectId){
 	if(document.getElementById && document.getElementById(objectId)){
 		return document.getElementById(objectId);
@@ -191,20 +192,21 @@ function showHide(e,objname){
 		e.className="plus";
 	}
 }
+
 </script>
  <style type="text/css">
 	
 		.poop{overflow-y: scroll;}
 	.poop span{font-size: 1.5rem;}
 	.template-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
-	.template-left,.template-right{width: 50%;float: left;height: 600px;overflow:auto;}
+	.template-left,.template-right{width: 50%;float: left;height: 650px;overflow:auto;}
 	.template-right .grade-text{width: 80%;}
 	.template-right .grade-text textarea{width: 100%;height: 110px;font-size:1.5rem}
     position:relative;}
 div.costs-uploadfile-div #textfield{width:40%; height:30px;}
 div.costs-uploadfile-div #fileField{width:100%;height:30px;     position: absolute; top: 0; left:0;  filter: alpha(opacity:0);opacity: 0;}
 div.costs-uploadfile-div .allBtn{ padding:0; margin:0; height: 30px;  line-height: 30px;   width: 35%;  background-color: #18b3cf; border: none;  color: #fff;}
-.xuanzekuang{width:60%;height: auto;text-align: center;}
+.xuanzekuang{width:60%;height: auto;text-align: center;background: #EDEEF0;}
 .xuanzekuang dt , .xuanzekuang ul li{font-size: 1.0em;height: 30px;text-align: 30px;width: 100%; cursor: pointer;;}
 .xuanzekuang ul li{font-size:1.2rem ;}
 .xuanzekuang input {

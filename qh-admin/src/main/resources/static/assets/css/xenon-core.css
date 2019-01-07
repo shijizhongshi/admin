@@ -823,6 +823,7 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   list-style: none;
+  background:#2C2E2F;
 }
 @media screen and (max-width: 768px) {
   .sidebar-menu .main-menu {

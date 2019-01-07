@@ -59,11 +59,13 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select" style="float:left;margin-right:15px;">搜索课程<br />
+	<div class="select-2" style="float:left;margin-right:15px;width: 15%;">
+	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" name="search" style=" text-indent:2em;"/></form>
+	<input type="text" placeholder=""/></form>
 	</div>
-	</div>
+	<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
+</div>
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
@@ -116,31 +118,31 @@
 		<form id="myform">
 	<h3>添加课程</h3>
 
-	<div class=" select"style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
+	<div class=" select">
 			<input type="text" ng-model="course.courseName" placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
 			<input type="file" value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" style="float: right;width:122px;"/>
 			<input type="hidden" ng-model="course.courseImg"/>
 			<img src="{{course.courseImg}}" ng-show="{{course.courseImg!=null}}" />
 
 		</div>
-		<div class="centre-border">
+		<div>
 		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
 			<input type="text"  ng-model="course.coursePrice" placeholder="输入课程价格" style="text-indent: 2em;margin-right:15px;"/>
 			<input type="text" ng-model="course.courseDiscountPrice" placeholder="输入折扣价格" style="text-indent: 2em;"/>
 		</div>
 		<div class=" select"style="width: 405px;">
 		<input type="text" placeholder="输入课程年份"  ng-model="course.courseYear" style="text-indent: 2em;"/></div>
-		<div class=" select" style="margin-right:15px;">
+		<div class=" select-2" style="float: left;margin-right:5%;width:35%; ">
 			<img src="/images/sjk-xl.png"/>
-			是否展示
+			<span>是否展示</span>
 			<select ng-model="course.courseShow">
 				<option ng-selected="course.courseShow==1" value="1">是</option>
 				<option ng-selected="course.courseShow==0" value="0">否</option>
 			</select>
 		</div>
-		<div class="select">
+		<div class="select-2" style="float: left;width:35%;">
 			<img src="/images/sjk-xl.png"/>
-			是否精品
+			<span>是否精品</span>
 			<select ng-model="course.courseExcellent">
 				<option ng-selected="course.courseExcellent==1" value="1">是</option>
 				<option ng-selected="course.courseExcellent==0" value="0">否</option>
@@ -148,9 +150,9 @@
 		</div>
 		</div>
 	
-<div class="select">
+<div class="select-2" style="float: left;margin-right:5%;width:35%; ">
 			<img src="/images/sjk-xl.png"/>
-			选择类别
+			<span>选择类别</span>
 			<select ng-model="course.courseResourceType">
 			
 				<option ng-selected="course.courseResourceType=='基础课' " value="基础课">基础课</option>
@@ -162,9 +164,9 @@
 			</select>
 		</div>
 
-			<div class="select">
+			<div class="select-2" style="float: left;width:35%; ">
 			<img src="/images/sjk-xl.png"/>
-			用途
+			<span>用途</span>
 			<select ng-model="course.courseUseDifference">
 				
 				<option ng-selected="course.courseUseDifference=='自用课程' " value="自用课程">自用课程</option>

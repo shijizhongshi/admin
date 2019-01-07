@@ -49,11 +49,7 @@
                             </a>
                         </li>
                        
-                        <li id="sidebarmenu-system-teacher">
-                            <a href="/web/system/teacher">
-                                <span class="title">教师管理</span>
-                            </a>
-                        </li>
+                       
                        
                     </ul>
                 </li>
@@ -89,10 +85,13 @@
                             <a href="/web/course/audition">
                                 <span class="title">试听课程</span>
 
-
                             </a>
                         </li>
-                        
+                         <li id="sidebarmenu-teacher">
+                            <a href="/web/course/teacher">
+                                <span class="title">教师管理</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
              </ul>
