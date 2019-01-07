@@ -16,9 +16,9 @@ public class CourseClassTemplateService implements ICourseClassTemplateService{
 	private CourseClassTemplateDao  courseClassTemplateDao;
 
 	@Override
-	public List<CourseClassTemplate> selectCourseClassTemplate(String templateName,int pageNo,int pageSize) {
+	public List<CourseClassTemplate> selectCourseClassTemplate(String id,int pageNo,int pageSize) {
 		
-		return courseClassTemplateDao.selectCourseClassTemplate(templateName,pageNo,pageSize);
+		return courseClassTemplateDao.selectCourseClassTemplate(id,pageNo,pageSize);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class CourseClassTemplateService implements ICourseClassTemplateService{
 	}
 
 	@Override
-	public int deleteCourseClassTemplate(String templateName) {
+	public int deleteCourseClassTemplate(String id) {
 		
-		return courseClassTemplateDao.deleteCourseClassTemplate(templateName);
+		return courseClassTemplateDao.deleteCourseClassTemplate(id);
 	}
 }
