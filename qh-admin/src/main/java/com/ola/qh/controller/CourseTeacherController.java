@@ -26,14 +26,21 @@ public class CourseTeacherController {
 	private ICourseTeacherService courseTeacherService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<CourseTeacher>> selectCourseSection(@RequestParam(name="page",required=true)int page){
+	public Results<List<CourseTeacher>> selectCourseSection(
+			@RequestParam(name="page",required=true)int page,
+			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName){
 		
 		Results<List<CourseTeacher>> results=new Results<List<CourseTeacher>>();
+		int pageSize = 0;
+		int pageNo =0;
+		if(page!=0){
+			pageSize = Patterns.pageSize;
+		    pageNo = (page - 1) * pageSize;
+		}
 		
-		int pageSize = Patterns.pageSize;
-		int pageNo = (page - 1) * pageSize;
 		
-		List<CourseTeacher> list=courseTeacherService.selectCourseTeacher(pageNo, pageSize);
+		List<CourseTeacher> list=courseTeacherService.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName);
 		
 		if(list==null || list.size()==0){
 			

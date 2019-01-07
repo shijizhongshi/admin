@@ -25,7 +25,7 @@
 	<div class="details-frame-content">
 <ul style="float:left;padding-top:20px;" class="show">
 
-			<li  onclick="showDiv()" style="margin-left: 70px;background:#5ED8A9;width: 100px;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加节</li>
+			<li  ng-click="add()" style="margin-left: 70px;background:#5ED8A9;width: 100px;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加节</li>
 		<li ng-click="updateSection()" style="background:#F9CD33;width: 100px;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改节</li>
 		<!--<li  style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;关联题库ID</li>-->
 		<li ng-click="deleteSection()" style="background:#F86846;width: 100px;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除节</li>
@@ -96,8 +96,8 @@
 		
 </div>			
 			<div class="end">
-			<input name="git" type="submit" ng-show="{{sectionId==null}}" value="提交" ng-click="addSection()" style="background:#5ED8A9;"/>
-			<input name="git" type="submit" ng-show="{{sectionId!=null}}" value="修改" ng-click="addSection()" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" ng-show="sectionId==null" value="提交" ng-click="addSection()" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" ng-show="sectionId!=null" value="修改" ng-click="addSection()" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
 			</div>
 			</form>

@@ -36,7 +36,6 @@ app.controller("sectionController", function($scope, $http){
 	};
 	
 	////////////////以上是通过不同的条件查章节的集合的	
-	$scope.section=null;
 	$scope.sectionId=null;
 	
 	$scope.addSection=function(){
@@ -62,6 +61,13 @@ app.controller("sectionController", function($scope, $http){
 		$scope.selected=c;
 		$scope.section=c;
 		$scope.sectionId=c.id;
+	}
+	$scope.add=function(){
+		$scope.section=null;
+		$scope.sectionId=null;
+		document.getElementById('add').style.display="block"; 
+		
+		
 	}
 	////点击修改的按钮先看看是否已经选中了
 	$scope.updateSection=function(){

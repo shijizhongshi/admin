@@ -88,6 +88,15 @@ app.controller("CourseController", function($scope, $http){
 		$scope.course=c;
 		$scope.courseId=c.id;
 	}
+	
+	$scope.add=function(){
+		$scope.course=null;
+		$scope.courseId=null;
+		document.getElementById('add').style.display="block"; 
+		
+		
+	}
+	
 	////点击修改的按钮先看看是否已经选中了
 	$scope.updateCourse=function(){
 		if($scope.courseId!=null){

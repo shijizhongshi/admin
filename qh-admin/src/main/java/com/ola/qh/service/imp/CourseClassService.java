@@ -1,5 +1,6 @@
 package com.ola.qh.service.imp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,9 +31,28 @@ public class CourseClassService implements ICourseClassService {
 	private CourseDao courseDao;
 
 	@Override
-	public List<CourseClass> selectCourseClass(String id, int pageNo, int pageSize) {
+	public List<CourseClass> selectCourseClass(String id, int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName) {
 
-		return courseClassDao.selectCourseClass(id, pageNo, pageSize);
+		List<CourseClass> list = courseClassDao.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName);
+		for (CourseClass courseClass : list) {
+			///查课程   
+			Course c=new Course();
+			c.setClassId(courseClass.getId());
+			List<Course> clist = courseDao.courseList(c);
+			courseClass.setListCourse(clist);
+			///查老师
+			List<CourseClassTeacher> ctlist=courseClassTeacherDao.selectCourseClassTeacher(courseClass.getId(), null);
+			List<CourseTeacher> tlist=new ArrayList<CourseTeacher>();
+			for (CourseClassTeacher courseClassTeacher : ctlist) {
+				CourseTeacher t=new CourseTeacher();
+				t.setId(courseClassTeacher.getTeacherId());
+				t.setName(courseClassTeacher.getTname());
+				tlist.add(t);
+			}
+			courseClass.setListTeacher(tlist);
+		}
+		return list;
+				
 	}
 
 	@Transactional
@@ -44,6 +64,14 @@ public class CourseClassService implements ICourseClassService {
 		try {
 
 			courseClass.setId(KeyGen.uuid());
+			///////专业名称已经存在了班级给他提示
+			int count = courseClassDao.selectCourseClassCount(courseClass.getCourseTypeName(), courseClass.getCourseTypeSubclassName(),courseClass.getClassName());
+			
+			if(count>0){
+				results.setStatus("1");
+				results.setMessage("该专业的班级名称已经存在");
+				return results;
+			}
 			List<CourseTeacher> teacher = courseClass.getListTeacher();
 
 			for (CourseTeacher courseTeacher : teacher) {
@@ -59,9 +87,11 @@ public class CourseClassService implements ICourseClassService {
 			List<Course> course = courseClass.getListCourse();
 			for (Course courseNew : course) {
 
-				courseNew.setClassId(courseNew.getClassId());
-				courseNew.setId(courseNew.getId());
-				courseDao.updateCourese(courseNew);
+				Course c=new Course();
+				c.setClassId(courseClass.getId());
+				c.setId(courseNew.getId());
+				c.setUpdatetime(new Date());
+				courseDao.updateCourese(c);
 
 			}
 			courseClass.setAddtime(new Date());
@@ -145,15 +175,14 @@ public class CourseClassService implements ICourseClassService {
 				}
 			}
 			for (Course courseinsert : courseset) {
-
-				Course exist = courseDao.existCourse(courseinsert.getId());
-				if (exist.getClassId() == null) {
+				/*Course exist = courseDao.existCourse(courseinsert.getId());
+				if (exist.getClassId() == null) {*/
 
 					Course courseOn = new Course();
 					courseOn.setId(courseinsert.getId());
 					courseOn.setClassId(courseClass.getId());
 					courseDao.updateCourese(courseOn);
-				}
+				/*}*/
 			}
 
 			results.setStatus("0");
@@ -170,6 +199,12 @@ public class CourseClassService implements ICourseClassService {
 	public int deleteCourseClass(String id) {
 
 		return courseClassDao.deleteCourseClass(id);
+	}
+
+	@Override
+	public int selectCourseClassCount(String courseTypeName, String courseTypeSubclassName) {
+		// TODO Auto-generated method stub
+		return courseClassDao.selectCourseClassCount(courseTypeName, courseTypeSubclassName,null);
 	}
 
 }

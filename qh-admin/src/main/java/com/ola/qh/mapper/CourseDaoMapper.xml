@@ -131,6 +131,9 @@
 	<if test="courseImg!=null">
 	course_img=#{courseImg},
 	</if>
+	<if test="classId!=null and classId!='' ">
+	class_id=#{classId},
+	</if>
 	updatetime=#{updatetime} where id=#{id}
 	</update>
 	
@@ -146,6 +149,9 @@
 	</if>
 	<if test="courseTypeSubclassName!=null">
 	 and course_type_subclass_name=#{courseTypeSubclassName}
+	</if>
+	<if test="classId!=null and classId!='' ">
+	and class_id=#{classId}
 	</if>
 	order by addtime desc 
 	<if test="pageSize!=0">

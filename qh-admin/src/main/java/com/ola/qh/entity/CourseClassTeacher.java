@@ -13,6 +13,18 @@ public class CourseClassTeacher {
 	private Date addtime;
 	
 	private Date updatetime;
+	
+	private String tname;/////教师的姓名
+	
+	
+
+	public String getTname() {
+		return tname;
+	}
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
 
 	public String getId() {
 		return id;

@@ -8,7 +8,10 @@ import com.ola.qh.entity.CourseTeacher;
 
 public interface CourseTeacherDao {
 
-	public List<CourseTeacher> selectCourseTeacher(@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<CourseTeacher> selectCourseTeacher(@Param("pageNo")int pageNo,
+			@Param("pageSize")int pageSize,
+			@Param("courseTypeName")String courseTypeName,
+			@Param("courseTypeSubclassName")String courseTypeSubclassName);
 	
 	public CourseTeacher selectCourseTeacherDetails(@Param("id")String id);
 	
