@@ -113,5 +113,11 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 			alert("请选中信息~");
 		}
 	}
-	
+	//////刷新
+	$scope.refresh=function(){
+		
+			$scope.classUrl=null;
+			$scope.templateBases();
+		
+	}
 });

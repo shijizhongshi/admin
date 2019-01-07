@@ -63,6 +63,8 @@ app.controller("ChapterController", function($scope, $http){
 	}
 	
 	$scope.saveChapter=function(){
+		$scope.chapter=null;
+		$scope.chapterId=null;
 		document.getElementById('add').style.display="block"; 
 		$http.get("/api/course/courseList",{"params": {"pageNo":0,"pageSize":0,
 			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})

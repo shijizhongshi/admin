@@ -22,9 +22,9 @@ public class CourseTeacherService implements ICourseTeacherService{
 	private CourseTeacherDao courseTeacherDao;
 
 	@Override
-	public List<CourseTeacher> selectCourseTeacher(int pageNo, int pageSize) {
+	public List<CourseTeacher> selectCourseTeacher(int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName) {
 		
-		return courseTeacherDao.selectCourseTeacher(pageNo, pageSize);
+		return courseTeacherDao.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName);
 	}
 	
 	@Override

@@ -26,21 +26,17 @@ public class CourseClassController {
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseClass>> selectCourseClass(@RequestParam(name="id",required=false)String id,
-			@RequestParam(name="page")int page){
+			@RequestParam(name="page")int page,
+			@RequestParam(name="courseTypeName")String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName){
 		
 		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
 		
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		
-		List<CourseClass> list=courseClassService.selectCourseClass(id, pageNo, pageSize);
-		
-		if(list==null || list.size()==0){
-			
-			results.setStatus("1");
-			results.setMessage("课程信息不存在");
-			return results;
-		}
+		List<CourseClass> list=courseClassService.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName);
+		results.setCount(courseClassService.selectCourseClassCount(courseTypeName, courseTypeSubclassName));
 		results.setStatus("0");
 		results.setData(list);
 		return results;

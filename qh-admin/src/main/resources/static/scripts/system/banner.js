@@ -65,6 +65,13 @@ $scope.uploadmainimage = function(file){
 		$scope.banner=b;
 		
 	}
+	
+	$scope.add=function(){
+		$scope.bannerId=null;
+		$scope.banner=null;
+		document.getElementById('add').style.display="block"; 
+		 
+	}
 	$scope.updatebanner=function(){
 		 if($scope.bannerId==null){
 			 alert("请选择信息~")

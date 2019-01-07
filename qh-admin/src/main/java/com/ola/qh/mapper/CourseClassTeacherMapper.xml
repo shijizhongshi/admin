@@ -9,15 +9,18 @@
 		<result column="teacher_id" property="teacherId" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="tname" property="tname"/>
 	</resultMap>
 	<select id="selectCourseClassTeacher" resultMap="CourseClassTeacherMap">
-		select id,class_id,teacher_id,addtime from course_class_teacher where 1=1
+		select cct.id,cct.class_id,cct.teacher_id,cct.addtime,ct.name tname from course_class_teacher cct
+		left join course_teacher ct on ct.id=cct.teacher_id
+		where 1=1
 		
 		<if test="classId!=null">
-		and class_id=#{classId}
+		and cct.class_id=#{classId}
 		</if>
 		<if test="teacherId!=null">
-		and teacher_id=#{teacherId}
+		and cct.teacher_id=#{teacherId}
 		</if>
 		 
 	</select>

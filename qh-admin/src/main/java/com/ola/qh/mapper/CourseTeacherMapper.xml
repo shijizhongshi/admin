@@ -22,7 +22,18 @@
 	id,name,isshow,isremmend,img_url,prizes,features,describes,details,course_type_names,course_type_subclass_names,addtime
 	</sql>
 	<select id="selectCourseTeacher" resultMap="CourseTeacherMap">
-		select id,name,isshow,isremmend,img_url from course_teacher order by addtime ASC limit #{pageNo},#{pageSize}
+		select id,name,isshow,isremmend,img_url from course_teacher where 1=1
+		<if test="courseTypeName!=null and courseTypeName!='' ">
+		and course_type_names like CONCAT(CONCAT('%',#{courseTypeName},'%'))
+		</if>
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+		and course_type_subclass_names like CONCAT(CONCAT('%',#{courseTypeSubclassName},'%'))
+		</if>
+		order by addtime ASC
+		<if test="pageSize!=0">
+		limit #{pageNo},#{pageSize}
+		</if>
+		 
 	</select>
 	
 	<select id="selectCourseTeacherDetails" resultMap="CourseTeacherMap">

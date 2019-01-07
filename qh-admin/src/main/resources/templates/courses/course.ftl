@@ -69,7 +69,7 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-			<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加课程</li>
+			<li  ng-click="add()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加课程</li>
 		<li ng-click="updateCourse()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改课程</li>
 		<li ng-click="deleteCourse()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除课程</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
@@ -122,7 +122,7 @@
 			<input type="text" ng-model="course.courseName" placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
 			<input type="file" value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" style="float: right;width:122px;"/>
 			<input type="hidden" ng-model="course.courseImg"/>
-			<img src="{{course.courseImg}}" ng-show="{{course.courseImg!=null}}" />
+			<img src="{{course.courseImg}}" style="width:50px;height:30px;"/>
 
 		</div>
 		<div>
@@ -176,8 +176,8 @@
 			</select>
 		</div>
 		<div class="end">
-			<input name="git" type="submit" value="提交" ng-show="{{courseId==null}}" ng-click="addCourse()" style="background:#5ED8A9;"/>
-			<input name="git" type="submit" value="修改" ng-show="{{courseId!=null}}" ng-click="addCourse()" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" value="修改" ng-show="courseId!=null" ng-click="addCourse()" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
 		</div>
 		</form>

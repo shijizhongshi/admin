@@ -5,9 +5,10 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/course/course.js"></script>
+<script src="/scripts/course/grade.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-grade">
+<div ng-controller="gradeController">
 <div class="classify">
 	<ul class="menu">
 	
@@ -63,108 +64,104 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-			<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;班级添加</li>
-		<li onclick="showDiv2()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;班级修改</li>
-		<li  style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;班级删除</li>
+			<li  ng-click="add()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;班级添加</li>
+		<li ng-click="update()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;班级修改</li>
+		<li ng-click="deleteClass()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;班级删除</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
-		<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
-		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>
-         <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
+		<!--<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
+		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>-->
+         <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="classBases()"/></li>
 	</ul>
 	<div class="admin-table">
 
 <table>
 	<tr>
-		<th>课程名称</th>
-	<th >课程总数</th>
-	<th >课程价格</th >
-	<th >课程折扣</th >
-	<th >年份</th >
-	<th >课时数</th >
-	<th >是否显示</th >
-	<th >资源类别</th >
-	<th >章类别</th >
+		<th>班级名称</th>
+
+	<th>班级图片</th>
+	<th>班级价格</th>
+	<th>班级折扣价</th>
+	<th>主讲老师</th>
+	<th>班级年限</th>
+	<th>是否可见</th>
 	</tr>
- <for:each>
- <tr >
-		<th>课程名称</th>
-	<th >课程总数</th>
-	<th >课程价格</th >
-	<th >课程折扣</th >
-	<th >年份</th >
-	<th >课时数</th >
-	<th >是否显示</th >
-	<th >资源类别</th >
-	<th >章类别</th >
+ <tr ng-repeat="c in classlist" ng-click="checkedclass(c)" ng-class="{'selected':selected==c}">
+	<th>{{c.className}}</th>
+
+	<th>{{c.imgUrl}}</th>
+	<th>{{c.classPrice}}</th>
+	<th>{{c.classDiscountPrice}}</th>
+	<th>{{c.courseLecturer}}</th>
+	<th>{{c.classYear}}</th>
+	<th ng-show="{{c.isshow==1}}">是</th>
+	<th ng-show="{{c.isshow==0}}">否</th>
 	</tr>
 	</table>
 
 	</div>
-<div class="fanye">
-	<ul class="pagination">
-		<li ><a href="#">&laquo;</a></li>
-		<li class="active"><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">&raquo;</a></li>
-	</ul>
-</div>
+<div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <ul uib-pagination boundary-links="true"
+                            total-items="total" ng-model="current"
+                            items-per-page="pageSize"
+                            max-size="5"
+                            class="pagination-sm" previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
+                        </ul>
+                    </div>
 
 	<!--弹窗-->
 		<div class="poop" id="add" style="width: 80%;height: 600px;position: absolute;left: 5%;top: 5%;">
 		<form id="myform">
 	<h3>班级添加</h3>
-	<span style="margin-right:20px ;">已选专业类型:</span> <span>lin</span>
+	<!--<span style="margin-right:20px ;">已选专业类型:</span> <span>lin</span>-->
 		<div class="grade-add">
 			<div class="grade-left" style="padding-right: 5%;">
 		
 				<div class=" select-2">
 						<span>班级名称：</span>
-			<input type="text" class=""placeholder="请输入班级名称" style="width: 230px;" />
+			<input type="text" ng-model="classes.className" class=""placeholder="请输入班级名称" style="width: 230px;" />
 		</div>
 	
 	<div style="width: 100%;height:90px;clear: both;">	<div class=" select-2" style="float: left;">
-		<img src="/images/sjk-xl.png"/>
+		<img src="/images/sjk-xl.png" ng-click="openTemplate()"/>
 						<span>班级模板：</span>
-			<select>
-				<option disabled selected style='display:none;'>选择模板</option>
-				<option></option>
-				<option></option>
+						
+			<select ng-model="classes"  ng-change="checkedTemplate(classes)"  ng-options="classes as classes.templateName for classes in templatelist" ng-selected="selected==classes" >
 			</select>
+			<!--<ul ng-show="tems==1">
+			<li style="float:none;" ng-repeat="classes in templatelist" ng-click="checkedTemplate(classes)" ng-model="classes.templateId">{{classes.templateName}}</li>
+			</ul>-->
 		</div>
 		<div class=" select-2" style="float:right;">
 			<img src="/images/sjk-xl.png"/>
 						<span>主讲老师：</span>
-			<select>
-				<option disabled selected style='display:none;'>查找</option>
-				<option></option>
-				<option></option>
+			<select ng-model="classes.courseLecturer" ng-options="t.name as t.name for t in teacherlist" ng-selected="selected==t.name">
 			</select>
 		</div></div>
 			<div style="width: 100%;height:90px;clear: both;">	<div class=" select-2" style="float: left;">
 	
 						<span>班级价格：</span>
-			<input type="text" class=""placeholder="请输入班级名称"  />
+			<input ng-model="classes.classPrice" type="text" class=""placeholder="请输入班级名称"  />
 		</div>
 		<div class=" select-2" style="float: right;">
 	
 						<span>班级折扣价：</span>
-			<input type="text" class=""placeholder="请输入班级名称"  />
+			<input type="text"  ng-model="classes.classDiscountPrice" class=""placeholder="请输入班级名称"  />
 		</div></div>
 		<div style="width: 100%;height:90px;clear: both;">		<div class=" select-2" style="float: left;">
 	
 						<span>班级年份：</span>
-			<input type="text" class=""placeholder="请输入班级年份"  />
+			<input type="text"  ng-model="classes.classYear" class=""placeholder="请输入班级年份"  />
 		</div>
 		<div class=" select-2" style="float: right;">
 	
 						<span>总课课时数：</span>
-			<input type="text" class=""placeholder="请输入课时数"  />
+			<input type="text" ng-model="classes.allTime" class=""placeholder="请输入课时数"  />
 		</div></div>
-<div class=" select-2">
+<!--<div class=" select-2">
 	<img src="/images/sjk-xl.png"/>
 		<span>显示级别：</span>
 			<select>
@@ -172,104 +169,82 @@
 				<option></option>
 				<option></option>
 			</select>
-		</div>
+		</div>-->
 
-<ul><li>是否推荐</li>  <li><input type="radio" name="tuijian"  /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
-<ul><li>是否关闭  </li><li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
-<ul><li>是否试听 </li><li><input type="radio" name="tuijian" /> 是</li> <li><input type="radio" name="tuijian" />否</li></ul>
+<ul>
+<li>是否推荐</li>  
+<li><input type="radio" name="tuijian"  ng-model="classes.isremmend" ng-value="1" /> 是</li>
+<li><input type="radio" name="tuijian" ng-model="classes.isremmend" ng-value="0" />否</li>
+ </ul>
+<!--<ul>
+<li>是否关闭  </li>
+<li><input type="radio" name="tuijian" /> 是</li> 
+<li><input type="radio" name="tuijian" />否</li>
+</ul>-->
+<ul>
+<li>是否显示 </li>
+<li><input type="radio"  ng-model="classes.isshow" ng-value="1" /> 是</li> 
+<li><input type="radio"  ng-model="classes.isshow" ng-value="0"/>否</li>
+</ul>
+			
 			<div class="costs-uploadfile-div">   
-				 <input type="file" name="file" id="fileField"  onchange="document.getElementById('textfield').value=this.value"  accept="image/*" /> 
-    <input type='text' id="textfield" style="border: solid 1px #B1B1B1;" /> 
+				 <input type="file" name="file" id="fileField"  onchange="angular.element(this).scope().uploadmainimage(this)"  accept="image/*" /> 
+    <input type='text' id="textfield" style="border: solid 1px #B1B1B1;"/> 
     <button class="allBtn costs-marl15">班级图片</button>
-    <div style="height:130px;width:40%;border: solid 1px #B1B1B1;margin-top:3px;">
-    <img  /></div>
-        </div>
-
+    <img ng-show="iurl" style="height:30px;width:50px;" src="{{imgUrl}}"/></div>
+  
 	</div>
 			</div>
 		
 		<div class="grade-center">
 			<div  class="grade-text">
 				<span>适宜人群</span>
-			    <textarea></textarea>
+			    <textarea ng-model="classes.properPeople"></textarea>
 			</div>
 			<div  class="grade-text">
 				<span>班级承诺</span>
-		    <textarea></textarea>
+		    <textarea ng-model="classes.promises"></textarea>
 			</div>
 			<div  class="grade-text">
 				<span>班级特色</span>
-		    <textarea></textarea>
+		    <textarea ng-model="classes.features"></textarea>
 			</div>
 			<div  class="grade-text">
 				<span>班级介绍</span>
-				    <textarea></textarea>
+				    <textarea ng-model="classes.introduce"></textarea>
 			</div>
 		</div>
 		<div class="grade-right">
 <div>
 <span>课程资源</span>
-<label >
-<p><input type="checkbox" name="ziyuan" /> 2018临床-冲刺习题课程</p>
-<p><input type="checkbox" name="ziyuan" />2018临床-冲刺习题课程</p>
+<label ng-repeat="course in courselist">
+<p><input type="checkbox" ng-checked="isSelected(course)" ng-click="updateSelection($event,course)" />{{course.courseName}}</p>
 </label>
 </div>
 <div>
-			<span>班级教师</span>
-			<label >
-  <p><input type="checkbox" name="teacher" /> 2018临床-冲刺习题课程</p>
-  <p><input type="checkbox" name="teacher" />2018临床-冲刺习题课程</p>
+	<span>班级教师</span>
+	<label ng-repeat="teacher in teacherlist">
+  <p><input type="checkbox" ng-checked="isTeacherSelected(teacher)" ng-click="updateTeacherSelection($event,teacher)" />{{teacher.name}}</p>
 </label>
 		</div>
 		</div>
 <div class="grade-add-bottom">
 	<span>班级详情</span>
-    <textarea></textarea>
+    <textarea ng-model="classes.detail"></textarea>
 </div>
 		</form>
 		<div class="end">
-			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" ng-show="classId==null" ng-click="addClass()" value="提交" style="background:#5ED8A9;"/>
+			<input name="git" type="submit" ng-show="classId!=null" ng-click="addClass()" value="修改" style="background:#5ED8A9;"/>
 			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
 		</div>
 	</div>
- <!-- <div class="resource" id="resource">
-	<h3>班级课程及赠送管理</h3>
-	<form id="myform3">
-	<div class="zengsong-left">
-	<p><span>所属专业：</span><span>临床执业助理医师</span></p>
-	<p><span>课程资源名：</span><span>2018临床-基础课程</span></p>
-	<p>班级课程</p>
-	<div class="admin-table">
-	<table>
-		<tr>
-			<th>课程名称</th>
-			<th>课程价格</th>
-			<th>是否显示</th>
-		</tr>
-		<tr>
-			<th>课程名称</th>
-			<th>课程价格</th>
-			<th>显示</th>
-			
-		</tr>
-	</table>
-	</div>
-	</div>
-	
-	</form>
-	<div class="end">
-			<input name="git" type="submit" value="提交" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv3();formReset3()" class="esc" />
-		</div>
-		
-	</div>
-	-->
 </div>
 	
 </div>
 
 </div>
-
+</div>
 </body>
  <style type="text/css">
 	

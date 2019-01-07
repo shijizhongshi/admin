@@ -28,7 +28,11 @@
 		id=#{id}
 		</if>
 		</where>
-		order by addtime ASC limit #{pageNo},#{pageSize}
+		order by addtime ASC 
+		<if test="pageSize!=0">
+		limit #{pageNo},#{pageSize}
+		</if>
+		
 	</select>
 	
 	<insert id="insertCourseClassTemplate" parameterType="com.ola.qh.entity.CourseClassTemplate">
@@ -84,4 +88,5 @@
 	<delete id="deleteCourseClassTemplate">
 		delete from course_class_template where id=#{id}
 	</delete>
+	
 </mapper>

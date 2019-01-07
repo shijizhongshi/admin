@@ -8,7 +8,17 @@ import com.ola.qh.entity.CourseClass;
 
 public interface CourseClassDao {
 
-	public List<CourseClass> selectCourseClass(@Param("id")String id,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<CourseClass> selectCourseClass(
+			@Param("id")String id,
+			@Param("pageNo")int pageNo,
+			@Param("pageSize")int pageSize,
+			@Param("courseTypeName")String courseTypeName,
+			@Param("courseTypeSubclassName")String courseTypeSubclassName);
+	
+	public int selectCourseClassCount(
+			@Param("courseTypeName")String courseTypeName,
+			@Param("courseTypeSubclassName")String courseTypeSubclassName,
+			@Param("className")String className);
 	
 	public int insertCourseClass(CourseClass courseClass);
 	

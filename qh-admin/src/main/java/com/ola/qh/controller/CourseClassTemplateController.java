@@ -31,10 +31,13 @@ public class CourseClassTemplateController {
 			@RequestParam(name="page",required=true)int page){
 		
 		Results<List<CourseClassTemplate>> results=new Results<List<CourseClassTemplate>>();
+		int pageSize=0;
+		int pageNo=0;
+		if(page!=0){
+			pageSize=Patterns.pageSize;
+			pageNo=(page-1)*pageSize;
+		}
 		
-		int pageSize=Patterns.pageSize;
-		
-		int pageNo=(page-1)*pageSize;
 		
 		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id, pageNo, pageSize);
 		

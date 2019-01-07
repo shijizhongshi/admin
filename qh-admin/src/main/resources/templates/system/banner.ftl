@@ -46,7 +46,7 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-		<li  onclick="showDiv()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
+		<li  ng-click="add()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
 		<li ng-click="updatebanner()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
 		<li ng-click="deletebanner()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
@@ -134,7 +134,7 @@
 			<div style="margin-bottom: 10px">图片:</div>
 			<input type="file" onchange="angular.element(this).scope().uploadmainimage(this)" />
 			<input type="hidden" ng-model="banner.imageurl" >
-			<img src="{{banner.imageurl}}" ng-show="{{banner.imageurl!=null}}" style="width:50px;height:30px;"/>
+			<img src="{{banner.imageurl}}" style="width:50px;height:30px;"/>
 	</div>
 		
 		<div  class="select-radio ">

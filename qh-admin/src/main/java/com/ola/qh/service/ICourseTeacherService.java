@@ -7,7 +7,7 @@ import com.ola.qh.util.Results;
 
 public interface ICourseTeacherService {
 
-	public List<CourseTeacher> selectCourseTeacher(int pageNo,int pageSize);
+	public List<CourseTeacher> selectCourseTeacher(int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName);
 	
 	public CourseTeacher selectCourseTeacherDetails(String id);
 	
