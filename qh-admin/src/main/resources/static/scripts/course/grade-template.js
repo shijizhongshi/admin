@@ -85,6 +85,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	    		
 	    			alert("修改成功~");
 	    			document.getElementById('add').style.display="none"; 
+	    			$scope.id=null;
 		    		$scope.templateBases();
 	    	}else{
 	    		alert("修改失败~");
