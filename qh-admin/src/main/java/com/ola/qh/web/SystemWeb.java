@@ -11,8 +11,10 @@ public class SystemWeb {
 	public String banner(){
 		return "system/banner";
 	}
-	@RequestMapping("/teacher")
-	public String teacher(){
-		return "system/teacher";
+	@RequestMapping("/zixun")
+	public String zixun(){
+		return "system/zixun";
 	}
+
+
 }
