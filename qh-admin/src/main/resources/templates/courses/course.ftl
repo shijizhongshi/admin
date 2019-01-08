@@ -173,12 +173,10 @@
 		</div>
 	
 		<div class="costs-uploadfile-div">   
-				 <input type="file" name="file" id="fileField"   accept="image/*"  value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" /> 
-   <input type="hidden" ng-model="course.courseImg"/>
-    <button class="allBtn costs-marl15" >班级图片</button>
-    <div style="height:100px;width:40%;">
-    <img  src="{{course.courseImg}}" style="height:100px;" /></div>
-        </div>
+				 上传课程图片<input type="file" name="file"   accept="image/*"  value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" /> 
+   <input type="hidden" ng-model="course.courseImg" />
+  <div class="costs-img"> <img  src="{{course.courseImg}}" /></div></div>
+
 		
 		<div class="end">
 			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;"/>
@@ -193,6 +191,7 @@
 </div>
 </div>
 </div>
+
 </@b.body>
  
  </html>

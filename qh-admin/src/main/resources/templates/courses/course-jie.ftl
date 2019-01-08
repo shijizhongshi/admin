@@ -72,7 +72,7 @@
                     </div>
 
 	<!--弹窗-->
-		<div class="poop" id="add" style="width: 790px;position: absolute;left: 20%;">
+		<div class="poop" id="add" style="width: 30%;height:400px;">
 			<form id="myform">
 			<div class="add-jie-left">
 	<h3>添加节</h3>
@@ -83,15 +83,17 @@
 			<input type="text" ng-model="section.sectionName" placeholder="节名称" style="width: 230px;text-indent: 2em;" />
 		</div>
 			
-		<div class="select">
-			<input type="file" value="阿里云的ID" onchange="angular.element(this).scope().uploadmainimage(this)" style="float: right;width:122px;"/>
-			
-		</div>
+		
 		
 			<div class="add-jie-radio" >
 			<span>是否可见</span> <span>
 			<input type="radio" name="visible" ng-model="section.isshow" ng-value="1" />是
 				&nbsp;<input type="radio" name="visible" ng-model="section.isshow"  ng-value="0" />否</span>
+		</div>
+		<div >
+			<input type="file" value="阿里云的ID" onchange="angular.element(this).scope().uploadmainimage(this)"/>
+			
+			    <img  src="" style="height:100px;" />
 		</div>
 		
 </div>			

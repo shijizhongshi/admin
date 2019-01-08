@@ -7,8 +7,8 @@
 <script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-system-fenlei"
-submenu="/web/system/fenlei">
+<@b.body menu="sidebarmenu-system"
+submenu="web-system-fenlei">
 <div >
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
@@ -121,7 +121,9 @@ submenu="/web/system/fenlei">
 				</div>
 			</div>
 		</div>
+</div>
 
+</div>
 
 
 <style type="text/css">

@@ -59,7 +59,7 @@ table .selected{background-color:#c1ddec}
 .fanye ul{width:405px;}
 .fanye  li{margin-left:18px;}
 /**/
-.poop{position: absolute;left:30%;top:15%;}
+.poop{position: absolute;left:30%;top:15%;overflow:auto;}
 .poop,.poop-revise,.resource{display: none;z-index:50;width: 463px;height: 500px;padding:20px 30px;background: white;box-shadow:1px 1px 4px 4px #D8D6D6;}
  .end{width: 200px;float: right;}
 .end input {width:78px;height: 30px;border-radius:20px;margin-top:5px;color: white;font-size:16px;}
@@ -142,4 +142,7 @@ div.costs-uploadfile-div .allBtn{
     border: none;
     color: #fff;
     }
-div.costs-uploadfile-div img{height:130px;}
+ .costs-uploadfile-div img:ACTIVE{ transform: scale(7.0);position: fixed;z-index: 9999;}
+.costs-uploadfile-div img{height:100px;}
+.costs-img{height:100px;}
+.admin-table table tr .xiangqing{background:#F9CE33;border-radius: 20px;color: white;padding: 5px;font-size: 1.3rem;}
