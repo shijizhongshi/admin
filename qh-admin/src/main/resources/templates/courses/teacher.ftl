@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/course.js"></script>
 <script src="/scripts/admin.js"></script>
-<@b.body menu="sidebarmenu-teacher" submenu="sidebarmenu-course-teacher">
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-teacher">
 
 <div>
 <div class="details" style="width: 100%;">

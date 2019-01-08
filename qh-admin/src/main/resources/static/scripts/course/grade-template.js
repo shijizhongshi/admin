@@ -113,6 +113,14 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 			alert("请选中信息~");
 		}
 	}
+	
+	$scope.add=function(){
+		$scope.courseClassTemplate=null;
+		$scope.id=null;
+		document.getElementById('add').style.display="block"; 
+		
+		
+	}
 	//////刷新
 	$scope.refresh=function(){
 		

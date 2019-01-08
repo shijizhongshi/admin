@@ -29,7 +29,7 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-					<li onclick="showDiv()"
+					<li ng-click="add()"
 						style="margin-left: 70px; background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加模板</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
