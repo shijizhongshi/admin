@@ -9,7 +9,7 @@
 <@b.body menu="sidebarmenu-course"
 submenu="sidebarmenu-course-audition">
 <div ng-controller="CourseNofreeController">
-	<div ng-controller="CourseController">
+	
 		<div>
 			<div class="classify">
 				<ul class="menu">
@@ -17,7 +17,7 @@ submenu="sidebarmenu-course-audition">
 					<li class="list" ng-click="typeList(1)">医师资格
 						<ul class="items" ng-class="{'active':active==1}">
 							<li ng-repeat="sub in courseTypeSubclass"
-								ng-click="auditionSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+								ng-click="auditionSub('医师资格',sub)"  ng-class="{'selected':selected==sub}" >{{sub.courseTypeSubclassName}}</li>
 
 						</ul>
 					</li>
@@ -377,7 +377,7 @@ div.costs-uploadfile-div .allBtn {
 	color: #fff;
 }
 </style>
-	</div>
+	
 </div>
 </@b.body>  
 </html>
