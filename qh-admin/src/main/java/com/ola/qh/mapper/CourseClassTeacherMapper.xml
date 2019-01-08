@@ -30,6 +30,12 @@
 	</insert>
 	
 	<delete id="deleteCourseClassTeacher" >
-		delete from course_class_teacher where class_id=#{classId} and teacher_id=#{teacherId}
+		delete from course_class_teacher where 1=1
+		<if test="classId!=null">
+		and class_id=#{classId} 
+		</if>
+		<if test="teacherId!=null">
+		and teacher_id=#{teacherId}
+		</if>
 	</delete>
 </mapper>

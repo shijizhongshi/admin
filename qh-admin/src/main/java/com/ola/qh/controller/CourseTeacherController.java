@@ -29,7 +29,8 @@ public class CourseTeacherController {
 	public Results<List<CourseTeacher>> selectCourseSection(
 			@RequestParam(name="page",required=true)int page,
 			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
-			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName){
+			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
+			@RequestParam(name="teacherName",required=false)String teacherName){
 		
 		Results<List<CourseTeacher>> results=new Results<List<CourseTeacher>>();
 		int pageSize = 0;
@@ -40,14 +41,9 @@ public class CourseTeacherController {
 		}
 		
 		
-		List<CourseTeacher> list=courseTeacherService.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName);
+		List<CourseTeacher> list=courseTeacherService.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName,teacherName);
 		
-		if(list==null || list.size()==0){
-			
-			results.setStatus("1");
-			results.setMessage("当前没有教师信息");
-			return results;
-		}
+		results.setCount(courseTeacherService.selectCourseTeacherCount(courseTypeName, courseTypeSubclassName, teacherName));
 		results.setStatus("0");
 		results.setData(list);
 		return results;
@@ -79,7 +75,7 @@ public class CourseTeacherController {
 		
 		Results<String> results=new Results<String>();
 		
-		if (valid.hasErrors()) {
+		if (valid.hasErrors() || courseTeacher.getTypename().size()==0) {
 			results.setMessage("信息填写不完整,请检查");
 			results.setStatus("1");
 			return results;

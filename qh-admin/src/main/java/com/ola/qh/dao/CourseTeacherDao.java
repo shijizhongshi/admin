@@ -11,7 +11,13 @@ public interface CourseTeacherDao {
 	public List<CourseTeacher> selectCourseTeacher(@Param("pageNo")int pageNo,
 			@Param("pageSize")int pageSize,
 			@Param("courseTypeName")String courseTypeName,
-			@Param("courseTypeSubclassName")String courseTypeSubclassName);
+			@Param("courseTypeSubclassName")String courseTypeSubclassName,
+			@Param("teacherName")String teacherName);
+	
+	public int selectCourseTeacherCount(
+			@Param("courseTypeName")String courseTypeName,
+			@Param("courseTypeSubclassName")String courseTypeSubclassName,
+			@Param("teacherName")String teacherName);
 	
 	public CourseTeacher selectCourseTeacherDetails(@Param("id")String id);
 	
