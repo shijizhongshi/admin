@@ -1,6 +1,8 @@
 
 package com.ola.qh.service.imp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.ola.qh.dao.CourseClassDao;
+import com.ola.qh.dao.CourseClassTeacherDao;
 import com.ola.qh.dao.CourseTeacherDao;
+import com.ola.qh.entity.CourseClassTeacher;
 import com.ola.qh.entity.CourseTeacher;
 import com.ola.qh.service.ICourseTeacherService;
 import com.ola.qh.util.KeyGen;
@@ -20,12 +25,26 @@ public class CourseTeacherService implements ICourseTeacherService{
 
 	@Autowired
 	private CourseTeacherDao courseTeacherDao;
+	@Autowired
+	private CourseClassTeacherDao courseClassTeacherDao;
+	
 
 	@Override
-	public List<CourseTeacher> selectCourseTeacher(int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName) {
-		
-		return courseTeacherDao.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName);
+	public List<CourseTeacher> selectCourseTeacher(int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName,String teacherName) {
+		List<CourseTeacher> list = courseTeacherDao.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName,teacherName);
+		for (CourseTeacher courseTeacher : list) {
+			List<String> typename=new ArrayList<String>();
+			if(courseTeacher.getCourseTypeSubclassNames().indexOf(",")>0){
+				String[] typenames=courseTeacher.getCourseTypeSubclassNames().split(",");
+				typename = Arrays.asList(typenames);
+			}else{
+				typename.add(courseTeacher.getCourseTypeSubclassNames());
+			}
+			courseTeacher.setTypename(typename);
+		}
+		return list;
 	}
+	
 	
 	@Override
 	public CourseTeacher selectCourseTeacherDetails(String id) {
@@ -48,6 +67,17 @@ public class CourseTeacherService implements ICourseTeacherService{
 		try {
 			courseTeacher.setId(KeyGen.uuid());
 			courseTeacher.setAddtime(new Date());
+			List<String> list = courseTeacher.getTypename();
+			String typename="";
+			for(String string : list) {
+				if("".equals(typename)){
+					typename=string;
+				}else{
+					typename=typename+","+string;
+				}
+			}
+			courseTeacher.setCourseTypeNames("医师资格,药师资格,中医适宜技术,卫生资格,健康管理师");
+			courseTeacher.setCourseTypeSubclassNames(typename);
 			courseTeacherDao.insertCourseTeacher(courseTeacher);
 		
 			results.setStatus("0");
@@ -66,10 +96,18 @@ public class CourseTeacherService implements ICourseTeacherService{
 		return courseTeacherDao.updateCourseTeacher(courseTeacher);
 	}
 
-	@Override
+	@Transactional
 	public int deleteCourseTeacher(String id) {
+		int num = courseTeacherDao.deleteCourseTeacher(id);
 		
-		return courseTeacherDao.deleteCourseTeacher(id);
+		courseClassTeacherDao.deleteCourseClassTeacher(null,id);
+		return num;
+	}
+
+	@Override
+	public int selectCourseTeacherCount(String courseTypeName, String courseTypeSubclassName, String teacherName) {
+		// TODO Auto-generated method stub
+		return courseTeacherDao.selectCourseTeacherCount(courseTypeName, courseTypeSubclassName, teacherName);
 	}
 
 	

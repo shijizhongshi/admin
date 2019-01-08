@@ -1,6 +1,7 @@
 package com.ola.qh.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -31,15 +32,25 @@ public class CourseTeacher {
 	@NotEmpty(message="详细介绍不能为空")
 	private String details;//详细介绍
 	
-	@NotEmpty(message="大类别不能为空")
 	private String courseTypeNames;//专业
 	
-	@NotEmpty(message="小类别不能为空")
 	private String courseTypeSubclassNames;//子专业
+	
+	private List<String> typename;///子类别的集合 
 	
 	private Date addtime;
 	
 	private Date updatetime;
+	
+	
+
+	public List<String> getTypename() {
+		return typename;
+	}
+
+	public void setTypename(List<String> typename) {
+		this.typename = typename;
+	}
 
 	public String getId() {
 		return id;
