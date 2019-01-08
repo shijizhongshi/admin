@@ -20,10 +20,32 @@ public class News {
 	
 	private int isstick;////是否置顶
 	
+	private int status;////0:正常   1;shixiao 
+	
 	private int isrecommend;////是否推荐
 	
-	private int contentTypes;
+	private String contentTypes;
 	
+	private String typename;///专业名称
+	
+	
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getTypename() {
+		return typename;
+	}
+
+	public void setTypename(String typename) {
+		this.typename = typename;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -80,11 +102,11 @@ public class News {
 		this.isstick = isstick;
 	}
 
-	public int getContentTypes() {
+	public String getContentTypes() {
 		return contentTypes;
 	}
 
-	public void setContentTypes(int contentTypes) {
+	public void setContentTypes(String contentTypes) {
 		this.contentTypes = contentTypes;
 	}
 

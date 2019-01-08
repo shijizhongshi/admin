@@ -22,12 +22,15 @@
 	id,name,isshow,isremmend,img_url,prizes,features,describes,details,course_type_names,course_type_subclass_names,addtime
 	</sql>
 	<select id="selectCourseTeacher" resultMap="CourseTeacherMap">
-		select id,name,isshow,isremmend,img_url from course_teacher where 1=1
+		select * from course_teacher where 1=1
 		<if test="courseTypeName!=null and courseTypeName!='' ">
 		and course_type_names like CONCAT(CONCAT('%',#{courseTypeName},'%'))
 		</if>
 		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
 		and course_type_subclass_names like CONCAT(CONCAT('%',#{courseTypeSubclassName},'%'))
+		</if>
+		<if test="teacherName!=null and teacherName!='' ">
+		and name like concat(concat('%',#{teacherName},'%'))
 		</if>
 		order by addtime ASC
 		<if test="pageSize!=0">
@@ -36,6 +39,20 @@
 		 
 	</select>
 	
+	
+	<select id="selectCourseTeacherCount"  resultType="int">
+		select count(id) from course_teacher where 1=1
+		<if test="courseTypeName!=null and courseTypeName!='' ">
+		and course_type_names like CONCAT(CONCAT('%',#{courseTypeName},'%'))
+		</if>
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+		and course_type_subclass_names like CONCAT(CONCAT('%',#{courseTypeSubclassName},'%'))
+		</if>
+		<if test="teacherName!=null and teacherName!='' ">
+		and name like concat(concat('%',#{teacherName},'%'))
+		</if>
+		 
+	</select>
 	<select id="selectCourseTeacherDetails" resultMap="CourseTeacherMap">
 		select <include refid="sql_teacher"></include> from course_teacher where id=#{id}
 	</select>

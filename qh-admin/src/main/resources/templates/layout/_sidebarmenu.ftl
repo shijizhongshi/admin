@@ -50,7 +50,7 @@
                         </li>
                        
                         <li id="sidebarmenu-system-zixun">
-                            <a href="/web/system/zixun">
+                            <a href="/web/system/news">
                                 <span class="title">咨询/话题&nbsp;管理</span>
                             </a>
                         </li>

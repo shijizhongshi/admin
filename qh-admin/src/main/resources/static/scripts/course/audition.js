@@ -10,6 +10,23 @@ app.controller("CourseNofreeController",function($scope,$http){
    
    $scope.id=null;
    
+   $scope.typeBases=function(){
+		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeSubclass=data.data;
+			}
+		})
+	};
+	$scope.active=1;
+	$scope.typeId=1;
+	$scope.typeBases();
+	$scope.typeList=function(typeId){
+			$scope.active=typeId;
+			$scope.typeId=typeId;
+			$scope.typeBases();
+	};
+   
    /////查询
    $scope.auditionBases=function(){
 	   
@@ -20,6 +37,9 @@ app.controller("CourseNofreeController",function($scope,$http){
 			if(data.status=="0"){
 				$scope.auditionlist=data.data;
 			}
+			else{
+				$scope.auditionlist=null;
+			}
 		})
 	};
 	
@@ -29,10 +49,12 @@ app.controller("CourseNofreeController",function($scope,$http){
 
 	$scope.auditionSub=function(typename,sub){
 		////////查课程的集合
+		$scope.selected=sub;
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.auditionBases();
 	
+}
 	$scope.imgUrl=null;
 	
 	/////分页
@@ -81,11 +103,12 @@ app.controller("CourseNofreeController",function($scope,$http){
 		
 	};
 	///////做选中的时候用
-	$scope.checkedAudition=function(t){
+	$scope.checkedAudition=function(a){
 		$scope.selected=a;
 		$scope.courseClassTemplate=a;
 		$scope.id=a.id;
 	};
+	
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
 		if($scope.id!=null){
@@ -131,43 +154,6 @@ app.controller("CourseNofreeController",function($scope,$http){
 			alert("请选中信息~");
 		}
 	}
-	}
-});
-app.controller("CourseController", function($scope, $http){
 	
-	$scope.active=1;
-	$scope.typeId=1;
-	$scope.typeList=function(typeId){
-			$scope.active=typeId;
-			$scope.typeId=typeId;
-			$scope.typeBases();
-	};
-	$scope.typeBases=function(){
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass=data.data;
-			}
-		})
-	};
-	
-	   $scope.total = 0;
-	   //当前的页数
-	   $scope.page = 1;
-	   //一页显示多少条
-	   $scope.pageSize = 20;
-	
-	
-	$scope.courseBases=function(){
-		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-		$http.get("/api/course/courseList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
-			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})
-			.success(function(data){
-				if(data.status=="0"){
-					$scope.courselist=data.data;
-				}
-		})
-};
-
 	
 });
