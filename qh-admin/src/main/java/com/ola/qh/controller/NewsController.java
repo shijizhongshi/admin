@@ -42,12 +42,15 @@ public class NewsController {
 	 * @return
 	 */
 	@RequestMapping(value="/newLists")
-	public Results<List<News>> newsList(@RequestParam(name = "page", required = false) int page){
+	public Results<List<News>> newsList(
+			@RequestParam(name="page", required=false) int page,
+			@RequestParam(name="title",required=false)String title){
 		
 		Results<List<News>> result = new Results<List<News>>();
 		int pageNo = (page - 1) * Patterns.pageSize;
 		
-		List<News> lists = newsService.selectNewList(pageNo,Patterns.pageSize);
+		List<News> lists = newsService.selectNewList(pageNo,Patterns.pageSize,title);
+		result.setCount(newsService.selectNewListCount(title));
 		result.setData(lists);
 		result.setStatus("0");
 		return result;
@@ -111,5 +114,19 @@ public class NewsController {
 		result.setStatus("1");
 		return result;
 	}
+	
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public Results<String> deleteNews(@RequestParam(name="id",required=true)String id){
+		Results<String> result = new Results<String>();
+		int num = newsService.deletenews(id);
+		if(num>0){
+			result.setStatus("0");
+			return result;
+		}
+		result.setMessage("删除失败");
+		result.setStatus("1");
+		return result;
+	}
+	
 	
 }

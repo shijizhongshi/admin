@@ -2,6 +2,7 @@ package com.ola.qh.service.imp;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +26,19 @@ public class NewsService implements INewsService {
 	
 	
 	@Override
-	public List<News> selectNewList(int pageNo,int pageSize) {
+	public List<News> selectNewList(int pageNo,int pageSize,String title) {
 		// TODO Auto-generated method stub
-		return newsDao.selectNewList(pageNo,pageSize);
+		return newsDao.selectNewList(pageNo, pageSize, title, null);
 	}
 
-
+	public int selectNewListCount(String title){
+		return newsDao.selectNewListCount(null, title);
+	}
 	@Override
 	public News singlenews(String id) {
 		// TODO Auto-generated method stub
 		return newsDao.singlenews(id);
 	}
-
 
 	@Override
 	public int saveNews(News news) {
@@ -49,6 +51,12 @@ public class NewsService implements INewsService {
 	public int updateNews(News news) {
 		// TODO Auto-generated method stub
 		return newsDao.updateNews(news);
+	}
+
+	@Override
+	public int deletenews(String id) {
+		// TODO Auto-generated method stub
+		return newsDao.deletenews(id);
 	}
 
 }
