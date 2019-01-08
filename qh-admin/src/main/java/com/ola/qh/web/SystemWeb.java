@@ -20,4 +20,8 @@ public class SystemWeb {
 	public String zhuanti(){
 		return "system/zhuanti";
 	}
+	@RequestMapping("/fenlei")
+	public String fenlei(){
+		return "system/fenlei";
+	}
 }

@@ -112,19 +112,19 @@
 		<form id="myform">
 	<h3>添加章</h3>
 	
-		<div class=" select"  style="width: 370px;height:53px;border-bottom: 1px solid #F5F6F8;margin-top:3px;">
+		<div class=" select"  >
 			<input type="text" ng-model="chapter.courseChapterName" placeholder="请输入章名称" style="width: 230px;text-indent: 2em;" />
 			
 		</div>
-		<div class="select"  style="width: 405px;height:48px;margin-top:5px;">
+		<div class="select"  >
 			<input type="text" ng-model="chapter.courseLecturer"  class=""placeholder="主讲老师" style="text-indent: 2em;margin-right:15px;"/>
 		
 		</div>
-		<div class="select"  style="width: 405px;height:48px;margin-top:5px;">
+		<div class="select"  >
 			<input type="text" ng-model="chapter.courseSectionSize"  class="" placeholder="小节数" style="text-indent: 2em;margin-right:15px;"/>
 		
 		</div>
-		<div>
+		<div class="select">
 		选择课程
 		<select ng-model="chapter.courseId"  ng-options="item.id as item.courseName for item in courselist" ng-selected="selected==item.courseName">
 		</select>
@@ -148,6 +148,8 @@
 <style type="text/css">
 	.admin-table ol li{width: 16% }
 	.admin-table ol li:nth-child(1){width: 20%;}
+	.poop .select{clear: both !important;}
+	.poop {height:350px;}
 </style>
 </@b.body>
  </html>

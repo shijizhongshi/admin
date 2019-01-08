@@ -118,20 +118,16 @@
 		<form id="myform">
 	<h3>添加课程</h3>
 
-	<div class=" select">
-			<input type="text" ng-model="course.courseName" placeholder="请输入课程名称" style="width: 230px;text-indent: 2em;" />
-			<input type="file" value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" style="float: right;width:122px;"/>
-			<input type="hidden" ng-model="course.courseImg"/>
-			<img src="{{course.courseImg}}" style="width:50px;height:30px;"/>
-
+	<div class=" select" style="width: 100%;height:48px;">
+			<input type="text" ng-model="course.courseName" placeholder="请输入课程名称" style="margin-right:5%;" />
+				<input type="text" placeholder="输入课程年份"  ng-model="course.courseYear"/>
 		</div>
 		<div>
-		<div class="select"style="width: 405px;height:48px;margin-top:5px;">
-			<input type="text"  ng-model="course.coursePrice" placeholder="输入课程价格" style="text-indent: 2em;margin-right:15px;"/>
-			<input type="text" ng-model="course.courseDiscountPrice" placeholder="输入折扣价格" style="text-indent: 2em;"/>
+		<div class="select"style="width: 100%;height:48px;">
+			<input type="text"  ng-model="course.coursePrice" placeholder="输入课程价格" style="margin-right:5%;"/>
+			<input type="text" ng-model="course.courseDiscountPrice" placeholder="输入折扣价格" />
 		</div>
-		<div class=" select"style="width: 405px;">
-		<input type="text" placeholder="输入课程年份"  ng-model="course.courseYear" style="text-indent: 2em;"/></div>
+		
 		<div class=" select-2" style="float: left;margin-right:5%;width:35%; ">
 			<img src="/images/sjk-xl.png"/>
 			<span>是否展示</span>
@@ -175,6 +171,15 @@
 				<option ng-selected="course.courseUseDifference=='他人共用' " value="他人共用">他人共用</option>
 			</select>
 		</div>
+	
+		<div class="costs-uploadfile-div">   
+				 <input type="file" name="file" id="fileField"   accept="image/*"  value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" /> 
+   <input type="hidden" ng-model="course.courseImg"/>
+    <button class="allBtn costs-marl15" >班级图片</button>
+    <div style="height:100px;width:40%;">
+    <img  src="{{course.courseImg}}" style="height:100px;" /></div>
+        </div>
+		
 		<div class="end">
 			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;"/>
 			<input name="git" type="submit" value="修改" ng-show="courseId!=null" ng-click="addCourse()" style="background:#5ED8A9;"/>

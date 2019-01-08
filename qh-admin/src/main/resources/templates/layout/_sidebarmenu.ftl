@@ -59,6 +59,11 @@
                                 <span class="title">专题活动</span>
                             </a>
                         </li>
+                         <li id="sidebarmenu-system-fenlei">
+                            <a href="/web/system/fenlei">
+                                <span class="title">分类管理</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li id="sidebarmenu-course">
