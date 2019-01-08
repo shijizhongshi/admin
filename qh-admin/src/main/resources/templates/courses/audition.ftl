@@ -9,7 +9,7 @@
 <@b.body menu="sidebarmenu-course"
 submenu="sidebarmenu-course-audition">
 <div ng-controller="CourseNofreeController">
-	<div ng-controller="CourseController">
+	
 		<div>
 			<div class="classify">
 				<ul class="menu">
@@ -17,7 +17,7 @@ submenu="sidebarmenu-course-audition">
 					<li class="list" ng-click="typeList(1)">医师资格
 						<ul class="items" ng-class="{'active':active==1}">
 							<li ng-repeat="sub in courseTypeSubclass"
-								ng-click="auditionSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+								ng-click="auditionSub('医师资格',sub)"  ng-class="{'selected':selected==sub}" >{{sub.courseTypeSubclassName}}</li>
 
 						</ul>
 					</li>
@@ -137,7 +137,7 @@ submenu="sidebarmenu-course-audition">
 									<div class="grade-left" style="padding-right: 5%;">
 
 										<div class=" select-2">
-											<span>班级名称：</span> <input type="text" class=""
+											<span>班级名称：</span> <input type="text" ng-model="courseNofree.courseName"
 												placeholder="请输入班级名称" style="width: 230px;" />
 										</div>
 
@@ -145,47 +145,44 @@ submenu="sidebarmenu-course-audition">
 											<div class=" select-2" style="float: left;">
 												<img src="/images/sjk-xl.png" /> <span>分类：</span> <select>
 													<option disabled selected style='display: none;'>选择类型</option>
-													<option></option>
-													<option></option>
+													<option ng-model="courseNofree.courseResourceType"></option>
+													
 												</select>
 											</div>
 											<div class=" select-2" style="float: right;">
 												<img src="/images/sjk-xl.png" /> <span>课程用途：</span> <select>
-													<option disabled selected style='display: none;'>选择类型</option>
-													<option></option>
-													<option></option>
+													<option disabled selected style='display: none;'>选择课程用途</option>
+													<option ng-model="courseNofree.courseUseDifference"></option>
+													
 												</select>
 											</div>
 										</div>
 										<div style="width: 100%; height: 90px; clear: both;">
 											<div class=" select-2">
 
-												<span>播放时长（分）：</span> <input type="text" class=""
+												<span>播放时长（分）：</span> <input type="text" ng-model="courseNofree.courseUseDifference"
 													placeholder="请输入时长" />
 											</div>
 										</div>
 										<div style="width: 100%; height: 90px; clear: both;">
 											<div class=" select-2">
-												<span>老师：</span> <input type="text" class=""
-													placeholder="请输选择老师" /> <i onclick="showDiv2()"
+												<span>老师：</span> <input type="text" ng-model="courseNofree.teachers"
+													placeholder="请选择老师" /> <i onclick="showDiv2()"
 													style="position: absolute; right: 10px; top: 45px; display: inherit; cursor: pointer;"
 													class="glyphicon glyphicon-search"></i>
 											</div>
 										</div>
 										<ul>
 											<li>是否推荐</li>
-											<li><input type="radio" name="tuijian" /> 是</li>
+											<li><input type="radio" name="tuijian" />是</li>
 											<li><input type="radio" name="tuijian" />否</li>
 										</ul>
 										<div class="costs-uploadfile-div">
-											<input type="file" name="file" id="fileField"
-												onchange="document.getElementById('textfield').value=this.value"
-												accept="image/*" /> <input type='text' id="textfield"
-												style="border: solid 1px #B1B1B1;" />
-											<button class="allBtn costs-marl15">班级图片</button>
+											<input type="file" value="上传试听课图片" onchange="angular.element(this).scope().uploadmainimage(this)" >
+											<input type="hidden" ng-model="courseNofree.imgUrl"/>
 											<div
 												style="height: 130px; width: 40%; border: solid 1px #B1B1B1; margin-top: 3px;">
-												<img />
+												<img src="{{courseNofree.imgUrl}}" style="width:50px;height:30px;"/>
 											</div>
 										</div>
 
@@ -377,7 +374,7 @@ div.costs-uploadfile-div .allBtn {
 	color: #fff;
 }
 </style>
-	</div>
+	
 </div>
 </@b.body>  
 </html>
