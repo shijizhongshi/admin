@@ -48,7 +48,8 @@ color:red;
  .show li{float: left;margin-left: 18px;cursor: pointer;width:8%;height: 30px;border-radius: 30px;color: white; text-align: center;line-height: 30px;font-size:16px;background:#8A959B;font-size:1.4rem;}
 
 .admin-table{width:90%;height:auto;border: 1px solid #B1B1B1;margin:0 auto;border-radius:10px;overflow: hidden;}
-.admin-table table tr th{text-align: center; height:42px;line-height: 42px;border-right:1px solid #F2F2F2 ;margin:0;font-size:1.3rem;}
+.admin-table table tr th{text-align: center; height:50px;line-height: 50px;border-right:1px solid #F2F2F2 ;margin:0;font-size:1.3rem;}
+.admin-table table tr th img{height:50px;}
 .admin-table table{width:100%;border-collapse:collapse;}
  .admin-table table tr{width:100%;height: 42px;margin-bottom:0;border-bottom:1px solid #dbdbdb;}
 
@@ -142,6 +143,7 @@ div.costs-uploadfile-div .allBtn{
     border: none;
     color: #fff;
     }
+    .costs-uploadfile-div input{width:80%;}
  .costs-uploadfile-div img:ACTIVE{ transform: scale(7.0);position: fixed;z-index: 9999;}
 .costs-uploadfile-div img{height:100px;}
 .costs-img{height:100px;}

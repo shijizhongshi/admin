@@ -118,6 +118,16 @@
                                 <span class="title">服务店铺</span>
                             </a>
                         </li>
+                        <li id="sidebarmenu-league-shangpin">
+                            <a href="/web/league/shangpin">
+                                <span class="title">商品店铺</span>
+                            </a>
+                        </li>
+                        <li id="sidebarmenu-league-yishi">
+                            <a href="/web/league/yishi">
+                                <span class="title">医师管理</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                

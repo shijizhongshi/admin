@@ -11,5 +11,12 @@ public class league {
 	public String fuwu(){
 		return "league/fuwu";
 	}
-	
+	@RequestMapping("/shangpin")
+	public String shangpin(){
+		return "league/shangpin";
+	}
+	@RequestMapping("/yishi")
+	public String yishi(){
+		return "league/yishi";
+	}
 }
