@@ -17,7 +17,7 @@ submenu="sidebarmenu-course-audition">
 					<li class="list" ng-click="typeList(1)">医师资格
 						<ul class="items" ng-class="{'active':active==1}">
 							<li ng-repeat="sub in courseTypeSubclass"
-								ng-click="auditionSub('医师资格',sub)"  >{{sub.courseTypeSubclassName}}</li>
+								ng-click="auditionSub('医师资格',sub)"  ng-class="{'selected':selected==sub}" >{{sub.courseTypeSubclassName}}</li>
 
 						</ul>
 					</li>
@@ -241,12 +241,14 @@ submenu="sidebarmenu-course-audition">
 								<div class="admin-table">
 									<table>
 										<tr>
+											<th>选择</th>
 											<th>教师名称</th>
 											<th>教师图片</th>
 											<th>	讲授课程</th>
 										</tr>
-										<tr ng-repeat="t in teacherlist"  ng-click="checkteacher(t)"   ng-class="{'selected':selected==t}">
-											<th >{{t.name}}</th>
+										<tr ng-repeat="t in teacherlist"  ng-click="checkedteacher(t)"ng-class="{'selected':selected==t}">
+											<th><input type="radio" ng-model="t.name"  ng-value="teachers" name="teacher"></th>
+											<th>{{t.name}}</th>
 											<th><img ng-src="{{t.imgUrl}}" style="width:50px;height:30px;"/></th>
 											<th>{{t.courseTypeSubclassNames}}</th>
 										</tr>
@@ -263,7 +265,7 @@ submenu="sidebarmenu-course-audition">
 
 							</form>
 							<div class="end" style="clear: both;">
-								<input name="git" type="submit" value="提交" ng-click="addteacher(t)" ng-if="id==null"
+								<input name="git" type="submit" value="提交" ng-click="addteacher()" ng-if="id==null"
 									style="background: #5ED8A9;" />
 								<input name="esc" type="reset"
 									value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
@@ -376,8 +378,6 @@ div.costs-uploadfile-div .allBtn {
 	border: none;
 	color: #fff;
 }
-
-
 </style>
 	
 </div>
