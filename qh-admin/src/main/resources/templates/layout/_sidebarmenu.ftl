@@ -130,7 +130,44 @@
                         </li>
                     </ul>
                 </li>
-               
+                   <li id="sidebarmenu-indent" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">订单管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-indent-dingdan">
+                            <a href="/web/indent/dingdan">
+                                <span class="title">订单查询</span>
+                            </a>
+                        </li>
+                          <li id="sidebarmenu-indent-today-bargain">
+                            <a href="/web/indent/today-bargain">
+                                <span class="title">今日成交</span>
+                            </a>
+                        </li>
+                         </ul>
+                </li>
+                      <li id="sidebarmenu-user" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">用户管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-user-tixian">
+                            <a href="/web/user/tixian">
+                                <span class="title">用户提现</span>
+                            </a>
+                        </li>
+                          <li id="sidebarmenu-user-userinfo">
+                            <a href="/web/user/userinfo">
+                                <span class="title">用户信息</span>
+                            </a>
+                        </li>
+                         </ul>
+                </li>
+                
+                
              </ul>
              
         </div>

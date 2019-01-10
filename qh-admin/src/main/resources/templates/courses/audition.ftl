@@ -7,7 +7,7 @@
 <script src="/scripts/course/audition.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course"
-submenu="sidebarmenu-course-audition">
+submenu="sidebarmenu-audition">
 <div ng-controller="CourseNofreeController">
 	
 		<div>
@@ -106,7 +106,7 @@ submenu="sidebarmenu-course-audition">
 								<tr ng-repeat="a in auditionlist" ng-click="checkedAudition(a)"
 									ng-class="{'selected':selected==a}">
 									<th>{{a.courseResourceType}}</th>
-									<th>{{a.imgUrl}}</th>
+									<th><img src="{{a.imgUrl}}" /></th>
 									<th>{{a.courseName}}</th>
 									<th>{{a.teachers}}</th>
 									<th>{{a.palyTime}}</th>
@@ -179,7 +179,7 @@ submenu="sidebarmenu-course-audition">
 													style="position: absolute; right: 10px; top: 45px; display: inherit; cursor: pointer;"
 													class="glyphicon glyphicon-search">
 													</i>
-												<input type="text"  ng-model="courseNofree.teachers" disabled="disabled"/> 
+												<input type="text"  ng-model="teachersName" disabled="disabled"/> 
 													
 											</div>
 										</div>
@@ -263,7 +263,7 @@ submenu="sidebarmenu-course-audition">
 
 							</form>
 							<div class="end" style="clear: both;">
-								<input name="git" type="submit" value="提交" ng-click="addteacher(t)" ng-if="id==null"
+								<input name="git" type="submit" value="提交" ng-click="addteacher(t)" 
 									style="background: #5ED8A9;" />
 								<input name="esc" type="reset"
 									value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
@@ -305,7 +305,7 @@ submenu="sidebarmenu-course-audition">
 .grade-left, .grade-center {
 	width: 50%;
 	float: left;
-	height: 600px;
+	height: auto;
 	overflow: auto;
 }
 

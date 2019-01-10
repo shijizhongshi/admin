@@ -98,12 +98,13 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		})
 	};
 $scope.news=$sce.trustAsResourceUrl;
-	
+$scope.teachersName=null;
 	
 	////保存
 	$scope.addAudition=function(){
-		
+		$scope.courseNofree.teachers=$scope.teachersName;
 		$scope.courseNofree.aliyunId=$scope.aliyunId;
+		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
@@ -134,6 +135,7 @@ $scope.news=$sce.trustAsResourceUrl;
 		$scope.selected=a;
 		$scope.courseNofree=a;
 		$scope.teachers=a.teachers;
+		$scope.teachersName=a.teachers;
 		$scope.id=a.id;
 		
 	};
@@ -151,6 +153,7 @@ $scope.news=$sce.trustAsResourceUrl;
 	};
 ////修改
 	$scope.updateAudition=function(){
+		$scope.courseNofree.teachers=$scope.teachersName;
 		$http.post("/api/coursenofree/update",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -215,14 +218,11 @@ $scope.news=$sce.trustAsResourceUrl;
 		$scope.courseTeacher.id=t.id;
 		$scope.courseTeacher.name=t.name;
 		
+		$scope.teachersName=t.name;
 		
-		$scope.checkteacher1($scope.courseTeacher.name);
 	};
+	$scope.teachersName=null;
 	
-	$scope.checkteacher1=function(teacher){
-		$scope.courseNofree.teacher=teacher;
-		
-	}
 	$scope.addteacher=function(){
 		
 	
