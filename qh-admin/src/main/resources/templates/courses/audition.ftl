@@ -7,7 +7,7 @@
 <script src="/scripts/course/audition.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course"
-submenu="sidebarmenu-course-audition">
+submenu="sidebarmenu-audition">
 <div ng-controller="CourseNofreeController">
 	
 		<div>
@@ -305,7 +305,7 @@ submenu="sidebarmenu-course-audition">
 .grade-left, .grade-center {
 	width: 50%;
 	float: left;
-	height: 600px;
+	height: auto;
 	overflow: auto;
 }
 
