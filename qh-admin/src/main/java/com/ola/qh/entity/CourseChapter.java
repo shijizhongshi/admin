@@ -38,7 +38,17 @@ public class CourseChapter {
 	
 	private Date updatetime;
 	
+	private String chapterOrders;//////章排序
 	
+	
+
+	public String getChapterOrders() {
+		return chapterOrders;
+	}
+
+	public void setChapterOrders(String chapterOrders) {
+		this.chapterOrders = chapterOrders;
+	}
 
 	public String getCourseSectionSize() {
 		return courseSectionSize;

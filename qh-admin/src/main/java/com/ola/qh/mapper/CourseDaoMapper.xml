@@ -66,7 +66,6 @@
 	<result column="course_name" property="courseName"/>
 	<result column="course_type_name" property="courseTypeName"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
-	<result column="course_chapter_size" property="courseChapterSize"/>
 	<result column="course_price" property="coursePrice"/>
 	<result column="course_discount_price" property="courseDiscountPrice"/>
 	<result column="course_year" property="courseYear"/>
@@ -81,14 +80,14 @@
 	</resultMap>
 	
 	<sql id="sql_base">
-	id,course_name,course_type_name,course_type_subclass_name,course_chapter_size,
+	id,course_name,course_type_name,course_type_subclass_name,
 	course_price,course_discount_price,course_year,course_show,course_excellent,course_img
 	,course_resource_type,course_use_difference,addtime
 	</sql>
 	
 	<insert id="insertCourse" parameterType="com.ola.qh.entity.Course">
 	insert into course(<include refid="sql_base"></include>,user_id)
-	values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},#{courseChapterSize},
+	values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},
 	#{coursePrice},#{courseDiscountPrice},#{courseYear},#{courseShow},#{courseExcellent},#{courseImg},
 	#{courseResourceType},#{courseUseDifference},#{addtime},#{userId}
 	)
@@ -103,9 +102,6 @@
 	</if>
 	<if test="courseTypeSubclassName!=null">
 	course_type_subclass_name=#{courseTypeSubclassName},
-	</if>
-	<if test="courseChapterSize!=0">
-	course_chapter_size=#{courseChapterSize},
 	</if>
 	<if test="coursePrice>0">
 	course_price=#{coursePrice},

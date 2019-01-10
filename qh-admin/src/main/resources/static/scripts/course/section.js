@@ -23,16 +23,30 @@ app.controller("sectionController", function($scope, $http){
 	
 	$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
-	    var fd = new FormData();
-	    fd.append("file", file.files[0]);
-		$http.post("/api/upload/single",fd,{
-	        withCredentials: true,
-	        headers: {'Content-Type': undefined },
-	        transformRequest: angular.identity
-	    })
-	    .success(function(data){
-	    	$scope.section.aliyunId=data.data;
-		})
+		var formData = new FormData();
+		formData.append('Filedata', $('#file')[0].files[0]);
+		formData.append("writetoken","a1df864b-405e-4782-9494-733e9b51c5d5");
+		formData.append("JSONRPC","{'title': '标题', 'tag':'标签','desc':'描述'}");
+		$.ajax({
+		    url: 'https://v.polyv.net/uc/services/rest?method=uploadfile',
+		    type: 'POST',
+		    data: formData,
+		    cache: false,
+		    processData: false,
+		    contentType: false
+		}).success(function(res) {
+			
+			if(res.error=="0"){
+				alert("上传成功~");
+				$scope.videoId = res.data[0].vid;
+				$scope.videoUrl = res.data[0].mp4;
+				
+			}else{
+				alert(res.error);		
+			}
+		}).fail(function(res) {
+			
+		});
 	};
 	
 	////////////////以上是通过不同的条件查章节的集合的	
@@ -40,6 +54,8 @@ app.controller("sectionController", function($scope, $http){
 	
 	$scope.addSection=function(){
 		$scope.section.id=$scope.sectionId;
+		$scope.section.videoId=$scope.videoId;
+		$scope.section.videoUrl=$scope.videoUrl;
 		$scope.section.courseChapterId=$("#chapterId").val();
 		$http.post("/api/course/subclass/courseSection/saveUpdate",$scope.section,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){

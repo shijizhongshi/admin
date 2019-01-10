@@ -22,12 +22,27 @@ public class CourseSection {
 	private String sectionName;
 	
 	private String isshow;
-	@NotEmpty(message="视频连接不能为空")
+	
 	private String aliyunId;
+	@NotEmpty(message="视频id不能为空")
+	private String videoId;////保利威返回的视频的id
+	
+	@NotEmpty(message="视频路径不能为空")
+	private String videoUrl;////保利威返回的视频路径
 	
 	private Date addtime;
 	
 	private Date updatetime;
+	
+	private int sectionOrders;///第1节 第2节
+
+	public int getSectionOrders() {
+		return sectionOrders;
+	}
+
+	public void setSectionOrders(int sectionOrders) {
+		this.sectionOrders = sectionOrders;
+	}
 
 	public String getId() {
 		return id;
@@ -84,6 +99,22 @@ public class CourseSection {
 
 	public void setCourseChapterId(String courseChapterId) {
 		this.courseChapterId = courseChapterId;
+	}
+
+	public String getVideoId() {
+		return videoId;
+	}
+
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
+	}
+
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
 	

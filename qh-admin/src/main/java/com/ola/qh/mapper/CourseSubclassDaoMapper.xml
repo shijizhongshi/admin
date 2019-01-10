@@ -12,15 +12,16 @@
 	<result column="course_id" property="courseId"/>
 	<result column="course_chapter_name" property="courseChapterName"/>
 	<result column="course_lecturer" property="courseLecturer"/>
-	<result column="course_section_size" property="courseSectionSize"/><!-- 是否付费 -->
+	<!-- 是否付费 -->
 	<result column="course_type_name" property="courseTypeName"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
+	
 	<result column="addtime" property="addtime"/>
 	</resultMap>
 	
 	<insert id="insertCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
-	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_section_size,course_type_name,course_type_subclass_name,addtime)
-	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseSectionSize},#{courseTypeName},#{courseTypeSubclassName},#{addtime})
+	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime)
+	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime})
 	</insert>
 	<update id="updateCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
 	update course_chapter set 
@@ -30,12 +31,10 @@
 	<if test="courseChapterName!=null">
 	course_chapter_name=#{courseChapterName},
 	</if>
-	<if test="courseSectionSize!=0">
-	course_section_size=#{courseSectionSize},
-	</if>
 	<if test="courseLecturer!=null">
 		course_lecturer=#{courseLecturer},
 	</if>
+	
 	updatetime=#{updatetime} where id=#{id}
 	</update>
 	
@@ -90,13 +89,15 @@
 	<result column="course_chapter_id" property="courseChapterId"/>
 	<result column="section_name" property="sectionName"/>
 	<result column="aliyunId" property="aliyunId"/>
+	<result column="video_id" property="videoId"/>
+	<result column="video_url" property="videoUrl"/>
 	<result column="isshow" property="isshow"/>
 	<result column="addtime" property="addtime"/>
 	</resultMap>
 	
 	<insert id="insertCourseSection" parameterType="com.ola.qh.entity.CourseSection">
-	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime)
-	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime})
+	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url)
+	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl})
 	</insert>
 	
 	<update id="updateCourseSection" parameterType="com.ola.qh.entity.CourseSection">
@@ -113,12 +114,19 @@
 	<if test="isshow!=null">
 	isshow=#{isshow},
 	</if>
+	<if test="videoId!=null">
+	video_id=#{videoId},
+	</if>
+	<if test="videoUrl!=null">
+	video_url=#{videoUrl},
+	</if>
+	
 	updatetime=#{updatetime} where id=#{id}
 	</update>
 	
 	<!-- 课程节的查询 -->
 	<select id="courseSectionList" resultMap="CourseSectionMap">
-	select id,course_chapter_id,section_name,aliyunId,isshow,addtime from course_section
+	select * from course_section
 	where 1=1
 	<if test="courseChapterId!=null">
 	and  course_chapter_id=#{courseChapterId}
