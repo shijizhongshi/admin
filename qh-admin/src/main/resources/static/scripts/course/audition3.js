@@ -1,7 +1,9 @@
 app.controller("CourseNofreeController",function($scope,$http,$sce){
 	
 	
-	$scope.total = 0;
+	$scope.teachers=null;
+	
+   $scope.total = 0;
    //当前的页数
    $scope.page = 1;
    //一页显示多少条
@@ -48,6 +50,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 
 	$scope.auditionSub=function(typename,sub){
 		////////查课程的集合
+		$scope.selected=sub;
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.auditionBases();
@@ -102,10 +105,8 @@ $scope.news=$sce.trustAsResourceUrl;
 	
 	////保存
 	$scope.addAudition=function(){
-		
-		$scope.courseNofree.aliyunId=$scope.aliyunId;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
-		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
+		$scope.courseNofree.courseTypeSubclassName=$scope.courseNofree.courseTypeName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -127,15 +128,13 @@ $scope.news=$sce.trustAsResourceUrl;
 		
 		
 	};
-	
 	///////做选中的时候用
 	$scope.checkedAudition=function(a){
-		
 		$scope.selected=a;
 		$scope.courseNofree=a;
 		$scope.teachers=a.teachers;
 		$scope.id=a.id;
-		
+		alert($scope.teachers);
 	};
 	
 	
@@ -193,40 +192,25 @@ $scope.news=$sce.trustAsResourceUrl;
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.teacherlist=data.data;
-				$scope.courseTeacher=$scope.teacherlist;
+				
 			}
 		})
 			
 		}
-	
 	$scope.showteacher=function(courseTypeSubclassName){
-		
+		$scope.courseTypeName=null;
 		document.getElementById('revise').style.display="block"; 
+		$scope.courseTypeSubclassName=courseTypeSubclassName;
 		
 		$scope.teacherList();
 		
 	}
 	
-///////做选中的时候用
-	$scope.checkteacher=function(t){
-		
-		$scope.selected=t;
-		$scope.courseTeacher=t;
-		$scope.courseTeacher.id=t.id;
-		$scope.courseTeacher.name=t.name;
-		
-		
-		$scope.checkteacher1($scope.courseTeacher.name);
-	};
+	$scope.teacherId=null;
 	
-	$scope.checkteacher1=function(teacher){
-		$scope.courseNofree.teacher=teacher;
+$scope.addteacher=function(){
 		
-	}
-	$scope.addteacher=function(){
-		
-	
-		if($scope.courseTeacher.id!=null){
+		if($scope.teacherId!=null){
 			document.getElementById('revise').style.display="none"; 
 			
 		}
@@ -236,6 +220,3 @@ $scope.news=$sce.trustAsResourceUrl;
 		}
 	};
 });
-	
-	
-
