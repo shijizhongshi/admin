@@ -27,8 +27,8 @@
 								<input type="date" name="search"/>
 						</div>
 						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
-							<span class="glyphicon glyphicon-hand-right"></span>
-								&nbsp;<span class="glyphicon glyphicon-hand-left"></span>
+							
+								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
 						</div>
 						<div class="select-3">
 							<span>&nbsp;</span>
