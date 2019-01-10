@@ -104,6 +104,7 @@ $scope.teachersName=null;
 	$scope.addAudition=function(){
 		$scope.courseNofree.teachers=$scope.teachersName;
 		$scope.courseNofree.aliyunId=$scope.aliyunId;
+		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})

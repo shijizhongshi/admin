@@ -106,7 +106,7 @@ submenu="sidebarmenu-course-audition">
 								<tr ng-repeat="a in auditionlist" ng-click="checkedAudition(a)"
 									ng-class="{'selected':selected==a}">
 									<th>{{a.courseResourceType}}</th>
-									<th>{{a.imgUrl}}</th>
+									<th><img src="{{a.imgUrl}}" /></th>
 									<th>{{a.courseName}}</th>
 									<th>{{a.teachers}}</th>
 									<th>{{a.palyTime}}</th>
