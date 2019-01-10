@@ -50,13 +50,18 @@
                         </li>
                        
                         <li id="sidebarmenu-system-zixun">
-                            <a href="/web/system/zixun">
+                            <a href="/web/system/news">
                                 <span class="title">咨询/话题&nbsp;管理</span>
                             </a>
                         </li>
-                        <li id="sidebarmenu-system-zhuanti">
+                     <!--   <li id="sidebarmenu-system-zhuanti">
                             <a href="/web/system/zhuanti">
                                 <span class="title">专题活动</span>
+                            </a>
+                        </li> --> 
+                         <li id="sidebarmenu-system-fenlei">
+                            <a href="/web/system/fenlei">
+                                <span class="title">分类管理</span>
                             </a>
                         </li>
                     </ul>
@@ -102,6 +107,30 @@
                         </li>
                     </ul>
                 </li>
+                <li id="sidebarmenu-league" >
+                    <a>
+                        <i class="linecons-cog"></i>
+                        <span class="title">加盟商管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-league-fuwu">
+                            <a href="/web/league/fuwu">
+                                <span class="title">服务店铺</span>
+                            </a>
+                        </li>
+                        <li id="sidebarmenu-league-shangpin">
+                            <a href="/web/league/shangpin">
+                                <span class="title">商品店铺</span>
+                            </a>
+                        </li>
+                        <li id="sidebarmenu-league-yishi">
+                            <a href="/web/league/yishi">
+                                <span class="title">医师管理</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+               
              </ul>
              
         </div>

@@ -47,9 +47,6 @@
         <script src="/assets/js/xenon-custom.js"></script>
         <script src="/assets/js/md5-min.js"></script>
         <script src="/scripts/layout/app.js"></script>
-     <script src="/assets/js/ueditor/ueditor.config.js"></script>
-    <script  src="/assets/js/ueditor/ueditor.all.min.js"></script>
-    <script  src="/assets/js/ueditor/lang/zh-cn/zh-cn.js"></script>
         
     </head>
 </#macro>

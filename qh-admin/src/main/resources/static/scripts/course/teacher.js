@@ -101,7 +101,9 @@ app.controller("teacherController", function($scope, $http){
 		})
 	}
 	
-	
+	$scope.test=function(){
+		alert("$scope.");
+	}
 	$scope.teacherBases();
 	
 	$scope.uploadmainimage = function(file){

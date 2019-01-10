@@ -15,7 +15,7 @@
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
-		<li>教师管理</li>
+		<li>教师管理<div ng-click="test()">教师管理</div></li>
 		</ul>
 	</div>
 <div class="details-frame" >

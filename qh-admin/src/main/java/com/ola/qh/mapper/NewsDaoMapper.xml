@@ -14,6 +14,7 @@
 	<result column="addtime" property="addtime"/>
 	<result column="isstick" property="isstick"/>
 	<result column="isrecommend" property="isrecommend"/>
+	<result column="status" property="status"/>
 	</resultMap>
 
 
@@ -21,8 +22,8 @@
 	id,types,title,img_url,addtime,isstick
 	</sql>
 	<insert id="saveNews" parameterType="com.ola.qh.entity.News">
-	insert into news(id,types,content_types,title,img_url,content,addtime,isstick,isrecommend)values
-	(#{id},#{types},#{contentTypes},#{title},#{imgUrl},#{content},#{addtime},#{isstick},#{isrecommend})
+	insert into news(id,types,content_types,title,img_url,content,addtime,isstick,isrecommend,typename)values
+	(#{id},#{types},#{contentTypes},#{title},#{imgUrl},#{content},#{addtime},#{isstick},#{isrecommend},#{typename})
 	</insert>
 
 	<update id="updateNews" parameterType="com.ola.qh.entity.News">
@@ -42,30 +43,49 @@
 	<if test="content!=null">
 	content=#{content},
 	</if>
-	<if test="isstick!=0">
-	isstick=#{isstick},
+	<if test="status!=null">
+	status=#{status},
 	</if>
-	<if test="isrecommend!=0">
+	<if test="isrecommend!=null">
 	isrecommend=#{isrecommend},
+	</if>
+	<if test="typename!=null">
+	typename=#{typename},
 	</if>
 	id=#{id}
 	where id=#{id}
 	</update>
 	
-	<select id="selectNewList" resultMap="NewsMap" parameterType="int">
-		select <include refid="sql_base"></include> from news
+	<select id="selectNewList" resultMap="NewsMap">
+		select * from news where 1=1
+		<if test="contentTypes!=null">
+		and content_types=#{contentTypes}
+		</if>
+		<if test="title!=null and title!='' ">
+		and title like concat(concat("%",title,"%"))
+		</if>
 		<if test="pageNo!=0">
-			where content_types=#{contentTypes} limit #{pageNo},#{pageSize}  
+			limit #{pageNo},#{pageSize}  
 		</if>
 	</select>
 
-
+	<select id="selectNewListCount" resultType="int">
+		select count(id) from news where 1=1
+		<if test="contentTypes!=null">
+		and content_types=#{contentTypes}
+		</if>
+		<if test="title!=null and title!='' ">
+		and title like concat(concat("%",title,"%"))
+		</if>
+	</select>
 	<select id="singlenews" parameterType="String" resultType="com.ola.qh.entity.News">
 		select * from news
 		where id=#{id}
 	</select>
 	
-	
+	<delete id="deletenews">
+	delete from news where id=#{id}
+	</delete>
 	
 
 

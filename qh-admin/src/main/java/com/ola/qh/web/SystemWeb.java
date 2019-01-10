@@ -11,7 +11,7 @@ public class SystemWeb {
 	public String banner(){
 		return "system/banner";
 	}
-	@RequestMapping("/zixun")
+	@RequestMapping("/news")
 	public String zixun(){
 		return "system/zixun";
 	}
@@ -19,5 +19,9 @@ public class SystemWeb {
 	@RequestMapping("/zhuanti")
 	public String zhuanti(){
 		return "system/zhuanti";
+	}
+	@RequestMapping("/fenlei")
+	public String fenlei(){
+		return "system/fenlei";
 	}
 }
