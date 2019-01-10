@@ -179,7 +179,7 @@ submenu="sidebarmenu-course-audition">
 													style="position: absolute; right: 10px; top: 45px; display: inherit; cursor: pointer;"
 													class="glyphicon glyphicon-search">
 													</i>
-												<input type="text"  ng-model="courseNofree.teachers" disabled="disabled"/> 
+												<input type="text"  ng-model="teachersName" disabled="disabled"/> 
 													
 											</div>
 										</div>
@@ -263,7 +263,7 @@ submenu="sidebarmenu-course-audition">
 
 							</form>
 							<div class="end" style="clear: both;">
-								<input name="git" type="submit" value="提交" ng-click="addteacher(t)" ng-if="id==null"
+								<input name="git" type="submit" value="提交" ng-click="addteacher(t)" 
 									style="background: #5ED8A9;" />
 								<input name="esc" type="reset"
 									value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
