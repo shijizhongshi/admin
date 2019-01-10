@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ola.qh.polyv.Tester;
 import com.ola.qh.service.IStoreService;
 import com.ola.qh.util.Results;
 
@@ -48,6 +49,17 @@ public class UploadStoreController {
 		}
 		result.setStatus("0");
 		result.setData(items);
+		return result;
+	}
+	
+	
+	@RequestMapping(value = "/api/upload/video", method = RequestMethod.GET)
+	public Results<String> uploadVideo(@RequestParam(value = "file", required = true) String file)
+			throws Exception {
+		Results<String> result = new Results<String>();
+		Tester t=new Tester();
+		System.out.println(file);
+//		
 		return result;
 	}
 }
