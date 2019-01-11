@@ -4,12 +4,12 @@
 <html lang="en">
 <@h.header title="分类管理"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/course/grade-template.js"></script>
+<script src="/scripts/system/fenlei.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-system"
-submenu="web-system-fenlei">
-<div >
+<@b.body menu="sidebarmenu-system" submenu="web-system-fenlei">
+<div ng-controller="ShopDrugCategoryController">
+<div>
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -22,26 +22,21 @@ submenu="web-system-fenlei">
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content" id="details-frame-content">
-<ul><li>热卖专区</li>
-	<li>医疗器械</li>
-	<li>母婴专场</li>
-	<li>美妆个护</li>
-	<li>海外精选</li>
-	<li>成人用品</li>
-	<li>中药养生</li>
-	<li>营养保健</li>
-	<li>实用百货</li>
+				<ul   >
+					<li ng-repeat="s in shopDrugCategory" ng-click="checkedShopcate(s)" ng-class="{'selected':selected==s}">{{s.categoryName}}</li>
+					
 
-		<ul class="add-fenlei" onclick="showDiv()"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加分类</ul>	
-</ul>
-		
-	
+					<ul class="add-fenlei" onclick="showDiv()">
+						<span class="glyphicon glyphicon-plus"></span>&nbsp;添加分类
+					</ul>
+				</ul>
+
+
 			</div>
 			<div class="manage">
 				<ul style="height: 80px;" class="show">
-                     <li style="background: none;color: black;"><b>食品百货管理</b></li>
-					<li onclick="showDiv()"
-						style=" background: #9DE879;"><span
+					<li style="background: none; color: black;"><b>食品百货管理</b></li>
+					<li onclick="showDiv()" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
@@ -102,16 +97,19 @@ submenu="web-system-fenlei">
 						<h3>添加分类</h3>
 						<div class="template-add">
 							<div class="select-2">
-								<span>分类名称</span>
-								<input type="text" />
+								<span>分类名称</span> <input type="text" />
 							</div>
-							<div class="costs-uploadfile-div">   
-	 <input type="file" name="file" id="fileField"  onchange="document.getElementById('textfield').value=this.value"  accept="image/*" /> 
- <button class="allBtn costs-marl15">封面图片</button> <input type='text' id="textfield"  /> 
-    <div style="height:130px;width:40%;margin-top:3px;">
-    <img style="height:130px;" /></div>
-        </div>	
+							<div class="costs-uploadfile-div">
+								<input type="file" name="file" id="fileField"
+									onchange="document.getElementById('textfield').value=this.value"
+									accept="image/*" />
+								<button class="allBtn costs-marl15">封面图片</button>
+								<input type='text' id="textfield" />
+								<div style="height: 130px; width: 40%; margin-top: 3px;">
+									<img style="height: 130px;" />
+								</div>
 							</div>
+						</div>
 					</form>
 					<div class="end">
 						<input name="git" type="submit" value="提交"
@@ -121,7 +119,7 @@ submenu="web-system-fenlei">
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 
 </div>
 
@@ -129,41 +127,87 @@ submenu="web-system-fenlei">
 <style type="text/css">
 .poop {
 	overflow-y: auto;
-	width: 25%; height: 400px; position: absolute; left: 25%; top: 10%; display:none;
+	width: 25%;
+	height: 400px;
+	position: absolute;
+	left: 25%;
+	top: 10%;
+	display: none;
 }
 
 .poop span {
 	font-size: 1.5rem;
 }
 
-.details-frame-content{height:160px;overflow-y: scroll;padding-bottom: 0;}
-.details-frame-content ul li{float: left;width:10%;height: 45px;text-align: center;line-height: 45px;margin-right: 2%;background:#F3F3F3;margin-bottom: 8px;font-size: 1.5rem;cursor: pointer;}
-.details-frame-content .add-fenlei{float: left;border-radius: 20px;background:#F3F3F3; height: 30px;line-height: 30px; margin-top: 10px;font-size:1.2rem;padding:0 15px;cursor: pointer; }
-.admin-table tr:nth-child(2n-1){background:#F3F4F6 !important;}
+.details-frame-content {
+	height: 160px;
+	overflow-y: scroll;
+	padding-bottom: 0;
+}
 
-.admin-table tr:nth-child(2n){background:#FFFFFF;}
-.admin-table tr th:last-child{color: red;}
-.admin-table tr th{cursor:pointer;}
+.details-frame-content ul li {
+	float: left;
+	width: 10%;
+	height: 45px;
+	text-align: center;
+	line-height: 45px;
+	margin-right: 2%;
+	background: #F3F3F3;
+	margin-bottom: 8px;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+.details-frame-content .add-fenlei {
+	float: left;
+	border-radius: 20px;
+	background: #F3F3F3;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 10px;
+	font-size: 1.2rem;
+	padding: 0 15px;
+	cursor: pointer;
+}
+
+.admin-table tr:nth-child(2n-1) {
+	background: #F3F4F6 !important;
+}
+
+.admin-table tr:nth-child(2n) {
+	background: #FFFFFF;
+}
+
+.admin-table tr th:last-child {
+	color: red;
+}
+
+.admin-table tr th {
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
-window.onload=function(){
-    var lis=document.getElementById("details-frame-content").getElementsByTagName("li");
-    for(var i=0;i<lis.length;i++){
-        lis[i].setAttribute("index",i);
-        lis[i].onclick=function(){
-            for(var i=0;i<lis.length;i++){
-                if(this.getAttribute("index")==i){
-                    lis[i].style.color="#fff";
-                    lis[i].style.backgroundColor="#666";
-                }else{
-                    lis[i].style.color="";
-                    lis[i].style.backgroundColor="";
-                }
-            }
-        }
-    }
-}
+	window.onload = function() {
+		var lis = document.getElementById("details-frame-content")
+				.getElementsByTagName("li");
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].setAttribute("index", i);
+			lis[i].onclick = function() {
+				for (var i = 0; i < lis.length; i++) {
+					if (this.getAttribute("index") == i) {
+						lis[i].style.color = "#fff";
+						lis[i].style.backgroundColor = "#666";
+					} else {
+						lis[i].style.color = "";
+						lis[i].style.backgroundColor = "";
+					}
+				}
+			}
+		}
+	}
 </script>
+</div>
+
 </@b.body>
 
 </html>
