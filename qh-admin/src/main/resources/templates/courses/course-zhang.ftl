@@ -112,16 +112,12 @@
 		<form id="myform">
 	<h3>添加章</h3>
 	
-		<div class=" select"  >
+		<div class="select">
 			<input type="text" ng-model="chapter.courseChapterName" placeholder="请输入章名称" style="width: 230px;text-indent: 2em;" />
 			
 		</div>
 		<div class="select"  >
 			<input type="text" ng-model="chapter.courseLecturer"  class=""placeholder="主讲老师" style="text-indent: 2em;margin-right:15px;"/>
-		
-		</div>
-		<div class="select"  >
-			<input type="text" ng-model="chapter.courseSectionSize"  class="" placeholder="小节数" style="text-indent: 2em;margin-right:15px;"/>
 		
 		</div>
 		<div class="select">
