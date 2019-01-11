@@ -23,7 +23,8 @@
 		<div class="details-frame">
 			<div class="details-frame-content" id="details-frame-content">
 				<ul   >
-					<li ng-repeat="s in shopDrugCategory" ng-click="checkedShopcate(s)" ng-class="{'selected':selected==s}">{{s.categoryName}}</li>
+					<li ng-repeat="s in shopDrugCategory"  ng-click="checkedShopcate(s)"  ng-class="{'clicked':clicked==s}">
+					{{s.categoryName}}</li>
 					
 
 					<ul class="add-fenlei" onclick="showDiv()">
@@ -51,32 +52,14 @@
 				<div class="admin-table">
 
 					<table>
-						<tr>
-							<th><input type="checkbox" /></th>
-							<th>电饭煲</th>
-							<th>上移</th>
-							<th>下移</th>
-							<th>编辑</th>
-							<th>删除</th>
+						<tr ng-repeat="ss in shopDrugSubcategory" ng-click="checkedShopcate(ss)" >
+							
+							<th>{{ss.subName}}</th>
+							
 
 						</tr>
 
-						<tr>
-							<th><input type="checkbox" /></th>
-							<th>电饭煲</th>
-							<th>上移</th>
-							<th>下移</th>
-							<th>编辑</th>
-							<th>删除</th>
-						</tr>
-						<tr>
-							<th><input type="checkbox" /></th>
-							<th>电饭煲</th>
-							<th>上移</th>
-							<th>下移</th>
-							<th>编辑</th>
-							<th>删除</th>
-						</tr>
+						
 					</table>
 
 				</div>
@@ -152,7 +135,8 @@
 	text-align: center;
 	line-height: 45px;
 	margin-right: 2%;
-	background: #F3F3F3;
+	border:1px solid  #F3F3F3;
+	/* background: #F3F3F3; */
 	margin-bottom: 8px;
 	font-size: 1.5rem;
 	cursor: pointer;
@@ -185,27 +169,11 @@
 .admin-table tr th {
 	cursor: pointer;
 }
+.clicked {
+color:red;
+}
 </style>
-<script type="text/javascript">
-	window.onload = function() {
-		var lis = document.getElementById("details-frame-content")
-				.getElementsByTagName("li");
-		for (var i = 0; i < lis.length; i++) {
-			lis[i].setAttribute("index", i);
-			lis[i].onclick = function() {
-				for (var i = 0; i < lis.length; i++) {
-					if (this.getAttribute("index") == i) {
-						lis[i].style.color = "#fff";
-						lis[i].style.backgroundColor = "#666";
-					} else {
-						lis[i].style.color = "";
-						lis[i].style.backgroundColor = "";
-					}
-				}
-			}
-		}
-	}
-</script>
+
 </div>
 
 </@b.body>
