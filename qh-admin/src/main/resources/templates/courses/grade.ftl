@@ -89,7 +89,7 @@
  <tr ng-repeat="c in classlist" ng-click="checkedclass(c)" ng-class="{'selected':selected==c}">
 	<th>{{c.className}}</th>
 
-	<th>{{c.imgUrl}}</th>
+	<th><img ng-src="{{c.imgUrl}}" style="width:50px;height:30px;"/></th>
 	<th>{{c.classPrice}}</th>
 	<th>{{c.classDiscountPrice}}</th>
 	<th>{{c.courseLecturer}}</th>

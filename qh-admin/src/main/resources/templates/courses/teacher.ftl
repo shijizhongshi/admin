@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/teacher.js"></script>
 <script src="/scripts/admin.js"></script>
+
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-teacher">
 
 <div ng-controller="teacherController">
@@ -15,7 +16,7 @@
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
-		<li>教师管理<div ng-click="test()">教师管理</div></li>
+		<li><div ng-click="test()">教师管理</div></li>
 		</ul>
 	</div>
 <div class="details-frame" >
@@ -90,16 +91,16 @@
 		</div>
 			<div class="costs-uploadfile-div">   
 				 <input type="file" name="file" id="fileField"  onchange="angular.element(this).scope().uploadmainimage(this)"  accept="image/*" /> 
-    <input type='text' id="textfield"  style="border: solid 1px #B1B1B1;" /> 
+
     <button class="allBtn costs-marl15">老师图片</button>
-    <div style="height:130px;width:35%;border: solid 1px #B1B1B1;margin-top:3px;">
+    <div style="height:130px;width:35%;margin-top:3px;">
     <img  src="{{teacher.imgUrl}}"/></div>
         </div>
 <b style="margin: 5px 0;font-size: 1.5rem;">讲授课程</b>
 <!--医师药师复选框-->
 <div class="xuanzekuang"> 
 		<dl> 
-			<dt>医师资格</dt> 
+			<dt  ><span onclick="showHide(this,'items0');">医师资格</span><!--  <input type="checkbox" class="yi" /> --></dt>
 			<dd id="items0"> 
 				<ul>
 					
@@ -109,29 +110,29 @@
 		</dl> 
 	
 		<dl> 
-			<dt>药师资格</dt> 
-			<dd id="items1"> 
+			<dt  ><span onclick="showHide(this,'items1');">药师资格</span> <!--  <input type="checkbox" class="yao" /> --></dt> 
+			<dd id="items1" style="display:none;"> 
 				<ul>
 					
 					<li ng-repeat="sub in courseTypeSubclass2"><span><input type="checkbox" ng-checked="isSelected(sub.courseTypeSubclassName)" ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
 				</ul> 
 			</dd> 
-			<dt >中医适宜技术</dt> 
-			<dd id="items2"> 
+			<dt><span onclick="showHide(this,'items2');">中医适宜技术</span> <!-- <input type="checkbox" class="zhong" /> --></dt> 
+			<dd id="items2" style="display:none;"> 
 				<ul>
 					
 					<li ng-repeat="sub in courseTypeSubclass3"><span><input type="checkbox" ng-checked="isSelected(sub.courseTypeSubclassName)" ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
 				</ul> 
 			</dd> 
-			<dt>卫生资格</dt> 
-			<dd id="items3"> 
+			<dt ><span onclick="showHide(this,'items3');">卫生资格</span> <!--  <input type="checkbox" class="wei" />--></dt> 
+			<dd id="items3" style="display:none;"> 
 				<ul>
 					
 					<li ng-repeat="sub in courseTypeSubclass4"><span><input type="checkbox" ng-checked="isSelected(sub.courseTypeSubclassName)" ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
 				</ul> 
 			</dd> 
-			<dt >健康管理师</dt> 
-			<dd id="items4"> 
+			<dt><span onclick="showHide(this,'items4');">健康管理师</span><!--  <input type="checkbox" class="jian" />--></dt> 
+			<dd id="items4" style="display:none;"> 
 				<ul>
 					
 					<li ng-repeat="sub in courseTypeSubclass5"><span><input type="checkbox" ng-checked="isSelected(sub.courseTypeSubclassName)" ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
@@ -203,14 +204,102 @@
 div.costs-uploadfile-div #textfield{width:40%; height:30px;}
 div.costs-uploadfile-div #fileField{width:100%;height:30px;     position: absolute; top: 0; left:0;  filter: alpha(opacity:0);opacity: 0;}
 div.costs-uploadfile-div .allBtn{ padding:0; margin:0; height: 30px;  line-height: 30px;   width: 35%;  background-color: #18b3cf; border: none;  color: #fff;}
-.xuanzekuang{width:60%;height: auto;text-align: center;background: #EDEEF0;}
-.xuanzekuang dt , .xuanzekuang ul li{font-size: 1.0em;height: 30px;text-align: 30px;width: 100%; cursor: pointer;;}
-.xuanzekuang ul li{font-size:1.2rem ;}
+.xuanzekuang{width:60%;height: auto;text-align: center;background:#f8fbffba;}
+.xuanzekuang dt , .xuanzekuang ul li{font-size: 1.0em;height: 30px;text-align: left;width: 100%; cursor: pointer;;}
+
+.xuanzekuang ul li{font-size:1.5rem ;}
 .xuanzekuang input {
 	text-align：left;
 	width: 15px;height: 15px;
 }
 .xuanzekuang span{height: 30px;float: left;}
 </style>
+
+<script type="text/javascript">
+function getObject(objectId){
+	if(document.getElementById && document.getElementById(objectId)){
+		return document.getElementById(objectId);
+	}else if(document.all && document.all(objectId)){
+		return document.all(objectId);
+	}else if(document.layers && document.layers[objectId]){
+		return document.layers[objectId];
+	}else{
+		return false;
+	}
+}
+
+function showHide(e,objname){
+	var obj = getObject(objname);
+	if(obj.style.display == "none"){
+		obj.style.display = "block";
+		e.className="minus";
+	}else{
+		obj.style.display = "none";
+		e.className="plus";
+	}
+}
+$(function() {
+    //实现全选反选
+    $(".yi").on('click', function() {
+        $("#items0 input:checkbox").prop("checked", $(this).prop('checked'));
+    })
+    $("#items0 input:checkbox").on('click', function() {
+        //当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
+        if($("#items0 input:checkbox").length === $("#items0 input:checked").length) {
+            $(".yi").prop("checked", true);
+        } else {
+            $(".yi").prop("checked", false);
+        }
+    })
+})
+$(function() {
+    $(".yao").on('click', function() {
+        $("#items1 input:checkbox").prop("checked", $(this).prop('checked'));
+    })
+    $("#items1 input:checkbox").on('click', function() {
+        if($("#items1 input:checkbox").length === $("#items1 input:checked").length) {
+            $(".yao").prop("checked", true);
+        } else {
+            $(".yao").prop("checked", false);
+        }
+    })
+})
+$(function() {
+    $(".zhong").on('click', function() {
+        $("#items2 input:checkbox").prop("checked", $(this).prop('checked'));
+    })
+    $("#items2 input:checkbox").on('click', function() {
+        if($("#items2 input:checkbox").length === $("#items2 input:checked").length) {
+            $(".zhong").prop("checked", true);
+        } else {
+            $(".zhong").prop("checked", false);
+        }
+    })
+})
+$(function() {
+    $(".wei").on('click', function() {
+        $("#items3 input:checkbox").prop("checked", $(this).prop('checked'));
+    })
+    $("#items3 input:checkbox").on('click', function() {
+        if($("#items3 input:checkbox").length === $("#items3 input:checked").length) {
+            $(".wei").prop("checked", true);
+        } else {
+            $(".wei").prop("checked", false);
+        }
+    })
+})
+$(function() {
+    $(".jian").on('click', function() {
+        $("#items4 input:checkbox").prop("checked", $(this).prop('checked'));
+    })
+    $("#items4 input:checkbox").on('click', function() {
+        if($("#items4 input:checkbox").length === $("#items4 input:checked").length) {
+            $(".jian").prop("checked", true);
+        } else {
+            $(".jian").prop("checked", false);
+        }
+    })
+})
+</script>
 </@b.body>
  </html>

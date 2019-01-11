@@ -75,7 +75,7 @@
 		<li ng-click="deleteChapter()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除章</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
-		<li ng-click="section()"><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;资源节管理</li>
+		<li ng-click="section()"><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;节管理</li>
          <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" ng-click="chapterBases()" name="changyi"/></li>
 
 	</ul>
@@ -112,16 +112,12 @@
 		<form id="myform">
 	<h3>添加章</h3>
 	
-		<div class=" select"  >
+		<div class="select">
 			<input type="text" ng-model="chapter.courseChapterName" placeholder="请输入章名称" style="width: 230px;text-indent: 2em;" />
 			
 		</div>
 		<div class="select"  >
 			<input type="text" ng-model="chapter.courseLecturer"  class=""placeholder="主讲老师" style="text-indent: 2em;margin-right:15px;"/>
-		
-		</div>
-		<div class="select"  >
-			<input type="text" ng-model="chapter.courseSectionSize"  class="" placeholder="小节数" style="text-indent: 2em;margin-right:15px;"/>
 		
 		</div>
 		<div class="select">

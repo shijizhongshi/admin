@@ -148,6 +148,26 @@
                         </li>
                          </ul>
                 </li>
+                      <li id="sidebarmenu-user" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">用户管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-user-tixian">
+                            <a href="/web/user/tixian">
+                                <span class="title">用户提现</span>
+                            </a>
+                        </li>
+                          <li id="sidebarmenu-user-userinfo">
+                            <a href="/web/user/userinfo">
+                                <span class="title">用户信息</span>
+                            </a>
+                        </li>
+                         </ul>
+                </li>
+                
+                
              </ul>
              
         </div>

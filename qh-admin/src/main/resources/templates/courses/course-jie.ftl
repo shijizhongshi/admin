@@ -91,7 +91,7 @@
 				&nbsp;<input type="radio" name="visible" ng-model="section.isshow"  ng-value="0" />否</span>
 		</div>
 		<div >
-			<input type="file" value="阿里云的ID" onchange="angular.element(this).scope().uploadmainimage(this)"/>
+			<input type="file" id="file" onchange="angular.element(this).scope().uploadmainimage(this)" accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" />
 			
 			    <img  src="" style="height:100px;" />
 		</div>
