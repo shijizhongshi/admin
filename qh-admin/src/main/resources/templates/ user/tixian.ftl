@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<@h.header title="商品店铺" />
+	<@h.header title="用户提现" />
 	<link rel="stylesheet" href="/styles/admin.css" />
 	<script src="/scripts/course/grade-template.js"></script>
 	<script src="/scripts/admin.js"></script>
@@ -15,15 +15,17 @@
 					<ul>
 						<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 						<li>/</li>
-						<li>加盟商管理</li>
+						<li>用户管理</li>
 						<li>/</li>
-						<li>商品店铺</li>
+						<li>用户提现
+						
+						</li>
 					</ul>
 				</div>
 				<div class="details-frame">
 					<div class="details-frame-content" id="details-frame-content">
 						<ul>
-							<li onmousedown="go(0)" style="border-bottom:3px solid red;font-weight: 900;">商品店铺</li>
+							<li onmousedown="go(0)" style="border-bottom:3px solid red;font-weight: 900;">核审列表</li>
 							<li onmousedown="go(1)">核审管理</li>
 							<li onmousedown="go(2)">未通过</li>
 						</ul>
@@ -33,11 +35,11 @@
 						<div class="manage">
 							<ul style="height: 80px;" class="managr-dianpu">
 								<div class="select-3">
-									<span>店铺名称</span>
+									<span>手机号</span>
 									<input type="text"/>
 								</div>
 						<div class="select-3">
-							<span>选择时间</span>
+							<span>申请时间</span>
 								<input type="date" name="search"/>
 						</div>
 						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
@@ -73,7 +75,7 @@
 										<th>申请提现金额</th>
 										<th>账户类型</th>
 										<th>申请时间</th>
-										<th><input type="button" value="允许" style="background:#7bc472;"/><input type="button" value="拒绝"/></th>
+										<th><form ><span>允许</span><input type="radio" value="允许" style="background:#7bc472;" name="caozuo" /><span>&nbsp;拒绝</span><input type="radio" value="拒绝"  name="caozuo"/></form></th>
 									</tr>
 									
 								</table>
@@ -85,59 +87,62 @@
 								</ul>
 							</div>
 
-					
-                           <!-- 核审管理内容 -->
-						<div class="manage" style="display: none;">
-						        <h4 style="padding-left:30px; ">核审列表()</h4>
-						<div class="details-frame-heshen">
-						<div class="select-3"
-							style="">
-							<span>店铺名称</span>
-							
-								<input type="text" name="search" />
-							
 						</div>
-						<div class="select-2">
-							<span>选择时间</span>
+                           <!-- 核审记录 -->
+
+					
+						<div class="manage" style="display: none;">
+						       	<ul style="height: 80px;" class="managr-dianpu">
+								<div class="select-3">
+									<span>手机号</span>
+									<input type="text"/>
+								</div>
+						<div class="select-3">
+							<span>申请时间</span>
 								<input type="date" name="search"/>
 						</div>
-						<div class="select-2" style="font-size: 1.6rem;width: 3%;text-align: center;">
-							<span class="glyphicon glyphicon-hand-right"></span>
-								&nbsp;<span class="glyphicon glyphicon-hand-left"></span>
+						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
+							
+								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
 						</div>
-						<div class="select-2">
+						<div class="select-3">
 							<span>&nbsp;</span>
 								<input type="date" name="search"/>
 						</div>
-					
-					<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="检索"></div>
-					</div>
-						<div class="admin-table">
+			
+			<div>
+					<input type="button" class="btn-lg im-key"
+						value="检索" />
+				</div>
+							</ul>
+				
+							<div class="admin-table">
 
 								<table>
-									<tr >
-										<th>名称</th>
-										<th>地址</th>
-										<th>类型</th>
-										<th>负责人</th>
+									<tr>
+										<th>手机号</th>
+										<th>姓名</th>
+										<th>申请提现金额</th>
+										<th>账户类型</th>
 										<th>申请时间</th>
+										<th>到账时间</th>
 										<th>操作</th>
 									</tr>
 
 									<tr>
-								
-										<th>名称</th>
-										<th>地址</th>
-										<th>类型</th>
-										<th>负责人</th>
+										<th>手机号</th>
+										<th>姓名</th>
+										<th>申请提现金额</th>
+										<th>账户类型</th>
 										<th>申请时间</th>
-										<th><span class="xiangqing" onclick="showDiv2()" >查看详情</span></th>
+										<th>到账时间</th>
+										<th>通过</th>
 									</tr>
 									
 								</table>
 
 							</div>
-						<div class="col-sm-6"></div>
+							<div class="col-sm-6"></div>
 							<div class="col-sm-6">
 								<ul uib-pagination boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
 								</ul>
@@ -145,12 +150,63 @@
 						
 						
 						
-						
 					
 						</div>
 			<!-- 未通过 -->
 				<div class="manage" style="display: none;">
-				
+					<ul style="height: 80px;" class="managr-dianpu">
+								<div class="select-3">
+									<span>手机号</span>
+									<input type="text"/>
+								</div>
+						<div class="select-3">
+							<span>申请时间</span>
+								<input type="date" name="search"/>
+						</div>
+						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
+							
+								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
+						</div>
+						<div class="select-3">
+							<span>&nbsp;</span>
+								<input type="date" name="search"/>
+						</div>
+			
+			<div>
+					<input type="button" class="btn-lg im-key"
+						value="检索" />
+				</div>
+							</ul>
+				<div class="admin-table">
+
+								<table>
+									<tr>
+										<th>手机号</th>
+										<th>姓名</th>
+										<th>申请提现金额</th>
+										<th>账户类型</th>
+										<th>申请时间</th>
+										<th>操作</th>
+									</tr>
+
+									<tr>
+										<th>手机号</th>
+										<th>姓名</th>
+										<th>申请提现金额</th>
+										<th>账户类型</th>
+										<th>申请时间</th>
+										<th>未通过</th>
+									</tr>
+									
+								</table>
+
+							</div>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
+								</ul>
+							</div>
+						
 				</div>
 					</div>
 				</div>
@@ -181,6 +237,7 @@
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}
+ .admin-table table tr form span{font-size:1.4rem;}
 
 		</style>
 	
