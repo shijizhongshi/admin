@@ -9,7 +9,8 @@ public interface IUserWithdrawService {
 
 	public List<UserWithdraw> selectUserWithdraw(String id,int pageNo,int pageSize);
 	
-	public Results<String> updateUserWithdraw(UserWithdraw userwithdrawhistory);
+	
+	public void agreeWithdraw();
 	
 	
 }
