@@ -10,29 +10,29 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.UserBookDao;
-import com.ola.qh.dao.UserWithdrawHistoryDao;
+import com.ola.qh.dao.UserWithdrawDao;
 import com.ola.qh.entity.UserBook;
-import com.ola.qh.entity.UserWithdrawHistory;
-import com.ola.qh.service.IUserWithdrawHistoryService;
+import com.ola.qh.entity.UserWithdraw;
+import com.ola.qh.service.IUserWithdrawService;
 import com.ola.qh.util.Results;
 
 @Service
-public class UserWithdrawHistoryService implements IUserWithdrawHistoryService{
+public class UserWithdrawService implements IUserWithdrawService{
 
 	@Autowired
-	private UserWithdrawHistoryDao userWithdrawHistoryDao;
+	private UserWithdrawDao userWithdrawHistoryDao;
 	@Autowired
 	private UserBookDao userBookDao;
 	
 	@Override
-	public List<UserWithdrawHistory> selectUserWithdrawHistory(String id,int pageNo,int pageSize) {
+	public List<UserWithdraw> selectUserWithdraw(String id,int pageNo,int pageSize) {
 		
-		return userWithdrawHistoryDao.selectUserWithdrawHistory(id,pageNo, pageSize);
+		return userWithdrawHistoryDao.selectUserWithdraw(id,pageNo, pageSize);
 	}
 
 	@Transactional
 	@Override
-	public Results<String> updateUserWithdrawHistory(UserWithdrawHistory userwithdrawhistory) {
+	public Results<String> updateUserWithdraw(UserWithdraw userwithdrawhistory) {
 		
 		Results<String> results=new Results<String>();
 		try {
@@ -45,7 +45,7 @@ public class UserWithdrawHistoryService implements IUserWithdrawHistoryService{
 		if(userwithdrawhistory.getPayStatus()==1){
 			
 			userwithdrawhistory.setUpdatetime(new Date());
-			userWithdrawHistoryDao.updateUserWithdrawHistory(userwithdrawhistory);
+			userWithdrawHistoryDao.updateUserWithdraw(userwithdrawhistory);
 			
 			BigDecimal FinishMoney =finishMoney.add(money);
 			
@@ -62,7 +62,7 @@ public class UserWithdrawHistoryService implements IUserWithdrawHistoryService{
 		BigDecimal CanWithdraw =canWithdraw.add(money);
 		
 		userwithdrawhistory.setUpdatetime(new Date());
-		userWithdrawHistoryDao.updateUserWithdrawHistory(userwithdrawhistory);
+		userWithdrawHistoryDao.updateUserWithdraw(userwithdrawhistory);
 		
 		UserBook userbook=new UserBook();
 		userbook.setUserId(userwithdrawhistory.getUserId());
