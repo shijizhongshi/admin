@@ -15,9 +15,6 @@ public class  user {
 	public String shangpin(){
 		return " user/userinfo";
 	}
-	@RequestMapping("/user-dingdan")
-	public String userdingdan(){
-		return " user/user-dingdan";
-	}
+	
 	
 }
