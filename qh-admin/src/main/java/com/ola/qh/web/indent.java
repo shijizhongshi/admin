@@ -15,4 +15,8 @@ public class indent {
 	public String todaybargain(){
 		return "indent/today-bargain";
 	}
+	@RequestMapping("/user-dingdan")
+	public String userdingdan(){
+		return "indent/user-dingdan";
+	}
 	}

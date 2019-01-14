@@ -1,11 +1,34 @@
 app.controller("ShopDrugCategoryController", function($scope, $http){
 
+	$scope.id=null;
+	$scope.sub=null;
+	$scope.shopDrugCategory=null;
+	$scope.shopDrugSubcategory=null;
+	$scope.name=null;
+	$scope.insert=null;
+	$scope.update=null;
+	$scope.picture=null;
+	
+	$scope.uploadmainimage = function(file){
+		if(!file.files || file.files.length < 1) return;
+	    var fd = new FormData();
+	    fd.append("file", file.files[0]);
+		$http.post("/api/upload/single",fd,{
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    })
+	    .success(function(data){
+	    	$scope.imgUrl=data.data;
+		})
+	};
 	
 	$scope.shopcateBases=function(){
 		$http.get("/api/shopdrugcategory/select", {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.shopDrugCategory=data.data;
+				$scope.id=$scope.shopDrugCategory.id;
 			}
 		})
 	};
@@ -17,31 +40,140 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				
 				$scope.shopDrugSubcategory=data.data;
+				$scope.shopDrugSubcategory.categoryId=$scope.id;
+			}else{
+					
+				$scope.shopDrugSubcategory=null;
 			}
+			
 		})
 	};
-	$scope.id=null;
-	///////做选中的时候用
-	$scope.checkedShopcate=function(s){
-
-		$scope.shopDrugCategory=s;
-		$scope.shopDrugCategory.id=s.id;
-		$scope.shopDrugCategory.categoryName=s.categoryName;
-		
-		$scope.id=s.id;
-		$scope.shopsubBases();
-		$scope.shopcateBases();
-	}
-	$scope.shopDrugCategory=null;
 	
-	$scope.addShopcate=function(){
-		$scope.shopDrugCategory.id=$scope.id;
-		$http.get("/api/shopdrugcategory/insert",$scope.shopDrugCategory, {'Content-Type': 'application/json;charset=UTF-8'})
+	
+	
+	$scope.checkedShopcate=function(s){
+		
+		
+		$scope.clicked=s;
+		$scope.id=s.id;
+		$scope.subid=null;
+		$scope.name=s.categoryName;
+		
+		$scope.shopsubBases();
+		
+		
+	}
+	
+	$scope.checkedShopsub=function(ss){
+		
+		
+		$scope.selected=ss;
+		$scope.subid=ss.id;
+		$scope.imgUrl=ss.imgUrl;
+		$scope.name=ss.subName;
+		
+		
+	}
+	
+	$scope.addcate=function(){
+		
+		$scope.insert=1;
+		$scope.update=null;
+		$scope.id=null;
+		$scope.name=null;
+		$scope.picture=null;
+		document.getElementById('add').style.display="block"; 
+		
+		
+	}
+	$scope.addsub=function(){
+		if($scope.id!=null){
+		
+			$scope.insert=1;
+			$scope.update=null;
+			$scope.name=null;
+			$scope.picture=1;
+			document.getElementById('add').style.display="block"; 
+		
+		}
+		else{
+			alert("请先选中大类别~")
+		}
+	}
+	
+	$scope.updateed=function(){
+		if($scope.subid!=null){
+			$scope.insert=null;
+			$scope.update=1;
+			$scope.picture=1;
+			document.getElementById('add').style.display="block"; 
+		}else{
+			alert("请先选中一个小类别~")
+		}
+		
+	}
+	$scope.insertcatesub=function(){
+		if($scope.id==null){
+			$http.get("/api/shopdrugcategory/insert",{"params": {"categoryName":$scope.name}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					location.reload();
+					alert("添加成功")
+					document.getElementById('add').style.display="none"; 
+				}else{
+					alert("添加失败")
+				}
+			})
+		}else	{
+			$scope.name
+			$http.get("/api/shopdrugsubcategory/insert",{"params": {"categoryId":$scope.id,"subName":$scope.name,"imgUrl":$scope.imgUrl}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					
+					alert("添加成功")
+					document.getElementById('add').style.display="none"; 
+					location.reload();
+				}else{
+					alert("添加失败")
+				}
+			})
+		}
+	};
+	
+	$scope.deletesub=function(){
+		if($scope.subid!=null){
+			////删除课程/
+			if(confirm("您确定要删出这个子类别吗")){
+				$http.get("/api/shopdrugsubcategory/delete",{"params": {"id":$scope.subid}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=='0'){
+						alert("删除成功~");
+						location.reload();
+					}else{
+						alert("删除失败~");
+					}
+				})
+			}
+			
+		}else{
+			alert("请选中一个子类别~");
+		}
+	}
+	
+	$scope.updatesub=function(){
+		$http.get("/api/shopdrugsubcategory/update",{"params": {"id":$scope.subid,"subName":$scope.name,"imgUrl":$scope.imgUrl}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
-			if(data.status=="0"){
-				$scope.shopDrugCategory=data.data;
+			if(data.status=='0'){
+				alert("修改成功~");
+				document.getElementById('add').style.display="none"; 
+				location.reload();
+			}else{
+				alert("修改失败~");
 			}
 		})
-	};
+		
+		
+	}
 });
