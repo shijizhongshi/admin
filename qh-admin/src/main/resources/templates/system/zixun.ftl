@@ -183,8 +183,8 @@
 .template-left, .template-right {
 	width: 50%;
 	float: left;
-	height: 500px;
-	overflow: auto;
+	height:auto;
+
 }
 
 .template-left ul {

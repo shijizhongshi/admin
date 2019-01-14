@@ -53,7 +53,7 @@
 						value="检索" ng-click="search()" />
 				</div>
 							</ul>
-							<ul style="height: 80px;" class="show">
+							<ul style="height: 60px;" class="show">
 							
 								<li onclick="showDiv()" style=" background: #9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
 								<li ng-click="update()" style="background: #F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
@@ -386,7 +386,7 @@
 .leibie{background:#F5F6F8;width: 50%;text-align: center; }
 .grade-text textarea {height:70px;width: 50%;}
 .manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
-.details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;border-bottom: solid 1px #EEEFF1;}
+.details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;}
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}

@@ -24,7 +24,6 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	
 	$scope.classUrl=null;
 	
-	/////分页
 	$scope.uploadmainimage = function(file){
 		
 		
