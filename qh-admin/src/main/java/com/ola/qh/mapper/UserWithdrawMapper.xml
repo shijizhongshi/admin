@@ -2,30 +2,34 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ola.qh.dao.UserWithdrawHistoryDao">
-	<resultMap type="com.ola.qh.entity.UserWithdrawHistory"  id="UserWithdrawHistoryMap">
+<mapper namespace="com.ola.qh.dao.UserWithdrawDao">
+	<resultMap type="com.ola.qh.entity.UserWithdraw"  id="UserWithdrawMap">
 		<result column="id" property="id" />
 		<result column="user_id" property="userId" />
-		<result column="withdraw_types" property="withdrawTypes" />
+		<result column="aliaccount" property="aliaccount" />
+		<result column="realname" property="realname" />
+		<result column="openId" property="openId" />
 		<result column="money" property="money" />
 		<result column="pay_status" property="payStatus" />
 		<result column="pay_message" property="payMessage" />
+		<result column="types" property="types"/>
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="status" property="status" />
 		
 	</resultMap>
 
 
-	<select id="selectUserWithdrawHistory"  resultMap="UserWithdrawHistoryMap">
-		select * from user_withdraw_history where pay_status=0 
+	<select id="selectUserWithdraw"  resultMap="UserWithdrawMap">
+		select * from user_withdraw where pay_status=0 
 		<if test="id!=null">
 		and id=#{id}
 		</if>
 		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	
-	<update id="updateUserWithdrawHistory" parameterType="com.ola.qh.entity.UserWithdrawHistory" >
-		update user_withdraw_history set 
+	<update id="updateUserWithdraw" parameterType="com.ola.qh.entity.UserWithdraw" >
+		update user_withdraw set 
 		<if test="payStatus!=0">
 		pay_status=#{payStatus},
 		</if>

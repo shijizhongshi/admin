@@ -7,24 +7,28 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class UserWithdrawHistory {
+public class UserWithdraw {
 
-	@NotEmpty(message="ID不能为空")
-	private String id;
+private String id;
 	
 	@NotEmpty(message="用户ID不能为空")
 	private String userId;
 	
-	@NotEmpty(message="提现的方式不能为空")
-	private String withdrawTypes;/////支付宝或者是微信
+	@NotNull
+	private int types;///1支付宝   2:微信
 	
-	@NotEmpty(message="真实姓名不能为空")
+	private String aliaccount;//支付宝账号
+	
 	private String realname;
 	
-	@NotNull
+	private String openId;////微信提现的重要参数
+	
+	private String weixinnickname;
+	
+	private String weixinheadimg;
+	
 	private BigDecimal money;
 	
-	@NotNull
 	private int payStatus;//审核是否通过
 	
 	private String payMessage;//审核失败的原因
@@ -35,6 +39,24 @@ public class UserWithdrawHistory {
 	
 	private int status;
 	
+	
+	
+	public String getWeixinnickname() {
+		return weixinnickname;
+	}
+
+	public void setWeixinnickname(String weixinnickname) {
+		this.weixinnickname = weixinnickname;
+	}
+
+	public String getWeixinheadimg() {
+		return weixinheadimg;
+	}
+
+	public void setWeixinheadimg(String weixinheadimg) {
+		this.weixinheadimg = weixinheadimg;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -50,16 +72,32 @@ public class UserWithdrawHistory {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public String getWithdrawTypes() {
-		return withdrawTypes;
-	}
-
-	public void setWithdrawTypes(String withdrawTypes) {
-		this.withdrawTypes = withdrawTypes;
-	}
-
 	
+	
+	public int getTypes() {
+		return types;
+	}
+
+	public void setTypes(int types) {
+		this.types = types;
+	}
+
+	public String getAliaccount() {
+		return aliaccount;
+	}
+
+	public void setAliaccount(String aliaccount) {
+		this.aliaccount = aliaccount;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
 	public BigDecimal getMoney() {
 		return money;
 	}
@@ -115,6 +153,7 @@ public class UserWithdrawHistory {
 	public void setRealname(String realname) {
 		this.realname = realname;
 	}
+
 
 	
 

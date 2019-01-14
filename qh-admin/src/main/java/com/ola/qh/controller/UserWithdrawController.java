@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.ola.qh.entity.UserWithdrawHistory;
-import com.ola.qh.service.IUserWithdrawHistoryService;
+import com.ola.qh.entity.UserWithdraw;
+import com.ola.qh.service.IUserWithdrawService;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
 @RequestMapping(value="/api/userwithdrawhistory")
-public class UserWithdrawHistoryController {
+public class UserWithdrawController {
 
 	@Autowired
-	private IUserWithdrawHistoryService userWithdrawHistoryService;
+	private IUserWithdrawService userWithdrawService;
 	
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public Results<List<UserWithdrawHistory>> selectUserWithdrawHistory(@RequestParam(name = "id", required = false) String id,
+	public Results<List<UserWithdraw>> selectUserWithdrawHistory(@RequestParam(name = "id", required = false) String id,
 			@RequestParam(name = "page", required = true) int page) {
 
-		Results<List<UserWithdrawHistory>> results = new Results<List<UserWithdrawHistory>>();
+		Results<List<UserWithdraw>> results = new Results<List<UserWithdraw>>();
 
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		List<UserWithdrawHistory> select = userWithdrawHistoryService.selectUserWithdrawHistory(id, pageNo, pageSize);
+		List<UserWithdraw> select = userWithdrawService.selectUserWithdraw(id, pageNo, pageSize);
 
 		
 				
@@ -47,7 +47,7 @@ public class UserWithdrawHistoryController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Results<String> updateUserWithdrawHistory(@RequestBody @Valid UserWithdrawHistory userwithdrawhistory,BindingResult valid) {
+	public Results<String> updateUserWithdrawHistory(@RequestBody @Valid UserWithdraw userwithdrawhistory,BindingResult valid) {
 
 		Results<String> results = new Results<String>();
 
@@ -56,7 +56,7 @@ public class UserWithdrawHistoryController {
 			results.setStatus("1");
 			return results;
 		}
-		return userWithdrawHistoryService.updateUserWithdrawHistory(userwithdrawhistory);
+		return userWithdrawService.updateUserWithdraw(userwithdrawhistory);
 
 	}
 }
