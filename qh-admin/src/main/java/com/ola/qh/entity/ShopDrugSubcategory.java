@@ -16,6 +16,8 @@ public class ShopDrugSubcategory {
 	
 	private Date addtime;
 	
+	private String imgUrl;
+	
 	public String getId() {
 		return id;
 	}
@@ -46,6 +48,14 @@ public class ShopDrugSubcategory {
 
 	public void setSubName(String subName) {
 		this.subName = subName;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	

@@ -8,18 +8,24 @@
 		<result column="category_id" property="categoryId" />
 		<result column="sub_name" property="subName" />
 		<result column="addtime" property="addtime" />
+		<result column="img_url" property="imgUrl" />
 	</resultMap>
 	
 	<select id="selectShopDrugSubcategory" resultMap="ShopDrugSubcategoryMap">
-		select id,category_id,sub_name,addtime from shop_drug_subcategory where category_id=#{categoryId}
+		select id,category_id,sub_name,addtime,img_url from shop_drug_subcategory where category_id=#{categoryId}
 	</select>
 
 	<insert id="insertShopDrugSubcategory" parameterType="com.ola.qh.entity.ShopDrugSubcategory">
-		insert into shop_drug_subcategory(id,category_id,sub_name,addtime) values(#{id},#{categoryId},#{subName},#{addtime})
+		insert into shop_drug_subcategory(id,category_id,sub_name,addtime,img_url) values(#{id},#{categoryId},#{subName},#{addtime},#{imgUrl})
 	</insert>
 	
 	<update id="updateShopDrugSubcategory" parameterType="com.ola.qh.entity.ShopDrugSubcategory">
-		update shop_drug_subcategory set sub_name=#{subName} where id=#{id}
+		update shop_drug_subcategory set 
+		
+		<if test="imgUrl!=null">
+		img_url=#{imgUrl},
+		</if>
+		 sub_name=#{subName} where id=#{id}
 	</update>
 	
 	<delete id="deleteShopDrugSubcategory">

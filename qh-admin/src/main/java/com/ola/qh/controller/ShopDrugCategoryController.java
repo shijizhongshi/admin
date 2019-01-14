@@ -3,11 +3,7 @@ package com.ola.qh.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,17 +33,13 @@ public class ShopDrugCategoryController {
 		return results;
 		
 	}
-	@RequestMapping(value="/insert",method=RequestMethod.POST)
-	public Results<String> insertShopDrugCategory(@RequestBody @Valid ShopDrugCategory shopDrugCategory,BindingResult valid){
+	@RequestMapping(value="/insert",method=RequestMethod.GET)
+	public Results<String> insertShopDrugCategory(@RequestParam(name="categoryName",required=true)String categoryName){
 		
 		Results<String> results=new Results<String>();
 		
-		if (valid.hasErrors()) {
-			results.setMessage("信息填写不完整,请检查");
-			results.setStatus("1");
-			return results;
-		}
-		
+		ShopDrugCategory shopDrugCategory=new ShopDrugCategory();
+		shopDrugCategory.setCategoryName(categoryName);
 		shopDrugCategory.setId(KeyGen.uuid());
 		shopDrugCategory.setAddtime(new Date());
 		int insert=shopDrugCategoryService.insertShopDrugCategory(shopDrugCategory);
@@ -63,16 +55,14 @@ public class ShopDrugCategoryController {
 		return results;
 		
 	}
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public Results<String> updateShopDrugCategory(@RequestBody @Valid ShopDrugCategory shopDrugCategory,BindingResult valid){
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public Results<String> updateShopDrugCategory(@RequestParam(name="categoryName",required=true)String categoryName,
+			@RequestParam(name="id",required=true)String id){
 		
 		Results<String> results=new Results<String>();
 		
-		if (valid.hasErrors()) {
-			results.setMessage("信息填写不完整,请检查");
-			results.setStatus("1");
-			return results;
-		}
+		ShopDrugCategory shopDrugCategory=new ShopDrugCategory();
+		shopDrugCategory.setId(id);
 		shopDrugCategory.setUpdatetime(new Date());
 		int update=shopDrugCategoryService.updateShopDrugCategory(shopDrugCategory);
 		
