@@ -9,6 +9,7 @@
 
 <@b.body menu="sidebarmenu-system" submenu="web-system-fenlei">
 <div ng-controller="ShopDrugCategoryController">
+
 <div>
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
@@ -23,10 +24,11 @@
 		<div class="details-frame">
 			<div class="details-frame-content" id="details-frame-content">
 				<ul   >
-					<li ng-repeat="s in shopDrugCategory" ng-click="checkedShopcate(s)" ng-class="{'selected':selected==s}">{{s.categoryName}}</li>
+					<li ng-repeat="s in shopDrugCategory"  ng-click="checkedShopcate(s)"  ng-class="{'clicked':clicked==s}">
+					{{s.categoryName}}</li>
 					
 
-					<ul class="add-fenlei" onclick="showDiv()">
+					<ul class="add-fenlei" ng-click="addcate()">
 						<span class="glyphicon glyphicon-plus"></span>&nbsp;添加分类
 					</ul>
 				</ul>
@@ -35,12 +37,12 @@
 			</div>
 			<div class="manage">
 				<ul style="height: 80px;" class="show">
-					<li style="background: none; color: black;"><b>食品百货管理</b></li>
-					<li onclick="showDiv()" style="background: #9DE879;"><span
+					<li style="background: none; color: black;" ><b>子类的操作</b></li>
+					<li  ng-click="addsub()" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
-					<li ng-click="deletetemplate()" style="background: #F86846;"><span
+					<li ng-click="deletesub()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 					<li><span class="glyphicon glyphicon-sort-by-attributes"
@@ -52,31 +54,15 @@
 
 					<table>
 						<tr>
-							<th><input type="checkbox" /></th>
-							<th>电饭煲</th>
-							<th>上移</th>
-							<th>下移</th>
-							<th>编辑</th>
-							<th>删除</th>
-
+							<th>子类名称</th>
+							
+						</tr>
+						<tr ng-repeat="ss in shopDrugSubcategory" ng-click="checkedShopsub(ss)" ng-class="{'selected':selected==ss}">
+							
+							<th>{{ss.subName}}</th>
 						</tr>
 
-						<tr>
-							<th><input type="checkbox" /></th>
-							<th>电饭煲</th>
-							<th>上移</th>
-							<th>下移</th>
-							<th>编辑</th>
-							<th>删除</th>
-						</tr>
-						<tr>
-							<th><input type="checkbox" /></th>
-							<th>电饭煲</th>
-							<th>上移</th>
-							<th>下移</th>
-							<th>编辑</th>
-							<th>删除</th>
-						</tr>
+						
 					</table>
 
 				</div>
@@ -96,24 +82,30 @@
 					<form id="myform">
 						<h3>添加分类</h3>
 						<div class="template-add">
+						
 							<div class="select-2">
-								<span>分类名称</span> <input type="text" />
+								<span>分类名称</span> 
+								<input type="text" ng-model="name"/>
+								
 							</div>
-							<div class="costs-uploadfile-div">
-								<input type="file" name="file" id="fileField"
-									onchange="document.getElementById('textfield').value=this.value"
+							<div class="costs-uploadfile-div" >
+								<input type="file" name="file" ng-show="picture==1"
+									onchange="angular.element(this).scope().uploadmainimage(this)"
 									accept="image/*" />
-								<button class="allBtn costs-marl15">封面图片</button>
-								<input type='text' id="textfield" />
+								
+								<input type="hidden" ng-model="imgUrl" />
 								<div style="height: 130px; width: 40%; margin-top: 3px;">
-									<img style="height: 130px;" />
+									<img src="{{imgUrl}}" style="height: 130px;" />
 								</div>
 							</div>
 						</div>
 					</form>
 					<div class="end">
-						<input name="git" type="submit" value="提交"
-							style="background: #5ED8A9;" /> <input name="esc" type="reset"
+						<input  name="git" type="submit" value="提交"  ng-show="insert==1"  ng-click="insertcatesub()"
+							style="background: #5ED8A9;" /> 
+							<input  name="git" type="submit" value="修改"  ng-show="update==1"  ng-click="updatesub()"
+							style="background: #5ED8A9;" />
+							<input name="esc" type="reset"
 							value="取消" onclick="CloseDiv();formReset()" class="esc" />
 					</div>
 				</div>
@@ -152,7 +144,8 @@
 	text-align: center;
 	line-height: 45px;
 	margin-right: 2%;
-	background: #F3F3F3;
+	border:1px solid  #F3F3F3;
+	background: #F3F3F3; 
 	margin-bottom: 8px;
 	font-size: 1.5rem;
 	cursor: pointer;
@@ -170,42 +163,16 @@
 	cursor: pointer;
 }
 
-.admin-table tr:nth-child(2n-1) {
-	background: #F3F4F6 !important;
-}
-
-.admin-table tr:nth-child(2n) {
-	background: #FFFFFF;
-}
-
-.admin-table tr th:last-child {
-	color: red;
-}
-
 .admin-table tr th {
 	cursor: pointer;
 }
+.clicked {
+background:#666 !important;
+color:white !important;
+}
+
 </style>
-<script type="text/javascript">
-	window.onload = function() {
-		var lis = document.getElementById("details-frame-content")
-				.getElementsByTagName("li");
-		for (var i = 0; i < lis.length; i++) {
-			lis[i].setAttribute("index", i);
-			lis[i].onclick = function() {
-				for (var i = 0; i < lis.length; i++) {
-					if (this.getAttribute("index") == i) {
-						lis[i].style.color = "#fff";
-						lis[i].style.backgroundColor = "#666";
-					} else {
-						lis[i].style.color = "";
-						lis[i].style.backgroundColor = "";
-					}
-				}
-			}
-		}
-	}
-</script>
+
 </div>
 
 </@b.body>

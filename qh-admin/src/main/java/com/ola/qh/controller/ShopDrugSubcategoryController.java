@@ -3,11 +3,7 @@ package com.ola.qh.controller;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,15 +40,15 @@ public class ShopDrugSubcategoryController {
 		return results;
 		
 	}
-	@RequestMapping(value="/insert",method=RequestMethod.POST)
-	public Results<String> insertShopDrugSubcategory(@RequestBody @Valid ShopDrugSubcategory shopDrugSubcategory,BindingResult valid){
+	@RequestMapping(value="/insert",method=RequestMethod.GET)
+	public Results<String> insertShopDrugSubcategory(@RequestParam(name="categoryId",required=false)String categoryId,
+			@RequestParam(name="subName",required=false)String subName,@RequestParam(name="imgUrl",required=false)String imgUrl){
 		
 		Results<String> results=new Results<String>();
-		if (valid.hasErrors()) {
-			results.setMessage("信息填写不完整,请检查");
-			results.setStatus("1");
-			return results;
-		}
+		ShopDrugSubcategory shopDrugSubcategory=new ShopDrugSubcategory();
+		shopDrugSubcategory.setCategoryId(categoryId);
+		shopDrugSubcategory.setSubName(subName);
+		shopDrugSubcategory.setImgUrl(imgUrl);
 		shopDrugSubcategory.setId(KeyGen.uuid());
 		shopDrugSubcategory.setAddtime(new Date());
 		int insert=shopDrugSubcategoryService.insertShopDrugSubcategory(shopDrugSubcategory);
@@ -68,10 +64,17 @@ public class ShopDrugSubcategoryController {
 		return results;
 		
 	}
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public Results<String> updateShopDrugSubcategory(@RequestBody ShopDrugSubcategory shopDrugSubcategory){
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public Results<String> updateShopDrugSubcategory(@RequestParam(name="categoryId",required=false)String categoryId,
+			@RequestParam(name="subName",required=false)String subName,@RequestParam(name="imgUrl",required=false)String imgUrl
+			,@RequestParam(name="id",required=false)String id){
 		
 		Results<String> results=new Results<String>();
+		
+		ShopDrugSubcategory shopDrugSubcategory=new ShopDrugSubcategory();
+		shopDrugSubcategory.setSubName(subName);
+		shopDrugSubcategory.setImgUrl(imgUrl);
+		shopDrugSubcategory.setId(id);
 		
 		int update=shopDrugSubcategoryService.updateShopDrugSubcategory(shopDrugSubcategory);
 		
