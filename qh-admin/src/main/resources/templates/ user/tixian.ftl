@@ -5,7 +5,7 @@
 <html lang="en">
 	<@h.header title="用户提现" />
 	<link rel="stylesheet" href="/styles/admin.css" />
-	<script src="/scripts/course/grade-template.js"></script>
+
 	<script src="/scripts/admin.js"></script>
 	<script src="/scripts/league/league.js"></script>
 	<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-user-tixian">
@@ -26,14 +26,19 @@
 					<div class="details-frame-content" id="details-frame-content">
 						<ul>
 							<li onmousedown="go(0)" style="border-bottom:3px solid red;font-weight: 900;">核审列表</li>
-							<li onmousedown="go(1)">核审管理</li>
-							<li onmousedown="go(2)">未通过</li>
 						</ul>
 					</div>
 					<div id="guanli">
 					<!-- 核审列表 -->
 						<div class="manage">
 							<ul style="height: 80px;" class="managr-dianpu">
+							<div class=" select-3">
+									<img src="/images/sjk-xl.png"> <span>核审状态</span> <select>
+										<option disabled="" selected="" style="display: none;" value=""></option>
+										<option value="">通过</option>
+										<option value="">未通过</option>
+									</select>
+								</div>
 								<div class="select-3">
 									<span>手机号</span>
 									<input type="text"/>
@@ -88,126 +93,7 @@
 							</div>
 
 						</div>
-                           <!-- 核审记录 -->
 
-					
-						<div class="manage" style="display: none;">
-						       	<ul style="height: 80px;" class="managr-dianpu">
-								<div class="select-3">
-									<span>手机号</span>
-									<input type="text"/>
-								</div>
-						<div class="select-3">
-							<span>申请时间</span>
-								<input type="date" name="search"/>
-						</div>
-						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
-							
-								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
-						</div>
-						<div class="select-3">
-							<span>&nbsp;</span>
-								<input type="date" name="search"/>
-						</div>
-			
-			<div>
-					<input type="button" class="btn-lg im-key"
-						value="检索" />
-				</div>
-							</ul>
-				
-							<div class="admin-table">
-
-								<table>
-									<tr>
-										<th>手机号</th>
-										<th>姓名</th>
-										<th>申请提现金额</th>
-										<th>账户类型</th>
-										<th>申请时间</th>
-										<th>到账时间</th>
-										<th>操作</th>
-									</tr>
-
-									<tr>
-										<th>手机号</th>
-										<th>姓名</th>
-										<th>申请提现金额</th>
-										<th>账户类型</th>
-										<th>申请时间</th>
-										<th>到账时间</th>
-										<th>通过</th>
-									</tr>
-									
-								</table>
-
-							</div>
-							<div class="col-sm-6"></div>
-							<div class="col-sm-6">
-								<ul uib-pagination boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
-								</ul>
-							</div>
-						
-						
-						
-					
-						</div>
-			<!-- 未通过 -->
-				<div class="manage" style="display: none;">
-					<ul style="height: 80px;" class="managr-dianpu">
-								<div class="select-3">
-									<span>手机号</span>
-									<input type="text"/>
-								</div>
-						<div class="select-3">
-							<span>申请时间</span>
-								<input type="date" name="search"/>
-						</div>
-						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
-							
-								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
-						</div>
-						<div class="select-3">
-							<span>&nbsp;</span>
-								<input type="date" name="search"/>
-						</div>
-			
-			<div>
-					<input type="button" class="btn-lg im-key"
-						value="检索" />
-				</div>
-							</ul>
-				<div class="admin-table">
-
-								<table>
-									<tr>
-										<th>手机号</th>
-										<th>姓名</th>
-										<th>申请提现金额</th>
-										<th>账户类型</th>
-										<th>申请时间</th>
-										<th>操作</th>
-									</tr>
-
-									<tr>
-										<th>手机号</th>
-										<th>姓名</th>
-										<th>申请提现金额</th>
-										<th>账户类型</th>
-										<th>申请时间</th>
-										<th>未通过</th>
-									</tr>
-									
-								</table>
-
-							</div>
-							<div class="col-sm-6"></div>
-							<div class="col-sm-6">
-								<ul uib-pagination boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
-								</ul>
-							</div>
-						
-				</div>
 					</div>
 				</div>
 			</div>

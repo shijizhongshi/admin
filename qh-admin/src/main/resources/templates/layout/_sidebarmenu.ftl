@@ -146,6 +146,11 @@
                                 <span class="title">今日成交</span>
                             </a>
                         </li>
+                         <li id="sidebarmenu-indent-user-dingdan">
+                            <a href="/web/indent/user-dingdan">
+                                <span class="title">用户订单管理</span>
+                            </a>
+                        </li>
                          </ul>
                 </li>
                       <li id="sidebarmenu-user" >
@@ -164,11 +169,7 @@
                                 <span class="title">用户信息</span>
                             </a>
                         </li>
-                        <li id="sidebarmenu-user-user-dingdan">
-                            <a href="/web/user/user-dingdan">
-                                <span class="title">用户订单管理</span>
-                            </a>
-                        </li>
+                       
                          </ul>
                 </li>
                 
