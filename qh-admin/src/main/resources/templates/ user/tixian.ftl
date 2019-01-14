@@ -25,7 +25,7 @@
 				<div class="details-frame">
 					<div class="details-frame-content" id="details-frame-content">
 						<ul>
-							<li onmousedown="go(0)" style="border-bottom:3px solid red;font-weight: 900;">核审列表</li>
+							<li  style="border-bottom:3px solid red;font-weight: 900;">核审列表</li>
 						</ul>
 					</div>
 					<div id="guanli">
