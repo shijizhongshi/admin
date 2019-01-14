@@ -17,21 +17,28 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.shopDrugSubcategory=data.data;
+				$scope.shopDrugCategory=data.data;
 			}
 		})
 	};
 	$scope.id=null;
 	///////做选中的时候用
 	$scope.checkedShopcate=function(s){
-
+		$scope.clicked=s;
 		$scope.shopDrugCategory=s;
 		$scope.shopDrugCategory.id=s.id;
 		$scope.shopDrugCategory.categoryName=s.categoryName;
 		
 		$scope.id=s.id;
+		
 		$scope.shopsubBases();
-		$scope.shopcateBases();
+		$http.get("/api/shopdrugcategory/select", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.shopDrugCategory=data.data;
+			}
+		})
+		
 	}
 	$scope.shopDrugCategory=null;
 	
