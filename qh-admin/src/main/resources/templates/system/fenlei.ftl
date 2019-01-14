@@ -40,7 +40,7 @@
 					<li style="background: none; color: black;" ><b>子类的操作</b></li>
 					<li  ng-click="addsub()" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
-					<li ng-click="update()" style="background: #F9CD33;"><span
+					<li ng-click="updateed()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
 					<li ng-click="deletesub()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>

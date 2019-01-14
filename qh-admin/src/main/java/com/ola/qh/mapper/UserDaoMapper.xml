@@ -12,9 +12,14 @@
 		<result column="userrole" property="userrole" />
 		<result column="mobile" property="mobile" />
 		<result column="isdoctor" property="isdoctor" />
+		<result column="updatetime" property="updatetime" />
+		<result column="birthday" property="birthday" />
 	</resultMap>
 
-
+	<select id="selectUser" resultMap="UserMap">
+	select id,nickname,userrole,mobile,isdoctor from user where id=#{id}
+	</select>
+	
 	<update id="updateUser" parameterType="com.ola.qh.entity.User" >
 		update user set 
 		<if test="userrole!=null">

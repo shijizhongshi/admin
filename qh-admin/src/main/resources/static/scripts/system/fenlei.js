@@ -103,7 +103,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		}
 	}
 	
-	$scope.update=function(){
+	$scope.updateed=function(){
 		if($scope.subid!=null){
 			$scope.insert=null;
 			$scope.update=1;
@@ -119,7 +119,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			$http.get("/api/shopdrugcategory/insert",{"params": {"categoryName":$scope.name}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					$scope.shopcateBases();
+					location.reload();
 					alert("添加成功")
 					document.getElementById('add').style.display="none"; 
 				}else{
@@ -134,7 +134,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 					
 					alert("添加成功")
 					document.getElementById('add').style.display="none"; 
-					$scope.shopsubBases();
+					location.reload();
 				}else{
 					alert("添加失败")
 				}
@@ -150,7 +150,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				.success(function(data){
 					if(data.status=='0'){
 						alert("删除成功~");
-						$scope.shopsubBases();
+						location.reload();
 					}else{
 						alert("删除失败~");
 					}
@@ -168,7 +168,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			if(data.status=='0'){
 				alert("修改成功~");
 				document.getElementById('add').style.display="none"; 
-				$scope.shopsubBases();
+				location.reload();
 			}else{
 				alert("修改失败~");
 			}
