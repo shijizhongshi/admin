@@ -1,83 +1,83 @@
 package com.ola.qh.service.imp;
 
-import java.math.BigDecimal;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.ola.qh.dao.UserBookDao;
+import com.alipay.api.AlipayApiException;
 import com.ola.qh.dao.UserWithdrawDao;
-import com.ola.qh.entity.UserBook;
 import com.ola.qh.entity.UserWithdraw;
 import com.ola.qh.service.IUserWithdrawService;
-import com.ola.qh.util.Results;
+import com.ola.qh.util.KeyGen;
+import com.ola.qh.weixin.WeixinDraw;
 
 @Service
 public class UserWithdrawService implements IUserWithdrawService{
 
 	@Autowired
-	private UserWithdrawDao userWithdrawHistoryDao;
-	@Autowired
-	private UserBookDao userBookDao;
+	private UserWithdrawDao userWithdrawDao;
 	
 	@Override
 	public List<UserWithdraw> selectUserWithdraw(String id,int pageNo,int pageSize) {
 		
-		return userWithdrawHistoryDao.selectUserWithdraw(id,pageNo, pageSize);
+		return userWithdrawDao.selectUserWithdraw(id,pageNo, pageSize);
 	}
-
-	@Transactional
 	@Override
-	public Results<String> updateUserWithdraw(UserWithdraw userwithdrawhistory) {
-		
-		Results<String> results=new Results<String>();
-		try {
+	public void agreeWithdraw() throws Exception{
+		// TODO Auto-generated method stub
+		/////查出所有没有过的记录;打钱
+		List<UserWithdraw> alilist=userWithdrawDao.selectListNoCheck(1);
+		for (UserWithdraw userWithdraw : alilist) {
+			String userId = userWithdrawDao.checkedAccountBook(userWithdraw.getUserId());
+			if(userId==null){
+				////说明账本没有问题
+				if(userWithdraw.getTypes()==1){
+					////提现到支付宝
+					Map<String,String> map = WeixinDraw.AlipayFundTransToaccountTransfer(userWithdraw.getAliaccount(), userWithdraw.getRealname(), userWithdraw.getMoney().toString());
+					if("0".equals(map.get("status"))){
+						/////支付成功
+						userWithdrawDao.updateChecked(userWithdraw.getId(), "1",null, new Date());
+					}else{
+						/////支付失败
+						userWithdrawDao.updateChecked(userWithdraw.getId(), "2",map.get("error"), new Date());
+					}
+				}
+				
+			}else{
+				/////说明账本有问题
+				userWithdrawDao.updateChecked(userWithdraw.getId(), "2", "该用户金额存在问题", new Date());
+			}
 			
-		UserBook userbooks=userBookDao.selectUserBook(userwithdrawhistory.getUserId());
-		BigDecimal onmoney=userbooks.getOnMoney();
-		BigDecimal money = userwithdrawhistory.getMoney();
-		BigDecimal finishMoney=userbooks.getFinishMoney();
-		BigDecimal onMoney =onmoney.subtract(money);
-		if(userwithdrawhistory.getPayStatus()==1){
-			
-			userwithdrawhistory.setUpdatetime(new Date());
-			userWithdrawHistoryDao.updateUserWithdraw(userwithdrawhistory);
-			
-			BigDecimal FinishMoney =finishMoney.add(money);
-			
-			UserBook userbook=new UserBook();
-			userbook.setOnMoney(onMoney);
-			userbook.setUserId(userwithdrawhistory.getUserId());
-			userbook.setFinishMoney(FinishMoney);
-			userBookDao.updateUserBook(userbook);
-			
-			results.setStatus("0");
-			return results;
 		}
-		BigDecimal canWithdraw=userbooks.getCanWithdraw();
-		BigDecimal CanWithdraw =canWithdraw.add(money);
-		
-		userwithdrawhistory.setUpdatetime(new Date());
-		userWithdrawHistoryDao.updateUserWithdraw(userwithdrawhistory);
-		
-		UserBook userbook=new UserBook();
-		userbook.setUserId(userwithdrawhistory.getUserId());
-		userbook.setOnMoney(onMoney);
-		userbook.setCanWithdraw(CanWithdraw);
-		userBookDao.updateUserBook(userbook);
-
-		results.setStatus("0");
-		return results;
-		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			results.setStatus("1");
-			results.setMessage("修改失败");
-			return results;
+		List<UserWithdraw> weixinlist=userWithdrawDao.selectListNoCheck(2);
+		for (UserWithdraw userWithdraw : weixinlist) {
+			String userId = userWithdrawDao.checkedAccountBook(userWithdraw.getUserId());
+			if(userId==null){
+				////说明账本没有问题
+				if(userWithdraw.getTypes()==2){
+					////提现到微信
+					Map<String,String> map = WeixinDraw.wexintransfer(userWithdraw.getOpenId(), userWithdraw.getMoney().intValue(), "用户提现", KeyGen.uuid().toString());
+					if("SUCCESS".equals(map.get("status"))){
+						//////支付成功~
+						userWithdrawDao.updateChecked(userWithdraw.getId(), "1",null, new Date());
+					}else{
+						////支付失败~
+						userWithdrawDao.updateChecked(userWithdraw.getId(), "2", map.get("err_code_des"), new Date());
+					}
+				}
+				
+			}else{
+				/////说明账本有问题
+				userWithdrawDao.updateChecked(userWithdraw.getId(), "2", "该用户金额存在问题", new Date());
+			}
+			
 		}
+		
+		
 	}
 
 	
