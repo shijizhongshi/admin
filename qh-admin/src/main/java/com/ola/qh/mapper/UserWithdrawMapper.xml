@@ -28,7 +28,13 @@
 		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	
-	<update id="updateUserWithdraw" parameterType="com.ola.qh.entity.UserWithdraw" >
+	
+	<select id="selectListNoCheck" resultMap="UserWithdrawMap">
+	select * from user_withdraw where pay_status in (0,2) and types=#{types}
+	</select>
+	
+	
+	<update id="updateChecked">
 		update user_withdraw set 
 		<if test="payStatus!=0">
 		pay_status=#{payStatus},
@@ -40,5 +46,22 @@
 	</update>
 	
 	
+	
+	<select id="checkedAccountBook" resultType="java.lang.String">
+	SELECT userId from user_book a where (
+	can_withdraw != IFNULL((SELECT sum(money) from user_intomoney_history c where c.user_id=a.user_id),0)-IFNULL((SELECT sum(money) from user_withdraw w where w.user_id=a.user_id),0) 
+	or can_withdraw&lt;0 
+	
+	OR finish_money != IFNULL((SELECT sum(money) from user_withdraw w where w.user_id=a.user_id and w.pay_status=1),0) 
+	OR finish_money&lt;0 
+	OR on_money != IFNULL((SELECT sum(money) from user_withdraw w where w.user_id=a.user_id and w.pay_status in (0,2)),0)
+	or on_money&lt;0
+	OR account_money != IFNULL((SELECT sum(money) from user_intomoney_history c where c.user_id=a.user_id),0)
+	OR account_money&lt;0
+	
+	)
+	and a.user_id=#{userId}
+</select>
+
 	
 </mapper>

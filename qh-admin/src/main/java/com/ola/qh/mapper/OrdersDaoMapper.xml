@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.OrdersDao">
+
+<resultMap type="com.ola.qh.entity.Orders" id="OrdersMap">
+    <result column="id" property="id"/>
+	<result column="user_id" property="userId"/>
+	<result column="muser_id" property="muserId"/>
+	<result column="orderno" property="orderno"/>
+	<result column="qrcodes" property="qrcodes"/>
+	<result column="orders_type" property="ordersType"/>
+	<result column="payaccount" property="payaccount"/>
+	<result column="freight" property="freight"/>
+	<result column="count" property="count"/>
+	<result column="address" property="address"/>
+	<result column="receiver" property="receiver"/>
+	<result column="mobile" property="mobile"/>
+	<result column="orders_status" property="ordersStatus"/>
+	<result column="orders_old_status" property="ordersOldStatus"/>
+	<result column="express_no" property="expressNo"/>
+	<result column="paytype" property="paytype"/>
+	<result column="payname" property="payname"/>
+	<result column="addtime" property="addtime"/>
+	<result column="paidtime" property="paidtime"/>
+	<result column="deliveredtime" property="deliveredtime"/>
+	<result column="payment_type" property="paymentType"/>
+	<result column="preset_time" property="presetTime"/>
+	<result column="class_status" property="classStatus"/>
+</resultMap>
+
+<!-- 查询所有的发货的商品 -->
+<select id="autoComfirmOrders" resultMap="OrdersMap">
+select id,deliveredtime,orders_status,muser_id from orders
+ where deliveredtime!=null and orders_status="DELIVERED" and orders_type=0
+</select>
+
+<!-- 通过订单的id和状态 查对应的订单商品的集合 -->
+<select id="selectByOid" resultMap="OrdersProductMap">
+	select <include refid="sql_base"></include>,status_name from orders_product op where orders_id=#{orderId}
+	<if test="statusCode!=null">
+	and status_code=#{statusCode}
+	</if>
+	</select>
+<!-- 修改订单的状态 -->
+<update id="updateOrders">
+	update orders set 
+	<if test="ordersStatus!=null">
+	orders_status=#{ordersStatus},
+	</if>
+	<if test="ordersOldStatus!=null">
+	orders_old_status=#{ordersOldStatus},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{oid}
+	</update>
+	
+
+<!-- 修改订单产品的状态 -->
+<update id="updateOrdersProduct">
+	update orders_product set 
+	<if test="statusCode!=null">
+	status_code=#{statusCode},
+	</if>
+	<if test="statusName!=null">
+	status_name=#{statusName},
+	</if>
+	<if test="oldStatusCode!=null">
+	old_status_code=#{oldStatusCode},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+</mapper>

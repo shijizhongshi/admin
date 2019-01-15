@@ -17,7 +17,7 @@ import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
-@RequestMapping(value="/api/userwithdrawhistory")
+@RequestMapping(value="/api/userwithdraw")
 public class UserWithdrawController {
 
 	@Autowired
@@ -45,18 +45,5 @@ public class UserWithdrawController {
 		results.setStatus("0");
 		return results;
 	}
-
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Results<String> updateUserWithdrawHistory(@RequestBody @Valid UserWithdraw userwithdrawhistory,BindingResult valid) {
-
-		Results<String> results = new Results<String>();
-
-		if (valid.hasErrors()) {
-			results.setMessage("信息填写不完整,请检查");
-			results.setStatus("1");
-			return results;
-		}
-		return userWithdrawService.updateUserWithdraw(userwithdrawhistory);
-
-	}
+	
 }

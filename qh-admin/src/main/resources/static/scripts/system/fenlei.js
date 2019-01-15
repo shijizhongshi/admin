@@ -5,6 +5,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	$scope.shopDrugCategory=null;
 	$scope.shopDrugSubcategory=null;
 	$scope.name=null;
+	$scope.selectdelete=null;
 	$scope.insert=null;
 	$scope.update=null;
 	$scope.picture=null;
@@ -59,6 +60,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$scope.clicked=s;
 		$scope.id=s.id;
 		$scope.subid=null;
+		$scope.selectdelete=s;
 		$scope.name=s.categoryName;
 		
 		$scope.shopsubBases();
@@ -160,6 +162,26 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		}else{
 			alert("请选中一个子类别~");
 		}
+	}
+	
+	$scope.deletecate=function(s){
+		
+		if($scope.id!=null){
+			if(confirm("您确定删除这个大类别吗")){
+				$http.get("/api/shopdrugcategory/delete", {"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=='0'){
+						alert("删除成功~");
+						location.reload();
+					}else{
+						alert("删除失败~");
+					}
+				})
+			}
+		}else{
+			alert("请选中一个大类别")
+		}
+		
 	}
 	
 	$scope.updatesub=function(){

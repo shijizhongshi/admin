@@ -15,7 +15,7 @@
 		<result column="forthe_money"  property="fortheMoney" />
 	</resultMap>
 
-	<select id="selectUserBook" resultMap="UserBookMap">
+	<select id="single" resultMap="UserBookMap">
 		select * from user_book where user_id=#{userId}
 	</select>
 	<insert id="saveUserBook" parameterType="com.ola.qh.entity.UserBook">
@@ -42,4 +42,9 @@
 	</update>
 
 
+
+
+		<insert id="saveUserIntomoneyHistory" parameterType="com.ola.qh.entity.UserIntomoneyHistory" >
+	 	insert into user_intomoney_history(id,user_id,money,orderid,into_status,addtime) values(#{id},#{userId},#{money},#{orderId},#{intoStatus},#{addtime})
+	</insert>
 </mapper>
