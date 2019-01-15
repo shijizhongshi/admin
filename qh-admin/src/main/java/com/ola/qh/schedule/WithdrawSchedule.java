@@ -17,13 +17,13 @@ import com.ola.qh.service.imp.UserWithdrawService;
  */
 
 @Component
-public class WithdrawSchedure {
+public class WithdrawSchedule {
 
 	@Autowired
 	private IUserWithdrawService withdrawService;
 	
 	@Scheduled(cron="0 0 0 ? * *")//0点执行
-	public void withdiawRun(){
+	public void withdiawRun() throws Exception{
 		withdrawService.agreeWithdraw();
 	}
 	

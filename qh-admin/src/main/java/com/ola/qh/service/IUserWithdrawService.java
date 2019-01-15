@@ -10,7 +10,7 @@ public interface IUserWithdrawService {
 	public List<UserWithdraw> selectUserWithdraw(String id,int pageNo,int pageSize);
 	
 	
-	public void agreeWithdraw();
+	public void agreeWithdraw()throws Exception;
 	
 	
 }
