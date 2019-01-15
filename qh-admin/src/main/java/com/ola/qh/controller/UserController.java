@@ -1,11 +1,14 @@
 package com.ola.qh.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.entity.User;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.Results;
 
@@ -17,12 +20,12 @@ public class UserController {
 	private IUserService userService;
 
 	@RequestMapping(value = "/updateuser", method = RequestMethod.GET)
-	public Results<String> updateUser(@RequestParam(name = "userrole", required = true) String userrole,
+	public Results<String> updateUser(@RequestParam(name = "isdisabled", required = true) int isdisabled,
 			@RequestParam(name = "id", required = true) String id) {
 
 		Results<String> results = new Results<String>();
 
-		int user = userService.updateUser(userrole, id);
+		int user = userService.updateUser(isdisabled, id);
 		if (user <= 0) {
 			results.setMessage("更改异常");
 			results.setStatus("1");
@@ -32,4 +35,17 @@ public class UserController {
 		return results;
 	}
 
+	
+	@RequestMapping(value = "/select", method = RequestMethod.GET)
+	public Results<List<User>> selectUser(@RequestParam(name = "mobile", required = false) String mobile,
+			@RequestParam(name = "nickname", required = false) String nickname,@RequestParam(name = "userrole", required = false) String userrole) {
+
+		Results<List<User>> results = new Results<List<User>>();
+
+		List<User> list=userService.selectUser(mobile, nickname, userrole);
+		
+		results.setData(list);
+		results.setStatus("0");
+		return results;
+	}
 }

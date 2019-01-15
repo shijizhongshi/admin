@@ -29,6 +29,8 @@ public class User {
 	
 	private Date updatetime;
 	
+	private int isdisabled;
+	
 	public String getId() {
 		return id;
 	}
@@ -100,6 +102,22 @@ public class User {
 
 	public void setIsdoctor(String isdoctor) {
 		this.isdoctor = isdoctor;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
+
+	public int getIsdisabled() {
+		return isdisabled;
+	}
+
+	public void setIsdisabled(int isdisabled) {
+		this.isdisabled = isdisabled;
 	}
 
 	
