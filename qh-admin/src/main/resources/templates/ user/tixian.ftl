@@ -119,8 +119,11 @@
 .grade-text textarea {height:70px;width: 50%;}
 .manage .managr-dianpu{padding-left:20px;}
 .manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
+@media screen and (min-width: 1601px) {.manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}}
+@media screen and (max-width: 1600px)  {.manage .managr-dianpu .select-3{width: 14%;margin-left: 18px;margin-right: 0;}}
+@media screen and (max-width: 1400px)  {.manage .managr-dianpu .select-3{width: 20%;margin-left: 18px;margin-right: 0;}}
 .details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;border-bottom: solid 1px #EEEFF1;}
-.details-frame-heshen .select-3{width:15%; }
+
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}
  .admin-table table tr form span{font-size:1.4rem;}

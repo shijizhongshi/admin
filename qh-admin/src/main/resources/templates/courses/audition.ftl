@@ -59,14 +59,14 @@ submenu="sidebarmenu-audition">
 					<div class="details-frame-content">
 
 						<div class="select-2"
-							style="float: left; margin-right: 15px; width: 15%;">
+							style="float: left; margin-right: 15px; width: 160px;">
 							<span>搜索课程</span>
 							<form id="search">
 								<input type="text" name="search" style="text-indent: 2em;" />
 							</form>
 						</div>
 						<div class="select-2"
-							style="float: left; margin-right: 15px; width: 15%;">
+							style="float: left; margin-right: 15px; width:160px;">
 							<span>搜索老师</span>
 							<form id="">
 								<input type="text" name="search" style="text-indent: 2em;" />
@@ -77,7 +77,7 @@ submenu="sidebarmenu-audition">
 						<ul style="height: 80px;" class="show">
 
 							<li ng-click="add()"
-								style="margin-left: 70px; background: #9DE879;"><span
+								style="background: #9DE879;"><span
 								class="glyphicon glyphicon-plus"></span>&nbsp;添加试听课程</li>
 							<li ng-click="update()" style="background: #F9CD33;"><span
 								class="glyphicon glyphicon-pencil"></span>&nbsp;修改试听课程</li>
@@ -290,6 +290,10 @@ submenu="sidebarmenu-audition">
 	height: 600px;
 }
 
+@media screen and (max-width: 1401px){.poop, .resource{width: 700px; left:0%; top:5%}}
+.poop span {
+	font-size: 1.5rem;
+}
 .poop span {
 	font-size: 1.5rem;
 }

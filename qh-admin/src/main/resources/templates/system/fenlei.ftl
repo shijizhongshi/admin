@@ -133,7 +133,6 @@
 
 .details-frame-content {
 	height: 160px;
-	overflow-y: scroll;
 	padding-bottom: 0;
 }
 
@@ -150,7 +149,7 @@
 	font-size: 1.5rem;
 	cursor: pointer;
 }
-
+@media screen and (max-width: 901px) {.details-frame-content ul li{	width: 48%; }}
 .details-frame-content .add-fenlei {
 	float: left;
 	border-radius: 20px;

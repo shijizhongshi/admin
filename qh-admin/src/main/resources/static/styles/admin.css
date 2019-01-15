@@ -1,6 +1,7 @@
 *{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;font-size:16px;}
 a{text-decoration: none;color: black;}
 .classify{width:13%; background:#FFFFFF;float:left;}
+@media screen and (max-width: 901px) {.classify{width:100%;float:none;}}
 .classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:15px;}
 
 .classify ul.menu .list a{color:black}
@@ -19,12 +20,13 @@ ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: abs
 
 
 
-.details{width:87%;height:auto;float:left;background:#fff;}
+.details{width:87%;height:auto;background:#fff;float:left;}
+@media screen and (max-width: 901px) {.details{width:100%;}}
 .details-nav{width:86%;height: 55px;background: white;padding:20px}
 .details-nav ul li{float: left;font-size:12px;color: #777777;margin-right:10px}
 .details-nav ul li img{margin-right:5px;vertical-align: middle;}
 .details-frame{padding: 29px;background:#EDEEF2;height:auto;backround:#FFFFFF;}
-.details-frame-content{width:100%;padding: 30px;background: white;height:120px;border-bottom: solid 1px #EEEFF1;}
+.details-frame-content{width:100%;padding: 20px;background: white;height:130px;border-bottom: solid 1px #EEEFF1;overflow:auto;}
 .centre-border{width:370px;height:170px;border-bottom: 1px solid #F5F6F8;clear:both;margin-bottom:15px;}
 .centre-border select,.centre-border .select{width:130px;}
 .select{width:160px;height:50px;float:left;margin-left:10px;margin-bottom:5px;position: relative;}
@@ -43,7 +45,10 @@ select[disabled]{
 color:red;
 }
 .select input{width: 180px;height: 30px;background:#EDEEF0;border-radius:20px;text-indent: 1em;}
-.im-key{background: #E8474D;color: white;border-radius:20px;margin: 30px;}
+.im-key{background: #E8474D;color: white;border-radius:20px;margin: 30px 10px;}
+@media screen and (max-width: 1600px)  {.im-key{margin: 30px 5px;}}
+@media screen and (max-width: 1400px)  {.im-key{margin: 30px 5px;}}
+@media screen and (max-width: 901px) {.im-key{margin:5px;}}
 .manage{width: 100%;height:auto;padding-top:23px;background:white; position: relative;}
  .show li{float: left;margin-left: 18px;cursor: pointer;height: 30px;border-radius: 30px;color: white; text-align: center;line-height: 30px;font-size:16px;background:#8A959B;font-size:1.4rem;padding:0 8px;}
 

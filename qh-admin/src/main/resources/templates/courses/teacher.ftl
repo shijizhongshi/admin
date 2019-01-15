@@ -22,7 +22,7 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select-2" style="float:left;margin-right:15px;width: 15%;">
+	<div class="select-2" style="float:left;margin-right:15px;width:160px;">
 	<span>教师名称</span>
 	<form id="search">
 	<input type="text" ng-model="teacherName" placeholder="请输入教师名称"/></form>
@@ -32,7 +32,7 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-			<li  ng-click="add()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加教师</li>
+			<li  ng-click="add()" style="background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加教师</li>
 		<li ng-click="update()"  style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改教师</li>
 		<li ng-click="deleteTeacher()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
          <li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
@@ -70,7 +70,7 @@
                     </div>
 
 	<!--弹窗-->
-			<div class="poop" id="add" style="width:60%;height: 600px;position: absolute;left: 15%;top: 5%;" >
+			<div class="poop" id="add" >
 				<form id="myform">
 	<h3>添加教师</h3>
 		<div class="template-add">
@@ -194,7 +194,8 @@
 </div>
  <style type="text/css">
 	
-		.poop{overflow-y: scroll;}
+		.poop{overflow-y: scroll;width:60%;height: 600px;position: absolute;left: 15%;top: 5%;}
+		@media screen and (max-width: 1501px){.poop{width: 750px; left:0%; top:5%}}
 	.poop span{font-size: 1.5rem;}
 	.template-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
 	.template-left,.template-right{width: 50%;float: left;height:auto;overflow:auto;}

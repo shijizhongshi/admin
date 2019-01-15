@@ -64,7 +64,7 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-			<li  ng-click="add()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;班级添加</li>
+			<li  ng-click="add()" style="background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;班级添加</li>
 		<li ng-click="update()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;班级修改</li>
 		<li ng-click="deleteClass()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;班级删除</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
@@ -113,7 +113,7 @@
                     </div>
 
 	<!--弹窗-->
-		<div class="poop" id="add" style="width: 80%;height: 600px;position: absolute;left: 5%;top: 5%;">
+		<div class="poop" id="add">
 		<form id="myform">
 	<h3>班级添加</h3>
 	<!--<span style="margin-right:20px ;">已选专业类型:</span> <span>lin</span>-->
@@ -248,7 +248,8 @@
 </body>
  <style type="text/css">
 	
-	.poop{overflow-y: scroll;}
+	.poop{overflow-y: scroll;width: 80%;height: 600px;position: absolute;left: 5%;top: 5%;}
+	@media screen and (max-width: 1401px){.poop{width:850px;left:0%;top: 5%;}}
 	.poop span{font-size: 1.5rem;}
 	.grade-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
 	.grade-left,.grade-center,.grade-right{width: 33%;float: left;height: 820px;overflow:auto;}

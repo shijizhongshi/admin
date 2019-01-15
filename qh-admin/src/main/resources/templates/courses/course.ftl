@@ -9,7 +9,7 @@
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-course">
 <div ng-controller="CourseController">
 
-<div class="classify" style="width:13%">
+<div class="classify">
 	<ul class="menu">
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
@@ -46,7 +46,7 @@
       </ul>
       </div>
 
- <div class="details" style="width:87%">
+ <div class="details">
 	<div class="details-nav">
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
@@ -59,7 +59,7 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select-2" style="float:left;margin-right:15px;width: 15%;">
+	<div class="select-2">
 	<span>搜索课程</span>
 	<form id="search">
 	<input type="text" placeholder=""/></form>
@@ -69,7 +69,7 @@
 <div class="manage">
 	<ul style="height: 80px;" class="show">
 
-			<li  ng-click="add()" style="margin-left: 70px;background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加课程</li>
+			<li  ng-click="add()" style="background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加课程</li>
 		<li ng-click="updateCourse()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改课程</li>
 		<li ng-click="deleteCourse()" style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除课程</li>
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
@@ -191,6 +191,10 @@
 </div>
 </div>
 </div>
+<style type="text/css">
+.details-frame-content .select-2{float: left; margin-right: 15px; width: 18%;}
+@media screen and (max-width: 901px) {.details-frame-content .select-2{width: 90%;}}
+</style>
 
 </@b.body>
  

@@ -24,7 +24,7 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select-2" style="float:left;margin-right:15px;width: 15%;">
+	<div class="select-2">
 	<span>新闻标题</span>
 	<form id="search">
 	<input type="text" ng-model="title" placeholder="搜索新闻标题"/></form>
@@ -37,7 +37,7 @@
 	<ul style="height: 80px;" class="show">
 
 					<li ng-click="add()"
-						style="margin-left: 70px; background: #9DE879;"><span
+						style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加新闻/话题</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
@@ -224,8 +224,9 @@
 	border-radius: 20px;
 	text-indent: 2em;
 }
+.details-frame-content .select-2{float:left;margin-right:15px;width: 18%;}
 
-
+@media screen and (max-width: 901px){.details-frame-content .select-2{width:90%;}}
 </style>
 </@b.body>
 
