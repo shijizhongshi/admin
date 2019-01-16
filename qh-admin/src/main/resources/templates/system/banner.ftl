@@ -69,7 +69,7 @@
                       
                            
                             <tr ng-repeat="b in bannerlist" ng-click="checkedbanner(b)" ng-class="{'selected':selected==b}">
-                                <td><img src="{{b.imageurl}}" style="width:50px;height:30px;"/></td>
+                                <td><img ng-src="{{b.imageurl}}" style="width:50px;height:30px;"/></td>
                                 <td ng-show="{{b.type==1}}">首页banner</td>
                                 <td ng-show="{{b.type==2}}">学院banner</td>
                                 <td ng-show="{{b.type==3}}">商城首页banner</td>
@@ -134,7 +134,7 @@
 			<div style="margin-bottom: 10px">图片:</div>
 			<input type="file" onchange="angular.element(this).scope().uploadmainimage(this)" />
 			<input type="hidden" ng-model="banner.imageurl" >
-			<img src="{{banner.imageurl}}" style="width:50px;height:30px;"/>
+			<img ng-src="{{banner.imageurl}}" style="width:50px;height:30px;"/>
 	</div>
 		
 		<div  class="select-radio ">

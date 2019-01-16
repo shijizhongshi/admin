@@ -62,7 +62,7 @@
 						<tr ng-repeat="new in newlist" ng-click="checkednews(new)" ng-class="{'selected':selected==new}">
 							<th>{{new.types}}</th>
 							<th>{{new.title}}</th>
-							<th><img src="{{new.imgUrl}}" style="width:50px;height:30px;"/></th>
+							<th><img ng-src="{{new.imgUrl}}" style="width:50px;height:30px;"/></th>
                              <th ng-show="{{new.isrecommend==1}}">推荐</th>
                              <th ng-show="{{new.isrecommend==0}}">不推荐</th>
                              
@@ -124,7 +124,7 @@
 					<div>上传图片</div> 
 	 <input type="file" name="file"  onchange="angular.element(this).scope().uploadmainimage(this)"   accept="image/*" /> 
     <div style="height:130px;width:40%;margin-top:3px;">
-    <img style="height:130px;" src="{{news.imgUrl}}"/></div>
+    <img style="height:130px;" ng-src="{{news.imgUrl}}"/></div>
         </div>
         <div  class="select-radio ">
 		<ul><li>是否推荐</li>  
