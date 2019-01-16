@@ -19,4 +19,8 @@ public class league {
 	public String yishi(){
 		return "league/yishi";
 	}
+	@RequestMapping("/xiangmu")
+	public String xiangmu(){
+		return "league/xiangmu";
+	}
 }

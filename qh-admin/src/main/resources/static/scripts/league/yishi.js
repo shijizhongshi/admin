@@ -58,6 +58,14 @@ app.controller("doctorsController", function($scope, $http){
 	}
 	
 	 $scope.checkedAll=function(d){
+		 if(d.islimit==1){
+		document.getElementById('islimit').style.display="none"; 
+		 
+		 
+		 }
+		 else{
+			 document.getElementById('islimit').style.display="bloke"; 
+		 }
 		 document.getElementById('revise').style.display="block"; 
 		 $scope.d=d;
 		 $scope.isrecommend=d.isrecommend;

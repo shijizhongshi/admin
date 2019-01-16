@@ -232,10 +232,10 @@
 								style="background: #5ED8A9;" /> <input name="esc" type="reset"
 								value="取消" onclick="CloseDiv();formReset()" class="esc" />
 						</div>
-					</div>
-				</div>
+</div>
+</div>
 				<!-- 核审管理内容 -->
-				<div class="manage" style="display: block;">
+				<div class="manage" style="display:none;">
 					<h4 style="padding-left: 30px;">核审列表()</h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
@@ -386,7 +386,8 @@
 								</div>
 
 							</div>
-							<div class="grade-right">
+							<div class="grade-right" >
+							<div id="islimit">
 								<h3>操作</h3>
 								<div>
 									<ul>
@@ -399,7 +400,7 @@
 									<span>拒绝原因</span>
 									<textarea style="height: 200px; width: 100% !important"></textarea>
 								</div>
-
+								</div>
 							</div>
 					</form>
 					<div class="end">
@@ -414,137 +415,53 @@
 
 			</div>
 		</div>
-	</div>
+	</div></div>
 
+		<style type="text/css">
+				@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
+			.poop {
+				
+				width: 55%;
+				height: 550px;
+				position: absolute;
+				left: 15%;
+				top: 10%;
+				display: none;
+			}
+				@media screen and (max-width:1401px){.poop {width: 560px;}}		
+			.poop span {
+				font-size: 1.5rem;
+			}
+.resource .grade-left , .resource .grade-center , .resource .grade-right{width:39%;float: left;height:720px;overflow: auto;}
+.resource .grade-right{width:20%;border-right: none;height: 500px;}	
+.poop .grade-left , .poop .grade-center {width:49%;float: left;height:760px;overflow: auto;}
+.details-frame-content {height: 50px;padding:0 29px;}
+			
+.details-frame-content ul li {	float: left;height: 50px;text-align: center;line-height: 50px;font-size: 1.5rem;cursor: pointer;margin-right:15px;}
+.leibie{background:#F5F6F8;width: 50%;text-align: center; }
+.grade-text textarea {height:70px;width: 70%;}
+.manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
+.details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;}
+@media screen and (max-width: 901px){.manage .managr-dianpu .select-3 , .details-frame-heshen .select-3 , .details-frame-heshen .select-2 {width:90% !important;}}
+.details-frame-heshen .select-3{width:15%; }
+.details-frame-heshen .select-2{width: 10%;float: left;}
+.details-frame-heshen .select-2 input {border-radius:0;}
+.resource{width: 70%;
+				height: 600px;
+				position: absolute;
+				left: 10%;
+				top: 20%;
+				display: none;}
+@media screen and (max-width:1401px){.resource{width:840px;}}
+.resource .grade-left ul{width:100%;margin:3px 0;height:50px;}
+.resource .grade-left ul li:nth-child(1){float:left;}
+.resource .grade-left ul li:nth-child(2){float:right;color:#999;}
+.biaoqian{width: 80%;height:80px;}
+.biaoqian ul li{float: left;background:#EDEEF0;margin-right: 5px;}
+.biaoqian i{color: #B1B1B1;font-weight: 100;}
+		</style>
+	
+	</@b.body>
 
-	<style type="text/css">
-.poop {
-	width: 55%;
-	height: 550px;
-	position: absolute;
-	left: 15%;
-	top: 10%;
-	display: none;
-}
-
-.poop span {
-	font-size: 1.5rem;
-}
-
-.resource .grade-left, .resource .grade-center, .resource .grade-right {
-	width: 39%;
-	float: left;
-	height: 720px;
-	overflow: auto;
-}
-
-.resource .grade-right {
-	width: 20%;
-	border-right: none;
-	height: 500px;
-}
-
-.poop .grade-left, .poop .grade-center {
-	width: 49%;
-	float: left;
-	height: 760px;
-	overflow: auto;
-}
-
-.details-frame-content {
-	height: 50px;
-	padding: 0 29px;
-}
-
-.details-frame-content ul li {
-	float: left;
-	height: 50px;
-	text-align: center;
-	line-height: 50px;
-	font-size: 1.5rem;
-	cursor: pointer;
-	margin-right: 15px;
-}
-
-.leibie {
-	background: #F5F6F8;
-	width: 50%;
-	text-align: center;
-}
-
-.grade-text textarea {
-	height: 70px;
-	width: 70%;
-}
-
-.manage .managr-dianpu .select-3 {
-	width: 10%;
-	margin-left: 18px;
-	margin-right: 0;
-}
-
-.details-frame-heshen {
-	width: 100%;
-	padding: 0 30px;
-	background: white;
-	height: auto;
-	border-bottom: solid 1px #EEEFF1;
-}
-
-.details-frame-heshen .select-3 {
-	width: 15%;
-}
-
-.details-frame-heshen .select-2 {
-	width: 10%;
-	float: left;
-}
-
-.details-frame-heshen .select-2 input {
-	border-radius: 0;
-}
-
-.resource {
-	width: 70%;
-	height: 600px;
-	position: absolute;
-	left: 10%;
-	top: 20%;
-	display: none;
-}
-
-.resource .grade-left ul {
-	width: 100%;
-	margin: 3px 0;
-	height: 50px;
-}
-
-.resource .grade-left ul li:nth-child(1) {
-	float: left;
-}
-
-.resource .grade-left ul li:nth-child(2) {
-	float: right;
-	color: #999;
-}
-
-.biaoqian {
-	width: 80%;
-	height: 80px;
-}
-
-.biaoqian ul li {
-	float: left;
-	background: #EDEEF0;
-	margin-right: 5px;
-}
-
-.biaoqian i {
-	color: #B1B1B1;
-	font-weight: 100;
-}
-</style>
-</div>
-</@b.body>
 
 </html>
