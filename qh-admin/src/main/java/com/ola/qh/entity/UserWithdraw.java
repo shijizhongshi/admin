@@ -39,8 +39,28 @@ private String id;
 	
 	private int status;
 	
+	private String mobile;
+	
+	private String showtime;
 	
 	
+	
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getWeixinnickname() {
 		return weixinnickname;
 	}
