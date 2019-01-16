@@ -5,6 +5,7 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
+<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/course/section.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-chapter">
@@ -49,7 +50,7 @@
 	<th>节名称</th>
 	<th>是否展示</th>
 	</tr>
- <tr ng-repeat="s in sectionlist" ng-click="checkedChapter(s)" ng-class="{'selected':selected==s}">
+ <tr ng-repeat="s in sectionlist" ng-click="checkedSection(s)" ng-class="{'selected':selected==s}">
 	<th>${chapterName}</th>
 	<th>{{s.sectionName}}</th>
 	<th ng-show="{{s.isshow==1}}">是</th >
@@ -93,7 +94,7 @@
 		<div >
 			<input type="file" id="file" onchange="angular.element(this).scope().uploadmainimage(this)" accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" />
 			
-			    <img  src="" style="height:100px;" />
+			    <div id='polyved'></div>
 		</div>
 		
 </div>			
