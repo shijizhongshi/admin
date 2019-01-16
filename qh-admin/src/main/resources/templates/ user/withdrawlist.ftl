@@ -5,11 +5,12 @@
 <html lang="en">
 	<@h.header title="用户提现" />
 	<link rel="stylesheet" href="/styles/admin.css" />
-
+	
 	<script src="/scripts/admin.js"></script>
 	<script src="/scripts/league/league.js"></script>
-	<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-user-tixian">
-		<div>
+	<script src="/scripts/user/withdrawlist.js"></script>
+	<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-user-withdraw">
+		<div ng-controller="withdrawController">
 			<div class="details" style="width: 100%">
 				<div class="details-nav">
 					<ul>
@@ -33,32 +34,32 @@
 						<div class="manage">
 							<ul style="height: 80px;" class="managr-dianpu">
 							<div class=" select-3">
-									<img src="/images/sjk-xl.png"> <span>核审状态</span> <select>
-										<option disabled="" selected="" style="display: none;" value=""></option>
-										<option value="">通过</option>
-										<option value="">未通过</option>
+									<img src="/images/sjk-xl.png"> <span>核审状态</span> 
+									<select ng-model="payStatus">
+										<option value="1">通过</option>
+										<option value="2">未通过</option>
+										<option value="0">未审核</option>
 									</select>
 								</div>
 								<div class="select-3">
 									<span>手机号</span>
-									<input type="text"/>
+									<input type="text" ng-model="mobile"/>
 								</div>
-						<div class="select-3">
-							<span>申请时间</span>
-								<input type="date" name="search"/>
-						</div>
-						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
-							
-								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
-						</div>
+						<div class="col-sm-1 form-group">
+                            <label>开始日期</label>
+                        </div>
+                        <div class="col-sm-2 form-group">
+                            <input type="text" uib-datepicker-popup="yyyy-MM-dd" is-open="fromdatepickeropen" ng-model="fromdate"
+                                   ng-click="openfromdatepicker()" datepicker-options="startDateOptions" close-text="关闭" current-text="今天" clear-text="清空" class="form-control" readonly>
+                        </div>
 						<div class="select-3">
 							<span>&nbsp;</span>
-								<input type="date" name="search"/>
+								<input type="date" ng-model="todate" name="search"/>
 						</div>
 			
 			<div>
 					<input type="button" class="btn-lg im-key"
-						value="检索" />
+						value="检索" ng-click="loaddata()"/>
 				</div>
 							</ul>
 				
@@ -67,20 +68,20 @@
 								<table>
 									<tr>
 										<th>手机号</th>
-										<th>姓名</th>
+										
 										<th>申请提现金额</th>
 										<th>账户类型</th>
 										<th>申请时间</th>
 										<th>操作</th>
 									</tr>
 
-									<tr>
-										<th>手机号</th>
-										<th>姓名</th>
-										<th>申请提现金额</th>
-										<th>账户类型</th>
-										<th>申请时间</th>
-										<th><form ><span>允许</span><input type="radio" value="允许" style="background:#7bc472;" name="caozuo" /><span>&nbsp;拒绝</span><input type="radio" value="拒绝"  name="caozuo"/></form></th>
+									<tr ng-repeat="w in withdrwlist">
+										<th>{{w.mobile}}</th>
+										<th>{{w.money}}</th>
+										<th ng-show="{{w.types==1}}">支付宝</th>
+										<th ng-show="{{w.types==2}}">微信</th>
+										<th>{{w.showtime}}</th>
+										<th></th>
 									</tr>
 									
 								</table>
