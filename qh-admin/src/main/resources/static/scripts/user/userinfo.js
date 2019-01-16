@@ -42,7 +42,7 @@ app.controller("userinfoController", function($scope, $http){
 		if($scope.selected!=u)
 		$scope.selected=u;
 		else{
-			$scope.selected=1;
+			$scope.selected=null;
 		}
 		}
 	

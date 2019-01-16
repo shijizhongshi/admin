@@ -49,6 +49,8 @@ public class Doctors {
 	private int islimit;
 	
 	private int isrecommend;
+	
+	private int isvirtual;
 
 	public int getIslimit() {
 		return islimit;
@@ -224,6 +226,14 @@ public class Doctors {
 
 	public void setIsrecommend(int isrecommend) {
 		this.isrecommend = isrecommend;
+	}
+
+	public int getIsvirtual() {
+		return isvirtual;
+	}
+
+	public void setIsvirtual(int isvirtual) {
+		this.isvirtual = isvirtual;
 	}
 	
 	

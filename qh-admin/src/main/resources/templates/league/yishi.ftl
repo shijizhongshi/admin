@@ -4,9 +4,9 @@
 <html lang="en">
 <@h.header title="商品店铺" />
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/league/yishi.js"></script>
+	<script src="/scripts/league/league.js"></script>
 <@b.body menu="sidebarmenu-league" submenu="sidebarmenu-league-yishi">
 <div ng-controller="doctorsController">
 	<div class="details" style="width: 100%">
@@ -73,14 +73,15 @@
 								<th>详细信息</th>
 							</tr>
 
-							<tr>
-								<th>医师名称</th>
-								<th>所在医院</th>
-								<th>科室</th>
-								<th>职位职称</th>
-								<th>是否推荐</th>
-								<th>注册时间</th>
-								<th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
+							<tr ng-repeat="d in doctorslist" ng-click="checkdoctor(d)"
+								ng-class="{'selected':selected==d}">
+								<th>{{d.name}}</th>
+								<th>{{d.hospital}}</th>
+								<th>{{d.offices}}</th>
+								<th>{{d.professional}}</th>
+								<th>{{d.isrecommend}}</th>
+								<th>{{d.addtime}}</th>
+								<th><span class="xiangqing" ng-click="checkedAll(d)">查看详情</span></th>
 							</tr>
 
 						</table>
@@ -178,48 +179,47 @@
 									<div class="costs-uploadfile-div">
 										<span style="float: left;">正面:&nbsp;</span><input type="file"
 											name="file" accept="image/*" value="身份证正面" onchange="" /> <input
-											type="hidden" ng-model="" />
+											type="hidden" />
 									</div>
 									&nbsp;
 									<div class="costs-uploadfile-div">
 										<span style="float: left;">反面:&nbsp;</span><input type="file"
 											name="file" accept="image/*" value="身份证反面" onchange="" /> <input
-											type="hidden" ng-model="" />
+											type="hidden" />
 									</div>
 									&nbsp;
 									<div class="costs-uploadfile-div">
 										医师照片<input type="file" name="file" accept="image/*"
-											value="上传课程图片" onchange="" /> <input type="hidden"
-											ng-model="" />
+											value="上传课程图片" onchange="" /> <input type="hidden" />
 										<div class="costs-img">
 											<img src="" />
 										</div>
 									</div>
 									<div class="costs-uploadfile-div">
 										职称证明<input type="file" name="file" value="上传课程图片" onchange="" />
-										<input type="hidden" ng-model="" />
+										<input type="hidden" />
 										<div class="costs-img">
 											<img src="" />
 										</div>
 									</div>
 									<div class="costs-uploadfile-div">
 										资质证书<input type="file" name="file" value="上传课程图片" onchange="" />
-										<input type="hidden" ng-model="" />
+										<input type="hidden" />
 										<div class="costs-img">
 											<img src="" />
 										</div>
 									</div>
 									<div class="costs-uploadfile-div">
 										其他证书<input type="file" name="file" value="上传课程图片" onchange="" />
-										<input type="hidden" ng-model="" />
+										<input type="hidden" />
 									</div>
 									<div class="select-radio ">
 										<ul>
 											<li>是否推荐</li>
-											<li><input type="radio" ng-model="" ng-value="1"
+											<li><input type="radio" ng-value="1"
 												class="ng-pristine ng-untouched ng-valid ng-empty" name="3"
 												value="1"> 是</li>
-											<li><input type="radio" ng-model="" ng-value="0"
+											<li><input type="radio" ng-value="0"
 												class="ng-pristine ng-untouched ng-valid ng-empty" name="4"
 												value="0">否</li>
 										</ul>
@@ -235,7 +235,7 @@
 					</div>
 				</div>
 				<!-- 核审管理内容 -->
-				<div class="manage" style="display: none;">
+				<div class="manage" style="display: block;">
 					<h4 style="padding-left: 30px;">核审列表()</h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
@@ -247,8 +247,6 @@
 						</div>
 						<div class="select-2"
 							style="font-size: 1.6rem; width: 3%; text-align: center;">
-							<span class="glyphicon glyphicon-hand-right"></span> &nbsp;<span
-								class="glyphicon glyphicon-hand-left"></span>
 						</div>
 						<div class="select-2">
 							<span>&nbsp;</span> <input type="date" name="search" />
@@ -267,17 +265,18 @@
 								<th>所在医院</th>
 								<th>职称</th>
 								<th>申请时间</th>
-								<th>操作</th>
+								<th>详细信息</th>
 							</tr>
 
-							<tr>
+							<tr ng-repeat="v in virtuallist" ng-click="checkdoctor(v)"
+								ng-class="{'selected':selected==v}">
 
-								<th>姓名</th>
-								<th>科室</th>
-								<th>所在医院</th>
-								<th>职称</th>
-								<th>申请时间</th>
-								<th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
+								<th>{{v.name}}</th>
+								<th>{{v.offices}}</th>
+								<th>{{v.hospital}}</th>
+								<th>{{v.professional}}</th>
+								<th>{{v.addtime}}</th>
+								<th><span class="xiangqing" ng-click="checkedAll(v)">查看详情</span></th>
 							</tr>
 
 						</table>
@@ -293,10 +292,6 @@
 						</ul>
 					</div>
 
-
-
-
-
 				</div>
 				<!-- 查看详情 -->
 				<div id="revise" class="resource">
@@ -306,53 +301,55 @@
 							<div class="grade-left" style="padding-right: 5%;">
 								<div
 									style="width: 50%; margin: 0 auto; text-align: center; height: 130px">
-									<img src="/images/sjk-home.png" style="height: 100px;" />
-									<p>王尼玛</p>
+									<img src="{{d.headImg}}" style="height: 100px;" />
+									<p>{{d.name}}</p>
 								</div>
+
 								<ul>
 									<li>医师姓名</li>
-									<li>王尼玛</li>
+									<li>{{d.name}}</li>
 								</ul>
 								<ul>
 									<li>身份证号</li>
-									<li>11111</li>
+									<li>{{d.idcard}}</li>
 								</ul>
 								<ul>
 									<li>性别</li>
-									<li>女</li>
+									<li>{{d.sexs}}</li>
 								</ul>
 								<ul>
 									<li>地区</li>
-									<li>日本</li>
+									<li>{{d.address}}</li>
 								</ul>
 								<ul>
 									<li>学历</li>
-									<li>学士</li>
+									<li>{{d.edu}}</li>
 								</ul>
 								<ul>
 									<li>毕业院校</li>
-									<li>家里蹲</li>
+									<li>{{d.school}}</li>
 								</ul>
 								<ul>
 									<li>所在医院</li>
-									<li>2</li>
+									<li>{{d.hospital}}</li>
 								</ul>
 								<ul>
 									<li>所在科室</li>
-									<li>妇产科</li>
+									<li>{{d.offices}}</li>
 								</ul>
 								<ul>
 									<li>职位职称</li>
-									<li>2</li>
+									<li>{{d.professional}}</li>
 								</ul>
 								<ul>
 									<li>标签</li>
-									<li>女</li>
+									<li>{{d.signs}}</li>
 								</ul>
 								<ul>
 									<li>擅长治疗</li>
-									<li>老年痴呆</li>
+									<li>{{d.skilled}}</li>
 								</ul>
+
 							</div>
 
 
@@ -361,33 +358,30 @@
 								<div class="costs-uploadfile-div">
 									职称证明：
 									<div class="costs-img">
-										<img src="" name="营业执照" />
+										<img src="{{d.professionalImg}}" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
 									身份证：
 									<div class="costs-img" style="height: 70px;">
-										<img src=""
+										<img src="{{d.frontIdcardImg}}"
 											style="width: 30%; float: left; height: 70px; margin-right: 3%;" />
-										<img src="" style="width: 30%; float: left; height: 70px;" />
+										<img src="{{d.reverseIdcardImg}}"
+											style="width: 30%; float: left; height: 70px;" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
 									资质证明：
 									<div class="costs-img">
-										<img src="" name="营业执照" />
+										<img src="{{d.practiceImg}}" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
 									其他证书：
 									<div class="costs-img" style="height: 110px;">
-										<img src=""
+										<img src="{{d.elseImg}}"
 											style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
-										<img src=""
-											style="width: 30%; float: left; height: 50px; margin-right: 3%;" "/>
-										<img src="" style="width: 30%; float: left; height: 50px;" />
-										<img src=""
-											style="width: 30%; float: left; height: 50px; margin-top: 10px;" />
+
 									</div>
 								</div>
 
@@ -397,8 +391,8 @@
 								<div>
 									<ul>
 										<li>是否同意</li>
-										<li><input type="radio" ng-model="" ng-value="1" /> 同意</li>
-										<li><input type="radio" ng-model="" ng-value="0" />不同意</li>
+										<li><input ng-model="islimit" type="radio" ng-value="1" name="1"/> 同意</li>
+										<li><input ng-model="islimit" type="radio" ng-value="2" name="1"/>不同意</li>
 									</ul>
 								</div>
 								<div class="grade-text">
@@ -409,9 +403,8 @@
 							</div>
 					</form>
 					<div class="end">
-						<input name="git" type="submit" value="提交"
-							style="background: #5ED8A9;" /> <input name="esc" type="reset"
-							value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
+						<input ng-click="updatedoctor(d.id)" name="git" type="submit" value="提交" style="background: #5ED8A9;" /> 
+						<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc" />
 					</div>
 
 

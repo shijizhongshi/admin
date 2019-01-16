@@ -1,5 +1,6 @@
 package com.ola.qh.service.imp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,19 @@ public class DoctorsService implements IDoctorsService{
 	private UserDao userDao;
 	
 	@Override 
-	public List<Doctors> selectDoctors(int islimit) {
+	public List<Doctors> selectDoctors(int islimit,int isvirtual,int pageNo,int pageSize) {
 		
-		return doctorsDao.selectDoctors(islimit);
+		return doctorsDao.selectDoctors(islimit,isvirtual,pageNo,pageSize);
 	}
 
 	@Transactional
 	@Override
-	public Results<String> updateDoctors(String id, int islimit,int isrecommend) {
+	public Results<String> updateDoctors(String id, int islimit,int isrecommend,Date updatetime) {
 		
 		Results<String> results=new Results<String>();
 		try {
 			
-		doctorsDao.updateDoctors(id, islimit, isrecommend);
+		doctorsDao.updateDoctors(id, islimit, isrecommend,updatetime);
 		String userId=doctorsDao.selectUserId(id);
 		if(islimit==1){
 			User u =new User();

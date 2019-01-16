@@ -1,5 +1,6 @@
 package com.ola.qh.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ public class DoctorsController {
 	
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<Doctors>> selectDoctors(@RequestParam(name="islimit",required=true)int islimit){
+	public Results<List<Doctors>> selectDoctors(@RequestParam(name="islimit",required=false)int islimit,@RequestParam(name="isvirtual",required=false)int isvirtual,
+			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize){
 		
 		Results<List<Doctors>> results=new Results<List<Doctors>>();
-		List<Doctors> list=doctorsService.selectDoctors(islimit);
+		List<Doctors> list=doctorsService.selectDoctors(islimit, isvirtual, pageNo, pageSize);
 		if(list==null || list.size()==0){
 			
 			results.setMessage("没有医生信息");
@@ -39,12 +41,12 @@ public class DoctorsController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public Results<String> updateDoctors(@RequestParam(name="islimit",required=true)int islimit,
-			@RequestParam(name="isrecommend",required=true)int isrecommend,
+	public Results<String> updateDoctors(@RequestParam(name="islimit",required=false)int islimit,
+			@RequestParam(name="isrecommend",required=false)int isrecommend,
 			@RequestParam(name="id",required=true)String id){
 		
-		
-		return doctorsService.updateDoctors(id, islimit, isrecommend);
+		Date updatetime=new Date();
+		return doctorsService.updateDoctors(id, islimit, isrecommend, updatetime);
 				
 		
 	}
