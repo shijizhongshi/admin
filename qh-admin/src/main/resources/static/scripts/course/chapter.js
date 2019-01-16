@@ -6,7 +6,8 @@ app.controller("ChapterController", function($scope, $http){
 		$scope.active=$("#typeId").val();
 		$scope.typeId=$("#typeId").val();
 		$scope.courseId=$("#courseId").val();
-		
+		$scope.courseTypeName=$("#courseTypeName").val();
+		$scope.courseTypeSubclassName=$("#courseTypeSubclassName").val();
 		
 	}else{
 		$scope.courseTypeName="医师资格";

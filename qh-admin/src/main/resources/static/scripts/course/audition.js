@@ -53,15 +53,11 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		$scope.auditionBases();
 	
 }
-	$scope.imgUrl=null;
-	$scope.aliyunId=null;
-	
 	$scope.uploadmainimage = function(file){
 		
 		
 		if(!file.files || file.files.length < 1) return;
 
-		
 	    var fd = new FormData();
 	    fd.append("file", file.files[0]);
 		$http.post("/api/upload/single",fd,{
@@ -71,40 +67,47 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	        
 	    })
 	    .success(function(data){
-	    	$scope.imgUrl=data.data;
+	    	$scope.courseNofree.imgUrl=data.data;
 	    	
 		})
 	};
 	
 	
 	$scope.uploadmainimage1 = function(file){
-		
-		
 		if(!file.files || file.files.length < 1) return;
-
-		
-	    var fd = new FormData();
-	    fd.append("file", file.files[0]);
-		$http.post("/api/upload/single",fd,{
-	        withCredentials: true,
-	        headers: {'Content-Type': undefined },
-	        transformRequest: angular.identity
-	        
-	    })
-	    .success(function(data){
-	    	
-	    	$scope.aliyunId=data.data;
-	    	
-		})
+		var formData = new FormData();
+		formData.append('Filedata', $('#file')[0].files[0]);
+		formData.append("writetoken","a1df864b-405e-4782-9494-733e9b51c5d5");
+		formData.append("JSONRPC","{'title': '标题', 'tag':'标签','desc':'描述'}");
+		$.ajax({
+		    url: 'https://v.polyv.net/uc/services/rest?method=uploadfile',
+		    type: 'POST',
+		    data: formData,
+		    cache: false,
+		    processData: false,
+		    contentType: false
+		}).success(function(res) {
+			
+			if(res.error=="0"){
+				alert("上传成功~");
+				$scope.courseNofree.videoId = res.data[0].vid;
+				$scope.videoUrl = res.data[0].mp4_2;
+				
+			}else{
+				alert(res.error);		
+			}
+		}).fail(function(res) {
+			
+		});
 	};
 $scope.news=$sce.trustAsResourceUrl;
-$scope.teachersName=null;
+
 	
 	////保存
 	$scope.addAudition=function(){
-		$scope.courseNofree.teachers=$scope.teachersName;
-		$scope.courseNofree.aliyunId=$scope.aliyunId;
-		$scope.courseNofree.imgUrl=$scope.imgUrl;
+		
+		
+		$scope.courseNofree.videoUrl=$scope.videoUrl;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
@@ -125,8 +128,6 @@ $scope.teachersName=null;
 		$scope.courseNofree=null;
 		$scope.id=null;
 		document.getElementById('add').style.display="block"; 
-		
-		
 	};
 	
 	///////做选中的时候用
@@ -134,13 +135,9 @@ $scope.teachersName=null;
 		
 		$scope.selected=a;
 		$scope.courseNofree=a;
-		$scope.teachers=a.teachers;
-		$scope.teachersName=a.teachers;
 		$scope.id=a.id;
-		
+		$scope.videoUrl=$scope.courseNofree.videoUrl;
 	};
-	
-	
 	
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
@@ -153,11 +150,10 @@ $scope.teachersName=null;
 	};
 ////修改
 	$scope.updateAudition=function(){
-		$scope.courseNofree.teachers=$scope.teachersName;
+		$scope.courseNofree.videoUrl=$scope.videoUrl;
 		$http.post("/api/coursenofree/update",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		
 	    			alert("修改成功~");
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.id=null;
@@ -171,7 +167,7 @@ $scope.teachersName=null;
 	$scope.deleteAudition=function(){
 		if($scope.id!=null){
 			////删除课程/
-			if(confirm("您确定要删出这个模板吗")){
+			if(confirm("您确定要删出这个试听课程吗")){
 				$http.get("/api/coursenofree/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
@@ -189,49 +185,41 @@ $scope.teachersName=null;
 		}
 	}
 	
-	
+	//////教师的集合
 	$scope.teacherList=function(){
 		$http.get("/api/courseteacher/select",{"params": {"courseTypeName":$scope.courseTypeName,"teacherName":$scope.teacherName,
 			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.teacherlist=data.data;
-				$scope.courseTeacher=$scope.teacherlist;
 			}
 		})
 			
 		}
 	
-	$scope.showteacher=function(courseTypeSubclassName){
-		
+	///////点击搜索老师的框
+	$scope.showteacher=function(){
 		document.getElementById('revise').style.display="block"; 
-		
 		$scope.teacherList();
-		
 	}
 	
-///////做选中的时候用
+	///////做选中的时候用
+	$scope.courseTeacher=null;
 	$scope.checkteacher=function(t){
-		
-		$scope.selected=t;
+		$scope.courseNofree.teachers=t.name;
 		$scope.courseTeacher=t;
-		$scope.courseTeacher.id=t.id;
-		$scope.courseTeacher.name=t.name;
-		
-		$scope.teachersName=t.name;
-		
 	};
-	$scope.teachersName=null;
+	////判断是都被选中
+	$scope.isSelected=function(tname){
+		return $scope.courseNofree.teachers==tname;
+	}
 	
+	/////教师的提交按钮
 	$scope.addteacher=function(){
-		
-	
-		if($scope.courseTeacher.id!=null){
+		if($scope.courseTeacher!=null){
 			document.getElementById('revise').style.display="none"; 
-			
 		}
 		else{
-			
 			alert("请选择教师");
 		}
 	};

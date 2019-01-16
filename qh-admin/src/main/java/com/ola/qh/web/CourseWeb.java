@@ -24,9 +24,14 @@ public class CourseWeb{
 	@RequestMapping(value="/chapter",method=RequestMethod.GET)
 	public String chapter(
 			@RequestParam(name="courseId")String courseId,
-			@RequestParam(name="typeId")String typeId,HttpServletRequest request){
+			@RequestParam(name="typeId")String typeId,
+			@RequestParam(name="courseTypeName")String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName,
+			HttpServletRequest request){
 		request.getSession().setAttribute("courseId", courseId);
 		request.getSession().setAttribute("typeId", typeId);
+		request.getSession().setAttribute("courseTypeName", courseTypeName);
+		request.getSession().setAttribute("courseTypeSubclassName", courseTypeSubclassName);
 		return "courses/course-zhang";
 	}
 	

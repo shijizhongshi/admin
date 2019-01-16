@@ -96,8 +96,8 @@ submenu="sidebarmenu-audition">
 									<th>课程名称</th>
 									<th>课程老师</th>
 									<th>课程时长</th>
-									<th>阿里云ID</th>
-									<th>备用地址</th>
+									<th>视频的ID</th>
+									
 									<th>是否推荐</th>
 									<th>课程用途</th>
 									<th>创建日期</th>
@@ -110,8 +110,8 @@ submenu="sidebarmenu-audition">
 									<th>{{a.courseName}}</th>
 									<th>{{a.teachers}}</th>
 									<th>{{a.palyTime}}</th>
-									<th>{{a.aliyunId}}</th>
-									<th>备用地址</th>
+									
+									<th>{{a.videoId}}</th>
 									<th>{{a.isremmend}}</th>
 									<th>{{a.courseUseDifference}}</th>
 									<th>{{a.addtime}}</th>
@@ -179,7 +179,7 @@ submenu="sidebarmenu-audition">
 													style="position: absolute; right: 10px; top: 45px; display: inherit; cursor: pointer;"
 													class="glyphicon glyphicon-search">
 													</i>
-												<input type="text"  ng-model="teachersName" disabled="disabled"/> 
+												<input type="text"  ng-model="courseNofree.teachers" disabled="disabled"/> 
 													
 											</div>
 										</div>
@@ -192,7 +192,7 @@ submenu="sidebarmenu-audition">
 											<input type="file" value="上传试听课图片" onchange="angular.element(this).scope().uploadmainimage(this)" >
 											<input type="hidden" ng-model="courseNofree.imgUrl"/>
 											<div style="height: 130px; width: 40%;  margin-top: 3px;">
-												<img ng-src="{{imgUrl}}" style="width:50px;height:130px;"/>
+												<img ng-src="{{courseNofree.imgUrl}}" style="width:50px;height:130px;"/>
 											</div>
 										</div>
 
@@ -205,11 +205,10 @@ submenu="sidebarmenu-audition">
 										<textarea ng-model="courseNofree.describes"></textarea>
 									</div>
 									<div class="costs-uploadfile-div">
-										<input type="file"  value="上传试听课视频" onchange="angular.element(this).scope().uploadmainimage1(this)" />
-										<input type="hidden"  id="viado" ng-model="courseNofree.aliyunId"  />
+										<input type="file" id="file"  value="上传试听课视频" accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" onchange="angular.element(this).scope().uploadmainimage1(this)" />
 										<div style="margin-top: 3px;">
 										
-											<video ng-src="{{news(aliyunId)}}" controls="controls" style="height:200px;width:90%";>
+											<video ng-src="{{news(videoUrl)}}" controls="controls" style="height:200px;width:90%";>
 											</video>
 										</div>
 									</div>
@@ -241,12 +240,15 @@ submenu="sidebarmenu-audition">
 								<div class="admin-table">
 									<table>
 										<tr>
+										    <th>选择教师</th>
 											<th>教师名称</th>
 											<th>教师图片</th>
-											<th>	讲授课程</th>
+											<th>所属专业</th>
+											
 										</tr>
-										<tr ng-repeat="t in teacherlist"  ng-click="checkteacher(t)"   ng-class="{'selected':selected==t}">
-											<th >{{t.name}}</th>
+										<tr ng-repeat="t in teacherlist">
+											<th ><input type="radio" ng-checked="isSelected(t.name)" ng-click="checkteacher(t)"></th>
+											<th>{{t.name}}</th>
 											<th><img ng-src="{{t.imgUrl}}" style="width:50px;height:30px;"/></th>
 											<th>{{t.courseTypeSubclassNames}}</th>
 										</tr>
@@ -263,7 +265,7 @@ submenu="sidebarmenu-audition">
 
 							</form>
 							<div class="end" style="clear: both;">
-								<input name="git" type="submit" value="提交" ng-click="addteacher(t)" 
+								<input name="git" type="submit" value="提交" ng-click="addteacher()" 
 									style="background: #5ED8A9;" />
 								<input name="esc" type="reset"
 									value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
