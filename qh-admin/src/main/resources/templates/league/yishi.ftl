@@ -232,38 +232,10 @@
 								style="background: #5ED8A9;" /> <input name="esc" type="reset"
 								value="取消" onclick="CloseDiv();formReset()" class="esc" />
 						</div>
-<<<<<<< HEAD
-                           <!-- 核审管理内容 -->
-						<div class="manage" style="display: none;">
-						        <h4 style="padding-left:30px; ">核审列表()</h4>
-						<div class="details-frame-heshen">
-						<div class="select-3"
-							style="">
-							<span>医师姓名</span>
-							
-								<input type="text" name="search" />
-							
-						</div>
-						<div class="select-2">
-							<span>选择时间</span>
-								<input type="date" name="search"/>
-						</div>
-						<div class="select-2" style="font-size: 1.6rem;width: 3%;text-align: center;">
-							<span>&nbsp;</span>
-								<span class="glyphicon glyphicon-hand-right"></span>
-						</div>
-						<div class="select-2">
-							<span>&nbsp;</span>
-								<input type="date" name="search"/>
-						</div>
-					
-					<div><input type="button" class="btn-lg im-key" ng-click="" value="检索"></div>
-=======
->>>>>>> branch 'master' of https://github.com/shijizhongshi/admin.git
-					</div>
-				</div>
+</div>
+</div>
 				<!-- 核审管理内容 -->
-				<div class="manage" style="display: block;">
+				<div class="manage" style="display:none;">
 					<h4 style="padding-left: 30px;">核审列表()</h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
@@ -442,9 +414,8 @@
 
 			</div>
 		</div>
-	</div>
+	</div></div>
 
-<<<<<<< HEAD
 		<style type="text/css">
 				@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
 			.poop {
@@ -469,7 +440,7 @@
 .leibie{background:#F5F6F8;width: 50%;text-align: center; }
 .grade-text textarea {height:70px;width: 70%;}
 .manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
-.details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;border-bottom: solid 1px #EEEFF1;}
+.details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;}
 @media screen and (max-width: 901px){.manage .managr-dianpu .select-3 , .details-frame-heshen .select-3 , .details-frame-heshen .select-2 {width:90% !important;}}
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
