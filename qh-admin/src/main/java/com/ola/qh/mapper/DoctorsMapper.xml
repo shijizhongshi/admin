@@ -8,10 +8,18 @@
 		<result column="user_id" property="userId"/>
 		<result column="islimit" property="islimit"/>
 		<result column="isrecommend" property="isrecommend"/>
+		<result column="head_img" property="headImg"/>
+		<result column="front_idcard_img" property="frontIdcardImg"/>
+		<result column="reverse_idcard_img" property="reverseIdcardImg"/>
+		<result column="professional_img" property="professionalImg"/>
+		<result column="practice_img" property="practiceImg"/>
+		<result column="else_img" property="elseImg"/>
+		<result column="isvirtual" property="isvirtual"/>
+		<result column="updatetime" property="updatetime"/>
 	</resultMap>
 	
 	<select id="selectDoctors" resultMap="DoctorsMap">
-		select * from doctors where islimit=#{islimit}
+		select * from doctors where islimit=#{islimit} and isvirtual=#{isvirtual} limit #{pageNo},#{pageSize}
 	</select>
 	
 	<select id="selectUserId" resultType="String">
@@ -19,6 +27,13 @@
 	</select>
 	
 	<update id="updateDoctors" parameterType="com.ola.qh.entity.Doctors">
-		update doctors set islimit=#{islimit},isrecommend=#{isrecommend} where id=#{id}
+		update doctors set 
+		<if test="islimit!=null and islimit!=''">
+		islimit=#{islimit},
+		</if>
+		<if test="isrecommend!=null and isrecommend!=''">
+		isrecommend=#{isrecommend},
+		</if>
+		 updatetime=#{updatetime} where id=#{id}
 	</update>
 </mapper>

@@ -28,11 +28,11 @@
 		<if test="payStatus!=null">
 		and w.pay_status=#{payStatus}
 		</if>
-		<if test="fromdate!=null">
-		and w.addtime&gt;=#{fromdate}
+		<if test="fromdate!=null and fromdate!='' ">
+		and UNIX_TIMESTAMP(w.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
-		<if test="todate!=null">
-		and w.addtime&lt;#{todate}
+		<if test="todate!=null and todate!='' ">
+		and UNIX_TIMESTAMP(w.addtime)&lt;=UNIX_TIMESTAMP(#{todate})
 		</if>
 		order by w.addtime ASC limit #{pageNo},#{pageSize}
 	</select>
@@ -46,11 +46,11 @@
 		<if test="payStatus!=null">
 		and w.pay_status=#{payStatus}
 		</if>
-		<if test="fromdate!=null">
-		and w.addtime&gt;=#{fromdate}
+		<if test="fromdate!=null and fromdate!='' ">
+		and UNIX_TIMESTAMP(w.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
-		<if test="todate!=null">
-		and w.addtime&lt;#{todate}
+		<if test="todate!=null and fromdate!='' ">
+		and UNIX_TIMESTAMP(w.addtime)&lt;=UNIX_TIMESTAMP(#{todate})
 		</if>
 	</select>
 	

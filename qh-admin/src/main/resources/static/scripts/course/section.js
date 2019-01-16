@@ -39,7 +39,7 @@ app.controller("sectionController", function($scope, $http){
 			if(res.error=="0"){
 				alert("上传成功~");
 				$scope.videoId = res.data[0].vid;
-				$scope.videoUrl = res.data[0].mp4;
+				$scope.videoUrl = res.data[0].mp4_2;
 				
 			}else{
 				alert(res.error);		

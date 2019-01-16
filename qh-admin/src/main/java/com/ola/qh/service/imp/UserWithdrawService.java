@@ -23,7 +23,7 @@ public class UserWithdrawService implements IUserWithdrawService{
 	private UserWithdrawDao userWithdrawDao;
 	
 	@Override
-	public List<UserWithdraw> selectUserWithdraw(String mobile,String payStatus,Date fromdate,Date todate,int pageNo,int pageSize) {
+	public List<UserWithdraw> selectUserWithdraw(String mobile,String payStatus,String fromdate,String todate,int pageNo,int pageSize) {
 		List<UserWithdraw> list = userWithdrawDao.selectUserWithdraw(mobile, payStatus, fromdate, todate, pageNo, pageSize);
 		for (UserWithdraw userWithdraw : list) {
 			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -85,7 +85,7 @@ public class UserWithdrawService implements IUserWithdrawService{
 		
 	}
 	@Override
-	public int selectUserWithdrawCount(String mobile, String payStatus, Date fromdate, Date todate) {
+	public int selectUserWithdrawCount(String mobile, String payStatus, String fromdate, String todate) {
 		// TODO Auto-generated method stub
 		return userWithdrawDao.selectUserWithdrawCount(mobile, payStatus, fromdate, todate);
 	}

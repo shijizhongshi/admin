@@ -30,8 +30,12 @@ public class CourseNofree {
 	
 	private String describes;//描述
 	
-	@NotEmpty(message="阿里云id不能为空")
 	private String aliyunId;//阿里云id
+	
+	@NotEmpty(message="视频的id不能为空")
+	private String videoId;
+	@NotEmpty(message="视频地址不能为空")
+	private String videoUrl;
 	
 	private int isremmend;//1:推荐
 	
@@ -41,6 +45,23 @@ public class CourseNofree {
 	private Date addtime;
 	
 	private Date updatetime;
+
+	
+	public String getVideoId() {
+		return videoId;
+	}
+
+	public void setVideoId(String videoId) {
+		this.videoId = videoId;
+	}
+
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
 
 	public String getId() {
 		return id;
