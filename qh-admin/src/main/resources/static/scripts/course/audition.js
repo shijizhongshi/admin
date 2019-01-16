@@ -1,4 +1,4 @@
-app.controller("CourseNofreeController",function($scope,$http,$sce){
+app.controller("CourseNofreeController",function($scope,$http){
 	
 	
 	$scope.total = 0;
@@ -8,6 +8,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
    $scope.pageSize = 20;
    
    $scope.id=null;
+   $scope.video=null;
    
    $scope.typeBases=function(){
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -28,7 +29,6 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
    
    /////查询
    $scope.auditionBases=function(){
-	   
 		$http.get("/api/coursenofree/select",{"params": {"courseTypeName":$scope.courseTypeName,
 			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
@@ -77,7 +77,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
-		formData.append("writetoken","a1df864b-405e-4782-9494-733e9b51c5d5");
+		formData.append("writetoken",$scope.video.writetoken);
 		formData.append("JSONRPC","{'title': '标题', 'tag':'标签','desc':'描述'}");
 		$.ajax({
 		    url: 'https://v.polyv.net/uc/services/rest?method=uploadfile',
@@ -90,8 +90,9 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 			
 			if(res.error=="0"){
 				alert("上传成功~");
-				$scope.courseNofree.videoId = res.data[0].vid;
-				$scope.videoUrl = res.data[0].mp4_2;
+				$scope.courseNofree.videoId=res.data[0].vid;
+				$scope.courseNofree.videoUrl=res.data[0].mp4;
+				$scope.polyv($scope.courseNofree.videoId);
 				
 			}else{
 				alert(res.error);		
@@ -100,14 +101,11 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 			
 		});
 	};
-$scope.news=$sce.trustAsResourceUrl;
 
 	
 	////保存
 	$scope.addAudition=function(){
 		
-		
-		$scope.courseNofree.videoUrl=$scope.videoUrl;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
@@ -137,7 +135,29 @@ $scope.news=$sce.trustAsResourceUrl;
 		$scope.courseNofree=a;
 		$scope.id=a.id;
 		$scope.videoUrl=$scope.courseNofree.videoUrl;
+		$scope.polyv(a.videoId);
 	};
+	
+	$scope.polyv=function(videoId){
+		$http.get("/api/coursenofree/polyv",{"params": {"vid":videoId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.video=data.data;
+				if($scope.video.videoId!=null){
+					var player = polyvObject('#polyved').videoPlayer({
+					    'width':'90%',
+					    'height':'200',
+					    'vid':$scope.video.videoId,
+					    'ts':$scope.video.ts,
+					    'sign':$scope.video.sign
+					});
+				}
+				
+			}
+		})
+	}
+	
+	$scope.polyv();
 	
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
