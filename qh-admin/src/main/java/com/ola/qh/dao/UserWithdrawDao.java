@@ -12,15 +12,15 @@ public interface UserWithdrawDao {
 	public List<UserWithdraw> selectUserWithdraw(
 			@Param("mobile")String mobile,
 			@Param("payStatus")String payStatus,
-			@Param("fromdate")Date fromdate,
-			@Param("todate")Date todate,
+			@Param("fromdate")String fromdate,
+			@Param("todate")String todate,
 			@Param("pageNo")int pageNo,
 			@Param("pageSize")int pageSize);
 	
 	public int selectUserWithdrawCount(@Param("mobile")String mobile,
 			@Param("payStatus")String payStatus,
-			@Param("fromdate")Date fromdate,
-			@Param("todate")Date todate);
+			@Param("fromdate")String fromdate,
+			@Param("todate")String todate);
 	
 	public String checkedAccountBook(String userId);/////对账用的
 	

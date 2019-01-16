@@ -32,8 +32,8 @@ public class UserWithdrawController {
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	public Results<List<UserWithdraw>> selectUserWithdrawHistory(
 			@RequestParam(name="page", required = true) int page,
-			@RequestParam(value="fromdate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fromdate,
-	        @RequestParam(value="todate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date todate,
+			@RequestParam(value="fromdate", required = false)String fromdate,
+	        @RequestParam(value="todate", required = false) String todate,
 			@RequestParam(name="mobile",required=false)String mobile,
 			@RequestParam(name="payStatus",required=false)String payStatus) throws Exception {
 
@@ -41,7 +41,6 @@ public class UserWithdrawController {
 
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		
 		List<UserWithdraw> select = userWithdrawService.selectUserWithdraw(mobile, payStatus,fromdate, todate, pageNo, pageSize);
 		int count = userWithdrawService.selectUserWithdrawCount(mobile, payStatus, fromdate, todate);
 		results.setCount(count);

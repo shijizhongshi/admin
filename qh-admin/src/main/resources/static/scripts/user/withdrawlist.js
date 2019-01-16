@@ -7,14 +7,6 @@ app.controller("withdrawController", function($scope, $http){
     //一页显示多少条
     $scope.pageSize = 20;
     
-   /* $scope.startDateOptions = {
-    	    formatYear: 'yy',
-    	    maxDate: $scope.todate,
-    	    startingDay: 1
-        };*/
-    $scope.openfromdatepicker = function(){
-        $scope.fromdatepickeropen = true;
-    };
     var formatDate = function (date) { 
 		if(date){
 		  	var y = date.getFullYear();  
@@ -27,9 +19,7 @@ app.controller("withdrawController", function($scope, $http){
 			return '';
 		}
 	      
-	};  $scope.openfromdatepicker = function(){
-        $scope.fromdatepickeropen = true;
-    };
+	};  
  
 $scope.loaddata = function(){
 	
