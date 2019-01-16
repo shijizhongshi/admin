@@ -21,11 +21,37 @@
 
 
 	<select id="selectUserWithdraw"  resultMap="UserWithdrawMap">
-		select * from user_withdraw where pay_status=0 
-		<if test="id!=null">
-		and id=#{id}
+		select w.*,u.mobile mobile from user_withdraw w left join user u on w.user_id=u.id where 1=1
+		<if test="mobile!=null and mobile!=''">
+		and u.mobile=#{mobile}
 		</if>
-		order by addtime ASC limit #{pageNo},#{pageSize}
+		<if test="payStatus!=null">
+		and w.pay_status=#{payStatus}
+		</if>
+		<if test="fromdate!=null">
+		and w.addtime&gt;=#{fromdate}
+		</if>
+		<if test="todate!=null">
+		and w.addtime&lt;#{todate}
+		</if>
+		order by w.addtime ASC limit #{pageNo},#{pageSize}
+	</select>
+	
+	
+	<select id="selectUserWithdrawCount"  resultType="int">
+		select count(w.id) from user_withdraw w left join user u on w.user_id=u.id where 1=1
+		<if test="mobile!=null">
+		and u.mobile=#{mobile}
+		</if>
+		<if test="payStatus!=null">
+		and w.pay_status=#{payStatus}
+		</if>
+		<if test="fromdate!=null">
+		and w.addtime&gt;=#{fromdate}
+		</if>
+		<if test="todate!=null">
+		and w.addtime&lt;#{todate}
+		</if>
 	</select>
 	
 	

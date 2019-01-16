@@ -31,6 +31,13 @@ public class UserWeb {
 		return "main";
 	}
 	
-	
+	@RequestMapping("/web/user/withdrawlist")
+	public String fuwu(){
+		return " user/withdrawlist";
+	}
+	@RequestMapping("/web/user/userinfo")
+	public String shangpin(){
+		return " user/userinfo";
+	}
 
 }

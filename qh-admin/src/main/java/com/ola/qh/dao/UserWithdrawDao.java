@@ -9,7 +9,18 @@ import com.ola.qh.entity.UserWithdraw;
 
 public interface UserWithdrawDao {
 
-	public List<UserWithdraw> selectUserWithdraw(@Param("id")String id,@Param("pageNo")int page,@Param("pageSize")int zupageSize);
+	public List<UserWithdraw> selectUserWithdraw(
+			@Param("mobile")String mobile,
+			@Param("payStatus")String payStatus,
+			@Param("fromdate")Date fromdate,
+			@Param("todate")Date todate,
+			@Param("pageNo")int pageNo,
+			@Param("pageSize")int pageSize);
+	
+	public int selectUserWithdrawCount(@Param("mobile")String mobile,
+			@Param("payStatus")String payStatus,
+			@Param("fromdate")Date fromdate,
+			@Param("todate")Date todate);
 	
 	public String checkedAccountBook(String userId);/////对账用的
 	

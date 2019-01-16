@@ -159,8 +159,8 @@
                         <span class="title">用户管理</span>
                     </a>
                     <ul>
-                        <li id="sidebarmenu-user-tixian">
-                            <a href="/web/user/tixian">
+                        <li id="sidebarmenu-user-withdraw">
+                            <a href="/web/user/withdrawlist">
                                 <span class="title">用户提现</span>
                             </a>
                         </li>
