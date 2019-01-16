@@ -113,11 +113,11 @@
 									<img src="/images/sjk-xl.png"/>
 									<span>选择类型</span>
 				<select ng-model="news.typename">
-				<option ng-selected="news.typename==医师资格" value="医师资格">医师资格</option>
-				<option ng-selected="news.typename==药师资格" value="药师资格">药师资格</option>
-				<option ng-selected="news.typename==中医适宜技术" value="中医适宜技术">中医适宜技术</option>
-				<option ng-selected="news.typename==卫生资格" value="卫生资格">卫生资格</option>
-				<option ng-selected="news.typename==健康管理师" value="健康管理师">健康管理师</option>
+				<option ng-selected="news.typename=='医师资格'" value="医师资格">医师资格</option>
+				<option ng-selected="news.typename=='药师资格'" value="药师资格">药师资格</option>
+				<option ng-selected="news.typename=='中医适宜技术'" value="中医适宜技术">中医适宜技术</option>
+				<option ng-selected="news.typename=='卫生资格'" value="卫生资格">卫生资格</option>
+				<option ng-selected="news.typename=='健康管理师'" value="健康管理师">健康管理师</option>
 			</select>
 				</div>
 					<div class="costs-uploadfile-div">  
