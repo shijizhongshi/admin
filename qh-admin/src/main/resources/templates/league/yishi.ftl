@@ -386,7 +386,8 @@
 								</div>
 
 							</div>
-							<div class="grade-right">
+							<div class="grade-right" >
+							<div id="islimit">
 								<h3>操作</h3>
 								<div>
 									<ul>
@@ -399,7 +400,7 @@
 									<span>拒绝原因</span>
 									<textarea style="height: 200px; width: 100% !important"></textarea>
 								</div>
-
+								</div>
 							</div>
 					</form>
 					<div class="end">
