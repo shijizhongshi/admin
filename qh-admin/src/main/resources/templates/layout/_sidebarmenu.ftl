@@ -128,6 +128,11 @@
                                 <span class="title">医师管理</span>
                             </a>
                         </li>
+                        <li id="sidebarmenu-league-xiangmu">
+                            <a href="/web/league/xiangmu">
+                                <span class="title">项目管理</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                    <li id="sidebarmenu-indent" >
