@@ -4,6 +4,7 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
+<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/course/audition.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course"
@@ -207,9 +208,7 @@ submenu="sidebarmenu-audition">
 									<div class="costs-uploadfile-div">
 										<input type="file" id="file"  value="上传试听课视频" accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" onchange="angular.element(this).scope().uploadmainimage1(this)" />
 										<div style="margin-top: 3px;">
-										
-											<video ng-src="{{news(videoUrl)}}" controls="controls" style="height:200px;width:90%";>
-											</video>
+										<div id='polyved'></div>
 										</div>
 									</div>
 								</div>

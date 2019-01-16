@@ -20,12 +20,12 @@ app.controller("sectionController", function($scope, $http){
 	
 	
 	$scope.sectionBases();
-	
+	$scope.video=null;
 	$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
-		formData.append("writetoken","a1df864b-405e-4782-9494-733e9b51c5d5");
+		formData.append("writetoken",$scope.video.writetoken);
 		formData.append("JSONRPC","{'title': '标题', 'tag':'标签','desc':'描述'}");
 		$.ajax({
 		    url: 'https://v.polyv.net/uc/services/rest?method=uploadfile',
@@ -38,9 +38,9 @@ app.controller("sectionController", function($scope, $http){
 			
 			if(res.error=="0"){
 				alert("上传成功~");
-				$scope.videoId = res.data[0].vid;
-				$scope.videoUrl = res.data[0].mp4_2;
-				
+				$scope.section.videoId=res.data[0].vid;
+				$scope.section.videoUrl=res.data[0].mp4;
+				$scope.polyv($scope.section.videoId);
 			}else{
 				alert(res.error);		
 			}
@@ -49,13 +49,32 @@ app.controller("sectionController", function($scope, $http){
 		});
 	};
 	
+	$scope.polyv=function(videoId){
+		$http.get("/api/coursenofree/polyv",{"params": {"vid":videoId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.video=data.data;
+				if($scope.video.videoId!=null){
+					var player = polyvObject('#polyved').videoPlayer({
+					    'width':'90%',
+					    'height':'200',
+					    'vid':$scope.video.videoId,
+					    'ts':$scope.video.ts,
+					    'sign':$scope.video.sign
+					});
+				}
+				
+			}
+		})
+	}
+	$scope.polyv();
+	
 	////////////////以上是通过不同的条件查章节的集合的	
 	$scope.sectionId=null;
 	
 	$scope.addSection=function(){
 		$scope.section.id=$scope.sectionId;
-		$scope.section.videoId=$scope.videoId;
-		$scope.section.videoUrl=$scope.videoUrl;
+		
 		$scope.section.courseChapterId=$("#chapterId").val();
 		$http.post("/api/course/subclass/courseSection/saveUpdate",$scope.section,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
@@ -73,10 +92,11 @@ app.controller("sectionController", function($scope, $http){
 		})
 	};
 	///////做选中的时候用
-	$scope.checkedChapter=function(c){
+	$scope.checkedSection=function(c){
 		$scope.selected=c;
 		$scope.section=c;
 		$scope.sectionId=c.id;
+		$scope.polyv(c.videoId);
 	}
 	$scope.add=function(){
 		$scope.section=null;

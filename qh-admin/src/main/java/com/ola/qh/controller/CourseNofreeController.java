@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.CourseNofree;
+import com.ola.qh.entity.Polyv;
 import com.ola.qh.service.ICourseNofreeService;
 import com.ola.qh.util.KeyGen;
+import com.ola.qh.util.MD5;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
@@ -106,5 +108,28 @@ public class CourseNofreeController {
 		}
 		results.setStatus("0");
 		return results;
+	}
+	
+	@RequestMapping("/polyv")
+	public Results<Polyv> getPolyv(@RequestParam(name="vid",required=false)String vid){
+		Results<Polyv> result=new Results<Polyv>();
+		Polyv vo=new Polyv();
+		vo.setSecretkey("ucxGUE1iuw");
+		vo.setWritetoken("a1df864b-405e-4782-9494-733e9b51c5d5");
+		if(vid!=null && !"".equals(vid)){
+			long ts=new Date().getTime();
+			vo.setTs(String.valueOf(ts));
+			String si="ucxGUE1iuw"+vid+String.valueOf(ts);
+			vo.setSign(MD5.digest(si));
+			vo.setVideoId(vid);
+		}
+		
+		
+		result.setData(vo);
+		result.setStatus("0");
+		return result;
+	}
+	public static void main(String[] args) {
+		System.out.println();
 	}
 }
