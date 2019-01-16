@@ -14,13 +14,15 @@
 		<result column="paly_time" property="palyTime" />
 		<result column="describes" property="describes" />
 		<result column="aliyunId" property="aliyunId" />
+		<result column="video_id" property="videoId"/>
+		<result column="video_url" property="videoUrl"/>
 		<result column="isremmend" property="isremmend" />
 		<result column="img_url" property="imgUrl" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
 	</resultMap>
 	<sql id="sql_coursenofree">
-		id,course_type_name,course_type_subclass_name,course_resource_type,course_use_difference,course_name,teachers,paly_time,describes,aliyunId,isremmend,img_url,addtime
+		id,course_type_name,course_type_subclass_name,course_resource_type,course_use_difference,course_name,teachers,paly_time,describes,aliyunId,video_id,video_url,isremmend,img_url,addtime
 	</sql>
 	<select id="selectCourseNofree" resultMap="CourseNofreeMap">
 		select <include refid="sql_coursenofree"></include> from course_nofree 
@@ -35,7 +37,7 @@
 	</select>
 	
 	<insert id="insertCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">
-		insert into course_nofree(<include refid="sql_coursenofree"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{courseResourceType},#{courseUseDifference},#{courseName},#{teachers},#{palyTime},#{describes},#{aliyunId},#{isremmend},#{imgUrl},#{addtime})
+		insert into course_nofree(<include refid="sql_coursenofree"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{courseResourceType},#{courseUseDifference},#{courseName},#{teachers},#{palyTime},#{describes},#{aliyunId},#{videoId},#{videoUrl},#{isremmend},#{imgUrl},#{addtime})
 	</insert>
 	
 	<update id="updateCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">
@@ -83,7 +85,12 @@
 		<if test="imgUrl!=null">
 		img_url=#{imgUrl},
 		</if>
-		
+		<if test="videoUrl!=null">
+		video_url=#{videoUrl},
+		</if>
+		<if test="videoId!=null">
+		video_id=#{videoId},
+		</if>
 		updatetime=#{updatetime} where id=#{id}
 	</update>
 	

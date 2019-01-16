@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li id="sidebarmenu-course-chapter">
-                            <a href="/web/course/chapter?typeId=&courseId=" >
+                            <a href="/web/course/chapter?typeId=&courseId=&courseTypeName=&courseTypeSubclassName=" >
                                 <span class="title">课程章管理</span>
                             </a>
                         </li>

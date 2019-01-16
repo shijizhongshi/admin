@@ -45,13 +45,14 @@
 									<span>手机号</span>
 									<input type="text" ng-model="mobile"/>
 								</div>
-						<div class="col-sm-1 form-group">
-                            <label>开始日期</label>
-                        </div>
-                        <div class="col-sm-2 form-group">
-                            <input type="text" uib-datepicker-popup="yyyy-MM-dd" is-open="fromdatepickeropen" ng-model="fromdate"
-                                   ng-click="openfromdatepicker()" datepicker-options="startDateOptions" close-text="关闭" current-text="今天" clear-text="清空" class="form-control" readonly>
-                        </div>
+						<div class="select-3">
+							<span>申请时间</span>
+								<input type="date" ng-model="fromdate" name="search"/>
+						</div>
+						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
+							
+								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
+						</div>
 						<div class="select-3">
 							<span>&nbsp;</span>
 								<input type="date" ng-model="todate" name="search"/>

@@ -40,7 +40,7 @@
 	
 	<!-- 课程章的查询 -->
 	<select id="courseChapterList" resultMap="CourseChapterMap">
-	select id,course_id,course_lecturer,course_section_size,course_chapter_name,ispay,course_chapter_category,addtime from course_chapter
+	select id,course_id,course_lecturer,course_chapter_name,ispay,addtime from course_chapter
 	where  1=1
 	<if test="courseId!=null and courseId!='' ">
 	and course_id=#{courseId}

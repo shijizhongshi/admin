@@ -12,6 +12,8 @@
 <div ng-controller="ChapterController">
 <input type="hidden" value="${typeId}" id="typeId" >
 <input type="hidden" value="${courseId}" id="courseId">
+<input type="hidden" value="${courseTypeName}" id="courseTypeName" >
+<input type="hidden" value="${courseTypeSubclassName}" id="courseTypeSubclassName">
 <div class="classify">
 	<ul class="menu">
 	
