@@ -73,7 +73,7 @@ app.controller("gradeController", function($scope, $http){
 	}
 	$scope.coursess=[];
 	$scope.classBases();
-	$scope.imgUrl=null;
+	
 	$scope.uploadmainimage = function(file){
 	    var fd = new FormData();
 	    fd.append("file", file.files[0]);
@@ -84,10 +84,10 @@ app.controller("gradeController", function($scope, $http){
 	    })
 	    .success(function(data){
 	    	$scope.imgUrl=data.data;
-	    	$scope.iurl=true;
+	    	
 		})
 	};
-	$scope.iurl=false;
+	
 	////////////////以上是通过不同的条件查章节的集合的	
 	
 	

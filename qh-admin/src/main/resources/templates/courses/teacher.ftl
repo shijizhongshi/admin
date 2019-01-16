@@ -48,7 +48,7 @@
 	<th >是否显示</th >
 	</tr>
  <tr ng-repeat="t in teacherlist" ng-click="checkedTeacher(t)" ng-class="{'selected':selected==t}">
-	<th><img src="{{t.imgUrl}}" style="width:50px;height:30px;"></th>
+	<th><img ng-src="{{t.imgUrl}}" style="width:50px;height:30px;"></th>
 	<th>{{t.name}}</th>
 	
 	<th ng-show="{{t.isshow==1}}">是</th >
@@ -94,7 +94,7 @@
 
     <button class="allBtn costs-marl15">老师图片</button>
     <div style="height:130px;width:35%;margin-top:3px;">
-    <img  src="{{teacher.imgUrl}}"/></div>
+    <img  ng-src="{{teacher.imgUrl}}"/></div>
         </div>
 <b style="margin: 5px 0;font-size: 1.5rem;">讲授课程</b>
 <!--医师药师复选框-->

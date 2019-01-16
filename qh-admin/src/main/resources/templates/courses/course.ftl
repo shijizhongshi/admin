@@ -174,8 +174,8 @@
 	
 		<div class="costs-uploadfile-div">   
 				 上传课程图片<input type="file" name="file"   accept="image/*"  value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)" /> 
-   <input type="hidden" ng-model="course.courseImg" />
-  <div class="costs-img"> <img  src="{{course.courseImg}}" /></div></div>
+ 
+  <div class="costs-img"> <img  ng-src="{{course.courseImg}}" /></div></div>
 
 		
 		<div class="end">
