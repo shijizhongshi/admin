@@ -36,6 +36,46 @@ select id,deliveredtime,orders_status,muser_id from orders
  where deliveredtime!=null and orders_status="DELIVERED" and orders_type=0
 </select>
 
+<select id="ordersList" resultMap="OrdersMap">
+  select o.*,u.mobile from orders o left join user u on u.id=o.user_id where 1=1
+  <if test="fromdate!=null and fromdate!='' ">
+  and o.addime&gt;=#{fromdate}
+  </if>
+  <if test="todate!=null and todate!=''">
+  and o.addtime&lt;#{todate}
+  </if>
+  <if test="mobile!=null and mobile!=''">
+  and u.mobile like concat(concat("%",#{mobile},"%"))
+  </if>
+  <if test="ordersType!=null and ordersType!=''">
+  and o.orders_type=#{ordersType}
+  </if>
+  orders by o.addime desc
+  <if test="pageSize!=0">
+  limit #{pageNo},#{pageSize}
+  </if>
+</select>
+
+
+<select id="ordersListCount" resultType="int">
+  select count(o.id) from orders o left join user u on u.id=o.user_id where 1=1
+  <if test="fromdate!=null and fromdate!='' ">
+  and o.addime&gt;=#{fromdate}
+  </if>
+  <if test="todate!=null and todate!=''">
+  and o.addtime&lt;#{todate}
+  </if>
+  <if test="mobile!=null and mobile!=''">
+  and u.mobile like concat(concat("%",#{mobile},"%"))
+  </if>
+  <if test="ordersType!=null and ordersType!=''">
+  and o.orders_type=#{ordersType}
+  </if>
+</select>
+
+
+
+
 <!-- 通过订单的id和状态 查对应的订单商品的集合 -->
 <resultMap type="com.ola.qh.entity.OrdersProduct" id="OrdersProductMap">
 	<result column="id" property="id"/>
@@ -56,13 +96,38 @@ select id,deliveredtime,orders_status,muser_id from orders
 	<result column="addtime" property="addtime"/>
 	</resultMap>
 
+
+
+<select id="selectByOrderId" resultMap="OrdersProductMap">
+select * from orders_product where 1=1
+<if test="openId!=null">
+and orders_id=#{orderId}
+</if>
+order by addtime desc
+<if test="pageSize!=0">
+limit #{pageNo},#{pageSize}
+</if>
+</select>
+
+<select id=selectByOrderIdCount resultType="int">
+select count(id) from orders_product where 1=1
+<if test="openId!=null">
+and orders_id=#{orderId}
+</if>
+
+</select>
+
+
+
+
+
 <select id="selectByOid" resultMap="OrdersProductMap">
 	select op.id,op.orders_id,op.user_id,op.muser_id,op.product_id,op.product_name,op.product_price,op.count,
 	op.payout,op.product_img,op.status_code,op.freight from orders_product op where orders_id=#{orderId}
 	<if test="statusCode!=null">
 	and status_code=#{statusCode}
 	</if>
-	</select>
+</select>
 <!-- 修改订单的状态 -->
 <update id="updateOrders">
 	update orders set 

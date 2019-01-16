@@ -14,7 +14,7 @@ public class Orders {
 	
 	private String orderno;
 	
-	private int ordersType;////0:药品订单  1:课程订单 2:服务的订单
+	private String ordersType;////0:药品订单  1:课程订单 2:服务的订单
 	
 	private BigDecimal payaccount;/////实际支付金额
 	
@@ -117,11 +117,12 @@ public class Orders {
 		this.orderno = orderno;
 	}
 
-	public int getOrdersType() {
+	
+	public String getOrdersType() {
 		return ordersType;
 	}
 
-	public void setOrdersType(int ordersType) {
+	public void setOrdersType(String ordersType) {
 		this.ordersType = ordersType;
 	}
 
