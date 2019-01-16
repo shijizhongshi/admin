@@ -25,7 +25,10 @@
 			<div class="details-frame-content" id="details-frame-content">
 				<ul   >
 					<li ng-repeat="s in shopDrugCategory"  ng-click="checkedShopcate(s)"  ng-class="{'clicked':clicked==s}">
-					{{s.categoryName}}</li>
+					{{s.categoryName}} 
+					<i ng-click="deletecate(s)"  ng-show="selectdelete==s" class="glyphicon glyphicon-remove" style="float: right;color:#666;font-size:1.1rem"></i>
+					</li>
+					
 					
 
 					<ul class="add-fenlei" ng-click="addcate()">
@@ -133,7 +136,7 @@
 
 .details-frame-content {
 	height: 160px;
-	overflow-y: scroll;
+
 	padding-bottom: 0;
 }
 
@@ -150,7 +153,7 @@
 	font-size: 1.5rem;
 	cursor: pointer;
 }
-
+@media screen and (max-width: 901px) {.details-frame-content ul li{	width: 48%; }}
 .details-frame-content .add-fenlei {
 	float: left;
 	border-radius: 20px;
@@ -167,7 +170,7 @@
 	cursor: pointer;
 }
 .clicked {
-background:#666 !important;
+background:#999 !important;
 color:white !important;
 }
 

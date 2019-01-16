@@ -1,5 +1,7 @@
 package com.ola.qh.service.imp;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,11 @@ public class UserService implements IUserService{
 	private UserDao userDao;
 
 	@Override
-	public int updateUser(String userrole, String id) {
+	public int updateUser(int isdisabled, String id) {
 		
 		User user=new User();
 		user.setId(id);
-		user.setUserrole(userrole);
+		user.setIsdisabled(isdisabled);
 		return userDao.updateUser(user);
 	}
 
@@ -39,6 +41,13 @@ public class UserService implements IUserService{
 			return result;
 		}
 	}
+
+	@Override
+	public List<User> selectUser(String mobile, String nickname, String userrole) {
+		
+		return userDao.selectUser(mobile, nickname, userrole);
+	}
+
 	
 	
 

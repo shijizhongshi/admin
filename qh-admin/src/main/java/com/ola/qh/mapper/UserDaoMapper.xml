@@ -14,10 +14,21 @@
 		<result column="isdoctor" property="isdoctor" />
 		<result column="updatetime" property="updatetime" />
 		<result column="birthday" property="birthday" />
+		<result column="isdisabled" property="isdisabled" />
 	</resultMap>
 
 	<select id="selectUser" resultMap="UserMap">
-	select id,nickname,userrole,mobile,isdoctor from user where id=#{id}
+	select id,nickname,userrole,mobile,isdoctor,isdisabled from user 
+	where 1=1
+	<if test="mobile!=null and mobile!='' ">
+	and  mobile=#{mobile} 
+	</if>
+	<if test="nickname!=null and nickname!='' ">
+	and  nickname=#{nickname} 
+	</if>
+	<if test="userrole!=null and userrole!='' ">
+	and  userrole=#{userrole} 
+	</if>
 	</select>
 	
 	<update id="updateUser" parameterType="com.ola.qh.entity.User" >
@@ -27,6 +38,9 @@
 		</if>
 		<if test="isdoctor!=null">
 		isdoctor=#{isdoctor},
+		</if>
+		<if test="isdisabled!=null">
+		isdisabled=#{isdisabled},
 		</if>
 		updatetime=#{updatetime} where id=#{id} 
 	</update>

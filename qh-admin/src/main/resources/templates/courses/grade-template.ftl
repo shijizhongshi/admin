@@ -30,7 +30,7 @@
 	<ul style="height: 80px;" class="show">
 
 					<li ng-click="add()"
-						style="margin-left: 70px; background: #9DE879;"><span
+						style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加模板</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改模板</li>
@@ -72,7 +72,7 @@
 
 
 				<!--弹窗-->
-				<div class="poop" id="add"style="width: 60%; height: 600px; position: absolute; left: 15%; top: 15%;">
+				<div class="poop" id="add">
 					<form id="myform">
 						<h3>添加模板</h3>
 						<div class="template-add">
@@ -158,8 +158,9 @@
 <style type="text/css">
 .poop {
 	overflow-y: scroll;
+	width: 60%; height: 600px; position: absolute; left: 15%; top: 15%;
 }
-
+@media screen and (max-width: 1401px){.poop {width: 580px; left:0%; top:5%}}
 .poop span {
 	font-size: 1.5rem;
 }

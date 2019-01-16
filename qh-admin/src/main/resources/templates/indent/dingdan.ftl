@@ -119,6 +119,10 @@
 </div>
 <style type="text/css">
 .details-frame-content .select-3{width: 10%;margin-right: 1%;}
+@media screen and (min-width: 1601px) {.details-frame-content .select-3{width: 12%;}}
+@media screen and (max-width: 1600px)  {.details-frame-content .select-3{width: 14%;}}
+@media screen and (max-width: 1400px)  {.details-frame-content .select-3{width: 20%;}}
+@media screen and (max-width: 901px) {.details-frame-content .select-3{width: 90%;}}
 .details-frame-content .select-3 input{border-radius:0;}
 
 </style>

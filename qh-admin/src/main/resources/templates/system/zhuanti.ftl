@@ -23,8 +23,7 @@ submenu="/web/system/zhuanti">
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-2"
-					style="float: left; margin-right: 15px; width: 15%;">
+				<div class="select-2">
 					<span>商品名称</span>
 					<form id="search">
 						<input type="text" placeholder="" />
@@ -203,6 +202,7 @@ submenu="/web/system/zhuanti">
 	width: 18px;
 	height: 18px;
 }
+.details-frame-content .select-2{float: left; margin-right: 15px; width: 18%;}
 </style>
 </@b.body>
 
