@@ -341,6 +341,8 @@
 		</div>
 
 		<style type="text/css">
+		@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
+
 			.poop {
 				
 				width: 55%;
@@ -350,7 +352,7 @@
 				top: 10%;
 				display: none;
 			}
-			
+			@media screen and (max-width:1401px){.poop {width: 560px;}}
 			.poop span {
 				font-size: 1.5rem;
 			}
@@ -370,7 +372,7 @@
 }
 .resource .grade-right{width:20%;border-right: none;height: 500px;}	
 .details-frame-content {
-				height: 50px;
+				height: 51px;
 				padding:0 29px;}
 			
 			.details-frame-content ul li {
@@ -385,7 +387,9 @@
 			}
 .leibie{background:#F5F6F8;width: 50%;text-align: center; }
 .grade-text textarea {height:70px;width: 50%;}
-.manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
+.manage .managr-dianpu .select-3{width: 12%;margin-left: 18px;margin-right: 0;}
+@media screen and (max-width: 901px){.manage .managr-dianpu .select-3 , .details-frame-heshen .select-3 , .details-frame-heshen .select-2 {width:90% !important;}}
+
 .details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;}
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
@@ -396,6 +400,7 @@
 				left: 10%;
 				top: 20%;
 				display: none;}
+@media screen and (max-width:1401px){.resource{width:840px;}}
 .resource .grade-left ul{width:100%;margin:3px 0;height:50px;}
 .resource .grade-left ul li:nth-child(1){float:left;}
 .resource .grade-left ul li:nth-child(2){float:right;color:#999;}

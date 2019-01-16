@@ -219,8 +219,8 @@
 								<input type="date" name="search"/>
 						</div>
 						<div class="select-2" style="font-size: 1.6rem;width: 3%;text-align: center;">
-							<span class="glyphicon glyphicon-hand-right"></span>
-								&nbsp;<span class="glyphicon glyphicon-hand-left"></span>
+							<span>&nbsp;</span>
+								<span class="glyphicon glyphicon-hand-right"></span>
 						</div>
 						<div class="select-2">
 							<span>&nbsp;</span>
@@ -377,6 +377,7 @@
 		</div>
 
 		<style type="text/css">
+				@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
 			.poop {
 				
 				width: 55%;
@@ -386,7 +387,7 @@
 				top: 10%;
 				display: none;
 			}
-			
+				@media screen and (max-width:1401px){.poop {width: 560px;}}		
 			.poop span {
 				font-size: 1.5rem;
 			}
@@ -400,6 +401,7 @@
 .grade-text textarea {height:70px;width: 70%;}
 .manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
 .details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;border-bottom: solid 1px #EEEFF1;}
+@media screen and (max-width: 901px){.manage .managr-dianpu .select-3 , .details-frame-heshen .select-3 , .details-frame-heshen .select-2 {width:90% !important;}}
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}
@@ -409,6 +411,7 @@
 				left: 10%;
 				top: 20%;
 				display: none;}
+@media screen and (max-width:1401px){.resource{width:840px;}}
 .resource .grade-left ul{width:100%;margin:3px 0;height:50px;}
 .resource .grade-left ul li:nth-child(1){float:left;}
 .resource .grade-left ul li:nth-child(2){float:right;color:#999;}
