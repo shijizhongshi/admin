@@ -122,29 +122,21 @@
 							</ul>
 							
 							<div class="admin-table">
-
 								<table>
 									<tr>
 										<th>手机号</th>
 										<th>姓名</th>
-										
 										<th>支付金额</th>
-									
 										<th>售后服务</th>
 										<th>时间</th>
-										<th>操作</th>
 										<th>详细信息</th>
 									</tr>
-
 									<tr>
 										<th>手机号</th>
 										<th>姓名</th>
-									
 										<th>支付金额</th>
-									
 										<th>售后服务</th>
 										<th>时间</th>
-										<th><form ><span>允许</span><input type="radio" value="允许" style="background:#7bc472;" name="caozuo" /><span>&nbsp;拒绝</span><input type="radio" value="拒绝"  name="caozuo"/></form></th>
 										<th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
 									</tr>
 									
@@ -220,7 +212,15 @@
 								<p><span>价格：</span> <span style="font-size:1.3rem ;color: #B1B1B1;">&nbsp;原价：</span></p>
 								</div>
 								</ul>
-		
+		            <ul class="tuihuo">
+		            <li>商品售后申请:<span>退款</span></li>
+		             <li>申请理由:<span>未发货</span></li>
+		              <li>退款金额:<span>666</span></li>
+		              <div>
+				<input type="button" class="btn-lg im-key" value="允许" style="background: #6eecb2;"/>
+				<input type="button" class="btn-lg im-key"value="拒绝" style="background:#adafaad1;"/>
+						</div>
+		            </ul>
 								</div>
 								</form>
 								<div class="end" style="width: 100px;">
@@ -269,6 +269,9 @@
 .resource .grade-left ul li:nth-child(1){float:left;font-size: 1.5rem;}
 .resource .grade-left ul li:nth-child(2){float:right;color:#999;font-size: 1.5rem;}
  .admin-table table tr form span{font-size:1.4rem;}
+  .tuihuo {border-bottom:1px solid #e8e6e6;}
+.tuihuo li {font-size: 16px;line-height: 30px;}
+ .tuihuo input{font-size: 16px;margin:10px; padding:6px;}
 		</style>
 	
 	</@b.body>
