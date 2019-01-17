@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/league/yishi.js"></script>
-	<script src="/scripts/league/league.js"></script>
+<script src="/scripts/league/league.js"></script>
 <@b.body menu="sidebarmenu-league" submenu="sidebarmenu-league-yishi">
 <div ng-controller="doctorsController">
 	<div class="details" style="width: 100%">
@@ -29,41 +29,41 @@
 			</div>
 			<div id="guanli">
 				<div class="manage">
-				<form action="">
-					<ul style="height: 80px;" class="managr-dianpu">
-						<div class="select-3">
-							<span>医师名称</span> <input type="text" ng-model="name"/>
-						</div>
-						<div class=" select-3">
-							<img src="/images/sjk-xl.png" /> <span>医院科室</span>
-							 <select ng-model="offices">
-								<option value="">查看全部</option>
-								<option>内分泌</option>
-								<option>内科</option>
-							</select>
-						</div>
-						<div class=" select-3">
-							<img src="/images/sjk-xl.png" /> <span>是否真实</span>
-							 <select ng-model="isvirtual">
-								
-								<option value="0">是</option>
-								<option value="1">否</option>
-							</select>
-						</div>
+					<form action="">
+						<ul style="height: 80px;" class="managr-dianpu">
+							<div class="select-3">
+								<span>医师名称</span> <input type="text" ng-model="name" />
+							</div>
+							<div class=" select-3">
+								<img src="/images/sjk-xl.png" /> <span>医院科室</span> <select
+									ng-model="offices">
+									<option value="">查看全部</option>
+									<option>内分泌</option>
+									<option>内科</option>
+								</select>
+							</div>
+							<div class=" select-3">
+								<img src="/images/sjk-xl.png" /> <span>是否真实</span> <select
+									ng-model="isvirtual">
 
-						<div>
-							<input type="button" class="btn-lg im-key"  value="检索"
-								ng-click="doctorsList()" />
-						</div>
-					</ul>
-				</form>
+									<option value="0">是</option>
+									<option value="1">否</option>
+								</select>
+							</div>
+
+							<div>
+								<input type="button" class="btn-lg im-key" value="检索"
+									ng-click="doctorsList()" />
+							</div>
+						</ul>
+					</form>
 					<ul style="height: 80px;" class="show">
 
-						<li  style="background: #9DE879;"><span
+						<li style="background: #9DE879;"><span
 							class="glyphicon glyphicon-plus"></span>&nbsp;添加医师</li>
-						<li  style="background: #F9CD33;"><span
+						<li style="background: #F9CD33;"><span
 							class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
-						<li  style="background: #F86846;"><span
+						<li style="background: #F86846;"><span
 							class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
@@ -115,19 +115,21 @@
 							<div class="template-add">
 								<div class="grade-left" style="padding-right: 5%;">
 									<div class="select-2">
-										<span>医师名称</span> <input type="text" ng-model="doctors.name"/>
+										<span>医师名称</span> <input type="text" ng-model="doctors.name" />
 									</div>
 
 									<div class=" select-3">
-										<img src="/images/sjk-xl.png" /> <span>性别</span> <select ng-model="doctors.sexs">
-											<option disabled selected style='display: none;' ></option>
+										<img src="/images/sjk-xl.png" /> <span>性别</span> <select
+											ng-model="doctors.sexs">
+											<option disabled selected style='display: none;'></option>
 											<option>女</option>
 											<option>男</option>
 										</select>
 									</div>
 									<div class=" select-3">
-										<img src="/images/sjk-xl.png" /> <span>学历</span> <select ng-model="doctors.edu">
-											<option disabled selected style='display: none;' ></option>
+										<img src="/images/sjk-xl.png" /> <span>学历</span> <select
+											ng-model="doctors.edu">
+											<option disabled selected style='display: none;'></option>
 											<option>本科</option>
 											<option>硕士</option>
 											<option>研究生</option>
@@ -135,8 +137,9 @@
 										</select>
 									</div>
 									<div class=" select-2" style="clear: both;">
-										<img src="/images/sjk-xl.png" /> <span>地区</span> <select ng-model="doctors.address">
-											<option disabled selected style='display: none;' ></option>
+										<img src="/images/sjk-xl.png" /> <span>地区</span> <select
+											ng-model="doctors.address">
+											<option disabled selected style='display: none;'></option>
 											<option>山东</option>
 											<option></option>
 											<option></option>
@@ -145,82 +148,99 @@
 									</div>
 
 									<div class="select-2">
-										<span>毕业院校</span> <input ng-model="doctors.school" type="text" placeholder="请输入毕业院校" />
+										<span>毕业院校</span> <input ng-model="doctors.school" type="text"
+											placeholder="请输入毕业院校" />
 									</div>
 
 									<div class="select-2">
-										<span>所在医院</span> <input ng-model="doctors.hospital"  type="text" placeholder="" />
+										<span>所在医院</span> <input ng-model="doctors.hospital"
+											type="text" placeholder="" />
 									</div>
 									<div class="select-2">
-										<span>所在科室</span> <input ng-model="doctors.offices" type="text" placeholder="" />
+										<span>所在科室</span> <input ng-model="doctors.offices"
+											type="text" placeholder="" />
 									</div>
 									<div class="select-2">
-										<span>职位职称</span> <input ng-model="doctors.professional"  type="text" placeholder="" />
+										<span>职位职称</span> <input ng-model="doctors.professional"
+											type="text" placeholder="" />
 									</div>
 									<div class="grade-text">
 										<span>擅长治疗</span>
 										<textarea ng-model="doctors.skilled"></textarea>
 									</div>
 									<div class="select-2">
-										<span>添加标签</span> <input ng-model="doctors.signs" type="text" placeholder=""
-											style="border-radius: 0;" />
-										
+										<span>添加标签</span> <input ng-model="doctors.signs" type="text"
+											placeholder="" style="border-radius: 0;" />
+
 									</div>
-									
+
 
 
 
 								</div>
 								<div class="grade-center">
 									<div class="select-2">
-										<span>身份证号</span> <input ng-model="doctors.idcard" type="text" placeholder="请输入身份证号" />
+										<span>身份证号</span> <input ng-model="doctors.idcard" type="text"
+											placeholder="请输入身份证号" />
 									</div>
 									<p>身份证照片</p>
 									<div class="costs-uploadfile-div">
-										<span style="float: left;">正面:&nbsp;</span><input onchange="angular.element(this).scope().uploadmainimage(this,1)" type="file"
-											name="file" accept="image/*" value="身份证正面" /> <input
-											type="hidden" ng-model="frontIdcardImg"/>
+										<span style="float: left;">正面:&nbsp;</span><input
+											onchange="angular.element(this).scope().uploadmainimage(this,1)"
+											type="file" name="file" accept="image/*" value="身份证正面" /> <input
+											type="hidden" ng-model="frontIdcardImg" />
 									</div>
 									&nbsp;
 									<div class="costs-uploadfile-div">
-										<span style="float: left;">反面:&nbsp;</span><input onchange="angular.element(this).scope().uploadmainimage(this,2)" type="file"
-											name="file" accept="image/*" value="身份证反面"  /> <input
-											type="hidden" ng-model="reverseIdcardImg"/>
+										<span style="float: left;">反面:&nbsp;</span><input
+											onchange="angular.element(this).scope().uploadmainimage(this,2)"
+											type="file" name="file" accept="image/*" value="身份证反面" /> <input
+											type="hidden" ng-model="reverseIdcardImg" />
 									</div>
 									&nbsp;
 									<div class="costs-uploadfile-div">
-										医师照片<input onchange="angular.element(this).scope().uploadmainimage(this,3)" type="file" name="file" accept="image/*" 
-											value="上传医师照片" onchange="" /> <input type="hidden" ng-model="headImg"/>
+										医师照片<input
+											onchange="angular.element(this).scope().uploadmainimage(this,3)"
+											type="file" name="file" accept="image/*" value="上传医师照片"
+											onchange="" /> <input type="hidden" ng-model="headImg" />
 										<div class="costs-img">
 											<img src="{{headImg}}" />
 										</div>
 									</div>
 									<div class="costs-uploadfile-div">
-										职称证明<input onchange="angular.element(this).scope().uploadmainimage(this,4)" type="file" name="file" value="上传职称证明" />
-										<input type="hidden" ng-model="professionalImg"/>
+										职称证明<input
+											onchange="angular.element(this).scope().uploadmainimage(this,4)"
+											type="file" name="file" value="上传职称证明" /> <input
+											type="hidden" ng-model="professionalImg" />
 										<div class="costs-img">
 											<img src="{{professionalImg}}" />
 										</div>
 									</div>
 									<div class="costs-uploadfile-div">
-										资质证书<input onchange="angular.element(this).scope().uploadmainimage(this,5)" type="file" name="file" value="上传资质证书"  />
-										<input type="hidden" ng-model="practiceImg"/>
+										资质证书<input
+											onchange="angular.element(this).scope().uploadmainimage(this,5)"
+											type="file" name="file" value="上传资质证书" /> <input
+											type="hidden" ng-model="practiceImg" />
 										<div class="costs-img">
 											<img src="{{practiceImg}}" />
 										</div>
 									</div>
 									<div class="costs-uploadfile-div">
-										其他证书<input onchange="angular.element(this).scope().uploadmainimage(this,6)" type="file" name="file" value="上传其他证书" />
-										<input type="hidden" ng-model="elseImg"/>
-										
+										其他证书<input
+											onchange="angular.element(this).scope().uploadmainimage(this,6)"
+											type="file" name="file" value="上传其他证书" /> <input
+											type="hidden" ng-model="elseImg" />
+
 									</div>
 									<div class="select-radio ">
 										<ul>
 											<li>是否推荐</li>
-											<li><input ng-model="doctors.isrecommend" type="radio" ng-value="1"
+											<li><input ng-model="doctors.isrecommend" type="radio"
+												ng-value="1"
 												class="ng-pristine ng-untouched ng-valid ng-empty" name="4"
 												value="1"> 是</li>
-											<li><input ng-model="doctors.isrecommend" type="radio" ng-value="0"
+											<li><input ng-model="doctors.isrecommend" type="radio"
+												ng-value="0"
 												class="ng-pristine ng-untouched ng-valid ng-empty" name="4"
 												value="0">否</li>
 										</ul>
@@ -229,14 +249,14 @@
 							</div>
 						</form>
 						<div class="end">
-							<input ng-click="insertdoctor()" name="git" type="submit" value="提交"
-								style="background: #5ED8A9;" /> <input name="esc" type="reset"
-								value="取消" ng-click="reset()" class="esc" />
+							<input ng-click="insertdoctor()" name="git" type="submit"
+								value="提交" style="background: #5ED8A9;" /> <input name="esc"
+								type="reset" value="取消" ng-click="reset()" class="esc" />
 						</div>
-</div>
-</div>
+					</div>
+				</div>
 				<!-- 核审管理内容 -->
-				<div class="manage" style="display:none;">
+				<div class="manage" style="display: none;">
 					<h4 style="padding-left: 30px;">核审列表()</h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
@@ -387,26 +407,28 @@
 								</div>
 
 							</div>
-							<div class="grade-right"   id="islimit">
-					
+							<div class="grade-right" id="islimit">
+
 								<h3>操作</h3>
 								<div>
 									<ul>
 										<li>是否同意</li>
-										<li><input ng-model="islimit" type="radio" value="1" name="1"/> 同意</li>
-										<li><input ng-model="islimit" type="radio" value="2" name="1"/>不同意</li>
+										<li><input ng-model="islimit" type="radio" value="1"
+											name="1" /> 同意</li>
+										<li><input ng-model="islimit" type="radio" value="2"
+											name="1" />不同意</li>
 									</ul>
 								</div>
 								<div class="grade-text">
 									<span>拒绝原因</span>
 									<textarea style="height: 200px; width: 100% !important"></textarea>
 								</div>
-								</div>
-						
+							</div>
 					</form>
 					<div class="end">
-						<input ng-click="updatedoctor(d.id)" name="git" type="submit" value="提交" style="background: #5ED8A9;" /> 
-						<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc" />
+						<input ng-click="updatedoctor(d.id)" name="git" type="submit"
+							value="提交" style="background: #5ED8A9;" /> <input name="esc"
+							type="reset" value="取消" ng-click="reset()" class="esc" />
 					</div>
 
 
@@ -416,57 +438,171 @@
 
 			</div>
 		</div>
-	</div></div>
+	</div>
+</div>
 
-		<style type="text/css">
-				@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
-			.poop {
-				
-				width: 55%;
-				height: 550px;
-				position: absolute;
-				left: 15%;
-				top: 10%;
-				display: none;
-			}
-				@media screen and (max-width:1401px){.poop {width: 560px;}}		
-			.poop span {
-				font-size: 1.5rem;
-			}
+<style type="text/css">
+@media screen and (max-width:901px) {
+	.managr-dianpu, .details-frame-heshen {
+		overflow: auto;
+	}
+}
 
-.resource .grade-left , .resource .grade-center , .resource .grade-right{width:400px;float: left;height:720px;overflow: auto;}
-.resource .grade-right{width:200px;border-right: none;height: 500px;}	
+.poop {
+	width: 55%;
+	height: 550px;
+	position: absolute;
+	left: 15%;
+	top: 10%;
+	display: none;
+}
 
-.poop .grade-left , .poop .grade-center {width:49%;float: left;height:760px;overflow: auto;}
-.details-frame-content {height: 50px;padding:0 29px;}
-			
-.details-frame-content ul li {	float: left;height: 50px;text-align: center;line-height: 50px;font-size: 1.5rem;cursor: pointer;margin-right:15px;}
-.leibie{background:#F5F6F8;width: 50%;text-align: center; }
-.grade-text textarea {height:70px;width: 70%;}
-.manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
-.details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;}
-@media screen and (max-width: 901px){.manage .managr-dianpu .select-3 , .details-frame-heshen .select-3 , .details-frame-heshen .select-2 {width:90% !important;}}
-.details-frame-heshen .select-3{width:15%; }
-.details-frame-heshen .select-2{width: 10%;float: left;}
-.details-frame-heshen .select-2 input {border-radius:0;}
-.resource{width: auto;
-				height: 600px;
-				position: absolute;
-				left: 10%;
-				top: 20%;
-				}
-	.end{float:none;margin-left:auto;}
-@media screen and (max-width:1401px){.resource{width:840px;}}
-.resource .grade-left ul{width:100%;margin:3px 0;height:50px;}
-.resource .grade-left ul li:nth-child(1){float:left;}
-.resource .grade-left ul li:nth-child(2){float:right;color:#999;}
-.biaoqian{width: 80%;height:80px;}
-.biaoqian ul li{float: left;background:#EDEEF0;margin-right: 5px;}
-.biaoqian i{color: #B1B1B1;font-weight: 100;}
-.end {float: none; margin-left: auto;}
-		</style>
-	
-	</@b.body>
+@media screen and (max-width:1401px) {
+	.poop {
+		width: 560px;
+	}
+}
+
+.poop span {
+	font-size: 1.5rem;
+}
+
+.resource .grade-left, .resource .grade-center, .resource .grade-right {
+	width: 400px;
+	float: left;
+	height: 720px;
+	overflow: auto;
+}
+
+.resource .grade-right {
+	width: 200px;
+	border-right: none;
+	height: 500px;
+}
+
+.poop .grade-left, .poop .grade-center {
+	width: 49%;
+	float: left;
+	height: 760px;
+	overflow: auto;
+}
+
+.details-frame-content {
+	height: 50px;
+	padding: 0 29px;
+}
+
+.details-frame-content ul li {
+	float: left;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 1.5rem;
+	cursor: pointer;
+	margin-right: 15px;
+}
+
+.leibie {
+	background: #F5F6F8;
+	width: 50%;
+	text-align: center;
+}
+
+.grade-text textarea {
+	height: 70px;
+	width: 70%;
+}
+
+.manage .managr-dianpu .select-3 {
+	width: 10%;
+	margin-left: 18px;
+	margin-right: 0;
+}
+
+.details-frame-heshen {
+	width: 100%;
+	padding: 0 30px;
+	background: white;
+	height: auto;
+}
+
+@media screen and (max-width: 901px) {
+	.manage .managr-dianpu .select-3, .details-frame-heshen .select-3,
+		.details-frame-heshen .select-2 {
+		width: 90% !important;
+	}
+}
+
+.details-frame-heshen .select-3 {
+	width: 15%;
+}
+
+.details-frame-heshen .select-2 {
+	width: 10%;
+	float: left;
+}
+
+.details-frame-heshen .select-2 input {
+	border-radius: 0;
+}
+
+.resource {
+	width: auto;
+	height: 600px;
+	position: absolute;
+	left: 10%;
+	top: 20%;
+}
+
+.end {
+	float: none;
+	margin-left: auto;
+}
+
+@media screen and (max-width:1401px) {
+	.resource {
+		width: 840px;
+	}
+}
+
+.resource .grade-left ul {
+	width: 100%;
+	margin: 3px 0;
+	height: 50px;
+}
+
+.resource .grade-left ul li:nth-child(1) {
+	float: left;
+}
+
+.resource .grade-left ul li:nth-child(2) {
+	float: right;
+	color: #999;
+}
+
+.biaoqian {
+	width: 80%;
+	height: 80px;
+}
+
+.biaoqian ul li {
+	float: left;
+	background: #EDEEF0;
+	margin-right: 5px;
+}
+
+.biaoqian i {
+	color: #B1B1B1;
+	font-weight: 100;
+}
+
+.end {
+	float: none;
+	margin-left: auto;
+}
+</style>
+
+</@b.body>
 
 
 </html>
