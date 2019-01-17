@@ -41,6 +41,9 @@ public class Orders {
 	private Date deliveredtime;
 	
 	private Date paidtime;
+	
+	private String paidtimes;////字符串的支付时间
+	
 	private List<OrdersProduct> product = new ArrayList<OrdersProduct>();
 	
 	private int count;////总共多少件商品
@@ -62,8 +65,26 @@ public class Orders {
 	private String showtime;
 	
 	private String userMobile;////对应用户的手机号
+
+	private String recommendTeacher;
 	
 	
+	public String getPaidtimes() {
+		return paidtimes;
+	}
+
+	public void setPaidtimes(String paidtimes) {
+		this.paidtimes = paidtimes;
+	}
+
+	public String getRecommendTeacher() {
+		return recommendTeacher;
+	}
+
+	public void setRecommendTeacher(String recommendTeacher) {
+		this.recommendTeacher = recommendTeacher;
+	}
+
 	public String getUserMobile() {
 		return userMobile;
 	}

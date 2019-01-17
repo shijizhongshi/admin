@@ -24,6 +24,9 @@ public class OrdersController {
 			@RequestParam(name="page",required=true)int page,
 			@RequestParam(name="ordersType",required=false)String ordersType,
 			@RequestParam(name="mobile",required=false)String mobile,
+			@RequestParam(name="recommendTeacher",required=false)String recommendTeacher,
+			@RequestParam(name="orderno",required=false)String orderno,
+			@RequestParam(name="ordersStatus",required=false)String ordersStatus,
 			@RequestParam(name="todate",required=false)String todate,
 			@RequestParam(name="fromdate",required=false)String fromdate){
 		
@@ -31,8 +34,8 @@ public class OrdersController {
 		int pageNo=(page-1)*Patterns.pageSize;
 		int pageSize=Patterns.pageSize;
 		
-		List<Orders> list = ordersService.list(pageNo, pageSize, ordersType, mobile, todate, fromdate);
-		int count = ordersService.listCount(ordersType, mobile, todate, fromdate);
+		List<Orders> list = ordersService.list(pageNo, pageSize, ordersType, mobile, todate, fromdate,orderno,ordersStatus,recommendTeacher);
+		int count = ordersService.listCount(ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher);
 		result.setCount(count);
 		result.setStatus("0");
 		result.setData(list);

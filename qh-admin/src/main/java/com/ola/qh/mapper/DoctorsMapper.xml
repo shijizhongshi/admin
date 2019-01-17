@@ -6,20 +6,41 @@
 	<resultMap type="com.ola.qh.entity.Doctors" id="DoctorsMap">
 		<result column="id" property="id"/>
 		<result column="user_id" property="userId"/>
-		<result column="islimit" property="islimit"/>
-		<result column="isrecommend" property="isrecommend"/>
+		<result column="name" property="name"/>
 		<result column="head_img" property="headImg"/>
+		<result column="sexs" property="sexs"/>
+		<result column="edu" property="edu"/>
+		<result column="school" property="school"/>
+		<result column="hospital" property="hospital"/>
+		<result column="offices" property="offices"/>
+		<result column="professional" property="professional"/>
+		<result column="signs" property="signs"/>
+		<result column="address" property="address"/>
+		<result column="skilled" property="skilled"/>
+		<result column="idcard" property="idcard"/>
 		<result column="front_idcard_img" property="frontIdcardImg"/>
 		<result column="reverse_idcard_img" property="reverseIdcardImg"/>
 		<result column="professional_img" property="professionalImg"/>
 		<result column="practice_img" property="practiceImg"/>
 		<result column="else_img" property="elseImg"/>
-		<result column="isvirtual" property="isvirtual"/>
+		<result column="addtime" property="addtime"/>
 		<result column="updatetime" property="updatetime"/>
+		<result column="islimit" property="islimit"/>
+		<result column="isrecommend" property="isrecommend"/>
+		<result column="isvirtual" property="isvirtual"/>
+		
 	</resultMap>
 	
 	<select id="selectDoctors" resultMap="DoctorsMap">
-		select * from doctors where islimit=#{islimit} and isvirtual=#{isvirtual} limit #{pageNo},#{pageSize}
+		select * from doctors where islimit=#{islimit} and isvirtual=#{isvirtual}
+		<if test="name!=null and name!=''">
+		and name LIKE CONCAT(CONCAT('%',#{name},'%'))
+		</if>
+		<if test="offices!=null and offices!=''">
+		and offices=#{offices}
+		</if>
+		
+		 limit #{pageNo},#{pageSize}
 	</select>
 	
 	<select id="selectUserId" resultType="String">
@@ -36,4 +57,15 @@
 		</if>
 		 updatetime=#{updatetime} where id=#{id}
 	</update>
+	
+	<insert id="insertDoctors" parameterType="com.ola.qh.entity.Doctors">
+		insert into doctors(id,user_id,name,head_img,sexs,edu,school,hospital,offices,professional,signs,address,skilled,idcard,front_idcard_img,
+		reverse_idcard_img,professional_img,practice_img,else_img,islimit,isrecommend,isvirtual,addtime) 
+		values(#{id},#{userId},#{name},#{headImg},#{sexs},#{edu},#{school},#{hospital},#{offices},#{professional},#{signs},#{address},#{skilled},#{idcard},#{frontIdcardImg},
+		#{reverseIdcardImg},#{professionalImg},#{practiceImg},#{elseImg},#{islimit},#{isrecommend},#{isvirtual},#{addtime})
+	</insert>
+	
+	<delete id="deleteDoctors">
+		delete from doctors where id=#{id}
+	</delete>
 </mapper>
