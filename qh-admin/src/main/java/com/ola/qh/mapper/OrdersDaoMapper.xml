@@ -37,20 +37,20 @@ select id,deliveredtime,orders_status,muser_id from orders
 </select>
 <!-- 订单 -->
 <select id="ordersList" resultMap="OrdersMap">
-  select o.*,u.mobile from orders o left join user u on u.id=o.user_id where 1=1
+  select o.*,u.mobile userMobile from orders o left join user u on u.id=o.user_id where 1=1
   <if test="fromdate!=null and fromdate!='' ">
-  and UNIX_TIMESTAMP(o.addime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+  and UNIX_TIMESTAMP(o.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
   </if>
   <if test="todate!=null and todate!=''">
   and UNIX_TIMESTAMP(o.addtime)&lt;UNIX_TIMESTAMP(#{todate})
   </if>
   <if test="mobile!=null and mobile!=''">
-  and u.mobile like concat(concat("%",#{mobile},"%"))
+  and u.mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
   </if>
   <if test="ordersType!=null and ordersType!=''">
   and o.orders_type=#{ordersType}
   </if>
-  orders by o.addime desc
+  order by o.addtime desc
   <if test="pageSize!=0">
   limit #{pageNo},#{pageSize}
   </if>
@@ -60,7 +60,7 @@ select id,deliveredtime,orders_status,muser_id from orders
 <select id="ordersListCount" resultType="int">
   select count(o.id) from orders o left join user u on u.id=o.user_id where 1=1
   <if test="fromdate!=null and fromdate!='' ">
-  and UNIX_TIMESTAMP(o.addime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+  and UNIX_TIMESTAMP(o.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
   </if>
   <if test="todate!=null and todate!=''">
   and UNIX_TIMESTAMP(o.addtime)&lt;=UNIX_TIMESTAMP(#{todate})

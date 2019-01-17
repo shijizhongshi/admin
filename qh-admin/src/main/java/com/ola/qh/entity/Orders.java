@@ -58,8 +58,28 @@ public class Orders {
 	private String qrcodes;/////服务店铺的二维码
 	
 	private int classStatus;////1:购买的全套课程
-
 	
+	private String showtime;
+	
+	private String userMobile;////对应用户的手机号
+	
+	
+	public String getUserMobile() {
+		return userMobile;
+	}
+
+	public void setUserMobile(String userMobile) {
+		this.userMobile = userMobile;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
+
 	public int getClassStatus() {
 		return classStatus;
 	}
