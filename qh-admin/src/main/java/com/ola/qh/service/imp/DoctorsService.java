@@ -23,9 +23,9 @@ public class DoctorsService implements IDoctorsService{
 	private UserDao userDao;
 	
 	@Override 
-	public List<Doctors> selectDoctors(int islimit,int isvirtual,int pageNo,int pageSize) {
+	public List<Doctors> selectDoctors(int islimit,String name,String offices,int isvirtual,int pageNo,int pageSize) {
 		
-		return doctorsDao.selectDoctors(islimit,isvirtual,pageNo,pageSize);
+		return doctorsDao.selectDoctors(islimit, name, offices, isvirtual, pageNo, pageSize);
 	}
 
 	@Transactional
@@ -52,5 +52,17 @@ public class DoctorsService implements IDoctorsService{
 			results.setMessage("修改失败");
 		return results;
 		}
+	}
+
+	@Override
+	public int insertDoctors(Doctors doctors) {
+		
+		return doctorsDao.insertDoctors(doctors);
+	}
+	
+	@Override
+	public int deleteDoctors(String id) {
+		
+		return doctorsDao.deleteDoctors(id);
 	}
 }

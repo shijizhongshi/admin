@@ -9,37 +9,39 @@ public class Doctors {
 	private String id;
 	
 	private String userId;
-	
+	@NotEmpty
 	private String name;
-	
+	@NotEmpty
 	private String headImg;
-	
+	@NotEmpty
 	private String sexs;
-	
+	@NotEmpty
 	private String edu;
-	
+	@NotEmpty
 	private String school;
-	
+	@NotEmpty
 	private String hospital;
-	
+	@NotEmpty
 	private String offices;
-	
+	@NotEmpty
 	private String professional;////职称
 	
 	private String signs;
-	
+	@NotEmpty
 	private String skilled;
-	
+	@NotEmpty
+	private String address;
+	@NotEmpty
 	private String idcard;
-	
+	@NotEmpty
 	private String frontIdcardImg;
-	
+	@NotEmpty
 	private String reverseIdcardImg;
-	
+	@NotEmpty
 	private String professionalImg;///职称的图片
-@NotEmpty
+	@NotEmpty
 	private String practiceImg;////执业医师证的图片
-	
+	@NotEmpty
 	private String elseImg;////其他的图片
 	
 	private Date addtime;
@@ -234,6 +236,14 @@ public class Doctors {
 
 	public void setIsvirtual(int isvirtual) {
 		this.isvirtual = isvirtual;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	
