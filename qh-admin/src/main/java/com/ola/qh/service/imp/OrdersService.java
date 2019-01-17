@@ -81,20 +81,27 @@ public class OrdersService implements IOrdersService{
 
 	@Override
 	public List<Orders> list(int pageNo, int pageSize, String ordersType, String mobile, String todate,
-			String fromdate) {
+			String fromdate,String orderno,String ordersStatus, String recommendTeacher) {
 		// TODO Auto-generated method stub
-		List<Orders> list = ordersDao.ordersList(pageNo, pageSize, ordersType, mobile, todate, fromdate);
+		List<Orders> list = ordersDao.ordersList(pageNo, pageSize, ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher);
 		for (Orders orders : list) {
 			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			orders.setShowtime(sf.format(orders.getAddtime()));
+			if(orders.getPaidtime()!=null){
+				orders.setPaidtimes(sf.format(orders.getPaidtime()));
+			}else{
+				orders.setPaidtimes("订单还未支付");
+			}
 		}
 		return list;
 	}
 
 	@Override
-	public int listCount(String ordersType, String mobile, String todate, String fromdate) {
+	public int listCount(String ordersType, String mobile, String todate, String fromdate,String orderno,String ordersStatus, String recommendTeacher) {
 		// TODO Auto-generated method stub
-		return ordersDao.ordersListCount(ordersType, mobile, todate, fromdate);
+		return ordersDao.ordersListCount(ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher);
+				
 	}
+
 
 }

@@ -28,6 +28,7 @@
 	<result column="payment_type" property="paymentType"/>
 	<result column="preset_time" property="presetTime"/>
 	<result column="class_status" property="classStatus"/>
+	<result column="recommend_teacher" property="recommendTeacher"/>
 </resultMap>
 
 <!-- 查询所有的发货的商品 -->
@@ -50,6 +51,15 @@ select id,deliveredtime,orders_status,muser_id from orders
   <if test="ordersType!=null and ordersType!=''">
   and o.orders_type=#{ordersType}
   </if>
+   <if test="orderno!=null and orderno!='' ">
+  and orderno LIKE CONCAT(CONCAT('%',#{orderno},'%'))
+  </if>
+  <if test="ordersStatus!=null and ordersStatus!='' ">
+  and orders_status=#{ordersStatus}
+  </if>
+  <if test="recommendTeacher!=null and recommendTeacher!='' ">
+  and recommend_teacher LIKE CONCAT(CONCAT('%',#{recommendTeacher},'%'))
+  </if>
   order by o.addtime desc
   <if test="pageSize!=0">
   limit #{pageNo},#{pageSize}
@@ -66,10 +76,19 @@ select id,deliveredtime,orders_status,muser_id from orders
   and UNIX_TIMESTAMP(o.addtime)&lt;=UNIX_TIMESTAMP(#{todate})
   </if>
   <if test="mobile!=null and mobile!=''">
-  and u.mobile like concat(concat("%",#{mobile},"%"))
+  and u.mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
   </if>
   <if test="ordersType!=null and ordersType!=''">
   and o.orders_type=#{ordersType}
+  </if>
+  <if test="orderno!=null and orderno!='' ">
+  and orderno LIKE CONCAT(CONCAT('%',#{orderno},'%'))
+  </if>
+  <if test="ordersStatus!=null and ordersStatus!='' ">
+  and orders_status=#{ordersStatus}
+  </if>
+  <if test="recommendTeacher!=null and recommendTeacher!='' ">
+  and recommend_teacher LIKE CONCAT(CONCAT('%',#{recommendTeacher},'%'))
   </if>
 </select>
 <!-- 订单 -->

@@ -3,13 +3,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="课程管理页面"/>
+<@h.header title="课程订单管理"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
+<script src="/scripts/orders/course_orders.js"></script>
 <script src="/scripts/indent/excle.js"></script>
 <@b.body menu="sidebarmenu-orders" submenu="sidebarmenu-orders-course">
-<div>
+<div ng-controller="courseOrdersController">
 <div class="details" style="width: 100%">
 	<div class="details-nav">
 		<ul>
@@ -24,7 +24,7 @@
 	<div class="details-frame-content">
 		<div class="select-3">
 							<span>选择时间</span>
-								<input type="date" name="search"/>
+								<input type="date" name="search" ng-model="fromdate"/>
 						</div>
 						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
 							
@@ -32,28 +32,31 @@
 						</div>
 						<div class="select-3">
 							<span>&nbsp;</span>
-								<input type="date" name="search"/>
+								<input type="date" name="search" ng-model="todate"/>
 						</div>
 					
 	<div class="select-3">
-		<span>学员姓名</span>
-		<input type="text" />
+		<span>推荐老师</span>
+		<input type="text" ng-model="recommendTeacher"/>
 	</div>
 		<div class="select-3">
-		<span>学员电话</span>
-		<input type="text" />
+		<span>用户手机号</span>
+		<input type="text" ng-model="mobile"/>
 	</div>
 		<div class="select-3">
 		<span>支付订单号</span>
-		<input type="text" />
+		<input type="text" ng-model="orderno"/>
 	</div>
 		<div class="select-3">
 		<span>订单状态</span>
-		<input type="text" />
+		<select ng-model="ordersStatus">
+			<option value="NEW">待付款</option>
+			<option value="">已完成</option>
+		</select>
 	</div>
 			<div style="float:left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
-						value="检索" ng-click="search()" />
+						value="检索"  />
 				</div>
 <div>
 <input type="button" class="btn-lg im-key" 
@@ -66,6 +69,7 @@
 
 					<table id="tableExcel">
 						<tr>
+							<th>用户手机号</th>
 							<th>学员姓名</th>
 							<th>学员电话</th>
 							<th>支付订单号</th>
@@ -78,22 +82,24 @@
 							<th>订单创建时间</th>
 							<th>订单支付时间</th>
 							<th>推荐老师</th>
-							<th>学员单位</th>
-						<th>详情</th>
+							
+						<th>操作</th>
 						</tr>
 
-						<tr>
-							<th>学员姓名</th>
-							<th>学员电话</th>
-							<th>支付订单号</th>
-							<th>支付方式</th>
-							<th>支付途径</th>
-							<th>订单状态</th>
-							<th>实际费用</th>
-							<th>订单创建时间</th>
-							<th>订单支付时间</th>
-							<th>推荐老师</th>
-							<th>学员单位</th>
+						<tr ng-repeat="o in list">
+							<th>{{o.userMobile}}</th>
+							<th>{{o.receiver}}</th>
+							<th>{{o.mobile}}</th>
+							<th>{{o.orderno}}</th>
+							<th>{{o.payname}}</th>
+							<th>APP</th>
+							<th>{{o.statusName}}</th>
+							<th>{{o.payaccount}}</th>
+							<th>{{o.showtime}}</th>
+							<th>{{o.paidtimes}}</th>
+							<th>{{o.recommendTeacher}}</th>
+							
+						
                            <th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
 						</tr>
 					</table>
@@ -105,7 +111,7 @@
 						ng-model="page" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-change="courseBases()">
+						ng-change="loaddata()">
 					</ul>
 				</div>
 

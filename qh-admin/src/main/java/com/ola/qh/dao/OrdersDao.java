@@ -27,13 +27,19 @@ public interface OrdersDao {
 			@Param("ordersType")String ordersType,
 			@Param("mobile")String mobile,
 			@Param("todate")String todate,
-			@Param("fromdate")String fromdate);
+			@Param("fromdate")String fromdate,
+			@Param("orderno")String orderno,
+			@Param("ordersStatus")String ordersStatus, 
+			@Param("recommendTeacher")String recommendTeacher);
 	
 	public int ordersListCount(
 			@Param("ordersType")String ordersType,
 			@Param("mobile")String mobile,
 			@Param("todate")String todate,
-			@Param("fromdate")String fromdate);
+			@Param("fromdate")String fromdate,
+			@Param("orderno")String orderno,
+			@Param("ordersStatus")String ordersStatus, 
+			@Param("recommendTeacher")String recommendTeacher);
 	
 	
 	
