@@ -253,7 +253,7 @@
 				margin-right:15px;
 			}
 .leibie{background:#F5F6F8;width: 50%;text-align: center; }
-.manage .managr-dianpu .select-3{width: 10%;margin-left: 18px;margin-right: 0;}
+.manage .managr-dianpu .select-3{width: 15%;margin-left: 18px;margin-right: 0;}
 .details-frame-heshen{width:100%;padding:0 30px;background: white;height:auto;}
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
