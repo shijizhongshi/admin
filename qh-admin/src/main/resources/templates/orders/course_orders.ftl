@@ -54,6 +54,10 @@
 			<option value="">已完成</option>
 		</select>
 	</div>
+	<div class="select-3">
+		<span>推荐老师</span>
+		<input type="text" />
+	</div>
 			<div style="float:left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
 						value="检索"  />
@@ -175,6 +179,7 @@
  </div>  
 </div>
 <style type="text/css">
+.details-frame-content{height:219px;}
 .details-frame-content .select-3{width: 10%;margin-right: 1%;}
 @media screen and (min-width: 1601px) {.details-frame-content .select-3{width: 12%;}}
 @media screen and (max-width: 1600px)  {.details-frame-content .select-3{width: 14%;}}

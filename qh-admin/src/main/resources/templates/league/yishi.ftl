@@ -432,8 +432,8 @@
 			.poop span {
 				font-size: 1.5rem;
 			}
-.resource .grade-left , .resource .grade-center , .resource .grade-right{width:39%;float: left;height:720px;overflow: auto;}
-.resource .grade-right{width:20%;border-right: none;height: 500px;}	
+.resource .grade-left , .resource .grade-center , .resource .grade-right{width:400px;float: left;height:720px;overflow: auto;}
+.resource .grade-right{width:200px;border-right: none;height: 500px;}	
 .poop .grade-left , .poop .grade-center {width:49%;float: left;height:760px;overflow: auto;}
 .details-frame-content {height: 50px;padding:0 29px;}
 			
@@ -446,7 +446,7 @@
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}
-.resource{width: 70%;
+.resource{width: auto;
 				height: 600px;
 				position: absolute;
 				left: 10%;
@@ -459,6 +459,7 @@
 .biaoqian{width: 80%;height:80px;}
 .biaoqian ul li{float: left;background:#EDEEF0;margin-right: 5px;}
 .biaoqian i{color: #B1B1B1;font-weight: 100;}
+.end {float: none; margin-left: auto;}
 		</style>
 	
 	</@b.body>
