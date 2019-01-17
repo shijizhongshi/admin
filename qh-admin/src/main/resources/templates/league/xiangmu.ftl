@@ -1,4 +1,5 @@
-<#import "/layout/header.ftl" as h/> <#import "/layout/body.ftl" as b/>
+<#import "/layout/header.ftl" as h/>
+ <#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -291,5 +292,4 @@
 	
 	
 	</@b.body>
-
 </html>
