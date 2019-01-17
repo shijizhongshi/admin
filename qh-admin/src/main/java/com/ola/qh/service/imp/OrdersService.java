@@ -1,6 +1,7 @@
 package com.ola.qh.service.imp;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -82,7 +83,12 @@ public class OrdersService implements IOrdersService{
 	public List<Orders> list(int pageNo, int pageSize, String ordersType, String mobile, String todate,
 			String fromdate) {
 		// TODO Auto-generated method stub
-		return ordersDao.ordersList(pageNo, pageSize, ordersType, mobile, todate, fromdate);
+		List<Orders> list = ordersDao.ordersList(pageNo, pageSize, ordersType, mobile, todate, fromdate);
+		for (Orders orders : list) {
+			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			orders.setShowtime(sf.format(orders.getAddtime()));
+		}
+		return list;
 	}
 
 	@Override

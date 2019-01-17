@@ -20,7 +20,8 @@ public class OrdersController {
 	private IOrdersService ordersService;
 	
 	@RequestMapping("/list")
-	public Results<List<Orders>> list(@RequestParam(name="page",required=true)int page,
+	public Results<List<Orders>> list(
+			@RequestParam(name="page",required=true)int page,
 			@RequestParam(name="ordersType",required=false)String ordersType,
 			@RequestParam(name="mobile",required=false)String mobile,
 			@RequestParam(name="todate",required=false)String todate,

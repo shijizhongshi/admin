@@ -5,11 +5,17 @@
 <html lang="en">
 	<@h.header title="用户订单管理" />
 	<link rel="stylesheet" href="/styles/admin.css" />
-	<script src="/scripts/course/grade-template.js"></script>
 	<script src="/scripts/admin.js"></script>
+	<script src="/scripts/orders/orders.js"></script>
 	<script src="/scripts/league/league.js"></script>
+	<style>
+	.tab0{
+     border-bottom:3px solid red;
+     font-weight:900;
+	}
+	</style>
 	<@b.body menu="sidebarmenu-orders" submenu="sidebarmenu-orders-list">
-		<div>
+		<div ng-controller="ordersController">
 			<div class="details" style="width: 100%">
 				<div class="details-nav">
 					<ul>
@@ -23,8 +29,8 @@
 				<div class="details-frame">
 					<div class="details-frame-content" id="details-frame-content">
 						<ul>
-							<li onmousedown="go(0)" style="border-bottom:3px solid red;font-weight: 900;">商品订单</li>
-							<li onmousedown="go(1)">服务订单</li>
+							<li ng-click="onmousedowngo(0)" ng-class="{'tab0':tab0==0}">商品订单</li>
+							<li ng-click="onmousedowngo(2)" ng-class="{'tab0':tab0==2}">服务订单</li>
 						</ul>
 					</div>
 					<div id="guanli">
@@ -32,11 +38,11 @@
 							<ul style="height: 80px;" class="managr-dianpu">
 								<div class="select-3">
 									<span>手机号</span>
-									<input type="text"/>
+									<input type="text" ng-model="mobile"/>
 								</div>
 						<div class="select-3">
 							<span>申请时间</span>
-								<input type="date" name="search"/>
+								<input type="date" name="search" ng-model="fromdate"/>
 						</div>
 						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
 							
@@ -44,12 +50,12 @@
 						</div>
 						<div class="select-3">
 							<span>&nbsp;</span>
-								<input type="date" name="search"/>
+								<input type="date" name="search" ng-model="todate"/>
 						</div>
 			
 			<div>
 					<input type="button" class="btn-lg im-key"
-						value="检索" />
+						value="检索" ng-click="loaddata()"/>
 				</div>
 							</ul>
 							
@@ -64,19 +70,17 @@
 										<th>订单状态</th>
 										<th>售后服务</th>
 										<th>时间</th>
-										<th>操作</th>
 										<th>详细信息</th>
 									</tr>
 
-									<tr>
-										<th>手机号</th>
-										<th>姓名</th>
-										<th>订单号</th>
-										<th>支付金额</th>
-										<th>订单状态</th>
-										<th>售后服务</th>
-										<th>时间</th>
-										<th><form ><span>允许</span><input type="radio" value="允许" style="background:#7bc472;" name="caozuo" /><span>&nbsp;拒绝</span><input type="radio" value="拒绝"  name="caozuo"/></form></th>
+									<tr ng-repeat="o in list">
+										<th>{{o.userMobile}}</th>
+										<th>{{o.receiver}}</th>
+										<th>{{o.orderno}}</th>
+										<th>{{o.payaccount}}</th>
+										<th>{{o.statusName}}</th>
+										<th>{{o.refund}}</th>
+										<th>{{o.showtime}}</th>
 										<th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
 									</tr>
 									
@@ -85,7 +89,7 @@
 							</div>
 							<div class="col-sm-6"></div>
 							<div class="col-sm-6">
-								<ul uib-pagination boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
+								<ul uib-pagination boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="loaddata()">
 								</ul>
 							</div>
 
