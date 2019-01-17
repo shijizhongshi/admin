@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.Orders;
+import com.ola.qh.entity.OrdersProduct;
 import com.ola.qh.service.IOrdersService;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
@@ -41,4 +42,20 @@ public class OrdersController {
 		result.setData(list);
 		return result;
 	}
+	
+	
+	/**
+	 * 查出订单对应的商品信息
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping("/product/list")
+	public Results<List<OrdersProduct>> ordersProductList(@RequestParam(name="orderId",required=true)String orderId){
+		Results<List<OrdersProduct>> results=new Results<List<OrdersProduct>>();
+		List<OrdersProduct> list = ordersService.productList(orderId);
+		results.setStatus("0");
+		results.setData(list);
+		return results;
+	}
+	
 }

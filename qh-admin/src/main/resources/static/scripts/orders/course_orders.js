@@ -52,8 +52,18 @@ $scope.loaddata = function(){
 };
 
 $scope.loaddata();
+ $scope.orders=null;
 	
-	
-	
+	$scope.detail=function(o){
+	 document.getElementById('revise').style.display="block"; 
+	 ///////查询所有的订单的产品
+	  $scope.orders=o;
+	 $http.get("/api/orders/product/list",{"params":{"orderId":o.id}},{'Content-Type': 'application/json;charset=UTF-8'})
+	 .success(function(result){
+		 if(result.status=="0"){
+			 $scope.productList=result.data;
+		 }
+	 })
+	}
 
 });
