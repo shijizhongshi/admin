@@ -1,5 +1,6 @@
 *{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;font-size:16px;}
 a{text-decoration: none;color: black;}
+h3{font-size:20px;}
 .classify{width:13%; background:#FFFFFF;float:left;}
 @media screen and (max-width: 901px) {.classify{width:100%;float:none;}}
 .classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:15px;}
@@ -81,7 +82,7 @@ table .selected{background-color:#c1ddec}
 .section li:nth-child(2n-1){background:#F0F1F3;}
 .section li input{float: right;}
 
-.resource{width:790px;position: absolute;left:20%;top: 200px;padding: 40px;padding-top:10px;overflow:auto;}
+.resource{width:790px;position: absolute;left:20%;top:10%;padding: 20px;padding-top:10px;overflow:auto;}
 .resource-table{width:720px;height: 340px;overflow: scroll;}
 .resource-table ul{width: 100%;height:30px;line-height: 30px;margin:0;}
 .resource-table ul li{float: left;text-align: center;width: 20%;border-right:1px solid #F2F2F2;margin:0; }
@@ -154,3 +155,4 @@ div.costs-uploadfile-div .allBtn{
 .costs-uploadfile-div img{height:100px;}
 .costs-img{height:100px;}
 .admin-table table tr .xiangqing{background:#F9CE33;border-radius: 20px;color: white;padding: 5px;font-size: 1.3rem;cursor: pointer;}
+.bitian{color:red;}

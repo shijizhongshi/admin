@@ -433,8 +433,10 @@
 			.poop span {
 				font-size: 1.5rem;
 			}
-.resource .grade-left , .resource .grade-center , .resource .grade-right{width:420px;float: left;height:720px;overflow: auto;}
-.resource .grade-right{width:250px;border-right: none;height: 500px;}	
+
+.resource .grade-left , .resource .grade-center , .resource .grade-right{width:400px;float: left;height:720px;overflow: auto;}
+.resource .grade-right{width:200px;border-right: none;height: 500px;}	
+
 .poop .grade-left , .poop .grade-center {width:49%;float: left;height:760px;overflow: auto;}
 .details-frame-content {height: 50px;padding:0 29px;}
 			
@@ -461,6 +463,7 @@
 .biaoqian{width: 80%;height:80px;}
 .biaoqian ul li{float: left;background:#EDEEF0;margin-right: 5px;}
 .biaoqian i{color: #B1B1B1;font-weight: 100;}
+.end {float: none; margin-left: auto;}
 		</style>
 	
 	</@b.body>

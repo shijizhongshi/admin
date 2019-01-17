@@ -14,7 +14,7 @@ public class Orders {
 	
 	private String orderno;
 	
-	private int ordersType;////0:药品订单  1:课程订单 2:服务的订单
+	private String ordersType;////0:药品订单  1:课程订单 2:服务的订单
 	
 	private BigDecimal payaccount;/////实际支付金额
 	
@@ -41,6 +41,9 @@ public class Orders {
 	private Date deliveredtime;
 	
 	private Date paidtime;
+	
+	private String paidtimes;////字符串的支付时间
+	
 	private List<OrdersProduct> product = new ArrayList<OrdersProduct>();
 	
 	private int count;////总共多少件商品
@@ -58,8 +61,46 @@ public class Orders {
 	private String qrcodes;/////服务店铺的二维码
 	
 	private int classStatus;////1:购买的全套课程
-
 	
+	private String showtime;
+	
+	private String userMobile;////对应用户的手机号
+
+	private String recommendTeacher;
+	
+	
+	public String getPaidtimes() {
+		return paidtimes;
+	}
+
+	public void setPaidtimes(String paidtimes) {
+		this.paidtimes = paidtimes;
+	}
+
+	public String getRecommendTeacher() {
+		return recommendTeacher;
+	}
+
+	public void setRecommendTeacher(String recommendTeacher) {
+		this.recommendTeacher = recommendTeacher;
+	}
+
+	public String getUserMobile() {
+		return userMobile;
+	}
+
+	public void setUserMobile(String userMobile) {
+		this.userMobile = userMobile;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
+
 	public int getClassStatus() {
 		return classStatus;
 	}
@@ -117,11 +158,12 @@ public class Orders {
 		this.orderno = orderno;
 	}
 
-	public int getOrdersType() {
+	
+	public String getOrdersType() {
 		return ordersType;
 	}
 
-	public void setOrdersType(int ordersType) {
+	public void setOrdersType(String ordersType) {
 		this.ordersType = ordersType;
 	}
 

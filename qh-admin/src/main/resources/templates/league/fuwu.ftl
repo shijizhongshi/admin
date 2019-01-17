@@ -357,8 +357,8 @@
 			.poop span {
 				font-size: 1.5rem;
 			}
-.resource .grade-left , .resource .grade-center , .resource .grade-right{
-	width:39%;
+.resource .grade-left , .resource .grade-center {
+	width:400px;
 	float: left;
 	height:550px;
 	overflow: auto;
@@ -371,7 +371,7 @@
 	overflow: auto;
 	
 }
-.resource .grade-right{width:20%;border-right: none;height: 500px;}	
+.resource .grade-right{width:200px;border-right: none;height: 500px;float: left;}	
 .details-frame-content {
 				height: 51px;
 				padding:0 29px;}
@@ -395,7 +395,7 @@
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}
-.resource{width: 70%;
+.resource{width: auto;
 				height: 600px;
 				position: absolute;
 				left: 10%;
@@ -405,6 +405,7 @@
 .resource .grade-left ul{width:100%;margin:3px 0;height:50px;}
 .resource .grade-left ul li:nth-child(1){float:left;}
 .resource .grade-left ul li:nth-child(2){float:right;color:#999;}
+.end {float: none; margin-left: auto;}
 		</style>
 	
 	</@b.body>
