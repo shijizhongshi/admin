@@ -135,25 +135,25 @@
                         </li>
                     </ul>
                 </li>
-                   <li id="sidebarmenu-indent" >
+                   <li id="sidebarmenu-orders" >
                     <a>
                        <i class="linecons-cog"></i>
                         <span class="title">订单管理</span>
                     </a>
                     <ul>
-                        <li id="sidebarmenu-indent-dingdan">
-                            <a href="/web/indent/dingdan">
-                                <span class="title">订单查询</span>
+                        <li id="sidebarmenu-orders-course">
+                            <a href="/web/orders/courselist">
+                                <span class="title">课程订单</span>
                             </a>
                         </li>
-                          <li id="sidebarmenu-indent-today-bargain">
+                         <!-- <li id="sidebarmenu-indent-today-bargain">
                             <a href="/web/indent/today-bargain">
                                 <span class="title">今日成交</span>
                             </a>
-                        </li>
-                         <li id="sidebarmenu-indent-user-dingdan">
-                            <a href="/web/indent/user-dingdan">
-                                <span class="title">用户订单管理</span>
+                        </li>-->
+                         <li id="sidebarmenu-orders-list">
+                            <a href="/web/orders/list">
+                                <span class="title">订单管理</span>
                             </a>
                         </li>
                          </ul>

@@ -8,7 +8,7 @@
 	<script src="/scripts/course/grade-template.js"></script>
 	<script src="/scripts/admin.js"></script>
 	<script src="/scripts/league/league.js"></script>
-	<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-indent-user-dingdan">
+	<@b.body menu="sidebarmenu-orders" submenu="sidebarmenu-orders-list">
 		<div>
 			<div class="details" style="width: 100%">
 				<div class="details-nav">
@@ -17,7 +17,7 @@
 						<li>/</li>
 						<li>订单管理</li>
 						<li>/</li>
-						<li>用户订单管理</li>
+						<li>订单管理</li>
 					</ul>
 				</div>
 				<div class="details-frame">
