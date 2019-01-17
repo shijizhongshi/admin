@@ -8,7 +8,7 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/league/yishi.js"></script>
 <@b.body menu="sidebarmenu-league" submenu="sidebarmenu-league-xiangmu">
-<div ng-controller="doctorsController">
+<div>
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -82,6 +82,7 @@
 								<th>职位职称</th>
 								<th>是否推荐</th>
 								<th>注册时间</th>
+								<th>推荐级别</th>
 								<th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
 							</tr>
 
@@ -101,9 +102,9 @@
 					<!--弹窗-->
 					<div class="poop" id="add">
 						<form id="myform">
-							<h3>医师</h3>
+							<h3>项目</h3>
 							<div class="template-add">
-								<div class="grade-left" style="padding-right: 5%;">
+								<div class="grade-left">
 										<div class="select-2">
 										<span>项目名称<i class="bitian">*</i></span> <input type="text" />
 									</div>
@@ -115,26 +116,22 @@
 											<option></option>
 										</select>
 									</div>
-									<div class="grade-left" style="padding-right: 5%;">
+								
 										<div class="select-2">
 										<span>服务时间<i class="bitian">*</i></span> <input type="text" />
 									</div>
-
-									<div class="grade-left" style="padding-right: 5%;">
 										<div class="select-2">
 										<span>原价<i class="bitian">*</i></span> <input type="text" />
 									</div>
 
-									<div class="grade-left" style="padding-right: 5%;">
+									
 										<div class="select-2">
-										<span>优惠价格<i class="bitian">*</i></span> <input type="text" />
-									</div>
-                                     <div class="grade-left" style="padding-right: 5%;">
+										<span>优惠价格<i class="bitian">*</i></span> <input type="text" /></div>
+							
+                                  
 										<div class="select-2">
 										<span>推荐级别</span> <input type="text" />
 									</div>
-									
-
 
 								</div>
 								<div class="grade-center">
@@ -147,130 +144,89 @@
 										<textarea></textarea>
 									</div>
 									<div class="costs-uploadfile-div">
-										其他证书<input type="file" name="file" value="上传课程图片" onchange="" />
-										<input type="hidden" ng-model="" />
+										服务图片<input type="file" name="file" value="上传课程图片"/>
+										<input type="hidden" />
 									</div>
 									
 									</div>
 								</div>
-							</div>
 						</form>
 						<div class="end">
 							<input name="git" type="submit" value="提交"
 								style="background: #5ED8A9;" /> <input name="esc" type="reset"
 								value="取消" onclick="CloseDiv();formReset()" class="esc" />
 						</div>
-
-
+</div>
 				<!-- 查看详情 -->
-				<div id="revise" class="resource">
+				<div id="revise" class="resource" style="display: none;">
 					<form id="myform2">
 						<h3>详细信息</h3>
 						<div class="template-add">
 							<div class="grade-left" style="padding-right: 5%;">
-								<div
-									style="width: 50%; margin: 0 auto; text-align: center; height: 130px">
-									<img src="/images/sjk-home.png" style="height: 100px;" />
-									<p>王尼玛</p>
-								</div>
-								<ul>
-									<li>医师姓名</li>
+											<ul>
+									<li>店铺名称</li>
 									<li>王尼玛</li>
 								</ul>
 								<ul>
-									<li>身份证号</li>
+									<li>店铺类型</li>
 									<li>11111</li>
 								</ul>
 								<ul>
-									<li>性别</li>
-									<li>女</li>
+									<li>负责人</li>
+									<li>王小明</li>
 								</ul>
 								<ul>
-									<li>地区</li>
-									<li>日本</li>
+									<li>联系电话</li>
+									<li>112</li>
 								</ul>
 								<ul>
-									<li>学历</li>
-									<li>学士</li>
+									<li>身份证号</li>
+									<li>5466</li>
 								</ul>
-								<ul>
-									<li>毕业院校</li>
-									<li>家里蹲</li>
-								</ul>
-								<ul>
-									<li>所在医院</li>
-									<li>2</li>
-								</ul>
-								<ul>
-									<li>所在科室</li>
-									<li>妇产科</li>
-								</ul>
-								<ul>
-									<li>职位职称</li>
-									<li>2</li>
-								</ul>
-								<ul>
-									<li>标签</li>
-									<li>女</li>
-								</ul>
-								<ul>
-									<li>擅长治疗</li>
-									<li>老年痴呆</li>
-								</ul>
+								<ul style="height: 70px;">
+                                        	<li>店铺地址</li>
+                                        	<li style="margin-top: 5px;">地址地址地址地址地址地址地址地址地址地址地址</li>
+                                        </ul>
+                                        <ul style="height: 70px;">
+                                        	<li>营业类别:</li>
+                                            <li> <span>中医推拿&nbsp;</span><span>小儿推拿&nbsp;</span></li>
+                                        </ul>
 							</div>
 
 
 
 							<div class="grade-center">
 								<div class="costs-uploadfile-div">
-									职称证明：
+									营业执照：
 									<div class="costs-img">
 										<img src="" name="营业执照" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
-									身份证：
+									职业资格：
 									<div class="costs-img" style="height: 70px;">
 										<img src=""
-											style="width: 30%; float: left; height: 70px; margin-right: 3%;" />
-										<img src="" style="width: 30%; float: left; height: 70px;" />
+											style="float: left; height: 70px; margin-right: 3%;" />
+										<img src="" style="float: left; height: 70px;" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
-									资质证明：
+									门头照片：
 									<div class="costs-img">
-										<img src="" name="营业执照" />
+										<img src="" name="门头照片" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
-									其他证书：
+									店面照片：
 									<div class="costs-img" style="height: 110px;">
 										<img src=""
-											style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
-										<img src=""
-											style="width: 30%; float: left; height: 50px; margin-right: 3%;" "/>
-										<img src="" style="width: 30%; float: left; height: 50px;" />
-										<img src=""
-											style="width: 30%; float: left; height: 50px; margin-top: 10px;" />
+											style="float: left; height: 50px; margin-right: 3%;" />
+										
 									</div>
 								</div>
 
 							</div>
-							<div class="grade-right">
-								<h3>操作</h3>
-								<div>
-									<ul>
-										<li>是否同意</li>
-										<li><input type="radio" ng-model="" ng-value="1" /> 同意</li>
-										<li><input type="radio" ng-model="" ng-value="0" />不同意</li>
-									</ul>
-								</div>
-								<div class="grade-text">
-									<span>拒绝原因</span>
-									<textarea style="height: 200px; width: 100% !important"></textarea>
-								</div>
-
-							</div>
+							
 					</form>
 					<div class="end">
 						<input name="git" type="submit" value="提交"
@@ -288,7 +244,7 @@
 	</div>
 
 		<style type="text/css">
-				@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
+@media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
 			.poop {
 				
 				width: 55%;
@@ -302,9 +258,9 @@
 			.poop span {
 				font-size: 1.5rem;
 			}
-.resource .grade-left , .resource .grade-center , .resource .grade-right{width:39%;float: left;height:720px;overflow: auto;}
-.resource .grade-right{width:20%;border-right: none;height: 500px;}	
-.poop .grade-left , .poop .grade-center {width:49%;float: left;height:760px;overflow: auto;}
+.resource .grade-left , .resource .grade-center , .resource .grade-right{width:380px;float: left;height:470px;overflow: auto;}
+.resource .grade-right{width:200px;border-right: none;height: 500px;}	
+.poop .grade-left , .poop .grade-center {width:49%;float: left;height:450px;overflow: auto;}
 .details-frame-content {height: 50px;padding:0 29px;}
 			
 .details-frame-content ul li {	float: left;height: 50px;text-align: center;line-height: 50px;font-size: 1.5rem;cursor: pointer;margin-right:15px;}
@@ -316,7 +272,7 @@
 .details-frame-heshen .select-3{width:15%; }
 .details-frame-heshen .select-2{width: 10%;float: left;}
 .details-frame-heshen .select-2 input {border-radius:0;}
-.resource{width: 70%;
+.resource{width:auto;
 				height: 600px;
 				position: absolute;
 				left: 10%;
@@ -326,12 +282,14 @@
 .resource .grade-left ul{width:100%;margin:3px 0;height:50px;}
 .resource .grade-left ul li:nth-child(1){float:left;}
 .resource .grade-left ul li:nth-child(2){float:right;color:#999;}
+.resource .grade-left  ul p li{color: #999;}
 .biaoqian{width: 80%;height:80px;}
 .biaoqian ul li{float: left;background:#EDEEF0;margin-right: 5px;}
 .biaoqian i{color: #B1B1B1;font-weight: 100;}
+.end {float: none; margin-left: auto;}
 		</style>
 	
+	
 	</@b.body>
-
 
 </html>
