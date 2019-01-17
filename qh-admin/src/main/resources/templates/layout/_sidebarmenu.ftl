@@ -64,6 +64,11 @@
                                 <span class="title">分类管理</span>
                             </a>
                         </li>
+                        <li id="sidebarmenu-system-live">
+                            <a href="/web/system/live">
+                                <span class="title">直播管理</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li id="sidebarmenu-course">
