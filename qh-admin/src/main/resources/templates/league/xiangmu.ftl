@@ -248,7 +248,7 @@
 @media screen and (max-width:901px){.managr-dianpu , .details-frame-heshen  {overflow: auto;}}
 			.poop {
 				
-				width: 55%;
+				width: 40%;
 				height: 550px;
 				position: absolute;
 				left: 15%;
@@ -259,6 +259,7 @@
 			.poop span {
 				font-size: 1.5rem;
 			}
+.poop .grade-left .select-2{width:78%;}
 .resource .grade-left , .resource .grade-center , .resource .grade-right{width:380px;float: left;height:470px;overflow: auto;}
 .resource .grade-right{width:200px;border-right: none;height: 500px;}	
 .poop .grade-left , .poop .grade-center {width:49%;float: left;height:450px;overflow: auto;}
