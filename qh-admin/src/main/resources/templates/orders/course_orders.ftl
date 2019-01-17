@@ -71,31 +71,30 @@
 							<th>支付订单号</th>
 							<th>支付方式</th>
 							<th>支付途径</th>
-							<th>商品信息</th>
+							
 							<th>订单状态</th>
 							<th>实际费用</th>
-							<th>学习费用</th>
+							
 							<th>订单创建时间</th>
 							<th>订单支付时间</th>
 							<th>推荐老师</th>
 							<th>学员单位</th>
+						<th>详情</th>
 						</tr>
 
-						<tr ng-repeat="" ng-click="" ng-class="">
+						<tr>
 							<th>学员姓名</th>
 							<th>学员电话</th>
 							<th>支付订单号</th>
 							<th>支付方式</th>
 							<th>支付途径</th>
-							<th>商品信息</th>
 							<th>订单状态</th>
 							<th>实际费用</th>
-							<th>学习费用</th>
 							<th>订单创建时间</th>
 							<th>订单支付时间</th>
 							<th>推荐老师</th>
 							<th>学员单位</th>
-
+                           <th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
 						</tr>
 					</table>
 
@@ -110,9 +109,61 @@
 					</ul>
 				</div>
 
-
 </div>
+		<div id="revise" class="resource" style="display:none;">
+								<form id="myform2" class="ng-pristine ng-valid">
+									<h4>详细信息</h4>
+						<div class="template-add">
+										<div class="grade-left" style="border-top:1px solid #dddddd;border-bottom:1px solid #dddddd;padding: 10px 0;">
+                                       
+                                        <ul>
+                                        	<li>订单编号：</li>
+                                        	<li>e464s454s65844545</li>
+                                        </ul>
+                                         <ul>
+                                        	<li>姓名:</li>
+                                        	<li>猪蹄子</li>
+                                        </ul>
+                                        
+                                         <ul>
+                                        	<li>手机号：</li>
+                                        	<li>111</li>
+                                        </ul>
+                                         <ul>
+                                        	<li>订单状态：</li>
+                                        	<li>付款</li>
+                                        </ul>
+                                         <ul>
+                                        	<li>实际费用：</li>
+                                        	<li>250</li>
+                                        </ul>
+                                        <ul>
+                                        	<li>时间：</li>
+                                        	<li></li>
+                                        </ul>
+                                        
+	                                       </div>
+								</div>
+								<div>
+								<p style="padding-top: 15px;">购买清单</p>
+								<ul style="width: 100%;height: 80px;margin: 15px 0;">
+								<div style="width:20%;height:100%;float: left;"><img src="/images/sjk-home.png" style="height:100%;width:100%;"></div>
+								<div style="width:75%;height:100%;float: right;"><p>名称：</p>
+								<p> <span style="color: #B1B1B1;">原价：</span></p>
+								<p><span>现价：</span></p>
+								</div>
+								</ul>
 		
+								</div>
+								</form>
+								<div class="end" style="width: 100px;">
+									<input name="esc" type="reset" value="关闭" onclick="CloseDiv2();formReset2()" class="esc">
+								</div>
+				
+					
+					
+					
+					</div>
 </div>
 
  </div>  
@@ -124,7 +175,17 @@
 @media screen and (max-width: 1400px)  {.details-frame-content .select-3{width: 20%;}}
 @media screen and (max-width: 901px) {.details-frame-content .select-3{width: 90%;}}
 .details-frame-content .select-3 input{border-radius:0;}
+.resource{width:400px;
+				height: 490px;
+				position: absolute;
+				left: 25%;
+				top:20%;
+				display: none;padding:20px;}
 
+.resource .grade-left ul{width:100%;margin:3px 0;height:30px;line-height: 30px;}
+.resource .grade-left ul li:nth-child(1){float:left;font-size: 1.5rem;}
+.resource .grade-left ul li:nth-child(2){float:right;color:#999;font-size: 1.5rem;}
+ .admin-table table tr form span{font-size:1.4rem;}
 </style>
 </@b.body>
 
