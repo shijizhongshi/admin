@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ola.qh.dao.OrdersDao;
+import com.ola.qh.dao.OrdersProductDao;
 import com.ola.qh.dao.UserBookDao;
 import com.ola.qh.entity.Orders;
 import com.ola.qh.entity.OrdersProduct;
@@ -23,6 +24,8 @@ public class OrdersService implements IOrdersService{
 
 	@Autowired
 	private OrdersDao ordersDao;
+	@Autowired
+	private OrdersProductDao ordersProductDao;
 	@Autowired
 	private UserBookDao userBookDao;
 	
@@ -40,11 +43,11 @@ public class OrdersService implements IOrdersService{
 				Date date = new Date();
 				if (date.getTime() > calendar.getTime().getTime() && "DELIVERED".equals(orders.getOrdersStatus())){
 					///////超过了7天
-					List<OrdersProduct> list=ordersDao.selectByOid(orders.getId(), orders.getOrdersStatus());
+					List<OrdersProduct> list=ordersProductDao.selectByOid(orders.getId(), orders.getOrdersStatus());
 					BigDecimal money = BigDecimal.ZERO;
 					for(OrdersProduct ordersProduct : list){
 						money=money.add(ordersProduct.getPayout());
-						ordersDao.updateOrdersProduct("RECEIVED", "发货超过7天已自动确认收货", "DELIVERED", new Date(), ordersProduct.getId());
+						ordersProductDao.updateOrdersProduct("RECEIVED", "发货超过7天已自动确认收货", "DELIVERED", new Date(), ordersProduct.getId());
 					}
 					UserIntomoneyHistory uh = new UserIntomoneyHistory();
 					uh.setAddtime(new Date());
@@ -73,6 +76,19 @@ public class OrdersService implements IOrdersService{
 			}
 			
 		}
+	}
+
+	@Override
+	public List<Orders> list(int pageNo, int pageSize, String ordersType, String mobile, String todate,
+			String fromdate) {
+		// TODO Auto-generated method stub
+		return ordersDao.ordersList(pageNo, pageSize, ordersType, mobile, todate, fromdate);
+	}
+
+	@Override
+	public int listCount(String ordersType, String mobile, String todate, String fromdate) {
+		// TODO Auto-generated method stub
+		return ordersDao.ordersListCount(ordersType, mobile, todate, fromdate);
 	}
 
 }

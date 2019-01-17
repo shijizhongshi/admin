@@ -8,7 +8,7 @@
 <script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/indent/excle.js"></script>
-<@b.body menu="sidebarmenu-indent" submenu="sidebarmenu-indent-dingdan">
+<@b.body menu="sidebarmenu-orders" submenu="sidebarmenu-orders-course">
 <div>
 <div class="details" style="width: 100%">
 	<div class="details-nav">
@@ -17,7 +17,7 @@
 			<li>/</li>
 		<li>订单管理</li>
 		<li>/</li>
-		<li>订单查询</li>
+		<li>课程订单</li>
 		</ul>
 	</div>
 <div class="details-frame" >

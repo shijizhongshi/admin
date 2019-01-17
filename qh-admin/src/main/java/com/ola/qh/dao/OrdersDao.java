@@ -12,19 +12,12 @@ public interface OrdersDao {
 
 	public List<Orders> autoComfirmOrders(); 
 	
-	public List<OrdersProduct> selectByOid(@Param("orderId")String orderId,
-			@Param("statusCode")String statusCode);
-	
 	public int updateOrders(@Param("ordersStatus")String ordersStatus,
 			@Param("ordersOldStatus")String ordersOldStatus,
 			@Param("updatetime")Date updatetime,
 			@Param("oid")String oid);
 	
-	public int updateOrdersProduct(@Param("statusCode")String statusCode,
-			@Param("statusName")String statusName,
-			@Param("oldStatusCode")String oldStatusCode,
-			@Param("updatetime")Date updatetime,
-			@Param("id")String id);
+
 	/////////////////////////////以上是自动走定时任务的需求//////////////
 	
 	////////////////////////////订单/////////////////////////////////
@@ -44,11 +37,5 @@ public interface OrdersDao {
 	
 	
 	
-	//////////////////////订单的产品/////////////////////////////////
 	
-	public int selectByOrderIdCount(@Param("orderId")String orderId);
-	
-	public List<OrdersProduct> selectByOrderId(@Param("orderId")String orderId,
-			@Param("pageNo")int pageNo,
-			@Param("pageSize")int pageSize);
 }
