@@ -53,10 +53,10 @@ color:red;
 .manage{width: 100%;height:auto;padding-top:23px;background:white; position: relative;}
  .show li{float: left;margin-left: 18px;cursor: pointer;height: 30px;border-radius: 30px;color: white; text-align: center;line-height: 30px;font-size:16px;background:#8A959B;font-size:1.4rem;padding:0 8px;}
 
-.admin-table{width:90%;height:auto;border: 1px solid #B1B1B1;margin:0 auto;border-radius:10px;overflow: hidden;}
+.admin-table{width:100%;height:auto;margin:0 auto;border-radius:10px;overflow: hidden;padding:20px;}
 .admin-table table tr th{text-align: center; height:50px;line-height: 50px;border-right:1px solid #F2F2F2 ;margin:0;font-size:1.3rem;}
 .admin-table table tr th img{height:50px;}
-.admin-table table{width:100%;border-collapse:collapse;}
+.admin-table table{width:100%;border-collapse:collapse;border: 1px solid #B1B1B1;}
  .admin-table table tr{width:100%;height: 42px;margin-bottom:0;border-bottom:1px solid #dbdbdb;}
 
 .admin-table table tr:nth-child(1){background: #CBD2D8;font-weight: bold;}
