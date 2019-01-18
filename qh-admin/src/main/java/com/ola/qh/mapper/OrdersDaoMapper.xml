@@ -37,8 +37,14 @@ select id,deliveredtime,orders_status,muser_id from orders
  where deliveredtime!=null and orders_status="DELIVERED" and orders_type=0
 </select>
 <!-- 订单 -->
+<select id="singleOrders" resultMap="OrdersMap">
+
+select * from orders where id=#{id}
+</select>
 <select id="ordersList" resultMap="OrdersMap">
-  select o.*,u.mobile userMobile from orders o left join user u on u.id=o.user_id where 1=1
+  select o.*,u.mobile userMobile from orders o 
+  left join user u on u.id=o.user_id 
+  where 1=1
   <if test="fromdate!=null and fromdate!='' ">
   and UNIX_TIMESTAMP(o.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
   </if>
@@ -54,11 +60,26 @@ select id,deliveredtime,orders_status,muser_id from orders
    <if test="orderno!=null and orderno!='' ">
   and orderno LIKE CONCAT(CONCAT('%',#{orderno},'%'))
   </if>
-  <if test="ordersStatus!=null and ordersStatus!='' ">
-  and orders_status=#{ordersStatus}
+ <if test="ordersStatus!=null and ordersStatus!='' ">
+  <choose>
+  <when test="ordersStatus=='REFUND'">
+  <!-- 商品订单的退款售后 -->
+  and orders_status not in('NEW','PAID','DELIVERED','RECEIVED')
+  </when>
+  <when test="ordersStatus=='CANCEL'">
+  <!-- 服务订单的取消订单的查询 -->
+  and orders_status not in('NEW','PAID','RECEIVED')
+  </when>
+  <otherwise>
+ 		and orders_status=#{ordersStatus}
+  </otherwise>
+  </choose>
   </if>
   <if test="recommendTeacher!=null and recommendTeacher!='' ">
   and recommend_teacher LIKE CONCAT(CONCAT('%',#{recommendTeacher},'%'))
+  </if>
+   <if test="receiver!=null and receiver!=''">
+  and receiver LIKE CONCAT(CONCAT('%',#{receiver},'%'))
   </if>
   order by o.addtime desc
   <if test="pageSize!=0">
@@ -84,11 +105,26 @@ select id,deliveredtime,orders_status,muser_id from orders
   <if test="orderno!=null and orderno!='' ">
   and orderno LIKE CONCAT(CONCAT('%',#{orderno},'%'))
   </if>
-  <if test="ordersStatus!=null and ordersStatus!='' ">
-  and orders_status=#{ordersStatus}
+ <if test="ordersStatus!=null and ordersStatus!='' ">
+  <choose>
+  <when test="ordersStatus=='REFUND'">
+  <!-- 商品订单的退款售后 -->
+  and orders_status not in('NEW','PAID','DELIVERED','RECEIVED')
+  </when>
+  <when test="ordersStatus=='CANCEL'">
+  <!-- 服务订单的取消订单的查询 -->
+  and orders_status not in('NEW','PAID','RECEIVED')
+  </when>
+  <otherwise>
+ 		and orders_status=#{ordersStatus}
+  </otherwise>
+  </choose>
   </if>
   <if test="recommendTeacher!=null and recommendTeacher!='' ">
   and recommend_teacher LIKE CONCAT(CONCAT('%',#{recommendTeacher},'%'))
+  </if>
+   <if test="receiver!=null and receiver!=''">
+  and receiver LIKE CONCAT(CONCAT('%',#{receiver},'%'))
   </if>
 </select>
 <!-- 订单 -->
@@ -105,6 +141,24 @@ select id,deliveredtime,orders_status,muser_id from orders
 	updatetime=#{updatetime}
 	where id=#{oid}
 	</update>
-
-
+	<resultMap type="com.ola.qh.entity.OrdersPayment" id="OrdersPaymentMap">
+	<result column="id" property="id"/>
+	<result column="user_id" property="userId"/>
+	<result column="muser_id" property="muserId"/>
+	<result column="orders_id" property="ordersId"/>
+	<result column="orders_type" property="ordersType"/>
+	<result column="money" property="money"/>
+	<result column="done" property="done"/>
+	<result column="paytype_code" property="paytypeCode"/>
+	<result column="pagetype_name" property="paytypeName"/>
+	<result column="extransno" property="extransno"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	<select id="listByExtransno" resultMap="OrdersPaymentMap">
+	select * from orders_payment where extransno=#{extransno}
+	</select>
+	
+	<select id="singlePayment" resultMap="OrdersPaymentMap">
+	select * from orders_payment where orders_id=#{orderId}
+	</select>
 </mapper>

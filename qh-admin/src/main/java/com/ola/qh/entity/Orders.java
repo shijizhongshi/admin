@@ -68,7 +68,29 @@ public class Orders {
 
 	private String recommendTeacher;
 	
+	private String shopName;
 	
+	private String shopServeDomain;
+	
+	
+	
+	
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getShopServeDomain() {
+		return shopServeDomain;
+	}
+
+	public void setShopServeDomain(String shopServeDomain) {
+		this.shopServeDomain = shopServeDomain;
+	}
+
 	public String getPaidtimes() {
 		return paidtimes;
 	}

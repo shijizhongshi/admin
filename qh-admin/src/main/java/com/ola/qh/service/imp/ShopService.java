@@ -24,7 +24,7 @@ public class ShopService implements IShopService{
 	@Override
 	public Shop selectShopSingle(String id) {
 		// TODO Auto-generated method stub
-		return shopDao.selectShopSingle(id);
+		return shopDao.selectShopSingle(id,null,null);
 	}
 
 	@Override

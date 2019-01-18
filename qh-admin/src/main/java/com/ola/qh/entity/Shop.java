@@ -45,6 +45,16 @@ public class Shop {
 	private Date addtime;
 	
 	private Date updatetime;
+	
+	private String serveDomain;
+
+	public String getServeDomain() {
+		return serveDomain;
+	}
+
+	public void setServeDomain(String serveDomain) {
+		this.serveDomain = serveDomain;
+	}
 
 	public String getId() {
 		return id;

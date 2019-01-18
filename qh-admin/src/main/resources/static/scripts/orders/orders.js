@@ -1,4 +1,4 @@
-app.controller("ordersController", function($scope, $http){
+app.controller("ordersController", function($scope, $http,$filter){
 	
 	 //总条数
     $scope.total = 0;
@@ -9,10 +9,21 @@ app.controller("ordersController", function($scope, $http){
 
     $scope.ordersType=0;
     $scope.tab0=0
+   
+    $scope.statusNames=[{"name":"待付款","status":"NEW"},{"name":"待发货","status":"PAID"},{"name":"待收货","status":"DELIVERED"},
+    	                   {"name":"已完成","status":"RECEIVED"},{"name":"退款售后","status":"REFUND"}]
+    	
+    
     $scope.onmousedowngo=function(ordersType){
     	////ordersType 1:课程订单   0:商品订单   2:服务订单
     	$scope.tab0=ordersType;
     	$scope.ordersType=ordersType;
+    	if(ordersType==2){
+    		$scope.statusNames=[{"name":"待付款","status":"NEW"},{"name":"待使用","status":"PAID"},{"name":"已完成","status":"RECEIVED"},{"name":"取消退款","status":"CANCEL"}];
+    	}else{
+    		 $scope.statusNames=[{"name":"待付款","status":"NEW"},{"name":"待发货","status":"PAID"},{"name":"待收货","status":"DELIVERED"},
+    	    	                   {"name":"已完成","status":"RECEIVED"},{"name":"退款售后","status":"REFUND"}]
+    	}
     	$scope.loaddata();
     }
     var formatDate = function (date) { 
@@ -32,7 +43,8 @@ app.controller("ordersController", function($scope, $http){
 $scope.loaddata = function(){
 	$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 	$http.get("/api/orders/list",{"params": {"page":$scope.current,"ordersType":$scope.ordersType,
-		"mobile":$scope.mobile,"todate":formatDate($scope.todate),"fromdate":formatDate($scope.fromdate)}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		"mobile":$scope.mobile,"todate":formatDate($scope.todate),"fromdate":formatDate($scope.fromdate),
+		"ordersStatus":$scope.ordersStatus,"receiver":$scope.receiver,"orderno":$scope.orderno}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){
     		
@@ -100,13 +112,48 @@ $scope.detail=function(o){
 	
 	 ///////查询所有的订单的产品
 	  $scope.order=o;
+	  $scope.order.timeString = $filter('date')(o.presetTime, 'yyyy-MM-dd HH:mm:ss');
 	 $http.get("/api/orders/product/list",{"params":{"orderId":o.id}},{'Content-Type': 'application/json;charset=UTF-8'})
 	 .success(function(result){
 		 if(result.status=="0"){
 			 $scope.productList=result.data;
+			 
 		 }
 	 })
 	}
 	
+
+$scope.CloseDiv2=function(){
+	document.getElementById('revise').style.display="none"; 
+	document.getElementById('revise1').style.display="none"; 
+}
+$scope.updateProduct=function(ordersProductId,statusCode){
+	if(confirm("你确认审核这个订单产品吗")){
+		$http.get("/api/orders/update/product",{"params":{"ordersProductId":ordersProductId,"statusCode":statusCode}},{'Content-Type': 'application/json;charset=UTF-8'})
+		 .success(function(result){
+			 if(result.status=="0"){
+				 alert("审核成功~")
+				 
+			 }else{
+				 alert("审核失败~")
+			 }
+		 })
+	}
+}
+
+$scope.updateProduct=function(ordersId,statusCode){
+	if(confirm("你确认审核这个订单产品吗")){
+		$http.get("/api/orders/update/serve",{"params":{"ordersId":ordersId,"statusCode":statusCode}},{'Content-Type': 'application/json;charset=UTF-8'})
+		 .success(function(result){
+			 if(result.status=="0"){
+				 alert("审核成功~")
+				 
+			 }else{
+				 alert("审核失败~")
+			 }
+		 })
+	}
+}
+
 
 });

@@ -21,6 +21,7 @@
 	<result column="islimits" property="islimits"/>
 	<result column="addtime" property="addtime"/>
 	<result column="updatetime" property="updatetime"/>
+	<result column="serve_domain" property="serveDomain"/>
 	
 	</resultMap>
 	
@@ -32,7 +33,16 @@
 	</select>
 	<!-- 店铺详细信息的展示 -->
 	<select id="selectShopSingle" resultMap="ShopMap">
-	select * from shop where id=#{id}
+	select * from shop where 1=1
+	<if test="id!=null and id!=''">
+	and id=#{id}
+	</if>
+	<if test="userId!=null and userId!=''">
+	and user_id=#{userId}
+	</if>
+	<if test="shopType!=null and shopType!='' ">
+	and shop_type=#{shopType}
+	</if>
 	</select>
 	<!-- 开通开通店铺的权限 -->
 	<update id="updateShop" parameterType="String">
