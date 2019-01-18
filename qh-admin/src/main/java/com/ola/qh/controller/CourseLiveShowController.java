@@ -57,11 +57,17 @@ public class CourseLiveShowController {
 	}
 	
 	@RequestMapping("/list")
-	public Results<List<CourseLineShow>> list(@RequestParam(name="page",required=true)int page){
+	public Results<List<CourseLineShow>> list(
+			@RequestParam(name="page",required=true)int page,
+			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
+			@RequestParam(name="liveName",required=false)String liveName){
 		Results<List<CourseLineShow>> result=new Results<List<CourseLineShow>>();
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		List<CourseLineShow> list = courseNofreeService.selectLiveList(pageNo, pageSize);
+		List<CourseLineShow> list = courseNofreeService.selectLiveList(pageNo, pageSize,courseTypeName,courseTypeSubclassName,liveName);
+		int count = courseNofreeService.selectLiveListCount(courseTypeName, courseTypeSubclassName,liveName);
+		result.setCount(count);
 		result.setData(list);
 		result.setStatus("0");
 		return result;

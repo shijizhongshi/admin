@@ -101,14 +101,50 @@
 	<!-- 热门直播的开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<insert id="insertLive" parameterType="com.ola.qh.entity.CourseLineShow">
 	insert into course_line_show(id,course_type_name,course_type_subclass_name,live_name,
-	img_url,isremmend,isshow,addtime)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
-	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime})
+	img_url,isremmend,isshow,addtime,out_links)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
+	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},#{outLinks})
 	</insert>
-	<select id="selectLiveList" resultType="com.ola.qh.entity.CourseLineShow">
-	select id,live_name  liveName, img_url imgUrl,isshow from course_line_show
+	<resultMap type="com.ola.qh.entity.CourseLineShow" id="liveMap">
+	
+	<result column="id" property="id"/>
+	<result column="course_type_name" property="courseTypeName"/>
+	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
+	<result column="live_name" property="liveName"/>
+	<result column="img_url" property="imgUrl"/>
+	<result column="out_links" property="outLinks"/>
+
+	
+	</resultMap>
+	<select id="selectLiveList" resultMap="liveMap">
+	select * from course_line_show where 1=1
+	<if test="courseTypeName!=null and courseTypeName!='' ">
+	and course_type_name=#{courseTypeName}
+	</if>
+	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
+	and course_type_subclass_name=#{courseTypeSubclassName}
+	</if>
+	<if test="liveName!=null and liveName!=''">
+	and live_name like concat(concat('%',#{liveName},'%'))
+	</if>
 	order by addtime desc
 	limit #{pageNo},#{pageSize}
 	</select>
+	
+	<select id="selectLiveListCount" resultType="int">
+	select count(id) from course_line_show where 1=1
+	<if test="courseTypeName!=null and courseTypeName!='' ">
+	and course_type_name=#{courseTypeName}
+	</if>
+	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
+	and course_type_subclass_name=#{courseTypeSubclassName}
+	</if>
+	<if test="liveName!=null and liveName!=''">
+	and live_name like concat(concat('%',#{liveName},'%'))
+	</if>
+	</select>
+	
+	
+	
 	<update id="updateLive" parameterType="com.ola.qh.entity.CourseLineShow">
 	update course_line_show set
 	<if test="liveName!=null">
@@ -119,6 +155,12 @@
 	</if>	
 	<if test="isshow!=null">
 	isshow=#{isshow},
+	</if>
+	<if test="isremmend!=null">
+	isremmend=#{isremmend},
+	</if>
+	<if test="outLinks!=null and outLinks!=''">
+	out_links=#{outLinks},
 	</if>
 	updatetime=#{updatetime}
 	where id=#{id}
