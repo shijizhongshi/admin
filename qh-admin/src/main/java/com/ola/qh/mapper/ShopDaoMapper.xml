@@ -27,7 +27,7 @@
 	<!-- 所有店铺的列表页 (按照申请时间进行排序)-->
 	<select id="selectShopList" resultMap="ShopMap">
 	select id,user_id,shop_name,shop_type,leader_name,leader_mobile,addtime from shop
-	order by addtime desc
+	where shop_type=#{shopType} order by addtime desc
 	 limit #{pageNo},#{pageSize}
 	</select>
 	<!-- 店铺详细信息的展示 -->

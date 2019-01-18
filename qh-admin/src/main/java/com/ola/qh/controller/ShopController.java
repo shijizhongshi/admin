@@ -20,12 +20,12 @@ public class ShopController {
 	
 	
 	@RequestMapping("/shopList")
-	public Results<List<Shop>> listShop(
+	public Results<List<Shop>> listShop(@RequestParam(name="shopType",required=true)int shopType,
 			@RequestParam(name="pageNo",required=true)int pageNo,
 			@RequestParam(name="pageSize",required=true)int pageSize){
 		
 		Results<List<Shop>> result = new Results<List<Shop>>();
-		result.setData(shopService.selectShopList(pageNo, pageSize));
+		result.setData(shopService.selectShopList(shopType,pageNo, pageSize));
 		result.setStatus("0");
 		return result;
 		

@@ -16,9 +16,9 @@ public class ShopService implements IShopService{
 	
 	
 	@Override
-	public List<Shop> selectShopList(int pageNo, int pageSize) {
+	public List<Shop> selectShopList(int shopType,int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
-		return shopDao.selectShopList(pageNo, pageSize);
+		return shopDao.selectShopList(shopType,pageNo, pageSize);
 	}
 
 	@Override

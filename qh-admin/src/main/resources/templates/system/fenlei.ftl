@@ -97,7 +97,7 @@
 									accept="image/*" />
 								
 								<input type="hidden" ng-model="imgUrl" />
-								<div style="height: 130px; width: 40%; margin-top: 3px;">
+								<div ng-show="picture==1" style="height: 130px; width: 40%; margin-top: 3px;">
 									<img src="{{imgUrl}}" style="height: 130px;" />
 								</div>
 							</div>
