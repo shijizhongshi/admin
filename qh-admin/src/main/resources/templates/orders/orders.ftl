@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="/styles/admin.css" />
 	<script src="/scripts/admin.js"></script>
 	<script src="/scripts/orders/orders.js"></script>
-
 	<script src="/scripts/league/league.js"></script>
 	<script src="/scripts/indent/excle.js"></script>
 	<style>
@@ -81,7 +80,7 @@
 							
 							<div class="admin-table">
 
-								<table>
+								<table id="tableExcel">
 									<tr>
 										<th >手机号</th>
 										<th>姓名</th>
@@ -171,14 +170,13 @@
 								<div style="width:20%;height:100%;float: left;">
 								<img ng-src="{{p.productImg}}" style="height:100%;width:100%;" />
 								</div>
-								<div style="width:75%;height:100%;float: right;">
-								<p>名称：{{p.productName}}</p>
-								<p>个数：{{p.count}}</p>
-								<p><span>价格：{{p.productPrice}}</span> 
-								<p>个数：{{p.freight}}</p>
-								<span style="font-size:1.3rem ;color: #B1B1B1;">&nbsp;实际支付：{{p.payout}}</span>
-								</p>
-								<p>状态：{{p.statusName}}</p>
+								<div  class="qingdan">
+								<p >名称：{{p.productName}}</p>
+								<p style="float:left;">个数:<span>{{p.count}}</span></p>
+								<p style="float:left;" >价格:<span>{{p.productPrice}}</span> </p>
+								<p style="float:left;">运费:<span>{{p.freight}}</span></p>
+								<p style="clear:both;">实际支付:<span>{{p.payout}}</span></p>
+								<p>状态：<span>{{p.statusName}}</span></p>
 								</div>
 								</ul>
 		            <ul class="tuihuo" ng-show="{{order.refund=='有'}}">
@@ -207,7 +205,7 @@
 					
 					</div>
 						<!-- 服务订单详情 -->
-						<div id="revise" class="resource">
+						<div id="revise" class="resource" style="height:600px;">
 								<form id="myform2">
 									<h4>详细信息</h4>
 						<div class="template-add">
@@ -258,14 +256,13 @@
 								<div style="width:20%;height:100%;float: left;">
 								<img ng-src="{{p.productImg}}" style="height:100%;width:100%;" />
 								</div>
-								<div style="width:75%;height:100%;float: right;">
+								<div class="qingdan">
 								<p>名称:{{p.productName}}</p>
-							 
-								<p><span>价格：{{p.productPrice}}</span> 
-								<p>人数：{{p.count}}</span> 
-								<span>&nbsp;实际支付：{{p.payout}}</span>
-								</p>
-								<p>状态：{{p.statusName}}</p>
+							 <p>人数：{{p.count}}</span> 	</p>
+								<p style="float:left;">价格:<span>{{p.productPrice}}</span></p>
+								<p style="float:left;">实际支付:<span>{{p.payout}}</span>	</p>
+							
+								<p style="clear:both;">状态：{{p.statusName}}</p>
 								</div>
 								</ul>
 		            <ul class="tuihuo" ng-show="{{order.refund=='有'}}">
@@ -330,6 +327,9 @@
   .tuihuo {border-bottom:1px solid #e8e6e6;}
 .tuihuo li {font-size: 16px;line-height: 30px;}
  .tuihuo input{font-size: 16px;margin:10px; padding:6px;}
+ .qingdan{width:80%;height:100%;float: right;}
+   .qingdan p{font-size:16px;text-indent: 1rem;margin:0;}
+  .qingdan p span {color:red;}
 		</style>
 	
 	</@b.body>
