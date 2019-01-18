@@ -44,15 +44,19 @@
 								</div>
 								<div class="select-3">
 									<span>订单状态</span>
-									<input type="text" ng-model="mobile"/>
+									<select>
+									<option><option>
+									<option><option>
+									<option><option>
+									</select>
 								</div>
 								<div class="select-3">
 									<span>姓名</span>
-									<input type="text" ng-model="mobile"/>
+									<input type="text" ng-model="receiver"/>
 								</div>
 								<div class="select-3">
 									<span>订单号</span>
-									<input type="text" ng-model="mobile"/>
+									<input type="text" ng-model="orderno"/>
 								</div>
 						<div class="select-3">
 							<span>申请时间</span>
@@ -99,7 +103,7 @@
 										<th>{{o.statusName}}</th>
 										<th>{{o.refund}}</th>
 										<th>{{o.showtime}}</th>
-										<th><span class="xiangqing">查看详情</span></th>
+										<th><span class="xiangqing" ng-click="detail(o)">查看详情</span></th>
 									</tr>
 									
 								</table>
@@ -117,7 +121,7 @@
 				
 						</div>
 				<!-- 商品订单详情 -->
-					<div class="resource">
+					<div class="resource" id="revise1">
 								<form id="myform2">
 									<h4>详细信息</h4>
 						<div class="template-add">
@@ -125,56 +129,61 @@
                                        
                                         <ul>
                                         	<li>订单编号：</li>
-                                        	<li>e464s454s65844545</li>
+                                        	<li>{{order.orderno}}</li>
                                         </ul>
                                          <ul>
                                         	<li>姓名:</li>
-                                        	<li>猪蹄子</li>
+                                        	<li>{{order.receiver}}</li>
                                         </ul>
                                          <ul style="height: 70px;">
                                         	<li>收货地址：</li>
-                                        	<li style="margin-top: 5px;">地址地址地址地址地址地址地址地址地址地址地址</li>
+                                        	<li style="margin-top: 5px;">{{order.address}}</li>
                                         </ul>
                                          <ul>
                                         	<li>购买店铺：</li>
-                                        	<li>111</li>
+                                        	<li>{{order.shopId}}</li>
                                         </ul>
                                          <ul>
                                         	<li>支付金额：</li>
-                                        	<li>121</li>
+                                        	<li>{{order.payaccount}}</li>
                                         </ul>
                                          <ul>
                                         	<li>订单状态：</li>
-                                        	<li>完成</li>
+                                        	<li>{{order.statusName}}</li>
                                         </ul>
                                         <ul>
                                         	<li>售后服务：</li>
-                                        	<li>无</li>
+                                        	<li>{{order.refund}}</li>
                                         </ul>
-                                        <ul>
+                                        <ul ng-show="{{order.refund=='有'}}">
                                         	<li>申请售后时间：</li>
-                                        	<li>110</li>
+                                        	<li>{{}}</li>
                                         </ul>
                                         <ul>
                                         	<li>快递编号：</li>
-                                        	<li>2222</li>
+                                        	<li>{{order.expressNo}}</li>
                                         </ul>
                                         <ul>
                                         	<li>时间：</li>
-                                        	<li>10.25</li>
+                                        	<li>{{order.showtime}}</li>
                                         </ul>
 	                                       </div>
 								</div>
 								<div>
 								<p  style="padding-top: 15px;">购买清单</p>
-								<ul style="width: 100%;height: 80px;margin: 15px 0;">
-								<div style="width:20%;height:100%;float: left;"><img src="/images/sjk-home.png" style="height:100%;width:100%;" /></div>
-								<div style="width:75%;height:100%;float: right;"><p>名称：</p>
-								<p>规格：</p>
-								<p><span>价格：</span> <span style="font-size:1.3rem ;color: #B1B1B1;">&nbsp;原价：</span></p>
+								<ul style="width: 100%;height: 80px;margin: 15px 0;" ng-repeat="p in productList">
+								<div style="width:20%;height:100%;float: left;">
+								<img ng-src="{{p.productImg}}" style="height:100%;width:100%;" />
+								</div>
+								<div style="width:75%;height:100%;float: right;">
+								<p>名称：{{p.productName}}</p>
+								<p>规格：{{p.count}}</p>
+								<p><span>价格：{{p.productPrice}}</span> 
+								<span style="font-size:1.3rem ;color: #B1B1B1;">&nbsp;原价：{{p.productPrice}}</span>
+								</p>
 								</div>
 								</ul>
-		            <ul class="tuihuo">
+		            <ul class="tuihuo" ng-show="{{p.statusCode=='APPLYREFUNED'}}">
 		            <li>商品售后申请:<span>退款</span></li>
 		             <li>申请理由:<span>未发货</span></li>
 		              <li>退款金额:<span>666</span></li>

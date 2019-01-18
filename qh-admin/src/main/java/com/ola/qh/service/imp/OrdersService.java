@@ -103,5 +103,11 @@ public class OrdersService implements IOrdersService{
 				
 	}
 
+	@Override
+	public List<OrdersProduct> productList(String orderId) {
+		// TODO Auto-generated method stub
+		return ordersProductDao.selectByOid(orderId, null);
+	}
+
 
 }
