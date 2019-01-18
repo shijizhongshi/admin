@@ -24,8 +24,5 @@ public class SystemWeb {
 	public String fenlei(){
 		return "system/fenlei";
 	}
-	@RequestMapping("/live")
-	public String Live(){
-		return "system/live";
-	}
+	
 }

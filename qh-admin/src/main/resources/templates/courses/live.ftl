@@ -8,7 +8,7 @@
 <script src="/scripts/course/grade-template.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-live">
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-live">
 <div ng-controller="CourseClassTemplateController">
 <div class="details" style="width: 100%">
 	<div class="details-nav">

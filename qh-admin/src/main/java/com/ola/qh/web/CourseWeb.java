@@ -56,4 +56,8 @@ public class CourseWeb{
 	public String teacher(){
 		return "courses/teacher";
 	}
+	@RequestMapping("/live")
+	public String Live(){
+		return "courses/live";
+	}
 }
