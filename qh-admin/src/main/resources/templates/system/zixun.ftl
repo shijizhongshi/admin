@@ -101,6 +101,11 @@
 									<span>类别：</span>
 									<input type="text" ng-model="news.types" />
 								</div>
+								 <div class=" select-2" style="clear: both;">
+									
+									<span>一句话简介</span>
+									<input type="text" ng-model="news.simpleIntro" />
+								</div>
 									<div class=" select-3">
 									<img src="/images/sjk-xl.png"/>
 									<span>咨询/话题选择</span>
