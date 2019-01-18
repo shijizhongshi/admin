@@ -8,7 +8,7 @@ import com.ola.qh.entity.Shop;
 
 public interface ShopDao {
 
-	public List<Shop> selectShopList(@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<Shop> selectShopList(@Param("shopType")int shopType,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
 	public Shop selectShopSingle(@Param("id")String id,@Param("userId")String userId,@Param("shopType")String shopType);
 	

@@ -70,13 +70,16 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	
 	$scope.checkedShopsub=function(ss){
 		
+		if($scope.selected!=null){
+		$scope.selected=null;
 		
-		$scope.selected=ss;
+		}else{
+			$scope.selected=ss;
+			
+		}
 		$scope.subid=ss.id;
 		$scope.imgUrl=ss.imgUrl;
 		$scope.name=ss.subName;
-		
-		
 	}
 	
 	$scope.addcate=function(){
@@ -86,6 +89,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$scope.id=null;
 		$scope.name=null;
 		$scope.picture=null;
+		
 		document.getElementById('add').style.display="block"; 
 		
 		
@@ -97,6 +101,8 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			$scope.update=null;
 			$scope.name=null;
 			$scope.picture=1;
+			$scope.imgUrl=null;
+			
 			document.getElementById('add').style.display="block"; 
 		
 		}
@@ -110,6 +116,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			$scope.insert=null;
 			$scope.update=1;
 			$scope.picture=1;
+			
 			document.getElementById('add').style.display="block"; 
 		}else{
 			alert("请先选中一个小类别~")
@@ -142,6 +149,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				}
 			})
 		}
+		$scope.subid=null;
 	};
 	
 	$scope.deletesub=function(){
@@ -195,7 +203,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				alert("修改失败~");
 			}
 		})
-		
+		$scope.subid=null;
 		
 	}
 });
