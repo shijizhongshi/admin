@@ -85,8 +85,28 @@ $scope.loaddata = function(){
 };
 
 $scope.loaddata();
+$scope.order=null;
+$scope.detail=function(o){
+	if($scope.ordersType==0){
+		 document.getElementById('revise1').style.display="block"; 
+	}else{
+		 document.getElementById('revise1').style.display="none"; 
+	}
+	if($scope.ordersType==2){
+		 document.getElementById('revise').style.display="block"; 
+	}else{
+		document.getElementById('revise').style.display="none"; 
+	}
 	
-	
+	 ///////查询所有的订单的产品
+	  $scope.order=o;
+	 $http.get("/api/orders/product/list",{"params":{"orderId":o.id}},{'Content-Type': 'application/json;charset=UTF-8'})
+	 .success(function(result){
+		 if(result.status=="0"){
+			 $scope.productList=result.data;
+		 }
+	 })
+	}
 	
 
 });

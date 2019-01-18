@@ -51,7 +51,7 @@
 		<span>订单状态</span>
 		<select ng-model="ordersStatus">
 			<option value="NEW">待付款</option>
-			<option value="">已完成</option>
+			<option value="RECEIVED">已完成</option>
 		</select>
 	</div>
 	<div class="select-3">
@@ -104,7 +104,7 @@
 							<th>{{o.recommendTeacher}}</th>
 							
 						
-                           <th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
+                           <th><span class="xiangqing" ng-click="detail(o)">查看详情</span></th>
 						</tr>
 					</table>
 
@@ -128,39 +128,42 @@
                                        
                                         <ul>
                                         	<li>订单编号：</li>
-                                        	<li>e464s454s65844545</li>
+                                        	<li>{{orders.orderno}}</li>
                                         </ul>
                                          <ul>
                                         	<li>姓名:</li>
-                                        	<li>猪蹄子</li>
+                                        	<li>{{orders.receiver}}</li>
                                         </ul>
                                         
                                          <ul>
                                         	<li>手机号：</li>
-                                        	<li>111</li>
+                                        	<li>{{orders.mobile}}</li>
                                         </ul>
                                          <ul>
                                         	<li>订单状态：</li>
-                                        	<li>付款</li>
+                                        	<li>{{orders.statusName}}</li>
                                         </ul>
                                          <ul>
                                         	<li>实际费用：</li>
-                                        	<li>250</li>
+                                        	<li>{{orders.payaccount}}</li>
                                         </ul>
                                         <ul>
-                                        	<li>时间：</li>
-                                        	<li></li>
+                                        	<li>下单时间：</li>
+                                        	<li>{{orders.showtime}}</li>
                                         </ul>
                                         
 	                                       </div>
 								</div>
 								<div>
 								<p style="padding-top: 15px;">购买清单</p>
-								<ul style="width: 100%;height: 80px;margin: 15px 0;">
-								<div style="width:20%;height:100%;float: left;"><img src="/images/sjk-home.png" style="height:100%;width:100%;"></div>
-								<div style="width:75%;height:100%;float: right;"><p>名称：</p>
-								<p> <span style="color: #B1B1B1;">原价：</span></p>
-								<p><span>现价：</span></p>
+								<ul style="width: 100%;height: 80px;margin: 15px 0;" ng-repeat="p in productList">
+								<div style="width:20%;height:100%;float: left;">
+								<img ng-src="{{p.productImg}}" style="height:100%;width:100%;">
+								</div>
+								<div style="width:75%;height:100%;float: right;">
+								<p>名称:{{p.productName}}</p>
+								<p><span style="color: #B1B1B1;">原价：{{p.productPrice}}</span></p>
+								<p><span>现价：{{p.productPrice}}</span></p>
 								</div>
 								</ul>
 		

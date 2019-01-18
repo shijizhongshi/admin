@@ -64,6 +64,7 @@
                                 <span class="title">分类管理</span>
                             </a>
                         </li>
+                        
                     </ul>
                 </li>
                 <li id="sidebarmenu-course">
@@ -100,9 +101,14 @@
 
                             </a>
                         </li>
-                         <li id="sidebarmenu-teacher">
+                         <li id="sidebarmenu-course-teacher">
                             <a href="/web/course/teacher">
                                 <span class="title">教师管理</span>
+                            </a>
+                        </li>
+                        <li id="sidebarmenu-course-live">
+                            <a href="/web/course/live">
+                                <span class="title">直播管理</span>
                             </a>
                         </li>
                     </ul>

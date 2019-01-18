@@ -3,6 +3,7 @@ package com.ola.qh.service;
 import java.util.List;
 
 import com.ola.qh.entity.Orders;
+import com.ola.qh.entity.OrdersProduct;
 
 public interface IOrdersService {
 
@@ -13,4 +14,6 @@ public interface IOrdersService {
 	
 	public int listCount(String ordersType,String mobile,
 			String todate,String fromdate,String orderno,String ordersStatus,String recommendTeacher);
+	
+	public List<OrdersProduct> productList(String orderId);
 }

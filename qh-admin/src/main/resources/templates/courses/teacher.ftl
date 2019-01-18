@@ -8,7 +8,7 @@
 <script src="/scripts/course/teacher.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-teacher">
+<@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-teacher">
 
 <div ng-controller="teacherController">
 <div class="details" style="width: 100%;">

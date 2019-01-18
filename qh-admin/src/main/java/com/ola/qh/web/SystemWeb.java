@@ -24,4 +24,5 @@ public class SystemWeb {
 	public String fenlei(){
 		return "system/fenlei";
 	}
+	
 }
