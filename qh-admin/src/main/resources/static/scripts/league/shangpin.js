@@ -1,4 +1,4 @@
-app.controller("fuwushopController", function($scope, $http){
+app.controller("shangpinshopController", function($scope, $http){
 	
 		$scope.total = 0;
 	   //当前的页数
@@ -14,7 +14,7 @@ app.controller("fuwushopController", function($scope, $http){
 	   
 		$scope.shopList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"shopType":1,
+			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"shopType":2,
 				"address":$scope.address,"shopName":$scope.shopName,"isrecommend":$scope.isrecommend,
 				"islimits":$scope.islimits,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
@@ -41,7 +41,7 @@ app.controller("fuwushopController", function($scope, $http){
 	
 		$scope.islimitList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"shopType":1,
+			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"shopType":2,
 				"address":null,"shopName":$scope.shopName,"isrecommend":null,
 				"islimits":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){

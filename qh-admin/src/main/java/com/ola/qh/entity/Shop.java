@@ -1,16 +1,21 @@
 package com.ola.qh.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class Shop {
 
-	private String id;
+private String id;
 	
+	@NotEmpty(message="用户的标识不能为空")
 	private String userId;
 	@NotNull(message="必须选择店铺的类型")
 	private int shopType;////1:服务店铺    2:商城店铺
@@ -24,27 +29,48 @@ public class Shop {
 	@NotEmpty(message="负责人手机号不能为空")
 	private String leaderMobile;////负责人手机号
 	
+	@NotEmpty(message="详细地址不能为空")
 	private String address;////
 	@NotEmpty(message="营业执照图片不能为空")
 	private String businessLicenseUrl;/////营业执照图片
-	@NotEmpty(message="执业资格证图片不能为空")
-	private String licenseStatusUrl;/////执业资格证图片
+	
 	@NotEmpty(message="门口图片不能为空")
 	private String doorHeadUrl;//////门口图片
-	
-	private String businessEnvironmentUrl;////营业环境照片
-	
+		
 	private String shopLogo;//////商城参数的logo
 	
 	private String licenceUrl;/////商城的许可证
 	
 	private int islimits;/////查看是否已经审核通过了
 	
-	private int isrecommend;/////是否推荐
+	private String remarked;////备注
+	
+	private String businessHours;////营业时间
+	@Valid
+	@NotNull
+	@Size(min=1)
+	private List<ShopImg> imgList=new ArrayList<ShopImg>();//执业资格证书
+	
+	private List<ShopImg> environmentImgList=new ArrayList<ShopImg>();////门头照片
 	
 	private Date addtime;
 	
 	private Date updatetime;
+	
+	private String isrecommend;////0:后台没有设置推荐   1:后台设置推荐的店铺
+	
+	@NotEmpty(message="负责人身份证号不能为空")
+	private String idcard;////负责人的身份证号
+	
+	private double commentGrade;////评价的评分
+	
+	private List<String> comments;///评论内容
+
+	private String serveDomain;////服务领域(中医推拿   小儿推拿等)
+	
+	private List<String> serveDaomainList=new ArrayList<String>();
+	
+	private String servetypeName;
 
 	public String getId() {
 		return id;
@@ -110,28 +136,12 @@ public class Shop {
 		this.businessLicenseUrl = businessLicenseUrl;
 	}
 
-	public String getLicenseStatusUrl() {
-		return licenseStatusUrl;
-	}
-
-	public void setLicenseStatusUrl(String licenseStatusUrl) {
-		this.licenseStatusUrl = licenseStatusUrl;
-	}
-
 	public String getDoorHeadUrl() {
 		return doorHeadUrl;
 	}
 
 	public void setDoorHeadUrl(String doorHeadUrl) {
 		this.doorHeadUrl = doorHeadUrl;
-	}
-
-	public String getBusinessEnvironmentUrl() {
-		return businessEnvironmentUrl;
-	}
-
-	public void setBusinessEnvironmentUrl(String businessEnvironmentUrl) {
-		this.businessEnvironmentUrl = businessEnvironmentUrl;
 	}
 
 	public String getShopLogo() {
@@ -158,6 +168,38 @@ public class Shop {
 		this.islimits = islimits;
 	}
 
+	public String getRemarked() {
+		return remarked;
+	}
+
+	public void setRemarked(String remarked) {
+		this.remarked = remarked;
+	}
+
+	public String getBusinessHours() {
+		return businessHours;
+	}
+
+	public void setBusinessHours(String businessHours) {
+		this.businessHours = businessHours;
+	}
+
+	public List<ShopImg> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<ShopImg> imgList) {
+		this.imgList = imgList;
+	}
+
+	public List<ShopImg> getEnvironmentImgList() {
+		return environmentImgList;
+	}
+
+	public void setEnvironmentImgList(List<ShopImg> environmentImgList) {
+		this.environmentImgList = environmentImgList;
+	}
+
 	public Date getAddtime() {
 		return addtime;
 	}
@@ -174,13 +216,62 @@ public class Shop {
 		this.updatetime = updatetime;
 	}
 
-	public int getIsrecommend() {
+	public String getIsrecommend() {
 		return isrecommend;
 	}
 
-	public void setIsrecommend(int isrecommend) {
+	public void setIsrecommend(String isrecommend) {
 		this.isrecommend = isrecommend;
 	}
+
+	public String getIdcard() {
+		return idcard;
+	}
+
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+
+	public double getCommentGrade() {
+		return commentGrade;
+	}
+
+	public void setCommentGrade(double commentGrade) {
+		this.commentGrade = commentGrade;
+	}
+
+	public List<String> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<String> comments) {
+		this.comments = comments;
+	}
+
+	public String getServeDomain() {
+		return serveDomain;
+	}
+
+	public void setServeDomain(String serveDomain) {
+		this.serveDomain = serveDomain;
+	}
+
+	public List<String> getServeDaomainList() {
+		return serveDaomainList;
+	}
+
+	public void setServeDaomainList(List<String> serveDaomainList) {
+		this.serveDaomainList = serveDaomainList;
+	}
+
+	public String getServetypeName() {
+		return servetypeName;
+	}
+
+	public void setServetypeName(String servetypeName) {
+		this.servetypeName = servetypeName;
+	}
+
 	
 	
 	

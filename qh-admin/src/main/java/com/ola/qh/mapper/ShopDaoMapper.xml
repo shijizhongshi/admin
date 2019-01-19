@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ola.qh.dao.ShopDao">
 <resultMap type="com.ola.qh.entity.Shop" id="ShopMap">
+	
 	<result column="id" property="id"/>
 	<result column="user_id" property="userId"/>
 	<result column="shop_type" property="shopType"/>
@@ -12,22 +13,36 @@
 	<result column="leader_mobile" property="leaderMobile"/>
 	<result column="address" property="address"/>
 	<result column="business_license_url" property="businessLicenseUrl"/>
-	<result column="license_status_url" property="licenseStatusUrl"/>
 	<result column="door_head_url" property="doorHeadUrl"/>
-	<result column="business_environment_url" property="businessEnvironmentUrl"/>
 	<result column="shop_logo" property="shopLogo"/>
 	<result column="licence_url" property="licenceUrl"/>
 	<result column="isrecommend" property="isrecommend"/>
 	<result column="islimits" property="islimits"/>
+	<result column="remarked" property="remarked"/>
+	<result column="business_hours" property="businessHours"/>
 	<result column="addtime" property="addtime"/>
 	<result column="updatetime" property="updatetime"/>
+	<result column="idcard" property="idcard"/>
+	<result column="serve_domain" property="serveDomain"/>
 	
 	</resultMap>
 	
 	<!-- 所有店铺的列表页 (按照申请时间进行排序)-->
 	<select id="selectShopList" resultMap="ShopMap">
-	select id,user_id,shop_name,shop_type,leader_name,leader_mobile,addtime from shop
-	where shop_type=#{shopType} order by addtime desc
+	select id,user_id,shop_type,shop_name,leader_name,leader_mobile,address,business_license_url,
+	door_head_url,shop_logo,licence_url,islimits,addtime,remarked,isrecommend,
+	business_hours,idcard,serve_domain from shop
+	where shop_type=#{shopType} and islimits=#{islimits} 
+	<if test="isrecommend!=null and isrecommend!=''">
+	and isrecommend=#{isrecommend}
+	</if>
+	<if test="shopName!=null and shopName!=''">
+	and shop_name LIKE CONCAT(CONCAT('%',#{shopName},'%'))
+	</if>
+	<if test="address!=null and address!=''">
+	and address=#{address}
+	</if>
+	 order by addtime desc
 	 limit #{pageNo},#{pageSize}
 	</select>
 	<!-- 店铺详细信息的展示 -->
@@ -35,8 +50,21 @@
 	select * from shop where id=#{id}
 	</select>
 	<!-- 开通开通店铺的权限 -->
-	<update id="updateShop" parameterType="String">
+	<update id="updateShop" >
 	update shop set isrecommend=#{isrecommend},islimits=#{islimits} where id=#{id}
 	</update>
 
+
+
+<resultMap type="com.ola.qh.entity.ShopImg" id="ShopImgMap">
+	<result column="id" property="id"/>
+	<result column="shop_id" property="shopId"/>
+	<result column="img_url" property="imgUrl"/>
+	<result column="subtype" property="subtype"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	<select id="selectImgList" resultMap="ShopImgMap">
+	select id,img_url,subtype from shop_img where shop_id=#{shopId} and subtype=#{subtype}
+	</select>
 </mapper>

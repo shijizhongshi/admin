@@ -21,13 +21,15 @@ public class ShopController {
 	
 	@RequestMapping("/shopList")
 	public Results<List<Shop>> listShop(@RequestParam(name="shopType",required=true)int shopType,
+			@RequestParam(name="address",required=false)String address,
+			@RequestParam(name="shopName",required=false)String shopName,
+			@RequestParam(name="isrecommend",required=false)String isrecommend,
+			@RequestParam(name="islimits",required=true)int islimits,
 			@RequestParam(name="pageNo",required=true)int pageNo,
 			@RequestParam(name="pageSize",required=true)int pageSize){
 		
-		Results<List<Shop>> result = new Results<List<Shop>>();
-		result.setData(shopService.selectShopList(shopType,pageNo, pageSize));
-		result.setStatus("0");
-		return result;
+		
+		return shopService.selectShopList(address, shopName, isrecommend, shopType, islimits, pageNo, pageSize);
 		
 	}
 	
