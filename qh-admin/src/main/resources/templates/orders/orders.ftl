@@ -7,7 +7,6 @@
 	<link rel="stylesheet" href="/styles/admin.css" />
 	<script src="/scripts/admin.js"></script>
 	<script src="/scripts/orders/orders.js"></script>
-
 	<script src="/scripts/league/league.js"></script>
 	<script src="/scripts/indent/excle.js"></script>
 	<style>
@@ -39,15 +38,13 @@
 						<div class="manage">
 							<ul style="height: 80px;" class="managr-dianpu">
 								<div class="select-3">
-									<span>手机号</span>
+									<span>用户手机号</span>
 									<input type="text" ng-model="mobile"/>
 								</div>
 								<div class="select-3">
 									<span>订单状态</span>
-									<select>
-									<option><option>
-									<option><option>
-									<option><option>
+									<select ng-options="s.status as s.name for s in statusNames" ng-model="ordersStatus">
+									
 									</select>
 								</div>
 								<div class="select-3">
@@ -83,7 +80,7 @@
 							
 							<div class="admin-table">
 
-								<table>
+								<table id="tableExcel">
 									<tr>
 										<th >手机号</th>
 										<th>姓名</th>
@@ -141,7 +138,7 @@
                                         </ul>
                                          <ul>
                                         	<li>购买店铺：</li>
-                                        	<li>{{order.shopId}}</li>
+                                        	<li>{{order.shopName}}</li>
                                         </ul>
                                          <ul>
                                         	<li>支付金额：</li>
@@ -155,10 +152,7 @@
                                         	<li>售后服务：</li>
                                         	<li>{{order.refund}}</li>
                                         </ul>
-                                        <ul ng-show="{{order.refund=='有'}}">
-                                        	<li>申请售后时间：</li>
-                                        	<li>{{}}</li>
-                                        </ul>
+                                       
                                         <ul>
                                         	<li>快递编号：</li>
                                         	<li>{{order.expressNo}}</li>
@@ -171,31 +165,39 @@
 								</div>
 								<div>
 								<p  style="padding-top: 15px;">购买清单</p>
-								<ul style="width: 100%;height: 80px;margin: 15px 0;" ng-repeat="p in productList">
+								<div ng-repeat="p in productList">
+								<ul style="width: 100%;height: 80px;margin: 15px 0;">
 								<div style="width:20%;height:100%;float: left;">
 								<img ng-src="{{p.productImg}}" style="height:100%;width:100%;" />
 								</div>
-								<div style="width:75%;height:100%;float: right;">
-								<p>名称：{{p.productName}}</p>
-								<p>规格：{{p.count}}</p>
-								<p><span>价格：{{p.productPrice}}</span> 
-								<span style="font-size:1.3rem ;color: #B1B1B1;">&nbsp;原价：{{p.productPrice}}</span>
-								</p>
+								<div  class="qingdan">
+								<p >名称：{{p.productName}}</p>
+								<p style="float:left;">个数:<span>{{p.count}}</span></p>
+								<p style="float:left;" >价格:<span>{{p.productPrice}}</span> </p>
+								<p style="float:left;">运费:<span>{{p.freight}}</span></p>
+								<p style="clear:both;">实际支付:<span>{{p.payout}}</span></p>
+								<p>状态：<span>{{p.statusName}}</span></p>
 								</div>
 								</ul>
-		            <ul class="tuihuo" ng-show="{{p.statusCode=='APPLYREFUNED'}}">
+		            <ul class="tuihuo" ng-show="{{order.refund=='有'}}">
 		            <li>商品售后申请:<span>退款</span></li>
-		             <li>申请理由:<span>未发货</span></li>
-		              <li>退款金额:<span>666</span></li>
+		             <li>申请售后时间<span>{{p.opr.showtime}}</span></li>
+		             <li>申请理由:<span>{{p.opr.refundReason}}</span></li>
+		              <li>退款金额:<span>{{p.opr.refundMoney}}</span></li>
+		              
 		              <div>
-				<input type="button" class="btn-lg im-key" value="允许" style="background: #6eecb2;"/>
-				<input type="button" class="btn-lg im-key"value="拒绝" style="background:#adafaad1;"/>
+				<input type="button" class="btn-lg im-key" value="同意" style="background: #6eecb2;" ng-click="updateProduct(p.id,'AGREEREFUNED')"/>
+				<input type="button" class="btn-lg im-key"value="拒绝" style="background:#adafaad1;" ng-click="updateProduct(p.id,'REJECTREFUNED')"/>
 						</div>
 		            </ul>
+		            </div>
+		            
+		            
+		            
 								</div>
 								</form>
 								<div class="end" style="width: 100px;">
-									<input name="esc" type="reset" value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
+									<input name="esc" type="reset" value="取消" ng-click="CloseDiv2()" class="esc" />
 								</div>
 				
 					
@@ -203,7 +205,7 @@
 					
 					</div>
 						<!-- 服务订单详情 -->
-						<div id="revise" class="resource">
+						<div id="revise" class="resource" style="height:600px;">
 								<form id="myform2">
 									<h4>详细信息</h4>
 						<div class="template-add">
@@ -211,72 +213,72 @@
                                        
                                         <ul>
                                         	<li>订单编号：</li>
-                                        	<li>e464s454s65844545</li>
+                                        	<li>{{order.orderno}}</li>
                                         </ul>
                                          <ul>
                                         	<li>姓名:</li>
-                                        	<li>猪蹄子</li>
+                                        	<li>{{order.receiver}}</li>
                                         </ul>
                                         <ul>
                                         	<li>手机号：</li>
-                                        	<li>111</li>
+                                        	<li>{{order.mobile}}</li>
                                         </ul>
                                          <ul>
                                         	<li>购买店铺：</li>
-                                        	<li>111</li>
+                                        	<li>{{order.shopName}}</li>
                                         </ul>
                                          <ul>
                                         	<li>服务类别：</li>
-                                        	<li>121</li>
+                                        	<li>{{order.shopServeDomain}}</li>
                                         </ul>
                                          <ul>
                                         	<li>预约时间：</li>
-                                        	<li>11</li>
+                                        	<li>{{order.timeString}}</li>
                                         </ul>
                                         <ul>
                                         	<li>支付金额：</li>
-                                        	<li>无</li>
-                                        </ul>
-                                        <ul>
-                                        	<li>购买项目：</li>
-                                        	<li>110</li>
+                                        	<li>{{order.payaccount}}</li>
                                         </ul>
                                         <ul>
                                         	<li>人数</li>
-                                        	<li>2222</li>
+                                        	<li>{{order.count}}</li>
                                         </ul>
                                         <ul>
                                         	<li>售后服务：</li>
-                                        	<li>10.25</li>
-                                        </ul>
-                                        <ul>
-                                        	<li>售后时间：</li>
-                                        	<li>10.25</li>
+                                        	<li>{{order.refund}}</li>
                                         </ul>
 	                                       </div>
 								</div>
 								<div>
 								<p  style="padding-top: 15px;">购买清单</p>
-								<ul style="width: 100%;height: 80px;margin: 15px 0;">
-								<div style="width:20%;height:100%;float: left;"><img src="/images/sjk-home.png" style="height:100%;width:100%;" /></div>
-								<div style="width:75%;height:100%;float: right;"><p>名称：</p>
+								<div ng-repeat="p in productList">
+								<ul style="width: 100%;height: 80px;margin: 15px 0;" >
+								<div style="width:20%;height:100%;float: left;">
+								<img ng-src="{{p.productImg}}" style="height:100%;width:100%;" />
+								</div>
+								<div class="qingdan">
+								<p>名称:{{p.productName}}</p>
+							 <p>人数：{{p.count}}</span> 	</p>
+								<p style="float:left;">价格:<span>{{p.productPrice}}</span></p>
+								<p style="float:left;">实际支付:<span>{{p.payout}}</span>	</p>
 							
-								<p><span>价格：</span> <span style="font-size:1.3rem ;color: #B1B1B1;">&nbsp;原价：</span></p>
+								<p style="clear:both;">状态：{{p.statusName}}</p>
 								</div>
 								</ul>
-		            <ul class="tuihuo">
-		            <li>售后申请:<span>退款</span></li>
-		             <li>申请理由:<span>未发货</span></li>
-		              <li>退款金额:<span>666</span></li>
+		            <ul class="tuihuo" ng-show="{{order.refund=='有'}}">
+		            <li>售后申请:<span>取消服务</span></li>
+		             <li>申请理由:<span></span></li>
+		              <li>退款金额:<span>{{p.payout}}</span></li>
 		              <div>
-				<input type="button" class="btn-lg im-key" value="允许" style="background: #6eecb2;"/>
-				<input type="button" class="btn-lg im-key"value="拒绝" style="background:#adafaad1;"/>
+				<input type="button" class="btn-lg im-key" value="同意" style="background: #6eecb2;" ng-click="updateServe(p.id,'AGREEREFUNED')"/>
+				<input type="button" class="btn-lg im-key"value="拒绝" style="background:#adafaad1;" ng-click="updateServe(p.id,'REJECTREFUNED')"/>
 						</div>
 		            </ul>
+		            </div>
 								</div>
 								</form>
 								<div class="end" style="width: 100px;">
-									<input name="esc" type="reset" value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
+									<input name="esc" type="reset" value="取消" ng-click="CloseDiv2();" class="esc" />
 								</div>
 				
 					
@@ -325,6 +327,9 @@
   .tuihuo {border-bottom:1px solid #e8e6e6;}
 .tuihuo li {font-size: 16px;line-height: 30px;}
  .tuihuo input{font-size: 16px;margin:10px; padding:6px;}
+ .qingdan{width:80%;height:100%;float: right;}
+   .qingdan p{font-size:16px;text-indent: 1rem;margin:0;}
+  .qingdan p span {color:red;}
 		</style>
 	
 	</@b.body>

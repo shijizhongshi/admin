@@ -14,6 +14,8 @@ public class CourseLineShow {
 	@NotEmpty
 	private String liveName;
 	@NotEmpty
+	private String outLinks;
+	@NotEmpty
 	private String imgUrl;
 	
 	private String isremmend;////1是推荐
@@ -24,7 +26,26 @@ public class CourseLineShow {
 	
 	private Date updatetime;
 	
+	private String showtime;
 	
+	
+	
+
+	public String getOutLinks() {
+		return outLinks;
+	}
+
+	public void setOutLinks(String outLinks) {
+		this.outLinks = outLinks;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
 
 	public Date getUpdatetime() {
 		return updatetime;

@@ -28,6 +28,7 @@ public class OrdersController {
 			@RequestParam(name="recommendTeacher",required=false)String recommendTeacher,
 			@RequestParam(name="orderno",required=false)String orderno,
 			@RequestParam(name="ordersStatus",required=false)String ordersStatus,
+			@RequestParam(name="receiver",required=false)String receiver,
 			@RequestParam(name="todate",required=false)String todate,
 			@RequestParam(name="fromdate",required=false)String fromdate){
 		
@@ -35,8 +36,8 @@ public class OrdersController {
 		int pageNo=(page-1)*Patterns.pageSize;
 		int pageSize=Patterns.pageSize;
 		
-		List<Orders> list = ordersService.list(pageNo, pageSize, ordersType, mobile, todate, fromdate,orderno,ordersStatus,recommendTeacher);
-		int count = ordersService.listCount(ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher);
+		List<Orders> list = ordersService.list(pageNo, pageSize, ordersType, mobile, todate, fromdate,orderno,ordersStatus,recommendTeacher,receiver);
+		int count = ordersService.listCount(ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher,receiver);
 		result.setCount(count);
 		result.setStatus("0");
 		result.setData(list);
@@ -57,5 +58,33 @@ public class OrdersController {
 		results.setData(list);
 		return results;
 	}
+	/**
+	 * 商品订单
+	 * 管理员同意拒绝退款
+	 * @param ordersProductId
+	 * @param statusCode
+	 * @return
+	 */
+	@RequestMapping("/update/product")
+	public Results<String> updateProduct(@RequestParam(name="ordersProductId",required=true)String ordersProductId,
+			@RequestParam(name="statusCode",required=true)String statusCode){
+		
+		return ordersService.updateRefund(ordersProductId, statusCode);
+	}
+	/**
+	 * 服务订单
+	 * 管理员同意或者是拒绝
+	 * @param ordersId
+	 * @param statusCode
+	 * @return
+	 */
+	@RequestMapping("/update/serve")
+	public Results<String> updateServe(@RequestParam(name="ordersId",required=true)String ordersId,
+			@RequestParam(name="statusCode",required=true)String statusCode){
+		return ordersService.updateServeRefund(ordersId, statusCode);
+	}
+	
+	
+	
 	
 }

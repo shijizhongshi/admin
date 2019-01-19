@@ -57,6 +57,7 @@ private String id;
 	
 	private Date updatetime;
 	
+
 	private String isrecommend;////0:后台没有设置推荐   1:后台设置推荐的店铺
 	
 	@NotEmpty(message="负责人身份证号不能为空")
@@ -71,6 +72,7 @@ private String id;
 	private List<String> serveDaomainList=new ArrayList<String>();
 	
 	private String servetypeName;
+
 
 	public String getId() {
 		return id;

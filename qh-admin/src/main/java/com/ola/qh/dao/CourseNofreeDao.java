@@ -20,7 +20,14 @@ public interface CourseNofreeDao {
 	
 	public int insertLive(CourseLineShow cl);
 	
-	public List<CourseLineShow> selectLiveList(@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<CourseLineShow> selectLiveList(@Param("pageNo")int pageNo,
+			@Param("pageSize")int pageSize,
+			@Param("courseTypeName")String courseTypeName,
+			@Param("courseTypeSubclassName")String courseTypeSubclassName,
+			@Param("liveName")String liveName);
+	
+	public int selectLiveListCount(@Param("courseTypeName")String courseTypeName,
+			@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("liveName")String liveName);
 	
 	public int updateLive(CourseLineShow cl);
 	

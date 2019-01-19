@@ -10,24 +10,29 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class OrdersProductRefund {
 
 	private String id;
-	@NotEmpty(message="用户的标识不能为空")
 	private String userId;
-	@NotEmpty(message="订单产品的ID不能为空")
 	private String ordersProductId;////退款订单的产品的ID
-	@NotEmpty(message="退款理由不能为空")
 	private String refundReason;////退款理由
 	
 	private String refundExplain;/////退款说明
-	@NotNull(message="退款金额不能为空")
 	private BigDecimal refundMoney;/////退款金额
 	
 	private Date addtime;////退款时间
 
-	@NotEmpty(message="订单的状态不能为空")
 	private String statusCode;
 	
 	private Date updatetime;
 	
+	private String showtime;
+	
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
+
 	public String getId() {
 		return id;
 	}

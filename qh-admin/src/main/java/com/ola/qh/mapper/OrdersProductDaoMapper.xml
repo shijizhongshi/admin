@@ -24,33 +24,12 @@
 	</resultMap>
 
 
-<!-- 订单商品 -->
-<select id="selectByOrderId" resultMap="OrdersProductMap">
-select * from orders_product where 1=1
-<if test="openId!=null">
-and orders_id=#{orderId}
-</if>
-order by addtime desc
-<if test="pageSize!=0">
-limit #{pageNo},#{pageSize}
-</if>
-</select>
-
-<select id="selectByOrderIdCount" resultType="int">
-select count(id) from orders_product where 1=1
-<if test="openId!=null">
-and orders_id=#{orderId}
-</if>
-
-</select>
 
 <!-- 订单商品 -->
-
-
 
 <select id="selectByOid" resultMap="OrdersProductMap">
 	select op.id,op.orders_id,op.user_id,op.muser_id,op.product_id,op.product_name,op.product_price,op.count,
-	op.payout,op.product_img,op.status_code,op.freight from orders_product op where orders_id=#{orderId}
+	op.payout,op.product_img,op.status_code,op.status_name,op.freight from orders_product op where orders_id=#{orderId}
 	<if test="statusCode!=null">
 	and status_code=#{statusCode}
 	</if>
@@ -70,6 +49,50 @@ and orders_id=#{orderId}
 	</if>
 	updatetime=#{updatetime}
 	where id=#{id}
+	</update>
+	
+	<select id="singleOrdersProduct" resultMap="OrdersProductMap">
+	select op.id,op.orders_id,op.user_id,op.muser_id,op.product_id,op.product_name,op.product_price,op.count,
+	op.payout,op.product_img,op.status_code,op.status_name,op.freight,old_status_code from orders_product op where id=#{id}
+	</select>
+<!-- 申请退款 -->
+<resultMap type="com.ola.qh.entity.OrdersProductRefund" id="OrdersProductRefundMap">
+	<result column="id" property="id"/>
+	<result column="user_id" property="userId"/>
+	<result column="orders_product_id" property="ordersProductId"/>
+	<result column="refund_reason" property="refundReason"/>
+	<result column="refund_explain" property="refundExplain"/>
+	<result column="refund_money" property="refundMoney"/>
+	<result column="status_code" property="statusCode"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	<select id="singleRefund" resultMap="OrdersProductRefundMap">
+	    select * from orders_product_refund where orders_product_id=#{ordersProductId}
+	</select>
+
+	<update id="updateRefund" parameterType="com.ola.qh.entity.OrdersProductRefund">
+	update orders_product_refund set 
+	<if test="refundReason!=null">
+	refund_reason=#{refundReason},
+	</if>
+	<if test="refundExplain!=null">
+	refund_explain=#{refundExplain},
+	</if>
+	<if test="refundMoney!=0">
+	refund_money=#{refundMoney},
+	</if>
+	<if test="statusCode!=null">
+	status_code=#{statusCode},
+	</if>
+	updatetime=#{updatetime}
+	where 1=1
+	
+	<if test="id!=null">
+	and id=#{id}
+	</if>
+	<if test="ordersProductId!=null">
+	and orders_product_id=#{ordersProductId}
+	</if>
 	</update>
 	
 	</mapper>
