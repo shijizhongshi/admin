@@ -19,7 +19,10 @@ public interface ICourseNofreeService {
 	
 	public int insertLive(CourseLineShow cl);
 	
-	public List<CourseLineShow> selectLiveList(int pageNo,int pageSize);
+	
+	public List<CourseLineShow> selectLiveList(int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName,String liveName);
+	
+	public int selectLiveListCount(String courseTypeName,String courseTypeSubclassName,String liveName);
 	
 	public int updateLive(CourseLineShow cl);
 	

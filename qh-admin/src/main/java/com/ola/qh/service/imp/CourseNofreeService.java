@@ -1,5 +1,6 @@
 package com.ola.qh.service.imp;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -52,9 +53,14 @@ public class CourseNofreeService implements ICourseNofreeService {
 	}
 
 	@Override
-	public List<CourseLineShow> selectLiveList(int pageNo, int pageSize) {
+	public List<CourseLineShow> selectLiveList(int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName,String liveName) {
 		// TODO Auto-generated method stub
-		return courseNofreeDao.selectLiveList(pageNo, pageSize);
+		List<CourseLineShow> list= courseNofreeDao.selectLiveList(pageNo, pageSize,courseTypeName,courseTypeSubclassName,liveName);
+		for (CourseLineShow courseLineShow : list) {
+			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			courseLineShow.setShowtime(sf.format(courseLineShow.getAddtime()));
+		}
+		return list;
 	}
 
 	@Override
@@ -74,6 +80,12 @@ public class CourseNofreeService implements ICourseNofreeService {
 	public int deleteLive(String id) {
 		// TODO Auto-generated method stub
 		return courseNofreeDao.deleteLive(id);
+	}
+
+	@Override
+	public int selectLiveListCount(String courseTypeName, String courseTypeSubclassName,String liveName) {
+		// TODO Auto-generated method stub
+		return courseNofreeDao.selectLiveListCount(courseTypeName, courseTypeSubclassName,liveName);
 	}
 
 	

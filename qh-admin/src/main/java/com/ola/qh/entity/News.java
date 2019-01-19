@@ -28,8 +28,19 @@ public class News {
 	
 	private String typename;///专业名称
 	
+	private String simpleIntro;////一句话的介绍
 	
 	
+	
+	
+	public String getSimpleIntro() {
+		return simpleIntro;
+	}
+
+	public void setSimpleIntro(String simpleIntro) {
+		this.simpleIntro = simpleIntro;
+	}
+
 	public int getStatus() {
 		return status;
 	}
