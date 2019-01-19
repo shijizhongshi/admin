@@ -39,7 +39,7 @@
 
 			</div>
 			<div class="manage">
-				<ul style="height: 80px;" class="show">
+				<ul class="show">
 					<li style="background: none; color: black;" ><b>子类的操作</b></li>
 					<li  ng-click="addsub()" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>

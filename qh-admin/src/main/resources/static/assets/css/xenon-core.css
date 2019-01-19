@@ -1998,7 +1998,7 @@ body.chat-open .user-info-navbar a[data-toggle="chat"] {
   border: 0;
   padding: 0;
   margin: -10px;
-  margin-bottom: 30px;
+  margin-bottom:auto;
 }
 .user-info-navbar .user-info-menu {
   margin: 0;

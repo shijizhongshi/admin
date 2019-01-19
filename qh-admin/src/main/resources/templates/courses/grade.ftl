@@ -50,7 +50,7 @@
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;"/>我的主页</li>
 			<li>/</li>
-		<li>课程章节管理</li>
+		<li>班级管理</li>
 		</ul>
 	</div>
 <div class="details-frame" >
@@ -62,7 +62,7 @@
 	</div>
 	</div>
 <div class="manage">
-	<ul style="height: 80px;" class="show">
+	<ul class="show">
 
 			<li  ng-click="add()" style="background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;班级添加</li>
 		<li ng-click="update()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;班级修改</li>
@@ -71,7 +71,7 @@
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<!--<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
 		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>-->
-         <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="classBases()"/></li>
+         <li style="float: right;margin-right:20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="classBases()"/></li>
 	</ul>
 	<div class="admin-table">
 

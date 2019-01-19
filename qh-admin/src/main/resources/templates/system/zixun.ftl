@@ -34,7 +34,7 @@
 	
 	</div>
 <div class="manage">
-	<ul style="height: 80px;" class="show">
+	<ul  class="show">
 
 					<li ng-click="add()"
 						style="background: #9DE879;"><span
@@ -43,7 +43,7 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
 					<li ng-click="deletenews()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-					<li style="float: right; margin-right: 100px; background: none;"><img
+					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
 				</ul>
 				<div class="admin-table">

@@ -36,10 +36,10 @@ submenu="/web/system/zhuanti">
 
 			</div>
 			<div class="manage">
-				<ul style="height: 80px;" class="show">
+				<ul class="show">
 
 					<li onclick="showDiv()"
-						style="margin-left: 70px; background: #9DE879;"><span
+						style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
