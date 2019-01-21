@@ -87,7 +87,7 @@
 									<th>详细信息</th>
 								</tr>
 
-								<tr ng-repeat="s in shoplist" ng-click="checkdoctor(s)"
+								<tr ng-repeat="s in shoplist" ng-click="checkshop(s)"
 									ng-class="{'selected':selected==s}">
 									<th>{{s.shopName}}</th>
 									<th>{{s.address}}</th>
@@ -227,7 +227,7 @@
 									<th>操作</th>
 								</tr>
 
-								<tr ng-repeat="i in islimitlist" ng-click="checkdoctor(i)"
+								<tr ng-repeat="i in islimitlist" ng-click="checkshop(i)"
 									ng-class="{'selected':selected==i}">
 
 									<th>{{i.shopName}}</th>
