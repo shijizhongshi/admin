@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.UserLoginDao">
+	<resultMap type="com.ola.qh.entity.UserLogin"  id="UserLoginMap">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="device_name" property="deviceName" />
+		<result column="device_id" property="deviceId" />
+		<result column="device_token" property="deviceToken" />
+		<result column="device_type" property="deviceType" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+
+	<select id="selectUserLogin" resultType="com.ola.qh.entity.UserLogin">
+		select id,user_id,device_name,device_id,device_token,device_type,addtime from user_login where user_id=#{userId}
+	</select>
+	
+	<insert id="saveUserLogin" parameterType="com.ola.qh.entity.UserLogin" >
+	 	insert into user_login(id,user_id,device_name,device_id,device_token,device_type,addtime) values(#{id},#{userId},#{deviceName},#{deviceId},#{deviceToken},#{deviceType},#{addtime})
+	</insert>
+	
+	<update id="updateUserLogin"  parameterType="com.ola.qh.entity.UserLogin">
+		update user_login set 
+		<if test="deviceName!=null">
+		device_name=#{deviceName},
+		</if>
+		<if test="deviceId!=null">
+		device_id=#{deviceId},
+		</if>
+		<if test="deviceToken!=null">
+		device_token=#{deviceToken},
+		</if>
+		<if test="deviceType!=0">
+		device_type=#{deviceType},
+		</if>
+		updatetime=#{updatetime}
+		
+		where user_id=#{userId}
+	</update>
+	
+</mapper>

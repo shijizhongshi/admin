@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.ola.qh.dao.UserMessageDao">
+		<resultMap type="com.ola.qh.entity.UserMessage" id="UserMessageMap">
+		<result column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="types" property="types"/>
+		<result column="title" property="title"/>
+		<result column="describe" property="describe"/>
+		<result column="head_status" property="headStatus"/>
+		<result column="orders_id" property="ordersId"/>
+		<result column="patient_id" property="patientId"/>
+		<result column="addtime" property="addtime"/>
+		<result column="sub_type" property="subType"/>
+		</resultMap>
+		<sql id="sql_base">
+		id,user_id,types,title,describe,head_status,orders_id,patient_id,addtime,sub_type
+		</sql>
+		
+		<insert id="insert" parameterType="com.ola.qh.entity.UserMessage">
+		insert into user_message(<include refid="sql_base"></include>)
+		values(#{id},#{userId},#{types},#{title},#{describe},#{headStatus},#{ordersId},#{patientId},#{addtime},#{subType})
+		</insert>
+		
+		
+	</mapper>
