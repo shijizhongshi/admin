@@ -12,8 +12,8 @@ public class OrdersSchedule {
 	@Autowired
 	private IOrdersService ordersService;
 	
-	@Scheduled(cron="0 0 1 ? * *")//1点执行)
-	public void autoComfirmOrders(){
+	/*@Scheduled(cron="0 0 1 ? * *")//1点执行)
+*/	public void autoComfirmOrders(){
 		////7天自动确认收货
 		ordersService.comfirmOrders();
 		
