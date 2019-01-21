@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ShopServeDao">
+	<resultMap type="com.ola.qh.entity.ShopServe" id="ShopServeMap">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="shop_id" property="shopId" />
+		<result column="shop_name" property="shopName" />
+		<result column="serve_name" property="serveName" />
+		<result column="price" property="price" />
+		<result column="discount_price" property="discountPrice" />
+		<result column="img_url" property="imgUrl" />
+		<result column="content" property="content" />
+		<result column="serve_time" property="serveTime" />
+		<result column="buy_rule" property="buyRule" />
+		<result column="serve_type" property="serveType" />
+		<result column="serve_status" property="serveStatus" />
+		<result column="ishot" property="ishot" />
+		<result column="payment_type" property="paymentType" />
+		<result column="explains" property="explains" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+		
+	</resultMap>
+	<select id="selectShopServe" resultMap="ShopServeMap">
+		select sv.id,sv.user_id,shop_id,serve_name,price,discount_price,img_url,content,serve_time,buy_rule
+		,serve_type,serve_status,ishot,payment_type,explains,sv.addtime,sv.updatetime,shop_name
+		from shop_serve sv left join shop s on sv.shop_id=s.id 
+		where 1=1
+		<if test="shopName!=null and shopName!=''">
+		and shop_name LIKE CONCAT(CONCAT('%',#{shopName},'%'))
+		</if>
+		<if test="serveName!=null and serveName!=''">
+		and serve_name LIKE CONCAT(CONCAT('%',#{serveName},'%'))
+		</if>
+		<if test="serveType!=null and serveType!=''">
+		and serve_type=#{serveType}
+		</if>
+		limit #{pageNo},#{pageSize}
+	</select>
+	
+	<update id="updateShopServe" >
+		update shop_serve set
+		<if test="ishot!=null and ishot!=''">
+		ishot=#{ishot},
+		</if>
+		<if test="serveStatus!=null and serveStatus!=''">
+		serve_status=#{serveStatus},
+		</if>
+		updatetime=#{updatetime} where id=#{id}
+		
+	</update>
+	
+	<delete id="deleteShopServe" >
+		delete from shop_serve where id=#{id}
+	</delete>
+	
+</mapper>

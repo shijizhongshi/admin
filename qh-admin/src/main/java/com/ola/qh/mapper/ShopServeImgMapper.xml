@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ShopServeImgDao">
+	<resultMap type="com.ola.qh.entity.ShopServeImg" id="ShopServeImgMap">
+		<result column="id" property="id" />
+		<result column="serve_id" property="serveId" />
+		<result column="img_url" property="imgUrl" />
+		<result column="addtime" property="addtime" />
+	</resultMap>
+	
+	<select id="selectServeImg" resultMap="ShopServeImgMap">
+		select * from shop_serve_img where serve_id=#{serveId}
+		
+	</select>
+	
+	<delete id="deleteServeImg" >
+		delete from shop_serve_img where serve_id=#{serveId}
+	</delete>
+	
+</mapper>
