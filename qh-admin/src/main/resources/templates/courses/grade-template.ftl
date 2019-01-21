@@ -27,7 +27,7 @@
 	</div>
 	</div>
 <div class="manage">
-	<ul style="height: 80px;" class="show">
+	<ul class="show">
 
 					<li ng-click="add()"
 						style="background: #9DE879;"><span
@@ -36,7 +36,7 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改模板</li>
 					<li ng-click="deletetemplate()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除模板</li>
-					<li ng-click="refresh()" style="float: right; margin-right: 100px; background: none;"><img
+					<li ng-click="refresh()" style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
 				</ul>
 				<div class="admin-table">

@@ -64,13 +64,14 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select" style="float:left;margin-right:15px;">搜索课程<br />
+	<div class="select-2" style="width:18%">
+	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" name="search" style="text-indent:2em;"/></form>
+	<input type="text" name="search"/></form>
 	</div>
 	</div>
 <div class="manage">
-	<ul style="height: 80px;" class="show">
+	<ul class="show">
 
 			<li  ng-click="saveChapter()" style="background:#9DE879;"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加章</li>
 		<li ng-click="updateChapter()" style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改章</li>
@@ -78,7 +79,7 @@
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<li ng-click="section()"><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;节管理</li>
-         <li style="float: right;margin-right: 100px;background:none;"><img src="/images/sjk-f5.png" ng-click="chapterBases()" name="changyi"/></li>
+         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" ng-click="chapterBases()" name="changyi"/></li>
 
 	</ul>
 	<div class="admin-table">
