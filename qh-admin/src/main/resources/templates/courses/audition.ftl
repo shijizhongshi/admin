@@ -75,7 +75,7 @@ submenu="sidebarmenu-audition">
 						</div>
 					</div>
 					<div class="manage">
-						<ul style="height: 80px;" class="show">
+						<ul  class="show">
 
 							<li ng-click="add()"
 								style="background: #9DE879;"><span
@@ -128,7 +128,7 @@ submenu="sidebarmenu-audition">
 								ng-change="courseBases()">
 							</ul>
 						</div>
-
+</div>
 						<!--弹窗-->
 						<div class="poop" id="add">
 							<form id="myform">
@@ -166,18 +166,18 @@ submenu="sidebarmenu-audition">
 												</select>
 											</div>
 										</div>
-										<div style="width: 100%; height: 90px; clear: both;">
+										<div style="width: 100%;clear: both;">
 											<div class=" select-2">
 
 												<span>播放时长（分）：</span> <input type="text" ng-model="courseNofree.palyTime"
 													placeholder="请输入时长" />
 											</div>
 										</div>
-										<div style="width: 100%; height: 90px; clear: both;">
+										<div style="width: 100%;clear: both;">
 											<div class=" select-2">
 												<span>老师：</span> 
 												<i ng-click="showteacher(courseTypeSubclassName)"
-													style="position: absolute; right: 10px; top: 45px; display: inherit; cursor: pointer;"
+													style="position: absolute; right: 10px; top: 40px; display: inherit; cursor: pointer;"
 													class="glyphicon glyphicon-search">
 													</i>
 												<input type="text"  ng-model="courseNofree.teachers" disabled="disabled"/> 
@@ -189,30 +189,32 @@ submenu="sidebarmenu-audition">
 											<li><input type="radio" name="tuijian" ng-model="courseNofree.isremmend" ng-value="1"/>是</li>
 											<li><input type="radio" name="tuijian" ng-model="courseNofree.isremmend" ng-value="0"/>否</li>
 										</ul>
-										<div class="costs-uploadfile-div">
-											<input type="file" value="上传试听课图片" onchange="angular.element(this).scope().uploadmainimage(this)" >
-											<input type="hidden" ng-model="courseNofree.imgUrl"/>
-											<div style="height: 130px; width: 40%;  margin-top: 3px;">
-												<img ng-src="{{courseNofree.imgUrl}}" style="width:50px;height:130px;"/>
-											</div>
-										</div>
+										
 
 									</div>
-								</div>
+							
 
 								<div class="grade-center">
 									<div class="grade-text">
 										<span>描述</span>
 										<textarea ng-model="courseNofree.describes"></textarea>
 									</div>
-									<div class="costs-uploadfile-div">
+							<div class="costs-uploadfile-div">
+											<input type="file" value="上传试听课图片" onchange="angular.element(this).scope().uploadmainimage(this)" >
+											<input type="hidden" ng-model="courseNofree.imgUrl"/>
+											<div style="height: 130px;  margin-top: 3px;">
+												<img ng-src="{{courseNofree.imgUrl}}" style="height:130px;"/>
+											</div>
+										</div>
+								</div>
+	<div class="costs-uploadfile-div">
+									<b>添加试听课程</b>
 										<input type="file" id="file"  value="上传试听课视频" accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" onchange="angular.element(this).scope().uploadmainimage1(this)" />
 										<div style="margin-top: 3px;">
 										<div id='polyved'></div>
 										</div>
 									</div>
 								</div>
-
 							</form>
 							<div class="end">
 								<input name="git" type="submit" value="提交" ng-click="addAudition()" ng-if="id==null" style="background: #5ED8A9;" />
@@ -273,7 +275,7 @@ submenu="sidebarmenu-audition">
 						</div>
 
 
-					</div>
+					
 
 				</div>
 
@@ -283,11 +285,11 @@ submenu="sidebarmenu-audition">
 		 
 		<style type="text/css">
 .poop, .resource {
-	overflow-y: scroll;
+	overflow-y: auto;
 	position: absolute;
-	left: 5%;
-	top: 5%;
-	width: 60%;
+	left: 25%;
+	top: 15%;
+	width:auto;
 	height: 600px;
 }
 
@@ -308,7 +310,7 @@ submenu="sidebarmenu-audition">
 }
 
 .grade-left, .grade-center {
-	width: 50%;
+	width:330px;
 	float: left;
 	height: auto;
 	overflow: auto;
