@@ -13,9 +13,9 @@ app.controller("shopServeController", function($scope, $http){
 	   $scope.serveName=null;
 	   $scope.serveType=null;
 	   $scope.serveStatus=0;
-	   $scope.id=null;
-	   $scope.ishot=null;
-	   
+	   $scope.yunxu=true;
+	   $scope.jujue=true;
+	   $scope.serveStatused=null;
 	  
 	   $scope.serveList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
@@ -105,20 +105,25 @@ app.controller("shopServeController", function($scope, $http){
 			
 		}
 	
-	$scope.updateserve=function(ishot,serveStatused,id){
+	$scope.updateserve=function(s){
 		 
-		$http.get("/api/shopserve/update",{"params": {"ishot":ishot,"serveStatus":serveStatused,
-			"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$scope.s=s;
+		
+		if(s.serveStatus=="允许"){
+			$scope.serveStatused=1;
+		}
+		else if(s.serveStatus=="拒绝"){
+			
+			$scope.serveStatused=4;
+		}
+		$http.get("/api/shopserve/update",{"params": {"ishot":s.ishot,"serveStatus":$scope.serveStatused,
+			"id":s.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				alert("修改成功");
+				alert("修改成功")
 				document.getElementById('add').style.display="none"; 
 				$scope.serveList();
 				
-			}
-			else{
-				
-				alert("修改失败");
 			}
 		})
 	}

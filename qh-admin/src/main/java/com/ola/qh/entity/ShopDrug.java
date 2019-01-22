@@ -14,22 +14,28 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class ShopDrug {
 	
 	private String id;
-	
+	@NotEmpty(message="用户的id不能为空")
 	private String userId;
-	
+	@NotEmpty(message="店铺的id不能为空")
 	private String shopId;
-	
+	@NotEmpty(message="药品名称不能为空")
 	private String drugName;////药品名称
-	
+	@NotEmpty(message="商品的类别不能为空")
+	private String categoryName;///商品的类别
+	@NotEmpty(message="商品的子类别不能为空")
+	private String categorySubname;////商品的类别
+	@NotEmpty(message="治疗功能不能为空")
 	private String healingPowers;//////治疗功能
-	
+	@NotEmpty(message="药品规格不能为空")
 	private String specification;////药品规格
-	
+	@NotNull
 	private BigDecimal originalPrice;////原价
-	
+	@NotNull
 	private BigDecimal discountPrice;///折扣价
-	
+	@NotNull
 	private BigDecimal price;////原价
+	@NotNull
+	private int stocks;////库存
 	
 	private String drugDetail;///
 	
@@ -80,11 +86,79 @@ public class ShopDrug {
 	private Date addtime;
 	
 	private Date updatetime;
+	@Valid
+	@NotNull
+	@Size(min=1)
+	private List<ShopDrugImg> imgList=new ArrayList<ShopDrugImg>();
 	
 	private int status;////0:自动状态
 	
 	private int ishot;////1"首页的热卖
 	
+	private String istimes;///1:审批过的限时抢购的商品  2:审批没有过的抢购商品   0:还没有审批的抢购商品
+	
+	private String deadlines;////限时规定的天数
+	
+	private int islimits;///1:审批过了   2:审批不过  0未审批
+	
+	private int salesNumber;////销量
+	
+	private BigDecimal freight;////运费
+	
+	private int isFavorite;///1:已经收藏   0:没有收藏
+	
+	private String isrecommend;////1:店家推荐  0不
+	
+	private String issales;////1:是促销  0:不
+
+	public String getIstimes() {
+		return istimes;
+	}
+
+	public void setIstimes(String istimes) {
+		this.istimes = istimes;
+	}
+
+
+	public String getIsrecommend() {
+		return isrecommend;
+	}
+
+	public void setIsrecommend(String isrecommend) {
+		this.isrecommend = isrecommend;
+	}
+
+	public String getIssales() {
+		return issales;
+	}
+
+	public void setIssales(String issales) {
+		this.issales = issales;
+	}
+
+	public int getIsFavorite() {
+		return isFavorite;
+	}
+
+	public void setIsFavorite(int isFavorite) {
+		this.isFavorite = isFavorite;
+	}
+
+	public BigDecimal getFreight() {
+		return freight;
+	}
+
+	public void setFreight(BigDecimal freight) {
+		this.freight = freight;
+	}
+
+	public int getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(int stocks) {
+		this.stocks = stocks;
+	}
 
 	public String getId() {
 		return id;
@@ -360,6 +434,14 @@ public class ShopDrug {
 		this.updatetime = updatetime;
 	}
 
+	public List<ShopDrugImg> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<ShopDrugImg> imgList) {
+		this.imgList = imgList;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -375,7 +457,44 @@ public class ShopDrug {
 	public void setIshot(int ishot) {
 		this.ishot = ishot;
 	}
-	
-	
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getCategorySubname() {
+		return categorySubname;
+	}
+
+	public void setCategorySubname(String categorySubname) {
+		this.categorySubname = categorySubname;
+	}
+	public int getIslimits() {
+		return islimits;
+	}
+
+	public void setIslimits(int islimits) {
+		this.islimits = islimits;
+	}
+
+	public int getSalesNumber() {
+		return salesNumber;
+	}
+
+	public void setSalesNumber(int salesNumber) {
+		this.salesNumber = salesNumber;
+	}
+
+	public String getDeadlines() {
+		return deadlines;
+	}
+
+	public void setDeadlines(String deadlines) {
+		this.deadlines = deadlines;
+	}
 	
 }

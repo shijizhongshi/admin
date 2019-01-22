@@ -38,6 +38,9 @@
 		<if test="serveType!=null and serveType!=''">
 		and serve_type=#{serveType}
 		</if>
+		<if test="serveStatus!=null and serveStatus!=''">
+		and serve_status=#{serveStatus}
+		</if>
 		limit #{pageNo},#{pageSize}
 	</select>
 	

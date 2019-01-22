@@ -26,13 +26,13 @@ public class ShopServeService implements IShopServeService {
 	
 	@Transactional
 	@Override
-	public Results<List<ShopServe>> selectShopServe(String shopName, String serveName, String serveType,int pageNo,int pageSize) {
+	public Results<List<ShopServe>> selectShopServe(String shopName, String serveName, String serveType,int pageNo,int pageSize,String serveStatus) {
 		
 		Results<List<ShopServe>> results=new Results<List<ShopServe>>();
 		
 		try {
 			
-			List<ShopServe> list=shopServeDao.selectShopServe(shopName, serveName, serveType,pageNo,pageSize);
+			List<ShopServe> list=shopServeDao.selectShopServe(shopName, serveName, serveType,pageNo,pageSize,serveStatus);
 			for (ShopServe shopServe : list) {
 				
 				if(shopServe.getId()==null){

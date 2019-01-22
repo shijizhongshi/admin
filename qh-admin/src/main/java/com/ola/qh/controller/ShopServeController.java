@@ -24,10 +24,11 @@ public class ShopServeController {
 	public Results<List<ShopServe>> selectShopServe(@RequestParam(name="shopName",required=false)String shopName,
 			@RequestParam(name="serveName",required=false)String serveName,@RequestParam(name="serveType",required=false)String serveType,
 			@RequestParam(name = "pageNo", required = false) int pageNo,
-			@RequestParam(name = "pageSize", required = false) int pageSize){
+			@RequestParam(name = "pageSize", required = false) int pageSize,
+			@RequestParam(name ="serveStatus",required=false)String serveStatus){
 		
 		
-		return shopServeService.selectShopServe(shopName, serveName, serveType,pageNo,pageSize);
+		return shopServeService.selectShopServe(shopName, serveName, serveType,pageNo,pageSize,serveStatus);
 		
 	}
 	
@@ -36,8 +37,12 @@ public class ShopServeController {
 			@RequestParam(name="ishot",required=false)String ishot,@RequestParam(name="serveStatus",required=false)String serveStatus){
 		
 		Results<String> results=new Results<String>();
-		shopServeService.updateShopServe(id, ishot, serveStatus,new Date());
-		
+		int update=shopServeService.updateShopServe(id, ishot, serveStatus,new Date());
+		if(update<=0){
+			results.setStatus("1");
+			return results;
+			
+		}
 		results.setStatus("0");
 		return results;
 		
