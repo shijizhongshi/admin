@@ -10,7 +10,7 @@
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-chapter">
 
-<div class="details" id="details" ng-controller="sectionController">
+<div class="details" id="details" ng-controller="sectionController" style="width:100%;">
 <input type="hidden" value="${chapterId}" id="chapterId"/>
 <input type="hidden" value="${chapterName}" id="chapterName"/>
 	<div class="details-nav">
@@ -73,14 +73,15 @@
                     </div>
 
 	<!--弹窗-->
-		<div class="poop" id="add" style="width: 30%;height:400px;">
+		<div class="poop" id="add" style="width:auto;height:auto;">
 			<form id="myform">
-			<div class="add-jie-left">
+			<div >
 	<h3>添加节</h3>
 	<p><span style="float: left;">章名称：</span><span style="float: right;">${chapterName}</span></p>
 	
 		
-		<div class=" select">
+		<div class=" select-2" style="clear:both">
+		<span>节名称:</span>
 			<input type="text" ng-model="section.sectionName" placeholder="节名称" style="width: 230px;text-indent: 2em;" />
 		</div>
 			

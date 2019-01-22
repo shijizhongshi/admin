@@ -145,8 +145,8 @@ app.controller("CourseNofreeController",function($scope,$http){
 				$scope.video=data.data;
 				if($scope.video.videoId!=null){
 					var player = polyvObject('#polyved').videoPlayer({
-					    'width':'90%',
-					    'height':'200',
+					    'width':'400',
+					    'height':'400',
 					    'vid':$scope.video.videoId,
 					    'ts':$scope.video.ts,
 					    'sign':$scope.video.sign
