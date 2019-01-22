@@ -191,7 +191,7 @@
 				 <input type="file" name="file" id="fileField"  onchange="angular.element(this).scope().uploadmainimage(this)"  accept="image/*" /> 
     <input type='text' id="textfield" style="border: solid 1px #B1B1B1;"/> 
     <button class="allBtn costs-marl15">班级图片</button>
-    <img style="height:30px;width:50px;" ng-src="{{imgUrl}}"/></div>
+     <div class="costs-img"> <img ng-src="{{imgUrl}}"/></div></div>
   
 	</div>
 			</div>

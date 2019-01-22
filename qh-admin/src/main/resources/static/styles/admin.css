@@ -67,6 +67,12 @@ table .selected{background-color:#c1ddec}
 .fanye  li{margin-left:18px;}
 /**/
 .poop{position: absolute;left:30%;top:15%;overflow:auto;}
+.poop::-webkit-scrollbar , .resource::-webkit-scrollbar {width:6px;}
+.poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+            border-radius: 5px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.2);
+        }
 .poop,.poop-revise,.resource{display: none;z-index:50;width: 463px;height: 530px;padding:20px 30px;background: white;box-shadow:1px 1px 4px 4px #D8D6D6;}
  .end{width: 200px;float: right;}
 .end input {width:78px;height: 30px;border-radius:20px;margin-top:5px;color: white;font-size:16px;}
@@ -150,7 +156,7 @@ div.costs-uploadfile-div .allBtn{
     color: #fff;
     }
     .costs-uploadfile-div input{width:80%;}
- .costs-uploadfile-div img:ACTIVE{ transform: scale(7.0);position: fixed;z-index: 9999;}
+ .poop img:ACTIVE , .resource img:ACTIVE { transform: scale(7.0);position: fixed;z-index: 9999;}
 .admin-table table tr th img:ACTIVE{ transform: scale(9.0);position: fixed;z-index: 9999;}
 .costs-uploadfile-div img{height:100px;}
 .costs-img{height:100px;}

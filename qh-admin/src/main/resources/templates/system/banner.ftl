@@ -25,7 +25,7 @@
 	</div>
 <div class="details-frame" >
 	<div class="details-frame-content">
-		<div class=" select-3">
+		<div class="select-3">
 			<span>广告横幅的位置</span>
 			<img src="/images/sjk-xl.png"/>
 			<select ng-model="types">

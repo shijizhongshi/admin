@@ -21,10 +21,12 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select" style="float:left;margin-right:15px;">搜索课程<br />
+	<div class="select-3" style="width:15%;">
+	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" name="search" style=" text-indent:2em;"/></form>
+	<input type="text" name="search"/></form>
 	</div>
+		<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
 	</div>
 <div class="manage">
 	<ul class="show">
@@ -105,7 +107,7 @@
 									<input type="file" name="file"
 										onchange="angular.element(this).scope().uploadmainimage(this)" />
 									<input type="hidden" ng-model="courseClassTemplate.classUrl"
-										id="textfield" style="border: solid 1px #B1B1B1;" />
+										id="textfield"/>
 									
 									<div
 										style="height: 130px; width: 40%; border: solid 1px #B1B1B1; margin-top: 3px;">
