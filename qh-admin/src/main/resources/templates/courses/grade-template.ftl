@@ -107,7 +107,7 @@
 									<input type="file" name="file"
 										onchange="angular.element(this).scope().uploadmainimage(this)" />
 									<input type="hidden" ng-model="courseClassTemplate.classUrl"
-										id="textfield" style="border: solid 1px #B1B1B1;" />
+										id="textfield"/>
 									
 									<div
 										style="height: 130px; width: 40%; border: solid 1px #B1B1B1; margin-top: 3px;">

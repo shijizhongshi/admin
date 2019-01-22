@@ -80,7 +80,8 @@
 	<p><span style="float: left;">章名称：</span><span style="float: right;">${chapterName}</span></p>
 	
 		
-		<div class=" select">
+		<div class=" select-2" style="clear:both">
+		<span>节名称:</span>
 			<input type="text" ng-model="section.sectionName" placeholder="节名称" style="width: 230px;text-indent: 2em;" />
 		</div>
 			
