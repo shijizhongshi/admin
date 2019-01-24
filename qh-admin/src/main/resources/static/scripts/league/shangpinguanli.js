@@ -121,7 +121,8 @@ app.controller("shopdrugController", function($scope, $http){
 			
 		 document.getElementById('revise').style.display="block"; 
 		 $scope.d=d;
-			
+		 $scope.$emit('to-parent',d);  
+
 		}
 		
 		$scope.updatedrug=function(ishot,islimits,istimes,isrecommend,issales,id){
@@ -141,4 +142,12 @@ app.controller("shopdrugController", function($scope, $http){
 				}
 			})
 		}
+})
+app.controller("shopdrugControllered", function($scope, $http){
+	//////父极
+	 $scope.$on('to-parent', function(d,data) { 
+		 $scope.d=data;          //父级能得到值  
+	    });  
+
+	
 })

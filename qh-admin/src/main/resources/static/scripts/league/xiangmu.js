@@ -103,6 +103,7 @@ app.controller("shopServeController", function($scope, $http){
 			
 		 document.getElementById('add').style.display="block"; 
 		 $scope.s=s;
+		 $scope.$emit('to-parent',s);  
 			
 		}
 	
@@ -124,4 +125,11 @@ app.controller("shopServeController", function($scope, $http){
 		})
 	}
 	
+})
+
+app.controller("shopServeControllered", function($scope, $http){
+	
+	$scope.$on('to-parent', function(d,data) { 
+		$scope.s=data;   //父级能得到值  
+	    });
 })
