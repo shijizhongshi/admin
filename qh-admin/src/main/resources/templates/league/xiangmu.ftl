@@ -24,6 +24,8 @@
 					<li>项目管理</li>
 				</ul>
 			</div>
+			<div ng-controller="shopServeControllered">
+			<div ng-controller="shopdrugControllered">
 			<div class="details-frame">
 				<div class="details-frame-content" id="details-frame-content">
 					<ul>
@@ -226,7 +228,9 @@
 			</div>
 			<!-- 商品详情 -->
 			<div ng-controller="shopdrugControllered">
-			<div id="revise" class="resource" style="display: none;" >
+
+			<div id="revise" class="resource" style="display: none;">
+
 				<form id="myform2">
 					<h3>商品详情</h3>
 					<div class="template-add">
@@ -424,11 +428,13 @@
 						style="background: #5ED8A9;" /> <input name="esc" type="reset"
 						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
 				</div>
+				</div>
 			</div>
 			</div>
 		</div>
+		</div>
 		<!-- 项目详情 -->
-		<div id="add" class="resource" style="display: none;" ng-controller="shopServeController">
+		<div id="add" class="resource" style="display: none;" ng-controller="shopServeControllered">
 			<form id="myform">
 				<h3>项目详情</h3>
 				<div class="template-add">
@@ -496,7 +502,7 @@
 	</form>
 
 
-
+</div>
 		</div>
 
 
