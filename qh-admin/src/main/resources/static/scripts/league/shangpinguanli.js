@@ -1,4 +1,4 @@
-app.controller("shopServeController", function($scope, $http){
+app.controller("shopdrugController", function($scope, $http){
 	
 	
 		$scope.total = 0;
@@ -7,59 +7,64 @@ app.controller("shopServeController", function($scope, $http){
 	   //一页显示多少条
 	   $scope.pageSize = 20;
 	
-	   $scope.hot=null;
-	   $scope.Status=null;
+	   
+	   $scope.id=null;
+	   $scope.drugName=null;
 	   $scope.shopName=null;
-	   $scope.serveName=null;
-	   $scope.serveType=null;
-	   $scope.serveStatus=0;
-	   $scope.yunxu=true;
-	   $scope.jujue=true;
-	   $scope.serveStatused=null;
-	  
-	   $scope.serveList=function(){
+	   $scope.categoryName=null;
+	   $scope.categorySubname=null;
+	   $scope.drlimits=0;
+	   
+	   
+	    $scope.drugList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-			$http.get("/api/shopserve/list",{"params": {"shopName":$scope.shopName,"serveName":$scope.serveName,
-				"serveType":$scope.serveType,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"serveStatus":$scope.serveStatus}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			$http.get("/api/shopDrug/select",{"params": {"shopName":$scope.shopName,"drugName":$scope.drugName,"categoryName":$scope.categoryName,
+				"categorySubname":$scope.categorySubname,"islimits":$scope.drlimits,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					$scope.servelist=data.data;
+					$scope.druglist=data.data;
 					
-					angular.forEach($scope.servelist, function(serve){  
+					angular.forEach($scope.druglist, function(drug){  
 						
-						if(serve.ishot==0){
+						if(drug.isrecommend==0){
 							
-							serve.hot="不推荐";
+							drug.recommend="不推荐"
 						}
-						else if(serve.ishot==1){
-							serve.hot="推荐";
+						else if(drug.isrecommend==1){
+							
+							drug.recommend="推荐"
 						}
 						
-						if(serve.serveStatus==0){
+						if(drug.status==0){
 							
-							serve.Status="待审核";
-							$scope.yunxu=true;
-							$scope.jujue=true;
+							drug.statu="正常"
 						}
-						else if(serve.serveStatus==1){
-							serve.Status="已通过";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+						else if(drug.status==2){
+							
+							drug.statu="下架"
 						}
-						else if(serve.serveStatus==2){
-							serve.Status="已下架";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+						else if(drug.status==3){
+							
+							drug.statu="商家已删除"
 						}
-						else if(serve.serveStatus==3){
-							serve.Status="已删除";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+						
+						if(drug.islimits==0){
+							
+							drug.limits="未审批"
+								drug.yunxu1=true;
+							drug.jujue1=true;
 						}
-						else if(serve.serveStatus==4){
-							serve.Status="未通过";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+						else if(drug.islimits==1){
+							
+							drug.limits="已通过"
+								drug.yunxu1=false;
+							drug.jujue1=false;
+						}
+						else if(drug.islimits==2){
+							
+							drug.limits="未通过"
+								drug.yunxu1=false;
+							drug.jujue1=false;
 						}
 						
 					})
@@ -69,27 +74,41 @@ app.controller("shopServeController", function($scope, $http){
 				}
 			})
 		}
-		$scope.serveList();
+	    
+		$scope.drugList();
 		
-		$scope.servetypeList=function(){
-			$http.get("/api/shopservetype/select", {'Content-Type': 'application/json;charset=UTF-8'})
+		$scope.categoryList=function(){
+			$http.get("/api/shopdrugcategory/select", {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					$scope.servetypelist=data.data;
+					$scope.categorylist=data.data;
 					
 				}else{
-					$scope.servetypelist=null;
+					$scope.categorylist=null;
 				}
 			})
 		}
-		$scope.servetypeList();		
+		$scope.categoryList();	
 		
-		$scope.checkserve=function(s){
+		$scope.subcategoryList=function(){
+			$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.categoryId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					$scope.subcategorylist=data.data;
+					
+				}else{
+					$scope.subcategorylist=null;
+				}
+			})
+		}
+		$scope.subcategoryList();
+		
+		$scope.checkdrug=function(d){
 			
-			 if($scope.selected!=s){
-					$scope.selected=s;
-			 		$scope.id=s.id;
-			 		$scope.shop=s;
+			 if($scope.selected!=d){
+					$scope.selected=d;
+			 		$scope.id=d.id;
+			 		$scope.drug=d;
 			 		
 			 		
 			 }else{
@@ -98,34 +117,28 @@ app.controller("shopServeController", function($scope, $http){
 					}
 		}
 		
-	$scope.checkedAll=function(s){
+		$scope.checkedAlldrug=function(d){
 			
-		 document.getElementById('add').style.display="block"; 
-		 $scope.s=s;
+		 document.getElementById('revise').style.display="block"; 
+		 $scope.d=d;
 			
 		}
-	
-	$scope.updateserve=function(s){
-		 
-		$scope.s=s;
 		
-		if(s.serveStatus=="允许"){
-			$scope.serveStatused=1;
+		$scope.updatedrug=function(ishot,islimits,istimes,isrecommend,issales,id){
+			 
+			$http.get("/api/shopDrug/update",{"params": {"ishot":ishot,"islimits":islimits,"istimes":istimes,
+				"isrecommend":isrecommend,"":issales,"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					alert("修改成功");
+					document.getElementById('revise').style.display="none"; 
+					$scope.drugList();
+					
+				}
+				else{
+					
+					alert("修改失败");
+				}
+			})
 		}
-		else if(s.serveStatus=="拒绝"){
-			
-			$scope.serveStatused=4;
-		}
-		$http.get("/api/shopserve/update",{"params": {"ishot":s.ishot,"serveStatus":$scope.serveStatused,
-			"id":s.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				alert("修改成功")
-				document.getElementById('add').style.display="none"; 
-				$scope.serveList();
-				
-			}
-		})
-	}
-	
 })

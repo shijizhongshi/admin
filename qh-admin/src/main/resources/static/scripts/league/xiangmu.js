@@ -38,28 +38,29 @@ app.controller("shopServeController", function($scope, $http){
 						if(serve.serveStatus==0){
 							
 							serve.Status="待审核";
-							$scope.yunxu=true;
-							$scope.jujue=true;
+							serve.yunxu=true;
+							serve.jujue=true;
 						}
-						else if(serve.serveStatus==1){
+						else{
+							serve.yunxu=false;
+							serve.jujue=false;
+							
+						}
+						 if(serve.serveStatus==1){
 							serve.Status="已通过";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+							
 						}
 						else if(serve.serveStatus==2){
 							serve.Status="已下架";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+							
 						}
 						else if(serve.serveStatus==3){
 							serve.Status="已删除";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+							
 						}
 						else if(serve.serveStatus==4){
 							serve.Status="未通过";
-							$scope.yunxu=false;
-							$scope.jujue=false;
+							
 						}
 						
 					})

@@ -48,9 +48,60 @@
 		<result column="friendly_hint" property="friendlyHint" />
 		<result column="img_url" property="imgUrl" />
 		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
 		<result column="freight" property="freight"/>
+		<result column="approval_time" property="approvalTime"/>
+		<result column="shop_name" property="shopName"/>
 	</resultMap>
 
+	<select id="selectDrugList" resultMap="ShopDrugMap">
+	select sd.id id,sd.user_id user_id,drug_name,category_name,category_subname,healing_powers,specification,original_price,discount_price,price,
+	stocks,sales_number,ishot,sd.isrecommend isrecommend,issales,istimes,sd.islimits islimits,status,freight,deadlines,drug_detail,specification_params,product_name,
+	manufacturer,drug_sign,approval_number,period_validity,storages,units,proper_people,elements,characters,packagings,indication,dosage,
+	bad_symptom,taboo,attention_matter,drug_interactions,drug_action,shap_code,friendly_hint,img_url,shop_name
+	from shop_drug sd left join shop s on sd.shop_id=s.id
+	where 1=1
+	<if test="categoryName!=null and categoryName!=''">
+	and category_name=#{categoryName}
+	</if>
+	<if test="categorySubname!=null and categorySubname!=''">
+	and category_subname=#{categorySubname}
+	</if>
+	<if test="drugName!=null and drugName!=''">
+	and drug_name LIKE CONCAT(CONCAT('%',#{drugName},'%'))
+	</if>
 	
+	<if test="islimits!=null and islimits!=''">
+	and sd.islimits=#{islimits}
+	</if>
 	
+	<if test="shopName!=null and shopName!=''">
+	and shop_name LIKE CONCAT(CONCAT('%',#{shopName},'%'))
+	</if>
+	
+	 limit #{pageNo},#{pageSize}
+	</select>
+	
+	<update id="updateDrug">
+	update shop_drug set 
+	
+	<if test="islimits!=null and islimits!=''">
+	islimits=#{islimits},
+	</if>
+	<if test="issales!=null and issales!=''">
+	issales=#{issales},
+	</if>
+	<if test="istimes!=null and istimes!=''">
+	istimes=#{istimes},
+	</if>
+	<if test="isrecommend!=null and isrecommend!=''">
+	isrecommend=#{isrecommend},
+	</if>
+	<if test="ishot!=null and ishot!=''">
+	ishot=#{ishot},
+	</if>
+	approval_time=#{approvalTime},
+	
+	updatetime=updatetime where id=#{id}
+	</update>
 </mapper>

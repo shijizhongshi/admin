@@ -7,8 +7,10 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/league/xiangmu.js"></script>
 <script src="/scripts/league/league.js"></script>
+<script src="/scripts/league/shangpinguanli.js"></script>
 <@b.body menu="sidebarmenu-league" submenu="sidebarmenu-league-xiangmu">
-<div ng-controller="shopServeController">
+
+
 	<div>
 		<div class="details" style="width: 100%">
 			<div class="details-nav">
@@ -31,28 +33,52 @@
 					</ul>
 				</div>
 				<div id="guanli">
+				
 					<!-- 商品管理 -->
-					<div class="manage">
+					<div class="manage" ng-controller="shopdrugController">
+					
+					<form>
 						<ul style="height: 80px;" class="managr-dianpu">
 							<div class="select-3">
-								<span>商品名称</span> <input type="text" />
+								<span>商品名称</span> <input type="text" ng-model="drugName"/>
 							</div>
 							<div class="select-3">
-								<span>店铺名称</span> <input type="text" />
+								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
 							</div>
 							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>商品分类</span> <select>
-									<option disabled selected style='display: none;'></option>
-									<option></option>
-									<option></option>
+								<img src="/images/sjk-xl.png" /> <span>商品大类别</span>
+								 <select ng-model="categoryName">
+									<option value="">查看全部</option>
+									<option ng-repeat="cat in categorylist"  value="{{cat.categoryName}}" ng-selected="categoryName==cat.categoryName">{{cat.categoryName}}</option>
 								</select>
 							</div>
+							<div class=" select-3">
+								<img src="/images/sjk-xl.png" /> <span>商品小类别</span>
+								 <select ng-model="categorySubname">
+									<option value="">查看全部</option>
+									<option ng-repeat="sub in subcategorylist"  value="{{sub.subName}}" ng-selected="categorySubname==sub.subName">{{sub.subName}}</option>
+								</select>
+							</div>
+							<div class=" select-3">
+								<img src="/images/sjk-xl.png" /> <span>审核状态</span>
+								 <select ng-model="drlimits">
+									<option ng-selected="drlimits==''"  value="">查看全部</option>
+									<option ng-selected="drlimits=='0'" value="0">未审核</option>
+									<option ng-selected="drlimits=='1'" value="1">已通过</option>
+									<option ng-selected="drlimits=='2'" value="2">未通过</option>
+									
+								</select>
+							</div>
+							
+							
 
 							<div>
-								<input type="button" class="btn-lg im-key" ng-click=""
-									value="检索" ng-click="" />
+								<input type="button" class="btn-lg im-key" ng-click="drugList()"
+									value="检索" />
 							</div>
 						</ul>
+						</form>
+						
 						<ul class="show">
 							<li ng-click="deletetemplate()" style="background: #F86846;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
@@ -67,33 +93,32 @@
 							<table>
 								<tr>
 									<th>商品名称</th>
-									<th>商品价格</th>
-									<th>优惠价格</th>
 									<th>分类</th>
 									<th>所属店铺</th>
 									<th>商品图片</th>
 									<th>推荐级别</th>
-									<th>展示时间</th>
-									<th>详细信息</th>
 									<th>审核状态</th>
 									<th>操作</th>
+									
 								</tr>
-								<tr >
-									<th>商品名称</th>
-									<th>商品价格</th>
-									<th>优惠价格</th>
-									<th>分类</th>
-									<th>所属店铺</th>
-									<th>商品图片</th>
-									<th>推荐级别</th>
-									<th>展示时间</th>
-									<th><span class="xiangqing" onclick="showDiv2()">查看详情</span></th>
-									<th>审核状态</th>
-									<th><input type="button" class="btn-lg im-key" value="允许"
-										style="background: #7bd88b;" /> <input type="button"
+								<form>
+								<tr ng-repeat="d in druglist" ng-click="checkdrug(d)"
+									ng-class="{'selected':selected==d}">
+									<th>{{d.drugName}}</th>
+									<th>{{d.categorySubname}}</th>
+									<th>{{d.shopName}}</th>
+									<th><img  src="{{d.imgUrl}}"></th>
+									<th>{{d.recommend}}</th>
+									<th>{{d.limits}}</th>
+									<th>
+									<span class="xiangqing" ng-click="checkedAlldrug(d)">查看详情</span>
+									<input ng-click="updatedrug('',1,'','','',d.id)" ng-show="d.yunxu1==true"  type="button" class="btn-lg im-key" value="允许"
+										style="background: #7bd88b;" /> 
+										<input ng-click="updatedrug('',2,'','','',d.id)"  ng-show="d.jujue1==true" id="no"  type="button"
 										class="btn-lg im-key" value="拒绝" style="background: #8e9a91;" />
 									</th>
 								</tr>
+								</form>
 							</table>
 						</div>
 						<div class="col-sm-6"></div>
@@ -102,13 +127,13 @@
 								ng-model="current" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-change="drugList()">
 							</ul>
 						</div>
 					</div>
 
 					<!-- 项目管理 -->
-					<div class="manage" style="display: none;">
+					<div class="manage" style="display: none;" ng-controller="shopServeController">
 					<form>
 						<ul style="height: 80px;" class="managr-dianpu">
 							<div class="select-3">
@@ -128,18 +153,17 @@
 							<div class=" select-3">
 								<img src="/images/sjk-xl.png" /> <span>审核状态</span> 
 								<select ng-model="serveStatus" >
-									<option  value="">查看全部</option>
-									<option  value="0" ng-selected="serveStatus==0">待审批</option>
-									<option  value="1" ng-selected="serveStatus==1">已通过</option>
-									<option  value="2" ng-selected="serveStatus==2">已下架</option>
-									<option  value="3" ng-selected="serveStatus==3">用户已删除</option>
-									<option  value="4" ng-selected="serveStatus==4">未通过</option>
+									<option ng-selected="serveStatus==''"  value="">查看全部</option>
+									<option ng-selected="serveStatus=='0'"  value="0">待审批</option>
+									<option ng-selected="serveStatus=='1'"  value="1" >已通过</option>
+									<option ng-selected="serveStatus=='2'"  value="2" >已下架</option>
+									<option ng-selected="serveStatus=='3'"  value="3" >用户已删除</option>
+									<option ng-selected="serveStatus=='4'"  value="4" >未通过</option>
 								</select>
 							</div>
 
 							<div>
-								<input type="button" class="btn-lg im-key" ng-click="serveList()"
-									value="检索" />
+								<input type="button" class="btn-lg im-key" ng-click="serveList()" value="检索" />
 							</div>
 						</ul>
 						</form>
@@ -178,9 +202,9 @@
 									<th>{{s.Status}}</th>
 									<th>
 										<span class="xiangqing" ng-click="checkedAll(s)">查看详情</span>
-										<input ng-click="updateserve('',1,s.id)"  ng-show="yunxu==true"  type="button" class="btn-lg im-key" value="允许"
+										<input ng-click="updateserve('',1,s.id)"  ng-show="s.yunxu"  type="button" class="btn-lg im-key" value="允许"
 										style="background: #7bd88b;" /> 
-										<input ng-click="updateserve('',4,s.id)"  ng-show="jujue==true" id="no"  type="button"
+										<input ng-click="updateserve('',4,s.id)"  ng-show="s.jujue" id="no"  type="button"
 										class="btn-lg im-key" value="拒绝" style="background: #8e9a91;" />
 									</th>
 								</tr>
@@ -201,7 +225,7 @@
 				</div>
 			</div>
 			<!-- 商品详情 -->
-			<div id="revise" class="resource" style="display: none;">
+			<div id="revise" class="resource" style="display: none;" ng-controller="shopdrugController">
 				<form id="myform2">
 					<h3>商品详情</h3>
 					<div class="template-add">
@@ -210,71 +234,198 @@
 							<div class="costs-uploadfile-div">
 								商品照片：
 								<div class="costs-img">
-									<img src="" name="营业执照" />
+									<img src="{{d.imgUrl}}" name="商品照片" />
 								</div>
 							</div>
 							<ul>
-								<li>是否是药品</li>
-								<li>是</li>
+								<li>药品名称</li>
+								<li>{{d.productName}}</li>
 							</ul>
 							<ul>
-								<li>商品名称</li>
-								<li>11111</li>
+								<li>商家名称</li>
+								<li>{{d.shopName}}</li>
 							</ul>
 							<ul>
-								<li>商品价格</li>
-								<li>2</li>
+								<li>商品的大类别</li>
+								<li>{{d.categoryName}}</li>
 							</ul>
 							<ul>
-								<li>优惠价格</li>
-								<li>2</li>
+								<li>商品的小类别</li>
+								<li>{{d.categorySubname}}</li>
 							</ul>
 							<ul>
-								<li>所属分类</li>
-								<li>5466</li>
+								<li>治疗功能</li>
+								<li>{{d.healingPowers}}</li>
 							</ul>
 							<ul>
-								<li>所属店铺</li>
-								<li>5466</li>
+								<li>药品规格</li>
+								<li>{{d.specification}}</li>
 							</ul>
-							<ul style="height: 70px;">
-								<li>其他信息:</li>
-								<li><span>中医推拿&nbsp;</span><span>小儿推拿&nbsp;</span></li>
+							<ul>
+								<li>原价</li>
+								<li>{{d.originalPrice}}</li>
 							</ul>
+							<ul>
+								<li>折扣价</li>
+								<li>{{d.discountPrice}}</li>
+							</ul>
+							<ul>
+								<li>库存</li>
+								<li>{{d.stocks}}</li>
+							</ul>
+							<ul>
+								<li>商品详情</li>
+								<li>{{d.drugDetail}}</li>
+							</ul>
+							<ul>
+								<li>规格参数</li>
+								<li>{{d.specificationParams}}</li>
+							</ul>
+							
+							<ul>
+								<li>生产厂家</li>
+								<li>{{d.manufacturer}}</li>
+							</ul>
+							<ul>
+								<li>药品标识</li>
+								<li>{{d.drugSign}}</li>
+							</ul>
+							<ul>
+								<li>批准文号</li>
+								<li>{{d.approvalNumber}}</li>
+							</ul>
+							<ul>
+								<li>有效期</li>
+								<li>{{d.periodValidity}}</li>
+							</ul>
+							<ul>
+								<li>存储</li>
+								<li>{{d.storages}}</li>
+							</ul>
+							<ul>
+								<li>单位</li>
+								<li>{{d.units}}</li>
+							</ul>
+							<ul>
+								<li>适宜人群</li>
+								<li>{{d.properPeople}}</li>
+							</ul>
+							<ul>
+								<li>成分</li>
+								<li>{{d.elements}}</li>
+							</ul>
+							<ul>
+								<li>性状</li>
+								<li>{{d.characters}}</li>
+							</ul>
+							<ul>
+								<li>包装</li>
+								<li>{{d.packagings}}</li>
+							</ul>
+							<ul>
+								<li>适应症</li>
+								<li>{{d.indication}}</li>
+							</ul>
+							<ul>
+								<li>用量</li>
+								<li>{{d.dosage}}</li>
+							</ul>
+							<ul>
+								<li>不良症状</li>
+								<li>{{d.badSymptom}}</li>
+							</ul>
+							<ul>
+								<li>禁忌</li>
+								<li>{{d.taboo}}</li>
+							</ul>
+							<ul>
+								<li>注意事项</li>
+								<li>{{d.attentionMatter}}</li>
+							</ul>
+							<ul>
+								<li>药物相互作用</li>
+								<li>{{d.drugInteractions}}</li>
+							</ul>
+							<ul>
+								<li>药理作用</li>
+								<li>{{d.drugAction}}</li>
+							</ul>
+							<ul>
+								<li>条形码</li>
+								<li>{{d.shapCode}}</li>
+							</ul>
+							<ul>
+								<li>友情提示</li>
+								<li>{{d.friendlyHint}}</li>
+							</ul>
+							<ul>
+								<li>状态</li>
+								<li>{{d.statu}}</li>
+							</ul>
+							<ul>
+								<li>限时规定的天数</li>
+								<li>{{d.deadlines}}</li>
+							</ul>
+							<ul>
+								<li>销量</li>
+								<li>{{d.salesNumber}}</li>
+							</ul>
+							<ul>
+								<li>运费</li>
+								<li>{{d.freight}}</li>
+							</ul>
+							<ul>
+								<li>审批的时间</li>
+								<li>{{d.approvalTime}}</li>
+							</ul>
+							
 						</div>
-
-
 
 						<div class="grade-center">
 							<div class=" select-2">
 								<img src="/images/sjk-xl.png" /> <span>推荐级别<i
-									class="bitian">*</i></span> <select>
-									<option disabled selected style='display: none;'></option>
-									<option></option>
-									<option></option>
+									class="bitian">*</i></span> <select ng-model="drisrecommend">
+									<option value="">查看全部</option>
+									<option ng-selected="d.isrecommend==0" value="0">不推荐</option>
+									<option ng-selected="d.isrecommend==1" value="1">推荐</option>
 								</select>
 							</div>
-							<div class="select-2">
-								<span>展示时间<i class="bitian">*</i></span> <input type="date"
-									name="search" ng-model="fromdate"
-									class="ng-pristine ng-untouched ng-valid ng-empty">
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>是否限时抢购<i
+									class="bitian">*</i></span> <select ng-model="dristimes">
+									<option value="">查看全部</option>
+									<option ng-selected="d.istimes==0" value="0">不限时抢购</option>
+									<option ng-selected="d.istimes==1" value="1">限时抢购</option>
+								</select>
 							</div>
-
-							<div class="select-2">
-								<span></span> <input type="date" name="search" ng-model="todate"
-									class="ng-pristine ng-untouched ng-valid ng-empty">
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>是否促销<i
+									class="bitian">*</i></span> <select ng-model="drissales">
+									<option value="">查看全部</option>
+									<option ng-selected="d.issales==0" value="0">不促销</option>
+									<option ng-selected="d.issales==1" value="1">促销</option>
+								</select>
 							</div>
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>是否热卖<i
+									class="bitian">*</i></span> <select ng-model="drishot">
+									<option value="">查看全部</option>
+									<option ng-selected="d.ishot==0" value="0">不热卖</option>
+									<option ng-selected="d.ishot==1" value="1">热卖</option>
+								</select>
+							</div>
+							
 						</div>
 				</form>
 				<div class="end">
-					<input name="git" type="submit" value="提交"
+					<input name="git" type="submit" value="提交" ng-click="updateserve(drishot,'',dristimes,drisrecommend,drissales,d.id)"
 						style="background: #5ED8A9;" /> <input name="esc" type="reset"
 						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
 				</div>
 			</div>
 		</div>
 		<!-- 项目详情 -->
-		<div id="add" class="resource" style="display: none;">
+		<div id="add" class="resource" style="display: none;" ng-controller="shopServeController">
 			<form id="myform">
 				<h3>项目详情</h3>
 				<div class="template-add">
@@ -485,6 +636,6 @@
 }
 </style>
 
-</div>
+
 </@b.body>
 </html>

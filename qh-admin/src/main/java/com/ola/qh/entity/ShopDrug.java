@@ -91,25 +91,29 @@ public class ShopDrug {
 	@Size(min=1)
 	private List<ShopDrugImg> imgList=new ArrayList<ShopDrugImg>();
 	
-	private int status;////0:自动状态
+	private String status;////0:自动状态
 	
-	private int ishot;////1"首页的热卖
+	private String ishot;////1"首页的热卖
 	
 	private String istimes;///1:审批过的限时抢购的商品  2:审批没有过的抢购商品   0:还没有审批的抢购商品
 	
 	private String deadlines;////限时规定的天数
 	
-	private int islimits;///1:审批过了   2:审批不过  0未审批
+	private String islimits;///1:审批过了   2:审批不过  0未审批
 	
 	private int salesNumber;////销量
 	
 	private BigDecimal freight;////运费
 	
-	private int isFavorite;///1:已经收藏   0:没有收藏
+	private Date approvalTime;///审批的时间
 	
 	private String isrecommend;////1:店家推荐  0不
 	
 	private String issales;////1:是促销  0:不
+	
+	private String shopName;/////商家
+	
+	
 
 	public String getIstimes() {
 		return istimes;
@@ -134,14 +138,6 @@ public class ShopDrug {
 
 	public void setIssales(String issales) {
 		this.issales = issales;
-	}
-
-	public int getIsFavorite() {
-		return isFavorite;
-	}
-
-	public void setIsFavorite(int isFavorite) {
-		this.isFavorite = isFavorite;
 	}
 
 	public BigDecimal getFreight() {
@@ -442,19 +438,19 @@ public class ShopDrug {
 		this.imgList = imgList;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public int getIshot() {
+	public String getIshot() {
 		return ishot;
 	}
 
-	public void setIshot(int ishot) {
+	public void setIshot(String ishot) {
 		this.ishot = ishot;
 	}
 
@@ -473,11 +469,11 @@ public class ShopDrug {
 	public void setCategorySubname(String categorySubname) {
 		this.categorySubname = categorySubname;
 	}
-	public int getIslimits() {
+	public String getIslimits() {
 		return islimits;
 	}
 
-	public void setIslimits(int islimits) {
+	public void setIslimits(String islimits) {
 		this.islimits = islimits;
 	}
 
@@ -496,5 +492,22 @@ public class ShopDrug {
 	public void setDeadlines(String deadlines) {
 		this.deadlines = deadlines;
 	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public Date getApprovalTime() {
+		return approvalTime;
+	}
+
+	public void setApprovalTime(Date approvalTime) {
+		this.approvalTime = approvalTime;
+	}
+	
 	
 }
