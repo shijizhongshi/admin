@@ -63,4 +63,16 @@ public class ShopController {
 		
 	}
 
+	@RequestMapping("/shopcount")
+	public Results<String> selectCount(@RequestParam(name="shopType",required=true)String shopType){
+		
+		Results<String> results = new Results<String>();
+		
+		String count=shopService.selectCount(shopType);
+		
+		results.setData(count);
+		results.setStatus("0");
+		return results;
+		
+	}
 }

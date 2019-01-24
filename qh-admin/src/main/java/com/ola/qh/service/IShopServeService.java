@@ -13,4 +13,6 @@ public interface IShopServeService {
 	public int updateShopServe(String id,String ishot,String serveStatus,Date updatetime);
 	
 	public Results<String> deleteShopServe(String id);
+	
+	
 }

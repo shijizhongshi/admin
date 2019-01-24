@@ -11,6 +11,7 @@ app.controller("shangpinshopController", function($scope, $http){
 	   $scope.isrecommend = 0;
 	   $scope.address = null;;
 	   $scope.shopName = null;
+	   $scope.scount=null;
 	   
 		$scope.shopList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
@@ -83,6 +84,18 @@ app.controller("shangpinshopController", function($scope, $http){
 			 $scope.s=s;
 			
 		}
+		
+		$scope.shangpincount=function(){
+			 
+			$http.get("/api/shop/shopcount",{"params": {"shopType":2}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					$scope.scount=data.data;
+					$scope.sscount="审核列表( "+$scope.scount+" )";
+				}
+			})
+	}
+		$scope.shangpincount();
 		
 		$scope.updateshop=function(s){
 			 

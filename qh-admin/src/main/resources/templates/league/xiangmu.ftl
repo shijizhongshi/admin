@@ -111,7 +111,7 @@
 									<th>{{d.recommend}}</th>
 									<th>{{d.limits}}</th>
 									<th>
-									<span class="xiangqing" ng-click="checkedAlldrug(d)">查看详情</span>
+									<span class="xiangqing" ng-click="checkedAlldrug(d)"><input type="hidden" ng-model="d"/>查看详情</span>
 									<input ng-click="updatedrug('',1,'','','',d.id)" ng-show="d.yunxu1==true"  type="button" class="btn-lg im-key" value="允许"
 										style="background: #7bd88b;" /> 
 										<input ng-click="updatedrug('',2,'','','',d.id)"  ng-show="d.jujue1==true" id="no"  type="button"
@@ -225,7 +225,8 @@
 				</div>
 			</div>
 			<!-- 商品详情 -->
-			<div id="revise" class="resource" style="display: none;" ng-controller="shopdrugController">
+			<div ng-controller="shopdrugControllered">
+			<div id="revise" class="resource" style="display: none;" >
 				<form id="myform2">
 					<h3>商品详情</h3>
 					<div class="template-add">
@@ -238,7 +239,8 @@
 								</div>
 							</div>
 							<ul>
-								<li>药品名称</li>
+								<li ng-click="test()">药品名称</li>
+								
 								<li>{{d.productName}}</li>
 							</ul>
 							<ul>
@@ -422,6 +424,7 @@
 						style="background: #5ED8A9;" /> <input name="esc" type="reset"
 						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
 				</div>
+			</div>
 			</div>
 		</div>
 		<!-- 项目详情 -->

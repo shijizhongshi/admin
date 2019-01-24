@@ -14,6 +14,8 @@ app.controller("shopdrugController", function($scope, $http){
 	   $scope.categoryName=null;
 	   $scope.categorySubname=null;
 	   $scope.drlimits=0;
+	   $scope.d=null;
+	   
 	   
 	   
 	    $scope.drugList=function(){
@@ -121,7 +123,8 @@ app.controller("shopdrugController", function($scope, $http){
 			
 		 document.getElementById('revise').style.display="block"; 
 		 $scope.d=d;
-			
+			console.log(d.id);
+			$scope.$emit('$fromSubControllerClick','hello');
 		}
 		
 		$scope.updatedrug=function(ishot,islimits,istimes,isrecommend,issales,id){
@@ -141,4 +144,5 @@ app.controller("shopdrugController", function($scope, $http){
 				}
 			})
 		}
+	
 })
