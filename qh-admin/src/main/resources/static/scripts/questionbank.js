@@ -1,4 +1,4 @@
-app.controller("bankController", function($scope, $http){
+/*app.controller("bankController", function($scope, $http){
 
 	
 	
@@ -28,5 +28,38 @@ $scope.uploadmainimage = function(file){
 };
 	
 
+$http.get("/api/coursenofree/polyv",{"params": {"vid":"b826fec7541e00ae5c2364c1a6c42870_b"}}, {'Content-Type': 'application/json;charset=UTF-8'})
+.success(function(data){
+	if(data.status=="0"){
+		$scope.video=data.data;
+		if($scope.video.videoId!=null){
+			var player = polyvObject('#polyved').videoPlayer({
+			    'width':'90%',
+			    'height':'100',
+			    'vid':$scope.video.videoId,
+			    'ts':$scope.video.ts,
+			    'sign':$scope.video.sign
+			});
+		}
+		
+	}
+})
 
-});
+});*/
+
+
+var app=angular.module("app",[]);
+app.controller('myCtrl', ['$scope','appService',function ($scope,appService) {
+	$scope.$on('to-parent', function(d,data) {  
+        console.log(data);         //父级能得到值  
+    });  
+}]);
+app.controller('myCtrl1', ['$scope', 'appService',function ($scope,appService) {
+    $scope.name=appService.name;
+    $scope.test=function(){
+    	 $scope.$emit('to-parent', "geifuji");  
+    }
+}]);
+app.service("appService", [function(){
+    this.name="hello";
+}]);

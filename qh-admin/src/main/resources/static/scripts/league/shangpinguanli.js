@@ -1,4 +1,4 @@
-app.controller("shopdrugController", function($scope, $http){
+app.controller("shopdrugControllered", function($scope, $http){
 	
 	
 		$scope.total = 0;
@@ -14,8 +14,7 @@ app.controller("shopdrugController", function($scope, $http){
 	   $scope.categoryName=null;
 	   $scope.categorySubname=null;
 	   $scope.drlimits=0;
-	   
-	   
+	   $scope.tab0=0;
 	    $scope.drugList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 			$http.get("/api/shopDrug/select",{"params": {"shopName":$scope.shopName,"drugName":$scope.drugName,"categoryName":$scope.categoryName,
@@ -143,11 +142,11 @@ app.controller("shopdrugController", function($scope, $http){
 			})
 		}
 })
-app.controller("shopdrugControllered", function($scope, $http){
+/*app.controller("shopdrugControllered", function($scope, $http){
 	//////父极
 	 $scope.$on('to-parent', function(d,data) { 
 		 $scope.d=data;          //父级能得到值  
 	    });  
 
 	
-})
+})*/

@@ -1,4 +1,4 @@
-app.controller("shopServeController", function($scope, $http){
+app.controller("shopServeControllered", function($scope, $http){
 	
 	
 		$scope.total = 0;
@@ -15,8 +15,19 @@ app.controller("shopServeController", function($scope, $http){
 	   $scope.serveStatus=0;
 	   $scope.id=null;
 	   $scope.ishot=null;
-	   
 	  
+	   $scope.tab0=1;
+	   
+	   $scope.go=function(type){
+	   $scope.tab0=type;
+		   if(type==1){
+			   document.getElementById('drugshow').style.display="none"; 
+		   document.getElementById('serveshow').style.display="block"; 
+	   }else{
+		   document.getElementById('serveshow').style.display="none";
+		   document.getElementById('drugshow').style.display="block"; 
+	   }
+	}
 	   $scope.serveList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 			$http.get("/api/shopserve/list",{"params": {"shopName":$scope.shopName,"serveName":$scope.serveName,
@@ -127,9 +138,9 @@ app.controller("shopServeController", function($scope, $http){
 	
 })
 
-app.controller("shopServeControllered", function($scope, $http){
+/*app.controller("shopServeControllered", function($scope, $http){
 	
 	$scope.$on('to-parent', function(d,data) { 
 		$scope.s=data;   //父级能得到值  
 	    });
-})
+})*/

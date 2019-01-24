@@ -5,9 +5,10 @@
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="./styles/admin.css" />
+<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/questionbank.js"></script>
 <body ng-app="app">
-<div class="details" ng-controller="bankController">
+<!--<div class="details" ng-controller="bankController">
 
 <body>
 <form>
@@ -28,11 +29,20 @@ Filedata:<input name="Filedata" id="file" type="file" onchange="angular.element(
 </div>
 </form>
  
- <script>
- 
-
-</script>
+<div id='polyved'></div>
+</div>-->
+<div>
+<div ng-controller="myCtrl">
+xiaohaiyaoguan
+<div ng-controller="myCtrl1">
+<input type="button" value="测试" ng-click="test()"/>
+xiaohaiyaoguan11111
 </div>
+</div>
+
+</div>
+
+
 </body>
  
  </html>
