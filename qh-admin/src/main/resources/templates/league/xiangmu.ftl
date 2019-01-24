@@ -6,12 +6,18 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/league/xiangmu.js"></script>
-<script src="/scripts/league/league.js"></script>
 <script src="/scripts/league/shangpinguanli.js"></script>
+<script src="/scripts/league/common.js"></script>
+<style>
+.tab0{
+border-bottom:3px solid red; 
+font-weight: 900;
+}
+</style>
 <@b.body menu="sidebarmenu-league" submenu="sidebarmenu-league-xiangmu">
 
 
-	<div>
+	<div ng-controller="commonController">
 		<div class="details" style="width: 100%">
 			<div class="details-nav">
 				<ul>
@@ -24,20 +30,19 @@
 					<li>项目管理</li>
 				</ul>
 			</div>
-			<div ng-controller="shopServeControllered">
+			
 			<div ng-controller="shopdrugControllered">
-			<div class="details-frame">
+			<div class="details-frame" id="drugshow" style="display: none;">
 				<div class="details-frame-content" id="details-frame-content">
 					<ul>
-						<li onmousedown="go(0)"
-							style="border-bottom: 3px solid red; font-weight: 900;">商品管理</li>
-						<li onmousedown="go(1)">项目管理</li>
+						<li ng-click="go(0)" class="tab0">商品管理</li>
+						<li ng-click="go(1)">项目管理</li>
 					</ul>
 				</div>
 				<div id="guanli">
 				
 					<!-- 商品管理 -->
-					<div class="manage" ng-controller="shopdrugController">
+					<div class="manage" >
 					
 					<form>
 						<ul style="height: 80px;" class="managr-dianpu">
@@ -134,101 +139,9 @@
 						</div>
 					</div>
 
-					<!-- 项目管理 -->
-					<div class="manage" style="display: none;" ng-controller="shopServeController">
-					<form>
-						<ul style="height: 80px;" class="managr-dianpu">
-							<div class="select-3">
-								<span>项目名称</span> <input type="text" ng-model="serveName"/>
-							</div>
-							<div class="select-3">
-								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
-							</div>
-							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>项目分类</span> 
-								<select ng-model="serveType" >
-									<option value="">查看全部</option>
-									<option ng-repeat="s in servetypelist"  value="{{s.name}}" ng-selected="serveType==s.name">{{s.name}}</option>
-									
-								</select>
-							</div>
-							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>审核状态</span> 
-								<select ng-model="serveStatus" >
-									<option ng-selected="serveStatus==''"  value="">查看全部</option>
-									<option ng-selected="serveStatus=='0'"  value="0">待审批</option>
-									<option ng-selected="serveStatus=='1'"  value="1" >已通过</option>
-									<option ng-selected="serveStatus=='2'"  value="2" >已下架</option>
-									<option ng-selected="serveStatus=='3'"  value="3" >用户已删除</option>
-									<option ng-selected="serveStatus=='4'"  value="4" >未通过</option>
-								</select>
-							</div>
-
-							<div>
-								<input type="button" class="btn-lg im-key" ng-click="serveList()" value="检索" />
-							</div>
-						</ul>
-						</form>
-						<ul class="show">
-							<li ng-click="deletetemplate()" style="background: #F86846;"><span
-								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-							<li><span class="glyphicon glyphicon-sort-by-attributes"
-								class="move-down"></span>&nbsp;下移</li>
-							<li style="float: right; margin-right: 20px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" /></li>
-						</ul>
-						<div class="admin-table">
-
-							<table>
-								<tr>
-									<th>项目名称</th>
-									<th>项目价格</th>
-									<th>优惠价格</th>
-									<th>分类</th>
-									<th>所属店铺</th>
-									<th>项目图片</th>
-									<th>推荐级别</th>
-									<th>审核状态</th>
-									<th>操作</th>
-								</tr>
-								<tr ng-repeat="s in servelist" ng-click="checkserve(s)"
-									ng-class="{'selected':selected==s}">
-									<th>{{s.serveName}}</th>
-									<th>{{s.price}}</th>
-									<th>{{s.discountPrice}}</th>
-									<th>{{s.serveType}}</th>
-									<th>{{s.shopName}}</th>
-									<th><img src="{{s.imgUrl}}"></th>
-									<th>{{s.hot}}</th>
-									<th>{{s.Status}}</th>
-									<th>
-										<span class="xiangqing" ng-click="checkedAll(s)">查看详情</span>
-										<input ng-click="updateserve('',1,s.id)"  ng-show="s.yunxu"  type="button" class="btn-lg im-key" value="允许"
-										style="background: #7bd88b;" /> 
-										<input ng-click="updateserve('',4,s.id)"  ng-show="s.jujue" id="no"  type="button"
-										class="btn-lg im-key" value="拒绝" style="background: #8e9a91;" />
-									</th>
-								</tr>
-							</table>
-						</div>
-						<div class="col-sm-6"></div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total"
-								ng-model="current" items-per-page="pageSize" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="serveList()">
-							</ul>
-						</div>
-					</div>
-
-
 				</div>
 			</div>
 			<!-- 商品详情 -->
-			
-
 			<div id="revise" class="resource" style="display: none;">
 
 				<form id="myform2">
@@ -432,8 +345,113 @@
 			
 			</div>
 		</div>
-		</div>
-		<!-- 项目详情 -->
+		
+			
+			<div ng-controller="shopServeControllered">
+			<div class="details-frame" id="serveshow" style="display: none;">
+				<div class="details-frame-content" id="details-frame-content">
+					<ul>
+						<li ng-click="go(0)">商品管理</li>
+						<li ng-click="go(1)" class="tab0">项目管理</li>
+					</ul>
+				</div>
+				<div id="guanli">
+				
+					
+
+					<!-- 项目管理 -->
+					<div class="manage">
+					<form id="myform1">
+						<ul style="height: 80px;" class="managr-dianpu">
+							<div class="select-3">
+								<span>项目名称</span> <input type="text" ng-model="serveName"/>
+							</div>
+							<div class="select-3">
+								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
+							</div>
+							<div class=" select-3">
+								<img src="/images/sjk-xl.png" /> <span>项目分类</span> 
+								<select ng-model="serveType" >
+									<option value="">查看全部</option>
+									<option ng-repeat="s in servetypelist"  value="{{s.name}}" ng-selected="serveType==s.name">{{s.name}}</option>
+									
+								</select>
+							</div>
+							<div class=" select-3">
+								<img src="/images/sjk-xl.png" /> <span>审核状态</span> 
+								<select ng-model="serveStatus" >
+									<option ng-selected="serveStatus==''"  value="">查看全部</option>
+									<option ng-selected="serveStatus=='0'"  value="0">待审批</option>
+									<option ng-selected="serveStatus=='1'"  value="1" >已通过</option>
+									<option ng-selected="serveStatus=='2'"  value="2" >已下架</option>
+									<option ng-selected="serveStatus=='3'"  value="3" >用户已删除</option>
+									<option ng-selected="serveStatus=='4'"  value="4" >未通过</option>
+								</select>
+							</div>
+
+							<div>
+								<input type="button" class="btn-lg im-key" ng-click="serveList()" value="检索" />
+							</div>
+						</ul>
+						</form>
+						<ul class="show">
+							<li ng-click="deletetemplate()" style="background: #F86846;"><span
+								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+							<li><span class="glyphicon glyphicon-sort-by-attributes"
+								class="move-down"></span>&nbsp;下移</li>
+							<li style="float: right; margin-right: 20px; background: none;"><img
+								src="/images/sjk-f5.png" name="changyi" /></li>
+						</ul>
+						<div class="admin-table">
+
+							<table>
+								<tr>
+									<th>项目名称</th>
+									<th>项目价格</th>
+									<th>优惠价格</th>
+									<th>分类</th>
+									<th>所属店铺</th>
+									<th>项目图片</th>
+									<th>推荐级别</th>
+									<th>审核状态</th>
+									<th>操作</th>
+								</tr>
+								<tr ng-repeat="s in servelist" ng-click="checkserve(s)"
+									ng-class="{'selected':selected==s}">
+									<th>{{s.serveName}}</th>
+									<th>{{s.price}}</th>
+									<th>{{s.discountPrice}}</th>
+									<th>{{s.serveType}}</th>
+									<th>{{s.shopName}}</th>
+									<th><img src="{{s.imgUrl}}"></th>
+									<th>{{s.hot}}</th>
+									<th>{{s.Status}}</th>
+									<th>
+										<span class="xiangqing" ng-click="checkedAll(s)">查看详情</span>
+										<input ng-click="updateserve('',1,s.id)"  ng-show="s.yunxu"  type="button" class="btn-lg im-key" value="允许"
+										style="background: #7bd88b;" /> 
+										<input ng-click="updateserve('',4,s.id)"  ng-show="s.jujue" id="no"  type="button"
+										class="btn-lg im-key" value="拒绝" style="background: #8e9a91;" />
+									</th>
+								</tr>
+							</table>
+						</div>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="total"
+								ng-model="current" items-per-page="pageSize" max-size="5"
+								class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-change="serveList()">
+							</ul>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+			<!-- 项目详情 -->
 		<div id="add" class="resource" style="display: none;" >
 			<form id="myform">
 				<h3>项目详情</h3>
@@ -502,10 +520,17 @@
 	</form>
 
 
+
+		
 </div>
+			
+			</div>
+			
+			
+			
+
+			
 		</div>
-
-
 
 
 	</div>

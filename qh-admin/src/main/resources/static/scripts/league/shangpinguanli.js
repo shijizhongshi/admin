@@ -1,4 +1,4 @@
-app.controller("shopdrugController", function($scope, $http){
+app.controller("shopdrugControllered", function($scope, $http){
 	
 	
 		$scope.total = 0;
@@ -148,12 +148,12 @@ app.controller("shopdrugController", function($scope, $http){
 		}
 
 })
-app.controller("shopdrugControllered", function($scope, $http){
-	//////父极
-	 $scope.$on('to-parent', function(d,data) { 
-		 $scope.d=data;          //父级能得到值  
-	    });  
-
-	
-})
+//app.controller("shopdrugControllered", function($scope, $http){
+//	//////父极
+//	 $scope.$on('to-parent', function(d,data) { 
+//		 $scope.d=data;          //父级能得到值  
+//	    });  
+//
+//	
+//})
 
