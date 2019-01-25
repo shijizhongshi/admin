@@ -148,7 +148,7 @@
 	.admin-table ol li{width: 16% }
 	.admin-table ol li:nth-child(1){width: 20%;}
 	.poop .select{clear: both !important;}
-	.poop {height:350px;}
+	.poop {height:auto;}
 </style>
 </@b.body>
  </html>

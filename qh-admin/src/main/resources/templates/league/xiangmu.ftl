@@ -244,7 +244,7 @@
 
 							</div>
 							<div
-								style="float: left; width: 300px; margin-top: -150px; padding-right: 30px;">
+								style="float: left; width: 300px; margin-top: -120px; padding-right: 30px;">
 								<ul>
 									<li>成分</li>
 									<li>{{d.elements}}</li>
@@ -514,7 +514,7 @@
 						</div>
 						<div class="grade-text">
 							<span>购买须知:</span>
-							<div style="height: 100px;">
+							<div style="height:auto;">
 								<span>{{s.explains}}</span>
 							</div>
 						</div>
@@ -629,7 +629,7 @@
 
 .resource {
 	width: auto;
-	height: 600px;
+	height:auto;
 	position: absolute;
 	left: 15%;
 	top: 20%;
