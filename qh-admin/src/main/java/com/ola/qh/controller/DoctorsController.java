@@ -82,4 +82,17 @@ public class DoctorsController {
 		return results;
 		
 	}
+	
+	@RequestMapping(value="/selectcount",method=RequestMethod.GET)
+	public Results<String> selectcount(){
+		
+		Results<String> results=new Results<String>();
+		
+		String count=doctorsService.selectcount();
+		
+		results.setData(count);
+		results.setStatus("0");
+		return results;
+		
+	}
 }

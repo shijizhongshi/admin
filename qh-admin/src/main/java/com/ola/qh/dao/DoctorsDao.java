@@ -13,6 +13,8 @@ public interface DoctorsDao {
 	
 	public String selectUserId(@Param("id")String id);
 	
+	public String selectcount();
+	
 	public int updateDoctors(@Param("id")String id,@Param("islimit")int islimit,@Param("isrecommend")int isrecommend,@Param("updatetime")Date updatetime);
 
 	public int insertDoctors(Doctors doctors);

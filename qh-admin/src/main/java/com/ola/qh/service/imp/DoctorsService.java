@@ -65,4 +65,10 @@ public class DoctorsService implements IDoctorsService{
 		
 		return doctorsDao.deleteDoctors(id);
 	}
+
+	@Override
+	public String selectcount() {
+		
+		return doctorsDao.selectcount();
+	}
 }
