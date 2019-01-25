@@ -64,4 +64,10 @@ public class ShopDrugCategoryService implements IShopDrugCategoryService{
 		}
 	}
 
+	@Override
+	public String selectShopDrugCategoryName(String categoryName) {
+		
+		return shopDrugCategoryDao.selectShopDrugCategoryName(categoryName);
+	}
+
 }

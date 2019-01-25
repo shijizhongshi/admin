@@ -42,7 +42,7 @@ font-weight: 900;
 				<div id="guanli">
 				
 					<!-- 商品管理 -->
-					<div class="manage" >
+					<div class="manage"  >
 					
 					<form>
 						<ul style="height: 80px;" class="managr-dianpu">
@@ -52,18 +52,18 @@ font-weight: 900;
 							<div class="select-3">
 								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
 							</div>
-							<div class=" select-3">
+							<div class=" select-3" ng-mouseleave="subcategoryList()">
 								<img src="/images/sjk-xl.png" /> <span>商品大类别</span>
-								 <select ng-model="categoryName">
+								 <select   ng-model="categoryName">
 									<option value="">查看全部</option>
 									<option ng-repeat="cat in categorylist"  value="{{cat.categoryName}}" ng-selected="categoryName==cat.categoryName">{{cat.categoryName}}</option>
 								</select>
 							</div>
-							<div class=" select-3">
+							<div class=" select-3" ng-mouseenter="subcategoryList()">
 								<img src="/images/sjk-xl.png" /> <span>商品小类别</span>
-								 <select ng-model="categorySubname">
+								 <select  ng-model="categorySubname">
 									<option value="">查看全部</option>
-									<option ng-repeat="sub in subcategorylist"  value="{{sub.subName}}" ng-selected="categorySubname==sub.subName">{{sub.subName}}</option>
+									<option  ng-repeat="sub in subcategorylist"  value="{{sub.subName}}" ng-selected="categorySubname==sub.subName">{{sub.subName}}</option>
 								</select>
 							</div>
 							<div class=" select-3">
