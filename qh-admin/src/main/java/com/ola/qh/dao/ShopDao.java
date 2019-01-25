@@ -16,4 +16,6 @@ public interface ShopDao {
 	public int updateShop(@Param("id")String id,@Param("islimits")int islimits,@Param("isrecommend")int isrecommend);
 	
 	public List<ShopImg> selectImgList(@Param("shopId")String shopId,@Param("subtype")int subtype);
+	
+	public String selectCount(@Param("shopType")String shopType);
 }

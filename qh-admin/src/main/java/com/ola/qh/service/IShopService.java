@@ -12,4 +12,6 @@ public interface IShopService {
 	public Shop selectShopSingle(String id);
 	
 	public int updateShop(String id,int islimits,int isrecommend);
+	
+	public String selectCount(String shopType);
 }

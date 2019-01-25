@@ -95,6 +95,7 @@ app.controller("shopdrugControllered", function($scope, $http){
 		
 		
 		$scope.categoryid=function(){
+			if($scope.categoryName!=null && $scope.categoryName!=""){
 			$http.get("/api/shopdrugcategory/selectid",{"params": {"categoryName":$scope.categoryName}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
@@ -104,6 +105,10 @@ app.controller("shopdrugControllered", function($scope, $http){
 					$scope.cateId=null;
 				}
 			})
+			}else{
+				
+				$scope.cateId=null;
+			}
 		}
 		
 		
