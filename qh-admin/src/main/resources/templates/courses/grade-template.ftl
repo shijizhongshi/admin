@@ -178,7 +178,7 @@
 .template-left, .template-right {
 	width: 50%;
 	float: left;
-	height: auto;
+	height: 600px;
 	overflow: auto;
 }
 
@@ -203,7 +203,7 @@
 
 .template-right .grade-text textarea {
 	width: 100%;
-	height:80px;
+	height: 110px;
 	font-size: 1.5rem
 }
 

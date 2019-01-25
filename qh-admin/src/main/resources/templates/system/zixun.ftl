@@ -83,7 +83,7 @@
 						ng-change="courseBases()">
 					</ul>
 				</div>
-	</div>
+
 				<!--弹窗-->
 				<div class="poop" id="add"style="width: 60%; height: 600px; position: absolute; left: 15%; top: 15%;">
 					<form id="myform">
@@ -163,7 +163,7 @@
 							value="取消" onclick="CloseDiv();formReset()" class="esc" />
 					</div>
 				</div>
-			
+				</div>
 		</div>
 </div>  
 </div>
