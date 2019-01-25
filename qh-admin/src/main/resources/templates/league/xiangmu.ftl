@@ -232,14 +232,15 @@
 				<form id="myform2">
 					<h3>商品详情</h3>
 					<div class="template-add">
-						<div class="grade-left" style="padding-right: 3%;">
+						<div class="grade-left" style="width:auto;">
 
 							<div class="costs-uploadfile-div">
 								商品照片：
-								<div class="costs-img">
+								<div class="costs-img" style="display:-webkit-inline-box;">
 									<img src="{{d.imgUrl}}" name="商品照片" />
 								</div>
 							</div>
+							<div style="float:left;width:300px;padding-right:30px;">
 							<ul>
 								<li>药品名称</li>
 								<li>{{d.productName}}</li>
@@ -256,30 +257,35 @@
 								<li>商品的小类别</li>
 								<li>{{d.categorySubname}}</li>
 							</ul>
-							<ul>
+							<ul  style="color:red;">
 								<li>治疗功能</li>
-								<li>{{d.healingPowers}}</li>
+								<li  style="color:red;">{{d.healingPowers}}</li>
 							</ul>
 							<ul>
 								<li>药品规格</li>
 								<li>{{d.specification}}</li>
 							</ul>
-							<ul>
+							<ul  style="color:red;">
 								<li>原价</li>
-								<li>{{d.originalPrice}}</li>
+								<li  style="color:red;">{{d.originalPrice}}</li>
 							</ul>
 							<ul>
-								<li>折扣价</li>
-								<li>{{d.discountPrice}}</li>
+								<li style="color:red;">折扣价</li>
+								<li  style="color:red;">{{d.discountPrice}}</li>
+							</ul>
+									<ul style="color:red;">
+								<li >销量</li>
+								<li  style="color:red;">{{d.salesNumber}}</li>
+							</ul>
+							<ul style="color:red;">
+								<li >运费</li>
+								<li  style="color:red;">{{d.freight}}</li>
 							</ul>
 							<ul>
 								<li>库存</li>
 								<li>{{d.stocks}}</li>
 							</ul>
-							<ul>
-								<li>商品详情</li>
-								<li>{{d.drugDetail}}</li>
-							</ul>
+							
 							<ul>
 								<li>规格参数</li>
 								<li>{{d.specificationParams}}</li>
@@ -297,9 +303,9 @@
 								<li>批准文号</li>
 								<li>{{d.approvalNumber}}</li>
 							</ul>
-							<ul>
+							<ul  style="color:red;">
 								<li>有效期</li>
-								<li>{{d.periodValidity}}</li>
+								<li  style="color:red;">{{d.periodValidity}}</li>
 							</ul>
 							<ul>
 								<li>存储</li>
@@ -313,7 +319,11 @@
 								<li>适宜人群</li>
 								<li>{{d.properPeople}}</li>
 							</ul>
-							<ul>
+							
+							
+							</div>
+							<div style="float:left;width:300px;margin-top:-150px;padding-right:30px;">
+						<ul>
 								<li>成分</li>
 								<li>{{d.elements}}</li>
 							</ul>
@@ -369,19 +379,15 @@
 								<li>限时规定的天数</li>
 								<li>{{d.deadlines}}</li>
 							</ul>
-							<ul>
-								<li>销量</li>
-								<li>{{d.salesNumber}}</li>
-							</ul>
-							<ul>
-								<li>运费</li>
-								<li>{{d.freight}}</li>
+                             <ul>
+								<li>商品详情</li>
+								<li>{{d.drugDetail}}</li>
 							</ul>
 							<ul>
 								<li>审批的时间</li>
 								<li>{{d.approvalTime}}</li>
 							</ul>
-							
+							</div>
 						</div>
 
 						<div class="grade-center">
@@ -430,7 +436,7 @@
 		</div>
 		</div>
 		<!-- 项目详情 -->
-		<div id="add" class="resource" style="display: none;" ng-controller="shopServeControllered">
+		<div id="add" class="resource" style="display: none;height:auto;" ng-controller="shopServeControllered">
 			<form id="myform">
 				<h3>项目详情</h3>
 				<div class="template-add">
@@ -516,7 +522,7 @@
 }
 
 .resource .grade-left, .resource .grade-center, .resource .grade-right {
-	width: 380px;
+	width: 250px;
 	float: left;
 	height: auto;
 }
@@ -583,7 +589,7 @@
 
 .resource {
 	width: auto;
-	height: auto;
+	height:600px;
 	position: absolute;
 	left: 15%;
 	top: 20%;
@@ -596,27 +602,30 @@
 	}
 }
 
-.resource .grade-left ul {
+.resource  ul {
 	width: 100%;
 	margin: 3px 0;
-	height: 50px;
+	height:auto;
+	padding:5px 0;
+	clear:both;
 }
 
-.resource .grade-left ul li:nth-child(1) {
+.resource  ul li:nth-child(1) {
 	float: left;
 }
 
-.resource .grade-left ul li:nth-child(2) {
+.resource  ul li:nth-child(2) {
 	float: right;
 	color: #999;
+	font-size:12px;
 }
 
-.resource .grade-left  ul p li {
+.resource   ul p li {
 	color: #999;
 }
 
 .resource .grade-center .select-2 {
-	width: 70%;
+	width: 95%;
 }
 
 .biaoqian {

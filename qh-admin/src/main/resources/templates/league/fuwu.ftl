@@ -313,13 +313,13 @@
 										执业资格证：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.imgList[0].imgUrl}}" name="资格证1"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
+												style=" float: left; height: 50px; margin-right: 3%;" />
 											<img ng-src="{{s.imgList[1].imgUrl}}" name="资格证2"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" "/>
+												style=" float: left; height: 50px; margin-right: 3%;" "/>
 											<img ng-src="{{s.imgList[2].imgUrl}}" name="资格证3"
-												style="width: 30%; float: left; height: 50px;" /> <img
+												style="float: left; height: 50px;" /> <img
 												ng-src="{{s.imgList[3].imgUrl}}" name="资格证4"
-												style="width: 30%; float: left; height: 50px; margin-top: 10px;" />
+												style="float: left; height: 50px; margin-top: 10px;" />
 
 										</div>
 									</div>
@@ -333,13 +333,13 @@
 										店面照片：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.environmentImgList[0].imgUrl}}" name="资格证1"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
+												style="float: left; height: 50px; margin-right: 3%;" />
 											<img ng-src="{{s.environmentImgList[1].imgUrl}}" name="资格证2"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" "/>
+												style=" float: left; height: 50px; margin-right: 3%;" "/>
 											<img ng-src="{{s.environmentImgList[2].imgUrl}}" name="资格证3"
-												style="width: 30%; float: left; height: 50px;" /> <img
+												style=" float: left; height: 50px;" /> <img
 												ng-src="{{s.environmentImgList[3].imgUrl}}" name="资格证4"
-												style="width: 30%; float: left; height: 50px; margin-top: 10px;" />
+												style="float: left; height: 50px; margin-top: 10px;" />
 
 										</div>
 									</div>
