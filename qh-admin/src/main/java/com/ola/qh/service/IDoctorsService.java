@@ -15,4 +15,6 @@ public interface IDoctorsService {
 	public int insertDoctors(Doctors doctors);
 	
 	public int deleteDoctors(String id);
+	
+	public String selectcount();
 }

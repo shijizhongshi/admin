@@ -94,6 +94,7 @@ app.controller("shangpinshopController", function($scope, $http){
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
 					location.reload();
+					$scope.shangpincount();
 				}
 			})
 	}
