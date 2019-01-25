@@ -11,6 +11,7 @@ app.controller("fuwushopController", function($scope, $http){
 	   $scope.isrecommend = 0;
 	   $scope.address = null;;
 	   $scope.shopName = null;
+	   $scope.fcount=null;
 	   
 		$scope.shopList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
@@ -105,5 +106,15 @@ app.controller("fuwushopController", function($scope, $http){
 				
 				
 		}
-		 
+		 $scope.fuwucount=function(){
+
+				$http.get("/api/shop/shopcount",{"params": {"shopType":1}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=="0"){
+						$scope.fcount=data.data;
+						$scope.ffcount="审核列表( "+$scope.fcount+" )";
+					}
+				})
+		}
+			$scope.fuwucount();
 })

@@ -118,7 +118,7 @@
 										<th>{{d.drugName}}</th>
 										<th>{{d.categorySubname}}</th>
 										<th>{{d.shopName}}</th>
-										<th><img src="{{d.imgUrl}}"></th>
+										<th><img ng-src="{{d.imgUrl}}"></th>
 										<th>{{d.recommend}}</th>
 										<th>{{d.limits}}</th>
 										<th><span class="xiangqing" ng-click="checkedAlldrug(d)"><input
@@ -158,7 +158,7 @@
 							<div class="costs-uploadfile-div">
 								商品照片：
 								<div class="costs-img" style="display: -webkit-inline-box;">
-									<img src="{{d.imgUrl}}" name="商品照片" />
+									<img ng-src="{{d.imgUrl}}" name="商品照片" />
 								</div>
 							</div>
 							<div style="float: left; width: 300px; padding-right: 30px;">
@@ -440,7 +440,7 @@
 								<th>{{s.discountPrice}}</th>
 								<th>{{s.serveType}}</th>
 								<th>{{s.shopName}}</th>
-								<th><img src="{{s.imgUrl}}"></th>
+								<th><img ng-src="{{s.imgUrl}}"></th>
 								<th>{{s.hot}}</th>
 								<th>{{s.Status}}</th>
 								<th><span class="xiangqing" ng-click="checkedAll(s)">查看详情</span>
@@ -477,7 +477,7 @@
 						<div class="costs-uploadfile-div">
 							项目照片：
 							<div class="costs-img">
-								<img src="{{s.imgUrl}}" name="营业执照" />
+								<img ng-src="{{s.imgUrl}}" name="营业执照" />
 							</div>
 						</div>
 						<ul>

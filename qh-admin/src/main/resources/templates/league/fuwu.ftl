@@ -202,7 +202,7 @@
 					</div>
 					<!-- 核审管理内容 -->
 					<div class="manage" style="display: none;">
-						<h4 style="padding-left: 30px;">核审列表()</h4>
+						<h4 style="padding-left: 30px;"><span>{{ffcount}}</span></h4>
 						<form >
 						<div class="details-frame-heshen">
 							<div class="select-3" style="">
