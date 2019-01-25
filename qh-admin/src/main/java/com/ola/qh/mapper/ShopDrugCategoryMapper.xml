@@ -13,6 +13,10 @@
 	<select id="selectShopDrugCategory" resultMap="ShopDrugCategoryMap">
 		select id,category_name,addtime from shop_drug_category
 	</select>
+	
+	<select id="selectShopDrugCategoryName" resultType="java.lang.String">
+		select id from shop_drug_category where category_name=#{categoryName}
+	</select>
 
 	<insert id="insertShopDrugCategory" parameterType="com.ola.qh.entity.ShopDrugCategory">
 		insert into shop_drug_category(id,category_name,addtime) values(#{id},#{categoryName},#{addtime})

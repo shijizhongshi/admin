@@ -1,4 +1,4 @@
-app.controller("shopdrugController", function($scope, $http){
+app.controller("shopdrugControllered", function($scope, $http){
 	
 	
 		$scope.total = 0;
@@ -14,6 +14,9 @@ app.controller("shopdrugController", function($scope, $http){
 	   $scope.categoryName=null;
 	   $scope.categorySubname=null;
 	   $scope.drlimits=0;
+	   $scope.d=null;
+	   $scope.cateId=null;
+	   
 	   
 	   
 	    $scope.drugList=function(){
@@ -90,8 +93,23 @@ app.controller("shopdrugController", function($scope, $http){
 		}
 		$scope.categoryList();	
 		
+		
+		$scope.categoryid=function(){
+			$http.get("/api/shopdrugcategory/selectid",{"params": {"categoryName":$scope.categoryName}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					$scope.cateId=data.data;
+					
+				}else{
+					$scope.cateId=null;
+				}
+			})
+		}
+		
+		
 		$scope.subcategoryList=function(){
-			$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.categoryId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			$scope.categoryid();
+			$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.cateId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.subcategorylist=data.data;
@@ -100,8 +118,8 @@ app.controller("shopdrugController", function($scope, $http){
 					$scope.subcategorylist=null;
 				}
 			})
+			
 		}
-		$scope.subcategoryList();
 		
 		$scope.checkdrug=function(d){
 			
@@ -121,7 +139,9 @@ app.controller("shopdrugController", function($scope, $http){
 			
 		 document.getElementById('revise').style.display="block"; 
 		 $scope.d=d;
+
 		 $scope.$emit('to-parent',d);  
+
 
 		}
 		
@@ -142,12 +162,16 @@ app.controller("shopdrugController", function($scope, $http){
 				}
 			})
 		}
-})
-app.controller("shopdrugControllered", function($scope, $http){
-	//////父极
-	 $scope.$on('to-parent', function(d,data) { 
-		 $scope.d=data;          //父级能得到值  
-	    });  
+		
+		
 
-	
 })
+//app.controller("shopdrugControllered", function($scope, $http){
+//	//////父极
+//	 $scope.$on('to-parent', function(d,data) { 
+//		 $scope.d=data;          //父级能得到值  
+//	    });  
+//
+//	
+//})
+

@@ -10,6 +10,8 @@ public interface ShopDrugCategoryDao {
 
 	public List<ShopDrugCategory> selectShopDrugCategory();
 	
+	public String selectShopDrugCategoryName(@Param("categoryName")String categoryName);
+	
 	public int insertShopDrugCategory(ShopDrugCategory shopDrugCategory);
 	
 	public int updateShopDrugCategory(ShopDrugCategory shopDrugCategory);

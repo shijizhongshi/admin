@@ -1,4 +1,4 @@
-*{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;font-size:16px;}
+*{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;font-size:14px;}
 a{text-decoration: none;color: black;}
 h3{font-size:20px;}
 .classify{width:13%; background:#FFFFFF;float:left;}
@@ -162,4 +162,4 @@ div.costs-uploadfile-div .allBtn{
 .costs-img{height:100px;}
 .admin-table table tr .xiangqing{background:#F9CE33;border-radius: 20px;color: white;padding: 5px;font-size: 1.3rem;cursor: pointer;}
 .bitian{color:red;}
-.admin-table table tr input {padding:6px;margin:5px;font-size:15px;}
+.admin-table table tr input {padding:6px;margin:5px;font-size:1.2rem;}

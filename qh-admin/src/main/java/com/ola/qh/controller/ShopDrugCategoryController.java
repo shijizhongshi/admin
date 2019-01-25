@@ -33,6 +33,19 @@ public class ShopDrugCategoryController {
 		return results;
 		
 	}
+	
+	@RequestMapping(value="selectid",method=RequestMethod.GET)
+	public Results<String> selectShopDrugCategoryName(@RequestParam(name="categoryName",required=true)String categoryName){
+		
+		Results<String> results=new Results<String>();
+		
+		String id=shopDrugCategoryService.selectShopDrugCategoryName(categoryName);
+		
+		results.setData(id);
+		results.setStatus("0");
+		return results;
+		
+	}
 	@RequestMapping(value="/insert",method=RequestMethod.GET)
 	public Results<String> insertShopDrugCategory(@RequestParam(name="categoryName",required=true)String categoryName){
 		

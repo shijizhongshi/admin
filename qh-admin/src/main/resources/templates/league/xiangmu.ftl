@@ -6,12 +6,18 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/league/xiangmu.js"></script>
-<script src="/scripts/league/league.js"></script>
 <script src="/scripts/league/shangpinguanli.js"></script>
+<script src="/scripts/league/common.js"></script>
+<style>
+.tab0{
+border-bottom:3px solid red; 
+font-weight: 900;
+}
+</style>
 <@b.body menu="sidebarmenu-league" submenu="sidebarmenu-league-xiangmu">
 
 
-	<div>
+	<div ng-controller="commonController">
 		<div class="details" style="width: 100%">
 			<div class="details-nav">
 				<ul>
@@ -24,20 +30,19 @@
 					<li>项目管理</li>
 				</ul>
 			</div>
-			<div ng-controller="shopServeControllered">
+			
 			<div ng-controller="shopdrugControllered">
-			<div class="details-frame">
+			<div class="details-frame" id="drugshow" style="display: none;">
 				<div class="details-frame-content" id="details-frame-content">
 					<ul>
-						<li onmousedown="go(0)"
-							style="border-bottom: 3px solid red; font-weight: 900;">商品管理</li>
-						<li onmousedown="go(1)">项目管理</li>
+						<li ng-click="go(0)" class="tab0">商品管理</li>
+						<li ng-click="go(1)">项目管理</li>
 					</ul>
 				</div>
 				<div id="guanli">
 				
 					<!-- 商品管理 -->
-					<div class="manage" ng-controller="shopdrugController">
+					<div class="manage"  >
 					
 					<form>
 						<ul style="height: 80px;" class="managr-dianpu">
@@ -47,18 +52,18 @@
 							<div class="select-3">
 								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
 							</div>
-							<div class=" select-3">
+							<div class=" select-3" ng-mouseleave="subcategoryList()">
 								<img src="/images/sjk-xl.png" /> <span>商品大类别</span>
-								 <select ng-model="categoryName">
+								 <select   ng-model="categoryName">
 									<option value="">查看全部</option>
 									<option ng-repeat="cat in categorylist"  value="{{cat.categoryName}}" ng-selected="categoryName==cat.categoryName">{{cat.categoryName}}</option>
 								</select>
 							</div>
-							<div class=" select-3">
+							<div class=" select-3" ng-mouseenter="subcategoryList()">
 								<img src="/images/sjk-xl.png" /> <span>商品小类别</span>
-								 <select ng-model="categorySubname">
+								 <select  ng-model="categorySubname">
 									<option value="">查看全部</option>
-									<option ng-repeat="sub in subcategorylist"  value="{{sub.subName}}" ng-selected="categorySubname==sub.subName">{{sub.subName}}</option>
+									<option  ng-repeat="sub in subcategorylist"  value="{{sub.subName}}" ng-selected="categorySubname==sub.subName">{{sub.subName}}</option>
 								</select>
 							</div>
 							<div class=" select-3">
@@ -113,7 +118,7 @@
 									<th>{{d.recommend}}</th>
 									<th>{{d.limits}}</th>
 									<th>
-									<span class="xiangqing" ng-click="checkedAlldrug(d)">查看详情</span>
+									<span class="xiangqing" ng-click="checkedAlldrug(d)"><input type="hidden" ng-model="d"/>查看详情</span>
 									<input ng-click="updatedrug('',1,'','','',d.id)" ng-show="d.yunxu1==true"  type="button" class="btn-lg im-key" value="允许"
 										style="background: #7bd88b;" /> 
 										<input ng-click="updatedrug('',2,'','','',d.id)"  ng-show="d.jujue1==true" id="no"  type="button"
@@ -134,9 +139,235 @@
 						</div>
 					</div>
 
+				</div>
+			</div>
+			<!-- 商品详情 -->
+			<div id="revise" class="resource" style="display: none;">
+
+				<form id="myform2">
+					<h3>商品详情</h3>
+					<div class="template-add">
+						<div class="grade-left" style="width:auto;">
+
+							<div class="costs-uploadfile-div">
+								商品照片：
+								<div class="costs-img" style="display:-webkit-inline-box;">
+									<img src="{{d.imgUrl}}" name="商品照片" />
+								</div>
+							</div>
+							<div style="float:left;width:300px;padding-right:30px;">
+							<ul>
+								<li>药品名称</li>
+								<li>{{d.productName}}</li>
+							</ul>
+							<ul>
+								<li>商家名称</li>
+								<li>{{d.shopName}}</li>
+							</ul>
+							<ul>
+								<li>商品的大类别</li>
+								<li>{{d.categoryName}}</li>
+							</ul>
+							<ul>
+								<li>商品的小类别</li>
+								<li>{{d.categorySubname}}</li>
+							</ul>
+							<ul  style="color:red;">
+								<li>治疗功能</li>
+								<li  style="color:red;">{{d.healingPowers}}</li>
+							</ul>
+							<ul>
+								<li>药品规格</li>
+								<li>{{d.specification}}</li>
+							</ul>
+							<ul  style="color:red;">
+								<li>原价</li>
+								<li  style="color:red;">{{d.originalPrice}}</li>
+							</ul>
+							<ul>
+								<li style="color:red;">折扣价</li>
+								<li  style="color:red;">{{d.discountPrice}}</li>
+							</ul>
+									<ul style="color:red;">
+								<li >销量</li>
+								<li  style="color:red;">{{d.salesNumber}}</li>
+							</ul>
+							<ul style="color:red;">
+								<li >运费</li>
+								<li  style="color:red;">{{d.freight}}</li>
+							</ul>
+							<ul>
+								<li>库存</li>
+								<li>{{d.stocks}}</li>
+							</ul>
+							
+							<ul>
+								<li>规格参数</li>
+								<li>{{d.specificationParams}}</li>
+							</ul>
+							
+							<ul>
+								<li>生产厂家</li>
+								<li>{{d.manufacturer}}</li>
+							</ul>
+							<ul>
+								<li>药品标识</li>
+								<li>{{d.drugSign}}</li>
+							</ul>
+							<ul>
+								<li>批准文号</li>
+								<li>{{d.approvalNumber}}</li>
+							</ul>
+							<ul  style="color:red;">
+								<li>有效期</li>
+								<li  style="color:red;">{{d.periodValidity}}</li>
+							</ul>
+							<ul>
+								<li>存储</li>
+								<li>{{d.storages}}</li>
+							</ul>
+							<ul>
+								<li>单位</li>
+								<li>{{d.units}}</li>
+							</ul>
+							<ul>
+								<li>适宜人群</li>
+								<li>{{d.properPeople}}</li>
+							</ul>
+							
+							
+							</div>
+							<div style="float:left;width:300px;margin-top:-150px;padding-right:30px;">
+						<ul>
+								<li>成分</li>
+								<li>{{d.elements}}</li>
+							</ul>
+							<ul>
+								<li>性状</li>
+								<li>{{d.characters}}</li>
+							</ul>
+							<ul>
+								<li>包装</li>
+								<li>{{d.packagings}}</li>
+							</ul>
+							<ul>
+								<li>适应症</li>
+								<li>{{d.indication}}</li>
+							</ul>
+							<ul>
+								<li>用量</li>
+								<li>{{d.dosage}}</li>
+							</ul>
+							<ul>
+								<li>不良症状</li>
+								<li>{{d.badSymptom}}</li>
+							</ul>
+							<ul>
+								<li>禁忌</li>
+								<li>{{d.taboo}}</li>
+							</ul>
+							<ul>
+								<li>注意事项</li>
+								<li>{{d.attentionMatter}}</li>
+							</ul>
+							<ul>
+								<li>药物相互作用</li>
+								<li>{{d.drugInteractions}}</li>
+							</ul>
+							<ul>
+								<li>药理作用</li>
+								<li>{{d.drugAction}}</li>
+							</ul>
+							<ul>
+								<li>条形码</li>
+								<li>{{d.shapCode}}</li>
+							</ul>
+							<ul>
+								<li>友情提示</li>
+								<li>{{d.friendlyHint}}</li>
+							</ul>
+							<ul>
+								<li>状态</li>
+								<li>{{d.statu}}</li>
+							</ul>
+							<ul>
+								<li>限时规定的天数</li>
+								<li>{{d.deadlines}}</li>
+							</ul>
+                             <ul>
+								<li>商品详情</li>
+								<li>{{d.drugDetail}}</li>
+							</ul>
+							<ul>
+								<li>审批的时间</li>
+								<li>{{d.approvalTime}}</li>
+							</ul>
+							</div>
+						</div>
+
+
+						<div class="grade-center">
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>推荐级别<i
+									class="bitian">*</i></span> <select ng-model="drisrecommend">
+									<option value="">查看全部</option>
+									<option ng-selected="d.isrecommend==0" value="0">不推荐</option>
+									<option ng-selected="d.isrecommend==1" value="1">推荐</option>
+								</select>
+							</div>
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>是否限时抢购<i
+									class="bitian">*</i></span> <select ng-model="dristimes">
+									<option value="">查看全部</option>
+									<option ng-selected="d.istimes==0" value="0">不限时抢购</option>
+									<option ng-selected="d.istimes==1" value="1">限时抢购</option>
+								</select>
+							</div>
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>是否促销<i
+									class="bitian">*</i></span> <select ng-model="drissales">
+									<option value="">查看全部</option>
+									<option ng-selected="d.issales==0" value="0">不促销</option>
+									<option ng-selected="d.issales==1" value="1">促销</option>
+								</select>
+							</div>
+							<div class=" select-2">
+								<img src="/images/sjk-xl.png" /> <span>是否热卖<i
+									class="bitian">*</i></span> <select ng-model="drishot">
+									<option value="">查看全部</option>
+									<option ng-selected="d.ishot==0" value="0">不热卖</option>
+									<option ng-selected="d.ishot==1" value="1">热卖</option>
+								</select>
+							</div>
+							
+						</div>
+				</form>
+				<div class="end">
+					<input name="git" type="submit" value="提交" ng-click="updateserve(drishot,'',dristimes,drisrecommend,drissales,d.id)"
+						style="background: #5ED8A9;" /> <input name="esc" type="reset"
+						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
+				</div>
+				</div>
+			
+			</div>
+		</div>
+		
+			
+			<div ng-controller="shopServeControllered">
+			<div class="details-frame" id="serveshow" style="display: none;">
+				<div class="details-frame-content" id="details-frame-content">
+					<ul>
+						<li ng-click="go(0)">商品管理</li>
+						<li ng-click="go(1)" class="tab0">项目管理</li>
+					</ul>
+				</div>
+				<div id="guanli">
+				
+					
+
 					<!-- 项目管理 -->
-					<div class="manage" style="display: none;" ng-controller="shopServeController">
-					<form>
+					<div class="manage">
+					<form id="myform1">
 						<ul style="height: 80px;" class="managr-dianpu">
 							<div class="select-3">
 								<span>项目名称</span> <input type="text" ng-model="serveName"/>
@@ -226,211 +457,8 @@
 
 				</div>
 			</div>
-			<!-- 商品详情 -->
-			<div ng-controller="shopdrugControllered">
-			<div id="revise" class="resource" style="display: none;">
-				<form id="myform2">
-					<h3>商品详情</h3>
-					<div class="template-add">
-						<div class="grade-left" style="padding-right: 3%;">
-
-							<div class="costs-uploadfile-div">
-								商品照片：
-								<div class="costs-img">
-									<img src="{{d.imgUrl}}" name="商品照片" />
-								</div>
-							</div>
-							<ul>
-								<li>药品名称</li>
-								<li>{{d.productName}}</li>
-							</ul>
-							<ul>
-								<li>商家名称</li>
-								<li>{{d.shopName}}</li>
-							</ul>
-							<ul>
-								<li>商品的大类别</li>
-								<li>{{d.categoryName}}</li>
-							</ul>
-							<ul>
-								<li>商品的小类别</li>
-								<li>{{d.categorySubname}}</li>
-							</ul>
-							<ul>
-								<li>治疗功能</li>
-								<li>{{d.healingPowers}}</li>
-							</ul>
-							<ul>
-								<li>药品规格</li>
-								<li>{{d.specification}}</li>
-							</ul>
-							<ul>
-								<li>原价</li>
-								<li>{{d.originalPrice}}</li>
-							</ul>
-							<ul>
-								<li>折扣价</li>
-								<li>{{d.discountPrice}}</li>
-							</ul>
-							<ul>
-								<li>库存</li>
-								<li>{{d.stocks}}</li>
-							</ul>
-							<ul>
-								<li>商品详情</li>
-								<li>{{d.drugDetail}}</li>
-							</ul>
-							<ul>
-								<li>规格参数</li>
-								<li>{{d.specificationParams}}</li>
-							</ul>
-							
-							<ul>
-								<li>生产厂家</li>
-								<li>{{d.manufacturer}}</li>
-							</ul>
-							<ul>
-								<li>药品标识</li>
-								<li>{{d.drugSign}}</li>
-							</ul>
-							<ul>
-								<li>批准文号</li>
-								<li>{{d.approvalNumber}}</li>
-							</ul>
-							<ul>
-								<li>有效期</li>
-								<li>{{d.periodValidity}}</li>
-							</ul>
-							<ul>
-								<li>存储</li>
-								<li>{{d.storages}}</li>
-							</ul>
-							<ul>
-								<li>单位</li>
-								<li>{{d.units}}</li>
-							</ul>
-							<ul>
-								<li>适宜人群</li>
-								<li>{{d.properPeople}}</li>
-							</ul>
-							<ul>
-								<li>成分</li>
-								<li>{{d.elements}}</li>
-							</ul>
-							<ul>
-								<li>性状</li>
-								<li>{{d.characters}}</li>
-							</ul>
-							<ul>
-								<li>包装</li>
-								<li>{{d.packagings}}</li>
-							</ul>
-							<ul>
-								<li>适应症</li>
-								<li>{{d.indication}}</li>
-							</ul>
-							<ul>
-								<li>用量</li>
-								<li>{{d.dosage}}</li>
-							</ul>
-							<ul>
-								<li>不良症状</li>
-								<li>{{d.badSymptom}}</li>
-							</ul>
-							<ul>
-								<li>禁忌</li>
-								<li>{{d.taboo}}</li>
-							</ul>
-							<ul>
-								<li>注意事项</li>
-								<li>{{d.attentionMatter}}</li>
-							</ul>
-							<ul>
-								<li>药物相互作用</li>
-								<li>{{d.drugInteractions}}</li>
-							</ul>
-							<ul>
-								<li>药理作用</li>
-								<li>{{d.drugAction}}</li>
-							</ul>
-							<ul>
-								<li>条形码</li>
-								<li>{{d.shapCode}}</li>
-							</ul>
-							<ul>
-								<li>友情提示</li>
-								<li>{{d.friendlyHint}}</li>
-							</ul>
-							<ul>
-								<li>状态</li>
-								<li>{{d.statu}}</li>
-							</ul>
-							<ul>
-								<li>限时规定的天数</li>
-								<li>{{d.deadlines}}</li>
-							</ul>
-							<ul>
-								<li>销量</li>
-								<li>{{d.salesNumber}}</li>
-							</ul>
-							<ul>
-								<li>运费</li>
-								<li>{{d.freight}}</li>
-							</ul>
-							<ul>
-								<li>审批的时间</li>
-								<li>{{d.approvalTime}}</li>
-							</ul>
-							
-						</div>
-
-						<div class="grade-center">
-							<div class=" select-2">
-								<img src="/images/sjk-xl.png" /> <span>推荐级别<i
-									class="bitian">*</i></span> <select ng-model="drisrecommend">
-									<option value="">查看全部</option>
-									<option ng-selected="d.isrecommend==0" value="0">不推荐</option>
-									<option ng-selected="d.isrecommend==1" value="1">推荐</option>
-								</select>
-							</div>
-							<div class=" select-2">
-								<img src="/images/sjk-xl.png" /> <span>是否限时抢购<i
-									class="bitian">*</i></span> <select ng-model="dristimes">
-									<option value="">查看全部</option>
-									<option ng-selected="d.istimes==0" value="0">不限时抢购</option>
-									<option ng-selected="d.istimes==1" value="1">限时抢购</option>
-								</select>
-							</div>
-							<div class=" select-2">
-								<img src="/images/sjk-xl.png" /> <span>是否促销<i
-									class="bitian">*</i></span> <select ng-model="drissales">
-									<option value="">查看全部</option>
-									<option ng-selected="d.issales==0" value="0">不促销</option>
-									<option ng-selected="d.issales==1" value="1">促销</option>
-								</select>
-							</div>
-							<div class=" select-2">
-								<img src="/images/sjk-xl.png" /> <span>是否热卖<i
-									class="bitian">*</i></span> <select ng-model="drishot">
-									<option value="">查看全部</option>
-									<option ng-selected="d.ishot==0" value="0">不热卖</option>
-									<option ng-selected="d.ishot==1" value="1">热卖</option>
-								</select>
-							</div>
-							
-						</div>
-				</form>
-				<div class="end">
-					<input name="git" type="submit" value="提交" ng-click="updateserve(drishot,'',dristimes,drisrecommend,drissales,d.id)"
-						style="background: #5ED8A9;" /> <input name="esc" type="reset"
-						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
-				</div>
-				</div>
-			</div>
-		</div>
-		</div>
-		<!-- 项目详情 -->
-		<div id="add" class="resource" style="display: none;" ng-controller="shopServeControllered">
+			<!-- 项目详情 -->
+		<div id="add" class="resource" style="display: none;" >
 			<form id="myform">
 				<h3>项目详情</h3>
 				<div class="template-add">
@@ -498,10 +526,17 @@
 	</form>
 
 
+
+		
 </div>
+			
+			</div>
+			
+			
+			
+
+			
 		</div>
-
-
 
 
 	</div>
@@ -516,7 +551,7 @@
 }
 
 .resource .grade-left, .resource .grade-center, .resource .grade-right {
-	width: 380px;
+	width: 250px;
 	float: left;
 	height: auto;
 }
@@ -583,7 +618,7 @@
 
 .resource {
 	width: auto;
-	height: auto;
+	height:600px;
 	position: absolute;
 	left: 15%;
 	top: 20%;
@@ -596,27 +631,31 @@
 	}
 }
 
-.resource .grade-left ul {
+.resource  ul {
 	width: 100%;
 	margin: 3px 0;
-	height: 50px;
+	height:auto;
+	padding:5px 0;
+	clear:both;
 }
 
-.resource .grade-left ul li:nth-child(1) {
+.resource  ul li:nth-child(1) {
 	float: left;
+	font-size:12px;
 }
 
-.resource .grade-left ul li:nth-child(2) {
+.resource  ul li:nth-child(2) {
 	float: right;
 	color: #999;
+	font-size:12px;
 }
 
-.resource .grade-left  ul p li {
+.resource   ul p li {
 	color: #999;
 }
 
 .resource .grade-center .select-2 {
-	width: 70%;
+	width: 95%;
 }
 
 .biaoqian {
@@ -640,7 +679,6 @@
 	margin-left: auto;
 }
 </style>
-
 
 </@b.body>
 </html>

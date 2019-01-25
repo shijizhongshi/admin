@@ -127,9 +127,9 @@ app.controller("shopServeController", function($scope, $http){
 	
 })
 
-app.controller("shopServeControllered", function($scope, $http){
+//app.controller("shopServeControllered", function($scope, $http){
 	
-	$scope.$on('to-parent', function(d,data) { 
-		$scope.s=data;   //父级能得到值  
-	    });
-})
+	//$scope.$on('to-parent', function(d,data) { 
+	//	$scope.s=data;   //父级能得到值  
+	//    });
+//})
