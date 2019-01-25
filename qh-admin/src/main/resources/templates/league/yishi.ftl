@@ -257,7 +257,7 @@
 				</div>
 				<!-- 核审管理内容 -->
 				<div class="manage" style="display: none;">
-					<h4 style="padding-left: 30px;">核审列表()</h4>
+					<h4 style="padding-left: 30px;"><span>{{ddcount}}</span></h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
 							<span>医师姓名</span> <input type="text" name="search" />
