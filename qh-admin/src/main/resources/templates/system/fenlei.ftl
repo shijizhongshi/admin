@@ -7,7 +7,7 @@
 <script src="/scripts/system/fenlei.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-system" submenu="web-system-fenlei">
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-fenlei">
 <div ng-controller="ShopDrugCategoryController">
 
 <div>
@@ -135,7 +135,7 @@
 }
 
 .details-frame-content {
-	height: 160px;
+	height: auto;
 
 	padding-bottom: 0;
 }
