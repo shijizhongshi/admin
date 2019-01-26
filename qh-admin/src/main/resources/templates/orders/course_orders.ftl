@@ -64,7 +64,7 @@
 				</div>
 <div>
 <input type="button" class="btn-lg im-key" 
-	value="导出excle" onclick="method5('tableExcel')" />
+	value="导出excle" onclick="method5('tableExcel')" style="margin:5px 0" />
 				</div>
 	</div>
 <div class="manage">
@@ -182,7 +182,7 @@
  </div>  
 </div>
 <style type="text/css">
-.details-frame-content{height:219px;}
+.details-frame-content{height:auto;}
 .details-frame-content .select-3{width: 10%;margin-right: 1%;}
 @media screen and (min-width: 1601px) {.details-frame-content .select-3{width: 12%;}}
 @media screen and (max-width: 1600px)  {.details-frame-content .select-3{width: 14%;}}

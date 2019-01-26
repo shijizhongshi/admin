@@ -377,9 +377,9 @@
 									身份证：
 									<div class="costs-img" style="height: 70px;">
 										<img ng-src="{{d.frontIdcardImg}}"
-											style="width: 30%; float: left; height: 70px; margin-right: 3%;" />
+											style="float: left; height: 70px; margin-right: 3%;" />
 										<img ng-src="{{d.reverseIdcardImg}}"
-											style="width: 30%; float: left; height: 70px;" />
+											style="float: left; height: 70px;" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
@@ -392,7 +392,7 @@
 									其他证书：
 									<div class="costs-img" style="height: 110px;">
 										<img ng-src="{{d.elseImg}}"
-											style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
+											style="float: left; height: 80px; margin-right: 3%;" />
 
 									</div>
 								</div>

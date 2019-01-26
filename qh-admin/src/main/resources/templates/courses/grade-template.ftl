@@ -110,7 +110,7 @@
 										id="textfield"/>
 									
 									<div
-										style="height: 130px; width: 40%; border: solid 1px #B1B1B1; margin-top: 3px;">
+										style="height: 130px;margin-top: 3px;">
 										<img ng-src="{{classUrl}}" />
 									</div>
 								</div>
@@ -178,7 +178,7 @@
 .template-left, .template-right {
 	width: 50%;
 	float: left;
-	height: 600px;
+	height:auto;
 	overflow: auto;
 }
 
@@ -203,7 +203,7 @@
 
 .template-right .grade-text textarea {
 	width: 100%;
-	height: 110px;
+	height: 80px;
 	font-size: 1.5rem
 }
 
