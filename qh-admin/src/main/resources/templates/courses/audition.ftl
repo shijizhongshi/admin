@@ -231,7 +231,7 @@ submenu="sidebarmenu-audition">
 
 
 
-						<div id="revise" class="resource">
+						<div id="revise" class="resource" style="width: 720px;">
 							<form id="myform2">
 
 								<div class="select-2" style="width: 100%;">
