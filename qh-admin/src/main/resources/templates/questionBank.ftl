@@ -2,11 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+<meta name="referrer" content="always">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="./styles/admin.css" />
 <script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/questionbank.js"></script>
+
 <body ng-app="app">
 <!--<div class="details" ng-controller="bankController">
 
@@ -31,7 +33,7 @@ Filedata:<input name="Filedata" id="file" type="file" onchange="angular.element(
  
 <div id='polyved'></div>
 </div>-->
-<div>
+<!--<div>
 <div ng-controller="myCtrl">
 xiaohaiyaoguan
 <div ng-controller="myCtrl1">
@@ -41,7 +43,19 @@ xiaohaiyaoguan11111
 </div>
 
 </div>
+<script src='' type='text/javascript'></script>
+-->
 
+<div ng-controller="bankController">
+
+<div>
+上传视频
+<input type="file" id="file" onchange="angular.element(this).scope().uploadmainimage(this)"/>
+</div>
+<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600">
+</iframe>
+
+</div>
 
 </body>
  

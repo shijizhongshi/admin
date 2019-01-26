@@ -73,7 +73,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 	
 	
-	$scope.uploadmainimage1 = function(file){
+	/*$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
@@ -90,6 +90,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 			
 			if(res.error=="0"){
 				alert("上传成功~");
+				console.log(res);
 				$scope.courseNofree.videoId=res.data[0].vid;
 				$scope.courseNofree.videoUrl=res.data[0].mp4;
 				$scope.polyv($scope.courseNofree.videoId);
@@ -101,7 +102,51 @@ app.controller("CourseNofreeController",function($scope,$http){
 			
 		});
 	};
-
+*/
+	$scope.uploadmainimage1 = function(file){
+		if(!file.files || file.files.length < 1) return;
+	    var formData={
+	    		"title" : "测试11",
+				"filename" : file.files[0],
+				"filesize" : file.files[0].size,
+				"description":"很好很好",
+				"userid":"91DD94C27B488135",
+				"tag":"教育"
+				
+	    }
+		/*formData.append('filename', file.files[0]);
+		formData.append("userid","91DD94C27B488135");
+		formData.append("title","测试11");
+		formData.append("tag","教育");
+		formData.append("description","很好很好");
+		formData.append("filesize",file.files[0].size);*/
+		
+		
+		$.ajax({
+		    url: 'http://spark.bokecc.com/api/video/create/v2',
+		    type: 'GET',
+			data : {
+	    		"title" : "测试11",
+				"filename" : file.files[0],
+				"filesize" : file.files[0].size,
+				"description":"很好很好",
+				"userid":"91DD94C27B488135",
+				"tag":"教育"
+				
+	    },
+			cache : false,
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		}).success(function(res) {
+			
+			console.log(res);
+			
+		}).fail(function(res) {
+			
+		});
+		
+		
+	};
 	
 	////保存
 	$scope.addAudition=function(){

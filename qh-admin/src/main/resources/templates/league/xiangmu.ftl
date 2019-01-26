@@ -141,6 +141,7 @@ font-weight: 900;
 
 				</div>
 			</div>
+			<!-- 商品详情 -->
 			<div id="revise" class="resource" style="display: none;">
 
 				<form id="myform2">
@@ -524,7 +525,7 @@ font-weight: 900;
 </div>
 			
 			</div>
-			<!-- 商品详情 -->
+			
 			
 			
 
