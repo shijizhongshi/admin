@@ -11,6 +11,8 @@ app.controller("CourseNofreeController",function($scope,$http){
    $scope.video=null;
    $scope.teachers=null;
    $scope.courseName=null;
+   $scope.teacher=null;
+   $scope.teacherName=null;
    
    $scope.typeBases=function(){
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -118,7 +120,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	
 	////保存
 	$scope.addAudition=function(){
-		
+		$scope.courseNofree.teachers=$scope.teacher;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
@@ -238,14 +240,19 @@ app.controller("CourseNofreeController",function($scope,$http){
 	
 	///////做选中的时候用
 	$scope.courseTeacher=null;
+	
 	$scope.checkteacher=function(t){
-		$scope.courseNofree.teachers=t.name;
+		if($scope.selected!=t){
+		$scope.teacher=t.name;
 		$scope.courseTeacher=t;
+		$scope.selected=t
+		}else{
+			$scope.teacher=null;
+			$scope.courseTeacher=null;
+			$scope.selected=null;
+			
+		}
 	};
-	////判断是都被选中
-	$scope.isSelected=function(tname){
-		return $scope.courseNofree.teachers==tname;
-	}
 	
 	/////教师的提交按钮
 	$scope.addteacher=function(){
@@ -263,6 +270,12 @@ app.controller("CourseNofreeController",function($scope,$http){
 			location.reload();
 		
 	};
+	
+	$scope.rest=function(){
+		$scope.teacher=null;
+		document.getElementById('revise').style.display="none"; 
+	
+};
 });
 	
 	
