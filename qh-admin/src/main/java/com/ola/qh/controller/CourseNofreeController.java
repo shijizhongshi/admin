@@ -31,6 +31,7 @@ public class CourseNofreeController {
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseNofree>> selectCourseNofree(@RequestParam(name="courseTypeName",required=false)String courseTypeName,
 			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
+			@RequestParam(name="teachers",required=false)String teachers,@RequestParam(name="courseName",required=false)String courseName,
 			@RequestParam(name="page",required=true)int page){
 		
 		Results<List<CourseNofree>> results=new Results<List<CourseNofree>>();
@@ -38,7 +39,7 @@ public class CourseNofreeController {
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		
-		List<CourseNofree> list=courseNofreeService.selectCourseNofree(courseTypeName, courseTypeSubclassName, pageNo, pageSize);
+		List<CourseNofree> list=courseNofreeService.selectCourseNofree(courseTypeName, courseTypeSubclassName, pageNo, pageSize, teachers, courseName);
 		
 		if(list==null || list.size()==0){
 			

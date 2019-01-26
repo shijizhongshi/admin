@@ -9,6 +9,8 @@ app.controller("CourseNofreeController",function($scope,$http){
    
    $scope.id=null;
    $scope.video=null;
+   $scope.teachers=null;
+   $scope.courseName=null;
    
    $scope.typeBases=function(){
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -30,11 +32,22 @@ app.controller("CourseNofreeController",function($scope,$http){
    /////查询
    $scope.auditionBases=function(){
 		$http.get("/api/coursenofree/select",{"params": {"courseTypeName":$scope.courseTypeName,
-			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page}}, 
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,
+			"page":$scope.page,"teachers":$scope.teachers,"courseName":$scope.courseName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.auditionlist=data.data;
+				angular.forEach($scope.auditionlist, function(audition){  
+					
+					if(audition.isremmend==0){
+						
+						audition.remmend="不推荐";
+					}
+					else if(audition.isremmend==1){
+						audition.remmend="推荐";
+					}
+				})
 			}
 			else{
 				$scope.auditionlist=null;
@@ -242,6 +255,13 @@ app.controller("CourseNofreeController",function($scope,$http){
 		else{
 			alert("请选择教师");
 		}
+	};
+	
+	
+	$scope.refresh=function(){
+		
+			location.reload();
+		
 	};
 });
 	

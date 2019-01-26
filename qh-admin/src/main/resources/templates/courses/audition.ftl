@@ -63,15 +63,19 @@ submenu="sidebarmenu-audition">
 							style="float: left; margin-right: 15px; width: 160px;">
 							<span>搜索课程</span>
 							<form id="search">
-								<input type="text" name="search" style="text-indent: 2em;" />
+								<input ng-model="courseName" type="text"  style="text-indent: 2em;" />
 							</form>
 						</div>
 						<div class="select-2"
 							style="float: left; margin-right: 15px; width:160px;">
 							<span>搜索老师</span>
 							<form id="">
-								<input type="text" name="search" style="text-indent: 2em;" />
+								<input ng-model="teachers" type="text"  style="text-indent: 2em;" />
 							</form>
+						</div>
+						<div class="select-2" style="float: left; margin-right: 15px; width:160px;">
+							<input type="button" class="btn-lg im-key" ng-click="auditionBases()"
+									value="检索"  />
 						</div>
 					</div>
 					<div class="manage">
@@ -85,7 +89,7 @@ submenu="sidebarmenu-audition">
 							<li ng-click="deleteAudition()" style="background: #F86846;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;删除试听课程</li>
 
-							<li style="float: right; margin-right: 100px; background: none;"><img
+							<li ng-click="refresh()" style="float: right; margin-right: 100px; background: none;"><img
 								src="/images/sjk-f5.png" name="changyi" /></li>
 						</ul>
 						<div class="admin-table">
@@ -113,7 +117,7 @@ submenu="sidebarmenu-audition">
 									<th>{{a.palyTime}}</th>
 									
 									<th>{{a.videoId}}</th>
-									<th>{{a.isremmend}}</th>
+									<th>{{a.remmend}}</th>
 									<th>{{a.courseUseDifference}}</th>
 									<th>{{a.addtime}}</th>
 								</tr>
