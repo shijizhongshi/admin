@@ -56,9 +56,13 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select" style="float:left;margin-right:15px;">搜索课程<br />
+	<div class="select-2" style="width:13%;float:left">
+	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" name="search" style=" text-indent:2em;"/></form>
+	<input ng-model="className" type="text"  style=" text-indent:2em;"/></form>
+	</div>
+	<div>
+		<input type="button" class="btn-lg im-key" ng-click="classBases()"value="检索"  />
 	</div>
 	</div>
 <div class="manage">
@@ -71,7 +75,7 @@
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<!--<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
 		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>-->
-         <li style="float: right;margin-right:20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="classBases()"/></li>
+         <li style="float: right;margin-right:20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 	</ul>
 	<div class="admin-table">
 
@@ -236,7 +240,7 @@
 		<div class="end">
 			<input name="git" type="submit" ng-show="classId==null" ng-click="addClass()" value="提交" style="background:#5ED8A9;"/>
 			<input name="git" type="submit" ng-show="classId!=null" ng-click="addClass()" value="修改" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  ng-click="rest()" class="esc" />
 		</div>
 	</div>
 </div>

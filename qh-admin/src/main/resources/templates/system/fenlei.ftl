@@ -50,7 +50,7 @@
 					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 					<li><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;下移</li>
-					<li style="float: right; margin-right: 100px; background: none;"><img
+					<li ng-click="refresh()" style="float: right; margin-right: 100px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
 				</ul>
 				<div class="admin-table">

@@ -228,4 +228,9 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		
 		document.getElementById('add').style.display="none"; 
 	}
+	
+	$scope.refresh=function(){
+		
+		location.reload();
+	}
 });

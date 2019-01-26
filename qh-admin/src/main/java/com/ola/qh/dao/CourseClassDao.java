@@ -13,7 +13,8 @@ public interface CourseClassDao {
 			@Param("pageNo")int pageNo,
 			@Param("pageSize")int pageSize,
 			@Param("courseTypeName")String courseTypeName,
-			@Param("courseTypeSubclassName")String courseTypeSubclassName);
+			@Param("courseTypeSubclassName")String courseTypeSubclassName,
+			@Param("className")String className);
 	
 	public int selectCourseClassCount(
 			@Param("courseTypeName")String courseTypeName,
