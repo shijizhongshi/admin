@@ -61,7 +61,7 @@ app.controller("fuwushopController", function($scope, $http){
 					$scope.selected=s;
 			 		$scope.id=s.id;
 			 		$scope.shop=s;
-			 		
+			 		$scope.shopId=s.id;
 			 		
 			 }else{
 						$scope.selected=null;
@@ -117,4 +117,12 @@ app.controller("fuwushopController", function($scope, $http){
 				})
 		}
 			$scope.fuwucount();
+			
+			$scope.guanli=function(){
+				if($scope.shopId!=null){
+					location.href="/web/league/xiangmu?shopId="+$scope.shopId;
+				}else{
+					alert("请选中信息~");
+				}
+			}
 })

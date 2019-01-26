@@ -21,10 +21,10 @@
 	select id,nickname,userrole,mobile,isdoctor,isdisabled from user 
 	where 1=1
 	<if test="mobile!=null and mobile!='' ">
-	and  mobile=#{mobile} 
+	and  mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
 	</if>
 	<if test="nickname!=null and nickname!='' ">
-	and  nickname=#{nickname} 
+	and  nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
 	</if>
 	<if test="userrole!=null and userrole!='' ">
 	and  userrole=#{userrole} 

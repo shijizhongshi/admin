@@ -58,11 +58,13 @@
 					<table>
 						<tr>
 							<th>子类名称</th>
+							<th>图片</th>
 							
 						</tr>
 						<tr ng-repeat="ss in shopDrugSubcategory" ng-click="checkedShopsub(ss)" ng-class="{'selected':selected==ss}">
 							
 							<th>{{ss.subName}}</th>
+							<th><img  src="{{ss.imgUrl}}"></th>
 						</tr>
 
 						

@@ -6,13 +6,22 @@ app.controller("shopServeControllered", function($scope, $http){
 	   $scope.current = 1;
 	   //一页显示多少条
 	   $scope.pageSize = 20;
-	
+	   
+	   if($("#shopId").val()!=''){
+			////说明是在服务点进来的
+			$scope.shopId=$("#shopId").val();
+			$scope.serveStatus=null;
+			
+	   }else{
+		   $scope.shopId=null;
+		   $scope.serveStatus=0;
+	   }
 	   $scope.hot=null;
 	   $scope.Status=null;
 	   $scope.shopName=null;
 	   $scope.serveName=null;
 	   $scope.serveType=null;
-	   $scope.serveStatus=0;
+	   
 	   $scope.id=null;
 	   $scope.ishot=null;
 	   
@@ -20,7 +29,7 @@ app.controller("shopServeControllered", function($scope, $http){
 	   $scope.serveList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 			$http.get("/api/shopserve/list",{"params": {"shopName":$scope.shopName,"serveName":$scope.serveName,
-				"serveType":$scope.serveType,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"serveStatus":$scope.serveStatus}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				"serveType":$scope.serveType,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"serveStatus":$scope.serveStatus,"shopId":$scope.shopId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.servelist=data.data;

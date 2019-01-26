@@ -25,12 +25,12 @@ public class ShopDrugController {
 			@RequestParam(name="categoryName",required=false)String categoryName,@RequestParam(name="categorySubname",required=false)String categorySubname,
 			@RequestParam(name="islimits",required=false)String islimits,@RequestParam(name="shopName",required=false)String shopName,
 			@RequestParam(name="pageNo",required=false)int pageNo,
-			@RequestParam(name="pageSize",required=false)int pageSize){
+			@RequestParam(name="pageSize",required=false)int pageSize,@RequestParam(name="shopId",required=false)String shopId){
 		
 		
 		Results<List<ShopDrug>> results=new Results<List<ShopDrug>>();
 		
-		List<ShopDrug> list=shopDrugService.selectDrugList(drugName, categoryName, categorySubname, islimits ,shopName,pageNo,pageSize);
+		List<ShopDrug> list=shopDrugService.selectDrugList(drugName, categoryName, categorySubname, islimits ,shopName,pageNo,pageSize,shopId);
 		
 		results.setData(list);
 		results.setStatus("0");

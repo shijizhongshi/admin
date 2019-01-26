@@ -7,13 +7,16 @@ app.controller("shopdrugControllered", function($scope, $http){
 	   //一页显示多少条
 	   $scope.pageSize = 20;
 	
-	   
+	   if($("#shopId").val()!=''){
+			////说明是在商品点进来的
+			$scope.shopId=$("#shopId").val();
+			
+	   }else{
+		   $scope.shopId=null;
+	   }
 	   $scope.id=null;
-	   $scope.drugName=null;
-	   $scope.shopName=null;
 	   $scope.categoryName=null;
 	   $scope.categorySubname=null;
-	   $scope.drlimits=0;
 	   $scope.d=null;
 	   $scope.cateId=null;
 	   
@@ -22,7 +25,7 @@ app.controller("shopdrugControllered", function($scope, $http){
 	    $scope.drugList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 			$http.get("/api/shopDrug/select",{"params": {"shopName":$scope.shopName,"drugName":$scope.drugName,"categoryName":$scope.categoryName,
-				"categorySubname":$scope.categorySubname,"islimits":$scope.drlimits,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				"categorySubname":$scope.categorySubname,"islimits":$scope.drlimits,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"shopId":$scope.shopId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.druglist=data.data;

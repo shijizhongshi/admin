@@ -1,7 +1,11 @@
 package com.ola.qh.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/web/league")
@@ -19,8 +23,11 @@ public class league {
 	public String yishi(){
 		return "league/yishi";
 	}
-	@RequestMapping("/xiangmu")
-	public String xiangmu(){
+	@RequestMapping(value="/xiangmu",method=RequestMethod.GET)
+	public String xiangmu(@RequestParam(name="shopId")String shopId,HttpServletRequest request){
+		
+			request.getSession().setAttribute("shopId", shopId);
+			
 		return "league/xiangmu";
 	}
 }

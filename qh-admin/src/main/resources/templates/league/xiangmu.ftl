@@ -18,6 +18,8 @@
 
 
 <div ng-controller="commonController">
+<input type="hidden" value="${shopId}" id="shopId" >
+
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>

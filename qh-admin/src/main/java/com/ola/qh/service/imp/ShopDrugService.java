@@ -18,9 +18,9 @@ public class ShopDrugService implements IShopDrugService {
 	
 	@Override
 	public List<ShopDrug> selectDrugList(String drugName, String categoryName, String categorySubname,
-			 String islimits,String shopName,int pageNo,int pageSize) {
+			 String islimits,String shopName,int pageNo,int pageSize,String shopId) {
 		
-		return shopDrugDao.selectDrugList(drugName, categoryName, categorySubname, islimits, shopName, pageNo, pageSize);
+		return shopDrugDao.selectDrugList(drugName, categoryName, categorySubname, islimits, shopName, pageNo, pageSize,shopId);
 	}
 
 	@Override
