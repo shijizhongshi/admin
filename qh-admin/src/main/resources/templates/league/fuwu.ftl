@@ -70,7 +70,7 @@
 							<li ng-click="guanli()"><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;项目管理</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" /></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 						</ul>
 						<div class="admin-table">
 

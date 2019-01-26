@@ -226,4 +226,10 @@ app.controller("doctorsController", function($scope, $http){
 			})
 	}
 		$scope.doctorscount();
+		
+		$scope.refresh=function(){
+			
+			location.reload();
+			
+		}
 })

@@ -134,6 +134,11 @@ app.controller("shopServeControllered", function($scope, $http){
 		})
 	}
 	
+	$scope.refresh=function(){
+		
+		location.reload();
+		
+	}
 })
 
 //app.controller("shopServeControllered", function($scope, $http){

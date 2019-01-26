@@ -125,4 +125,10 @@ app.controller("fuwushopController", function($scope, $http){
 					alert("请选中信息~");
 				}
 			}
+			
+			$scope.refresh=function(){
+				
+				location.reload();
+				
+			}
 })

@@ -129,4 +129,9 @@ app.controller("shangpinshopController", function($scope, $http){
 					alert("请选中信息~");
 				}
 			}
+			$scope.refresh=function(){
+				
+				location.reload();
+				
+			}
 })
