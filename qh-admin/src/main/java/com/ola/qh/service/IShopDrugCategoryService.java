@@ -9,6 +9,8 @@ public interface IShopDrugCategoryService {
 	
 	public List<ShopDrugCategory> selectShopDrugCategory();
 	
+	public String selectShopDrugCategoryName(String categoryName);
+	
 	public int insertShopDrugCategory(ShopDrugCategory shopDrugCategory);
 	
 	public int updateShopDrugCategory(ShopDrugCategory shopDrugCategory);

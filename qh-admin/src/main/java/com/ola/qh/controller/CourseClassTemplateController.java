@@ -28,6 +28,7 @@ public class CourseClassTemplateController {
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseClassTemplate>> selectCourseClassTemplate(@RequestParam(name="id",required=false)String id,
+			@RequestParam(name="templateName",required=false)String templateName,
 			@RequestParam(name="page",required=true)int page){
 		
 		Results<List<CourseClassTemplate>> results=new Results<List<CourseClassTemplate>>();
@@ -39,7 +40,7 @@ public class CourseClassTemplateController {
 		}
 		
 		
-		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id, pageNo, pageSize);
+		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id,templateName, pageNo, pageSize);
 		
 		
 		results.setData(list);

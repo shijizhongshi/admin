@@ -41,6 +41,9 @@
 		<if test="serveStatus!=null and serveStatus!=''">
 		and serve_status=#{serveStatus}
 		</if>
+		<if test="shopId!=null and shopId!=''">
+		and shop_id=#{shopId}
+		</if>
 		limit #{pageNo},#{pageSize}
 	</select>
 	

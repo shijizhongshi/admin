@@ -67,10 +67,10 @@
 							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 							<li><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;下移</li>
-							<li><span class="glyphicon glyphicon-sort-by-attributes"
+							<li ng-click="guanli()"><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;项目管理</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" /></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 						</ul>
 						<div class="admin-table">
 
@@ -202,7 +202,7 @@
 					</div>
 					<!-- 核审管理内容 -->
 					<div class="manage" style="display: none;">
-						<h4 style="padding-left: 30px;">核审列表()</h4>
+						<h4 style="padding-left: 30px;"><span>{{ffcount}}</span></h4>
 						<form >
 						<div class="details-frame-heshen">
 							<div class="select-3" style="">
@@ -313,13 +313,13 @@
 										执业资格证：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.imgList[0].imgUrl}}" name="资格证1"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
+												style="float: left; height: 80px; margin-right: 3%;" />
 											<img ng-src="{{s.imgList[1].imgUrl}}" name="资格证2"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" "/>
+												style="float: left; height: 80px; margin-right: 3%;" "/>
 											<img ng-src="{{s.imgList[2].imgUrl}}" name="资格证3"
-												style="width: 30%; float: left; height: 50px;" /> <img
+												style="float: left; height: 80px;" /> <img
 												ng-src="{{s.imgList[3].imgUrl}}" name="资格证4"
-												style="width: 30%; float: left; height: 50px; margin-top: 10px;" />
+												style="float: left; height: 80px; margin-top: 10px;" />
 
 										</div>
 									</div>
@@ -333,13 +333,13 @@
 										店面照片：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.environmentImgList[0].imgUrl}}" name="资格证1"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
+												style="float: left; height: 50px; margin-right: 3%;" />
 											<img ng-src="{{s.environmentImgList[1].imgUrl}}" name="资格证2"
-												style="width: 30%; float: left; height: 50px; margin-right: 3%;" "/>
+												style=" float: left; height: 50px; margin-right: 3%;" "/>
 											<img ng-src="{{s.environmentImgList[2].imgUrl}}" name="资格证3"
-												style="width: 30%; float: left; height: 50px;" /> <img
+												style=" float: left; height: 50px;" /> <img
 												ng-src="{{s.environmentImgList[3].imgUrl}}" name="资格证4"
-												style="width: 30%; float: left; height: 50px; margin-top: 10px;" />
+												style=" float: left; height: 50px; margin-top: 10px;" />
 
 										</div>
 									</div>

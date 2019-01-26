@@ -8,7 +8,7 @@ import com.ola.qh.entity.CourseClassTemplate;
 
 public interface CourseClassTemplateDao {
 
-	public List<CourseClassTemplate> selectCourseClassTemplate(@Param("id")String id,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<CourseClassTemplate> selectCourseClassTemplate(@Param("id")String id,@Param("templateName")String templateName,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
 	public int insertCourseClassTemplate(CourseClassTemplate courseClassTemplate);
 	

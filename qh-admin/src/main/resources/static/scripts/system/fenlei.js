@@ -1,12 +1,10 @@
 app.controller("ShopDrugCategoryController", function($scope, $http){
 
 	$scope.id=null;
-	$scope.sub=null;
-	$scope.shopDrugCategory=null;
-	$scope.shopDrugSubcategory=null;
 	$scope.name=null;
-	$scope.selectdelete=null;
 	$scope.insert=null;
+	$scope.clicked=null;
+	$scope.selected=null;
 	$scope.update=null;
 	$scope.picture=null;
 	
@@ -56,11 +54,20 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	
 	$scope.checkedShopcate=function(s){
 		
+	
+		if($scope.clicked!=s){
+			$scope.clicked=s;
+			$scope.id=s.id;
+			$scope.selectdelete=s;
+			
+		}else{
+				$scope.clicked=null;
+				$scope.id=null;
+				$scope.selectdelete=null;
+			}
 		
-		$scope.clicked=s;
-		$scope.id=s.id;
+		
 		$scope.subid=null;
-		$scope.selectdelete=s;
 		$scope.name=s.categoryName;
 		
 		$scope.shopsubBases();
@@ -70,20 +77,27 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	
 	$scope.checkedShopsub=function(ss){
 		
-		if($scope.selected!=null){
-		$scope.selected=null;
-		
-		}else{
-			$scope.selected=ss;
-			
-		}
+		if($scope.selected!=ss){
+		$scope.selected=ss;
 		$scope.subid=ss.id;
 		$scope.imgUrl=ss.imgUrl;
 		$scope.name=ss.subName;
+		
+		}else{
+			$scope.selected=null;
+			$scope.subid=null;
+			$scope.imgUrl=null;
+			$scope.name=null;
+		}
+		
+		
 	}
 	
 	$scope.addcate=function(){
 		
+		
+		$scope.shopcateBases();
+		$scope.shopsubBases();
 		$scope.insert=1;
 		$scope.update=null;
 		$scope.id=null;
@@ -91,10 +105,14 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$scope.picture=null;
 		
 		document.getElementById('add').style.display="block"; 
-		
+		$scope.selected=null;
+		$scope.shopcateBases();
+		$scope.shopsubBases();
 		
 	}
 	$scope.addsub=function(){
+		
+		$scope.selected=null;
 		if($scope.id!=null){
 		
 			$scope.insert=1;
@@ -205,5 +223,9 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		})
 		$scope.subid=null;
 		
+	}
+	$scope.resert=function(){
+		
+		document.getElementById('add').style.display="none"; 
 	}
 });

@@ -22,11 +22,11 @@
 	<div class="details-frame-content">
 
 	<div class="select-3" style="width:15%;">
-	<span>搜索课程</span>
+	<span>模板名称</span>
 	<form id="search">
-	<input type="text" name="search"/></form>
+	<input type="text" ng-model="templateName"/></form>
 	</div>
-		<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
+		<div><input type="button" class="btn-lg im-key"  value="立即检索" ng-click="templateBases()" /></div>	
 	</div>
 <div class="manage">
 	<ul class="show">
@@ -68,7 +68,6 @@
 						ng-model="page" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-change="courseBases()">
 					</ul>
 				</div>
 
@@ -110,7 +109,7 @@
 										id="textfield"/>
 									
 									<div
-										style="height: 130px; width: 40%; border: solid 1px #B1B1B1; margin-top: 3px;">
+										style="height: 130px;margin-top: 3px;">
 										<img ng-src="{{classUrl}}" />
 									</div>
 								</div>
@@ -178,7 +177,7 @@
 .template-left, .template-right {
 	width: 50%;
 	float: left;
-	height: 600px;
+	height:auto;
 	overflow: auto;
 }
 
@@ -203,7 +202,7 @@
 
 .template-right .grade-text textarea {
 	width: 100%;
-	height: 110px;
+	height: 80px;
 	font-size: 1.5rem
 }
 

@@ -847,6 +847,7 @@ body {
 }
 .sidebar-menu .main-menu a > span {
   display: inline-block;
+  font-size:1.6rem;
 }
 .sidebar-menu .main-menu a > .label {
   margin-top: 1px;

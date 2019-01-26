@@ -59,4 +59,10 @@ public class ShopService implements IShopService{
 		return shopDao.updateShop(id, islimits,isrecommend);
 	}
 
+	@Override
+	public String selectCount(String shopType) {
+		
+		return shopDao.selectCount(shopType);
+	}
+
 }

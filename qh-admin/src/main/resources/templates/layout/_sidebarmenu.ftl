@@ -135,7 +135,7 @@
                             </a>
                         </li>
                         <li id="sidebarmenu-league-xiangmu">
-                            <a href="/web/league/xiangmu">
+                            <a href="/web/league/xiangmu?shopId=">
                                 <span class="title">项目管理</span>
                             </a>
                         </li>

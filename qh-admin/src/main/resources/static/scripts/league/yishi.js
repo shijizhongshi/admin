@@ -20,6 +20,7 @@ app.controller("doctorsController", function($scope, $http){
    $scope.headImg = null;
    $scope.name = null;
    $scope.offices = null;
+   $scope.dcount=null;
    
   
    
@@ -140,6 +141,7 @@ app.controller("doctorsController", function($scope, $http){
 					alert("修改成功")
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
+					$scope.doctorscount();
 				}
 			})
 	}
@@ -212,4 +214,22 @@ app.controller("doctorsController", function($scope, $http){
 				}
 			})
 	 }
+	 
+	 $scope.doctorscount=function(){
+		 
+			$http.get("/api/doctors/selectcount", {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					$scope.dcount=data.data;
+					$scope.ddcount="审核列表( "+$scope.dcount+" )";
+				}
+			})
+	}
+		$scope.doctorscount();
+		
+		$scope.refresh=function(){
+			
+			location.reload();
+			
+		}
 })

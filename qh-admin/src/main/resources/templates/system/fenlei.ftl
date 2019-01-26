@@ -7,7 +7,7 @@
 <script src="/scripts/system/fenlei.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-system" submenu="web-system-fenlei">
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-fenlei">
 <div ng-controller="ShopDrugCategoryController">
 
 <div>
@@ -58,11 +58,13 @@
 					<table>
 						<tr>
 							<th>子类名称</th>
+							<th>图片</th>
 							
 						</tr>
 						<tr ng-repeat="ss in shopDrugSubcategory" ng-click="checkedShopsub(ss)" ng-class="{'selected':selected==ss}">
 							
 							<th>{{ss.subName}}</th>
+							<th><img  src="{{ss.imgUrl}}"></th>
 						</tr>
 
 						
@@ -83,7 +85,7 @@
 				<!--弹窗-->
 				<div class="poop" id="add">
 					<form id="myform">
-						<h3>添加分类</h3>
+						<h3>添加或修改分类</h3>
 						<div class="template-add">
 						
 							<div class="select-2">
@@ -109,7 +111,7 @@
 							<input  name="git" type="submit" value="修改"  ng-show="update==1"  ng-click="updatesub()"
 							style="background: #5ED8A9;" />
 							<input name="esc" type="reset"
-							value="取消" onclick="CloseDiv();formReset()" class="esc" />
+							value="取消" ng-click="resert()" class="esc" />
 					</div>
 				</div>
 			</div>
@@ -135,7 +137,7 @@
 }
 
 .details-frame-content {
-	height: 160px;
+	height: auto;
 
 	padding-bottom: 0;
 }

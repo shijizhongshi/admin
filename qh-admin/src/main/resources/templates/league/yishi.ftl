@@ -69,7 +69,7 @@
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
 							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi" /></li>
+							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 					</ul>
 					<div class="admin-table">
 
@@ -107,7 +107,6 @@
 							ng-change="courseBases()">
 						</ul>
 					</div>
-
 					<!--弹窗-->
 					<div class="poop" id="add">
 						<form id="myform">
@@ -255,24 +254,16 @@
 						</div>
 					</div>
 				</div>
+				
+
 				<!-- 核审管理内容 -->
 				<div class="manage" style="display: none;">
-					<h4 style="padding-left: 30px;">核审列表()</h4>
+					<h4 style="padding-left: 30px;"><span>{{ddcount}}</span></h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
 							<span>医师姓名</span> <input type="text" name="search" />
 
 						</div>
-						<div class="select-2">
-							<span>选择时间</span> <input type="date" name="search" />
-						</div>
-						<div class="select-2"
-							style="font-size: 1.6rem; width: 3%; text-align: center;">
-						</div>
-						<div class="select-2">
-							<span>&nbsp;</span> <input type="date" name="search" />
-						</div>
-
 						<div>
 							<input type="button" class="btn-lg im-key" ng-click="" value="检索">
 						</div>
@@ -322,7 +313,7 @@
 							<div class="grade-left" style="padding-right: 5%;">
 								<div
 									style="width: 50%; margin: 0 auto; text-align: center; height: 130px">
-									<img src="{{d.headImg}}" style="height: 100px;" />
+									<img ng-src="{{d.headImg}}" style="height: 100px;" />
 									<p>{{d.name}}</p>
 								</div>
 
@@ -379,29 +370,29 @@
 								<div class="costs-uploadfile-div">
 									职称证明：
 									<div class="costs-img">
-										<img src="{{d.professionalImg}}" />
+										<img ng-src="{{d.professionalImg}}" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
 									身份证：
 									<div class="costs-img" style="height: 70px;">
-										<img src="{{d.frontIdcardImg}}"
-											style="width: 30%; float: left; height: 70px; margin-right: 3%;" />
-										<img src="{{d.reverseIdcardImg}}"
-											style="width: 30%; float: left; height: 70px;" />
+										<img ng-src="{{d.frontIdcardImg}}"
+											style="float: left; height: 70px; margin-right: 3%;" />
+										<img ng-src="{{d.reverseIdcardImg}}"
+											style="float: left; height: 70px;" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
 									资质证明：
 									<div class="costs-img">
-										<img src="{{d.practiceImg}}" />
+										<img ng-src="{{d.practiceImg}}" />
 									</div>
 								</div>
 								<div class="costs-uploadfile-div">
 									其他证书：
 									<div class="costs-img" style="height: 110px;">
-										<img src="{{d.elseImg}}"
-											style="width: 30%; float: left; height: 50px; margin-right: 3%;" />
+										<img ng-src="{{d.elseImg}}"
+											style="float: left; height: 80px; margin-right: 3%;" />
 
 									</div>
 								</div>

@@ -11,6 +11,8 @@ app.controller("shangpinshopController", function($scope, $http){
 	   $scope.isrecommend = 0;
 	   $scope.address = null;;
 	   $scope.shopName = null;
+	   $scope.scount=null;
+	   $scope.shopId=null;
 	   
 		$scope.shopList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
@@ -60,11 +62,13 @@ app.controller("shangpinshopController", function($scope, $http){
 					$scope.selected=s;
 			 		$scope.id=s.id;
 			 		$scope.shop=s;
+			 		$scope.shopId=s.id;
 			 		
 			 		
 			 }else{
 						$scope.selected=null;
 						$scope.id=null;
+						$scope.shopId=null;
 					}
 		}
 		
@@ -94,6 +98,7 @@ app.controller("shangpinshopController", function($scope, $http){
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
 					location.reload();
+					$scope.shangpincount();
 				}
 			})
 	}
@@ -105,5 +110,28 @@ app.controller("shangpinshopController", function($scope, $http){
 				
 				
 		}
-		 
+		 $scope.shangpincount=function(){
+
+				$http.get("/api/shop/shopcount",{"params": {"shopType":2}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=="0"){
+						$scope.scount=data.data;
+						$scope.sscount="审核列表( "+$scope.scount+" )";
+					}
+				})
+		}
+			$scope.shangpincount();
+			
+			$scope.guanli=function(){
+				if($scope.shopId!=null){
+					location.href="/web/league/xiangmu?shopId="+$scope.shopId;
+				}else{
+					alert("请选中信息~");
+				}
+			}
+			$scope.refresh=function(){
+				
+				location.reload();
+				
+			}
 })
