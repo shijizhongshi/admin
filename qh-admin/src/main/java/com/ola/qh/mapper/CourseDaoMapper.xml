@@ -77,19 +77,20 @@
 	<result column="addtime" property="addtime" />
 	<result column="updatetime" property="updatetime"/>
 	<result column="class_id" property="classId"/>
+	<result column="maxdoudou" property="maxdoudou"/>
 	</resultMap>
 	
 	<sql id="sql_base">
 	id,course_name,course_type_name,course_type_subclass_name,
 	course_price,course_discount_price,course_year,course_show,course_excellent,course_img
-	,course_resource_type,course_use_difference,addtime
+	,course_resource_type,course_use_difference,addtime,maxdoudou
 	</sql>
 	
 	<insert id="insertCourse" parameterType="com.ola.qh.entity.Course">
 	insert into course(<include refid="sql_base"></include>,user_id)
 	values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},
 	#{coursePrice},#{courseDiscountPrice},#{courseYear},#{courseShow},#{courseExcellent},#{courseImg},
-	#{courseResourceType},#{courseUseDifference},#{addtime},#{userId}
+	#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId}
 	)
 	</insert>
 	<update id="updateCourese" parameterType="com.ola.qh.entity.Course">
@@ -129,6 +130,9 @@
 	</if>
 	<if test="classId!=null and classId!='' ">
 	class_id=#{classId},
+	</if>
+	<if test="maxdoudou!=null and maxdoudou!=''">
+	maxdoudou=#{maxdoudou},
 	</if>
 	updatetime=#{updatetime} where id=#{id}
 	</update>

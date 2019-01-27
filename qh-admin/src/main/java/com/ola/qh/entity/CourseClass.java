@@ -61,10 +61,21 @@ public class CourseClass {
 	
 	private Date updatetime;//
 	
+	private String maxdoudou;/////最多用的豆豆数
+	
 	private List<CourseTeacher> listTeacher=new ArrayList<CourseTeacher>();//
 	
 	private List<Course> listCourse=new ArrayList<Course>();//
 	
+	
+	public String getMaxdoudou() {
+		return maxdoudou;
+	}
+
+	public void setMaxdoudou(String maxdoudou) {
+		this.maxdoudou = maxdoudou;
+	}
+
 	public String getId() {
 		return id;
 	}
