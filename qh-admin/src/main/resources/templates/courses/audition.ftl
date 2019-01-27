@@ -73,10 +73,10 @@ submenu="sidebarmenu-audition">
 								<input ng-model="teachers" type="text"  style="text-indent: 2em;" />
 							</form>
 						</div>
-						<div class="select-2" style="float: left; margin-right: 15px; width:160px;">
-							<input type="button" class="btn-lg im-key" ng-click="auditionBases()"
+							<div>
+								<input type="button" class="btn-lg im-key" ng-click="auditionBases()"
 									value="检索"  />
-						</div>
+							</div>
 					</div>
 					<div class="manage">
 						<ul  class="show">
@@ -184,7 +184,7 @@ submenu="sidebarmenu-audition">
 													style="position: absolute; right: 10px; top: 40px; display: inherit; cursor: pointer;"
 													class="glyphicon glyphicon-search">
 													</i>
-												<input type="text"  ng-model="courseNofree.teachers" disabled="disabled"/> 
+												<input type="text"  ng-model="teacher" disabled="disabled"/> 
 													
 											</div>
 										</div>
@@ -231,13 +231,12 @@ submenu="sidebarmenu-audition">
 
 
 
-						<div id="revise" class="resource">
+						<div id="revise" class="resource" style="width: 720px;">
 							<form id="myform2">
 
 								<div class="select-2" style="width: 100%;">
-									<span>查找带回选择老师</span> <input type="text" placeholder="搜索老师名称" />
-									<p
-										style="position: absolute; right: 10px; top: 40px; cursor: pointer;">
+									<span>搜索老师名称</span> <input type="text" ng-model="teacherName" />
+									<p ng-click="teacherList()" style="position: absolute; right: 10px; top: 40px; cursor: pointer;">
 										<i class="glyphicon glyphicon-search"></i>搜索
 									</p>
 								</div>
@@ -245,14 +244,12 @@ submenu="sidebarmenu-audition">
 								<div class="admin-table">
 									<table>
 										<tr>
-										    <th>选择教师</th>
-											<th>教师名称</th>
+										    <th>教师名称</th>
 											<th>教师图片</th>
 											<th>所属专业</th>
 											
 										</tr>
-										<tr ng-repeat="t in teacherlist">
-											<th ><input type="radio" ng-checked="isSelected(t.name)" ng-click="checkteacher(t)"></th>
+										<tr ng-repeat="t in teacherlist" ng-class="{'selected':selected==t}"ng-click="checkteacher(t)">
 											<th>{{t.name}}</th>
 											<th><img ng-src="{{t.imgUrl}}" style="width:50px;height:30px;"/></th>
 											<th>{{t.courseTypeSubclassNames}}</th>
@@ -273,7 +270,7 @@ submenu="sidebarmenu-audition">
 								<input name="git" type="submit" value="提交" ng-click="addteacher()" 
 									style="background: #5ED8A9;" />
 								<input name="esc" type="reset"
-									value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
+									value="取消" ng-click="rest()" class="esc" />
 							</div>
 
 						</div>
