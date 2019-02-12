@@ -96,7 +96,7 @@
 									<th><img ng-src="{{s.doorHeadUrl}}"></th>
 									<th>{{s.leaderName}}</th>
 									<th>{{s.leaderMobile}}</th>
-									<th>{{s.addtime}}</th>
+									<th>{{s.showtime}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(s)">查看详情</span></th>
 								</tr>
 

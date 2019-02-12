@@ -55,7 +55,7 @@
 	</resultMap>
 
 	<select id="selectDrugList" resultMap="ShopDrugMap">
-	select sd.id id,sd.shop_id shopId,sd.user_id user_id,drug_name,category_name,category_subname,healing_powers,specification,original_price,discount_price,price,
+	select sd.id id,sd.approval_time approvalTime,sd.shop_id shopId,sd.user_id user_id,drug_name,category_name,category_subname,healing_powers,specification,original_price,discount_price,price,
 	stocks,sales_number,ishot,sd.isrecommend isrecommend,issales,istimes,sd.islimits islimits,status,freight,deadlines,drug_detail,specification_params,product_name,
 	manufacturer,drug_sign,approval_number,period_validity,storages,units,proper_people,elements,characters,packagings,indication,dosage,
 	bad_symptom,taboo,attention_matter,drug_interactions,drug_action,shap_code,friendly_hint,img_url,shop_name

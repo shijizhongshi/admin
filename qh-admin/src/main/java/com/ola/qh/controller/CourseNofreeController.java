@@ -1,5 +1,6 @@
 package com.ola.qh.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,10 @@ public class CourseNofreeController {
 			results.setStatus("1");
 			return results;
 			
+		}
+		for (CourseNofree courseNofree : list) {
+			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			courseNofree.setShowtime(sf.format(courseNofree.getAddtime()));
 		}
 		results.setData(list);
 		results.setStatus("0");

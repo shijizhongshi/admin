@@ -1,5 +1,6 @@
 package com.ola.qh.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,10 @@ public class ShopDrugController {
 		
 		List<ShopDrug> list=shopDrugService.selectDrugList(drugName, categoryName, categorySubname, islimits ,shopName,pageNo,pageSize,shopId);
 		
+		for (ShopDrug shopDrug : list) {
+			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			shopDrug.setShowtime(sf.format(shopDrug.getApprovalTime()));
+		}
 		results.setData(list);
 		results.setStatus("0");
 		return results;

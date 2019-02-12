@@ -29,6 +29,7 @@
 			<span>广告横幅的位置</span>
 			<img src="/images/sjk-xl.png"/>
 			<select ng-model="types">
+				<option value="0">查看全部</option>
 				<option value="1">首页banner</option>
 				<option value="2">学院banner</option>
 				<option value="3">商城首页banner</option>
@@ -144,7 +145,7 @@
 		<div class="end">
 			<input name="git"  ng-show="bannerId==null" type="submit" value="提交" ng-click="banneradd()" style="background:#5ED8A9;"/>
 			<input name="git"  ng-show="bannerId!=null" type="submit" value="修改" ng-click="bannerupdate()" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  ng-click="reset()" class="esc" />
 		</div>
 		</div>
 	

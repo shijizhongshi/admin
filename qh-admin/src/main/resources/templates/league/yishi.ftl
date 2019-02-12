@@ -91,7 +91,7 @@
 								<th>{{d.offices}}</th>
 								<th>{{d.professional}}</th>
 								<th>{{d.recommend}}</th>
-								<th>{{d.addtime}}</th>
+								<th>{{d.showtime}}</th>
 								<th><span class="xiangqing" ng-click="checkedAll(d)">查看详情</span></th>
 							</tr>
 
