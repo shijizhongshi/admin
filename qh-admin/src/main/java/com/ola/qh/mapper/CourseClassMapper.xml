@@ -25,10 +25,11 @@
 		<result column="detail" property="detail" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="maxdoudou" property="maxdoudou"/>
 	</resultMap>
 	<sql id="sql_courseclass">
 		id,course_type_name,course_type_subclass_name,template_id,class_name,class_price,class_discount_price,class_year,course_lecturer,all_time,
-		grade,isremmend,isshow,img_url,proper_people,promises,features,introduce,detail,addtime
+		grade,isremmend,isshow,img_url,proper_people,promises,features,introduce,detail,addtime,maxdoudou
 	</sql>
 	<select id="selectCourseClass" resultMap="CourseClassMap">
 		select <include refid="sql_courseclass"></include> from course_class 
@@ -66,7 +67,7 @@
 	<insert id="insertCourseClass" parameterType="com.ola.qh.entity.CourseClass">
 		insert into course_class(<include refid="sql_courseclass"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{templateId},
 		#{className},#{classPrice},#{classDiscountPrice},#{classYear},#{courseLecturer},#{allTime},#{grade},#{isremmend},#{isshow},#{imgUrl},#{properPeople},
-		#{promises},#{features},#{introduce},#{detail},#{addtime})
+		#{promises},#{features},#{introduce},#{detail},#{addtime},#{maxdoudou})
 	</insert>
 	
 	<update id="updateCourseClass" parameterType="com.ola.qh.entity.CourseClass">
@@ -124,6 +125,9 @@
 		</if>
 		<if test="detail!=null">
 			detail=#{detail},
+		</if>
+		<if test="maxdoudou!=null and maxdoudou!='' ">
+		maxdoudou=#{maxdoudou},
 		</if>
 		updatetime=#{updatetime} where id=#{id}
 		

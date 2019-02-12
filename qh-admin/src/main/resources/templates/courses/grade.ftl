@@ -155,7 +155,20 @@
 						<span>班级折扣价：</span>
 			<input type="text"  ng-model="classes.classDiscountPrice" class=""placeholder="请输入班级名称"  />
 		</div></div>
-		<div style="width: 100%;height:90px;clear: both;">		<div class=" select-2" style="float: left;">
+		
+		
+		<div class=" select-2">
+						<span>最多折扣豆：</span>
+			<input type="number" ng-model="classes.maxdoudou" class=""placeholder="请输入最多使用的豆豆数" style="width: 230px;" />
+		</div>
+		<div style="width: 100%;height:90px;clear: both;">		
+		
+		
+		
+		<div class=" select-2" style="float: left;">
+	
+	
+	
 	
 						<span>班级年份：</span>
 			<input type="text"  ng-model="classes.classYear" class=""placeholder="请输入班级年份"  />

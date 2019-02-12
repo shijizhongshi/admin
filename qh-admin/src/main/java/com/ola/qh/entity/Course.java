@@ -32,6 +32,8 @@ public class Course {
 	
 	private BigDecimal courseDiscountPrice;////课程折扣价格
 	
+	private String maxdoudou;//////最大的折扣豆豆数
+	
 	private String courseYear;////课程年限
 	
 	private int courseShow;////课程是否展示
@@ -53,6 +55,15 @@ public class Course {
 	private int pageSize;
 	
 	private String classId;
+
+	
+	public String getMaxdoudou() {
+		return maxdoudou;
+	}
+
+	public void setMaxdoudou(String maxdoudou) {
+		this.maxdoudou = maxdoudou;
+	}
 
 	public String getUserId() {
 		return userId;
