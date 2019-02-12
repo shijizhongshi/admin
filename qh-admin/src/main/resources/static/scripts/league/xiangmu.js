@@ -117,7 +117,7 @@ app.controller("shopServeControllered", function($scope, $http){
 		}
 	
 	$scope.updateserve=function(ishot,serveStatused,id){
-		 
+		if(confirm("您确定修改吗")){
 		$http.get("/api/shopserve/update",{"params": {"ishot":ishot,"serveStatus":serveStatused,
 			"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
@@ -132,6 +132,7 @@ app.controller("shopServeControllered", function($scope, $http){
 				alert("修改失败");
 			}
 		})
+		}
 	}
 	
 	$scope.refresh=function(){
