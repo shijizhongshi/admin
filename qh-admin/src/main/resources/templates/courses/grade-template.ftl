@@ -149,7 +149,7 @@
 							ng-if="id!=null" ng-click="updateTemplate()"
 							style="background: #5ED8A9;" />
 							<input name="esc" type="reset"
-							value="取消" onclick="CloseDiv();formReset()" class="esc" />
+							value="取消" ng-click="reset()" class="esc" />
 					</div>
 				</div>
 				</div>

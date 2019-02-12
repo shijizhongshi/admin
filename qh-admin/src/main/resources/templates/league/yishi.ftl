@@ -258,14 +258,14 @@
 
 				<!-- 核审管理内容 -->
 				<div class="manage" style="display: none;">
-					<h4 style="padding-left: 30px;"><span>{{ddcount}}</span></h4>
+					<h4 style="padding-left: 30px;"><span>{{doctorcount}}</span></h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
-							<span>医师姓名</span> <input type="text" name="search" />
+							<span>医师姓名</span> <input type="text"  ng-model="name"/>
 
 						</div>
 						<div>
-							<input type="button" class="btn-lg im-key" ng-click="" value="检索">
+							<input type="button" class="btn-lg im-key" ng-click="islimitList()" value="检索">
 						</div>
 					</div>
 					<div class="admin-table">

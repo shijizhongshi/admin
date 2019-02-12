@@ -29,7 +29,7 @@
 							<span>昵称</span> <input type="text" ng-model="nickname"/>
 						</div>
 						<div class="select-3">
-							<span>手机号</span> <input type="text" name="search"  ng-model="mobile"/>
+							<span>手机号</span> <input type="text"   ng-model="mobile"/>
 						</div>
 						<div class=" select-3">
 							<img src="/images/sjk-xl.png" /> <span>用户类型</span> 

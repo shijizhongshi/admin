@@ -13,7 +13,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
    /////查询
    $scope.templateBases=function(){
 	   
-		$http.get("/api/classtemplate/select",{"params": {"id":$scope.id,"templateName":$scope.templateName,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/classtemplate/select",{"params": {"id":null,"templateName":$scope.templateName,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.templatelist=data.data;
@@ -125,7 +125,17 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	$scope.add=function(){
 		$scope.courseClassTemplate=null;
 		$scope.id=null;
+		$scope.selected=null;
 		document.getElementById('add').style.display="block"; 
+		
+		
+	}
+	
+	$scope.reset=function(){
+		$scope.courseClassTemplate=null;
+		$scope.id=null;
+		$scope.selected=null;
+		document.getElementById('add').style.display="none"; 
 		
 		
 	}

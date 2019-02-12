@@ -206,7 +206,7 @@
 						<form >
 						<div class="details-frame-heshen">
 							<div class="select-3" style="">
-								<span>店铺名称</span> <input type="text" name="search" ng-model="shopName"/>
+								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
 
 							</div>
 							
