@@ -48,18 +48,13 @@ public class ShopController {
 	@RequestMapping("/updateShop")
 	public Results<String> singleShop(
 			@RequestParam(name="id",required=true)String id,
+			@RequestParam(name="userId",required=true)String userId,
+			@RequestParam(name="shopType",required=true)String shopType,
 			@RequestParam(name="islimits",required=true)int islimits,
 			@RequestParam(name="isrecommend",required=true)int isrecommend){
 		
-		Results<String> result = new Results<String>();
-		int num = shopService.updateShop(id, islimits,isrecommend);
-		if(num>0){
-			result.setStatus("0");
-			return result;
-		}
-		result.setStatus("1");
-		result.setMessage("审核失败~");
-		return result;
+		return shopService.updateShop(id,userId,islimits,isrecommend,shopType);
+		
 		
 	}
 	@RequestMapping("/shopcount")

@@ -562,14 +562,13 @@ public class Uploader {
 		return false;
 	}
 	
- 	/*public static void main(String[] args) {
+ 	public static void main(String[] args) {
 		File file = new File("C://Users/Administrator/Desktop/tupian/ddd.mp4");
 		VideoInfo videoInfo = new VideoInfo(file);
-		Uploader uploader = new Uploader(null);
+		Uploader uploader = new Uploader(videoInfo);
 		uploader.upload();
-		;
 		
 		getVideo();
-	}*/
+	}
 
 }
