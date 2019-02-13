@@ -154,7 +154,7 @@ app.controller("shopdrugControllered", function($scope, $http){
 		}
 		
 		$scope.updatedrug=function(ishot,islimits,istimes,isrecommend,issales,id){
-			 
+			if(confirm("您确定修改吗")){
 			$http.get("/api/shopDrug/update",{"params": {"ishot":ishot,"islimits":islimits,"istimes":istimes,
 				"isrecommend":isrecommend,"":issales,"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
@@ -169,6 +169,7 @@ app.controller("shopdrugControllered", function($scope, $http){
 					alert("修改失败");
 				}
 			})
+			}
 		}
 		
 		$scope.refresh=function(){

@@ -309,7 +309,7 @@
 								</ul>
 								<ul>
 									<li>审批的时间</li>
-									<li>{{d.approvalTime}}</li>
+									<li>{{d.showtime}}</li>
 								</ul>
 							</div>
 						</div>
@@ -353,7 +353,7 @@
 				</form>
 				<div class="end">
 					<input name="git" type="submit" value="提交"
-						ng-click="updateserve(drishot,'',dristimes,drisrecommend,drissales,d.id)"
+						ng-click="updatedrug(drishot,'',dristimes,drisrecommend,drissales,d.id)"
 						style="background: #5ED8A9;" /> <input name="esc" type="reset"
 						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
 				</div>

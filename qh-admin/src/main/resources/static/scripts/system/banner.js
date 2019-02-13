@@ -69,6 +69,7 @@ $scope.uploadmainimage = function(file){
 	$scope.add=function(){
 		$scope.bannerId=null;
 		$scope.banner=null;
+		$scope.selected = null;
 		document.getElementById('add').style.display="block"; 
 		 
 	}
@@ -114,5 +115,15 @@ $scope.uploadmainimage = function(file){
 		 }
 	}
 	
+	$scope.reset=function(){
+		$scope.bannerId=null;
+		$scope.banner=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
+	$scope.loaddata=function(){
+		
+		location.reload();
+	}
 
 });

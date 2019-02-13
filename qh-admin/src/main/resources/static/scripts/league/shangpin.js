@@ -90,7 +90,7 @@ app.controller("shangpinshopController", function($scope, $http){
 		
 		$scope.updateshop=function(s){
 			 
-			$http.get("/api/shop/updateShop",{"params": {"islimits":$scope.islimits,"isrecommend":s.isrecommend,
+			$http.get("/api/shop/updateShop",{"params": {"islimits":$scope.islimits,"isrecommend":s.isrecommend,"userId":s.userId,"shopType":2,
 				"id":s.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){

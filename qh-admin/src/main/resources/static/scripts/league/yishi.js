@@ -20,7 +20,7 @@ app.controller("doctorsController", function($scope, $http){
    $scope.headImg = null;
    $scope.name = null;
    $scope.offices = null;
-   $scope.dcount=null;
+   $scope.count=null;
    
   
    
@@ -54,7 +54,7 @@ app.controller("doctorsController", function($scope, $http){
 	
 	$scope.islimitList=function(){
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-		$http.get("/api/doctors/select",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"isvirtual":0,
+		$http.get("/api/doctors/select",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"isvirtual":0,"name":$scope.name,
 			"islimit":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -141,7 +141,8 @@ app.controller("doctorsController", function($scope, $http){
 					alert("修改成功")
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
-					$scope.doctorscount();
+					$scope.yishicount();
+					location.reload();
 				}
 			})
 	}
@@ -215,19 +216,20 @@ app.controller("doctorsController", function($scope, $http){
 			})
 	 }
 	 
-	 $scope.doctorscount=function(){
-		 
+	 $scope.yishicount=function(){
+
 			$http.get("/api/doctors/selectcount", {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					$scope.dcount=data.data;
-					$scope.ddcount="审核列表( "+$scope.dcount+" )";
+					$scope.count=data.data;
+					$scope.doctorcount="审核列表( "+$scope.count+" )";
 				}
 			})
 	}
-		$scope.doctorscount();
-		
-		$scope.refresh=function(){
+		$scope.yishicount();
+	
+	 
+	 $scope.refresh=function(){
 			
 			location.reload();
 			

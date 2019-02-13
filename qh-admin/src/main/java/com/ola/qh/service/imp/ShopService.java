@@ -1,5 +1,6 @@
 package com.ola.qh.service.imp;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,9 @@ public class ShopService implements IShopService{
 				
 				List<ShopImg> environmentImgList=shopDao.selectImgList(shop.getId(), 2);
 				shop.setEnvironmentImgList(environmentImgList);
+				
+				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				shop.setShowtime(sf.format(shop.getAddtime()));
 			}
 			results.setData(listAll);
 			results.setStatus("0");

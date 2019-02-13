@@ -43,6 +43,9 @@
 		<if test="courseTypeSubclassName!=null">
 		and course_type_subclass_name=#{courseTypeSubclassName}
 		</if>
+		<if test="className!=null and className!=''">
+		and class_name LIKE CONCAT(CONCAT('%',#{className},'%'))
+		</if>
 		order by addtime desc limit #{pageNo},#{pageSize}
 	</select>
 	

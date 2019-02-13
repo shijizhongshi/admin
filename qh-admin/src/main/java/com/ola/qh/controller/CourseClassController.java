@@ -28,14 +28,15 @@ public class CourseClassController {
 	public Results<List<CourseClass>> selectCourseClass(@RequestParam(name="id",required=false)String id,
 			@RequestParam(name="page")int page,
 			@RequestParam(name="courseTypeName")String courseTypeName,
-			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName){
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName,
+			@RequestParam(name="className",required=false)String className){
 		
 		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
 		
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		
-		List<CourseClass> list=courseClassService.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName);
+		List<CourseClass> list=courseClassService.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName,className);
 		results.setCount(courseClassService.selectCourseClassCount(courseTypeName, courseTypeSubclassName));
 		results.setStatus("0");
 		results.setData(list);

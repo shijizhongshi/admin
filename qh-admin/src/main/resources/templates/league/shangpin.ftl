@@ -97,7 +97,7 @@ submenu="sidebarmenu-league-shangpin">
 									<th><img ng-src="{{s.doorHeadUrl}}"></th>
 									<th>{{s.leaderName}}</th>
 									<th>{{s.leaderMobile}}</th>
-									<th>{{s.addtime}}</th>
+									<th>{{s.showtime}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(s)">查看详情</span></th>
 								</tr>
 
@@ -207,7 +207,7 @@ submenu="sidebarmenu-league-shangpin">
 						<form >
 						<div class="details-frame-heshen">
 							<div class="select-3" style="">
-								<span>店铺名称</span> <input type="text" name="search" ng-model="shopName"/>
+								<span>店铺名称</span> <input type="text"  ng-model="shopName"/>
 
 							</div>
 							

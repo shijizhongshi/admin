@@ -31,9 +31,9 @@ public class CourseClassService implements ICourseClassService {
 	private CourseDao courseDao;
 
 	@Override
-	public List<CourseClass> selectCourseClass(String id, int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName) {
+	public List<CourseClass> selectCourseClass(String id, int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName,String className) {
 
-		List<CourseClass> list = courseClassDao.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName);
+		List<CourseClass> list = courseClassDao.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName,className);
 		for (CourseClass courseClass : list) {
 			///查课程   
 			Course c=new Course();

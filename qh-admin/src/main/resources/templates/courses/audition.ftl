@@ -119,7 +119,7 @@ submenu="sidebarmenu-audition">
 									<th>{{a.videoId}}</th>
 									<th>{{a.remmend}}</th>
 									<th>{{a.courseUseDifference}}</th>
-									<th>{{a.addtime}}</th>
+									<th>{{a.showtime}}</th>
 								</tr>
 							</table>
 
