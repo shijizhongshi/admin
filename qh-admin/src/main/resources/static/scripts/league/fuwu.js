@@ -12,7 +12,6 @@ app.controller("fuwushopController", function($scope, $http){
 	   $scope.address = null;;
 	   $scope.shopName = null;
 	   $scope.fcount=null;
-	   $scope.userId=null;
 	   
 		$scope.shopList=function(){
 			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
