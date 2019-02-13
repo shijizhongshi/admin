@@ -115,8 +115,9 @@ public class ShopService implements IShopService{
 		newUser.setUserrole(userrole+"");
 		userDao.updateUser(user);
 		shopDao.updateShop(id, islimits,isrecommend);
-
-		
+		//////////////网易云信注册账号开始//////////////////////////////////////
+				
+		//////////////网易云信注册账号结束///////////////////////////////////////	
 		result.setStatus("0");
 		return result;
 	}
