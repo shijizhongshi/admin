@@ -25,6 +25,7 @@ app.controller("gradeController", function($scope, $http){
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.classBases();
+		$scope.selected=sub;
 		
 	}
 	$scope.typeBases();//////保证已经来有默认的参数

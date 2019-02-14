@@ -41,6 +41,7 @@ public class CourseSubclassController {
 	@RequestMapping("/courseChapterList")
 	public Results<List<CourseChapter>> ListCourseChapter(
 			@RequestParam(name="courseId",required=false)String courseId,
+			@RequestParam(name="courseChapterName",required=false)String courseChapterName,
 			@RequestParam(name="pageNo",required=true)int pageNo,
 			@RequestParam(name="pageSize",required=true)int pageSize,
 			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
@@ -48,7 +49,7 @@ public class CourseSubclassController {
 		
 		Results<List<CourseChapter>> result = new Results<List<CourseChapter>>();
 		
-		result.setData(courseSubclassService.courseChapterList(courseId,pageNo,pageSize,courseTypeName,courseTypeSubclassName));
+		result.setData(courseSubclassService.courseChapterList(courseId,courseChapterName,pageNo,pageSize,courseTypeName,courseTypeSubclassName));
 		result.setCount(courseSubclassService.courseChapterListCount(courseId, courseTypeName, courseTypeSubclassName));
 		result.setStatus("0");
 		return result;

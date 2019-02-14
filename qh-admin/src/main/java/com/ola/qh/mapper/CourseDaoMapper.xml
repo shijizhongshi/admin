@@ -154,7 +154,7 @@
 	and class_id=#{classId}
 	</if>
 	<if test="courseName!=null and courseName!='' ">
-	and course_name=#{courseName}
+	and course_name like concat(concat('%',#{courseName},'%'))
 	</if>
 	order by addtime desc 
 	<if test="pageSize!=0">

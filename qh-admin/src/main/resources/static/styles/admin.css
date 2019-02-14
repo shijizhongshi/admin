@@ -68,7 +68,7 @@ table .selected{background-color:#c1ddec}
 /**/
 .poop{position: absolute;left:30%;top:15%;overflow:auto;}
 .poop::-webkit-scrollbar , .resource::-webkit-scrollbar {width:6px;}
-.poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {/*¹ö¶¯ÌõÀïÃæÐ¡·½¿é*/
+.poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½*/
             border-radius: 5px;
             -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
             background: rgba(0,0,0,0.2);

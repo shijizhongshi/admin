@@ -15,30 +15,30 @@
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('医师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
    </li>
    <li class="list" ng-click="typeList(2)">药师资格
       <ul class="items" ng-class="{'active':active==2}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('药师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('药师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
        <li class="list" ng-click="typeList(3)" >中医基础理论
       <ul class="items" ng-class="{'active':active==3}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('中医基础理论',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('中医基础理论',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
        <li class="list" ng-click="typeList(4)">卫生资格 
       <ul class="items" ng-class="{'active':active==4}">
-        <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('卫生资格',sub)">{{sub.courseTypeSubclassName}}</li>
+        <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('卫生资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
       <li class="list"><a href="#">健康管理师</a> 
       <ul class="items" ng-class="{'active':active==5}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('健康管理师',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('健康管理师',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
       

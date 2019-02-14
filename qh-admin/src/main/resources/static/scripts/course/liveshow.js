@@ -59,7 +59,7 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.courseTypeName = typename;
 		$scope.courseTypeSubclassName = sub.courseTypeSubclassName;
 		$scope.liveBases();
-
+		$scope.selected=sub;
 	}
 
 	$scope.live = null;

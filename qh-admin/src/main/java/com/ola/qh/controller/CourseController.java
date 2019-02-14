@@ -144,14 +144,18 @@ public class CourseController {
 			@RequestParam(name = "pageNo", required = true) int pageNo,
 			@RequestParam(name = "pageSize", required = true) int pageSize,
 			@RequestParam(name = "courseTypeName", required = false) String courseTypeName,
-			@RequestParam(name = "courseTypeSubclassName", required = false) String courseTypeSubclassName) {
+			@RequestParam(name = "courseTypeSubclassName", required = false) String courseTypeSubclassName,
+			@RequestParam(name = "courseName", required = false) String courseName) {
 
 		Results<List<Course>> result = new Results<List<Course>>();
+		
 		Course course = new Course();
 		course.setCourseTypeName(courseTypeName);
 		course.setCourseTypeSubclassName(courseTypeSubclassName);
 		course.setPageNo(pageNo);
 		course.setPageSize(pageSize);
+		course.setCourseName(courseName);
+		
 		result.setData(courseService.courseList(course));
 		result.setStatus("0");
 		return result;

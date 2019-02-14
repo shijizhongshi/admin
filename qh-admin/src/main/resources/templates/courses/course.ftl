@@ -14,30 +14,30 @@
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <a ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)" >{{sub.courseTypeSubclassName}}</a>
+         <li  ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
    </li>
    <li class="list" ng-click="typeList(2)">药师资格
       <ul class="items" ng-class="{'active':active==2}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('药师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
        <li class="list" ng-click="typeList(3)">中医基础理论
       <ul class="items" ng-class="{'active':active==3}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('中医基础理论',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
        <li class="list" ng-click="typeList(4)">卫生资格 
       <ul class="items" ng-class="{'active':active==4}">
-        <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('卫生资格 ',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
       <li class="list"><a href="#">健康管理师</a> 
       <ul class="items" ng-class="{'active':active==5}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('健康管理师',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
       
@@ -62,7 +62,7 @@
 	<div class="select-2">
 	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" placeholder=""/></form>
+	<input type="text" ng-model="courseName"/></form>
 	</div>
 	<div><input type="button" class="btn-lg im-key" ng-click="courseBases()" value="立即检索"  /></div>	
 </div>
@@ -197,7 +197,7 @@
 <style type="text/css">
 .details-frame-content .select-2{float: left; margin-right: 15px; width: 18%;}
 @media screen and (max-width: 901px) {.details-frame-content .select-2{width: 90%;}}
-.itmes a:visited{color:red}  
+
 </style>
 
 </@b.body>

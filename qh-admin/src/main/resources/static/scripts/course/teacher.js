@@ -198,4 +198,8 @@ app.controller("teacherController", function($scope, $http){
 		}
 	}
 
+	$scope.reset=function(){
+		
+		location.reload();
+	}
 });

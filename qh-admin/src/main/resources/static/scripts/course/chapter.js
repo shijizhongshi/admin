@@ -40,7 +40,8 @@ app.controller("ChapterController", function($scope, $http){
 	$scope.chapterBases=function(){
 		$scope.pageNo=($scope.current-1)*$scope.pageSize;
 		$http.get("/api/course/subclass/courseChapterList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
-			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"courseId":$scope.courseId}}, 
+			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"courseId":$scope.courseId
+			,"courseChapterName":$scope.courseChapterName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -60,6 +61,7 @@ app.controller("ChapterController", function($scope, $http){
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.chapterBases();
+		$scope.selected=sub;
 		
 	}
 	
@@ -148,6 +150,10 @@ app.controller("ChapterController", function($scope, $http){
 		}else{
 			alert("请选中信息~");
 		}
+	}
+	$scope.reset=function(){
+		
+		location.reload();
 	}
 
 });

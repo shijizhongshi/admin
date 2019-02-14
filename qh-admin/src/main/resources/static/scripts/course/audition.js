@@ -66,6 +66,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.auditionBases();
+		$scope.selected=sub;
 	
 }
 	$scope.uploadmainimage = function(file){

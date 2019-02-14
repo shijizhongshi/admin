@@ -2,6 +2,7 @@ app.controller("CourseController", function($scope, $http){
 
 	$scope.active=1;
 	$scope.typeId=1;
+	$scope.selected=null;
 	$scope.typeList=function(typeId){
 			$scope.active=typeId;
 			$scope.typeId=typeId;
@@ -26,7 +27,7 @@ app.controller("CourseController", function($scope, $http){
 	$scope.courseBases=function(){
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 		$http.get("/api/course/courseList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
-			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"courseName":$scope.courseName}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courselist=data.data;

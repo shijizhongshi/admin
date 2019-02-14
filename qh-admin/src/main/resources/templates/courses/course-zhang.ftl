@@ -19,30 +19,30 @@
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('医师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
    </li>
    <li class="list" ng-click="typeList(2)">药师资格
       <ul class="items" ng-class="{'active':active==2}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('药师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('药师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
        <li class="list" ng-click="typeList(3)" >中医基础理论
       <ul class="items" ng-class="{'active':active==3}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('中医基础理论',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('中医基础理论',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
        <li class="list" ng-click="typeList(4)">卫生资格 
       <ul class="items" ng-class="{'active':active==4}">
-        <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('卫生资格',sub)">{{sub.courseTypeSubclassName}}</li>
+        <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('卫生资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
       <li class="list"><a href="#">健康管理师</a> 
       <ul class="items" ng-class="{'active':active==5}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('健康管理师',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('健康管理师',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
       
@@ -67,8 +67,9 @@
 	<div class="select-2" style="width:18%">
 	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" name="search"/></form>
+	<input type="text" ng-model="courseChapterName"/></form>
 	</div>
+	<div><input type="button" class="btn-lg im-key" ng-click="chapterBases()" value="立即检索"  /></div>	
 	</div>
 <div class="manage">
 	<ul class="show">
@@ -79,7 +80,7 @@
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<li ng-click="section()"><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;节管理</li>
-         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" ng-click="chapterBases()" name="changyi"/></li>
+         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" ng-click="reset()" name="changyi"/></li>
 
 	</ul>
 	<div class="admin-table">
