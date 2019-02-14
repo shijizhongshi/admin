@@ -46,7 +46,7 @@
 	</update>
 	
 	<select id="singleUser" resultMap="UserMap">
-		select * from user where user_id=#{userId}
+		select * from user where id=#{id}
 	</select>
 	
 	<update id="updateFavorite" parameterType="String">

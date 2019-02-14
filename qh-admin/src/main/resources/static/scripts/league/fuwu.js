@@ -96,6 +96,10 @@ app.controller("fuwushopController", function($scope, $http){
 					$scope.islimitList();
 					location.reload();
 				}
+				else if(data.status=="1"){
+					
+					alert(data.message);
+				}
 			})
 	}
 		

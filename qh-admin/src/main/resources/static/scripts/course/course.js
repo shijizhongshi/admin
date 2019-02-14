@@ -43,7 +43,7 @@ app.controller("CourseController", function($scope, $http){
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.courseBases();
-		
+		$scope.selected=sub;
 	}
 	////////////////以上是通过不同的条件查课程的集合的	
 	$scope.course=null;
@@ -133,6 +133,11 @@ app.controller("CourseController", function($scope, $http){
 		}else{
 			alert("请选中信息~");
 		}
+	}
+	
+	$scope.reset=function(){
+
+		location.reload();
 	}
 
 });

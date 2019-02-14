@@ -14,7 +14,7 @@
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <a ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)" >{{sub.courseTypeSubclassName}}</a>
         
       </ul>
    </li>
@@ -64,7 +64,7 @@
 	<form id="search">
 	<input type="text" placeholder=""/></form>
 	</div>
-	<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
+	<div><input type="button" class="btn-lg im-key" ng-click="courseBases()" value="立即检索"  /></div>	
 </div>
 <div class="manage">
 	<ul class="show">
@@ -75,7 +75,7 @@
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<li  ng-click="chapter()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;资源章节管理</li>
-         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
+         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="reset()"/></li>
 	</ul>
 	<div class="admin-table">
 
@@ -197,6 +197,7 @@
 <style type="text/css">
 .details-frame-content .select-2{float: left; margin-right: 15px; width: 18%;}
 @media screen and (max-width: 901px) {.details-frame-content .select-2{width: 90%;}}
+.itmes a:visited{color:red}  
 </style>
 
 </@b.body>

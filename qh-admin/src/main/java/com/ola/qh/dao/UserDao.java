@@ -10,7 +10,7 @@ public interface UserDao {
 
 	public int updateUser(User user);
 	
-	public User singleUser(@Param("userId")String userId);
+	public User singleUser(@Param("id")String id);
 	
 	public List<User> selectUser(@Param("mobile")String mobile,@Param("nickname")String nickname,@Param("userrole")String userrole);
 	

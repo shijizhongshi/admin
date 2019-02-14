@@ -29,7 +29,7 @@
 	<form id="search">
 	<input type="text" ng-model="title" placeholder="搜索新闻标题"/></form>
 	</div>
-<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="检索" ng-click="search()" /></div>	
+<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="检索"  /></div>	
 	
 	
 	</div>

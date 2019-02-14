@@ -100,6 +100,10 @@ app.controller("shangpinshopController", function($scope, $http){
 					location.reload();
 					$scope.shangpincount();
 				}
+				else if(data.status=="1"){
+					
+					alert(data.message);
+				}
 			})
 	}
 		

@@ -153,6 +153,9 @@
 	<if test="classId!=null and classId!='' ">
 	and class_id=#{classId}
 	</if>
+	<if test="courseName!=null and courseName!='' ">
+	and course_name=#{courseName}
+	</if>
 	order by addtime desc 
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
