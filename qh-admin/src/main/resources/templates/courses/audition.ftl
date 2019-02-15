@@ -145,9 +145,9 @@ submenu="sidebarmenu-audition">
 								<div class="grade-add">
 									<div class="grade-left" style="padding-right: 5%;">
 
-										<div class=" select-2">
+										<div class=" select-2" style="width:100%;">
 											<span>班级名称：</span> <input type="text" ng-model="courseNofree.courseName"
-												placeholder="请输入班级名称" style="width: 230px;" />
+												placeholder="请输入班级名称"/>
 										</div>
 
 										<div style="width: 100%; height: 90px; clear: both;">

@@ -30,7 +30,7 @@ ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: abs
 .details-frame-content{width:100%;padding: 20px;background: white;height:auto;border-bottom: solid 1px #EEEFF1;overflow:auto;padding-bottom:0;}
 .centre-border{width:370px;height:170px;border-bottom: 1px solid #F5F6F8;clear:both;margin-bottom:15px;}
 .centre-border select,.centre-border .select{width:130px;}
-.select{width:160px;height:50px;float:left;margin-left:10px;margin-bottom:5px;position: relative;}
+.select{width:160px;height:50px;float:left;margin-bottom:5px;position: relative;}
 .details-frame-content .select img{position: absolute;right:10px;bottom:8px;}
 .manage .select img{position: absolute;right:10px;top:17px;}
 
@@ -45,7 +45,7 @@ color:red;
 select[disabled]{
 color:red;
 }
-.select input{width: 180px;height: 30px;background:#EDEEF0;border-radius:20px;text-indent: 1em;}
+.select input{height: 30px;background:#EDEEF0;border-radius:20px;text-indent: 1em;}
 .im-key{background: #E8474D;color: white;border-radius:20px;margin: 30px 10px;}
 @media screen and (max-width: 1600px)  {.im-key{margin: 30px 5px;}}
 @media screen and (max-width: 1400px)  {.im-key{margin: 30px 5px;}}

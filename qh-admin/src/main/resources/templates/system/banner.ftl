@@ -25,7 +25,7 @@
 	</div>
 <div class="details-frame" >
 	<div class="details-frame-content">
-		<div class="select-3">
+		<div class="select-3" style="width:15%">
 			<span>广告横幅的位置</span>
 			<img src="/images/sjk-xl.png"/>
 			<select ng-model="types">
@@ -106,7 +106,7 @@
 	<input type="hidden" ng-model="bannerId" />
 		<div class="select-2 ">
 	<span>链接:</span>
-			<input type="text" ng-model="banner.outLinks" style="width: 180px;height: 40px;background:#EDEEF0;border-radius:20px;" placeholder="请输入跳转链接" style="width: 230px;text-indent: 2em;" />
+			<input type="text" ng-model="banner.outLinks" placeholder="请输入跳转链接"  />
 	</div>
 	
 	<div class="select-2 ">
@@ -135,7 +135,7 @@
 			<div style="margin-bottom: 10px">图片:</div>
 			<input type="file" onchange="angular.element(this).scope().uploadmainimage(this)" />
 			<input type="hidden" ng-model="banner.imageurl" >
-			<img ng-src="{{banner.imageurl}}" style="width:50px;height:30px;"/>
+			<img ng-src="{{banner.imageurl}}" style="width:50px;"/>
 	</div>
 		
 		<div  class="select-radio ">

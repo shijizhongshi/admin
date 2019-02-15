@@ -106,7 +106,7 @@
 									<span>一句话简介</span>
 									<input type="text" ng-model="news.simpleIntro" />
 								</div>
-									<div class=" select-3">
+									<div class=" select-2">
 									<img src="/images/sjk-xl.png"/>
 									<span>咨询/话题选择</span>
 									<select ng-model="news.contentTypes">
