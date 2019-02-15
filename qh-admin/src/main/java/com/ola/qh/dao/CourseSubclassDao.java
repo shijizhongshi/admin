@@ -12,6 +12,7 @@ public interface CourseSubclassDao {
 	/////课程章的操作
 	public List<CourseChapter> courseChapterList(
 			@Param("courseId") String courseId,
+			@Param("courseChapterName") String courseChapterName,
 			@Param("pageNo") int pageNo,
 			@Param("pageSize") int pageSize,
 			@Param("courseTypeName")String courseTypeName,

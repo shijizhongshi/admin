@@ -19,9 +19,9 @@ public class CourseSubclassService implements ICourseSubclassService{
 	private CourseSubclassDao courseSubclassDao;
 	
 	@Override
-	public List<CourseChapter> courseChapterList(String courseId,int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName) {
+	public List<CourseChapter> courseChapterList(String courseId,String courseChapterName,int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName) {
 		// TODO Auto-generated method stub
-		return courseSubclassDao.courseChapterList(courseId,pageNo,pageSize,courseTypeName,courseTypeSubclassName);
+		return courseSubclassDao.courseChapterList(courseId,courseChapterName,pageNo,pageSize,courseTypeName,courseTypeSubclassName);
 	}
 
 	@Override

@@ -9,6 +9,10 @@ app.controller("CourseNofreeController",function($scope,$http){
    
    $scope.id=null;
    $scope.video=null;
+   $scope.teachers=null;
+   $scope.courseName=null;
+   $scope.teacher=null;
+   $scope.teacherName=null;
    
    $scope.typeBases=function(){
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -30,11 +34,22 @@ app.controller("CourseNofreeController",function($scope,$http){
    /////查询
    $scope.auditionBases=function(){
 		$http.get("/api/coursenofree/select",{"params": {"courseTypeName":$scope.courseTypeName,
-			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page}}, 
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,
+			"page":$scope.page,"teachers":$scope.teachers,"courseName":$scope.courseName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.auditionlist=data.data;
+				angular.forEach($scope.auditionlist, function(audition){  
+					
+					if(audition.isremmend==0){
+						
+						audition.remmend="不推荐";
+					}
+					else if(audition.isremmend==1){
+						audition.remmend="推荐";
+					}
+				})
 			}
 			else{
 				$scope.auditionlist=null;
@@ -51,6 +66,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.auditionBases();
+		$scope.selected=sub;
 	
 }
 	$scope.uploadmainimage = function(file){
@@ -73,7 +89,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 	
 	
-	$scope.uploadmainimage1 = function(file){
+	/*$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
@@ -90,6 +106,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 			
 			if(res.error=="0"){
 				alert("上传成功~");
+				console.log(res);
 				$scope.courseNofree.videoId=res.data[0].vid;
 				$scope.courseNofree.videoUrl=res.data[0].mp4;
 				$scope.polyv($scope.courseNofree.videoId);
@@ -101,11 +118,55 @@ app.controller("CourseNofreeController",function($scope,$http){
 			
 		});
 	};
-
+*/
+	$scope.uploadmainimage1 = function(file){
+		if(!file.files || file.files.length < 1) return;
+	    var formData={
+	    		"title" : "测试11",
+				"filename" : file.files[0],
+				"filesize" : file.files[0].size,
+				"description":"很好很好",
+				"userid":"91DD94C27B488135",
+				"tag":"教育"
+				
+	    }
+		/*formData.append('filename', file.files[0]);
+		formData.append("userid","91DD94C27B488135");
+		formData.append("title","测试11");
+		formData.append("tag","教育");
+		formData.append("description","很好很好");
+		formData.append("filesize",file.files[0].size);*/
+		
+		
+		$.ajax({
+		    url: 'http://spark.bokecc.com/api/video/create/v2',
+		    type: 'GET',
+			data : {
+	    		"title" : "测试11",
+				"filename" : file.files[0],
+				"filesize" : file.files[0].size,
+				"description":"很好很好",
+				"userid":"91DD94C27B488135",
+				"tag":"教育"
+				
+	    },
+			cache : false,
+			dataType : "json",
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+		}).success(function(res) {
+			
+			console.log(res);
+			
+		}).fail(function(res) {
+			
+		});
+		
+		
+	};
 	
 	////保存
 	$scope.addAudition=function(){
-		
+		$scope.courseNofree.teachers=$scope.teacher;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
@@ -225,14 +286,19 @@ app.controller("CourseNofreeController",function($scope,$http){
 	
 	///////做选中的时候用
 	$scope.courseTeacher=null;
+	
 	$scope.checkteacher=function(t){
-		$scope.courseNofree.teachers=t.name;
+		if($scope.selected!=t){
+		$scope.teacher=t.name;
 		$scope.courseTeacher=t;
+		$scope.selected=t
+		}else{
+			$scope.teacher=null;
+			$scope.courseTeacher=null;
+			$scope.selected=null;
+			
+		}
 	};
-	////判断是都被选中
-	$scope.isSelected=function(tname){
-		return $scope.courseNofree.teachers==tname;
-	}
 	
 	/////教师的提交按钮
 	$scope.addteacher=function(){
@@ -243,6 +309,25 @@ app.controller("CourseNofreeController",function($scope,$http){
 			alert("请选择教师");
 		}
 	};
+	
+	
+	$scope.refresh=function(){
+		
+			location.reload();
+		
+	};
+	
+	$scope.reset=function(){
+		$scope.teacher=null;
+		$scope.courseTeacher=null;
+		$scope.selected=null;
+		$scope.courseNofree=null;
+		$scope.id=null;
+		$scope.videoUrl=null;
+		document.getElementById('revise').style.display="none"; 
+		document.getElementById('add').style.display="none"; 
+	
+};
 });
 	
 	

@@ -21,12 +21,12 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select-3" style="width:15%;">
-	<span>搜索课程</span>
+	<div class="select-2" style="width:13%;float:left;">
+	<span>模板名称</span>
 	<form id="search">
-	<input type="text" name="search"/></form>
+	<input type="text" ng-model="templateName"/></form>
 	</div>
-		<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
+		<div><input type="button" class="btn-lg im-key"  value="检索" ng-click="templateBases()" /></div>	
 	</div>
 <div class="manage">
 	<ul class="show">
@@ -68,7 +68,6 @@
 						ng-model="page" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-change="courseBases()">
 					</ul>
 				</div>
 
@@ -150,7 +149,7 @@
 							ng-if="id!=null" ng-click="updateTemplate()"
 							style="background: #5ED8A9;" />
 							<input name="esc" type="reset"
-							value="取消" onclick="CloseDiv();formReset()" class="esc" />
+							value="取消" ng-click="reset()" class="esc" />
 					</div>
 				</div>
 				</div>

@@ -14,30 +14,30 @@
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li  ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
    </li>
    <li class="list" ng-click="typeList(2)">药师资格
       <ul class="items" ng-class="{'active':active==2}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('药师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
        <li class="list" ng-click="typeList(3)">中医基础理论
       <ul class="items" ng-class="{'active':active==3}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('中医基础理论',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
        <li class="list" ng-click="typeList(4)">卫生资格 
       <ul class="items" ng-class="{'active':active==4}">
-        <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('卫生资格 ',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
       <li class="list"><a href="#">健康管理师</a> 
       <ul class="items" ng-class="{'active':active==5}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('健康管理师',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
       
@@ -62,9 +62,9 @@
 	<div class="select-2">
 	<span>搜索课程</span>
 	<form id="search">
-	<input type="text" placeholder=""/></form>
+	<input type="text" ng-model="courseName"/></form>
 	</div>
-	<div><input type="button" class="btn-lg im-key" ng-click="loaddata()" value="立即检索" ng-click="search()" /></div>	
+	<div><input type="button" class="btn-lg im-key" ng-click="courseBases()" value="立即检索"  /></div>	
 </div>
 <div class="manage">
 	<ul class="show">
@@ -75,7 +75,7 @@
 		<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<li  ng-click="chapter()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;资源章节管理</li>
-         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" name="changyi"/></li>
+         <li style="float: right;margin-right: 20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="reset()"/></li>
 	</ul>
 	<div class="admin-table">
 
@@ -181,7 +181,7 @@
 		<div class="end">
 			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;"/>
 			<input name="git" type="submit" value="修改" ng-show="courseId!=null" ng-click="addCourse()" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  ng-click="cancel()" class="esc" />
 		</div>
 		</form>
 	</div>
@@ -194,6 +194,7 @@
 <style type="text/css">
 .details-frame-content .select-2{float: left; margin-right: 15px; width: 18%;}
 @media screen and (max-width: 901px) {.details-frame-content .select-2{width: 90%;}}
+
 </style>
 
 </@b.body>

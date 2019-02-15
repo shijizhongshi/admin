@@ -2,14 +2,12 @@ package com.ola.qh.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ola.qh.entity.CourseLineShow;
 import com.ola.qh.entity.CourseNofree;
 
 public interface ICourseNofreeService {
 
-	public List<CourseNofree> selectCourseNofree(String courseTypeName,String courseTypeSubclassName,int pageNo,int pageSize);
+	public List<CourseNofree> selectCourseNofree(String courseTypeName,String courseTypeSubclassName,int pageNo,int pageSize,String teachers,String courseName);
 	
 	public int insertCourseNofree(CourseNofree courseNofree);
 	

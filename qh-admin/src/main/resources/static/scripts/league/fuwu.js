@@ -9,7 +9,7 @@ app.controller("fuwushopController", function($scope, $http){
 	   
 	   $scope.islimits = 1;
 	   $scope.isrecommend = 0;
-	   $scope.address = null;;
+	   $scope.address = null;
 	   $scope.shopName = null;
 	   $scope.fcount=null;
 	   
@@ -61,7 +61,7 @@ app.controller("fuwushopController", function($scope, $http){
 					$scope.selected=s;
 			 		$scope.id=s.id;
 			 		$scope.shop=s;
-			 		
+			 		$scope.shopId=s.id;
 			 		
 			 }else{
 						$scope.selected=null;
@@ -87,7 +87,7 @@ app.controller("fuwushopController", function($scope, $http){
 		
 		$scope.updateshop=function(s){
 			 
-			$http.get("/api/shop/updateShop",{"params": {"islimits":$scope.islimits,"isrecommend":s.isrecommend,
+			$http.get("/api/shop/updateShop",{"params": {"islimits":$scope.islimits,"isrecommend":s.isrecommend,"userId":s.userId,"shopType":1,
 				"id":s.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
@@ -95,6 +95,10 @@ app.controller("fuwushopController", function($scope, $http){
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
 					location.reload();
+				}
+				else if(data.status=="1"){
+					
+					alert(data.message);
 				}
 			})
 	}
@@ -117,4 +121,18 @@ app.controller("fuwushopController", function($scope, $http){
 				})
 		}
 			$scope.fuwucount();
+			
+			$scope.guanli=function(){
+				if($scope.shopId!=null){
+					location.href="/web/league/xiangmu?shopId="+$scope.shopId;
+				}else{
+					alert("请选中信息~");
+				}
+			}
+			
+			$scope.refresh=function(){
+				
+				location.reload();
+				
+			}
 })

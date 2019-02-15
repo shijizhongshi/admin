@@ -74,6 +74,8 @@ private String id;
 	private String servetypeName;
 
 
+	private String showtime;
+	
 	public String getId() {
 		return id;
 	}
@@ -272,6 +274,14 @@ private String id;
 
 	public void setServetypeName(String servetypeName) {
 		this.servetypeName = servetypeName;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
 	}
 
 	

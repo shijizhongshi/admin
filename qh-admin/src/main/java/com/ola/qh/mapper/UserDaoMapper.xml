@@ -21,10 +21,10 @@
 	select id,nickname,userrole,mobile,isdoctor,isdisabled from user 
 	where 1=1
 	<if test="mobile!=null and mobile!='' ">
-	and  mobile=#{mobile} 
+	and  mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
 	</if>
 	<if test="nickname!=null and nickname!='' ">
-	and  nickname=#{nickname} 
+	and  nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
 	</if>
 	<if test="userrole!=null and userrole!='' ">
 	and  userrole=#{userrole} 
@@ -33,19 +33,21 @@
 	
 	<update id="updateUser" parameterType="com.ola.qh.entity.User" >
 		update user set 
-		<if test="userrole!=null">
+		<if test="userrole!=null and userrole!='' ">
 		userrole=#{userrole},
 		</if>
-		<if test="isdoctor!=null">
+		<if test="isdoctor!=null and isdoctor!='' ">
 		isdoctor=#{isdoctor},
 		</if>
-		<if test="isdisabled!=null">
+		<if test="isdisabled!=null and isdisabled!='' ">
 		isdisabled=#{isdisabled},
 		</if>
 		updatetime=#{updatetime} where id=#{id} 
 	</update>
 	
-	
+	<select id="singleUser" resultMap="UserMap">
+		select * from user where id=#{id}
+	</select>
 	
 	<update id="updateFavorite" parameterType="String">
 		update user_favorite set status=1 where product_id=#{productId}

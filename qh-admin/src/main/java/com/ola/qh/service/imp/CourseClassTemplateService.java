@@ -16,9 +16,9 @@ public class CourseClassTemplateService implements ICourseClassTemplateService{
 	private CourseClassTemplateDao  courseClassTemplateDao;
 
 	@Override
-	public List<CourseClassTemplate> selectCourseClassTemplate(String id,int pageNo,int pageSize) {
+	public List<CourseClassTemplate> selectCourseClassTemplate(String id,String templateName,int pageNo,int pageSize) {
 		
-		return courseClassTemplateDao.selectCourseClassTemplate(id,pageNo,pageSize);
+		return courseClassTemplateDao.selectCourseClassTemplate(id,templateName,pageNo,pageSize);
 	}
 
 	@Override

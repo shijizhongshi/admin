@@ -1,5 +1,7 @@
 app.controller("gradeController", function($scope, $http){
 
+	$scope.className=null;
+	$scope.selected=null;
 	$scope.active=1;
 	$scope.typeId=1;
 	$scope.courseTypeName="医师资格";
@@ -23,6 +25,7 @@ app.controller("gradeController", function($scope, $http){
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.classBases();
+		$scope.selected=sub;
 		
 	}
 	$scope.typeBases();//////保证已经来有默认的参数
@@ -33,8 +36,10 @@ app.controller("gradeController", function($scope, $http){
     //一页显示多少条
     $scope.pageSize = 20;
     $scope.classes=null;
+    
 	$scope.classBases=function(){
-		$http.get("/api/courseclass/select",{"params": {"page":$scope.current,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}}, 
+		
+		$http.get("/api/courseclass/select",{"params": {"page":$scope.current,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"className":$scope.className}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -190,6 +195,7 @@ app.controller("gradeController", function($scope, $http){
 	};
 	///////做选中的时候用
 	$scope.checkedclass=function(c){
+		if($scope.selected!=c){
 		$scope.selected=c;
 		$scope.classes=c;
 		$scope.classId=c.id;
@@ -197,7 +203,14 @@ app.controller("gradeController", function($scope, $http){
 		console.log($scope.courseselected);
 		$scope.teacherselected=c.listTeacher;
 		console.log($scope.teacherselected);
-		
+		}
+		else{
+			$scope.selected=null;
+			$scope.classes=null;
+			$scope.classId=null;
+			
+			
+		}
 	}
 	$scope.add=function(){
 		$scope.classId=null;
@@ -242,4 +255,14 @@ app.controller("gradeController", function($scope, $http){
 		}
 	}
 
+	$scope.rest=function(){
+		$scope.selected=null;
+		$scope.classes=null;
+		$scope.classId=null;
+		document.getElementById('add').style.display="none"; 
+	}
+	$scope.refresh=function(){
+		location.reload();
+	}
+	
 });

@@ -25,10 +25,11 @@ public class ShopServeController {
 			@RequestParam(name="serveName",required=false)String serveName,@RequestParam(name="serveType",required=false)String serveType,
 			@RequestParam(name = "pageNo", required = false) int pageNo,
 			@RequestParam(name = "pageSize", required = false) int pageSize,
-			@RequestParam(name ="serveStatus",required=false)String serveStatus){
+			@RequestParam(name ="serveStatus",required=false)String serveStatus,
+			@RequestParam(name ="shopId",required=false)String shopId){
 		
 		
-		return shopServeService.selectShopServe(shopName, serveName, serveType,pageNo,pageSize,serveStatus);
+		return shopServeService.selectShopServe(shopName, serveName, serveType,pageNo,pageSize,serveStatus,shopId);
 		
 	}
 	

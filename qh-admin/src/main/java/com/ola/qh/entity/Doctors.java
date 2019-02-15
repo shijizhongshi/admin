@@ -53,6 +53,8 @@ public class Doctors {
 	private int isrecommend;
 	
 	private int isvirtual;
+	
+	private String showtime;
 
 	public int getIslimit() {
 		return islimit;
@@ -244,6 +246,14 @@ public class Doctors {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
 	}
 	
 	

@@ -8,7 +8,7 @@ import com.ola.qh.util.Results;
 
 public interface IShopServeService {
 
-	public Results<List<ShopServe>> selectShopServe(String shopName,String serveName,String serveType,int pageNo,int pageSize,String serveStatus);
+	public Results<List<ShopServe>> selectShopServe(String shopName,String serveName,String serveType,int pageNo,int pageSize,String serveStatus,String shopId);
 	
 	public int updateShopServe(String id,String ishot,String serveStatus,Date updatetime);
 	

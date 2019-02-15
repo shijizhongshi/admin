@@ -21,9 +21,9 @@ public class CourseNofreeService implements ICourseNofreeService {
 	
 	@Override
 	public List<CourseNofree> selectCourseNofree(String courseTypeName, String courseTypeSubclassName, int pageNo,
-			int pageSize) {
+			int pageSize,String teachers,String courseName) {
 		
-		return courseNofreeDao.selectCourseNofree(courseTypeName, courseTypeSubclassName, pageNo, pageSize);
+		return courseNofreeDao.selectCourseNofree(courseTypeName, courseTypeSubclassName, pageNo, pageSize, teachers,courseName);
 	}
 
 	@Override

@@ -50,7 +50,7 @@
 					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 					<li><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;下移</li>
-					<li style="float: right; margin-right: 100px; background: none;"><img
+					<li ng-click="refresh()" style="float: right; margin-right: 100px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
 				</ul>
 				<div class="admin-table">
@@ -58,11 +58,13 @@
 					<table>
 						<tr>
 							<th>子类名称</th>
+							<th>图片</th>
 							
 						</tr>
 						<tr ng-repeat="ss in shopDrugSubcategory" ng-click="checkedShopsub(ss)" ng-class="{'selected':selected==ss}">
 							
 							<th>{{ss.subName}}</th>
+							<th><img  src="{{ss.imgUrl}}"></th>
 						</tr>
 
 						
@@ -75,7 +77,7 @@
 						ng-model="current" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-change="courseBases()">
+						ng-change="shopsubBases()">
 					</ul>
 				</div>
 

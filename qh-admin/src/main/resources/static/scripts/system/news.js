@@ -117,5 +117,16 @@ $scope.uploadmainimage = function(file){
 		 }
 	}
 	
+	$scope.reset=function(){
+		
+		location.reload();
+	}
 
+	$scope.cancel=function(){
+		
+		$scope.newsId=null;
+		$scope.news=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
 });

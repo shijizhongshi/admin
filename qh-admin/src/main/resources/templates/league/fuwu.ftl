@@ -67,10 +67,10 @@
 							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 							<li><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;下移</li>
-							<li><span class="glyphicon glyphicon-sort-by-attributes"
+							<li ng-click="guanli()"><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;项目管理</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" /></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 						</ul>
 						<div class="admin-table">
 
@@ -96,7 +96,7 @@
 									<th><img ng-src="{{s.doorHeadUrl}}"></th>
 									<th>{{s.leaderName}}</th>
 									<th>{{s.leaderMobile}}</th>
-									<th>{{s.addtime}}</th>
+									<th>{{s.showtime}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(s)">查看详情</span></th>
 								</tr>
 
@@ -109,7 +109,7 @@
 								ng-model="current" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-change="shopList()">
 							</ul>
 						</div>
 
@@ -206,7 +206,7 @@
 						<form >
 						<div class="details-frame-heshen">
 							<div class="select-3" style="">
-								<span>店铺名称</span> <input type="text" name="search" ng-model="shopName"/>
+								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
 
 							</div>
 							
@@ -233,7 +233,7 @@
 									<th>{{i.shopName}}</th>
 									<th>{{i.address}}</th>
 									<th>{{i.leaderName}}</th>
-									<th>{{i.addtime}}</th>
+									<th>{{i.showtime}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(i)">查看详情</span></th>
 								</tr>
 
@@ -246,7 +246,7 @@
 								ng-model="current" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-change="islimitList()">
 							</ul>
 						</div>
 

@@ -1,5 +1,6 @@
 package com.ola.qh.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,10 @@ public class DoctorsController {
 		
 		Results<List<Doctors>> results=new Results<List<Doctors>>();
 		List<Doctors> list=doctorsService.selectDoctors(islimit, name, offices, isvirtual, pageNo, pageSize);
-		
+		for (Doctors doctors : list) {
+			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			doctors.setShowtime(sf.format(doctors.getAddtime()));
+		}
 		results.setData(list);
 		results.setStatus("0");
 		return results;

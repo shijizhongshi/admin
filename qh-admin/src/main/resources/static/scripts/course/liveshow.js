@@ -59,7 +59,7 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.courseTypeName = typename;
 		$scope.courseTypeSubclassName = sub.courseTypeSubclassName;
 		$scope.liveBases();
-
+		$scope.selected=sub;
 	}
 
 	$scope.live = null;
@@ -154,4 +154,11 @@ app.controller("liveShowController", function($scope, $http) {
 		}
 	}
 
+	$scope.cancel=function(){
+		
+		$scope.liveId=null;
+		$scope.live=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
 });

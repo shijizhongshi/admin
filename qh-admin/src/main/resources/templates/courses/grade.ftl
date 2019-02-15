@@ -14,30 +14,30 @@
 	
    <li class="list" ng-click="typeList(1)" >医师资格 
       <ul class="items" ng-class="{'active':active==1}">
-         <li ng-repeat="sub in courseTypeSubclass" ng-click="courseSub('医师资格',sub)">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('医师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
    </li>
    <li class="list" ng-click="typeList(2)">药师资格
       <ul class="items" ng-class="{'active':active==2}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('药师资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
        <li class="list" ng-click="typeList(3)">中医基础理论
       <ul class="items" ng-class="{'active':active==3}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('中医基础理论',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
        <li class="list" ng-click="typeList(4)">卫生资格 
       <ul class="items" ng-class="{'active':active==4}">
-        <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+        <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('卫生资格 ',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
         
       </ul>
       </li>
       <li class="list"><a href="#">健康管理师</a> 
       <ul class="items" ng-class="{'active':active==5}">
-         <li ng-repeat="sub in courseTypeSubclass">{{sub.courseTypeSubclassName}}</li>
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('健康管理师',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
       
@@ -56,9 +56,13 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select" style="float:left;margin-right:15px;">搜索课程<br />
+	<div class="select-2" style="width:13%;float:left">
+	<span>搜索班级</span>
 	<form id="search">
-	<input type="text" name="search" style=" text-indent:2em;"/></form>
+	<input ng-model="className" type="text"  style=" text-indent:2em;"/></form>
+	</div>
+	<div>
+		<input type="button" class="btn-lg im-key" ng-click="classBases()"value="检索"  />
 	</div>
 	</div>
 <div class="manage">
@@ -71,7 +75,7 @@
 		<li><span class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;下移</li>
 		<!--<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
 		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>-->
-         <li style="float: right;margin-right:20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="classBases()"/></li>
+         <li style="float: right;margin-right:20px;background:none;"><img src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 	</ul>
 	<div class="admin-table">
 
@@ -151,7 +155,20 @@
 						<span>班级折扣价：</span>
 			<input type="text"  ng-model="classes.classDiscountPrice" class=""placeholder="请输入班级名称"  />
 		</div></div>
-		<div style="width: 100%;height:90px;clear: both;">		<div class=" select-2" style="float: left;">
+		
+		
+		<div class=" select-2">
+						<span>最多折扣豆：</span>
+			<input type="number" ng-model="classes.maxdoudou" class=""placeholder="请输入最多使用的豆豆数" style="width: 230px;" />
+		</div>
+		<div style="width: 100%;height:90px;clear: both;">		
+		
+		
+		
+		<div class=" select-2" style="float: left;">
+	
+	
+	
 	
 						<span>班级年份：</span>
 			<input type="text"  ng-model="classes.classYear" class=""placeholder="请输入班级年份"  />
@@ -236,7 +253,7 @@
 		<div class="end">
 			<input name="git" type="submit" ng-show="classId==null" ng-click="addClass()" value="提交" style="background:#5ED8A9;"/>
 			<input name="git" type="submit" ng-show="classId!=null" ng-click="addClass()" value="修改" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  ng-click="rest()" class="esc" />
 		</div>
 	</div>
 </div>

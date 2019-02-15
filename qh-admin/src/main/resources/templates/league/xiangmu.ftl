@@ -18,6 +18,8 @@
 
 
 <div ng-controller="commonController">
+<input type="hidden" value="${shopId}" id="shopId" >
+
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -97,7 +99,7 @@
 							<li><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;下移</li>
 							<li style="float: right; margin-right: 100px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" /></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 						</ul>
 						<div class="admin-table">
 
@@ -307,7 +309,7 @@
 								</ul>
 								<ul>
 									<li>审批的时间</li>
-									<li>{{d.approvalTime}}</li>
+									<li>{{d.showtime}}</li>
 								</ul>
 							</div>
 						</div>
@@ -351,7 +353,7 @@
 				</form>
 				<div class="end">
 					<input name="git" type="submit" value="提交"
-						ng-click="updateserve(drishot,'',dristimes,drisrecommend,drissales,d.id)"
+						ng-click="updatedrug(drishot,'',dristimes,drisrecommend,drissales,d.id)"
 						style="background: #5ED8A9;" /> <input name="esc" type="reset"
 						value="取消" onclick="CloseDiv2();formReset2()" class="esc" />
 				</div>
@@ -417,7 +419,7 @@
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
 							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi" /></li>
+							src="/images/sjk-f5.png" name="changyi"  ng-click="refresh()"/></li>
 					</ul>
 					<div class="admin-table">
 

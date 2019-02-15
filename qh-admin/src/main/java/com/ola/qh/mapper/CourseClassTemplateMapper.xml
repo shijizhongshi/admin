@@ -27,6 +27,9 @@
 		<if test="id!=null">
 		id=#{id}
 		</if>
+		<if test="templateName!=null and templateName!=''">
+		template_name LIKE CONCAT(CONCAT('%',#{templateName},'%'))
+		</if>
 		</where>
 		order by addtime ASC 
 		<if test="pageSize!=0">

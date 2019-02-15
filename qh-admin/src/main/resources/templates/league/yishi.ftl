@@ -69,7 +69,7 @@
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
 							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi" /></li>
+							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
 					</ul>
 					<div class="admin-table">
 
@@ -91,7 +91,7 @@
 								<th>{{d.offices}}</th>
 								<th>{{d.professional}}</th>
 								<th>{{d.recommend}}</th>
-								<th>{{d.addtime}}</th>
+								<th>{{d.showtime}}</th>
 								<th><span class="xiangqing" ng-click="checkedAll(d)">查看详情</span></th>
 							</tr>
 
@@ -104,7 +104,7 @@
 							ng-model="current" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="courseBases()">
+							ng-change="doctorsList()">
 						</ul>
 					</div>
 					<!--弹窗-->
@@ -258,14 +258,14 @@
 
 				<!-- 核审管理内容 -->
 				<div class="manage" style="display: none;">
-					<h4 style="padding-left: 30px;"><span>{{ddcount}}</span></h4>
+					<h4 style="padding-left: 30px;"><span>{{doctorcount}}</span></h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="">
-							<span>医师姓名</span> <input type="text" name="search" />
+							<span>医师姓名</span> <input type="text"  ng-model="name"/>
 
 						</div>
 						<div>
-							<input type="button" class="btn-lg im-key" ng-click="" value="检索">
+							<input type="button" class="btn-lg im-key" ng-click="islimitList()" value="检索">
 						</div>
 					</div>
 					<div class="admin-table">
@@ -300,7 +300,7 @@
 							ng-model="current" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="courseBases()">
+							ng-change="islimitList()">
 						</ul>
 					</div>
 

@@ -45,6 +45,9 @@
 	<if test="courseId!=null and courseId!='' ">
 	and course_id=#{courseId}
 	</if>
+	<if test="courseChapterName!=null and courseChapterName!='' ">
+	and course_chapter_name like concat(concat('%',#{courseChapterName},'%'))
+	</if>
 	<if test="courseTypeName!=null and courseTypeName!='' ">
 	and course_type_name=#{courseTypeName}
 	</if>
