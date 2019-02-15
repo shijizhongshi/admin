@@ -127,10 +127,7 @@
 			<input type="text"  ng-model="course.coursePrice" placeholder="输入课程价格" style="margin-right:5%;"/>
 			<input type="text" ng-model="course.courseDiscountPrice" placeholder="输入折扣价格" />
 		</div>
-		<div class="select"style="width: 100%;height:48px;">
-			<input type="text"  placeholder="输入兑换币" />
-	
-		</div>
+		
 		<div class=" select-2" style="float: left;margin-right:5%;width:35%; ">
 			<img src="/images/sjk-xl.png"/>
 			<span>是否展示</span>
