@@ -202,4 +202,12 @@ app.controller("teacherController", function($scope, $http){
 		
 		location.reload();
 	}
+	
+	$scope.cancel=function(){
+		
+		$scope.teacherId=null;
+		$scope.teacher=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
 });

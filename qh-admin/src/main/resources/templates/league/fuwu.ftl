@@ -109,7 +109,7 @@
 								ng-model="current" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-change="shopList()">
 							</ul>
 						</div>
 
@@ -233,7 +233,7 @@
 									<th>{{i.shopName}}</th>
 									<th>{{i.address}}</th>
 									<th>{{i.leaderName}}</th>
-									<th>{{i.addtime}}</th>
+									<th>{{i.showtime}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(i)">查看详情</span></th>
 								</tr>
 
@@ -246,7 +246,7 @@
 								ng-model="current" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-change="islimitList()">
 							</ul>
 						</div>
 

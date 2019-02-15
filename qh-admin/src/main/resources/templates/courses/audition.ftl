@@ -227,7 +227,7 @@ submenu="sidebarmenu-audition">
 							<div class="end">
 								<input name="git" type="submit" value="提交" ng-click="addAudition()" ng-if="id==null" style="background: #5ED8A9;" />
 								<input name="git" type="submit" value="修改" ng-click="updateAudition()" ng-if="id!=null" style="background: #5ED8A9;" />
-								<input name="esc" type="reset" value="取消" onclick="CloseDiv();formReset()" class="esc" />
+								<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc" />
 							</div>
 
 
@@ -274,7 +274,7 @@ submenu="sidebarmenu-audition">
 								<input name="git" type="submit" value="提交" ng-click="addteacher()" 
 									style="background: #5ED8A9;" />
 								<input name="esc" type="reset"
-									value="取消" ng-click="rest()" class="esc" />
+									value="取消" ng-click="reset()" class="esc" />
 							</div>
 
 						</div>

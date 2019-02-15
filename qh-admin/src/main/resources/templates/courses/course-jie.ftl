@@ -35,10 +35,7 @@
 		<!--<li  onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;导入节内容</li>-->
        
 	</ul>
-	<div class="select" style="float: right;margin-right:15px;">搜索课程<br />
-	<form id="search">
-	<input type="text" name="search" style=" text-indent:2em;"/></form>
-	</div>
+	
 	</div>
 <div class="manage">
 	

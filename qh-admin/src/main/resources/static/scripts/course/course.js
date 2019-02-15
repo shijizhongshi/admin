@@ -141,4 +141,11 @@ app.controller("CourseController", function($scope, $http){
 		location.reload();
 	}
 
+	$scope.cancel=function(){
+		
+		$scope.courseId=null;
+		$scope.course=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
 });

@@ -154,4 +154,11 @@ app.controller("liveShowController", function($scope, $http) {
 		}
 	}
 
+	$scope.cancel=function(){
+		
+		$scope.liveId=null;
+		$scope.live=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
 });

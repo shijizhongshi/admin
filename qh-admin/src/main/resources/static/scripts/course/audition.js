@@ -317,9 +317,15 @@ app.controller("CourseNofreeController",function($scope,$http){
 		
 	};
 	
-	$scope.rest=function(){
+	$scope.reset=function(){
 		$scope.teacher=null;
+		$scope.courseTeacher=null;
+		$scope.selected=null;
+		$scope.courseNofree=null;
+		$scope.id=null;
+		$scope.videoUrl=null;
 		document.getElementById('revise').style.display="none"; 
+		document.getElementById('add').style.display="none"; 
 	
 };
 });

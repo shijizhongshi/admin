@@ -156,4 +156,12 @@ app.controller("ChapterController", function($scope, $http){
 		location.reload();
 	}
 
+	
+	$scope.cancel=function(){
+		
+		$scope.chapterId=null;
+		$scope.chapter=null;
+		$scope.selected = null;
+		document.getElementById('add').style.display="none"; 
+	}
 });

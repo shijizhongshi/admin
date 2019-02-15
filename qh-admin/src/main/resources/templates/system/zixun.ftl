@@ -44,7 +44,7 @@
 					<li ng-click="deletenews()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 					<li style="float: right; margin-right: 20px; background: none;"><img
-						src="/images/sjk-f5.png" name="changyi" /></li>
+						src="/images/sjk-f5.png" name="changyi"  ng-click="reset()"/></li>
 				</ul>
 				<div class="admin-table">
 
@@ -80,7 +80,7 @@
 						ng-model="current" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-change="courseBases()">
+						ng-change="loaddata()">
 					</ul>
 				</div>
 
@@ -160,7 +160,7 @@
 							ng-if="newsId!=null" ng-click="newsupdate()"
 							style="background: #5ED8A9;" />
 							<input name="esc" type="reset"
-							value="取消" onclick="CloseDiv();formReset()" class="esc" />
+							value="取消" ng-click="cancel()" class="esc" />
 					</div>
 				</div>
 				</div>

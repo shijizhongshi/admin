@@ -173,7 +173,7 @@
 		<div class="end">
 			<input name="git" type="submit" ng-show="teacherId==null" ng-click="addteacher()" value="提交" style="background:#5ED8A9;"/>
 			<input name="git" type="submit" ng-show="teacherId!=null" ng-click="addteacher()" value="修改" style="background:#5ED8A9;"/>
-			<input name="esc" type="reset" value="取消"  onclick="CloseDiv();formReset()" class="esc" />
+			<input name="esc" type="reset" value="取消"  ng-click="cancel()" class="esc" />
 		</div>
 		
 
