@@ -156,8 +156,8 @@ div.costs-uploadfile-div .allBtn{
     color: #fff;
     }
     .costs-uploadfile-div input{width:80%;}
- .poop img:ACTIVE , .resource img:ACTIVE { transform: scale(7.0);position: fixed;z-index: 9999;}
-.admin-table table tr th img:ACTIVE{ transform: scale(9.0);position: fixed;z-index: 9999;}
+ .poop img:ACTIVE , .resource img:ACTIVE { transform: scale(7.0);position: fixed;}
+.admin-table table tr th img:ACTIVE{ transform: scale(9.0);position: fixed;}
 .costs-uploadfile-div img{height:100px;}
 .costs-img{height:100px;}
 .admin-table table tr .xiangqing{background:#F9CE33;border-radius: 20px;color: white;padding: 5px;font-size: 1.3rem;cursor: pointer;}
