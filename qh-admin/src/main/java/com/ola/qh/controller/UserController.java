@@ -20,11 +20,11 @@ public class UserController {
 	private IUserService userService;
 
 	@RequestMapping(value = "/updateuser", method = RequestMethod.GET)
-	public Results<String> updateUser(@RequestParam(name = "isdisabled", required = true) int isdisabled,
+	public Results<String> updateUser(@RequestParam(name = "isdisabled", required = true) String isdisabled,
 			@RequestParam(name = "id", required = true) String id) {
 
 		Results<String> results = new Results<String>();
-
+		
 		int user = userService.updateUser(isdisabled, id);
 		if (user <= 0) {
 			results.setMessage("更改异常");

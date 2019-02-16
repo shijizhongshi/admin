@@ -11,7 +11,7 @@ public interface IUserService {
 	
 	public List<User> selectUser(String mobile,String nickname,String userrole);
 	
-	public int updateUser(int isdisabled,String id);
+	public int updateUser(String isdisabled,String id);
 	
 	public Results<String> adminLogin(String username,String password,HttpServletRequest request);
 }
