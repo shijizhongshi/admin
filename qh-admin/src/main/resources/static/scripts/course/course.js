@@ -130,7 +130,7 @@ app.controller("CourseController", function($scope, $http){
 	
 	$scope.chapter=function(){
 		if($scope.courseId!=null){
-			location.href="/web/course/chapter?courseId="+$scope.courseId+"&typeId="+$scope.typeId+"&courseTypeName="+$scope.courseTypeName+"&courseTypeSubclassName="+$scope.courseTypeSubclassName;
+			location.href="/web/course/chapter?courseId="+$scope.courseId+"&typeId="+$scope.typeId;
 		}else{
 			alert("请选中信息~");
 		}

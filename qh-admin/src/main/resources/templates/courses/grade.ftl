@@ -124,9 +124,9 @@
 		<div class="grade-add">
 			<div class="grade-left" style="padding-right: 5%;">
 		
-				<div class=" select-2">
+				<div class=" select-2" style="width:100%;">
 						<span>班级名称：</span>
-			<input type="text" ng-model="classes.className" class=""placeholder="请输入班级名称" style="width: 230px;" />
+			<input type="text" ng-model="classes.className" class=""placeholder="请输入班级名称" />
 		</div>
 	
 	<div style="width: 100%;height:90px;clear: both;">	<div class=" select-2" style="float: left;">
@@ -157,9 +157,9 @@
 		</div></div>
 		
 		
-		<div class=" select-2">
+		<div class=" select-2"style="width:100%;">
 						<span>最多折扣豆：</span>
-			<input type="number" ng-model="classes.maxdoudou" class=""placeholder="请输入最多使用的豆豆数" style="width: 230px;" />
+			<input type="number" ng-model="classes.maxdoudou" class=""placeholder="请输入最多使用的豆豆数" />
 		</div>
 		<div style="width: 100%;height:90px;clear: both;">		
 		

@@ -64,7 +64,7 @@
 <div class="details-frame" >
 	<div class="details-frame-content">
 
-	<div class="select-2" style="width:18%">
+	<div class="select-3" style="width:18%">
 	<span>搜索课程</span>
 	<form id="search">
 	<input type="text" ng-model="courseChapterName"/></form>
@@ -112,20 +112,20 @@
                         </ul>
                     </div>
 	<!--弹窗-->
-		<div class="poop" id="add">
+		<div class="poop" id="add" style="width:auto">
 		<form id="myform">
 	<h3>添加章</h3>
 	
 		<div class="select">
-			<input type="text" ng-model="chapter.courseChapterName" placeholder="请输入章名称" style="width: 230px;text-indent: 2em;" />
+			<input type="text" ng-model="chapter.courseChapterName" placeholder="请输入章名称" />
 			
 		</div>
 		<div class="select"  >
-			<input type="text" ng-model="chapter.courseLecturer"  class=""placeholder="主讲老师" style="text-indent: 2em;margin-right:15px;"/>
+			<input type="text" ng-model="chapter.courseLecturer"  class=""placeholder="主讲老师"/>
 		
 		</div>
 		<div class="select">
-		选择课程
+		<span>选择课程</span>
 		<select ng-model="chapter.courseId"  ng-options="item.id as item.courseName for item in courselist" ng-selected="selected==item.courseName">
 		</select>
 		</div>

@@ -1,4 +1,4 @@
-app.controller("shopServeControllered", function($scope, $http){
+app.controller("shopServeController", function($scope, $http){
 	
 	
 		$scope.total = 0;
