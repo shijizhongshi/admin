@@ -101,6 +101,7 @@ app.controller("sectionController", function($scope, $http){
 	$scope.add=function(){
 		$scope.section=null;
 		$scope.sectionId=null;
+		$scope.polyv();
 		document.getElementById('add').style.display="block"; 
 		
 		

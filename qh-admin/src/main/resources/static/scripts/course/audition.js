@@ -89,7 +89,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 	
 	
-	/*$scope.uploadmainimage1 = function(file){
+	$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
@@ -118,8 +118,8 @@ app.controller("CourseNofreeController",function($scope,$http){
 			
 		});
 	};
-*/
-	$scope.uploadmainimage1 = function(file){
+
+	/*$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 	    var formData={
 	    		"title" : "测试11",
@@ -130,12 +130,12 @@ app.controller("CourseNofreeController",function($scope,$http){
 				"tag":"教育"
 				
 	    }
-		/*formData.append('filename', file.files[0]);
+		formData.append('filename', file.files[0]);
 		formData.append("userid","91DD94C27B488135");
 		formData.append("title","测试11");
 		formData.append("tag","教育");
 		formData.append("description","很好很好");
-		formData.append("filesize",file.files[0].size);*/
+		formData.append("filesize",file.files[0].size);
 		
 		
 		$.ajax({
@@ -162,7 +162,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		});
 		
 		
-	};
+	};*/
 	
 	////保存
 	$scope.addAudition=function(){
@@ -186,6 +186,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	$scope.add=function(){
 		$scope.courseNofree=null;
 		$scope.id=null;
+		$scope.polyv();
 		document.getElementById('add').style.display="block"; 
 	};
 	
