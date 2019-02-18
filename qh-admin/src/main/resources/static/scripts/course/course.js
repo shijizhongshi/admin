@@ -2,17 +2,26 @@ app.controller("CourseController", function($scope, $http){
 
 	$scope.active=1;
 	$scope.typeId=1;
-	$scope.selected=null;
-	$scope.typeList=function(typeId){
+	$scope.typeSelected=null;
+	$scope.typeList=function(typename,typeId){
+		
 			$scope.active=typeId;
 			$scope.typeId=typeId;
 			$scope.typeBases();
+			$scope.courseTypeName=typename;
+			
+			
+			
 	};
 	$scope.typeBases=function(){
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courseTypeSubclass=data.data;
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseBases();
+				
 			}
 		})
 	};
@@ -39,12 +48,14 @@ app.controller("CourseController", function($scope, $http){
 	$scope.courseTypeSubclassName="临床(执业)助理医师";
 	$scope.courseBases();
 	
-	$scope.courseSub=function(typename,sub){
+	$scope.courseSub=function(typename,sub,$event){
 		////////查课程的集合
+		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.courseBases();
-		$scope.selected=sub;
+		$scope.typeSelected=sub.courseTypeSubclassName;
+		
 	}
 	////////////////以上是通过不同的条件查课程的集合的	
 	$scope.course=null;
@@ -130,7 +141,8 @@ app.controller("CourseController", function($scope, $http){
 	
 	$scope.chapter=function(){
 		if($scope.courseId!=null){
-			location.href="/web/course/chapter?courseId="+$scope.courseId+"&typeId="+$scope.typeId;
+			location.href="/web/course/chapter?courseId="+$scope.courseId+"&typeId="+$scope.typeId+
+			"&courseTypeName="+$scope.courseTypeName+"&courseTypeSubclassName="+$scope.courseTypeSubclassName;
 		}else{
 			alert("请选中信息~");
 		}

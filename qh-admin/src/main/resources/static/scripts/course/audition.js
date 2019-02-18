@@ -19,16 +19,20 @@ app.controller("CourseNofreeController",function($scope,$http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courseTypeSubclass=data.data;
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.auditionBases();
 			}
 		})
 	};
 	$scope.active=1;
 	$scope.typeId=1;
 	$scope.typeBases();
-	$scope.typeList=function(typeId){
+	$scope.typeList=function(typename,typeId){
 			$scope.active=typeId;
 			$scope.typeId=typeId;
 			$scope.typeBases();
+			$scope.courseTypeName=typename;
 	};
    
    /////查询
@@ -61,12 +65,13 @@ app.controller("CourseNofreeController",function($scope,$http){
 	$scope.courseTypeSubclassName="临床(执业)助理医师";
 	$scope.auditionBases();
 
-	$scope.auditionSub=function(typename,sub){
+	$scope.auditionSub=function(typename,sub,$event){
 		////////查课程的集合
+		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.auditionBases();
-		$scope.selected=sub;
+		$scope.typeSelected=sub.courseTypeSubclassName;
 	
 }
 	$scope.uploadmainimage = function(file){
