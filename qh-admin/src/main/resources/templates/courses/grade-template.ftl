@@ -67,7 +67,7 @@
 					<ul uib-pagination boundary-links="true" total-items="total"
 						ng-model="page" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
-						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
 					</ul>
 				</div>
 
@@ -105,12 +105,9 @@
 								<div class="costs-uploadfile-div">
 									<input type="file" name="file"
 										onchange="angular.element(this).scope().uploadmainimage(this)" />
-									<input type="hidden" ng-model="courseClassTemplate.classUrl"
-										id="textfield"/>
-									
 									<div
 										style="height: 130px;margin-top: 3px;">
-										<img ng-src="{{classUrl}}" />
+										<img src="{{classUrl}}" />
 									</div>
 								</div>
 

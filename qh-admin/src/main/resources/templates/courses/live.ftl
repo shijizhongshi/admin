@@ -141,7 +141,7 @@
 							<div class="costs-uploadfile-div">
 										课程图片<input type="file" name="file" value="上传课程图片" onchange="angular.element(this).scope().uploadmainimage(this)">
 										<div class="costs-img">
-											<img ng-src="{{live.imgUrl}}">
+											<img src="{{imgUrl}}">
 										</div>
 									</div>
 						</div>

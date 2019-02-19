@@ -134,8 +134,7 @@
 	<div>
 			<div style="margin-bottom: 10px">图片:</div>
 			<input type="file" onchange="angular.element(this).scope().uploadmainimage(this)" />
-			<input type="hidden" ng-model="banner.imageurl" >
-			<img ng-src="{{banner.imageurl}}" style="width:50px;"/>
+			<img src="{{imageurl}}" style="width:50px;"/>
 	</div>
 		
 		<div  class="select-radio ">

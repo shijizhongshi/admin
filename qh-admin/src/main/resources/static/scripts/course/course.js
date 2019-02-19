@@ -3,6 +3,7 @@ app.controller("CourseController", function($scope, $http){
 	$scope.active=1;
 	$scope.typeId=1;
 	$scope.typeSelected=null;
+	$scope.courseImg=null;
 	$scope.typeList=function(typename,typeId){
 		
 			$scope.active=typeId;
@@ -70,7 +71,7 @@ app.controller("CourseController", function($scope, $http){
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.course.courseImg=data.data;
+	    	$scope.courseImg=data.data;
 		})
 	};
 	
@@ -78,6 +79,7 @@ app.controller("CourseController", function($scope, $http){
 		$scope.course.id=$scope.courseId;
 		$scope.course.courseTypeName=$scope.courseTypeName;
 	    $scope.course.courseTypeSubclassName=$scope.courseTypeSubclassName;
+	    $scope.course.courseImg=$scope.courseImg;
 		$http.post("/api/course/courseSaveUpdate",$scope.course,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -104,6 +106,7 @@ app.controller("CourseController", function($scope, $http){
 	$scope.add=function(){
 		$scope.course=null;
 		$scope.courseId=null;
+		$scope.courseImg=null;
 		document.getElementById('add').style.display="block"; 
 		
 		

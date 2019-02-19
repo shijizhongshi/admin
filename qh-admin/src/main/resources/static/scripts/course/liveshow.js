@@ -4,7 +4,8 @@ app.controller("liveShowController", function($scope, $http) {
 	$scope.courseTypeSubclassName = "临床(执业)助理医师";
 	$scope.active = 1;
 	$scope.typeId = 1;
-
+	$scope.imgUrl=null;
+	
 	$scope.typeList = function(typename,typeId) {
 		$scope.active = typeId;
 		$scope.typeId = typeId;
@@ -80,10 +81,11 @@ app.controller("liveShowController", function($scope, $http) {
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.live.imgUrl=data.data;
+	    	$scope.imgUrl=data.data;
 		})
 	};
 	$scope.addLive = function() {
+		$scope.live.imgUrl = $scope.imgUrl;
 		$scope.live.courseTypeName = $scope.courseTypeName;
 		$scope.live.courseTypeSubclassName = $scope.courseTypeSubclassName;
 		if($scope.liveId==null){
@@ -121,10 +123,13 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.selected = l;
 		$scope.live = l;
 		$scope.liveId = l.id;
+		$scope.imgUrl=l.imgUrl;
 	}
 	$scope.add=function(){
+		$scope.imgUrl=null;
 		$scope.live =null;
 		$scope.liveId = null;
+		
 		document.getElementById('add').style.display="block"; 
 	}
 	$scope.update=function(){

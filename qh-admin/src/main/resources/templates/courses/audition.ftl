@@ -210,7 +210,7 @@ submenu="sidebarmenu-audition">
 							<div class="costs-uploadfile-div">
 											<input type="file" value="上传试听课图片" onchange="angular.element(this).scope().uploadmainimage(this)" >
 											<div style="height: 130px;  margin-top: 3px;">
-												<img ng-src="{{courseNofree.imgUrl}}" style="height:130px;"/>
+												<img src="{{imgUrl}}" style="height:130px;"/>
 											</div>
 										</div>
 								</div>

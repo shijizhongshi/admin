@@ -90,6 +90,7 @@ app.controller("teacherController", function($scope, $http){
     //一页显示多少条
     $scope.pageSize = 20;
     $scope.teacher=null;
+    $scope.imgUrl=null;
 	$scope.teacherBases=function(){
 		$http.get("/api/courseteacher/select",{"params": {"page":$scope.current,"teacherName":$scope.teacherName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
@@ -116,7 +117,7 @@ app.controller("teacherController", function($scope, $http){
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.teacher.imgUrl=data.data;
+	    	$scope.imgUrl=data.data;
 		})
 	};
 	
@@ -125,6 +126,7 @@ app.controller("teacherController", function($scope, $http){
 	
 	$scope.addteacher=function(){
 		$scope.teacher.typename=$scope.subtypeselected;
+		$scope.teacher.imgUrl=$scope.imgUrl;
 		if($scope.teacherId==null){
 			$http.post("/api/courseteacher/save",$scope.teacher,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
@@ -159,8 +161,10 @@ app.controller("teacherController", function($scope, $http){
 		$scope.selected=t;
 		$scope.teacher=t;
 		$scope.teacherId=t.id;
+		$scope.imgUrl=t.imgUrl;
 	}
 	$scope.add=function(){
+		$scope.imgUrl=null;
 		$scope.teacher=null;
 		$scope.teacherId=null;
 		document.getElementById('add').style.display="block"; 

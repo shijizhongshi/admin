@@ -88,7 +88,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	        
 	    })
 	    .success(function(data){
-	    	$scope.courseNofree.imgUrl=data.data;
+	    	$scope.imgUrl=data.data;
 	    	
 		})
 	};
@@ -171,6 +171,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	
 	////保存
 	$scope.addAudition=function(){
+		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.teachers=$scope.teacher;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
@@ -189,6 +190,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 	
 	$scope.add=function(){
+		$scope.imgUrl=null;
 		$scope.courseNofree=null;
 		$scope.id=null;
 		$scope.polyv();
@@ -197,7 +199,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	
 	///////做选中的时候用
 	$scope.checkedAudition=function(a){
-		
+		$scope.imgUrl=a.imgUrl;
 		$scope.selected=a;
 		$scope.courseNofree=a;
 		$scope.id=a.id;
@@ -237,6 +239,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 ////修改
 	$scope.updateAudition=function(){
+		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.videoUrl=$scope.videoUrl;
 		$http.post("/api/coursenofree/update",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
