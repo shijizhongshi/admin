@@ -69,20 +69,20 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		$scope.selected=t;
 		$scope.courseClassTemplate=t;
 		$scope.id=t.id;
-		$scope.classUrt=t.classUrl;
+		$scope.classUrl=t.classUrl;
 		}
 		else{
 			
 			$scope.selected=null;
 			$scope.courseClassTemplate=null;
 			$scope.id=null;
+			$scope.classUrl=null;
 		}
 	}
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
 		if($scope.id!=null){
 			document.getElementById('add').style.display="block"; 
-			alert($scope.classUrl);
 		}else{
 			alert("请选中信息~");
 		}

@@ -101,6 +101,7 @@ app.controller("CourseController", function($scope, $http){
 		$scope.selected=c;
 		$scope.course=c;
 		$scope.courseId=c.id;
+		$scope.courseImg=c.courseImg;
 	}
 	
 	$scope.add=function(){

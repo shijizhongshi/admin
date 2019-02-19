@@ -116,7 +116,7 @@ app.controller("gradeController", function($scope, $http){
 	 
 	    $scope.isSelected = function(course) {
 	     for(var i=0;i<$scope.courseselected.length;i++){
-	    	 if($scope.courseselected[i].id==course.id){
+	    	 if($scope.courseselected[i].id==course.id && $scope.classId!=null){
 	    		 return true;
 	    	 }else{
 	    		 return false;
@@ -142,7 +142,7 @@ app.controller("gradeController", function($scope, $http){
 	    
 	    $scope.isTeacherSelected = function(teacher) {
 	    	for(var i=0;i<$scope.teacherselected.length;i++){
-		    	 if($scope.teacherselected[i].id==teacher.id){
+		    	 if($scope.teacherselected[i].id==teacher.id && $scope.classId!=null){
 		    		 return true;
 		    	 }else{
 		    		 return false;
@@ -205,6 +205,7 @@ app.controller("gradeController", function($scope, $http){
 		$scope.classes=c;
 		$scope.classId=c.id;
 		$scope.courseselected=c.listCourse;
+		$scope.imgUrl=c.imgUrl;
 		console.log($scope.courseselected);
 		$scope.teacherselected=c.listTeacher;
 		console.log($scope.teacherselected);
