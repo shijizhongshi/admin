@@ -114,6 +114,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 				console.log(res);
 				$scope.courseNofree.videoId=res.data[0].vid;
 				$scope.courseNofree.videoUrl=res.data[0].mp4;
+				document.getElementById('polyved').style.display="block";
 				$scope.polyv($scope.courseNofree.videoId);
 				
 			}else{
@@ -203,8 +204,8 @@ app.controller("CourseNofreeController",function($scope,$http){
 		$scope.selected=a;
 		$scope.courseNofree=a;
 		$scope.id=a.id;
+		$scope.videoId=a.videoId;
 		$scope.videoUrl=$scope.courseNofree.videoUrl;
-		$scope.polyv(a.videoId);
 	};
 	
 	$scope.polyv=function(videoId){
@@ -220,6 +221,8 @@ app.controller("CourseNofreeController",function($scope,$http){
 					    'ts':$scope.video.ts,
 					    'sign':$scope.video.sign
 					});
+				}else{
+					document.getElementById('polyved').style.display="none"; 
 				}
 				
 			}
@@ -231,7 +234,9 @@ app.controller("CourseNofreeController",function($scope,$http){
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
 		if($scope.id!=null){
+			document.getElementById('polyved').style.display="block";
 			document.getElementById('add').style.display="block"; 
+			$scope.polyv($scope.videoId);
 		}else{
 			alert("请选中信息~");
 		}
