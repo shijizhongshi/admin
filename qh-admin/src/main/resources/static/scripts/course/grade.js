@@ -205,6 +205,7 @@ app.controller("gradeController", function($scope, $http){
 		$scope.classes=c;
 		$scope.classId=c.id;
 		$scope.courseselected=c.listCourse;
+		$scope.imgUrl=c.imgUrl;
 		console.log($scope.courseselected);
 		$scope.teacherselected=c.listTeacher;
 		console.log($scope.teacherselected);
