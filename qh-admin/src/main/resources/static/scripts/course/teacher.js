@@ -81,7 +81,11 @@ app.controller("teacherController", function($scope, $http){
 	    };
     
     $scope.isSelected = function(subName) {
+    	if($scope.teacher!=null){
 	    return $scope.subtypeselected.indexOf(subName) >= 0;
+    	}else{
+    		return false;
+    	}
 	};  
 	 //总条数
     $scope.total = 0;
