@@ -15,7 +15,6 @@ import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 /**
  * 
@@ -158,6 +157,7 @@ public class CourseController {
 		
 		result.setData(courseService.courseList(course));
 		result.setStatus("0");
+		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName,courseName));
 		return result;
 	}
 	

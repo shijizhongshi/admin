@@ -12,7 +12,7 @@ app.controller("newController", function($scope, $http){
     $scope.title=null;
     $scope.imgUrl=null;
 $scope.loaddata = function(){
-	$scope.pageNo=($scope.current-1)*$scope.pageSize;
+	
 	$http.get("/api/news/newLists",{"params": {"title":$scope.title,"page":$scope.current}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){

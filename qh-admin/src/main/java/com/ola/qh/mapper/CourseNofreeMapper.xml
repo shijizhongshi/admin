@@ -42,6 +42,24 @@
 		order by addtime ASC limit #{pageNo},#{pageSize}
 	</select>
 	
+	<select id="selectCourseNofreeCount" resultType="int">
+		select count(id) from course_nofree 
+		where 1=1
+		<if test="courseTypeName!=null and courseTypeName!=''">
+		and course_type_name=#{courseTypeName}
+		</if>
+		<if test="courseTypeSubclassName!=null">
+		and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		<if test="teachers!=null and teachers!=''">
+		and teachers LIKE CONCAT(CONCAT('%',#{teachers},'%'))
+		</if>
+		<if test="courseName!=null and courseName!=''">
+		and course_name LIKE CONCAT(CONCAT('%',#{courseName},'%'))
+		</if>
+		
+	</select>
+	
 	<insert id="insertCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">
 		insert into course_nofree(<include refid="sql_coursenofree"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{courseResourceType},#{courseUseDifference},#{courseName},#{teachers},#{palyTime},#{describes},#{aliyunId},#{videoId},#{videoUrl},#{isremmend},#{imgUrl},#{addtime})
 	</insert>

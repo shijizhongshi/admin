@@ -101,5 +101,10 @@ public class CourseService implements ICourseService{
 		// TODO Auto-generated method stub
 		return courseDao.deleteCourse(id);
 	}
+	@Override
+	public int courseCount(String courseTypeName, String courseTypeSubclassName,String courseName) {
+		
+		return courseDao.courseCount(courseTypeName, courseTypeSubclassName,courseName);
+	}
 
 }

@@ -29,7 +29,7 @@ app.controller("shopdrugControllered", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.druglist=data.data;
-					
+					$scope.total = data.count;
 					angular.forEach($scope.druglist, function(drug){  
 						
 						if(drug.isrecommend==0){
@@ -117,7 +117,7 @@ app.controller("shopdrugControllered", function($scope, $http){
 		
 		$scope.subcategoryList=function(){
 			$scope.categoryid();
-			$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.cateId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.cateId,"page":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.subcategorylist=data.data;

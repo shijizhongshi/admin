@@ -12,7 +12,9 @@ public interface UserDao {
 	
 	public User singleUser(@Param("id")String id);
 	
-	public List<User> selectUser(@Param("mobile")String mobile,@Param("nickname")String nickname,@Param("userrole")String userrole);
+	public List<User> selectUser(@Param("pageNo")int pageNo,@Param("pageSize")int pageSize,@Param("mobile")String mobile,@Param("nickname")String nickname,@Param("userrole")String userrole);
+	
+	public int selectUserCount(@Param("mobile")String mobile,@Param("nickname")String nickname,@Param("userrole")String userrole);
 	
 	public int updateFavorite(@Param("productId")String productId);
 	

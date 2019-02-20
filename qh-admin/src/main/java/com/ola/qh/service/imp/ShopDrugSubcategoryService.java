@@ -16,9 +16,9 @@ public class ShopDrugSubcategoryService implements IShopDrugSubcategoryService{
 	private ShopDrugSubcategoryDao shopDrugSubcategoryDao;
 
 	@Override
-	public List<ShopDrugSubcategory> selectShopDrugSubcategory(String categoryId) {
+	public List<ShopDrugSubcategory> selectShopDrugSubcategory(String categoryId,int pageNo,int pageSize) {
 		
-		return shopDrugSubcategoryDao.selectShopDrugSubcategory(categoryId);
+		return shopDrugSubcategoryDao.selectShopDrugSubcategory(categoryId,pageNo,pageSize);
 	}
 
 	@Override
@@ -37,6 +37,12 @@ public class ShopDrugSubcategoryService implements IShopDrugSubcategoryService{
 	public int deleteShopDrugSubcategory(String id) {
 		
 		return shopDrugSubcategoryDao.deleteShopDrugSubcategory(id);
+	}
+
+	@Override
+	public int selectShopDrugSubcount(String categoryId) {
+		
+		return shopDrugSubcategoryDao.selectShopDrugSubcount(categoryId);
 	}
 
 	

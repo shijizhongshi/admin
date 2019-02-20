@@ -21,10 +21,7 @@
 				<div class="details-frame-content">
 					<ul class="managr-dianpu">
 
-						<div class="select-3">
-							<span></span> <span><i class="glyphicon glyphicon-user">全部用户</i></span>
-
-						</div>
+						
 						<div class="select-3">
 							<span>昵称</span> <input type="text" ng-model="nickname"/>
 						</div>

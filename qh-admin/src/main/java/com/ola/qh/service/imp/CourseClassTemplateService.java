@@ -38,4 +38,10 @@ public class CourseClassTemplateService implements ICourseClassTemplateService{
 		
 		return courseClassTemplateDao.deleteCourseClassTemplate(id);
 	}
+
+	@Override
+	public int selectTemplateCount(String templateName) {
+		
+		return courseClassTemplateDao.selectTemplateCount(templateName);
+	}
 }

@@ -7,6 +7,11 @@ app.controller("doctorsController", function($scope, $http){
    //一页显示多少条
    $scope.pageSize = 20;
    
+   $scope.istotal = 0;
+   //当前的页数
+   $scope.iscurrent = 1;
+   //一页显示多少条
+   $scope.ispageSize = 20;
    
    $scope.islimit = 1;
    $scope.id = null;
@@ -32,7 +37,7 @@ app.controller("doctorsController", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.doctorslist=data.data;
-				
+				$scope.total=data.count;
 				angular.forEach($scope.doctorslist, function(doctors){  
 					
 					if(doctors.isrecommend==0){
@@ -53,12 +58,13 @@ app.controller("doctorsController", function($scope, $http){
 	$scope.doctorsList();
 	
 	$scope.islimitList=function(){
-		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-		$http.get("/api/doctors/select",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"isvirtual":0,"name":$scope.name,
+		$scope.pageNo=( $scope.iscurrent-1)*$scope.ispageSize;
+		$http.get("/api/doctors/select",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.ispageSize,"isvirtual":0,"name":$scope.name,
 			"islimit":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.islimitlist=data.data;
+				$scope.istotal=data.count;
 				$scope.id=null;
 			}
 		})
@@ -218,10 +224,10 @@ app.controller("doctorsController", function($scope, $http){
 	 
 	 $scope.yishicount=function(){
 
-			$http.get("/api/doctors/selectcount", {'Content-Type': 'application/json;charset=UTF-8'})
+			$http.get("/api/doctors/selectcount",{"params": {"islimit":0,"name":$scope.name}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					$scope.count=data.data;
+					$scope.count=data.count;
 					$scope.doctorcount="审核列表( "+$scope.count+" )";
 				}
 			})

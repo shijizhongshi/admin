@@ -85,6 +85,30 @@
 	 limit #{pageNo},#{pageSize}
 	</select>
 	
+	<select id="selectDrugCount" resultType="int">
+	select count(id) from shop_drug
+	where 1=1
+	<if test="categoryName!=null and categoryName!=''">
+	and category_name=#{categoryName}
+	</if>
+	<if test="categorySubname!=null and categorySubname!=''">
+	and category_subname=#{categorySubname}
+	</if>
+	<if test="drugName!=null and drugName!=''">
+	and drug_name LIKE CONCAT(CONCAT('%',#{drugName},'%'))
+	</if>
+	
+	<if test="islimits!=null and islimits!=''">
+	and sd.islimits=#{islimits}
+	</if>
+	
+	<if test="shopName!=null and shopName!=''">
+	and shop_name LIKE CONCAT(CONCAT('%',#{shopName},'%'))
+	</if>
+	
+	
+	</select>
+	
 	<update id="updateDrug">
 	update shop_drug set 
 	

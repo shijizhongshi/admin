@@ -16,5 +16,5 @@ public interface IDoctorsService {
 	
 	public int deleteDoctors(String id);
 	
-	public String selectcount();
+	public int selectcount(int islimit,String name);
 }

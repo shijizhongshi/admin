@@ -65,7 +65,7 @@
                             max-size="5"
                             class="pagination-sm" previous-text="&lsaquo;"
                             next-text="&rsaquo;"
-                            first-text="&laquo;" last-text="&raquo;" ng-change="courseBases()">
+                            first-text="&laquo;" last-text="&raquo;" ng-click="teacherBases()">
                         </ul>
                     </div>
 

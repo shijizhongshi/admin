@@ -21,6 +21,7 @@ public interface CourseSubclassDao {
 /////课程章的操作
 	public int courseChapterListCount(
 			@Param("courseId") String courseId,
+			@Param("courseChapterName") String courseChapterName,
 			@Param("courseTypeName")String courseTypeName,
 			@Param("courseTypeSubclassName")String courseTypeSubclassName);
 	

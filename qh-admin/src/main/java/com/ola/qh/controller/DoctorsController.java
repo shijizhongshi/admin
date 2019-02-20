@@ -38,7 +38,11 @@ public class DoctorsController {
 			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			doctors.setShowtime(sf.format(doctors.getAddtime()));
 		}
+		
+		int count=doctorsService.selectcount(islimit, name);
+				
 		results.setData(list);
+		results.setCount(count);
 		results.setStatus("0");
 		return results;
 		
@@ -88,13 +92,14 @@ public class DoctorsController {
 	}
 	
 	@RequestMapping(value="/selectcount",method=RequestMethod.GET)
-	public Results<String> selectcount(){
+	public Results<String> selectcount(@RequestParam(name="name",required=false)String name,
+			@RequestParam(name="islimit",required=false)int islimit){
 		
 		Results<String> results=new Results<String>();
 		
-		String count=doctorsService.selectcount();
+		int count=doctorsService.selectcount(islimit,name);
 		
-		results.setData(count);
+		results.setCount(count);
 		results.setStatus("0");
 		return results;
 		

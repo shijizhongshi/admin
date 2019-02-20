@@ -47,6 +47,25 @@
 		limit #{pageNo},#{pageSize}
 	</select>
 	
+	<select id="selectShopServeCount" resultType="int">
+		select count(id)
+		from shop_serve 
+		where 1=1
+		<if test="shopName!=null and shopName!=''">
+		and shop_name LIKE CONCAT(CONCAT('%',#{shopName},'%'))
+		</if>
+		<if test="serveName!=null and serveName!=''">
+		and serve_name LIKE CONCAT(CONCAT('%',#{serveName},'%'))
+		</if>
+		<if test="serveType!=null and serveType!=''">
+		and serve_type=#{serveType}
+		</if>
+		<if test="serveStatus!=null and serveStatus!=''">
+		and serve_status=#{serveStatus}
+		</if>
+		
+	</select>
+	
 	<update id="updateShopServe" >
 		update shop_serve set
 		<if test="ishot!=null and ishot!=''">

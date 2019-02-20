@@ -12,7 +12,16 @@
 	</resultMap>
 	
 	<select id="selectShopDrugSubcategory" resultMap="ShopDrugSubcategoryMap">
-		select id,category_id,sub_name,addtime,img_url from shop_drug_subcategory where category_id=#{categoryId}
+		select id,category_id,sub_name,addtime,img_url from shop_drug_subcategory where category_id=#{categoryId} 
+		<if test="pageSize!=0">
+		order by addtime ASC limit #{pageNo},#{pageSize}
+		</if>
+		
+	</select>
+	
+	<select id="selectShopDrugSubcount" resultType="int">
+		select count(id) from shop_drug_subcategory where  category_id=#{categoryId} 
+		
 	</select>
 
 	<insert id="insertShopDrugSubcategory" parameterType="com.ola.qh.entity.ShopDrugSubcategory">

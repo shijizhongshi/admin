@@ -17,6 +17,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.templatelist=data.data;
+				$scope.total=data.count;
 			}
 		})
 	}
