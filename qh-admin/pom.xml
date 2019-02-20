@@ -248,7 +248,7 @@
 		    <artifactId>maven-resources-plugin</artifactId>
 		    <version>2.4.3</version>
 		</dependency>
-		<dependency>
+		<!--  <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>aliyun-java-sdk-core</artifactId>
         <version>3.7.1</version>
@@ -257,7 +257,7 @@
         <groupId>com.aliyun</groupId>
         <artifactId>aliyun-java-sdk-vod</artifactId>
         <version>2.11.5</version>
-    </dependency>
+    </dependency>-->
 		<!-- <dependency>
 			<groupId>co.legu</groupId>
 			<artifactId>legu-alidayu-sms</artifactId>
@@ -280,7 +280,7 @@
 		</dependency>-->
 		
 		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
-		<dependency>
+	<!--  	<dependency>
   <groupId>com.polyv</groupId>
   <artifactId>sdk</artifactId>
   <version>1.0</version>
@@ -289,7 +289,7 @@
   <groupId>com.polyv</groupId>
   <artifactId>wcs-java-sdk-1.6.3</artifactId>
   <version>1.0</version>
-</dependency>
+</dependency>-->
 		<dependency>
 		    <groupId>com.google.zxing</groupId>
 		    <artifactId>javase</artifactId>
@@ -316,12 +316,12 @@
    </plugins>
    <defaultGoal>compile</defaultGoal>
 </build>
-<pluginRepositories>
+<!-- <pluginRepositories>
    <pluginRepository> 
 	        <id>spring-snapshots</id>
 			<url>http://repo.spring.io/libs-snapshot</url>
 	    </pluginRepository>
-</pluginRepositories>
+</pluginRepositories>-->
 	 <profiles>
         
         <profile>
@@ -342,11 +342,18 @@
                             <include>config.properties</include>
                         </includes>
                     </resource>
+                    <resource>
+						<directory>src/main/java</directory>
+						<includes>
+							<include>**/*.xml</include>
+
+						</includes>
+					</resource>
                 </resources>
             </build>
         </profile>
     </profiles>
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>spring-snapshots</id>
 			<url>http://repo.spring.io/libs-snapshot</url>
@@ -364,7 +371,7 @@
 		</repository>
 	</repositories>
 	<distributionManagement>
-	<!--  两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致 -->
+	  两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致 
 		<repository> 
 		<id>nexus-releases</id> 
 		<name>Nexus Release Repository</name> 
@@ -375,6 +382,6 @@
 		<name>Nexus Snapshot Repository</name> 
 		<url>http://fx.zhongshicc.com/nexus/content/repositories/snapshots</url> 
 		</snapshotRepository> 
-		</distributionManagement>
+		</distributionManagement>-->
 	
 </project>
