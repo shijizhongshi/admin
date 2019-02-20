@@ -37,6 +37,9 @@ public class ShopDrugController {
 			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			shopDrug.setShowtime(sf.format(shopDrug.getApprovalTime()));
 		}
+		int count=shopDrugService.selectDrugCount(drugName, categoryName, categorySubname, islimits, shopName);
+		
+		results.setCount(count);
 		results.setData(list);
 		results.setStatus("0");
 		return results;

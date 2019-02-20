@@ -142,7 +142,7 @@
 								ng-model="current" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="drugList()">
+								ng-click="drugList()">
 							</ul>
 						</div>
 					</div>
@@ -457,8 +457,8 @@
 					</div>
 					<div class="col-sm-6"></div>
 					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
+						<ul uib-pagination boundary-links="true" total-items="servetotal"
+							ng-model="servecurrent" items-per-page="servepageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 							ng-change="serveList()">

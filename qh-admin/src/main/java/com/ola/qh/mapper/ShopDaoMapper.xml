@@ -65,8 +65,17 @@
 	update shop set isrecommend=#{isrecommend},islimits=#{islimits} where id=#{id}
 	</update>
 
-	<select id="selectCount" resultType="java.lang.String">
-	select count(*) from shop where islimits=0 and shop_type=#{shopType}
+	<select id="selectCount" resultType="int">
+	select count(id) from shop where shop_type=#{shopType} and islimits=#{islimits} 
+	<if test="isrecommend!=null and isrecommend!=''">
+	and isrecommend=#{isrecommend}
+	</if>
+	<if test="shopName!=null and shopName!=''">
+	and shop_name LIKE CONCAT(CONCAT('%',#{shopName},'%'))
+	</if>
+	<if test="address!=null and address!=''">
+	and address=#{address}
+	</if>
 	</select>
 
 

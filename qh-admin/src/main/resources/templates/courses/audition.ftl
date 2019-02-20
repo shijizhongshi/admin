@@ -133,7 +133,7 @@ submenu="sidebarmenu-audition">
 								ng-model="page" items-per-page="pageSize" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-change="auditionBases()">
 							</ul>
 						</div>
 </div>

@@ -8,6 +8,8 @@ public interface ICourseClassTemplateService {
 
 	public List<CourseClassTemplate> selectCourseClassTemplate(String id,String templateName,int pageNo,int pageSize);
 	
+	public int selectTemplateCount(String templateName);
+	
 	public int insertCourseClassTemplate(CourseClassTemplate courseClassTemplate);
 	
 	public int updateCourseClassTemplate(CourseClassTemplate courseClassTemplate);

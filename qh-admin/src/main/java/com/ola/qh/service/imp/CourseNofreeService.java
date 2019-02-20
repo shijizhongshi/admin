@@ -88,6 +88,13 @@ public class CourseNofreeService implements ICourseNofreeService {
 		return courseNofreeDao.selectLiveListCount(courseTypeName, courseTypeSubclassName,liveName);
 	}
 
+	@Override
+	public int selectCourseNofreeCount(String courseTypeName, String courseTypeSubclassName, String teachers,
+			String courseName) {
+		
+		return courseNofreeDao.selectCourseNofreeCount(courseTypeName, courseTypeSubclassName, teachers, courseName);
+	}
+
 	
 
 }

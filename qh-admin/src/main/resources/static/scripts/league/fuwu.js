@@ -7,6 +7,12 @@ app.controller("fuwushopController", function($scope, $http){
 	   $scope.pageSize = 20;
 	
 	   
+	   $scope.istotal = 0;
+	   //当前的页数
+	   $scope.iscurrent = 1;
+	   //一页显示多少条
+	   $scope.ispageSize = 20;
+	   
 	   $scope.islimits = 1;
 	   $scope.isrecommend = 0;
 	   $scope.address = null;
@@ -21,7 +27,7 @@ app.controller("fuwushopController", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.shoplist=data.data;
-					
+					$scope.total=data.count;
 					angular.forEach($scope.shoplist, function(shop){  
 						
 						if(shop.isrecommend==0){
@@ -41,13 +47,14 @@ app.controller("fuwushopController", function($scope, $http){
 		$scope.shopList();
 	
 		$scope.islimitList=function(){
-			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"shopType":1,
+			$scope.pageNo=( $scope.iscurrent-1)*$scope.ispageSize;
+			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.ispageSize,"shopType":1,
 				"address":null,"shopName":$scope.shopName,"isrecommend":null,
 				"islimits":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.islimitlist=data.data;
+					$scope.istotal=data.count;
 					
 				}
 			})
@@ -112,10 +119,10 @@ app.controller("fuwushopController", function($scope, $http){
 		}
 		 $scope.fuwucount=function(){
 
-				$http.get("/api/shop/shopcount",{"params": {"shopType":1}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				$http.get("/api/shop/shopcount",{"params": {"shopType":1,"islimits":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
-						$scope.fcount=data.data;
+						$scope.fcount=data.count;
 						$scope.ffcount="审核列表( "+$scope.fcount+" )";
 					}
 				})

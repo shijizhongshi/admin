@@ -11,6 +11,8 @@ public interface ICourseNofreeService {
 	
 	public int insertCourseNofree(CourseNofree courseNofree);
 	
+	public int selectCourseNofreeCount(String courseTypeName,String courseTypeSubclassName,String teachers,String courseName);
+	
 	public int updateCourseNofree(CourseNofree courseNofree);
 	
 	public int deleteCourseNofree(String id);

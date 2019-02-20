@@ -41,10 +41,11 @@ public class CourseClassTemplateController {
 		
 		
 		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id,templateName, pageNo, pageSize);
-		
+		int count=courseClassTemplateService.selectTemplateCount(templateName);
 		
 		results.setData(list);
 		results.setStatus("0");
+		results.setCount(count);
 		return results;
 	}
 	

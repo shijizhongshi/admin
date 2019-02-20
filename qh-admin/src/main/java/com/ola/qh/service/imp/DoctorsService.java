@@ -67,8 +67,8 @@ public class DoctorsService implements IDoctorsService{
 	}
 
 	@Override
-	public String selectcount() {
+	public int selectcount(int islimit,String name) {
 		
-		return doctorsDao.selectcount();
+		return doctorsDao.selectcount(islimit,name);
 	}
 }

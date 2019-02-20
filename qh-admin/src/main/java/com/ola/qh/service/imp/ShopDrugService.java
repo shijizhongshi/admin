@@ -29,6 +29,13 @@ public class ShopDrugService implements IShopDrugService {
 		return shopDrugDao.updateDrug(id, istimes, ishot, islimits, isrecommend, issales,approvalTime, updatetime);
 	}
 
+	@Override
+	public int selectDrugCount(String drugName, String categoryName, String categorySubname, String islimits,
+			String shopName) {
+		// TODO Auto-generated method stub
+		return shopDrugDao.selectDrugCount(drugName, categoryName, categorySubname, islimits, shopName);
+	}
+
 	
 
 }

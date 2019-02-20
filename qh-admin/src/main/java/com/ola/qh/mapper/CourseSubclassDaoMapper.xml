@@ -74,7 +74,9 @@
 	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
 	and course_type_subclass_name=#{courseTypeSubclassName}
 	</if>
-	
+	<if test="courseChapterName!=null and courseChapterName!='' ">
+	and course_chapter_name like concat(concat('%',#{courseChapterName},'%'))
+	</if>
 	</select>
 	
 	<delete id="deleteChapter">

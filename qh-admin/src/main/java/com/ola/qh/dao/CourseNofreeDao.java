@@ -12,6 +12,8 @@ public interface CourseNofreeDao {
 	public List<CourseNofree> selectCourseNofree(@Param("courseTypeName")String courseTypeName,@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize,@Param("teachers")String teachers,@Param("courseName")String courseName);
 	
 	public int insertCourseNofree(CourseNofree courseNofree);
+
+	public int selectCourseNofreeCount(@Param("courseTypeName")String courseTypeName,@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("teachers")String teachers,@Param("courseName")String courseName);
 	
 	public int updateCourseNofree(CourseNofree courseNofree);
 	

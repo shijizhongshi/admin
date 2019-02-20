@@ -2,8 +2,6 @@ package com.ola.qh.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
@@ -18,7 +16,7 @@ public interface ICourseService {
 	
 	public List<CourseTypeSubclass> courseTypeSubclassList(String courseTypeId);
 	
-	
+	public int courseCount(String courseTypeName,String courseTypeSubclassName,String courseName);
 		
 	public List<Course> courseList(Course course);
 	

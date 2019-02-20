@@ -67,7 +67,7 @@
 					<ul uib-pagination boundary-links="true" total-items="total"
 						ng-model="page" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
-						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-click="templateBases()">
 					</ul>
 				</div>
 

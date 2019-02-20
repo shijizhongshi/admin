@@ -49,12 +49,14 @@ public class CourseNofreeController {
 			return results;
 			
 		}
+		int count=courseNofreeService.selectCourseNofreeCount(courseTypeName, courseTypeSubclassName, teachers, courseName);
 		for (CourseNofree courseNofree : list) {
 			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			courseNofree.setShowtime(sf.format(courseNofree.getAddtime()));
 		}
 		results.setData(list);
 		results.setStatus("0");
+		results.setCount(count);
 		return results;
 	}
 	

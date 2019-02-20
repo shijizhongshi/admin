@@ -45,9 +45,15 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public List<User> selectUser(String mobile, String nickname, String userrole) {
-		
-		return userDao.selectUser(mobile, nickname, userrole);
+	public List<User> selectUser(int pageNo,int pageSize, String mobile, String nickname, String userrole) {
+		// TODO Auto-generated method stub
+		return userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+	}
+
+	@Override
+	public int selectUserCount(String mobile, String nickname, String userrole) {
+		// TODO Auto-generated method stub
+		return userDao.selectUserCount(mobile, nickname, userrole);
 	}
 
 	

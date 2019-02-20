@@ -44,6 +44,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.auditionlist=data.data;
+				$scope.total=data.count;
 				angular.forEach($scope.auditionlist, function(audition){  
 					
 					if(audition.isremmend==0){

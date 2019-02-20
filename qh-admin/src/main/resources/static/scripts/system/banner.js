@@ -47,6 +47,7 @@ $scope.uploadmainimage = function(file){
 	
 	
 	$scope.banneradd=function(){
+		$scope.banner.imageurl=$scope.imageurl;
 		$http.post("/api/banner/saveBanner",$scope.banner,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -126,7 +127,7 @@ $scope.uploadmainimage = function(file){
 		$scope.imageurl=null;
 		document.getElementById('add').style.display="none"; 
 	}
-	$scope.loaddata=function(){
+	$scope.refresh=function(){
 		
 		location.reload();
 	}

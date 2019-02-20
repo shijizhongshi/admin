@@ -43,9 +43,11 @@
 		 limit #{pageNo},#{pageSize}
 	</select>
 	
-	<select id="selectcount" resultType="java.lang.String">
-		select count(*) from doctors where islimit=0 and isvirtual=0
-		
+	<select id="selectcount" resultType="int">
+		select count(id) from doctors where islimit=#{islimit} and isvirtual=0
+		<if test="name!=null and name!=''">
+		and name LIKE CONCAT(CONCAT('%',#{name},'%'))
+		</if>
 	</select>
 	
 	<select id="selectUserId" resultType="String">

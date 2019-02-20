@@ -9,7 +9,9 @@ import com.ola.qh.util.Results;
 
 public interface IUserService {
 	
-	public List<User> selectUser(String mobile,String nickname,String userrole);
+	public List<User> selectUser(int pageNo,int pageSize,String mobile,String nickname,String userrole);
+	
+	public int selectUserCount(String mobile,String nickname,String userrole);
 	
 	public int updateUser(String isdisabled,String id);
 	

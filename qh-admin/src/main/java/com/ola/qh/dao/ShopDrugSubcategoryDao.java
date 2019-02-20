@@ -8,7 +8,7 @@ import com.ola.qh.entity.ShopDrugSubcategory;
 
 public interface ShopDrugSubcategoryDao {
 	
-	public List<ShopDrugSubcategory> selectShopDrugSubcategory(@Param("categoryId")String categoryId);
+	public List<ShopDrugSubcategory> selectShopDrugSubcategory(@Param("categoryId")String categoryId,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
 	public int insertShopDrugSubcategory(ShopDrugSubcategory shopDrugSubcategory);
 	
@@ -17,4 +17,6 @@ public interface ShopDrugSubcategoryDao {
 	public int deleteShopDrugSubcategory(@Param("id")String id);
 	
 	public int deleteAllShopDrugSubcategory(@Param("categoryId")String categoryId);
+
+	public int selectShopDrugSubcount(String categoryId);
 }

@@ -77,7 +77,7 @@
 						ng-model="current" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-change="shopsubBases()">
+						ng-click="shopsubBases()">
 					</ul>
 				</div>
 

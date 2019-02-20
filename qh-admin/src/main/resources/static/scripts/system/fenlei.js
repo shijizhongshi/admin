@@ -1,5 +1,11 @@
 app.controller("ShopDrugCategoryController", function($scope, $http){
 
+	 //总条数
+    $scope.total = 0;
+    //当前的页数
+    $scope.current = 1;
+    //一页显示多少条
+    $scope.pageSize = 20;
 	$scope.id=null;
 	$scope.name=null;
 	$scope.insert=null;
@@ -36,12 +42,13 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	$scope.shopcateBases();
 	
 	$scope.shopsubBases=function(){
-		$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.id,"page":$scope.current}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				
 				$scope.shopDrugSubcategory=data.data;
 				$scope.shopDrugSubcategory.categoryId=$scope.id;
+				$scope.total=data.count;
 			}else{
 					
 				$scope.shopDrugSubcategory=null;

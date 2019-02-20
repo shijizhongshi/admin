@@ -110,7 +110,7 @@
 							ng-model="current" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="loaddata()">
+							ng-click="loaddata()">
 						</ul>
 					</div>
 
