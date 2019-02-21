@@ -19,4 +19,10 @@ public class Patterns {
     public static final String cert_path="/home/apiclient_cert.p12";
     
     
+    public static final String plovysecretkey="ucxGUE1iuw";
+    
+    public static final String plovywritetoken="a1df864b-405e-4782-9494-733e9b51c5d5";
+    
+    
+    
 }
