@@ -21,45 +21,45 @@
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
-				<div class="select-3">
+				<div class="select-3" style="width: 10%;">
 					<span>选择时间</span> <input type="date" name="search"
 						ng-model="fromdate" />
 				</div>
 				<div class="select-3"
-					style="font-size: 1.6rem; width: 1%; text-align: center;">
+					style="font-size: 1.6rem; width: 5px; text-align: center;">
 
 					&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
 				</div>
-				<div class="select-3">
+				<div class="select-3" style="width: 10%;margin-right:15px">
 					<span>&nbsp;</span> <input type="date" name="search"
 						ng-model="todate" />
 				</div>
 
-				<div class="select-3">
-					<span>推荐老师</span> <input type="text" ng-model="recommendTeacher" />
+				<div class="select-3" style="width: 10%;margin-right:15px">
+					<span>推荐老师</span> <input style="border-radius:20px" type="text" ng-model="recommendTeacher" />
 				</div>
-				<div class="select-3">
-					<span>用户手机号</span> <input type="text" ng-model="mobile" />
+				<div class="select-3" style="width: 10%;margin-right:15px">
+					<span>用户手机号</span> <input style="border-radius:20px" type="text" ng-model="mobile" />
 				</div>
-				<div class="select-3">
-					<span>支付订单号</span> <input type="text" ng-model="orderno" />
+				<div class="select-3" style="width: 10%;margin-right:15px">
+					<span>支付订单号</span> <input style="border-radius:20px" type="text" ng-model="orderno" />
 				</div>
-				<div class="select-3">
-					<span>订单状态</span> <select ng-model="ordersStatus">
+				<div class="select-3" style="width: 10%;margin-right:15px">
+					<span>订单状态</span><img src="/images/sjk-xl.png" />  <select style="border-radius:20px" ng-model="ordersStatus">
 						<option value="NEW">待付款</option>
 						<option value="RECEIVED">已完成</option>
 					</select>
 				</div>
-				<div class="select-3">
-					<span>推荐老师</span> <input type="text" />
+				<div class="select-3" style="width: 10%;margin-right:15px">
+					<span>推荐老师</span> <input style="border-radius:20px" type="text" />
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
-						value="检索" />
+						value="立即检索" />
 				</div>
-				<div>
+				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')" style="margin: 5px 0" />
+						onclick="method5('tableExcel')"  />
 				</div>
 			</div>
 			<div class="manage">

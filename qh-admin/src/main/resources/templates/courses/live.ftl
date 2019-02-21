@@ -60,6 +60,8 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
+				<li>网课资源管理</li>
+				<li>/</li>
 				<li>直播管理</li>
 			</ul>
 		</div>
@@ -67,14 +69,14 @@
 			<div class="details-frame-content"
 				style="height: 110px; padding-bottom: 0;">
 
-				<div class="select-3" style="width: 15%;">
+				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>直播名称</span>
 					<form id="">
 						<input type="text" ng-model="liveName" />
 					</form>
 				</div>
 				<div>
-					<input type="button" class="btn-lg im-key" value="检索"
+					<input type="button" class="btn-lg im-key" value="立即检索"
 						ng-click="liveBases()" />
 				</div>
 			</div>

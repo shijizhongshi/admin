@@ -59,13 +59,15 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
+				<li>网课资源管理</li>
+				<li>/</li>
 				<li>班级管理</li>
 			</ul>
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-2" style="width: 13%; float: left">
+				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>搜索班级</span>
 					<form id="search">
 						<input ng-model="className" type="text" style="text-indent: 2em;" />
@@ -73,7 +75,7 @@
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" ng-click="classBases()"
-						value="检索" />
+						value="立即检索" />
 				</div>
 			</div>
 			<div class="manage">

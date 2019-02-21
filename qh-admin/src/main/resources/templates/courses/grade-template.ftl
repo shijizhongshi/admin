@@ -14,20 +14,22 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
+				<li>网课资源管理</li>
+				<li>/</li>
 				<li>班级模板</li>
 			</ul>
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-2" style="width: 13%; float: left;">
+				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>模板名称</span>
 					<form id="search">
 						<input type="text" ng-model="templateName" />
 					</form>
 				</div>
 				<div>
-					<input type="button" class="btn-lg im-key" value="检索"
+					<input type="button" class="btn-lg im-key" value="立即检索"
 						ng-click="templateBases()" />
 				</div>
 			</div>

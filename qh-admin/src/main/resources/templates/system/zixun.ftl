@@ -17,21 +17,23 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
+				<li>公共资源管理</li>
+				<li>/</li>
 				<li>咨询/话题 管理</li>
 			</ul>
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-2">
+				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>新闻标题</span>
-					<form id="search">
+					<form id="search" >
 						<input type="text" ng-model="title" placeholder="搜索新闻标题" />
 					</form>
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
-						value="检索" />
+						value="立即检索" />
 				</div>
 
 
