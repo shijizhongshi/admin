@@ -10,82 +10,84 @@
 <@b.body menu="sidebarmenu-league"
 submenu="sidebarmenu-league-shangpin">
 <div ng-controller="shangpinshopController">
-<div>
-	<div class="details" style="width: 100%">
-		<div class="details-nav">
-			<ul>
-				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
-				<li>/</li>
-				<li>加盟商管理</li>
-				<li>/</li>
-				<li>商品店铺</li>
-			</ul>
-		</div>
-		<div class="details-frame">
-			<div class="details-frame-content" id="details-frame-content">
+	<div>
+		<div class="details" style="width: 100%">
+			<div class="details-nav">
 				<ul>
-					<li onmousedown="go(0)"
-						style="border-bottom: 3px solid red; font-weight: 900;">商品店铺</li>
-					<li onmousedown="go(1)">核审管理</li>
+					<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
+					<li>/</li>
+					<li>加盟商管理</li>
+					<li>/</li>
+					<li>商品店铺</li>
 				</ul>
 			</div>
-			<div id="guanli">
-				<div class="manage">
-					<form>
-						<ul style="height: 80px;" class="managr-dianpu">
-						
-							<div class="select-3">
-								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
-							</div>
-							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>所在地区</span> <select ng-model="address">
-									<option value="">查看全部</option>
-									<option value="山东"></option>
-									<option></option>
-								</select>
-							</div>
-							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>推荐级别</span> <select ng-model="isrecommend">
-									<option value="0">不推荐</option>
-									<option value="1">推荐</option>
-								</select>
-							</div>
-							<div>
-								<input type="button" class="btn-lg im-key" ng-click="shopList()"
-									value="检索"  />
-							</div>
-							
-						</ul>
-						</form>
-					<ul class="show">
-
-						
-						<li style="background: #F86846;"><span
-							class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-						<li><span class="glyphicon glyphicon-sort-by-attributes"
-							class="move-down"></span>&nbsp;下移</li>
-						<li ng-click="guanli()"><span class="glyphicon glyphicon-sort-by-attributes"
-							class="move-down"></span>&nbsp;项目管理</li>
-						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
+			<div class="details-frame">
+				<div class="details-frame-content" id="details-frame-content">
+					<ul>
+						<li onmousedown="go(0)"
+							style="border-bottom: 3px solid red; font-weight: 900;">商品店铺</li>
+						<li onmousedown="go(1)">核审管理</li>
 					</ul>
-					<div class="admin-table">
+				</div>
+				<div id="guanli">
+					<div class="manage">
+						<form>
+							<ul style="height: 80px;" class="managr-dianpu">
 
-						<table>
-							<tr>
-								<th>店铺名称</th>
-								<th>地址</th>
-								<th>推荐级别</th>
-								<th>店铺标志</th>
-								<th>门头照片</th>
-								<th>负责人</th>
-								<th>联系电话</th>
-								<th>创建时间</th>
-								<th>详细信息</th>
-							</tr>
+								<div class="select-3">
+									<span>店铺名称</span> <input type="text" ng-model="shopName" />
+								</div>
+								<div class=" select-3">
+									<img src="/images/sjk-xl.png" /> <span>所在地区</span> <select
+										ng-model="address">
+										<option value="">查看全部</option>
+										<option value="山东"></option>
+										<option></option>
+									</select>
+								</div>
+								<div class=" select-3">
+									<img src="/images/sjk-xl.png" /> <span>推荐级别</span> <select
+										ng-model="isrecommend">
+										<option value="0">不推荐</option>
+										<option value="1">推荐</option>
+									</select>
+								</div>
+								<div>
+									<input type="button" class="btn-lg im-key"
+										ng-click="shopList()" value="检索" />
+								</div>
 
-							<tr ng-repeat="s in shoplist" ng-click="checkshop(s)"
+							</ul>
+						</form>
+						<ul class="show">
+
+
+							<li style="background: #F86846;"><span
+								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+							<li><span class="glyphicon glyphicon-sort-by-attributes"
+								class="move-down"></span>&nbsp;下移</li>
+							<li ng-click="guanli()"><span
+								class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;项目管理</li>
+							<li style="float: right; margin-right: 20px; background: none;"><img
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
+						</ul>
+						<div class="admin-table">
+
+							<table>
+								<tr>
+									<th>店铺名称</th>
+									<th>地址</th>
+									<th>推荐级别</th>
+									<th>店铺标志</th>
+									<th>门头照片</th>
+									<th>负责人</th>
+									<th>联系电话</th>
+									<th>创建时间</th>
+									<th>详细信息</th>
+								</tr>
+
+								<tr ng-repeat="s in shoplist" ng-click="checkshop(s)"
 									ng-class="{'selected':selected==s}">
 									<th>{{s.shopName}}</th>
 									<th>{{s.address}}</th>
@@ -98,20 +100,20 @@ submenu="sidebarmenu-league-shangpin">
 									<th><span class="xiangqing" ng-click="checkedAll(s)">查看详情</span></th>
 								</tr>
 
-						</table>
+							</table>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="total"
+									ng-model="current" items-per-page="pageSize" max-size="5"
+									class="pagination-sm" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+									ng-change="shopList()">
+								</ul>
+							</div>
+						</div>
 
-					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="shopList()">
-						</ul>
-					</div>
 
-					<!--弹窗-->
+						<!--弹窗-->
 						<div class="poop" id="add">
 							<form id="myform">
 								<h3>添加店铺</h3>
@@ -200,19 +202,21 @@ submenu="sidebarmenu-league-shangpin">
 					</div>
 					<!-- 核审管理内容 -->
 					<div class="manage" style="display: none;">
-						<h4 style="padding-left: 30px;"><span>{{sscount}}</span></h4>
-						<form >
-						<div class="details-frame-heshen">
-							<div class="select-3" style="">
-								<span>店铺名称</span> <input type="text"  ng-model="shopName"/>
+						<h4 style="padding-left: 30px;">
+							<span>{{sscount}}</span>
+						</h4>
+						<form>
+							<div class="details-frame-heshen">
+								<div class="select-3" style="">
+									<span>店铺名称</span> <input type="text" ng-model="shopName" />
 
+								</div>
+
+								<div>
+									<input type="button" class="btn-lg im-key"
+										ng-click="islimitList()" value="检索" />
+								</div>
 							</div>
-							
-							<div>
-								<input type="button" class="btn-lg im-key" ng-click="islimitList()"
-									value="检索"  />
-							</div>
-						</div>
 						</form>
 						<div class="admin-table">
 
@@ -236,21 +240,16 @@ submenu="sidebarmenu-league-shangpin">
 								</tr>
 
 							</table>
-
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="istotal"
+									ng-model="iscurrent" items-per-page="ispageSize" max-size="5"
+									class="pagination-sm" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+									ng-change="islimitList()">
+								</ul>
+							</div>
 						</div>
-						<div class="col-sm-6"></div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="istotal"
-								ng-model="iscurrent" items-per-page="ispageSize" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="islimitList()">
-							</ul>
-						</div>
-
-
-
-
 
 					</div>
 					<!-- 查看详情 -->
@@ -259,7 +258,7 @@ submenu="sidebarmenu-league-shangpin">
 							<h3>详细信息</h3>
 							<div class="template-add">
 								<div class="grade-left" style="padding-right: 5%;">
-								<img ng-src="{{s.shopLogo}}" style="height: 100px;" />
+									<img ng-src="{{s.shopLogo}}" style="height: 100px;" />
 									<h5></h5>
 									<ul>
 										<li>店铺名称</li>
@@ -312,13 +311,13 @@ submenu="sidebarmenu-league-shangpin">
 										执业资格证：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.imgList[0].imgUrl}}" name="资格证1"
-												style=" float: left; height: 80px; margin-right: 3%;" />
-											<img ng-src="{{s.imgList[1].imgUrl}}" name="资格证2"
-												style=" float: left; height: 80px; margin-right: 3%;" "/>
-											<img ng-src="{{s.imgList[2].imgUrl}}" name="资格证3"
-												style=" float: left; height: 80px;" /> <img
+												style="float: left; height: 80px; margin-right: 3%;" /> <img
+												ng-src="{{s.imgList[1].imgUrl}}" name="资格证2"
+												style="float: left; height: 80px; margin-right: 3%;" "/> <img
+												ng-src="{{s.imgList[2].imgUrl}}" name="资格证3"
+												style="float: left; height: 80px;" /> <img
 												ng-src="{{s.imgList[3].imgUrl}}" name="资格证4"
-												style=" float: left; height: 80px; margin-top: 10px;" />
+												style="float: left; height: 80px; margin-top: 10px;" />
 
 										</div>
 									</div>
@@ -332,10 +331,10 @@ submenu="sidebarmenu-league-shangpin">
 										店面照片：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.environmentImgList[0].imgUrl}}" name="资格证1"
-												style="float: left; height:80px; margin-right: 3%;" />
-											<img ng-src="{{s.environmentImgList[1].imgUrl}}" name="资格证2"
-												style=" float: left; height:80px; margin-right: 3%;" "/>
-											<img ng-src="{{s.environmentImgList[2].imgUrl}}" name="资格证3"
+												style="float: left; height: 80px; margin-right: 3%;" /> <img
+												ng-src="{{s.environmentImgList[1].imgUrl}}" name="资格证2"
+												style="float: left; height: 80px; margin-right: 3%;" "/> <img
+												ng-src="{{s.environmentImgList[2].imgUrl}}" name="资格证3"
 												style="float: left; height: 80px;" /> <img
 												ng-src="{{s.environmentImgList[3].imgUrl}}" name="资格证4"
 												style="float: left; height: 80px; margin-top: 10px;" />
@@ -361,13 +360,13 @@ submenu="sidebarmenu-league-shangpin">
 									</div>
 
 								</div>
-						
-						<div class="end">
-							<input ng-click="updateshop(s)" name="git" type="submit" value="提交"
-								style="background: #5ED8A9;" /> <input name="esc" type="reset"
-								value="取消" ng-click="reset()" class="esc" />
-						</div>
-				</form>
+
+								<div class="end">
+									<input ng-click="updateshop(s)" name="git" type="submit"
+										value="提交" style="background: #5ED8A9;" /> <input name="esc"
+										type="reset" value="取消" ng-click="reset()" class="esc" />
+								</div>
+						</form>
 
 
 
@@ -377,7 +376,7 @@ submenu="sidebarmenu-league-shangpin">
 		</div>
 	</div>
 
-<style type="text/css">
+	<style type="text/css">
 @media screen and (max-width:901px) {
 	.managr-dianpu, .details-frame-heshen {
 		overflow: auto;
@@ -406,7 +405,7 @@ submenu="sidebarmenu-league-shangpin">
 .resource .grade-left, .resource .grade-center, .resource .grade-right {
 	width: 400px;
 	float: left;
-	height:auto;
+	height: auto;
 	overflow: auto;
 }
 

@@ -18,7 +18,7 @@
 
 
 <div ng-controller="commonController">
-<input type="hidden" value="${shopId}" id="shopId" >
+	<input type="hidden" value="${shopId}" id="shopId">
 
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
@@ -99,7 +99,7 @@
 							<li><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;下移</li>
 							<li style="float: right; margin-right: 100px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
 						<div class="admin-table">
 
@@ -135,16 +135,17 @@
 									</tr>
 								</form>
 							</table>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="total"
+									ng-model="current" items-per-page="pageSize" max-size="5"
+									class="pagination-sm" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+									ng-click="drugList()">
+								</ul>
+							</div>
 						</div>
-						<div class="col-sm-6"></div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total"
-								ng-model="current" items-per-page="pageSize" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-click="drugList()">
-							</ul>
-						</div>
+
 					</div>
 
 				</div>
@@ -419,7 +420,7 @@
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
 							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi"  ng-click="refresh()"/></li>
+							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 					</ul>
 					<div class="admin-table">
 
@@ -454,16 +455,17 @@
 									style="background: #8e9a91;" /></th>
 							</tr>
 						</table>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="servetotal"
+								ng-model="servecurrent" items-per-page="servepageSize"
+								max-size="5" class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-change="serveList()">
+							</ul>
+						</div>
 					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="servetotal"
-							ng-model="servecurrent" items-per-page="servepageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="serveList()">
-						</ul>
-					</div>
+
 				</div>
 
 
