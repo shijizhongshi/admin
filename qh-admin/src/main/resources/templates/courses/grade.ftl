@@ -82,11 +82,11 @@
 				<ul class="show">
 
 					<li ng-click="add()" style="background: #9DE879;"><span
-						class="glyphicon glyphicon-plus"></span>&nbsp;班级添加</li>
+						class="glyphicon glyphicon-plus"></span>&nbsp;添加班级</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
-						class="glyphicon glyphicon-pencil"></span>&nbsp;班级修改</li>
+						class="glyphicon glyphicon-pencil"></span>&nbsp;修改班级</li>
 					<li ng-click="deleteClass()" style="background: #F86846;"><span
-						class="glyphicon glyphicon-trash"></span>&nbsp;班级删除</li>
+						class="glyphicon glyphicon-trash"></span>&nbsp;删除班级</li>
 					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 					<li><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;下移</li>

@@ -46,6 +46,7 @@
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
 					<span>订单状态</span><img src="/images/sjk-xl.png" />  <select style="border-radius:20px" ng-model="ordersStatus">
+						<option value="">订单状态</option>
 						<option value="NEW">待付款</option>
 						<option value="RECEIVED">已完成</option>
 					</select>
