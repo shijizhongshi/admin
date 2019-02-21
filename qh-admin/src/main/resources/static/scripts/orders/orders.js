@@ -24,6 +24,9 @@ app.controller("ordersController", function($scope, $http,$filter){
     		 $scope.statusNames=[{"name":"待付款","status":"NEW"},{"name":"待发货","status":"PAID"},{"name":"待收货","status":"DELIVERED"},
     	    	                   {"name":"已完成","status":"RECEIVED"},{"name":"退款售后","status":"REFUND"}]
     	}
+    	
+        $scope.total = 0;
+        $scope.current = 1;
     	$scope.loaddata();
     }
     var formatDate = function (date) { 
