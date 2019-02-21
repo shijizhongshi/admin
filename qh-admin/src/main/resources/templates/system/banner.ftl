@@ -18,16 +18,16 @@
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 			<li>/</li>
-			<li>公共资源</li>
+			<li>公共资源管理</li>
 			<li>/</li>
-			<li>banner广告</li>
+			<li>banner管理</li>
 
 
 		</ul>
 	</div>
 	<div class="details-frame">
 		<div class="details-frame-content">
-			<div class="select-3" style="width: 15%">
+			<div class="select-3" style="width: 15%;margin-right:0%" >
 				<span>广告横幅的位置</span> <img src="/images/sjk-xl.png" /> <select
 					ng-model="types">
 					<option value="0">查看全部</option>

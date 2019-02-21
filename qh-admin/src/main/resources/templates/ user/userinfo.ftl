@@ -13,7 +13,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
-				<li>班级模板</li>
+				<li>用户管理</li>
+				<li>/</li>
+				<li>用户信息</li>
 			</ul>
 		</div>
 		<div class="details-frame">
@@ -22,13 +24,13 @@
 					<ul class="managr-dianpu">
 
 
-						<div class="select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<span>昵称</span> <input type="text" ng-model="nickname" />
 						</div>
-						<div class="select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<span>手机号</span> <input type="text" ng-model="mobile" />
 						</div>
-						<div class=" select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<img src="/images/sjk-xl.png" /> <span>用户类型</span> <select
 								ng-model="userrole">
 								<option value="">全部用户</option>
@@ -39,7 +41,7 @@
 
 						<div>
 							<input type="button" class="btn-lg im-key"
-								ng-click="selectUser()" value="检索" />
+								ng-click="selectUser()" value="立即检索" />
 						</div>
 					</ul>
 			</form>

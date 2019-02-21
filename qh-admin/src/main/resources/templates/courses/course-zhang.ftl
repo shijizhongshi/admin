@@ -66,7 +66,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
-				<li>课程章节管理</li>
+				<li>网课资源管理</li>
+				<li>/</li>
+				<li>课程章管理</li>
 
 
 			</ul>
@@ -74,7 +76,7 @@
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-3" style="width: 18%">
+				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>搜索课程</span>
 					<form id="search">
 						<input type="text" ng-model="courseChapterName" />

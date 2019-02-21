@@ -61,22 +61,22 @@
 				<ul>
 					<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 					<li>/</li>
-					<li>课程章节管理</li>
+					<li>网课资源管理</li>
+					<li>/</li>
+					<li>试听课程</li>
 				</ul>
 			</div>
 			<div class="details-frame">
 				<div class="details-frame-content">
 
-					<div class="select-2"
-						style="float: left; margin-right: 15px; width: 160px;">
+					<div class="select-3" style="width: 15%;margin-right:0%">
 						<span>搜索课程</span>
 						<form id="search">
 							<input ng-model="courseName" type="text"
 								style="text-indent: 2em;" />
 						</form>
 					</div>
-					<div class="select-2"
-						style="float: left; margin-right: 15px; width: 160px;">
+					<div class="select-3" style="width: 15%;margin-right:0%;margin-left:20px">
 						<span>搜索老师</span>
 						<form id="">
 							<input ng-model="teachers" type="text" style="text-indent: 2em;" />
@@ -84,7 +84,7 @@
 					</div>
 					<div>
 						<input type="button" class="btn-lg im-key"
-							ng-click="auditionBases()" value="检索" />
+							ng-click="auditionBases()" value="立即检索" />
 					</div>
 				</div>
 				<div class="manage">

@@ -17,7 +17,9 @@
 		<ul>
 			<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 			<li>/</li>
-			<li>课程章节管理</li>
+			<li>网课资源管理</li>
+			<li>/</li>
+			<li>课程节管理</li>
 
 
 		</ul>

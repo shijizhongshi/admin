@@ -34,10 +34,10 @@ submenu="sidebarmenu-league-shangpin">
 						<form>
 							<ul style="height: 80px;" class="managr-dianpu">
 
-								<div class="select-3">
+								<div class="select-3" style="width: 10%;margin-right:5px">
 									<span>店铺名称</span> <input type="text" ng-model="shopName" />
 								</div>
-								<div class=" select-3">
+								<div class="select-3" style="width: 10%;margin-right:5px">
 									<img src="/images/sjk-xl.png" /> <span>所在地区</span> <select
 										ng-model="address">
 										<option value="">查看全部</option>
@@ -45,7 +45,7 @@ submenu="sidebarmenu-league-shangpin">
 										<option></option>
 									</select>
 								</div>
-								<div class=" select-3">
+								<div class="select-3" style="width: 10%;margin-right:5px">
 									<img src="/images/sjk-xl.png" /> <span>推荐级别</span> <select
 										ng-model="isrecommend">
 										<option value="0">不推荐</option>
@@ -54,7 +54,7 @@ submenu="sidebarmenu-league-shangpin">
 								</div>
 								<div>
 									<input type="button" class="btn-lg im-key"
-										ng-click="shopList()" value="检索" />
+										ng-click="shopList()" value="立即检索" />
 								</div>
 
 							</ul>
@@ -207,14 +207,14 @@ submenu="sidebarmenu-league-shangpin">
 						</h4>
 						<form>
 							<div class="details-frame-heshen">
-								<div class="select-3" style="">
+								<div class="select-3" style="width: 15%;margin-right:0%">
 									<span>店铺名称</span> <input type="text" ng-model="shopName" />
 
 								</div>
 
 								<div>
 									<input type="button" class="btn-lg im-key"
-										ng-click="islimitList()" value="检索" />
+										ng-click="islimitList()" value="立即检索" />
 								</div>
 							</div>
 						</form>
@@ -425,6 +425,7 @@ submenu="sidebarmenu-league-shangpin">
 .details-frame-content {
 	height: 50px;
 	padding: 0 29px;
+	overflow-y:hidden;
 }
 
 .details-frame-content ul li {

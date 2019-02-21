@@ -31,10 +31,10 @@
 				<div class="manage">
 					<form action="">
 						<ul style="height: 80px;" class="managr-dianpu">
-							<div class="select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<span>医师名称</span> <input type="text" ng-model="name" />
 							</div>
-							<div class=" select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>医院科室</span> <select
 									ng-model="offices">
 									<option value="">查看全部</option>
@@ -42,7 +42,7 @@
 									<option>内科</option>
 								</select>
 							</div>
-							<div class=" select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>是否真实</span> <select
 									ng-model="isvirtual">
 
@@ -52,7 +52,7 @@
 							</div>
 
 							<div>
-								<input type="button" class="btn-lg im-key" value="检索"
+								<input type="button" class="btn-lg im-key" value="立即检索"
 									ng-click="doctorsList()" />
 							</div>
 						</ul>
@@ -259,13 +259,13 @@
 						<span>{{doctorcount}}</span>
 					</h4>
 					<div class="details-frame-heshen">
-						<div class="select-3" style="">
+						<div class="select-3" style="width: 15%;margin-right:0%">
 							<span>医师姓名</span> <input type="text" ng-model="name" />
 
 						</div>
 						<div>
 							<input type="button" class="btn-lg im-key"
-								ng-click="islimitList()" value="检索">
+								ng-click="islimitList()" value="立即检索">
 						</div>
 					</div>
 					<div class="admin-table">
@@ -481,6 +481,7 @@
 .details-frame-content {
 	height: 50px;
 	padding: 0 29px;
+	overflow-y:hidden;
 }
 
 .details-frame-content ul li {
