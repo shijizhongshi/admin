@@ -16,5 +16,7 @@ public class Patterns {
 
     public static final String ALI_APPID="2019022063258258";
     
+    public static final String cert_path="/home/apiclient_cert.p12";
+    
     
 }
