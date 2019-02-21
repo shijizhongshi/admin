@@ -33,6 +33,7 @@
 						<div class="select-3" style="width: 10%;margin-right:10px">
 							<img src="/images/sjk-xl.png"> <span>核审状态</span> <select
 								ng-model="payStatus">
+								<option value="">核审状态</option>
 								<option value="1">通过</option>
 								<option value="2">未通过</option>
 								<option value="0">未审核</option>
