@@ -30,18 +30,19 @@
 				<!-- 核审列表 -->
 				<div class="manage">
 					<ul style="height: 80px;" class="managr-dianpu">
-						<div class=" select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<img src="/images/sjk-xl.png"> <span>核审状态</span> <select
 								ng-model="payStatus">
+								<option value="">核审状态</option>
 								<option value="1">通过</option>
 								<option value="2">未通过</option>
 								<option value="0">未审核</option>
 							</select>
 						</div>
-						<div class="select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<span>手机号</span> <input type="text" ng-model="mobile" />
 						</div>
-						<div class="select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<span>申请时间</span> <input type="date" ng-model="fromdate"
 								name="search" />
 						</div>
@@ -50,13 +51,13 @@
 
 							&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
 						</div>
-						<div class="select-3">
+						<div class="select-3" style="width: 10%;margin-right:10px">
 							<span>&nbsp;</span> <input type="date" ng-model="todate"
 								name="search" />
 						</div>
 
 						<div>
-							<input type="button" class="btn-lg im-key" value="检索"
+							<input type="button" class="btn-lg im-key" value="立即检索"
 								ng-click="loaddata()" />
 						</div>
 					</ul>
@@ -83,17 +84,17 @@
 							</tr>
 
 						</table>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="total"
+								ng-model="current" items-per-page="pageSize" max-size="5"
+								class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-change="loaddata()">
+							</ul>
+						</div>
+					</div>
 
-					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="loaddata()">
-						</ul>
-					</div>
 
 				</div>
 
@@ -106,6 +107,7 @@
 .details-frame-content {
 	height: 50px;
 	padding: 0 29px;
+	overflow-y:hidden;
 }
 
 .details-frame-content ul li {
@@ -116,6 +118,7 @@
 	font-size: 1.5rem;
 	cursor: pointer;
 	margin-right: 15px;
+	
 }
 
 .leibie {

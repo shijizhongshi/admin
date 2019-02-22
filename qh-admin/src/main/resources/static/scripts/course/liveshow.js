@@ -4,11 +4,13 @@ app.controller("liveShowController", function($scope, $http) {
 	$scope.courseTypeSubclassName = "临床(执业)助理医师";
 	$scope.active = 1;
 	$scope.typeId = 1;
-
-	$scope.typeList = function(typeId) {
+	$scope.imgUrl=null;
+	
+	$scope.typeList = function(typename,typeId) {
 		$scope.active = typeId;
 		$scope.typeId = typeId;
 		$scope.typeBases();
+		$scope.courseTypeName=typename;
 	};
 	$scope.typeBases = function() {
 		$http.get("/api/course/courseTypeSubclassList", {
@@ -20,7 +22,9 @@ app.controller("liveShowController", function($scope, $http) {
 		}).success(function(data) {
 			if (data.status == "0") {
 				$scope.courseTypeSubclass = data.data;
-
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.liveBases();
 			}
 		})
 	};
@@ -48,18 +52,20 @@ app.controller("liveShowController", function($scope, $http) {
 			if (data.status == "0") {
 				$scope.livelist = data.data;
 				$scope.total = data.count;
+				
 			}
 		})
 	}
 
 	$scope.liveBases();
 	// ///点击专业的事件
-	$scope.typeSub = function(typename, sub) {
+	$scope.typeSub = function(typename, sub,$event) {
 		// //////
+		$event.stopPropagation();
 		$scope.courseTypeName = typename;
 		$scope.courseTypeSubclassName = sub.courseTypeSubclassName;
 		$scope.liveBases();
-		$scope.selected=sub;
+		$scope.typeSelected=sub.courseTypeSubclassName;
 	}
 
 	$scope.live = null;
@@ -75,10 +81,11 @@ app.controller("liveShowController", function($scope, $http) {
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.live.imgUrl=data.data;
+	    	$scope.imgUrl=data.data;
 		})
 	};
 	$scope.addLive = function() {
+		$scope.live.imgUrl = $scope.imgUrl;
 		$scope.live.courseTypeName = $scope.courseTypeName;
 		$scope.live.courseTypeSubclassName = $scope.courseTypeSubclassName;
 		if($scope.liveId==null){
@@ -116,10 +123,13 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.selected = l;
 		$scope.live = l;
 		$scope.liveId = l.id;
+		$scope.imgUrl=l.imgUrl;
 	}
 	$scope.add=function(){
+		$scope.imgUrl=null;
 		$scope.live =null;
 		$scope.liveId = null;
+		
 		document.getElementById('add').style.display="block"; 
 	}
 	$scope.update=function(){

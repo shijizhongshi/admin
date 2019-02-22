@@ -1,11 +1,11 @@
-app.controller("shopServeController", function($scope, $http){
+app.controller("shopServeControllered", function($scope, $http){
 	
 	
-		$scope.total = 0;
+		$scope.servetotal = 0;
 	   //当前的页数
-	   $scope.current = 1;
+	   $scope.servecurrent = 1;
 	   //一页显示多少条
-	   $scope.pageSize = 20;
+	   $scope.servepageSize = 20;
 	   
 	   if($("#shopId").val()!=''){
 			////说明是在服务点进来的
@@ -14,7 +14,7 @@ app.controller("shopServeController", function($scope, $http){
 			
 	   }else{
 		   $scope.shopId=null;
-		   $scope.serveStatus=0;
+		   
 	   }
 	   $scope.hot=null;
 	   $scope.Status=null;
@@ -27,13 +27,13 @@ app.controller("shopServeController", function($scope, $http){
 	   
 	  
 	   $scope.serveList=function(){
-			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+			$scope.pageNo=( $scope.servecurrent-1)*$scope.servepageSize;
 			$http.get("/api/shopserve/list",{"params": {"shopName":$scope.shopName,"serveName":$scope.serveName,
-				"serveType":$scope.serveType,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"serveStatus":$scope.serveStatus,"shopId":$scope.shopId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				"serveType":$scope.serveType,"pageNo":$scope.pageNo,"pageSize":$scope.servepageSize,"serveStatus":$scope.serveStatus,"shopId":$scope.shopId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.servelist=data.data;
-					
+					$scope.servetotal=data.count;
 					angular.forEach($scope.servelist, function(serve){  
 						
 						if(serve.ishot==0){

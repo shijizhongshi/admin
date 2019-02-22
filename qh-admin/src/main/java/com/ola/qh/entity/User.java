@@ -29,7 +29,7 @@ public class User {
 	
 	private Date updatetime;
 	
-	private int isdisabled;
+	private String isdisabled;
 	
 	public String getId() {
 		return id;
@@ -112,11 +112,11 @@ public class User {
 		this.updatetime = updatetime;
 	}
 
-	public int getIsdisabled() {
+	public String getIsdisabled() {
 		return isdisabled;
 	}
 
-	public void setIsdisabled(int isdisabled) {
+	public void setIsdisabled(String isdisabled) {
 		this.isdisabled = isdisabled;
 	}
 

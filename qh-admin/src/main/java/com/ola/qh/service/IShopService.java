@@ -13,5 +13,5 @@ public interface IShopService {
 	
 	public Results<String> updateShop(String id,String userId,int islimits,int isrecommend,String shopType);
 	
-	public String selectCount(String shopType);
+	public int selectCount(String address,String shopName,String isrecommend,int islimits,int shopType);
 }

@@ -163,6 +163,14 @@
 	
 	</select>
 	
+	<select id="courseCount" resultType="int">
+		select count(id) from course where  course_type_name=#{courseTypeName} and course_type_subclass_name=#{courseTypeSubclassName}
+		<if test="courseName!=null and courseName!=''">
+		and course_name like concat(concat('%',#{courseName},'%'))
+		</if>
+		
+	</select>
+	
 	<select id="existCourse" resultType="com.ola.qh.entity.Course">
 		select <include refid="sql_base"></include>,class_id from course where id=#{id}
 	</select>

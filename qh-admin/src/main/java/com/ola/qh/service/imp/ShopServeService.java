@@ -42,7 +42,8 @@ public class ShopServeService implements IShopServeService {
 				List<ShopServeImg> listimg=shopServeImgDao.selectServeImg(shopServe.getId());
 				shopServe.setImglist(listimg);
 			}
-			
+			int count=shopServeDao.selectShopServeCount(shopName, serveName, serveType, serveStatus);
+		results.setCount(count);
 		results.setData(list);	
 		results.setStatus("0");
 		return results;
@@ -78,6 +79,12 @@ public class ShopServeService implements IShopServeService {
 			results.setStatus("1");
 			return results;
 		}
+	}
+
+	@Override
+	public int selectShopServeCount(String shopName, String serveName, String serveType, String serveStatus) {
+		// TODO Auto-generated method stub
+		return shopServeDao.selectShopServeCount(shopName, serveName, serveType, serveStatus);
 	}
 
 	

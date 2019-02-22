@@ -29,6 +29,22 @@
 	<if test="userrole!=null and userrole!='' ">
 	and  userrole=#{userrole} 
 	</if>
+	order by addtime desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="selectUserCount" resultType="int">
+	select count(id) from user 
+	where 1=1
+	<if test="mobile!=null and mobile!='' ">
+	and  mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
+	</if>
+	<if test="nickname!=null and nickname!='' ">
+	and  nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
+	</if>
+	<if test="userrole!=null and userrole!='' ">
+	and  userrole=#{userrole} 
+	</if>
+	
 	</select>
 	
 	<update id="updateUser" parameterType="com.ola.qh.entity.User" >

@@ -36,38 +36,39 @@
 			<div id="guanli">
 				<div class="manage">
 					<ul style="height: 80px;" class="managr-dianpu">
-						<div class="select-3">
-							<span>用户手机号</span> <input type="text" ng-model="mobile" />
+					<div class="select-3" style="width: 10%;margin-right:5px">
+							<span>申请时间</span> <input  type="date" name="search"
+								ng-model="fromdate" />
 						</div>
-						<div class="select-3">
-							<span>订单状态</span> <select
+						<div class="select-3"
+							style="font-size: 1.6rem; width: 5px; text-align: center;">
+
+							&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
+						</div>
+						<div class="select-3" style="width: 10%;margin-right:5px">
+							<span>&nbsp;</span> <input type="date" name="search"
+								ng-model="todate" />
+						</div>
+						<div class="select-3" style="width: 10%;margin-right:10px">
+							<span>用户手机号</span> <input style="border-radius:20px" type="text" ng-model="mobile" />
+						</div>
+						<div class="select-3" >
+							<span>订单状态</span><img src="/images/sjk-xl.png" /> <select
 								ng-options="s.status as s.name for s in statusNames"
 								ng-model="ordersStatus">
 
 							</select>
 						</div>
-						<div class="select-3">
-							<span>姓名</span> <input type="text" ng-model="receiver" />
+						<div class="select-3" style="width: 10%;margin-right:10px">
+							<span>姓名</span> <input style="border-radius:20px" type="text" ng-model="receiver" />
 						</div>
-						<div class="select-3">
-							<span>订单号</span> <input type="text" ng-model="orderno" />
+						<div class="select-3" style="width: 10%;margin-right:10px">
+							<span>订单号</span> <input style="border-radius:20px" type="text" ng-model="orderno" />
 						</div>
-						<div class="select-3">
-							<span>申请时间</span> <input type="date" name="search"
-								ng-model="fromdate" />
-						</div>
-						<div class="select-3"
-							style="font-size: 1.6rem; width: 1%; text-align: center;">
-
-							&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
-						</div>
-						<div class="select-3">
-							<span>&nbsp;</span> <input type="date" name="search"
-								ng-model="todate" />
-						</div>
+						
 
 						<div style="float: left;">
-							<input type="button" class="btn-lg im-key" value="检索"
+							<input type="button" class="btn-lg im-key" value="立即检索"
 								ng-click="loaddata()" />
 						</div>
 						<div style="float:left;">
@@ -102,17 +103,17 @@
 							</tr>
 
 						</table>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="total"
+								ng-model="current" items-per-page="pageSize" max-size="5"
+								class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-click="loaddata()">
+							</ul>
+						</div>
+					</div>
 
-					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="loaddata()">
-						</ul>
-					</div>
 
 
 				</div>
@@ -326,6 +327,7 @@
 .details-frame-content {
 	height: 50px;
 	padding: 0 29px;
+	overflow-y:hidden;
 }
 
 .details-frame-content ul li {

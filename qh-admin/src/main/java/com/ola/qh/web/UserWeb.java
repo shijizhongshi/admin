@@ -17,7 +17,7 @@ public class UserWeb {
 	}
 	
 
-	@RequestMapping(value="/web/login",method=RequestMethod.GET)
+	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String UserWebload(){
 		return "login";
 	}

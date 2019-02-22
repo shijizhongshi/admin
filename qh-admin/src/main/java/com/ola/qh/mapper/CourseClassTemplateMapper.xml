@@ -38,6 +38,14 @@
 		
 	</select>
 	
+	<select id="selectTemplateCount"  resultType="int">
+		select count(id) from course_class_template where 1=1
+		<if test="templateName!=null and templateName!=''">
+		template_name LIKE CONCAT(CONCAT('%',#{templateName},'%'))
+		</if>
+		
+	</select>
+	
 	<insert id="insertCourseClassTemplate" parameterType="com.ola.qh.entity.CourseClassTemplate">
 		insert into course_class_template(<include refid="sql_classtemplate"></include>) values(#{id},#{templateName},#{className},#{classPrice},#{classDiscountPrice},#{classUrl},#{properPeople},#{promises},#{features},#{introduce},#{detail},#{addtime})
 	</insert>

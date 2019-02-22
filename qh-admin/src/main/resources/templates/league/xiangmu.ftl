@@ -18,7 +18,7 @@
 
 
 <div ng-controller="commonController">
-<input type="hidden" value="${shopId}" id="shopId" >
+	<input type="hidden" value="${shopId}" id="shopId">
 
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
@@ -48,13 +48,13 @@
 
 						<form>
 							<ul style="height: 80px;" class="managr-dianpu">
-								<div class="select-3">
+								<div class="select-3" style="width: 10%;margin-right:5px">
 									<span>商品名称</span> <input type="text" ng-model="drugName" />
 								</div>
-								<div class="select-3">
+								<div class="select-3" style="width: 10%;margin-right:5px">
 									<span>店铺名称</span> <input type="text" ng-model="shopName" />
 								</div>
-								<div class=" select-3" ng-mouseleave="subcategoryList()">
+								<div class="select-3" style="width: 10%;margin-right:5px" ng-mouseleave="subcategoryList()">
 									<img src="/images/sjk-xl.png" /> <span>商品大类别</span> <select
 										ng-model="categoryName">
 										<option value="">查看全部</option>
@@ -63,7 +63,7 @@
 											ng-selected="categoryName==cat.categoryName">{{cat.categoryName}}</option>
 									</select>
 								</div>
-								<div class=" select-3" ng-mouseenter="subcategoryList()">
+								<div class="select-3" style="width: 10%;margin-right:5px" ng-mouseenter="subcategoryList()">
 									<img src="/images/sjk-xl.png" /> <span>商品小类别</span> <select
 										ng-model="categorySubname">
 										<option value="">查看全部</option>
@@ -72,7 +72,7 @@
 											ng-selected="categorySubname==sub.subName">{{sub.subName}}</option>
 									</select>
 								</div>
-								<div class=" select-3">
+								<div class="select-3" style="width: 10%;margin-right:5px">
 									<img src="/images/sjk-xl.png" /> <span>审核状态</span> <select
 										ng-model="drlimits">
 										<option ng-selected="drlimits==''" value="">查看全部</option>
@@ -87,7 +87,7 @@
 
 								<div>
 									<input type="button" class="btn-lg im-key"
-										ng-click="drugList()" value="检索" />
+										ng-click="drugList()" value="立即检索" />
 								</div>
 							</ul>
 						</form>
@@ -99,7 +99,7 @@
 							<li><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;下移</li>
 							<li style="float: right; margin-right: 100px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
 						<div class="admin-table">
 
@@ -135,16 +135,17 @@
 									</tr>
 								</form>
 							</table>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="total"
+									ng-model="current" items-per-page="pageSize" max-size="5"
+									class="pagination-sm" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+									ng-click="drugList()">
+								</ul>
+							</div>
 						</div>
-						<div class="col-sm-6"></div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total"
-								ng-model="current" items-per-page="pageSize" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="drugList()">
-							</ul>
-						</div>
+
 					</div>
 
 				</div>
@@ -379,13 +380,13 @@
 				<div class="manage">
 					<form id="myform1">
 						<ul style="height: 80px;" class="managr-dianpu">
-							<div class="select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<span>项目名称</span> <input type="text" ng-model="serveName" />
 							</div>
-							<div class="select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<span>店铺名称</span> <input type="text" ng-model="shopName" />
 							</div>
-							<div class=" select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>项目分类</span> <select
 									ng-model="serveType">
 									<option value="">查看全部</option>
@@ -394,7 +395,7 @@
 
 								</select>
 							</div>
-							<div class=" select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>审核状态</span> <select
 									ng-model="serveStatus">
 									<option ng-selected="serveStatus==''" value="">查看全部</option>
@@ -408,7 +409,7 @@
 
 							<div>
 								<input type="button" class="btn-lg im-key"
-									ng-click="serveList()" value="检索" />
+									ng-click="serveList()" value="立即检索" />
 							</div>
 						</ul>
 					</form>
@@ -419,7 +420,7 @@
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
 							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi"  ng-click="refresh()"/></li>
+							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 					</ul>
 					<div class="admin-table">
 
@@ -454,16 +455,17 @@
 									style="background: #8e9a91;" /></th>
 							</tr>
 						</table>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="servetotal"
+								ng-model="servecurrent" items-per-page="servepageSize"
+								max-size="5" class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-change="serveList()">
+							</ul>
+						</div>
 					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="serveList()">
-						</ul>
-					</div>
+
 				</div>
 
 
@@ -572,6 +574,7 @@
 .details-frame-content {
 	height: 50px;
 	padding: 0 29px;
+	overflow-y:hidden;
 }
 
 .details-frame-content ul li {

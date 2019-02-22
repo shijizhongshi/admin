@@ -40,6 +40,7 @@ app.controller("sectionController", function($scope, $http){
 				alert("上传成功~");
 				$scope.section.videoId=res.data[0].vid;
 				$scope.section.videoUrl=res.data[0].mp4;
+				document.getElementById('polyved').style.display="block"; 
 				$scope.polyv($scope.section.videoId);
 			}else{
 				alert(res.error);		
@@ -62,6 +63,8 @@ app.controller("sectionController", function($scope, $http){
 					    'ts':$scope.video.ts,
 					    'sign':$scope.video.sign
 					});
+				}else{
+					document.getElementById('polyved').style.display="none"; 
 				}
 				
 			}
@@ -96,11 +99,12 @@ app.controller("sectionController", function($scope, $http){
 		$scope.selected=c;
 		$scope.section=c;
 		$scope.sectionId=c.id;
-		$scope.polyv(c.videoId);
+		$scope.videoId=c.videoId;
 	}
 	$scope.add=function(){
 		$scope.section=null;
 		$scope.sectionId=null;
+		$scope.polyv();
 		document.getElementById('add').style.display="block"; 
 		
 		
@@ -108,6 +112,8 @@ app.controller("sectionController", function($scope, $http){
 	////点击修改的按钮先看看是否已经选中了
 	$scope.updateSection=function(){
 		if($scope.sectionId!=null){
+			document.getElementById('polyved').style.display="block"; 
+			$scope.polyv($scope.videoId);
 			document.getElementById('add').style.display="block"; 
 		}else{
 			alert("请选中信息~");

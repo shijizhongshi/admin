@@ -10,7 +10,7 @@ public interface ICourseSubclassService {
 
 	public List<CourseChapter> courseChapterList(String courseId,String courseChapterName,int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName);
 	
-	public int courseChapterListCount(String courseId,String courseTypeName,String courseTypeSubclassName);
+	public int courseChapterListCount(String courseId, String courseChapterName,String courseTypeName,String courseTypeSubclassName);
 
 	public Results<String> courseChapterSaveUpdate(CourseChapter ccp);
 	

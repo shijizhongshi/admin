@@ -6,6 +6,11 @@ app.controller("shangpinshopController", function($scope, $http){
 	   //一页显示多少条
 	   $scope.pageSize = 20;
 	
+	   $scope.istotal = 0;
+	   //当前的页数
+	   $scope.iscurrent = 1;
+	   //一页显示多少条
+	   $scope.ispageSize = 20;
 	   
 	   $scope.islimits = 1;
 	   $scope.isrecommend = 0;
@@ -22,7 +27,7 @@ app.controller("shangpinshopController", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.shoplist=data.data;
-					
+					$scope.total=data.count;
 					angular.forEach($scope.shoplist, function(shop){  
 						
 						if(shop.isrecommend==0){
@@ -42,14 +47,14 @@ app.controller("shangpinshopController", function($scope, $http){
 		$scope.shopList();
 	
 		$scope.islimitList=function(){
-			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"shopType":2,
+			$scope.pageNo=( $scope.iscurrent-1)*$scope.ispageSize;
+			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.ispageSize,"shopType":2,
 				"address":null,"shopName":$scope.shopName,"isrecommend":null,
 				"islimits":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.islimitlist=data.data;
-					
+					$scope.istotal=data.count;
 				}
 			})
 		}
@@ -116,10 +121,10 @@ app.controller("shangpinshopController", function($scope, $http){
 		}
 		 $scope.shangpincount=function(){
 
-				$http.get("/api/shop/shopcount",{"params": {"shopType":2}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				$http.get("/api/shop/shopcount",{"params": {"shopType":2,"islimits":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
-						$scope.scount=data.data;
+						$scope.scount=data.count;
 						$scope.sscount="审核列表( "+$scope.scount+" )";
 					}
 				})

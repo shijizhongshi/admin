@@ -9,7 +9,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
    $scope.pageSize = 20;
    
    $scope.id=null;
-   
+   $scope.classUrl=null;
    /////查询
    $scope.templateBases=function(){
 	   
@@ -17,12 +17,13 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.templatelist=data.data;
+				$scope.total=data.count;
 			}
 		})
 	}
 	$scope.templateBases();
 	
-	$scope.classUrl=null;
+	
 	$scope.templateName=null;
 	
 	$scope.uploadmainimage = function(file){
@@ -48,6 +49,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	
 	////保存
 	$scope.addTemplate=function(){
+		$scope.courseClassTemplate.classUrl=$scope.classUrl;
 		$http.post("/api/classtemplate/save",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -68,12 +70,14 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		$scope.selected=t;
 		$scope.courseClassTemplate=t;
 		$scope.id=t.id;
+		$scope.classUrl=t.classUrl;
 		}
 		else{
 			
 			$scope.selected=null;
 			$scope.courseClassTemplate=null;
 			$scope.id=null;
+			$scope.classUrl=null;
 		}
 	}
 	////点击修改的按钮先看看是否已经选中了
@@ -87,6 +91,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	}
 ////修改
 	$scope.updateTemplate=function(){
+		$scope.courseClassTemplate.classUrl=$scope.classUrl;
 		$http.post("/api/classtemplate/update",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -126,6 +131,7 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		$scope.courseClassTemplate=null;
 		$scope.id=null;
 		$scope.selected=null;
+		$scope.classUrl=null;
 		document.getElementById('add').style.display="block"; 
 		
 		

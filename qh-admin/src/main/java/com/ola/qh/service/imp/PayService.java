@@ -69,10 +69,10 @@ public class PayService implements IPayService {
 
 	public static DefaultAlipayClient alipayclient() {
 
-		DefaultAlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", "", "",
+		DefaultAlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", Patterns.ALI_APPID, Patterns.ALIPAY_PRIVATE_KEY,
 				"json", "utf-8",
 				// 支付宝公钥 (ALIPAY_PUBLIC_KEY)，RSA支付宝公钥固定的，推荐使用rsa2的，这里先使用的rsa测试
-				"", "RSA2");
+				Patterns.ALIPAY_PUBLIC_KEY, "RSA2");
 		return alipayClient;
 	}
 	@Override
@@ -110,8 +110,8 @@ public class PayService implements IPayService {
 	
 	Map<String, String> message = new HashMap<String, String>();
 	KeyStore keyStore = KeyStore.getInstance("PKCS12");
-	/*FileInputStream instream = new FileInputStream(new File("/home/apiclient_cert.p12"));*/
-	FileInputStream instream = new FileInputStream(new File("/common/apiclient_cert.p12"));
+	FileInputStream instream = new FileInputStream(new File("/home/apiclient_cert.p12"));
+	/*FileInputStream instream = new FileInputStream(new File("/common/apiclient_cert.p12"));*/
 	try
 	{
 	    keyStore.load(instream, Patterns.wxmchId.toCharArray());

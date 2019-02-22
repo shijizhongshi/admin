@@ -1,5 +1,6 @@
 package com.ola.qh.service.imp;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +19,12 @@ public class UserService implements IUserService{
 	private UserDao userDao;
 
 	@Override
-	public int updateUser(int isdisabled, String id) {
+	public int updateUser(String isdisabled, String id) {
 		
 		User user=new User();
 		user.setId(id);
 		user.setIsdisabled(isdisabled);
+		user.setUpdatetime(new Date());
 		return userDao.updateUser(user);
 	}
 
@@ -43,9 +45,15 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public List<User> selectUser(String mobile, String nickname, String userrole) {
-		
-		return userDao.selectUser(mobile, nickname, userrole);
+	public List<User> selectUser(int pageNo,int pageSize, String mobile, String nickname, String userrole) {
+		// TODO Auto-generated method stub
+		return userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+	}
+
+	@Override
+	public int selectUserCount(String mobile, String nickname, String userrole) {
+		// TODO Auto-generated method stub
+		return userDao.selectUserCount(mobile, nickname, userrole);
 	}
 
 	

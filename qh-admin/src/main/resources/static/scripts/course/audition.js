@@ -19,16 +19,20 @@ app.controller("CourseNofreeController",function($scope,$http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courseTypeSubclass=data.data;
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.auditionBases();
 			}
 		})
 	};
 	$scope.active=1;
 	$scope.typeId=1;
 	$scope.typeBases();
-	$scope.typeList=function(typeId){
+	$scope.typeList=function(typename,typeId){
 			$scope.active=typeId;
 			$scope.typeId=typeId;
 			$scope.typeBases();
+			$scope.courseTypeName=typename;
 	};
    
    /////查询
@@ -40,6 +44,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.auditionlist=data.data;
+				$scope.total=data.count;
 				angular.forEach($scope.auditionlist, function(audition){  
 					
 					if(audition.isremmend==0){
@@ -61,12 +66,13 @@ app.controller("CourseNofreeController",function($scope,$http){
 	$scope.courseTypeSubclassName="临床(执业)助理医师";
 	$scope.auditionBases();
 
-	$scope.auditionSub=function(typename,sub){
+	$scope.auditionSub=function(typename,sub,$event){
 		////////查课程的集合
+		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.auditionBases();
-		$scope.selected=sub;
+		$scope.typeSelected=sub.courseTypeSubclassName;
 	
 }
 	$scope.uploadmainimage = function(file){
@@ -83,13 +89,13 @@ app.controller("CourseNofreeController",function($scope,$http){
 	        
 	    })
 	    .success(function(data){
-	    	$scope.courseNofree.imgUrl=data.data;
+	    	$scope.imgUrl=data.data;
 	    	
 		})
 	};
 	
 	
-	/*$scope.uploadmainimage1 = function(file){
+	$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
@@ -109,6 +115,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 				console.log(res);
 				$scope.courseNofree.videoId=res.data[0].vid;
 				$scope.courseNofree.videoUrl=res.data[0].mp4;
+				document.getElementById('polyved').style.display="block";
 				$scope.polyv($scope.courseNofree.videoId);
 				
 			}else{
@@ -118,8 +125,8 @@ app.controller("CourseNofreeController",function($scope,$http){
 			
 		});
 	};
-*/
-	$scope.uploadmainimage1 = function(file){
+
+	/*$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 	    var formData={
 	    		"title" : "测试11",
@@ -130,12 +137,12 @@ app.controller("CourseNofreeController",function($scope,$http){
 				"tag":"教育"
 				
 	    }
-		/*formData.append('filename', file.files[0]);
+		formData.append('filename', file.files[0]);
 		formData.append("userid","91DD94C27B488135");
 		formData.append("title","测试11");
 		formData.append("tag","教育");
 		formData.append("description","很好很好");
-		formData.append("filesize",file.files[0].size);*/
+		formData.append("filesize",file.files[0].size);
 		
 		
 		$.ajax({
@@ -162,10 +169,11 @@ app.controller("CourseNofreeController",function($scope,$http){
 		});
 		
 		
-	};
+	};*/
 	
 	////保存
 	$scope.addAudition=function(){
+		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.teachers=$scope.teacher;
 		$scope.courseNofree.courseTypeName=$scope.courseTypeName;
 		$scope.courseNofree.courseTypeSubclassName=$scope.courseTypeSubclassName;
@@ -184,19 +192,21 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 	
 	$scope.add=function(){
+		$scope.imgUrl=null;
 		$scope.courseNofree=null;
 		$scope.id=null;
+		$scope.polyv();
 		document.getElementById('add').style.display="block"; 
 	};
 	
 	///////做选中的时候用
 	$scope.checkedAudition=function(a){
-		
+		$scope.imgUrl=a.imgUrl;
 		$scope.selected=a;
 		$scope.courseNofree=a;
 		$scope.id=a.id;
+		$scope.videoId=a.videoId;
 		$scope.videoUrl=$scope.courseNofree.videoUrl;
-		$scope.polyv(a.videoId);
 	};
 	
 	$scope.polyv=function(videoId){
@@ -212,6 +222,8 @@ app.controller("CourseNofreeController",function($scope,$http){
 					    'ts':$scope.video.ts,
 					    'sign':$scope.video.sign
 					});
+				}else{
+					document.getElementById('polyved').style.display="none"; 
 				}
 				
 			}
@@ -223,7 +235,9 @@ app.controller("CourseNofreeController",function($scope,$http){
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
 		if($scope.id!=null){
+			document.getElementById('polyved').style.display="block";
 			document.getElementById('add').style.display="block"; 
+			$scope.polyv($scope.videoId);
 		}else{
 			alert("请选中信息~");
 		}
@@ -231,6 +245,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 ////修改
 	$scope.updateAudition=function(){
+		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.videoUrl=$scope.videoUrl;
 		$http.post("/api/coursenofree/update",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){

@@ -1,5 +1,5 @@
 app.controller("ChapterController", function($scope, $http){
-
+	
 	
 	if($("#typeId").val()!=''){
 		////说明是在课程点进章来的
@@ -8,28 +8,55 @@ app.controller("ChapterController", function($scope, $http){
 		$scope.courseId=$("#courseId").val();
 		$scope.courseTypeName=$("#courseTypeName").val();
 		$scope.courseTypeSubclassName=$("#courseTypeSubclassName").val();
+		$scope.typeSelected=$scope.courseTypeSubclassName;
 		
 	}else{
+		$scope.typeSelected="临床(执业)助理医师";
 		$scope.courseTypeName="医师资格";
 		$scope.courseTypeSubclassName="临床(执业)助理医师";
 		$scope.active=1;
 		$scope.typeId=1;
 	}
-	$scope.typeList=function(typeId){
+	
+	$scope.typeList=function(typename,typeId){
+			
 			$scope.active=typeId;
 			$scope.typeId=typeId;
 			$scope.typeBases();
+			$scope.courseTypeName=typename;
 	};
 	$scope.typeBases=function(){
+		
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courseTypeSubclass=data.data;
-				
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.chapterBases();
 			}
 		})
+		
 	};
-	$scope.typeBases();//////保证已经来有默认的参数
+	$scope.typeBases2=function(){
+		
+		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeSubclass=data.data;
+				$scope.chapterBases();
+			}
+		})
+		
+	};
+	if($("#typeId").val()!=''){
+		////说明是在课程点进章来的
+		
+		$scope.typeBases2();//////保证已经来有默认的参数
+	}else{
+		
+		$scope.typeBases();//////保证已经来有默认的参数
+	}
 	 //总条数
     $scope.total = 0;
     //当前的页数
@@ -55,13 +82,14 @@ app.controller("ChapterController", function($scope, $http){
 	$scope.chapterBases();
 	
 	/////点击专业的事件
-	$scope.typeSub=function(typename,sub){
+	$scope.typeSub=function(typename,sub,$event){
 		////////查章节的集合
+		$event.stopPropagation();
 		$scope.courseId=null;
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.chapterBases();
-		$scope.selected=sub;
+		$scope.typeSelected=$scope.courseTypeSubclassName;
 		
 	}
 	

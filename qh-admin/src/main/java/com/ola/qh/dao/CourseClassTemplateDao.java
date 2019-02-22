@@ -10,6 +10,8 @@ public interface CourseClassTemplateDao {
 
 	public List<CourseClassTemplate> selectCourseClassTemplate(@Param("id")String id,@Param("templateName")String templateName,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
+	public int selectTemplateCount(@Param("templateName")String templateName);
+	
 	public int insertCourseClassTemplate(CourseClassTemplate courseClassTemplate);
 	
 	public int updateCourseClassTemplate(CourseClassTemplate courseClassTemplate);

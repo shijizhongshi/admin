@@ -31,10 +31,10 @@
 				<div class="manage">
 					<form action="">
 						<ul style="height: 80px;" class="managr-dianpu">
-							<div class="select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<span>医师名称</span> <input type="text" ng-model="name" />
 							</div>
-							<div class=" select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>医院科室</span> <select
 									ng-model="offices">
 									<option value="">查看全部</option>
@@ -42,7 +42,7 @@
 									<option>内科</option>
 								</select>
 							</div>
-							<div class=" select-3">
+							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>是否真实</span> <select
 									ng-model="isvirtual">
 
@@ -52,21 +52,21 @@
 							</div>
 
 							<div>
-								<input type="button" class="btn-lg im-key" value="检索"
+								<input type="button" class="btn-lg im-key" value="立即检索"
 									ng-click="doctorsList()" />
 							</div>
 						</ul>
 					</form>
 					<ul class="show">
 
-						
+
 						<li style="background: #F86846;"><span
 							class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 						<li><span class="glyphicon glyphicon-sort-by-attributes"
 							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
-							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
+							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 					</ul>
 					<div class="admin-table">
 
@@ -93,17 +93,17 @@
 							</tr>
 
 						</table>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="total"
+								ng-model="current" items-per-page="pageSize" max-size="5"
+								class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-click="doctorsList()">
+							</ul>
+						</div>
+					</div>
 
-					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="doctorsList()">
-						</ul>
-					</div>
 					<!--弹窗-->
 					<div class="poop" id="add">
 						<form id="myform">
@@ -251,18 +251,21 @@
 						</div>
 					</div>
 				</div>
-				
+
 
 				<!-- 核审管理内容 -->
 				<div class="manage" style="display: none;">
-					<h4 style="padding-left: 30px;"><span>{{doctorcount}}</span></h4>
+					<h4 style="padding-left: 30px;">
+						<span>{{doctorcount}}</span>
+					</h4>
 					<div class="details-frame-heshen">
-						<div class="select-3" style="">
-							<span>医师姓名</span> <input type="text"  ng-model="name"/>
+						<div class="select-3" style="width: 15%;margin-right:0%">
+							<span>医师姓名</span> <input type="text" ng-model="name" />
 
 						</div>
 						<div>
-							<input type="button" class="btn-lg im-key" ng-click="islimitList()" value="检索">
+							<input type="button" class="btn-lg im-key"
+								ng-click="islimitList()" value="立即检索">
 						</div>
 					</div>
 					<div class="admin-table">
@@ -289,17 +292,17 @@
 							</tr>
 
 						</table>
+						<div class="col-sm-6"></div>
+						<div class="col-sm-6">
+							<ul uib-pagination boundary-links="true" total-items="istotal"
+								ng-model="iscurrent" items-per-page="ispageSize" max-size="5"
+								class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+								ng-click="islimitList()">
+							</ul>
+						</div>
+					</div>
 
-					</div>
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
-							class="pagination-sm" previous-text="&lsaquo;"
-							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-change="islimitList()">
-						</ul>
-					</div>
 
 				</div>
 				<!-- 查看详情 -->
@@ -374,8 +377,8 @@
 									身份证：
 									<div class="costs-img" style="height: 70px;">
 										<img ng-src="{{d.frontIdcardImg}}"
-											style="float: left; height: 70px; margin-right: 3%;" />
-										<img ng-src="{{d.reverseIdcardImg}}"
+											style="float: left; height: 70px; margin-right: 3%;" /> <img
+											ng-src="{{d.reverseIdcardImg}}"
 											style="float: left; height: 70px;" />
 									</div>
 								</div>
@@ -458,7 +461,7 @@
 .resource .grade-left, .resource .grade-center, .resource .grade-right {
 	width: 400px;
 	float: left;
-	height:auto;
+	height: auto;
 	overflow: auto;
 }
 
@@ -478,6 +481,7 @@
 .details-frame-content {
 	height: 50px;
 	padding: 0 29px;
+	overflow-y:hidden;
 }
 
 .details-frame-content ul li {

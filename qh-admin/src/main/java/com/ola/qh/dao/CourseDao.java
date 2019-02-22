@@ -31,6 +31,8 @@ public interface CourseDao {
 	
 	public int insertCourse(Course course);
 	
+	public int courseCount(@Param("courseTypeName")String courseTypeName,@Param("courseTypeSubclassName")String courseTypeSubclassName ,@Param("courseName")String courseName);
+	
 	public int updateCourese(Course course);
 	
 	public Course existCourse(@Param("id")String id);

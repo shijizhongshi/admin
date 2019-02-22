@@ -9,6 +9,7 @@ app.controller("bannerController", function($scope, $http){
 //上传主展示图片
     $scope.types=0;
     $scope.banner=null;
+    $scope.imageurl=null;
 $scope.loaddata = function(){
 	$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 	$http.get("/api/banner/selectlist",{"params": {"type":$scope.types,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -40,12 +41,13 @@ $scope.uploadmainimage = function(file){
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.banner.imageurl=data.data;
+	    	$scope.imageurl=data.data;
 		})
 	};
 	
 	
 	$scope.banneradd=function(){
+		$scope.banner.imageurl=$scope.imageurl;
 		$http.post("/api/banner/saveBanner",$scope.banner,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -63,13 +65,15 @@ $scope.uploadmainimage = function(file){
 		$scope.selected = b;
 		$scope.bannerId=b.id;
 		$scope.banner=b;
-		
+		$scope.imageurl=b.imageurl;
 	}
 	
 	$scope.add=function(){
+		$scope.imageurl=null;
 		$scope.bannerId=null;
 		$scope.banner=null;
 		$scope.selected = null;
+		
 		document.getElementById('add').style.display="block"; 
 		 
 	}
@@ -82,6 +86,7 @@ $scope.uploadmainimage = function(file){
 	}
 	
 	$scope.bannerupdate=function(){
+		$scope.banner.imageurl=$scope.imageurl;
 		$http.post("/api/banner/updateBanner",$scope.banner,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -119,9 +124,10 @@ $scope.uploadmainimage = function(file){
 		$scope.bannerId=null;
 		$scope.banner=null;
 		$scope.selected = null;
+		$scope.imageurl=null;
 		document.getElementById('add').style.display="none"; 
 	}
-	$scope.loaddata=function(){
+	$scope.refresh=function(){
 		
 		location.reload();
 	}

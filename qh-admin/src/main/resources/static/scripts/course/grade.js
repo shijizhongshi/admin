@@ -6,26 +6,31 @@ app.controller("gradeController", function($scope, $http){
 	$scope.typeId=1;
 	$scope.courseTypeName="医师资格";
 	$scope.courseTypeSubclassName="临床(执业)助理医师";
-	$scope.typeList=function(typeId){
+	$scope.typeList=function(typename,typeId){
 			$scope.active=typeId;
 			$scope.typeId=typeId;
 			$scope.typeBases();
+			$scope.courseTypeName=typename;
 	};
 	$scope.typeBases=function(){
 		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courseTypeSubclass=data.data;
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.classBases();
 			}
 		})
 	};
 /////点击专业的事件
-	$scope.typeSub=function(typename,sub){
+	$scope.typeSub=function(typename,sub,$event){
 		////////查班级的集合
+		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.classBases();
-		$scope.selected=sub;
+		$scope.typeSelected=sub.courseTypeSubclassName;
 		
 	}
 	$scope.typeBases();//////保证已经来有默认的参数
@@ -111,7 +116,7 @@ app.controller("gradeController", function($scope, $http){
 	 
 	    $scope.isSelected = function(course) {
 	     for(var i=0;i<$scope.courseselected.length;i++){
-	    	 if($scope.courseselected[i].id==course.id){
+	    	 if($scope.courseselected[i].id==course.id && $scope.classId!=null){
 	    		 return true;
 	    	 }else{
 	    		 return false;
@@ -137,7 +142,7 @@ app.controller("gradeController", function($scope, $http){
 	    
 	    $scope.isTeacherSelected = function(teacher) {
 	    	for(var i=0;i<$scope.teacherselected.length;i++){
-		    	 if($scope.teacherselected[i].id==teacher.id){
+		    	 if($scope.teacherselected[i].id==teacher.id && $scope.classId!=null){
 		    		 return true;
 		    	 }else{
 		    		 return false;
@@ -200,6 +205,7 @@ app.controller("gradeController", function($scope, $http){
 		$scope.classes=c;
 		$scope.classId=c.id;
 		$scope.courseselected=c.listCourse;
+		$scope.imgUrl=c.imgUrl;
 		console.log($scope.courseselected);
 		$scope.teacherselected=c.listTeacher;
 		console.log($scope.teacherselected);

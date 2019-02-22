@@ -50,7 +50,7 @@ public class CourseSubclassController {
 		Results<List<CourseChapter>> result = new Results<List<CourseChapter>>();
 		
 		result.setData(courseSubclassService.courseChapterList(courseId,courseChapterName,pageNo,pageSize,courseTypeName,courseTypeSubclassName));
-		result.setCount(courseSubclassService.courseChapterListCount(courseId, courseTypeName, courseTypeSubclassName));
+		result.setCount(courseSubclassService.courseChapterListCount(courseId,courseChapterName, courseTypeName, courseTypeSubclassName));
 		result.setStatus("0");
 		return result;
 	}

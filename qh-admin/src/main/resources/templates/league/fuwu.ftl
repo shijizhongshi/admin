@@ -30,44 +30,46 @@
 				</div>
 				<div id="guanli">
 					<div class="manage">
-					<form>
-						<ul style="height: 80px;" class="managr-dianpu">
-						
-							<div class="select-3">
-								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
-							</div>
-							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>所在地区</span> <select ng-model="address">
-									<option value="">查看全部</option>
-									<option value="山东"></option>
-									<option></option>
-								</select>
-							</div>
-							<div class=" select-3">
-								<img src="/images/sjk-xl.png" /> <span>推荐级别</span> <select ng-model="isrecommend">
-									<option value="0">不推荐</option>
-									<option value="1">推荐</option>
-								</select>
-							</div>
-							<div>
-								<input type="button" class="btn-lg im-key" ng-click="shopList()"
-									value="检索"  />
-							</div>
-							
-						</ul>
-						</form>
-						<ul  class="show">
+						<form>
+							<ul style="height: 80px;" class="managr-dianpu">
 
-						
-							<li  style="background: #F86846;"><span
+								<div class="select-3" style="width: 10%;margin-right:5px">
+									<span>店铺名称</span> <input type="text" ng-model="shopName" />
+								</div>
+								<div class="select-3" style="width: 10%;margin-right:5px">
+									<img src="/images/sjk-xl.png" /> <span>所在地区</span> <select
+										ng-model="address">
+										<option value="">查看全部</option>
+										<option value="山东"></option>
+										<option></option>
+									</select>
+								</div>
+								<div class="select-3" style="width: 10%;margin-right:5px">
+									<img src="/images/sjk-xl.png" /> <span>推荐级别</span> <select
+										ng-model="isrecommend">
+										<option value="0">不推荐</option>
+										<option value="1">推荐</option>
+									</select>
+								</div>
+								<div>
+									<input type="button" class="btn-lg im-key"
+										ng-click="shopList()" value="立即检索" />
+								</div>
+
+							</ul>
+						</form>
+						<ul class="show">
+
+
+							<li style="background: #F86846;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 							<li><span class="glyphicon glyphicon-sort-by-attributes"
 								class="move-down"></span>&nbsp;下移</li>
-							<li ng-click="guanli()"><span class="glyphicon glyphicon-sort-by-attributes"
-								class="move-down"></span>&nbsp;项目管理</li>
+							<li ng-click="guanli()"><span
+								class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;项目管理</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()"/></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
 						<div class="admin-table">
 
@@ -98,17 +100,17 @@
 								</tr>
 
 							</table>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="total"
+									ng-model="current" items-per-page="pageSize" max-size="5"
+									class="pagination-sm" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+									ng-click="shopList()">
+								</ul>
+							</div>
+						</div>
 
-						</div>
-						<div class="col-sm-6"></div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total"
-								ng-model="current" items-per-page="pageSize" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="shopList()">
-							</ul>
-						</div>
 
 						<!--弹窗-->
 						<div class="poop" id="add">
@@ -199,19 +201,21 @@
 					</div>
 					<!-- 核审管理内容 -->
 					<div class="manage" style="display: none;">
-						<h4 style="padding-left: 30px;"><span>{{ffcount}}</span></h4>
-						<form >
-						<div class="details-frame-heshen">
-							<div class="select-3" style="">
-								<span>店铺名称</span> <input type="text" ng-model="shopName"/>
+						<h4 style="padding-left: 30px;">
+							<span>{{ffcount}}</span>
+						</h4>
+						<form>
+							<div class="details-frame-heshen">
+								<div class="select-3" style="width: 15%;margin-right:0%" >
+									<span>店铺名称</span> <input type="text" ng-model="shopName" />
 
+								</div>
+
+								<div>
+									<input type="button" class="btn-lg im-key"
+										ng-click="islimitList()" value="立即检索" />
+								</div>
 							</div>
-							
-							<div>
-								<input type="button" class="btn-lg im-key" ng-click="islimitList()"
-									value="检索"  />
-							</div>
-						</div>
 						</form>
 						<div class="admin-table">
 
@@ -235,17 +239,17 @@
 								</tr>
 
 							</table>
+							<div class="col-sm-6"></div>
+							<div class="col-sm-6">
+								<ul uib-pagination boundary-links="true" total-items="istotal"
+									ng-model="iscurrent" items-per-page="ispageSize" max-size="5"
+									class="pagination-sm" previous-text="&lsaquo;"
+									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+									ng-click="islimitList()">
+								</ul>
+							</div>
+						</div>
 
-						</div>
-						<div class="col-sm-6"></div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total"
-								ng-model="current" items-per-page="pageSize" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="islimitList()">
-							</ul>
-						</div>
 
 
 
@@ -310,10 +314,10 @@
 										执业资格证：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.imgList[0].imgUrl}}" name="资格证1"
-												style="float: left; height: 80px; margin-right: 3%;" />
-											<img ng-src="{{s.imgList[1].imgUrl}}" name="资格证2"
-												style="float: left; height: 80px; margin-right: 3%;" "/>
-											<img ng-src="{{s.imgList[2].imgUrl}}" name="资格证3"
+												style="float: left; height: 80px; margin-right: 3%;" /> <img
+												ng-src="{{s.imgList[1].imgUrl}}" name="资格证2"
+												style="float: left; height: 80px; margin-right: 3%;" "/> <img
+												ng-src="{{s.imgList[2].imgUrl}}" name="资格证3"
 												style="float: left; height: 80px;" /> <img
 												ng-src="{{s.imgList[3].imgUrl}}" name="资格证4"
 												style="float: left; height: 80px; margin-top: 10px;" />
@@ -330,13 +334,13 @@
 										店面照片：
 										<div class="costs-img" style="height: 110px;">
 											<img ng-src="{{s.environmentImgList[0].imgUrl}}" name="资格证1"
-												style="float: left; height: 50px; margin-right: 3%;" />
-											<img ng-src="{{s.environmentImgList[1].imgUrl}}" name="资格证2"
-												style=" float: left; height: 50px; margin-right: 3%;" "/>
-											<img ng-src="{{s.environmentImgList[2].imgUrl}}" name="资格证3"
-												style=" float: left; height: 50px;" /> <img
+												style="float: left; height: 50px; margin-right: 3%;" /> <img
+												ng-src="{{s.environmentImgList[1].imgUrl}}" name="资格证2"
+												style="float: left; height: 50px; margin-right: 3%;" "/> <img
+												ng-src="{{s.environmentImgList[2].imgUrl}}" name="资格证3"
+												style="float: left; height: 50px;" /> <img
 												ng-src="{{s.environmentImgList[3].imgUrl}}" name="资格证4"
-												style=" float: left; height: 50px; margin-top: 10px;" />
+												style="float: left; height: 50px; margin-top: 10px;" />
 
 										</div>
 									</div>
@@ -359,13 +363,13 @@
 									</div>
 
 								</div>
-						
-						<div class="end">
-							<input ng-click="updateshop(s)" name="git" type="submit" value="提交"
-								style="background: #5ED8A9;" /> <input name="esc" type="reset"
-								value="取消" ng-click="reset()" class="esc" />
-						</div>
-				</form>
+
+								<div class="end">
+									<input ng-click="updateshop(s)" name="git" type="submit"
+										value="提交" style="background: #5ED8A9;" /> <input name="esc"
+										type="reset" value="取消" ng-click="reset()" class="esc" />
+								</div>
+						</form>
 
 
 

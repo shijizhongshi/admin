@@ -45,7 +45,9 @@ public class ShopService implements IShopService{
 				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				shop.setShowtime(sf.format(shop.getAddtime()));
 			}
+			int count=shopDao.selectCount(address, shopName, isrecommend, islimits, shopType);
 			results.setData(listAll);
+			results.setCount(count);
 			results.setStatus("0");
 			return results;
 		
@@ -123,9 +125,9 @@ public class ShopService implements IShopService{
 	}
 
 	@Override
-	public String selectCount(String shopType) {
-		
-		return shopDao.selectCount(shopType);
+	public int selectCount(String address, String shopName, String isrecommend, int islimits, int shopType) {
+		// TODO Auto-generated method stub
+		return shopDao.selectCount(address, shopName, isrecommend, islimits, shopType);
 	}
 
 }

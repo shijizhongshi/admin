@@ -13,7 +13,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
-				<li>班级模板</li>
+				<li>用户管理</li>
+				<li>/</li>
+				<li>用户信息</li>
 			</ul>
 		</div>
 		<div class="details-frame">
@@ -21,29 +23,25 @@
 				<div class="details-frame-content">
 					<ul class="managr-dianpu">
 
-						<div class="select-3">
-							<span></span> <span><i class="glyphicon glyphicon-user">全部用户</i></span>
 
+						<div class="select-3" style="width: 10%;margin-right:10px">
+							<span>昵称</span> <input type="text" ng-model="nickname" />
 						</div>
-						<div class="select-3">
-							<span>昵称</span> <input type="text" ng-model="nickname"/>
+						<div class="select-3" style="width: 10%;margin-right:10px">
+							<span>手机号</span> <input type="text" ng-model="mobile" />
 						</div>
-						<div class="select-3">
-							<span>手机号</span> <input type="text"   ng-model="mobile"/>
-						</div>
-						<div class=" select-3">
-							<img src="/images/sjk-xl.png" /> <span>用户类型</span> 
-							<select
+						<div class="select-3" style="width: 10%;margin-right:10px">
+							<img src="/images/sjk-xl.png" /> <span>用户类型</span> <select
 								ng-model="userrole">
-								<option value=""> 全部用户</option>
-								<option value="0"> 普通用户</option>
+								<option value="">全部用户</option>
+								<option value="0">普通用户</option>
 								<option value="1">商家用户</option>
 							</select>
 						</div>
 
 						<div>
-							<input type="button" class="btn-lg im-key" ng-click="selectUser()"
-								value="检索" />
+							<input type="button" class="btn-lg im-key"
+								ng-click="selectUser()" value="立即检索" />
 						</div>
 					</ul>
 			</form>
@@ -67,27 +65,29 @@
 						<th>{{u.nickname}}</th>
 						<th>{{u.userroles}}</th>
 						<th>{{u.disabled}}</th>
-						<th>
-						<input type="button" ng-click="changedisabled(1,u.id)"
-									ng-show="{{u.isdisabled}}==0"  class="btn-lg im-key" value="禁用"  style="padding:3px 10px;margin:0;"/>
-						<input type="button" ng-click="changedisabled(0,u.id)" 
-									ng-show="{{u.isdisabled}}==1"  class="btn-lg im-key" value="启用" style="padding:3px 10px;margin:0;background:#47e84c;" />
-						</th>
+						<th><input type="button" ng-click="changedisabled(1,u.id)"
+							ng-show="{{u.isdisabled}}==0" class="btn-lg im-key" value="禁用"
+							style="padding: 3px 10px; margin: 0;" /> <input type="button"
+							ng-click="changedisabled(0,u.id)" ng-show="{{u.isdisabled}}==1"
+							class="btn-lg im-key" value="启用"
+							style="padding: 3px 10px; margin: 0; background: #47e84c;" /></th>
 
 					</tr>
 				</table>
-
+				<div class="col-sm-6"></div>
+				<div class="col-sm-6">
+					<ul uib-pagination boundary-links="true" total-items="total"
+						ng-model="page" items-per-page="pageSize" max-size="5"
+						class="pagination-sm" previous-text="&lsaquo;"
+						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+						ng-click="selectUser()">
+					</ul>
+				</div>
 			</div>
 
-			<div class="col-sm-6">
-				<ul uib-pagination boundary-links="true" total-items="total"
-					ng-model="page" items-per-page="pageSize" max-size="5"
-					class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
-					first-text="&laquo;" last-text="&raquo;" ng-click="selectUser()">
-				</ul>
-			</div>
 
-</div>
+
+		</div>
 
 
 	</div>
@@ -104,7 +104,6 @@
 .admin-table table tr form span {
 	font-size: 1.4rem;
 }
-
 </style>
 </div>
   </@b.body>

@@ -10,8 +10,9 @@ app.controller("newController", function($scope, $http){
     $scope.types=0;
     $scope.news=null;
     $scope.title=null;
+    $scope.imgUrl=null;
 $scope.loaddata = function(){
-	$scope.pageNo=($scope.current-1)*$scope.pageSize;
+	
 	$http.get("/api/news/newLists",{"params": {"title":$scope.title,"page":$scope.current}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){
@@ -41,12 +42,13 @@ $scope.uploadmainimage = function(file){
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.news.imgUrl=data.data;
+	    	$scope.imgUrl=data.data;
 		})
 	};
 	
 	
 	$scope.newadd=function(){
+		$scope.news.imgUrl=$scope.imgUrl;
 		$scope.news.content = ue.getContent();
 		$http.post("/api/news/save",$scope.news,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
@@ -64,12 +66,13 @@ $scope.uploadmainimage = function(file){
 		$scope.selected=news;
 		$scope.newsId=news.id;
 		$scope.news=news;
-		
+		$scope.imgUrl=news.imgUrl;
 	}
 	
 	$scope.add=function(){
 		$scope.newsId=null;
 		$scope.news=null;
+		$scope.imgUrl=null;
 		document.getElementById('add').style.display="block"; 
 		 
 	}

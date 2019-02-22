@@ -6,7 +6,9 @@ import com.ola.qh.entity.ShopDrugSubcategory;
 
 public interface IShopDrugSubcategoryService {
 
-	public List<ShopDrugSubcategory> selectShopDrugSubcategory(String categoryId);
+	public List<ShopDrugSubcategory> selectShopDrugSubcategory(String categoryId,int pageNo,int pageSize);
+	
+	public int selectShopDrugSubcount(String categoryId);
 	
 	public int insertShopDrugSubcategory(ShopDrugSubcategory shopDrugSubcategory);
 	

@@ -90,10 +90,10 @@ public class CourseSubclassService implements ICourseSubclassService{
 	}
 
 	@Override
-	public int courseChapterListCount(String courseId, String courseTypeName,
+	public int courseChapterListCount(String courseId, String courseChapterName, String courseTypeName,
 			String courseTypeSubclassName) {
 		// TODO Auto-generated method stub
-		return courseSubclassDao.courseChapterListCount(courseId, courseTypeName, courseTypeSubclassName);
+		return courseSubclassDao.courseChapterListCount(courseId,courseChapterName, courseTypeName, courseTypeSubclassName);
 	}
 
 	@Override
