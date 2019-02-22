@@ -275,7 +275,7 @@
 	.grade-left ul li:nth-child(1){margin-right: 10px;}
 	.grade-center .grade-text{width: 80%;}
 	.grade-center .grade-text textarea{width: 100%;height:100px;font-size:1.5rem}
-	.grade-right label{width: 80%;height: auto;background:#EDEEF0;border-radius:20px;text-indent: 2em;font-size: 1.6rem;}
+	.grade-right label{width: 80%;height: auto;border-radius:20px;text-indent: 2em;font-size: 1.6rem;}
 	.grade-right label input{margin-right: 5px;width:17px;height: 17px;}
 	.grade-add-bottom{width: 100%;clear:both;}
 	.grade-add-bottom textarea{width: 100%;height: 250px;background:#EDEEF0;border-radius:20px;text-indent: 2em;}

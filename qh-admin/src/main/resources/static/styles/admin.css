@@ -1,6 +1,6 @@
 *{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;font-size:14px;}
 a{text-decoration: none;color: black;}
-h3{font-size:18px;margin-top:0;}
+h3{font-size:1.6rem;margin-top:0;font-weight:bold;}
 .classify{width:13%; background:#FFFFFF;float:left;}
 @media screen and (max-width: 901px) {.classify{width:100%;float:none;}}
 .classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:15px;}
@@ -34,7 +34,7 @@ ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: abs
 .details-frame-content .select img{position: absolute;right:10px;bottom:8px;}
 .manage .select img{position: absolute;right:10px;top:17px;}
 
-select{padding-left:18px ;width:100%;height: 30px;background:#EDEEF0;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
+select{padding-left:18px ;width:100%;height: 30px;background:#F7F8FC;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
 select[disabled='disabled']::-webkit-value {
 color:red;
 }
@@ -45,7 +45,7 @@ color:red;
 select[disabled]{
 color:red;
 }
-.select input{height: 30px;background:#EDEEF0;border-radius:20px;text-indent: 1em;}
+.select input{height: 30px;background:#F7F8FC;border-radius:20px;text-indent: 1em;}
 .im-key{background: #E8474D;color: white;border-radius:20px;margin: 30px 10px;}
 @media screen and (max-width: 1600px)  {.im-key{margin: 30px 5px;}}
 @media screen and (max-width: 1400px)  {.im-key{margin: 30px 5px;}}
@@ -68,12 +68,12 @@ table .selected{background-color:#c1ddec}
 /**/
 .poop{position: absolute;left:30%;top:15%;overflow:auto;}
 .poop::-webkit-scrollbar , .resource::-webkit-scrollbar {width:6px;}
-.poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {/*����������С����*/
+.poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {
             border-radius: 5px;
             -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
             background: rgba(0,0,0,0.2);
         }
-.poop,.poop-revise,.resource{display: none;z-index:50;width: 463px;height:auto;padding:20px 30px;background: white;box-shadow:1px 1px 4px 4px #D8D6D6;}
+.poop,.poop-revise,.resource{display: none;z-index:50;width: 463px;height:auto;padding:20px 30px;background: white;box-shadow:1px 1px 20px  #D8D6D6;}
  .end{width: 200px;float: right;}
 .end input {width:78px;height: 30px;border-radius:20px;margin-top:5px;color: white;font-size:16px;}
 
@@ -88,7 +88,7 @@ table .selected{background-color:#c1ddec}
 .section li:nth-child(2n-1){background:#F0F1F3;}
 .section li input{float: right;}
 
-.resource{width:790px;position: absolute;left:20%;top:10%;padding: 20px;padding-top:10px;overflow:auto;}
+.resource{width:790px;position: absolute;left:20%;top:0;padding: 20px;padding-top:10px;overflow:auto;}
 .resource-table{width:720px;height: 340px;overflow: scroll;}
 .resource-table ul{width: 100%;height:30px;line-height: 30px;margin:0;}
 .resource-table ul li{float: left;text-align: center;width: 20%;border-right:1px solid #F2F2F2;margin:0; }
@@ -119,12 +119,12 @@ table .selected{background-color:#c1ddec}
 .select-2 , .select-3 {width:48%;height: 70px;position: relative;}
 
 .select-2 span  , .select-3 span , .grade-text span , .grade-right span , .grade-add-bottom {display: block;margin-bottom: 10px;}
-.select-2 input , .grade-text textarea ,.select-3 input{width:100%;height: 30px;background:#EDEEF0;border-radius:20px;text-indent: 1em; font-size:1.5rem}
+.select-2 input , .grade-text textarea ,.select-3 input{width:100%;height: 30px;background:#F7F8FC;border-radius:20px;text-indent: 1em; font-size:1.4rem}
 .select-2 img , .select-3 img{position: absolute;right: 10px;bottom: 20px;}
 .select-radio{height:50px;}
 .select-radio ul{height: 50px;line-height: 50px; font-size: 2rem;}
 .select-radio ul li{float: left;margin:0 5px;}
-.select-radio ul li input{width:15px;height:15px;}
+.select-radio ul li input{width:13px;height:13px;}
 .select-3 {width:35%;float:left;margin-right:5%;}
 
 /**/
@@ -163,3 +163,5 @@ div.costs-uploadfile-div .allBtn{
 .admin-table table tr .xiangqing{background:#F9CE33;border-radius: 20px;color: white;padding: 5px;font-size: 1.3rem;cursor: pointer;}
 .bitian{color:red;}
 .admin-table table tr input {padding:6px;margin:5px;font-size:1.2rem;}
+.daochu{margin:30px 10px;}
+@media screen and (max-width: 1400px){.daochu{margin:5px;}}

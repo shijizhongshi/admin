@@ -64,7 +64,7 @@
 				</div>
 <div>
 <input type="button" class="btn-lg im-key" 
-	value="导出excle" onclick="method5('tableExcel')" style="margin:5px 0" />
+	value="导出excle" onclick="method5('tableExcel')" />
 				</div>
 	</div>
 <div class="manage">

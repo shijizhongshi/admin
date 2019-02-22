@@ -184,6 +184,24 @@
                          </ul>
                 </li>
                 
+                  <li id="sidebarmenu-student" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">学员信息管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-student-management">
+                            <a href="/web/student/management">
+                                <span class="title">学员管理</span>
+                            </a>
+                        </li>
+                         
+                       
+                         </ul>
+                </li>
+                
+                
+                
                 
              </ul>
              
