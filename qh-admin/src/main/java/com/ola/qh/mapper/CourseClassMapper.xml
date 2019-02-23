@@ -137,6 +137,8 @@
 		delete from course_class where id=#{id}
 	</delete>
 	
-	
+	<select id="single" resultMap="CourseClassMap">
+	select * from course_class where id=#{id}
+	</select>
 	
 </mapper>

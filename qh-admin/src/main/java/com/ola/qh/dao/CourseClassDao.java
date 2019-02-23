@@ -27,5 +27,6 @@ public interface CourseClassDao {
 	
 	public int deleteCourseClass(@Param("id")String id);
 	
+	public CourseClass single(@Param("id")String id);
 
 }
