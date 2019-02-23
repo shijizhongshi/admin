@@ -71,7 +71,7 @@
 							<input type="button" class="btn-lg im-key" value="立即检索"
 								ng-click="loaddata()" />
 						</div>
-						<div>
+						<div style="float:left;">
 							<input type="button" class="btn-lg im-key" value="导出excle"
 								onclick="method5('tableExcel')" />
 						</div>

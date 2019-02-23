@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.DoctorPatientImgDao">
+	<resultMap type="com.ola.qh.entity.DoctorPatientImg" id="DoctorPatientImgMap">
+		<result column="id" property="id"/>
+		<result column="patient_id" property="patientId"/>
+		<result column="img_url" property="imgUrl"/>
+		<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	<select id="selectPatientImg" resultMap="DoctorPatientImgMap">
+		select id,patient_id,img_url from doctor_patient_img
+		
+		where  patient_id=#{patientId}
+		
+	</select>
+	
+	<delete id="deletePatientImg">
+		delete from doctor_patient_img where 1=1
+		
+		<if test="id!=null and id!=''">
+		and id=#{id}
+		</if>
+		<if test="patientId!=null and patientId!=''">
+		and patient_id=#{patientId}
+		</if>
+	
+	</delete>
+	
+	
+</mapper>
