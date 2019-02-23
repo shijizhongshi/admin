@@ -13,5 +13,15 @@ public class studentWeb {
 		return "student/management";
 	}
 	
+		@RequestMapping("/Online-course")
+		public String online(){
+			return "student/Online-course";
+		}
+		@RequestMapping("/student-course")
+		public String student(){
+			return "student/student-course";
+		}
+		
+		
 	
 }

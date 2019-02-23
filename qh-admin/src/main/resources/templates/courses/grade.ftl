@@ -384,8 +384,8 @@
 .grade-right label {
 	width: 80%;
 	height: auto;
-	background: #EDEEF0;
-	border-radius: 20px;
+	background: #F7F8FC;
+	border-radius:5px;
 	text-indent: 2em;
 	font-size: 1.6rem;
 }
@@ -404,7 +404,7 @@
 .grade-add-bottom textarea {
 	width: 100%;
 	height: 250px;
-	background: #EDEEF0;
+	background:#F7F8FC;
 	border-radius: 20px;
 	text-indent: 2em;
 }

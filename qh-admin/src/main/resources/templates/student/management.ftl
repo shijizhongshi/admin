@@ -6,9 +6,9 @@
 <@h.header title="学员管理"/>
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
-
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/student/management.js"></script>
+<script src="/scripts/indent/excle.js"></script>
 <@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-management">
 <div ng-controller="gradeController">
 	<div class="details" style="width: 100%">
@@ -16,9 +16,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" />我的主页</li>
 				<li>/</li>
-				<li>学员管理</li>
-				<li>/</li>
 				<li>学员信息管理</li>
+				<li>/</li>
+				<li>学员管理</li>
 			</ul>
 		</div>
 <div class="details-frame">
@@ -72,7 +72,7 @@
 	</ul>
 	<div class="admin-table">
 
-  <table>
+  <table id="tableExcel">
 
 	<tbody>
 	<tr>
@@ -111,11 +111,15 @@
 
 	</tbody></table>
 	</div>
-	<div class="col-sm-6"></div>
-                    <div class="col-sm-6">
-                        <ul uib-pagination="" boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm ng-pristine ng-untouched ng-valid ng-not-empty" previous-text="?" next-text="?" first-text="?" last-text="?" ng-change="courseBases()">
-                        </ul>
-                    </div>
+		<div class="col-sm-6"></div>
+					<div class="col-sm-6">
+						<ul uib-pagination boundary-links="true" total-items="total"
+							ng-model="page" items-per-page="pageSize" max-size="5"
+							class="pagination-sm" previous-text="&lsaquo;"
+							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+							ng-click="templateBases()">
+						</ul>
+					</div>
 	<!--添加修改学员-->
 		<div class="poop" id="add" >
 		<form id="myform" class="ng-pristine ng-valid">
@@ -257,6 +261,9 @@
 </div>
 <div style="float:left;font-size: 1.6rem;line-height: 50px;">
 您当前余额：15454545&nbsp;所需班级需扣除：0元；
+</div>
+<div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;">
+销售人员<i class="bitian">*</i><input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
 </div>
 <div class="end">
 			<input name="git" type="submit" value="提交"  style="background:#5ED8A9;">

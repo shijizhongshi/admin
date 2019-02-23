@@ -9,7 +9,7 @@
 .details-frame-content .select-3 input{border-radius:0;}
 .poop{width:300px;}
 .poop .select-2{width:96%;}
-.poop .select-2 input , .poop .select-3 select {border-radius:5px;}
+.poop .select-2 input , .poop .select-3 select {border-radius:5px;border:#F0F1F3 1px solid;}
 .poop .select-3{width:45%;}
 /*网课报班,课程报名，直播报班*/
 .resource{min-width:950px;}

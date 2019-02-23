@@ -21,7 +21,7 @@
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
-				<div class="select-3" style="width: 10%;">
+				<div class="select-3" style="width: 11%;">
 					<span>选择时间</span> <input type="date" name="search"
 						ng-model="fromdate" />
 				</div>
@@ -30,29 +30,29 @@
 
 					&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
 				</div>
-				<div class="select-3" style="width: 10%;margin-right:15px">
+				<div class="select-3" style="width: 11%;margin-right:15px">
 					<span>&nbsp;</span> <input type="date" name="search"
 						ng-model="todate" />
 				</div>
 
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>推荐老师</span> <input style="border-radius:20px" type="text" ng-model="recommendTeacher" />
+					<span>推荐老师</span> <input style=" type="text" ng-model="recommendTeacher" />
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>用户手机号</span> <input style="border-radius:20px" type="text" ng-model="mobile" />
+					<span>用户手机号</span> <input style=" type="text" ng-model="mobile" />
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>支付订单号</span> <input style="border-radius:20px" type="text" ng-model="orderno" />
+					<span>支付订单号</span> <input style="type="text" ng-model="orderno" />
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>订单状态</span><img src="/images/sjk-xl.png" />  <select style="border-radius:20px" ng-model="ordersStatus">
+					<span>订单状态</span><img src="/images/sjk-xl.png" />  <select ng-model="ordersStatus">
 						<option value="">订单状态</option>
 						<option value="NEW">待付款</option>
 						<option value="RECEIVED">已完成</option>
 					</select>
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>推荐老师</span> <input style="border-radius:20px" type="text" />
+					<span>推荐老师</span> <input  type="text" />
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
