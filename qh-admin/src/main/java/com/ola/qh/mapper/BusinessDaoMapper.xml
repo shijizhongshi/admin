@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ola.qh.dao.BusinessDao">
+
+	<!-- 加盟商的开始############################################# -->
+	<resultMap type="com.ola.qh.entity.Business" id="BusinessMap">
+	<result column="id" property="id"/>
+	<result column="username" property="username"/>
+	<result column="password" property="password"/>
+	<result column="name" property="name"/>
+	<result column="principal" property="principal"/>
+	<result column="logo" property="logo"/>
+	<result column="mobile" property="mobile"/>
+	<result column="address" property="address"/>
+	<result column="status" property="status"/>
+	<result column="expire_time" property="expireTime"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.ola.qh.entity.Business">
+	insert into business(id,username,password,name,principal,logo,mobile,address,
+	status,addtime,expire_time)values(#{id},#{username},#{password},#{name},#{principal},#{logo},#{mobile},#{address},
+	#{status},#{addtime},#{expireTime})
+	</insert>
+	
+	<select id="selectList" resultMap="BusinessMap">
+	select * from business where 1=1
+	<if test="name!=null and name!='' ">
+	 and name=#{name}
+	</if>
+	<if test="address!=null and address!='' ">
+	 and address like concat(concat('%',#{address},'%'))
+	</if>
+	<if test="fromdate!='' and fromdate!=null ">
+	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	</if>
+	<if test="todate!='' and todate!=null ">
+	and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+	</if>
+	order by addtime desc
+	<if test="pageSize!=0">
+	limit #{pageNo},#{pageSize}
+	</if>
+	</select>
+	
+	<select id="exist" resultType="int">
+	select count(id) from business where 1=1
+	<if test="name!=null and name!='' ">
+	and name=#{name}
+	</if>
+	</select>
+	
+	<update id="update" parameterType="com.ola.qh.entity.Business">
+	update business set
+	<if test="username!=null and username!='' ">
+	username=#{username},
+	</if>
+	<if test="password!=null and password!='' ">
+	password=#{password},
+	</if>
+	<if test="name!=null and name!='' ">
+	name=#{name},
+	</if>
+	<if test="principal!=null and principal!='' ">
+	principal=#{principal},
+	</if>
+	<if test="logo!=null and logo!='' ">
+	logo=#{logo},
+	</if>
+	<if test="mobile!=null and mobile!='' ">
+	mobile=#{mobile},
+	</if>
+	<if test="address!=null and address!='' ">
+	address=#{address},
+	</if>
+	<if test="status!=null and status!='' ">
+	status=#{status},
+	</if>
+	<if test="expireTime!=null">
+	expire_time=#{expireTime}
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+	
+	<select id="single" resultMap="BusinessMap">
+	select * from business where id=#{id}
+	</select>
+	
+	<delete id="delete">
+	delete from business where id=#{id}
+	</delete>
+	
+	<!-- 加盟商的结束############################################# -->
+	
+	
+	<!-- 账本开始############################################# -->
+	<resultMap type="com.ola.qh.entity.BusinessBook" id="BusinessBookMap">
+	<result column="id" property="id"/>
+	<result column="business_id" property="businessId"/>
+	<result column="account" property="account"/>
+	<result column="payaccount" property="payaccount"/>
+	<result column="usedaccount" property="usedaccount"/>
+	<result column="surplusaccount" property="surplusaccount"/>
+	<result column="sales_name" property="salesName"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	<insert id="insertbook" parameterType="com.ola.qh.entity.BusinessBook">
+	insert into business_book(id,business_id,account,usedaccount,surplusaccount,
+	sales_name,addtime,payaccount)values(#{id},#{businessId},#{account},#{usedaccount},
+	#{surplusaccount},#{salesName},#{addtime},#{payaccount})
+	</insert>
+	
+	<select id="singlebook" resultMap="BusinessBookMap">
+	select * from business_book where 1=1
+	<if test="businessId!=null and businessId!='' ">
+	and business_id=#{businessId}
+	</if>
+	<if test="salesName!=null and salesName!='' ">
+	and sales_name=#{salesName}
+	</if>
+	</select>
+	
+	
+	<select id="updatebook" parameterType="com.ola.qh.entity.BusinessBook">
+	update business_book set 
+	<if test="account!=null">
+	account=#{account},
+	</if>
+	<if test="usedaccount!=null">
+	usedaccount=#{usedaccount},
+	</if>
+	<if test="surplusaccount!=null">
+	surplusaccount=#{surplusaccount},
+	</if>
+	<if test="payaccount!=null">
+	payaccount=#{payaccount},
+	</if>
+	updatetime=#{updatetime}
+	where 1=1
+	<if test="businessId!=null and businessId!='' ">
+	and business_id=#{businessId}
+	</if>
+	<if test="salesName!=null and salesName!='' ">
+	and sales_name=#{salesName}
+	</if>
+	</select>
+	<!-- 账本结束############################################# -->
+	
+	
+	<!-- 账本记录表开始############################################# -->
+	<resultMap type="com.ola.qh.entity.BusinessBookHistory" id="BusinessBookHistoryMap">
+	<result column="id" property="id"/>
+	<result column="course_ways" property="courseWays"/>
+	<result column="business_id" property="businessId"/>
+	<result column="sales_people" property="salesPeople"/>
+	<result column="sales_mobile" property="salesMobile"/>
+	<result column="types" property="types"/>
+	<result column="payaccount" property="payaccount"/>
+	<result column="account" property="account"/>
+	<result column="buy_course_id" property="buyCourseId"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	
+	<insert id="insertBookHistory" parameterType="com.ola.qh.entity.BusinessBookHistory">
+	insert into business_book_history(id,course_ways,business_id,sales_people,sales_mobile
+	types,payaccount,account,buy_course_id,addtime)values(#{id},#{courseWays},#{businessId},
+	#{salesPeople},#{salesMobile},#{types},#{payaccount},#{account},#{buyCourseId},#{addtime})
+	</insert>
+		
+	<!-- 账本记录表结束############################################# -->
+</mapper>

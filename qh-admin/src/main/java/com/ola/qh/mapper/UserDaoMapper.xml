@@ -15,8 +15,12 @@
 		<result column="updatetime" property="updatetime" />
 		<result column="birthday" property="birthday" />
 		<result column="isdisabled" property="isdisabled" />
+		<result column="address" property="address"/>
 	</resultMap>
 
+	<insert id="insertUser">
+	insert into user(id,password,nickname,mobile,address)values()
+	</insert>
 	<select id="selectUser" resultMap="UserMap">
 	select id,nickname,userrole,mobile,isdoctor,isdisabled from user 
 	where 1=1
