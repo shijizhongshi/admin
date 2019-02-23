@@ -16,9 +16,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" />我的主页</li>
 				<li>/</li>
-				<li>学员管理</li>
-				<li>/</li>
 				<li>学员信息管理</li>
+				<li>/</li>
+				<li>学员管理</li>
 			</ul>
 		</div>
 <div class="details-frame">
@@ -261,6 +261,9 @@
 </div>
 <div style="float:left;font-size: 1.6rem;line-height: 50px;">
 您当前余额：15454545&nbsp;所需班级需扣除：0元；
+</div>
+<div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;">
+销售人员<i class="bitian">*</i><input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
 </div>
 <div class="end">
 			<input name="git" type="submit" value="提交"  style="background:#5ED8A9;">
