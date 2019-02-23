@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="用户提现" />
+<@h.header title="用户管理" />
 <link rel="stylesheet" href="/styles/admin.css" />
 
 <script src="/scripts/admin.js"></script>

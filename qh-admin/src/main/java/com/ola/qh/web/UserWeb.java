@@ -39,5 +39,9 @@ public class UserWeb {
 	public String shangpin(){
 		return " user/userinfo";
 	}
+	@RequestMapping("/web/user/franchisee")
+	public String franchisee(){
+		return " user/franchisee";
+	}
 
 }

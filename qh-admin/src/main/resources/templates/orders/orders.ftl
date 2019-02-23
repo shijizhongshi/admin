@@ -50,7 +50,7 @@
 								ng-model="todate" />
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>用户手机号</span> <input style="border-radius:20px" type="text" ng-model="mobile" />
+							<span>用户手机号</span> <input type="text" ng-model="mobile" />
 						</div>
 						<div class="select-3" >
 							<span>订单状态</span><img src="/images/sjk-xl.png" /> <select
@@ -60,10 +60,10 @@
 							</select>
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>姓名</span> <input style="border-radius:20px" type="text" ng-model="receiver" />
+							<span>姓名</span> <input  type="text" ng-model="receiver" />
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>订单号</span> <input style="border-radius:20px" type="text" ng-model="orderno" />
+							<span>订单号</span> <input type="text" ng-model="orderno" />
 						</div>
 						
 

@@ -227,7 +227,7 @@
 .grade-add-bottom textarea {
 	width: 100%;
 	height: 250px;
-	background: #EDEEF0;
+	background:#F7F8FC;
 	border-radius: 20px;
 	text-indent: 2em;
 }
