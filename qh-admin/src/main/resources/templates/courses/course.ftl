@@ -95,6 +95,10 @@
 						class="move-down"></span>&nbsp;下移</li>
 					<li ng-click="chapter()"><span
 						class="glyphicon glyphicon-briefcase"></span>&nbsp;资源章节管理</li>
+										<li><span class="glyphicon glyphicon-sort-by-attributes"
+						class="move-down"></span>&nbsp;学员列表</li>
+						<li><span class="glyphicon glyphicon-sort-by-attributes"
+						class="move-down"></span>&nbsp;移除所有学员</li>
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="reset()" /></li>
 				</ul>

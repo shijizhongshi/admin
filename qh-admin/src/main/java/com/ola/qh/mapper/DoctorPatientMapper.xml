@@ -17,13 +17,30 @@
 	</resultMap>
 	
 	<select id="selectDoctorPatient" resultMap="DoctorPatientMap">
-		select id,user_id,category,title,likes,describes,publisher,publisher_head_img,publisher_position,addtime from doctor_patient
+		select id,category,title,likes,describes,addtime from doctor_patient
 		
 		where 1=1 
 		<if test="title!=null and title!=''">
 		and title like concat(concat('%',#{title},'%')) 
 		</if>
 		order by addtime desc limit #{pageNo},#{pageSize}
+	
+	</select>
+	
+	<select id="DoctorPatientCount" resultType="int">
+		select count(id) from doctor_patient
+		
+		where 1=1 
+		<if test="title!=null and title!=''">
+		and title like concat(concat('%',#{title},'%')) 
+		</if>
+		
+	</select>
+	
+	<select id="singleDoctorPatient" resultType="com.ola.qh.entity.DoctorPatient">
+		select id,user_id userId,category,title,likes,describes,publisher,publisher_head_img publisherHeadImg,publisher_position publisherPosition,addtime from doctor_patient
+		
+		where id=#{id} 
 	
 	</select>
 	

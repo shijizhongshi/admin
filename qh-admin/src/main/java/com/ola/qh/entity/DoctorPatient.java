@@ -28,6 +28,8 @@ public class DoctorPatient {
 	
 	private Date updatetime;
 	
+	private String showtime;
+	
 	private List<DoctorPatientImg> listimg=new ArrayList<DoctorPatientImg>();
 	
 	private List<DoctorReplyPatient> listreply=new ArrayList<DoctorReplyPatient>();
@@ -134,6 +136,14 @@ public class DoctorPatient {
 
 	public void setListreply(List<DoctorReplyPatient> listreply) {
 		this.listreply = listreply;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
 	}
 	
 	

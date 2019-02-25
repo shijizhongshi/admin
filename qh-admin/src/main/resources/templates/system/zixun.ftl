@@ -160,7 +160,7 @@
 							</div>
 
 							<div class="template-right">
-								<p style="height: 40px; font-size: 1.3rem;">班级详情</p>
+								<p style="height: 40px; font-size: 1.3rem;">文本内容</p>
 								<!--<textarea id="editor" ></textarea>
 								<script type="text/javascript">var ue = UE.getEditor('editor');</script>-->
 								<script id="editor" type="text/plain"

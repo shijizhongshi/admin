@@ -7,7 +7,11 @@ import com.ola.qh.util.Results;
 
 public interface IDoctorPatientService {
 
-	public Results<List<DoctorPatient>> selectDoctorPatient(int pageNo,int pageSize,String title);
+	public List<DoctorPatient> selectDoctorPatient(int pageNo,int pageSize,String title);
+	
+	public int DoctorPatientCount(String title);
+	
+	public Results<DoctorPatient> singleDoctorPatient(String id);
 	
 	public Results<String> deleteDoctorPatient(String id);
 }

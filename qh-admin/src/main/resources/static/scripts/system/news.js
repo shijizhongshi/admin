@@ -80,7 +80,10 @@ $scope.uploadmainimage = function(file){
 		 if($scope.newsId==null){
 			 alert("请选择信息~")
 		 }else{
+			 if($scope.news.content!=null){
 			 ue.setContent($scope.news.content);
+			 
+			 }
 			 document.getElementById('add').style.display="block"; 
 		 }
 	}

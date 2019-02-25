@@ -165,3 +165,13 @@ div.costs-uploadfile-div .allBtn{
 .admin-table table tr input {padding:6px;margin:5px;font-size:1.2rem;}
 .daochu{margin:30px 10px;}
 @media screen and (max-width: 1400px){.daochu{margin:5px;}}
+.message{border:1px solid red;width:100%;height:auto;margin:0 auto;overflow: hidden;}
+.user-message{float:left; height:auto;width:10%;border-right:1px solid #F2F2F2 ;margin:0;min-height:300px;}
+.head-img div{height:100px;width:100%;}
+.name{width:100%;}
+.img{width:100px;height:100px;margin-left:15px}
+.patient{float:left; height:auto;width:90%;min-height:260px;}
+.patients-img{float:left; height:auto;width:100%;display:flex;min-height:150px;padding:10px;}
+.describes{float:left; height:auto;width:100%;line-height: 25px;min-height:125px;}
+.timeandlikes{float:left; width:100%;height:30px;padding-right:10px;}
+.patient-message{float:left; height:150px;width:90%;min-height:300px;}

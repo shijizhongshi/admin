@@ -1,5 +1,6 @@
 package com.ola.qh.service.imp;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,34 +30,47 @@ public class DoctorPatientService implements IDoctorPatientService{
 	private DoctorReplyPatientDao doctorReplyPatientDao;
 	
 	
+	@Override
+	public List<DoctorPatient> selectDoctorPatient(int pageNo, int pageSize, String title) {
+		
+		return doctorPatientDao.selectDoctorPatient(pageNo, pageSize, title);
+		
+	}
 	@Transactional
 	@Override
-	public Results<List<DoctorPatient>> selectDoctorPatient(int pageNo, int pageSize, String title) {
+	public Results<DoctorPatient> singleDoctorPatient(String id) {
 		
-		Results<List<DoctorPatient>> results=new Results<List<DoctorPatient>>();
+		Results<DoctorPatient> results=new Results<DoctorPatient>();
 		
-		//try {
+		try {
 			
-		List<DoctorPatient> list=doctorPatientDao.selectDoctorPatient(pageNo, pageSize, title);
+		DoctorPatient single=doctorPatientDao.singleDoctorPatient(id);
 		
-		for (DoctorPatient doctorPatient : list) {
-			List<DoctorPatientImg> imgList=doctorPatientImgDao.selectPatientImg(doctorPatient.getId());
-			doctorPatient.setListimg(imgList);
+		
+			List<DoctorPatientImg> imgList=doctorPatientImgDao.selectPatientImg(single.getId());
+			single.setListimg(imgList);
 			
-			List<DoctorReplyPatient> replyList=doctorReplyPatientDao.selectDoctorReplyPatient(doctorPatient.getId());
-			doctorPatient.setListreply(replyList);
-		}
+			List<DoctorReplyPatient> replyList=doctorReplyPatientDao.selectDoctorReplyPatient(single.getId());
+			for (DoctorReplyPatient doctorReplyPatient : replyList) {
+				SimpleDateFormat sf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				doctorReplyPatient.setShowtime(sf1.format(doctorReplyPatient.getAddtime()));
+			}
+			single.setListreply(replyList);
+			
+			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			single.setShowtime(sf.format(single.getAddtime()));
+		
 		results.setStatus("0");
-		results.setData(list);
+		results.setData(single);
 		return results;
 		
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
 			return results;
-		}*/
-		
+		}
 	}
+	
 	@Transactional
 	@Override
 	public Results<String> deleteDoctorPatient(String id) {
@@ -80,4 +94,10 @@ public class DoctorPatientService implements IDoctorPatientService{
 	
 
 	}
+	@Override
+	public int DoctorPatientCount(String title) {
+		
+		return doctorPatientDao.DoctorPatientCount(title);
+	}
+	
 }

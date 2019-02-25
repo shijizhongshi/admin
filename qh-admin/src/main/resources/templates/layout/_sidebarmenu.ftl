@@ -199,7 +199,20 @@
                        
                          </ul>
                 </li>
-                
+                 <li id="sidebarmenu-patientmanage" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">评论信息管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-patientmanage-patient">
+                            <a href="/web/patientmanage/patient">
+                                <span class="title">信息简述</span>
+                            </a>
+                        </li>
+                         
+                       </ul>
+                </li>
                 
                 
                 
