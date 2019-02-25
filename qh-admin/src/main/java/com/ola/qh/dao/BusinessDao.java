@@ -37,4 +37,14 @@ public interface BusinessDao {
 	
 	
 	public int insertBookHistory(BusinessBookHistory bbh); 
+	
+	
+	public int insertBusinessUser(@Param("id")String id,
+			@Param("businessId")String businessId,
+			@Param("userId")String userId);
+	
+	public String singleBusinessUser(@Param("businessId")String businessId,
+			@Param("userId")String userId);
+	
+	public int deleteBusinessUser(@Param("businessId")String businessId);
 }

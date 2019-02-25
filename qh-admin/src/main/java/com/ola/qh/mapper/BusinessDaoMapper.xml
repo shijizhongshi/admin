@@ -175,4 +175,23 @@
 	</insert>
 		
 	<!-- 账本记录表结束############################################# -->
+	
+	<!-- 加盟商和用户的关联表开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<insert id="insertBusinessUser">
+	insert into business_user(id,business_id,user_id)values(#{id},#{businessId},#{userId})
+	</insert>
+	<select id="singleBusinessUser" resultType="java.lang.String">
+	select business_id from business_user where 1=1
+	<if test="businessId!=null and businessId!=''">
+	and business_id=#{businessId}
+	</if>
+	<if test="userId!=null and userId!=''">
+	and user_id=#{userId}
+	</if>
+	</select>
+	<delete id="deleteBusinessUser">
+	delete from business_user where business_id=#{businessId}
+	</delete>
+	
+	<!-- 加盟商和用户的关联表结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 </mapper>

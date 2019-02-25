@@ -32,6 +32,10 @@ public class BusinessService implements IBusinessService{
 		if(b.getId()!=null && !"".equals(b.getId())){
 			///////修改用户的基本信息
 			businessDao.update(b);
+			if("1".equals(b.getStatus()) && "2".equals(b.getStatus())){
+				////////学员不在属于这个加盟商
+				businessDao.deleteBusinessUser(b.getId());
+			}
 			result.setStatus("0");
 			return result;
 		}else{
@@ -80,14 +84,24 @@ public class BusinessService implements IBusinessService{
 	public Results<String> charge(Business b) {
 		// TODO Auto-generated method stub
 		Results<String> result=new Results<String>();
-		if(b.getPayaccount()!=null && b.getAccount()!=null){
+		///////充值金额必须大于0;;;;;;
+		if(b.getPayaccount().compareTo(BigDecimal.ZERO)==1 && b.getAccount().compareTo(BigDecimal.ZERO)==1){
 			Business bnew = businessDao.single(b.getId());
 			if(bnew.getExpireTime()!=null){
 				//////过期时间不为空
-                Calendar c=Calendar.getInstance();
-                c.setTime(bnew.getExpireTime());
-                c.add(Calendar.YEAR, 1);
-                b.setExpireTime(c.getTime());
+				if("1".equals(bnew.getStatus()) && bnew.getExpireTime().getTime()>=new Date().getTime()){
+					/////钱不够但是没有到期的话
+					Calendar c=Calendar.getInstance();
+	                c.setTime(bnew.getExpireTime());
+	                c.add(Calendar.YEAR, 1);
+	                b.setExpireTime(c.getTime());
+				}else if(bnew.getExpireTime().getTime()<new Date().getTime()){
+					//////到期了
+					Calendar c=Calendar.getInstance();
+	                c.setTime(new Date());
+	                c.add(Calendar.YEAR, 1);
+	                b.setExpireTime(c.getTime());
+				}
                 ////////基本资料中有效期延长
                 businessDao.update(b);
                 
