@@ -21,7 +21,7 @@ app.controller("sectionController", function($scope, $http){
 	
 	$scope.sectionBases();
 	$scope.video=null;
-	$scope.uploadmainimage = function(file){
+	/*$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
@@ -48,7 +48,7 @@ app.controller("sectionController", function($scope, $http){
 		}).fail(function(res) {
 			
 		});
-	};
+	};*/
 	
 	$scope.polyv=function(videoId){
 		$http.get("/api/coursenofree/polyv",{"params": {"vid":videoId}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -70,6 +70,12 @@ app.controller("sectionController", function($scope, $http){
 			}
 		})
 	}
+	
+	$scope.polyvnew=function(videoId){
+		document.getElementById('polyved').style.display="block"; 
+		$scope.polyv(videoId);
+	};
+	
 	$scope.polyv();
 	
 	////////////////以上是通过不同的条件查章节的集合的	
@@ -77,7 +83,6 @@ app.controller("sectionController", function($scope, $http){
 	
 	$scope.addSection=function(){
 		$scope.section.id=$scope.sectionId;
-		
 		$scope.section.courseChapterId=$("#chapterId").val();
 		$http.post("/api/course/subclass/courseSection/saveUpdate",$scope.section,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){

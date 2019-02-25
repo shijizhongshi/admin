@@ -13,7 +13,6 @@ public class User {
 	@NotEmpty(message="密码不能为空")
 	private String password;
 	
-	@NotEmpty(message="验证码不能为空")
 	private String verification;
 	
 	private Date addtime;
@@ -31,6 +30,26 @@ public class User {
 	
 	private String isdisabled;
 	
+	private String address;/////地址
+	
+	private String realname;/////真实姓名
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
 	public String getId() {
 		return id;
 	}

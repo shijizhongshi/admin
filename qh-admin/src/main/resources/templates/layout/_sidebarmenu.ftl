@@ -180,7 +180,11 @@
                                 <span class="title">用户信息</span>
                             </a>
                         </li>
-                       
+                       <li id="sidebarmenu-user-franchisee">
+                            <a href="/web/user/franchisee">
+                                <span class="title">加盟商信息管理</span>
+                            </a>
+                        </li>
                          </ul>
                 </li>
                 
@@ -195,7 +199,16 @@
                                 <span class="title">学员管理</span>
                             </a>
                         </li>
-                         
+                          <li id="sidebarmenu-student-Online-course">
+                            <a href="/web/student/Online-course">
+                                <span class="title">学员网课订购记录</span>
+                            </a>
+                        </li>
+                         <li id="sidebarmenu-student-student-course">
+                            <a href="/web/student/student-course">
+                                <span class="title">学员课程订购记录</span>
+                            </a>
+                        </li>
                        
                          </ul>
                 </li>

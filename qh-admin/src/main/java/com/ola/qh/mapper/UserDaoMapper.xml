@@ -15,10 +15,17 @@
 		<result column="updatetime" property="updatetime" />
 		<result column="birthday" property="birthday" />
 		<result column="isdisabled" property="isdisabled" />
+		<result column="address" property="address"/>
+		<result column="realname" property="realname"/>
 	</resultMap>
 
+	<insert id="insertUser" parameterType="com.ola.qh.entity.User">
+	insert into user(id,password,nickname,mobile,address,realname,addtime)
+	values(#{id},#{password},#{nickname},#{mobile},#{address},#{realname},#{addtime})
+	</insert>
+	
 	<select id="selectUser" resultMap="UserMap">
-	select id,nickname,userrole,mobile,isdoctor,isdisabled from user 
+	select * from user 
 	where 1=1
 	<if test="mobile!=null and mobile!='' ">
 	and  mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
@@ -58,12 +65,31 @@
 		<if test="isdisabled!=null and isdisabled!='' ">
 		isdisabled=#{isdisabled},
 		</if>
+		<if test="password!=null and password!='' ">
+		password=#{password},
+		</if>
+		<if test="nickname!=null and nickname!='' ">
+		nickname=#{nickname},
+		</if>
+		<if test="mobile!=null and mobile!='' ">
+		mobile=#{mobile},
+		</if>
+		<if test="address!=null and address!='' ">
+		address=#{address},
+		</if>
+		<if test="realname!=null and realname!='' ">
+		realname=#{realname},
+		</if>
 		updatetime=#{updatetime} where id=#{id} 
 	</update>
 	
 	<select id="singleUser" resultMap="UserMap">
 		select * from user where id=#{id}
 	</select>
+	<delete id="delete">
+	delete from user where id=#{id}
+	</delete>
+	
 	
 	<update id="updateFavorite" parameterType="String">
 		update user_favorite set status=1 where product_id=#{productId}

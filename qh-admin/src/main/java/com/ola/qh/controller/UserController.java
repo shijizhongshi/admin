@@ -2,7 +2,11 @@ package com.ola.qh.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,5 +56,31 @@ public class UserController {
 		results.setStatus("0");
 		results.setCount(count);
 		return results;
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/saveupdate",method=RequestMethod.GET)
+	public Results<String> saveUser(@RequestBody @Valid User user,BindingResult valid){
+		Results<String> result=new Results<String>();
+		if(user.getId()==null || "".equals(user.getId())){
+			if(valid.hasErrors()){
+				result.setStatus("1");
+				result.setMessage("学员信息不完整~");
+				return result;
+			}
+		}
+		
+		
+		return userService.saveUsers(user);
+	}
+	
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public Results<String> deleteUser(@RequestParam(name="id",required=true)String id){
+		Results<String> result=new Results<String>();
+		userService.deleteUser(id);
+		result.setStatus("0");
+		return result;
 	}
 }

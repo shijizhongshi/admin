@@ -34,7 +34,7 @@ ul.menu .active:before { content: '\f07c';font-family: FontAwesome;position: abs
 .details-frame-content .select img{position: absolute;right:10px;bottom:8px;}
 .manage .select img{position: absolute;right:10px;top:17px;}
 
-select{padding-left:18px ;width:100%;height: 30px;background:#F7F8FC;border-radius:20px; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;}
+select{padding-left:18px ;width:100%;height: 30px;border-radius:5px;border:#F0F1F3 1px solid; appearance:none;-moz-appearance:none; -webkit-appearance:none;display:run-in;cursor: pointer;background:#F7F8FC;}
 select[disabled='disabled']::-webkit-value {
 color:red;
 }
@@ -45,7 +45,7 @@ color:red;
 select[disabled]{
 color:red;
 }
-.select input{height: 30px;background:#F7F8FC;border-radius:20px;text-indent: 1em;}
+.select input{height: 30px;border-radius:5px;border:#F0F1F3 1px solid;text-indent: 1em;background:#F7F8FC;}
 .im-key{background: #E8474D;color: white;border-radius:20px;margin: 30px 10px;}
 @media screen and (max-width: 1600px)  {.im-key{margin: 30px 5px;}}
 @media screen and (max-width: 1400px)  {.im-key{margin: 30px 5px;}}
@@ -53,20 +53,22 @@ color:red;
 .manage{width: 100%;height:auto;padding-top:23px;background:white; position: relative;}
  .show li{float: left;margin-left: 18px;cursor: pointer;height: 30px;border-radius: 30px;color: white; text-align: center;line-height: 30px;font-size:16px;background:#8A959B;font-size:1.4rem;padding:0 8px;}
 
-.admin-table{width:100%;height:auto;margin:0 auto;border-radius:10px;overflow: hidden;padding:20px;}
-.admin-table table tr th{text-align: center; height:50px;line-height: 50px;border-right:1px solid #F2F2F2 ;margin:0;font-size:1.3rem;}
+.admin-table{width:100%;height:auto;margin:0 auto;padding:20px;overflow:hidden;}
+.admin-table table tr:nth-child(2n){background:#F3F4F6;}
+.admin-table table tr:nth-child(2n-1){background:#FFFFFF;}
+.admin-table table tr th{text-align: center; height:50px;line-height: 50px;border-right:1px solid #F3F3F3 ;margin:0;font-size:1.3rem;border-bottom:1px solid #f6f1f1;}
 .admin-table table tr th img{height:50px;}
-.admin-table table{width:100%;border-collapse:collapse;border: 1px solid #B1B1B1;}
+.admin-table table{width:100%;border-collapse:separate;border:1px solid #D5D8DC;border-radius:10px;overflow: hidden;}
  .admin-table table tr{width:100%;height: 42px;margin-bottom:0;border-bottom:1px solid #dbdbdb;}
 
 .admin-table table tr:nth-child(1){background: #CBD2D8;font-weight: bold;}
-.admin-table table tr::nth-child(2){box-shadow:0px 1px 1px 0px #B1B1B1 inset;" ng-repeat="c in courselist}
-table .selected{background-color:#c1ddec}
+.admin-table table tr:nth-child(2){box-shadow:3px -3px 3px #D3D3D3;}
+table .selected{background-color:#c1ddec !important;}
 .fanye{width:405px;margin: 0 auto;}
 .fanye ul{width:405px;}
 .fanye  li{margin-left:18px;}
 /**/
-.poop{position: absolute;left:30%;top:15%;overflow:auto;}
+.poop{position: absolute;left:30%;top:15%;overflow:auto;border-radius:5px;}
 .poop::-webkit-scrollbar , .resource::-webkit-scrollbar {width:6px;}
 .poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {
             border-radius: 5px;
@@ -88,7 +90,7 @@ table .selected{background-color:#c1ddec}
 .section li:nth-child(2n-1){background:#F0F1F3;}
 .section li input{float: right;}
 
-.resource{width:790px;position: absolute;left:20%;top:0;padding: 20px;padding-top:10px;overflow:auto;}
+.resource{width:790px;position: absolute;left:20%;top:0;padding: 20px;padding-top:10px;overflow:auto;border-radius:5px;}
 .resource-table{width:720px;height: 340px;overflow: scroll;}
 .resource-table ul{width: 100%;height:30px;line-height: 30px;margin:0;}
 .resource-table ul li{float: left;text-align: center;width: 20%;border-right:1px solid #F2F2F2;margin:0; }
@@ -119,7 +121,7 @@ table .selected{background-color:#c1ddec}
 .select-2 , .select-3 {width:48%;height: 70px;position: relative;}
 
 .select-2 span  , .select-3 span , .grade-text span , .grade-right span , .grade-add-bottom {display: block;margin-bottom: 10px;}
-.select-2 input , .grade-text textarea ,.select-3 input{width:100%;height: 30px;background:#F7F8FC;border-radius:20px;text-indent: 1em; font-size:1.4rem}
+.select-2 input , .grade-text textarea ,.select-3 input{width:100%;height: 30px;border-radius:5px;border:#F0F1F3 1px solid;text-indent: 1em; font-size:1.4rem;background:#F7F8FC;}
 .select-2 img , .select-3 img{position: absolute;right: 10px;bottom: 20px;}
 .select-radio{height:50px;}
 .select-radio ul{height: 50px;line-height: 50px; font-size: 2rem;}
