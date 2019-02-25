@@ -152,7 +152,7 @@
 							<div class="grade-left" style="padding-right: 5%;">
 
 								<div class=" select-2" style="width: 100%;">
-									<span>班级名称：</span> <input type="text"
+									<span>课程名称：</span> <input type="text"
 										ng-model="courseNofree.courseName" placeholder="请输入班级名称" />
 								</div>
 
@@ -240,10 +240,17 @@
 									</div>
 								</div>
 							</div>
+							<div style="width: 100%; clear: both;">
+									<div class=" select-2">
+
+										<span>视频的videoId:</span> <input type="text"
+											ng-model="courseNofree.videoId" placeholder="请输入视频的videoId" ng-keyup="polyvnew(courseNofree.videoId)"/>
+									</div>
+								</div>
 							<div class="costs-uploadfile-div">
-								<b>添加试听课程</b> <input type="file" id="file" value="上传试听课视频"
+								<!--<b>添加试听课程</b> <input type="file" id="file" value="上传试听课视频"
 									accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb"
-									onchange="angular.element(this).scope().uploadmainimage1(this)" />
+									onchange="angular.element(this).scope().uploadmainimage1(this)" />-->
 								<div style="margin-top: 3px;">
 									<div id='polyved'></div>
 								</div>

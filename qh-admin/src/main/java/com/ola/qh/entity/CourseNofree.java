@@ -34,7 +34,7 @@ public class CourseNofree {
 	
 	@NotEmpty(message="视频的id不能为空")
 	private String videoId;
-	@NotEmpty(message="视频地址不能为空")
+	
 	private String videoUrl;
 	
 	private int isremmend;//1:推荐

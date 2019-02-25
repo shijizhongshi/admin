@@ -27,7 +27,6 @@ public class CourseSection {
 	@NotEmpty(message="视频id不能为空")
 	private String videoId;////保利威返回的视频的id
 	
-	@NotEmpty(message="视频路径不能为空")
 	private String videoUrl;////保利威返回的视频路径
 	
 	private Date addtime;

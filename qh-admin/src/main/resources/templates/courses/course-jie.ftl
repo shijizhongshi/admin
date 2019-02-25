@@ -101,10 +101,15 @@
 								ng-model="section.isshow" ng-value="0" />否
 							</span>
 						</div>
+						<div class=" select-2" style="clear: both">
+							<span>视频的videoId:</span> <input type="text"
+								ng-model="section.videoId" placeholder="视频的videoId"
+								style="width: 230px; text-indent: 2em;" ng-keyup="polyvnew(section.videoId)"/>
+						</div>
 						<div>
-							<input type="file" id="file"
+							<!--<input type="file" id="file"
 								onchange="angular.element(this).scope().uploadmainimage(this)"
-								accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" />
+								accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" />-->
 
 							<div id='polyved'></div>
 						</div>

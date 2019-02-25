@@ -95,7 +95,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 	};
 	
 	
-	$scope.uploadmainimage1 = function(file){
+/*	$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
 		formData.append('Filedata', $('#file')[0].files[0]);
@@ -124,8 +124,11 @@ app.controller("CourseNofreeController",function($scope,$http){
 		}).fail(function(res) {
 			
 		});
+	};*/
+	$scope.polyvnew=function(videoId){
+		document.getElementById('polyved').style.display="block"; 
+		$scope.polyv(videoId);
 	};
-
 	/*$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 	    var formData={
