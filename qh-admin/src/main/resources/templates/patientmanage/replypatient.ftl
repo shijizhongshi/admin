@@ -66,8 +66,8 @@
 										</div>
 										<div class="patients-img">
 											<div class="img" ng-repeat="il in imglist" style="text-align:center;">
-												<i ng-click="deleteimg(il)" ng-show="selectdelete==il" class="glyphicon glyphicon-remove" style="float: right; color: #666; font-size: 1.1rem"></i>
-												<img ng-click="checkimg(il)" style="height:100%;width: 100%;" src="{{il.imgUrl}}">
+												<i ng-click="deleteimg(il)" class="glyphicon glyphicon-remove" style="float: right; color: #666; font-size: 1.1rem"></i>
+												<img  style="height:100%;width: 100%;" src="{{il.imgUrl}}">
 												
 											</div>
 										</div>

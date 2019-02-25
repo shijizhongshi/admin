@@ -39,12 +39,6 @@ app.controller("replyPatientController", function($scope, $http){
 			
 		}
 	   
-	   $scope.checkimg=function(il){
-		   $scope.selectdelete=il;
-			
-		}
-	   
-	   
 	   $scope.deletereply=function(rl){
 			if(confirm("您确定要删除这个信息吗")){
 				$http.get("/api/replypatient/delete",{"params": {"id":rl.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
