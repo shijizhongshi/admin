@@ -153,6 +153,7 @@ public class BusinessService implements IBusinessService{
 	@Override
 	public int delete(String id) {
 		// TODO Auto-generated method stub
+		businessDao.deleteBusinessUser(id);
 		return businessDao.delete(id);
 	}
 
