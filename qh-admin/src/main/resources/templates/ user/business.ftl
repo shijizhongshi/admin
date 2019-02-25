@@ -7,11 +7,11 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/student/management.js"></script>
+<script src="/scripts/user/business.js"></script>
 <script src="/scripts/indent/excle.js"></script>
 
-<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-student-user-franchisee">
-<div ng-controller="gradeController">
+<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-user-business">
+<div ng-controller="businessController">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -26,7 +26,7 @@
 	<div class="details-frame-content">
 		<div class="select-3">
 							<span>加盟商注册时间</span>
-								<input type="date" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
+								<input type="date" ng-model="fromdate" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
 						</div>
 						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
 							
@@ -34,21 +34,24 @@
 						</div>
 						<div class="select-3">
 							<span>&nbsp;</span>
-								<input type="date" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
+								<input type="date" ng-model="todate" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
 						</div>
 					
 	<div class="select-3">
 		<span>加盟商名称</span>
 		
-		<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty">
+		<input type="text" ng-model="name" class="ng-pristine ng-untouched ng-valid ng-empty">
 	</div>
 		<div class="select-3">
-		<span>地区</span>
+		<span>省</span>
 		<img src="/images/sjk-xl.png">
-		<select  class="ng-pristine ng-untouched ng-valid ng-empty">
-		<option value="? undefined:undefined ?"></option>
-			<option ></option>
-			<option ></option>
+		<select  ng-model="p" ng-options="p.provinceName for p in provincelist" ng-change="getCity(p)">
+		</select>
+	</div>
+	<div class="select-3">
+		<span>市</span>
+		<img src="/images/sjk-xl.png">
+		<select  ng-options="city.cityName for city in citylist" ng-model="cityName" ng-change="getCityName(cityName)">
 		</select>
 	</div>
 	
@@ -59,8 +62,8 @@
 <div class="manage">
 	<ul class="show">
 
-			<li style="background:#9DE879;" onclick="showDiv()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加加盟商</li>
-		<li style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改加盟商</li>
+			<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加加盟商</li>
+		<li style="background:#F9CD33;" ng-click="update()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改加盟商</li>
 		<li style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除加盟商</li>
 		<li  onclick="showDiv2()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;加盟商充值</li>
 		<li><span class="glyphicon glyphicon-briefcase"></span>&nbsp;停用</li>
@@ -82,19 +85,21 @@
 	<th>课程余额</th>
 	<th>用户状态</th>
 	<th>加盟时间</th>
-	<th>最后登陆时间</th>
+	<th>到期时间</th>
 	</tr>
-	<tr>
-			<th>加盟商名称</th>
-	<th>负责人</th>
-	<th>联系电话</th>
-	<th>LOGO</th>
-	<th>地区</th>
+	<tr ng-repeat="business in businesslist" ng-click="checkBusiness(business)" ng-class="{'seleted':seleted==business}">
+	<th>{{business.name}}</th>
+	<th>{{business.principal}}</th>
+	<th>{{business.mobile}}</th>
+	<th><img ng-src="{{business.logo}}"></th>
+	<th>{{business.address}}</th>
 	<th>充值总额</th>
 	<th>课程余额</th>
-	<th>用户状态</th>
-	<th>加盟时间</th>
-	<th>最后登陆时间</th>
+	<th ng-show="{{business.address=='1'}}">钱不够了</th>
+	<th ng-show="{{business.address=='2'}}">到期了</th>
+	<th ng-show="{{business.address=='2'}}">正常</th>
+	<th>{{business.addtime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
+	<th>{{business.expireTime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
 	</tr>
 
 
@@ -103,78 +108,82 @@
 	</div>
 	<div class="col-sm-6"></div>
                     <div class="col-sm-6">
-                        <ul uib-pagination="" boundary-links="true" total-items="total" ng-model="current" items-per-page="pageSize" max-size="5" class="pagination-sm ng-pristine ng-untouched ng-valid ng-not-empty" previous-text="?" next-text="?" first-text="?" last-text="?" ng-change="courseBases()">
+                        <ul uib-pagination boundary-links="true" 
+                        total-items="total" ng-model="current" items-per-page="pageSize" 
+                        max-size="5" class="pagination-sm" previous-text="&lsaquo;"
+								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" 
+								ng-change="loaddata()">
                         </ul>
                     </div>
 	<!--添加修改加盟商-->
 		<div class="poop" id="add" style="width:600px;left:15%;top:0;" >
 		<form id="myform" class="ng-pristine ng-valid">
-	<h3>{添加、修改}加盟商</h3>
-	<div style="float:left;width:49%;">
+	<h3 ng-show="businessId==null">添加加盟商</h3>
+	<h3 ng-show="businessId!=null">修改加盟商</h3>
+		<div style="float:left;width:49%;">
 <div class="select-2">
 		<span>加盟商名称<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入名称" >
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="business.name" placeholder="请输入名称" >
 	</div>
 	
 		<div class="select-3">
 		<span>所在城市<i class="bitian">*</i></span>
 		<img src="/images/sjk-xl.png">
-		<select  class="ng-pristine ng-untouched ng-valid ng-empty">
-		<option value="? undefined:undefined ?">所在省区</option>
-			<option ></option>
-			<option ></option>
+		<select ng-model="p" ng-options="p.provinceId as p.provinceName for p in provincelist" ng-change="getCity(p)">
+		
 		</select>
 	</div>
 		<div class="select-3">
 		<span>&nbsp;</span>
 		<img src="/images/sjk-xl.png">
-		<select  class="ng-pristine ng-untouched ng-valid ng-empty">
-		<option value="? undefined:undefined ?">所在市区</option>
-			<option ></option>
-			<option ></option>
+		<select ng-options="city.cityId as city.cityName for city in citylist" ng-model="cityName" ng-change="getCityName(cityName)">
 		</select>
 	</div>
 
 	
 	<div class="select-2" style="clear:both;">
 		<span>负责人姓名<i >*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请姓名" >
+<input type="text" ng-model="business.principal" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请姓名" >
 	</div>
 	<div class="select-2" style="border-botom:1px #F0F0F0 solid;">
 		<span>联系电话<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入用户密码" >
+<input type="text" ng-model="business.mobile" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入用户密码" >
 	</div>
 	<div class="select-2">
 		<span>初始充值余额<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="number" ng-model="business.payaccount" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
 	</div>
 <div class="select-2">
 		<span>拥有多少钱的课程<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="number" ng-model="business.account" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
 	</div>
 	</div>
 	<div style="width:49%;float:right;">
 	<div class="costs-uploadfile-div">
-	<b>加盟商LOGO</b> <input type="file" id="file" value="上传加盟商LOGO" accept="image/gif, image/jpeg, image/png, image/jpg">
-	<div style="margin-top: 3px;">
-	<div id="polyved" style="display: none;"></div>
-		</div>
+	<b>加盟商LOGO</b> <input type="file" id="file" value="上传加盟商LOGO" 
+	accept="image/gif, image/jpeg, image/png, image/jpg"
+	onchange="angular.element(this).scope().uploadmainimage(this)">
+	<div style="height: 130px; margin-top: 3px;">
+	<img src="{{business.logo}}" style="height: 130px;"/>
+	</div>
 	<div class="select-radio" style="margin:24px 0;">
 		<ul><li>账户状态</li>  
-		<li><input type="radio" ng-value="1" class="ng-pristine ng-untouched ng-valid ng-empty" name="1" value="1"> 正常</li> 
-		<li><input type="radio" ng-value="0" class="ng-pristine ng-untouched ng-valid ng-empty" name="1" value="0">停用</li></ul>
+		<li><input type="radio" ng-model="business.status" ng-value="0"> 正常</li> 
+		<li><input type="radio" ng-model="business.status" ng-value="1">到期</li>
+		<li><input type="radio" ng-model="business.status" ng-value="2">没钱</li>
+		</ul>
 		</div>	
 		<div class="select-2">
 		<span>设置账号<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="text" ng-model="business.username" placeholder="请设置登录的账号" >
 	</div>
 	<div class="select-2">
 		<span>设置密码<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="text" ng-model="business.password" placeholder="请设置登录的密码" >
 	</div>
 	<div class="select-2">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="text" ng-model="confirmPassword" placeholder="请输入确认密码" ng-keyup="confirm(confirmPassword,business.password)">
 	</div>
 		
 							</div>
@@ -182,8 +191,8 @@
 	
 	</div>
 		<div class="end">
-			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
-			<input name="git" type="submit" value="修改" ng-show="courseId!=null" ng-click="addCourse()" style="background:#5ED8A9;" class="ng-hide">
+			<input name="git" type="submit" value="提交" ng-show="businessId==null" ng-click="saveUpdateBusiness()" style="background:#5ED8A9;">
+			<input name="git" type="submit" value="修改" ng-show="businessId!=null" ng-click="saveUpdateBusiness()" style="background:#5ED8A9;">
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv()" class="esc">
 		</div>
 		</form>

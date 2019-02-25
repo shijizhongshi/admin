@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.AddressPcdDao">
+	<resultMap type="com.ola.qh.entity.AddressPcd" id="AddressPcdMap">
+		<result column="city_id" property="cityId" />
+		<result column="city_name" property="cityName" />
+		<result column="zipcode" property="zipcode" />
+		<result column="province_id" property="provinceId" />
+		<result column="district_id" property="districtId" />
+		<result column="district_name" property="districtName" />
+		<result column="province_name" property="provinceName" />
+	</resultMap>
+	
+	<select id="selectProvince" resultMap="AddressPcdMap">
+		select province_id,province_name from s_province
+	</select>
+	
+	<select id="selectCity" resultMap="AddressPcdMap">
+		select city_id,city_name,zipcode from s_city where province_id=#{provinceId}
+	</select>
+	
+	<select id="selectDistrict" resultMap="AddressPcdMap">
+		select district_id,district_name from s_district where city_id=#{cityId}
+	</select>
+	
+</mapper>
