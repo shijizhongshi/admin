@@ -9,6 +9,7 @@
 <@b.body menu="sidebarmenu-user" submenu="sidebarmenu-user-userinfo">
 <div ng-controller="userinfoController">
 	<div class="details" style="width: 100%">
+	<input type="hidden" value="${nickname}" id="nickname" />
 		<div class="details-nav">
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
@@ -55,7 +56,9 @@
 						<th>手机号</th>
 						<th>昵称</th>
 						<th>用户类型</th>
+						<th>用户资质</th>
 						<th>用户状态</th>
+						<th>真实姓名</th>
 						<th>修改用户状态</th>
 					</tr>
 
@@ -64,7 +67,9 @@
 						<th>{{u.mobile}}</th>
 						<th>{{u.nickname}}</th>
 						<th>{{u.userroles}}</th>
+						<th>{{u.isdoctors}}</th>
 						<th>{{u.disabled}}</th>
+						<th>{{u.realname}}</th>
 						<th><input type="button" ng-click="changedisabled(1,u.id)"
 							ng-show="{{u.isdisabled}}==0" class="btn-lg im-key" value="禁用"
 							style="padding: 3px 10px; margin: 0;" /> <input type="button"

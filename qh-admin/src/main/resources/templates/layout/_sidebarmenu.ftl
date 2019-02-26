@@ -1,3 +1,4 @@
+
 <#macro sidebarmenu activemenuid activesubmenuid>
     <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
     <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
@@ -176,12 +177,12 @@
                             </a>
                         </li>
                           <li id="sidebarmenu-user-userinfo">
-                            <a href="/web/user/userinfo">
+                            <a href="/web/user/userinfo?nickname=">
                                 <span class="title">用户信息</span>
                             </a>
                         </li>
-                       <li id="sidebarmenu-user-business">
-                            <a href="/web/user/business">
+                       <li id="sidebarmenu-user-franchisee">
+                            <a href="/web/user/franchisee">
                                 <span class="title">加盟商信息管理</span>
                             </a>
                         </li>
@@ -241,4 +242,5 @@
             $("#"+submenuid).addClass("active");
 		});
     </script>
+
 </#macro>
