@@ -10,7 +10,8 @@
 <script src="/scripts/student/management.js"></script>
 <script src="/scripts/indent/excle.js"></script>
 <@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-management">
-<div ng-controller="gradeController">
+<div ng-controller="studentController">
+<input type="hidden" value="${username}" id="username"/>
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -25,7 +26,7 @@
 	<div class="details-frame-content">
 		<div class="select-3">
 							<span>学员注册时间</span>
-								<input type="date" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
+								<input type="date" name="search" ng-model="fromdate" class="ng-pristine ng-untouched ng-valid ng-empty">
 						</div>
 						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
 							
@@ -33,21 +34,21 @@
 						</div>
 						<div class="select-3">
 							<span>&nbsp;</span>
-								<input type="date" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
+								<input type="date" name="search" ng-model="todate" class="ng-pristine ng-untouched ng-valid ng-empty">
 						</div>
 					
 	<div class="select-3">
 		<span>学员姓名或电话</span>
 		
-		<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty">
+		<input type="text" ng-model="realnameORmobile" class="ng-pristine ng-untouched ng-valid ng-empty">
 	</div>
 		<div class="select-3">
 		<span>学员状态</span>
 		<img src="/images/sjk-xl.png">
-		<select  class="ng-pristine ng-untouched ng-valid ng-empty">
-		<option value="? undefined:undefined ?"></option>
-			<option >全部</option>
-			<option ></option>
+		<select ng-model="status">
+			<option value="">全部</option>
+			<option value="0">正常</option>
+			<option value="1">停用</option>
 		</select>
 	</div>
 	
@@ -61,12 +62,12 @@
 <div class="manage">
 	<ul class="show">
 
-			<li style="background:#9DE879;" onclick="showDiv()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加学员</li>
-		<li style="background:#F9CD33;"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改学员</li>
-		<li style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除学员</li>
-		<li  onclick="showDiv2()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;网课报班</li>
-		<li><span class="glyphicon glyphicon-briefcase"></span>&nbsp;课程报名</li>
-		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;直播报班</li>
+			<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加学员</li>
+		<li style="background:#F9CD33;" ng-click="update()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改学员</li>
+		<li style="background:#F86846;" ng-click="deleteUser()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除学员</li>
+		<li ng-click="applys(1)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;网课报班</li>
+		<li ng-click="applys(2)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;课程报名</li>
+		<li ng-click="applys(3)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;直播报班</li>
 		<li onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;免费半价重学</li>
  
 	</ul>
@@ -76,35 +77,23 @@
 
 	<tbody>
 	<tr>
-		<th>学员名</th>
-
+	<th>学员名</th>
 	<th>学员电话</th>
 	<th>真实姓名</th>
-	<th>销售人员</th>
-	<th>已报网课班级</th>
-	<th>已报课程</th>
-	<th>学习总时长</th>
-	<th>总登录次数</th>
-	<th>最后登陆时间</th>
-	<th>学院状态</th>
-	<th>操作</th>
+	<th>所属地</th>
+	<th>学员状态</th>
+	<th>最后登录的时间</th>
+	<th>注册时间</th>
 	</tr>
-	<tr>
-		<th>学员名</th>
-
-	<th>学员电话</th>
-	<th>真实姓名</th>
-	<th>销售人员</th>
-	<th>已报网课班级</th>
-	<th>已报课程</th>
-	<th>学习总时长</th>
-	<th>总登录次数</th>
-	<th>最后登陆时间</th>
-	<th>学院状态</th>
-	<th>
-	<input type="button"  ng-show="0==0" class="btn-lg im-key" value="禁用" style="padding:3px 10px;margin:0;">
-	<input type="button"  ng-show="0==1" class="btn-lg im-key ng-hide" value="启用" style="padding:3px 10px;margin:0;background:#47e84c;">
-						</th>
+	<tr ng-repeat="u in userlist" ng-click="checkUser(u)" ng-class="{'selected':selected==u}">
+	<th>{{u.nickname}}</th>
+	<th>{{u.mobile}}</th>
+	<th>{{u.realname}}</th>
+	<th>{{u.address}}</th>
+	<th ng-show="{{u.isdisabled=='0'}}">正常</th>
+	<th ng-show="{{u.isdisabled=='1'}}">禁用</th>
+	<th>{{u.logintime}}</th>
+	<th>{{u.addtime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
 	</tr>
 
 
@@ -117,55 +106,52 @@
 							ng-model="page" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-click="templateBases()">
+							ng-click="loaddata()">
 						</ul>
 					</div>
 	<!--添加修改学员-->
 		<div class="poop" id="add" >
 		<form id="myform" class="ng-pristine ng-valid">
-	<h3>{{}}学员</h3>
+	<h3 ng-show="userId==null">添加学员</h3>
+	<h3 ng-show="userId!=null">修改学员</h3>
 <div class="select-2">
 		<span>真实姓名<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入学员姓名" >
+<input type="text" ng-model="user.realname" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入学员姓名" >
 	</div>
 	<div class="select-2">
 		<span>学员电话<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入学员电话" >
+<input type="text" ng-model="user.mobile" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入学员电话" >
 	</div>
 	<div class="select-2">
 		<span>用户密码<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入用户密码" >
+<input type="text" ng-model="user.password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入用户密码" >
 	</div>
 	<div class="select-2">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请确认密码" >
+<input type="text" ng-model="confirmPassword" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请确认密码" >
 	</div>
 	<div class="select-3">
 		<span>所在地区</span>
 		<img src="/images/sjk-xl.png">
-		<select  class="ng-pristine ng-untouched ng-valid ng-empty">
-		<option value="? undefined:undefined ?">所在省区</option>
-			<option ></option>
-			<option ></option>
+		<select ng-model="p" ng-options="p.provinceName for p in provincelist" ng-change="getCity(p)">
+		
 		</select>
 	</div>
 		<div class="select-3">
 		<span>&nbsp;</span>
 		<img src="/images/sjk-xl.png">
-		<select  class="ng-pristine ng-untouched ng-valid ng-empty">
-		<option value="? undefined:undefined ?">所在市区</option>
-			<option ></option>
-			<option ></option>
+		<select ng-options="city.cityName for city in citylist" ng-model="cityName" ng-change="getCityName(cityName)">
+		
 		</select>
 	</div>
 	<div class="select-radio ">
 		<ul><li>学员状态</li>  
-		<li><input type="radio" ng-value="1" class="ng-pristine ng-untouched ng-valid ng-empty" name="1" value="1"> 正常</li> 
-		<li><input type="radio"  ng-value="0" class="ng-pristine ng-untouched ng-valid ng-empty" name="1" value="0">停用</li></ul>
+		<li><input type="radio" ng-value="0" ng-model="user.isdisabled"> 正常</li> 
+		<li><input type="radio"  ng-value="1"  ng-model="user.isdisabled">禁用</li></ul>
 		</div>
 		<div class="end">
-			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
-			<input name="git" type="submit" value="修改" ng-show="courseId!=null" ng-click="addCourse()" style="background:#5ED8A9;" class="ng-hide">
+			<input name="git" type="submit" value="提交" ng-show="userId==null" ng-click="saveORupdateUser()" style="background:#5ED8A9;">
+			<input name="git" type="submit" value="修改" ng-show="userId!=null" ng-click="saveORupdateUser()" style="background:#5ED8A9;">
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv()" class="esc">
 		</div>
 		</form>
@@ -174,7 +160,7 @@
 
 <div class="resource" id="revise" >
 <form id="formReset2">
-<h3>{message}报班</h3>
+<h3>{{types}}</h3>
 <div style="display: flex; justify-content: space-between;">
 <div class="classify" style="width:28%;">
 <p class="xiaobiaoti">选择专业</p>
@@ -219,54 +205,70 @@
       </ul>
       </div>
 <div style="width:40%;">
-<p class="xiaobiaoti">选择课程</p>
+<p class="xiaobiaoti">选择{{typesName}}</p>
 <div style="weight:100;height:455px;border:1px solid #EEEEEE;border-radius:10px;overflow:hidden;">
 <table>
 
 	<tbody>
 	<tr>
 	<th>选择</th>
-  <th>名称</th>
-	<th>班级价格</th>
-	<th>班级折扣价</th>
-	<th>班级年限</th>
+  <th>{{typesName}}名称</th>
+	<th>{{typesName}}价格</th>
+	<th>{{typesName}}折扣价</th>
+	<th>{{typesName}}年限</th>
 	
 	</tr>
-	<tr>
-		<th><input type="checkbox" /></th>
-	<th>名称</th>
-	<th>班级价格</th>
-	<th>班级折扣价</th>
-	<th>班级年限</th>
+	<tr ng-show="{{typesName=='班级'}}" ng-repeat="class in classlist">
+	<th><input type="checkbox" ng-checked="isSelected(class.id)"
+	ng-click="updateSelection($event,class.id,class)"/></th>
+	<th>{{class.className}}</th>
+	<th>{{class.classPrice}}</th>
+	<th>{{class.classDiscountPrice}}</th>
+	<th>{{class.classYear}}</th>
 	</tr>
-
-
-
+	<tr ng-show="{{typesName=='课程'}}" ng-repeat="course in courselist">
+	<th><input type="checkbox" ng-checked="isSelected(course.id)"
+	ng-click="updateSelection($event,course.id,course)"/></th>
+	<th>{{course.courseName}}</th>
+	<th>{{course.coursePrice}}</th>
+	<th>{{course.courseDiscountPrice}}</th>
+	<th>{{course.courseYear}}</th>
+	</tr>
 	</tbody></table>
 </div>
 </div>
 <div style="width:28%;">
-<p>已选班级</p>
+<p>已选{{typesName}}</p>
 <div style="weight:100;height:455px;border:1px solid #EEEEEE;border-radius:10px;overflow:hidden;padding:20px 15px;">
 
 
 
-<ul class="yixuanbanji"> 
-<li><span style="color:red">健康管理师-</span>健康管理师</li>
-<li>价格：1000 <span style="color:red;margin-left:20px;">折扣价：10000</span></li></ul>
+<ul class="yixuanbanji" ng-show="{{typesName=='课程'}}" ng-repeat="productcourse in productlisted"> 
+<li><span style="color:red">{{productcourse.courseTypeSubclassName}}-</span>{{productcourse.courseName}}</li>
+<li>价格：{{productcourse.coursePrice}} <span style="color:red;margin-left:20px;">折扣价：{{productcourse.courseDiscountPrice}}</span></li></ul>
+
+<ul class="yixuanbanji" ng-show="{{typesName=='班级'}}" ng-repeat="productclass in productlisted"> 
+<li><span style="color:red">{{productclass.courseTypeSubclassName}}-</span>{{productclass.className}}</li>
+<li>价格：{{productclass.classPrice}} <span style="color:red;margin-left:20px;">折扣价：{{productclass.classDiscountPrice}}</span></li></ul>
 
 
 </div>
 </div>
 </div>
-<div style="float:left;font-size: 1.6rem;line-height: 50px;">
+
+<div style="float:left;font-size: 1.6rem;line-height: 50px;" ng-show="{{jiamengshang}}">
 您当前余额：15454545&nbsp;所需班级需扣除：0元；
 </div>
-<div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;">
-销售人员<i class="bitian">*</i><input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
+
+<div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;" ng-show="!{{jiamengshang}}">
+销售人员<i class="bitian">*</i><input type="text" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
 </div>
+<div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;" ng-show="!{{jiamengshang}}">
+销售人员电话<i class="bitian">*</i><input type="text" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
+</div>
+
 <div class="end">
-			<input name="git" type="submit" value="提交"  style="background:#5ED8A9;">
+			<input name="git" type="submit" value="提交" ng-click="openCourse()"  style="background:#5ED8A9;">
 
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv2()" class="esc">
 		</div>

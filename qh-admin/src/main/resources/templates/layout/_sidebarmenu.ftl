@@ -38,6 +38,7 @@
             <ul id="main-menu" class="main-menu">
                 <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                 <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+                 <#if admin>
                   <li id="sidebarmenu-system" >
                     <a>
                         <i class="linecons-cog"></i>
@@ -68,6 +69,7 @@
                         
                     </ul>
                 </li>
+                
                 <li id="sidebarmenu-course">
                     <a>
                         <i class="linecons-cog"></i>
@@ -188,7 +190,8 @@
                         </li>
                          </ul>
                 </li>
-                
+                 </#if>
+                 <#if admin || jiamengshang>
                   <li id="sidebarmenu-student" >
                     <a>
                        <i class="linecons-cog"></i>
@@ -213,6 +216,8 @@
                        
                          </ul>
                 </li>
+                </#if>
+                <#if admin>
                  <li id="sidebarmenu-patientmanage" >
                     <a>
                        <i class="linecons-cog"></i>
@@ -227,7 +232,7 @@
                          
                        </ul>
                 </li>
-                
+                </#if>
                 
                 
              </ul>

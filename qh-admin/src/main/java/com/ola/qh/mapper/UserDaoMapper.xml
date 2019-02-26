@@ -68,9 +68,11 @@
 		</if>
 		
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-		and (realname like concat(concat('%',#{realname},'%')) or mobile like concat(concat('%',#{mobile},'%')))
+		and (realname like concat(concat('%',#{realnameORmobile},'%')) or mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
-		
+		<if test="status!='' and status!=null ">
+		and status=#{status}
+		</if>
 		order by addtime desc limit #{pageNo},#{pageSize}
 	</select>
 	

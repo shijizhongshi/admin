@@ -43,6 +43,19 @@ public class CourseClassController {
 		return results;
 	}
 	
+	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public Results<List<CourseClass>> selectCourseClass(
+			@RequestParam(name="courseTypeName")String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName
+			){
+		
+		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
+		List<CourseClass> list=courseClassService.listCourseClass(courseTypeName, courseTypeSubclassName);
+		results.setStatus("0");
+		results.setData(list);
+		return results;
+	}
+	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public Results<String> insertCourseClass(@RequestBody @Valid CourseClass courseClass,BindingResult valid){
 		

@@ -88,7 +88,16 @@
 	</update>
 	
 	<select id="single" resultMap="BusinessMap">
-	select * from business where id=#{id}
+	select * from business where 1=1
+	<if test="id!=null and id!=''">
+	and id=#{id}
+	</if>
+	<if test="username!=null and username!=''">
+	and username=#{username}
+	</if>
+	<if test="password!=null and password!=''">
+	and password=#{password}
+	</if>
 	</select>
 	
 	<delete id="delete">

@@ -63,9 +63,10 @@ public class BuyCourseService implements IBuyCourseService {
 			///////用户已经属于某个固定的加盟商了
 			businessDao.insertBusinessUser(KeyGen.uuid(), oc.getBusinessId(), oc.getUserId());
 		}
+		
 		BusinessBook bbold=new BusinessBook();
 		if(oc.getBusinessId()!=null && !"".equals(oc.getBusinessId())){
-			Business business = businessDao.single(oc.getBusinessId());
+			Business business = businessDao.single(oc.getBusinessId(),null,null);
 			if(business!=null){
 				bbold=businessDao.singlebook(oc.getBusinessId(), null);
 				if(bbold!=null){

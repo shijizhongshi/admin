@@ -110,6 +110,8 @@ app.controller("businessController", function($scope, $http){
 	    		}
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.loaddata();
+	    	}else{
+	    		alert(data.message);
 	    	}
 	    })
 	};
@@ -122,6 +124,7 @@ app.controller("businessController", function($scope, $http){
 				.success(function(data){
 					if(data.status=="0"){
 						alert("删除成功~");
+						$scope.loaddata();
 					}
 				})
 			}

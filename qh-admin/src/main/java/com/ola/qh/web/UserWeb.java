@@ -21,7 +21,7 @@ public class UserWeb {
 	public String UserWebload(){
 		return "login";
 	}
-	@RequestMapping(value="/web/loginout",method=RequestMethod.GET)
+	@RequestMapping(value="/web/user/logout",method=RequestMethod.GET)
 	public String UserLoginout(){
 		return "login";
 	}

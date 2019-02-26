@@ -207,4 +207,10 @@ public class CourseClassService implements ICourseClassService {
 		return courseClassDao.selectCourseClassCount(courseTypeName, courseTypeSubclassName,null);
 	}
 
+	@Override
+	public List<CourseClass> listCourseClass(String courseTypeName, String courseTypeSubclassName) {
+		// TODO Auto-generated method stub
+		return courseClassDao.selectCourseClass(null, 0, 0, courseTypeName, courseTypeSubclassName, null);
+	}
+
 }

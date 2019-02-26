@@ -21,7 +21,7 @@ public interface BusinessDao {
 	
 	public int update(Business b);
 	
-	public Business single(@Param("id")String id);
+	public Business single(@Param("id")String id,@Param("username")String username,@Param("password")String password);
 	
 	public int delete(@Param("id")String id);
 	

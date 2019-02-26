@@ -25,8 +25,32 @@
 	#{id},#{userId},#{courseId},#{courseName},#{ordersId},#{classId},#{addtime},#{payType},#{businessId},#{courseDiscountPrice},#{coursePrice},#{courseImgUrl})
 	</insert>
 	
-	<select id="selectUserBuyCourse" resultMap="UserBuyCourseMap">
-	select id,user_id,course_id,course_name,course_discount_price,course_price,course_img_url,orders_id,class_id,addtime from user_buy_course where user_id=#{userId}
+	
+	
+	<select id="selectUserBuyCourse" resultMap="UserBuyCourseMap" parameterType="com.ola.qh.entity.BuyCourseDomain">
+	select ubc.* from user_buy_course ubc
+	left join user u on u.id=ubc.user_id where 1=1
+	<if test="nicknameORmobile!=null and nicknameORmobile!='' ">
+	and (u.nickname like concat(concat('%',#{nicknameORmobile},'%')) 
+	or u.mobile like concat(concat('%',#{nicknameORmobile},'%')))
+	</if>
+	<if test="fromdate!='' and fromdate!=null ">
+	and UNIX_TIMESTAMP(u.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	</if>
+	<if test="todate!='' and todate!=null ">
+	and UNIX_TIMESTAMP(u.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+	</if>
+	<if test="status!=null and status!='' ">
+	and u.status=#{status}
+	</if>
+	<if test="businessId!=null and businessId!='' ">
+	and business_id=#{businessId}
+	</if>
+	
+	order by ubc.addtime desc
+	<if test="pageSize!=0">
+	limit #{pageNo},#{pageSize}
+	</if>
 	</select>
 	
 	

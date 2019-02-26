@@ -46,6 +46,12 @@ public class BusinessService implements IBusinessService{
 				result.setMessage("该名称的加盟商已经存在了");
 				return result;
 			}
+			Business bold = businessDao.single(null, b.getUsername(),null);
+			if(bold!=null){
+				result.setStatus("1");
+				result.setMessage("该账号的加盟商已经存在了,请修改~");
+				return result;
+			}
 			b.setId(businessId);
 			Date date=new Date();
 			b.setAddtime(date);
@@ -88,7 +94,7 @@ public class BusinessService implements IBusinessService{
 		Results<String> result=new Results<String>();
 		///////充值金额必须大于0;;;;;;
 		if(b.getPayaccount().compareTo(BigDecimal.ZERO)==1 && b.getAccount().compareTo(BigDecimal.ZERO)==1){
-			Business bnew = businessDao.single(b.getId());
+			Business bnew = businessDao.single(b.getId(),null,null);
 			if(bnew.getExpireTime()!=null){
 				//////过期时间不为空
 				if(bnew.getExpireTime().getTime()>=new Date().getTime()){
