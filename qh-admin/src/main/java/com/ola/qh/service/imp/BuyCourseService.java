@@ -80,7 +80,7 @@ public class BuyCourseService implements IBuyCourseService {
 					result.setMessage("钱不够了");
 					return result;
 				}
-				if("2".equals(business.getStatus())){
+				if("2".equals(business.getStatus()) || business.getExpireTime().getTime()<new Date().getTime()){
 					result.setStatus("1");
 					result.setMessage("到期了");
 					return result;

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
 <mapper namespace="com.ola.qh.dao.UserDao">
 	<resultMap type="com.ola.qh.entity.User" id="UserMap">
 		<result column="id" property="id" />
@@ -36,6 +37,7 @@
 	<if test="userrole!=null and userrole!='' ">
 	and  userrole=#{userrole} 
 	</if>
+	
 	order by addtime desc limit #{pageNo},#{pageSize}
 	</select>
 	
@@ -53,6 +55,26 @@
 	</if>
 	
 	</select>
+	
+	
+	<select id="selectStudent" resultMap="UserMap">
+		select * from user 
+		where 1=1
+		<if test="fromdate!='' and fromdate!=null ">
+		and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+		</if>
+		<if test="todate!='' and todate!=null ">
+		and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+		</if>
+		
+		<if test="realnameORmobile!='' and realnameORmobile!=null ">
+		and (realname like concat(concat('%',#{realname},'%')) or mobile like concat(concat('%',#{mobile},'%')))
+		</if>
+		
+		order by addtime desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	
 	
 	<update id="updateUser" parameterType="com.ola.qh.entity.User" >
 		update user set 
