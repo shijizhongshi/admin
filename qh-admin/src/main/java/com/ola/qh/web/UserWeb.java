@@ -36,7 +36,8 @@ public class UserWeb {
 		return " user/withdrawlist";
 	}
 	@RequestMapping("/web/user/userinfo")
-	public String shangpin(){
+	public String shangpin(@RequestParam(name="nickname") String nickname,HttpServletRequest request){
+		request.getSession().setAttribute("nickname", nickname);
 		return " user/userinfo";
 	}
 	@RequestMapping("/web/user/franchisee")

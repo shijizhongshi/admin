@@ -84,5 +84,14 @@ app.controller("replyPatientController", function($scope, $http){
 			location.reload();
 			
 		}
+	   
+	   $scope.touser=function(nickname){
+		   $scope.nickname=nickname;
+		   if($scope.nickname!=null){
+				location.href="/web/user/userinfo?nickname="+$scope.nickname;
+			}else{
+				alert("请选中信息~");
+			}
+		}
 		
 })

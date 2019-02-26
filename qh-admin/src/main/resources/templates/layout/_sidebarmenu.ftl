@@ -176,7 +176,7 @@
                             </a>
                         </li>
                           <li id="sidebarmenu-user-userinfo">
-                            <a href="/web/user/userinfo">
+                            <a href="/web/user/userinfo?nickname=">
                                 <span class="title">用户信息</span>
                             </a>
                         </li>
