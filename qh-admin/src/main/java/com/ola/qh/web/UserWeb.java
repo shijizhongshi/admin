@@ -40,9 +40,9 @@ public class UserWeb {
 		request.getSession().setAttribute("nickname", nickname);
 		return " user/userinfo";
 	}
-	@RequestMapping("/web/user/franchisee")
+	@RequestMapping("/web/user/business")
 	public String franchisee(){
-		return " user/franchisee";
+		return " user/business";
 	}
 
 }

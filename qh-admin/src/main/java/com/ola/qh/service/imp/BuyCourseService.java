@@ -12,6 +12,7 @@ import com.ola.qh.dao.BusinessDao;
 import com.ola.qh.dao.CourseClassDao;
 import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.UserBuyCourseDao;
+import com.ola.qh.entity.Business;
 import com.ola.qh.entity.BusinessBook;
 import com.ola.qh.entity.BusinessBookHistory;
 import com.ola.qh.entity.BuyCourseDomain;
@@ -61,6 +62,21 @@ public class BuyCourseService implements IBuyCourseService {
 		}else{
 			///////用户已经属于某个固定的加盟商了
 			businessDao.insertBusinessUser(KeyGen.uuid(), oc.getBusinessId(), oc.getUserId());
+		}
+		if(oc.getBusinessId()!=null && !"".equals(oc.getBusinessId())){
+			Business business = businessDao.single(oc.getBusinessId());
+			if(business!=null){
+				if("1".equals(business.getStatus())){
+					result.setStatus("1");
+					result.setMessage("钱不够了");
+					return result;
+				}
+				if("2".equals(business.getStatus())){
+					result.setStatus("1");
+					result.setMessage("到期了");
+					return result;
+				}
+			}
 		}
 		if (oc.getTypes() == 1) {
 			///// 报班学习课程
