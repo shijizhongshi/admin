@@ -51,7 +51,7 @@
 	<div class="select-3">
 		<span>市</span>
 		<img src="/images/sjk-xl.png">
-		<select  ng-options="city.cityName for city in citylist" ng-model="cityName" ng-change="getCityName(cityName)">
+		<select  ng-options="city.cityName for city in citylist" ng-model="city" ng-change="getCityName(city)">
 		</select>
 	</div>
 	
@@ -64,8 +64,8 @@
 
 			<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加加盟商</li>
 		<li style="background:#F9CD33;" ng-click="update()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改加盟商</li>
-		<li style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除加盟商</li>
-		<li  onclick="showDiv2()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;加盟商充值</li>
+		<li style="background:#F86846;" ng-click="deleteBusiness()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除加盟商</li>
+		<li  ng-click="tocharge()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;加盟商充值</li>
 		<li><span class="glyphicon glyphicon-briefcase"></span>&nbsp;停用</li>
 
  
@@ -82,22 +82,24 @@
 	<th>LOGO</th>
 	<th>地区</th>
 	<th>充值总额</th>
+	<th>兑换总额</th>
 	<th>课程余额</th>
 	<th>用户状态</th>
 	<th>加盟时间</th>
 	<th>到期时间</th>
 	</tr>
-	<tr ng-repeat="business in businesslist" ng-click="checkBusiness(business)" ng-class="{'seleted':seleted==business}">
+	<tr ng-repeat="business in businesslist" ng-click="checkBusiness(business)" ng-class="{'selected':selected==business}">
 	<th>{{business.name}}</th>
 	<th>{{business.principal}}</th>
 	<th>{{business.mobile}}</th>
 	<th><img ng-src="{{business.logo}}"></th>
 	<th>{{business.address}}</th>
-	<th>充值总额</th>
-	<th>课程余额</th>
-	<th ng-show="{{business.address=='1'}}">钱不够了</th>
-	<th ng-show="{{business.address=='2'}}">到期了</th>
-	<th ng-show="{{business.address=='2'}}">正常</th>
+	<th>{{business.payaccount}}</th>
+	<th>{{business.account}}</th>
+	<th>{{business.surplusaccount}}</th>
+	<th ng-show="{{business.status=='1'}}">钱不够了</th>
+	<th ng-show="{{business.status=='2'}}">到期了</th>
+	<th ng-show="{{business.status=='0'}}">正常</th>
 	<th>{{business.addtime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
 	<th>{{business.expireTime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
 	</tr>
@@ -129,33 +131,33 @@
 		<div class="select-3">
 		<span>所在城市<i class="bitian">*</i></span>
 		<img src="/images/sjk-xl.png">
-		<select ng-model="p" ng-options="p.provinceId as p.provinceName for p in provincelist" ng-change="getCity(p)">
+		<select ng-model="p" ng-options="p.provinceName for p in provincelist" ng-change="getCity(p)">
 		
 		</select>
 	</div>
 		<div class="select-3">
 		<span>&nbsp;</span>
 		<img src="/images/sjk-xl.png">
-		<select ng-options="city.cityId as city.cityName for city in citylist" ng-model="cityName" ng-change="getCityName(cityName)">
+		<select ng-options="city.cityName for city in citylist" ng-model="cityName" ng-change="getCityName(cityName)">
 		</select>
 	</div>
 
 	
 	<div class="select-2" style="clear:both;">
 		<span>负责人姓名<i >*</i></span>
-<input type="text" ng-model="business.principal" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请姓名" >
+<input type="text" ng-model="business.principal" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入负责人姓名" >
 	</div>
 	<div class="select-2" style="border-botom:1px #F0F0F0 solid;">
 		<span>联系电话<i class="bitian">*</i></span>
-<input type="text" ng-model="business.mobile" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入用户密码" >
+<input type="text" ng-model="business.mobile" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入联系电话" >
 	</div>
 	<div class="select-2">
 		<span>初始充值余额<i class="bitian">*</i></span>
-<input type="number" ng-model="business.payaccount" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="number" ng-model="business.payaccount" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入充值金额" >
 	</div>
 <div class="select-2">
-		<span>拥有多少钱的课程<i class="bitian">*</i></span>
-<input type="number" ng-model="business.account" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+		<span>兑换多少钱的课程<i class="bitian">*</i></span>
+<input type="number" ng-model="business.account" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入兑换多少钱的课程" >
 	</div>
 	</div>
 	<div style="width:49%;float:right;">
@@ -169,8 +171,8 @@
 	<div class="select-radio" style="margin:24px 0;">
 		<ul><li>账户状态</li>  
 		<li><input type="radio" ng-model="business.status" ng-value="0"> 正常</li> 
-		<li><input type="radio" ng-model="business.status" ng-value="1">到期</li>
-		<li><input type="radio" ng-model="business.status" ng-value="2">没钱</li>
+		<li><input type="radio" ng-model="business.status" ng-value="2">到期</li>
+		<li><input type="radio" ng-model="business.status" ng-value="1">没钱</li>
 		</ul>
 		</div>	
 		<div class="select-2">
@@ -179,11 +181,11 @@
 	</div>
 	<div class="select-2">
 		<span>设置密码<i class="bitian">*</i></span>
-<input type="text" ng-model="business.password" placeholder="请设置登录的密码" >
+<input type="password" ng-model="business.password" placeholder="请设置登录的密码" >
 	</div>
 	<div class="select-2">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="text" ng-model="confirmPassword" placeholder="请输入确认密码" ng-keyup="confirm(confirmPassword,business.password)">
+<input type="password" ng-model="business.confirmPassword" placeholder="请输入确认密码">
 	</div>
 		
 							</div>
@@ -204,18 +206,18 @@
 <h3>充值操作</h3>
 <div class="select-2">
 		<span>加盟商名称</span>
- <p style="border-radius:5px;border:#F0F1F3 1px solid;background:#F7F8FC;width:100%;height:30px;font-size:1.4rem;text-indent:1rem;line-height:30px;color:#75758B;">加盟商名字</p>
+ <p style="border-radius:5px;border:#F0F1F3 1px solid;background:#F7F8FC;width:100%;height:30px;font-size:1.4rem;text-indent:1rem;line-height:30px;color:#75758B;">{{businessName}}</p>
 	</div>
 	<div class="select-2">
 		<span>充值金额<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入金额" >
+<input type="number" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入金额" ng-model="newBusiness.payaccount" >
 	</div>
 		<div class="select-2">
 		<span>兑换的课程金额<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入兑换的课程金额" >
+<input type="number" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入兑换的课程金额" ng-model="newBusiness.account" >
 	</div>
 <div class="end">
-			<input name="git" type="submit" value="提交"  style="background:#5ED8A9;">
+			<input name="git" type="submit" value="提交" ng-click="submitcharge()"  style="background:#5ED8A9;">
 
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv2()" class="esc">
 		</div>

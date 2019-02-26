@@ -71,8 +71,8 @@ public class BusinessController {
 		return result;
 	} 
 	
-	@RequestMapping(value="id",method=RequestMethod.GET)
-	public Results<String> delete(@RequestParam("id")String id){
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public Results<String> delete(@RequestParam(name="id",required=true)String id){
 		Results<String> result=new Results<String>();
 		businessService.delete(id);
 		result.setStatus("0");

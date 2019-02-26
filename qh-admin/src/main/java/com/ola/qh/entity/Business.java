@@ -26,6 +26,8 @@ public class Business {
 	@NotNull
 	private BigDecimal account;////实际课程的金额 
 	
+	private BigDecimal surplusaccount;
+	
 	private String status;////0:正常的状态
 	
 	private Date addtime;
@@ -39,6 +41,14 @@ public class Business {
 	private Date updatetime;
 	
 	
+
+	public BigDecimal getSurplusaccount() {
+		return surplusaccount;
+	}
+
+	public void setSurplusaccount(BigDecimal surplusaccount) {
+		this.surplusaccount = surplusaccount;
+	}
 
 	public Date getUpdatetime() {
 		return updatetime;

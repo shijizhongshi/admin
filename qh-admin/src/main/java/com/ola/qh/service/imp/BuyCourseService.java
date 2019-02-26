@@ -63,9 +63,18 @@ public class BuyCourseService implements IBuyCourseService {
 			///////用户已经属于某个固定的加盟商了
 			businessDao.insertBusinessUser(KeyGen.uuid(), oc.getBusinessId(), oc.getUserId());
 		}
+		BusinessBook bbold=new BusinessBook();
 		if(oc.getBusinessId()!=null && !"".equals(oc.getBusinessId())){
 			Business business = businessDao.single(oc.getBusinessId());
 			if(business!=null){
+				bbold=businessDao.singlebook(oc.getBusinessId(), null);
+				if(bbold!=null){
+					if(bbold.getSurplusaccount().compareTo(oc.getAccount())==-1){
+						result.setStatus("1");
+						result.setMessage("开课金额已经不足,请先去充值在来开课吧~");
+						return result;
+					}
+				}
 				if("1".equals(business.getStatus())){
 					result.setStatus("1");
 					result.setMessage("钱不够了");
@@ -157,7 +166,7 @@ public class BuyCourseService implements IBuyCourseService {
 		}
 		if (oc.getBusinessId() != null && !"".equals(oc.getBusinessId())) {
 			///////// 如果是加盟商的开课的时候
-			BusinessBook bbold = businessDao.singlebook(oc.getBusinessId(), null);
+			
 			if (bbold != null) {
 				//////// 开课的时候修改加盟商的账本
 				BusinessBook bbnew = new BusinessBook();

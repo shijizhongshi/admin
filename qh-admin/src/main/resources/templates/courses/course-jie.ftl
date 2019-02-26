@@ -9,7 +9,7 @@
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-chapter">
 
-<div class="details" id="details" ng-controller="sectionCo ntroller"
+<div class="details" id="details" ng-controller="sectionController"
 	style="width: 100%;">
 	<input type="hidden" value="${chapterId}" id="chapterId" /> <input
 		type="hidden" value="${chapterName}" id="chapterName" />

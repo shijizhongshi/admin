@@ -10,7 +10,8 @@ app.controller("businessController", function($scope, $http){
 	
 	$scope.address=null;
 	$scope.getCity=function(p){
-		$scope.address=p.provinceName;
+		$scope.provinceName=p.provinceName;
+		$scope.address=$scope.provinceName;
 		$http.get("/api/AddressPcd/selectcity",{"params": {"provinceId":p.provinceId}},{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -18,9 +19,9 @@ app.controller("businessController", function($scope, $http){
 			}
 		})
 	}
-	$scope.getCityName=function(cityName){
-		if(cityName!=null){
-			$scope.address=$scope.provinceName+cityName;
+	$scope.getCityName=function(city){
+		if(city!=null){
+			$scope.address=$scope.provinceName+city.cityName;
 		}
 	}
 	var changeDate = function (date) { 
@@ -91,16 +92,14 @@ app.controller("businessController", function($scope, $http){
 	    	$scope.business.logo=data.data;
 	    	
 		})
-	};
-	$scope.confirm=function(confirmpassword,password){
-		if(confirmpassword!=password){
-			alert("两次密码输入不一致~");
-		}
-	}
-	
+	};	
 	
 	$scope.saveUpdateBusiness=function(){
 		$scope.business.address=$scope.address;
+		if($scope.business.confirmPassword!=$scope.business.password){
+			alert("两次密码输入不一致~");
+			return;
+		}
 		$http.post("/api/business/saveupdate",$scope.business,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -111,13 +110,52 @@ app.controller("businessController", function($scope, $http){
 	    		}
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.loaddata();
-	    	}else{
-	    		alert("修改失败~");
 	    	}
 	    })
 	};
 	
 	
+	$scope.deleteBusiness=function(){
+		if($scope.businessId!=null){
+			 if(confirm("您确定要删除这条加盟商记录吗")){
+				$http.get("/api/business/delete",{"params": {"id":$scope.businessId}},{'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=="0"){
+						alert("删除成功~");
+					}
+				})
+			}
+		}else{
+			alert("请选中信息~");
+		}
+	}
 	
+	$scope.newBusiness=null;
+	$scope.tocharge=function(){
+		if($scope.businessId!=null){
+			
+			$scope.businessName=$scope.business.name;
+			 document.getElementById('revise').style.display="block"; 
+		}else{
+			alert("请选中信息~");
+		}
+	}
+	
+	$scope.submitcharge=function(){
+		if($scope.newBusiness.account!=null && $scope.newBusiness.payaccount!=null){
+			$scope.newBusiness.id=$scope.businessId;
+			$http.post("/api/business/tocharge",$scope.newBusiness,{'Content-Type': 'application/json;charset=UTF-8'})
+		    .success(function(data){
+		    	if(data.status=="0"){
+		    		alert("充值成功~");
+		    		document.getElementById('revise').style.display="none"; 
+		    		$scope.loaddata();
+		    	}
+		    })
+		}else{
+			alert("充值和兑换金额不能为空~");
+		}
+		
+	}
 	
 });

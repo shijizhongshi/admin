@@ -156,7 +156,7 @@
 	<if test="courseName!=null and courseName!='' ">
 	and course_name like concat(concat('%',#{courseName},'%'))
 	</if>
-	order by addtime desc 
+	order by addtime asc 
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>

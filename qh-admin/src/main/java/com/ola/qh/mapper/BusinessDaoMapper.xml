@@ -81,7 +81,7 @@
 	status=#{status},
 	</if>
 	<if test="expireTime!=null">
-	expire_time=#{expireTime}
+	expire_time=#{expireTime},
 	</if>
 	updatetime=#{updatetime}
 	where id=#{id}
@@ -127,7 +127,7 @@
 	</select>
 	
 	
-	<select id="updatebook" parameterType="com.ola.qh.entity.BusinessBook">
+	<update id="updatebook" parameterType="com.ola.qh.entity.BusinessBook">
 	update business_book set 
 	<if test="account!=null">
 	account=#{account},
@@ -149,7 +149,7 @@
 	<if test="salesName!=null and salesName!='' ">
 	and sales_name=#{salesName}
 	</if>
-	</select>
+	</update>
 	<!-- 账本结束############################################# -->
 	
 	
@@ -169,7 +169,7 @@
 	
 	
 	<insert id="insertBookHistory" parameterType="com.ola.qh.entity.BusinessBookHistory">
-	insert into business_book_history(id,course_ways,business_id,sales_people,sales_mobile
+	insert into business_book_history(id,course_ways,business_id,sales_people,sales_mobile,
 	types,payaccount,account,buy_course_id,addtime)values(#{id},#{courseWays},#{businessId},
 	#{salesPeople},#{salesMobile},#{types},#{payaccount},#{account},#{buyCourseId},#{addtime})
 	</insert>

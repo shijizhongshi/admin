@@ -59,6 +59,7 @@ public class BusinessService implements IBusinessService{
 			bb.setAccount(b.getAccount());////课程总的金额
 			bb.setAddtime(new Date());
 			bb.setBusinessId(businessId);
+			bb.setPayaccount(b.getPayaccount());
 			bb.setSurplusaccount(b.getAccount());
 			bb.setUsedaccount(BigDecimal.ZERO);
 			bb.setId(KeyGen.uuid());
@@ -80,6 +81,7 @@ public class BusinessService implements IBusinessService{
 		
 	}
 	
+	@Transactional
 	@Override
 	public Results<String> charge(Business b) {
 		// TODO Auto-generated method stub
@@ -89,7 +91,7 @@ public class BusinessService implements IBusinessService{
 			Business bnew = businessDao.single(b.getId());
 			if(bnew.getExpireTime()!=null){
 				//////过期时间不为空
-				if("1".equals(bnew.getStatus()) && bnew.getExpireTime().getTime()>=new Date().getTime()){
+				if(bnew.getExpireTime().getTime()>=new Date().getTime()){
 					/////钱不够但是没有到期的话
 					Calendar c=Calendar.getInstance();
 	                c.setTime(bnew.getExpireTime());
@@ -103,6 +105,7 @@ public class BusinessService implements IBusinessService{
 	                b.setExpireTime(c.getTime());
 				}
                 ////////基本资料中有效期延长
+				b.setStatus("0");
                 businessDao.update(b);
                 
                BusinessBook bb=businessDao.singlebook(b.getId(), null);
@@ -145,11 +148,14 @@ public class BusinessService implements IBusinessService{
 		List<Business> list = businessDao.selectList(name, address, fromdate, todate, pageNo, pageSize);
 		for (Business business : list) {
 			BusinessBook bb = businessDao.singlebook(business.getId(), null);
-			business.setAccount(bb.getSurplusaccount());/////剩余多少兑换课程的金额
+			business.setSurplusaccount(bb.getSurplusaccount());/////剩余多少兑换课程的金额
+			business.setPayaccount(bb.getPayaccount());/////总共充值的钱数
+			business.setAccount(bb.getAccount());////总的兑换金额
 		}
 		return list;
 	}
 
+	@Transactional
 	@Override
 	public int delete(String id) {
 		// TODO Auto-generated method stub
