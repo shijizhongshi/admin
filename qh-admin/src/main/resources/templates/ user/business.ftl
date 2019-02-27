@@ -162,11 +162,17 @@
 	</div>
 	<div style="width:49%;float:right;">
 	<div class="costs-uploadfile-div">
-	<b>加盟商LOGO</b> <input type="file" id="file" value="上传加盟商LOGO" 
+	<b>加盟商LOGO</b> <input type="file" value="上传加盟商LOGO" 
 	accept="image/gif, image/jpeg, image/png, image/jpg"
 	onchange="angular.element(this).scope().uploadmainimage(this)">
 	<div style="height: 130px; margin-top: 3px;">
 	<img src="{{business.logo}}" style="height: 130px;"/>
+	</div>
+	<b>加盟商banner</b> <input type="file" value="上传加盟商banner" 
+	accept="image/gif, image/jpeg, image/png, image/jpg"
+	onchange="angular.element(this).scope().uploadmainimage1(this)">
+	<div style="height: 130px; margin-top: 3px;">
+	<img src="{{business.banner}}" style="height: 130px;"/>
 	</div>
 	<div class="select-radio" style="margin:24px 0;">
 		<ul><li>账户状态</li>  

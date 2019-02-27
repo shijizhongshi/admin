@@ -97,6 +97,7 @@ public class UserController {
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		List<User> list = userService.selectStudent(fromdate, todate, realnameORmobile, status, pageNo, pageSize);
+		result.setCount(userService.selectStudentCount(fromdate, todate, realnameORmobile, status));
 		result.setStatus("0");
 		result.setData(list);
 		return result;

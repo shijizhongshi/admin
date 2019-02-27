@@ -78,6 +78,29 @@
 	
 	
 	
+	<select id="selectStudentCount" resultType="int">
+		select count(id) from user 
+		where 1=1
+		<if test="fromdate!='' and fromdate!=null ">
+		and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+		</if>
+		<if test="todate!='' and todate!=null ">
+		and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+		</if>
+		
+		<if test="realnameORmobile!='' and realnameORmobile!=null ">
+		and (realname like concat(concat('%',#{realnameORmobile},'%')) or mobile like concat(concat('%',#{realnameORmobile},'%')))
+		</if>
+		<if test="status!='' and status!=null ">
+		and isdisabled=#{status}
+		</if>
+	</select>
+	
+	
+	
+	
+	
+	
 	<update id="updateUser" parameterType="com.ola.qh.entity.User" >
 		update user set 
 		<if test="userrole!=null and userrole!='' ">

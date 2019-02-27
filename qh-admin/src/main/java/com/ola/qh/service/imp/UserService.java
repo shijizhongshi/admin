@@ -177,6 +177,12 @@ public class UserService implements IUserService{
 		}
 		return list;
 	}
+
+	@Override
+	public int selectStudentCount(String fromdate, String todate, String realnameORmobile, String status) {
+		// TODO Auto-generated method stub
+		return userDao.selectStudentCount(fromdate, todate, realnameORmobile, status);
+	}
 	
 	
 	

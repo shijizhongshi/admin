@@ -40,7 +40,17 @@ public class Business {
 	
 	private Date updatetime;
 	
+	private String banner;////加盟商学员的banner
 	
+	
+
+	public String getBanner() {
+		return banner;
+	}
+
+	public void setBanner(String banner) {
+		this.banner = banner;
+	}
 
 	public BigDecimal getSurplusaccount() {
 		return surplusaccount;

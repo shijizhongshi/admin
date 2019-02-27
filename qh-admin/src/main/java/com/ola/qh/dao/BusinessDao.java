@@ -17,6 +17,10 @@ public interface BusinessDao {
 			@Param("todate")String todate,@Param("pageNo")int pageNo,
 			@Param("pageSize")int pageSize);
 	
+	public int selectListCount(@Param("name")String name,
+			@Param("address")String address,@Param("fromdate")String fromdate,
+			@Param("todate")String todate);
+	
 	public int exist(@Param("name")String name);
 	
 	public int update(Business b);

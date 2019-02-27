@@ -18,13 +18,14 @@
 	<result column="status" property="status"/>
 	<result column="expire_time" property="expireTime"/>
 	<result column="addtime" property="addtime"/>
+	<result column="banner" property="banner"/>
 	</resultMap>
 	
 	
 	<insert id="insert" parameterType="com.ola.qh.entity.Business">
 	insert into business(id,username,password,name,principal,logo,mobile,address,
-	status,addtime,expire_time)values(#{id},#{username},#{password},#{name},#{principal},#{logo},#{mobile},#{address},
-	#{status},#{addtime},#{expireTime})
+	status,addtime,expire_time,banner)values(#{id},#{username},#{password},#{name},#{principal},#{logo},#{mobile},#{address},
+	#{status},#{addtime},#{expireTime},#{banner})
 	</insert>
 	
 	<select id="selectList" resultMap="BusinessMap">
@@ -45,6 +46,24 @@
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
+	</select>
+	
+	
+	<select id="selectListCount" resultType="int">
+	select count(id) from business where 1=1
+	<if test="name!=null and name!='' ">
+	 and name=#{name}
+	</if>
+	<if test="address!=null and address!='' ">
+	 and address like concat(concat('%',#{address},'%'))
+	</if>
+	<if test="fromdate!='' and fromdate!=null ">
+	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	</if>
+	<if test="todate!='' and todate!=null ">
+	and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+	</if>
+	
 	</select>
 	
 	<select id="exist" resultType="int">
@@ -82,6 +101,9 @@
 	</if>
 	<if test="expireTime!=null">
 	expire_time=#{expireTime},
+	</if>
+	<if test="banner!=null and banner!='' ">
+	banner=#{banner},
 	</if>
 	updatetime=#{updatetime}
 	where id=#{id}

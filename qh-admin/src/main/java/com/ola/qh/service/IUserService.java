@@ -27,4 +27,7 @@ public interface IUserService {
 	
 	public List<User> selectStudent(String fromdate,String todate,String realnameORmobile,String status,
 			int pageNo,int pageSize);
+	
+	public int selectStudentCount(String fromdate,String todate,
+			String realnameORmobile,String status);
 }

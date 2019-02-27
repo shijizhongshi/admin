@@ -183,8 +183,8 @@
                                 <span class="title">用户信息</span>
                             </a>
                         </li>
-                       <li id="sidebarmenu-user-franchisee">
-                            <a href="/web/user/franchisee">
+                       <li id="sidebarmenu-user-business">
+                            <a href="/web/user/business">
                                 <span class="title">加盟商信息管理</span>
                             </a>
                         </li>

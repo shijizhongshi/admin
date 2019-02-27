@@ -94,6 +94,24 @@ app.controller("businessController", function($scope, $http){
 		})
 	};	
 	
+	$scope.uploadmainimage1 = function(file){
+		
+		if(!file.files || file.files.length < 1) return;
+	    var fd = new FormData();
+	    fd.append("file", file.files[0]);
+		$http.post("/api/upload/single",fd,{
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	        
+	    })
+	    .success(function(data){
+	    	$scope.business.banner=data.data;
+	    	
+		})
+	};	
+	
+	
 	$scope.saveUpdateBusiness=function(){
 		$scope.business.address=$scope.address;
 		if($scope.business.confirmPassword!=$scope.business.password){

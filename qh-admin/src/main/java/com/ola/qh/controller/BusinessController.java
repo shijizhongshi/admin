@@ -66,6 +66,7 @@ public class BusinessController {
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		List<Business> list = businessService.list(name, address, fromdate, todate, pageNo, pageSize);
+		result.setCount(businessService.selectListCount(name, address, fromdate, todate));
 		result.setStatus("0");
 		result.setData(list);
 		return result;

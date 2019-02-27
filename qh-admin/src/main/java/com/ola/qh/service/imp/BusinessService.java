@@ -169,6 +169,12 @@ public class BusinessService implements IBusinessService{
 		return businessDao.delete(id);
 	}
 
+	@Override
+	public int selectListCount(String name, String address, String fromdate, String todate) {
+		// TODO Auto-generated method stub
+		return businessDao.selectListCount(name, address, fromdate, todate);
+	}
+
 
 	
 
