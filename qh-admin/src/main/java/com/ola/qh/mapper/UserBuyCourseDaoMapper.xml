@@ -28,25 +28,29 @@
 	
 	
 	<select id="selectUserBuyCourse" resultMap="UserBuyCourseMap" parameterType="com.ola.qh.entity.BuyCourseDomain">
-	select ubc.* from user_buy_course ubc
-	left join user u on u.id=ubc.user_id where 1=1
+	select ubc.*,u.nickname nickname,u.realname realname,u.mobile mobile,bbh.sales_people salesPeople,bbh.course_ways courseways from user_buy_course ubc
+	left join user u on u.id=ubc.user_id 
+	left join business_book_history bbh on bbh.buy_course_id=ubc.id
+	where 1=1
 	<if test="nicknameORmobile!=null and nicknameORmobile!='' ">
-	and (u.nickname like concat(concat('%',#{nicknameORmobile},'%')) 
+	and (u.realname like concat(concat('%',#{nicknameORmobile},'%')) 
 	or u.mobile like concat(concat('%',#{nicknameORmobile},'%')))
 	</if>
 	<if test="fromdate!='' and fromdate!=null ">
-	and UNIX_TIMESTAMP(u.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	and UNIX_TIMESTAMP(ubc.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 	</if>
 	<if test="todate!='' and todate!=null ">
-	and UNIX_TIMESTAMP(u.addtime)&lt;UNIX_TIMESTAMP(#{todate})
-	</if>
-	<if test="status!=null and status!='' ">
-	and u.status=#{status}
+	and UNIX_TIMESTAMP(ubc.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 	</if>
 	<if test="businessId!=null and businessId!='' ">
 	and business_id=#{businessId}
 	</if>
-	
+	<if test="types==1">
+	and class_id is not null
+	</if>
+	<if test="types==2">
+	and course_id is not null
+	</if>
 	order by ubc.addtime desc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}

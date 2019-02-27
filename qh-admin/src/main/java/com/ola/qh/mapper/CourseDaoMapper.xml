@@ -171,7 +171,7 @@
 		
 	</select>
 	
-	<select id="existCourse" resultType="com.ola.qh.entity.Course">
+	<select id="existCourse" resultMap="CourseMap">
 		select <include refid="sql_base"></include>,class_id from course where id=#{id}
 	</select>
 	<select id="existCourseList" resultMap="CourseMap">

@@ -16,6 +16,7 @@ import com.ola.qh.entity.BuyCourseDomain;
 import com.ola.qh.entity.OpenCourse;
 import com.ola.qh.entity.UserBuyCourse;
 import com.ola.qh.service.IBuyCourseService;
+import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 /**
@@ -39,20 +40,66 @@ public class BuyCourseController {
 		Results<String> result=new Results<String>();
 		if(valid.hasErrors()){
 			result.setStatus("1");
-			result.setMessage("开课的时候填写文章不完整");
+			result.setMessage("开课的时候填写信息不完整");
 			return result;
 		}
 		
 		return buyCourseService.openCourse(oc);
 	}
 	/**
-	 * 
-	 * @param businessId
+	 * 查看用户是否已经开通了id的课程
+	 * <p>Title: existOpen</p>  
+	 * <p>Description: </p>  
+	 * @param courseId
+	 * @param classId
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/existOpen")
+	public Results<String> existOpen(@RequestParam(name="courseId",required=false)String courseId,
+			@RequestParam(name="classId",required=false)String classId,
+			@RequestParam(name="userId",required=true)String userId){
+		int count = buyCourseService.existOpenCourse(courseId, userId, classId);
+		Results<String> result=new Results<String>();
+		if(count==0){
+			//////说明没有开过这个课
+			result.setStatus("0");
+		}else{
+			//////说明已经开过课了
+			result.setStatus("1");
+			result.setMessage("这个用户的这个课程已经开通过了,请进行核实开通其他的课程");
+		}
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 查询所有用户的购买记录
+	 * <p>Title: buyRecord</p>  
+	 * <p>Description: </p>  
+	 * @param bcd
 	 * @return
 	 */
 	@RequestMapping(value="/record",method=RequestMethod.POST)
-	public Results<List<UserBuyCourse>> buyRecord(@RequestBody BuyCourseDomain bcd){
+	public Results<List<UserBuyCourse>> buyRecord(
+			@RequestParam(name="nicknameORmobile",required=false)String nicknameORmobile,
+			@RequestParam(name="fromdate",required=false)String fromdate,
+			@RequestParam(name="todate",required=false)String todate,
+			@RequestParam(name="businessId",required=false)String businessId,
+			@RequestParam(name="types",required=true)int types,
+			@RequestParam(name="page",required=true)int page){
 		
+		BuyCourseDomain bcd=new BuyCourseDomain();
+		bcd.setBusinessId(businessId);
+		bcd.setFromdate(fromdate);
+		bcd.setNicknameORmobile(nicknameORmobile);
+		int pageSize=Patterns.pageSize;
+		int pageNo=(page-1)*pageSize;
+		bcd.setPageNo(pageNo);
+		bcd.setPageSize(pageSize);
+		bcd.setTodate(todate);
+		bcd.setTypes(types);
 		return buyCourseService.buyRecord(bcd);
 	}
 	

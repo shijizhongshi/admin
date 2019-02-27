@@ -203,13 +203,13 @@
                                 <span class="title">学员管理</span>
                             </a>
                         </li>
-                          <li id="sidebarmenu-student-Online-course">
-                            <a href="/web/student/Online-course">
-                                <span class="title">学员网课订购记录</span>
+                          <li id="sidebarmenu-student-classbuy">
+                            <a href="/web/student/classbuy">
+                                <span class="title">学员班级订购记录</span>
                             </a>
                         </li>
-                         <li id="sidebarmenu-student-student-course">
-                            <a href="/web/student/student-course">
+                         <li id="sidebarmenu-student-coursebuy">
+                            <a href="/web/student/coursebuy">
                                 <span class="title">学员课程订购记录</span>
                             </a>
                         </li>

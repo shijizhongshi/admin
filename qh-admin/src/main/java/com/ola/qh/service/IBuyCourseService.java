@@ -13,6 +13,8 @@ public interface IBuyCourseService {
 	
 	public Results<List<UserBuyCourse>> buyRecord(BuyCourseDomain bcd);
 	
+	public int existOpenCourse(String courseId, String userId, String classId);
+	
 	
 	
 }

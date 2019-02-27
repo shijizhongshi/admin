@@ -37,7 +37,59 @@ public class UserBuyCourse {
 	
 	private String businessId;////加盟商的id
 	
+	private String nickname;
 	
+	private String realname;
+	
+	private String mobile;
+	
+	private String salesPeople;
+	
+	private int courseways;
+	
+	
+	
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getSalesPeople() {
+		return salesPeople;
+	}
+
+	public void setSalesPeople(String salesPeople) {
+		this.salesPeople = salesPeople;
+	}
+
+	public int getCourseways() {
+		return courseways;
+	}
+
+	public void setCourseways(int courseways) {
+		this.courseways = courseways;
+	}
+
 	public String getBusinessId() {
 		return businessId;
 	}

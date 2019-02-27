@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/web/student")
-public class studentWeb {
+public class StudentWeb {
 
 	@RequestMapping("/management")
 	public String management(){
 		return "student/management";
 	}
 	
-		@RequestMapping("/Online-course")
-		public String online(){
-			return "student/Online-course";
+		@RequestMapping("/classbuy")
+		public String classbuy(){
+			return "student/classbuy";
 		}
-		@RequestMapping("/student-course")
-		public String student(){
-			return "student/student-course";
+		@RequestMapping("/coursebuy")
+		public String coursebuy(){
+			return "student/coursebuy";
 		}
 		
 		

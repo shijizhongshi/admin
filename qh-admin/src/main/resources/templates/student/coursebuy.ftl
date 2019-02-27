@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/indent/excle.js"></script>
-<@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-Online-course">
+<@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-coursebuy">
 <div >
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
@@ -92,9 +92,8 @@
 
 	</tbody></table>
 	</div>
-
 	
-	<div class="col-sm-6"></div>
+		<div class="col-sm-6"></div>
 					<div class="col-sm-6">
 						<ul uib-pagination boundary-links="true" total-items="total"
 							ng-model="page" items-per-page="pageSize" max-size="5"

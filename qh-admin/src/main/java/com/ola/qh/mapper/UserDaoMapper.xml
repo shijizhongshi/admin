@@ -71,7 +71,7 @@
 		and (realname like concat(concat('%',#{realnameORmobile},'%')) or mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
-		and status=#{status}
+		and isdisabled=#{status}
 		</if>
 		order by addtime desc limit #{pageNo},#{pageSize}
 	</select>

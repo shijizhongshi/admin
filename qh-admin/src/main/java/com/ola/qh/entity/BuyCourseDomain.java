@@ -12,9 +12,20 @@ public class BuyCourseDomain {
 	
 	private String businessId;
 	
+	private int types;
+	
 	private int pageNo;
 	
 	private int pageSize;
+	
+
+	public int getTypes() {
+		return types;
+	}
+
+	public void setTypes(int types) {
+		this.types = types;
+	}
 
 	public String getNicknameORmobile() {
 		return nicknameORmobile;

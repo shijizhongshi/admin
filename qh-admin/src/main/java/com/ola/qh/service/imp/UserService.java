@@ -20,6 +20,7 @@ import com.ola.qh.dao.UserBookDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
 import com.ola.qh.entity.Business;
+import com.ola.qh.entity.BusinessBook;
 import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserBook;
 import com.ola.qh.entity.UserLogin;
@@ -57,8 +58,8 @@ public class UserService implements IUserService{
 			if(un!=null){
 				result.setStatus("0");
 				result.setData(un);
+				request.getSession().setAttribute("surplusaccount",0);
 				request.getSession().setAttribute("username", un);
-				request.getSession().setAttribute("usernameId", "0");
 				request.getSession().setAttribute("admin",true);
 				request.getSession().setAttribute("jiamengshang",false);
 				return result;
@@ -70,8 +71,11 @@ public class UserService implements IUserService{
 		}else{
 			Business b = businessDao.single(null,username,password);
 			if(b!=null){
+				BusinessBook bb = businessDao.singlebook(b.getId(), null);
+				if(bb!=null){
+					request.getSession().setAttribute("surplusaccount", bb.getSurplusaccount());
+				}
 				request.getSession().setAttribute("username", b.getUsername());
-				request.getSession().setAttribute("usernameId",b.getId());
 				request.getSession().setAttribute("jiamengshang",true);
 				request.getSession().setAttribute("admin",false);
 				result.setStatus("0");

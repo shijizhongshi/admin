@@ -12,6 +12,7 @@
 <@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-management">
 <div ng-controller="studentController">
 <input type="hidden" value="${username}" id="username"/>
+<input type="hidden" value="${surplusaccount}" id="surplusaccount">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -62,13 +63,13 @@
 <div class="manage">
 	<ul class="show">
 
-			<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加学员</li>
+		<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加学员</li>
 		<li style="background:#F9CD33;" ng-click="update()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改学员</li>
 		<li style="background:#F86846;" ng-click="deleteUser()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除学员</li>
 		<li ng-click="applys(1)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;网课报班</li>
 		<li ng-click="applys(2)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;课程报名</li>
 		<li ng-click="applys(3)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;直播报班</li>
-		<li onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;免费半价重学</li>
+		<li ng-click="applys(3)"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;免费半价重学</li>
  
 	</ul>
 	<div class="admin-table">
@@ -220,7 +221,7 @@
 	</tr>
 	<tr ng-show="{{typesName=='班级'}}" ng-repeat="class in classlist">
 	<th><input type="checkbox" ng-checked="isSelected(class.id)"
-	ng-click="updateSelection($event,class.id,class)"/></th>
+	ng-click="updateSelection($event,class.id,class,class.classDiscountPrice)"/></th>
 	<th>{{class.className}}</th>
 	<th>{{class.classPrice}}</th>
 	<th>{{class.classDiscountPrice}}</th>
@@ -228,7 +229,7 @@
 	</tr>
 	<tr ng-show="{{typesName=='课程'}}" ng-repeat="course in courselist">
 	<th><input type="checkbox" ng-checked="isSelected(course.id)"
-	ng-click="updateSelection($event,course.id,course)"/></th>
+	ng-click="updateSelection($event,course.id,course,course.courseDiscountPrice)"/></th>
 	<th>{{course.courseName}}</th>
 	<th>{{course.coursePrice}}</th>
 	<th>{{course.courseDiscountPrice}}</th>
@@ -257,18 +258,18 @@
 </div>
 
 <div style="float:left;font-size: 1.6rem;line-height: 50px;" ng-show="{{jiamengshang}}">
-您当前余额：15454545&nbsp;所需班级需扣除：0元；
+您当前余额:{{surplusaccount}}&nbsp;所需班级需扣除：{{prices}}元；
 </div>
 
 <div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;" ng-show="!{{jiamengshang}}">
-销售人员<i class="bitian">*</i><input type="text" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
+销售人员<i class="bitian">*</i><input type="text" ng-model="openCourse.salesName" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
 </div>
 <div style="float:left;font-size: 1.6rem;line-height: 50px;margin-left:4%;" ng-show="!{{jiamengshang}}">
-销售人员电话<i class="bitian">*</i><input type="text" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
+销售人员电话<i class="bitian">*</i><input type="text" ng-model="openCourse.salesMobile" style="border:#F0F1F3 1px solid;border-radius:5px;width:150px;height:30px;margin-left:20px;background:#F7F8FC;">
 </div>
 
 <div class="end">
-			<input name="git" type="submit" value="提交" ng-click="openCourse()"  style="background:#5ED8A9;">
+			<input name="git" type="submit" value="提交" ng-click="openCourses()"  style="background:#5ED8A9;">
 
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv2()" class="esc">
 		</div>
