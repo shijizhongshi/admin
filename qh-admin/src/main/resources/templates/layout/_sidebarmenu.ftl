@@ -204,12 +204,12 @@
                             </a>
                         </li>
                           <li id="sidebarmenu-student-classbuy">
-                            <a href="/web/student/classbuy">
+                            <a href="/web/student/classbuy?classId=">
                                 <span class="title">学员班级订购记录</span>
                             </a>
                         </li>
                          <li id="sidebarmenu-student-coursebuy">
-                            <a href="/web/student/coursebuy">
+                            <a href="/web/student/coursebuy?courseId=">
                                 <span class="title">学员课程订购记录</span>
                             </a>
                         </li>

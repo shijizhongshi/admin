@@ -47,9 +47,26 @@ public class UserBuyCourse {
 	
 	private int courseways;
 	
+	private String operatingName;////操作账号
 	
+	private String status;///0:正常   1:已关闭
 	
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getOperatingName() {
+		return operatingName;
+	}
+
+	public void setOperatingName(String operatingName) {
+		this.operatingName = operatingName;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}

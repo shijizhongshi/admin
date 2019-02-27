@@ -165,4 +165,28 @@ app.controller("CourseController", function($scope, $http){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
+	$scope.goBuyCourse=function(){
+		if($scope.courseId!=null){
+			location.href="/web/student/coursebuy?courseId="+$scope.courseId;
+		}else{
+			alert("请选中信息~");
+		}
+	}
+	
+	$scope.removeStudent=function(){
+		if($scope.courseId!=null){
+			$http.get("/api/btl/remove/student",{"params": {"courseId":$scope.courseId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=='0'){
+					alert("移除学员成功~");
+				}else{
+					alert("移除学员失败~");
+				}
+			})
+		}else{
+			alert("请选中信息~");
+		}
+		
+	}
 });

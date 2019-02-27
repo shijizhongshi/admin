@@ -81,14 +81,16 @@ public class BuyCourseController {
 	 * @param bcd
 	 * @return
 	 */
-	@RequestMapping(value="/record",method=RequestMethod.POST)
+	@RequestMapping(value="/record",method=RequestMethod.GET)
 	public Results<List<UserBuyCourse>> buyRecord(
 			@RequestParam(name="nicknameORmobile",required=false)String nicknameORmobile,
 			@RequestParam(name="fromdate",required=false)String fromdate,
 			@RequestParam(name="todate",required=false)String todate,
 			@RequestParam(name="businessId",required=false)String businessId,
 			@RequestParam(name="types",required=true)int types,
-			@RequestParam(name="page",required=true)int page){
+			@RequestParam(name="page",required=true)int page,
+			@RequestParam(name="classId",required=false)String classId,
+			@RequestParam(name="courseId",required=false)String courseId){
 		
 		BuyCourseDomain bcd=new BuyCourseDomain();
 		bcd.setBusinessId(businessId);
@@ -100,7 +102,28 @@ public class BuyCourseController {
 		bcd.setPageSize(pageSize);
 		bcd.setTodate(todate);
 		bcd.setTypes(types);
+		bcd.setClassId(classId);
+		bcd.setCourseId(courseId);
 		return buyCourseService.buyRecord(bcd);
+	}
+	
+	
+	
+	@RequestMapping("/remove/student")
+	public Results<String> removeStudent(
+			@RequestParam(name="classId",required=false)String classId,
+			@RequestParam(name="courseId",required=false)String courseId){
+		
+		Results<String> result=new Results<String>();
+		int count=buyCourseService.updateBuy(classId, courseId);
+		if(count!=0){
+			result.setStatus("0");
+			return result;
+		}
+		result.setStatus("1");
+		result.setMessage("移除学员失败~");
+		return result;
+		
 	}
 	
 	

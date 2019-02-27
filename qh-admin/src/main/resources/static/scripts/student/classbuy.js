@@ -19,10 +19,11 @@ app.controller("classBuyController", function($scope, $http){
 	$scope.pageSize=20;
 	$scope.loaddata=function(){
 		$http.get("/api/btl/record",{"params": {"nicknameORmobile":$scope.nicknameORmobile,
-			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"page":$scope.current,"types":1}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"page":$scope.current,"types":1,"classId":$("#classId").val()}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.classrecord=data.data;
+				$scope.total=data.count;
 			}
 		})
 	}

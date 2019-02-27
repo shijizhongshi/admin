@@ -18,6 +18,27 @@ public class BuyCourseDomain {
 	
 	private int pageSize;
 	
+	private String classId;///////班级对应所有的学员
+	
+	private String courseId;//////课程对应所有的学员
+	
+	
+	
+	public String getClassId() {
+		return classId;
+	}
+
+	public void setClassId(String classId) {
+		this.classId = classId;
+	}
+
+	public String getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
 
 	public int getTypes() {
 		return types;

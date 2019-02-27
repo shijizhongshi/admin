@@ -18,6 +18,7 @@
 		<result column="pay_type" property="payType"/>
 		<result column="business_id" property="businessId"/>
 		<result column="addtime" property="addtime" />
+		<result column="status" property="status"/>
 	</resultMap>
 	<sql id="sql_base">id,user_id,course_id,course_name,orders_id,class_id,addtime,pay_type,business_id</sql>
 	<insert id="insertUserCourse" parameterType="com.ola.qh.entity.UserBuyCourse">
@@ -45,11 +46,17 @@
 	<if test="businessId!=null and businessId!='' ">
 	and business_id=#{businessId}
 	</if>
-	<if test="types==1">
+	<if test="types==1 and (classId==null or classId=='')">
 	and class_id is not null
 	</if>
-	<if test="types==2">
+	<if test="types==2 and (courseId==null or courseId=='')">
 	and course_id is not null
+	</if>
+	<if test="classId!=null and classId!='' ">
+	and class_id=#{classId}
+	</if>
+	<if test="courseId!=null and courseId!='' ">
+	and course_id=#{courseId}
 	</if>
 	order by ubc.addtime desc
 	<if test="pageSize!=0">
@@ -58,17 +65,66 @@
 	</select>
 	
 	
+	<select id="selectUserBuyCount" parameterType="com.ola.qh.entity.BuyCourseDomain" resultType="int">
+	select count(ubc.id) from user_buy_course ubc
+	left join user u on u.id=ubc.user_id 
+	left join business_book_history bbh on bbh.buy_course_id=ubc.id
+	where 1=1
+	<if test="nicknameORmobile!=null and nicknameORmobile!='' ">
+	and (u.realname like concat(concat('%',#{nicknameORmobile},'%')) 
+	or u.mobile like concat(concat('%',#{nicknameORmobile},'%')))
+	</if>
+	<if test="fromdate!='' and fromdate!=null ">
+	and UNIX_TIMESTAMP(ubc.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	</if>
+	<if test="todate!='' and todate!=null ">
+	and UNIX_TIMESTAMP(ubc.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+	</if>
+	<if test="businessId!=null and businessId!='' ">
+	and business_id=#{businessId}
+	</if>
+	<if test="types==1 and (classId==null or classId=='')">
+	and class_id is not null
+	</if>
+	<if test="types==2 and (courseId==null or courseId=='')">
+	and course_id is not null
+	</if>
+	<if test="classId!=null and classId!='' ">
+	and class_id=#{classId}
+	</if>
+	<if test="courseId!=null and courseId!='' ">
+	and course_id=#{courseId}
+	</if>
+	
+	</select>
+	
+	
+	
+	
 	
 	<select id="selectUserBuyCourseCount" resultType="int">
 	select count(id) from user_buy_course where 1=1
-	<if test="userId!=null">
+	<if test="userId!=null and userId!='' ">
 	and user_id=#{userId}
 	</if>
-	<if test="classId!=null">
+	<if test="classId!=null and classId!='' ">
 	and class_id=#{classId}
 	</if>
-	<if test="courseId!=null">
+	<if test="courseId!=null and courseId!='' ">
 	and course_id=#{courseId}
 	</if>
+	and status=0
 	</select>
+	
+	
+	
+	<update id="updateBuy">
+	update user_buy_course set status=1 where 1=1
+	<if test="classId!=null and classId!='' ">
+	and class_id=#{classId}
+	</if>
+	<if test="courseId!=null and courseId!='' ">
+	and course_id=#{courseId}
+	</if>
+	</update>
 </mapper>

@@ -214,11 +214,19 @@ public class BuyCourseService implements IBuyCourseService {
 		// TODO Auto-generated method stub
 		Results<List<UserBuyCourse>> result=new Results<List<UserBuyCourse>>();
 		List<UserBuyCourse> list = userBuyCourseDao.selectUserBuyCourse(bcd);
-		for (UserBuyCourse userBuyCourse : list) {
+		for(UserBuyCourse userBuyCourse : list){
 			//////////查出对应的操作账号
-			
-			
+			if(userBuyCourse.getBusinessId()!=null && !"".equals(userBuyCourse.getBusinessId())){
+				Business b=businessDao.single(userBuyCourse.getBusinessId(), null, null);
+				if(b!=null){
+					userBuyCourse.setOperatingName(b.getUsername()+"(加盟商)");
+				}
+				
+			}else{
+				userBuyCourse.setOperatingName("admin");
+			}
 		}
+		result.setCount(userBuyCourseDao.selectUserBuyCount(bcd));
 		result.setStatus("0");
 		result.setData(list);
 		return result;
@@ -230,6 +238,13 @@ public class BuyCourseService implements IBuyCourseService {
 		// TODO Auto-generated method stub
 		
 		return userBuyCourseDao.selectUserBuyCourseCount(userId, classId, courseId);
+	}
+
+
+	@Override
+	public int updateBuy(String classId, String courseId) {
+		// TODO Auto-generated method stub
+		return userBuyCourseDao.updateBuy(classId, courseId);
 	}
 
 }

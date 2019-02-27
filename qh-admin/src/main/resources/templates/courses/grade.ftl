@@ -90,9 +90,9 @@
 					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
 					<li><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;下移</li>
-						<li><span class="glyphicon glyphicon-sort-by-attributes"
+					<li ng-click="goBuyCourse()"><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;学员列表</li>
-						<li><span class="glyphicon glyphicon-sort-by-attributes"
+					<li ng-click="removeStudent()"><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;移除所有学员</li>
 					<!--<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
 		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>-->

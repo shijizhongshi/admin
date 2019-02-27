@@ -7,8 +7,10 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/indent/excle.js"></script>
+<script src="/scripts/student/classbuy.js"></script>
 <@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-classbuy">
 <div ng-controller="classBuyController">
+<input type="hidden" value="${classId}" id="classId">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -63,24 +65,25 @@
 	<th>学员电话</th>
 	<th>真实姓名</th>
 	<!--<th>销售人员</th>-->
-	<th>课程名称</th>
+	<th>班级名称</th>
 	<!--<th>课程类型</th>-->
 	<th>是否关闭</th>
-	<th>课程价格</th>
+	<th>班级价格</th>
 	<th>操作账户</th>
 	<th>是否重学</th>
 	<th>订购时间</th>
 	</tr>
-	<tr>
-	<th>学员名</th>
-	<th>学员电话</th>
-	<th>真实姓名</th>
-	<th>课程名称</th>
-	<th>是否关闭</th>
-	<th>课程价格</th>
-	<th>操作账户</th>
-	<th>是否重学</th>
-	<th>订购时间</th>
+	<tr ng-repeat="r in classrecord">
+	<th>{{r.nickname}}</th>
+	<th>{{r.mobile}}</th>
+	<th>{{r.realname}}</th>
+	<th>{{r.courseName}}</th>
+	<th ng-show="{{r.status=='0'}}">正常</th>
+	<th ng-show="{{r.status=='1'}}">已关闭</th>
+	<th>{{r.courseDiscountPrice}}</th>
+	<th>{{r.operatingName}}</th>
+	<th>否</th>
+	<th>{{r.addtime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
 	
 	</tr>
 	</tbody></table>
