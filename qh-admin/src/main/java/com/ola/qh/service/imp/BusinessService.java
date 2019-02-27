@@ -39,13 +39,21 @@ public class BusinessService implements IBusinessService{
 			result.setStatus("0");
 			return result;
 		}else{
-			String businessId=KeyGen.uuid();
-			int count = businessDao.exist(b.getName());
+			
+			int count = businessDao.exist(b.getName(),null);
 			if(count>0){
 				result.setStatus("1");
 				result.setMessage("该名称的加盟商已经存在了");
 				return result;
 			}
+			
+			int num = businessDao.exist(null, b.getAddress());
+			if(num>0){
+				result.setStatus("1");
+				result.setMessage("该地址的加盟商已经存在了");
+				return result;
+			}
+			String businessId=KeyGen.uuid();
 			Business bold = businessDao.single(null, b.getUsername(),null);
 			if(bold!=null){
 				result.setStatus("1");

@@ -71,6 +71,9 @@
 	<if test="name!=null and name!='' ">
 	and name=#{name}
 	</if>
+	<if test="address!=null and address!=''">
+	and address like concat(concat('%',#{address},'%'))
+	</if>
 	</select>
 	
 	<update id="update" parameterType="com.ola.qh.entity.Business">

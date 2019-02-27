@@ -21,7 +21,7 @@ public interface BusinessDao {
 			@Param("address")String address,@Param("fromdate")String fromdate,
 			@Param("todate")String todate);
 	
-	public int exist(@Param("name")String name);
+	public int exist(@Param("name")String name,@Param("address")String address);
 	
 	public int update(Business b);
 	
