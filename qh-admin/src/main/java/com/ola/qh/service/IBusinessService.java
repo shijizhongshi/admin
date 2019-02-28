@@ -14,7 +14,7 @@ public interface IBusinessService {
 	public Results<String> charge(Business b);
 	
 	public List<Business> list(String name,String address,String fromdate,
-			String todate,int pageNo,int pageSize);
+			String todate,int pageNo,int pageSize,String expireOrders,String superOrders);
 	
 	public int delete(String id);
 	

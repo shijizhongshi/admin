@@ -7,225 +7,259 @@
 
 	<!-- 加盟商的开始############################################# -->
 	<resultMap type="com.ola.qh.entity.Business" id="BusinessMap">
-	<result column="id" property="id"/>
-	<result column="username" property="username"/>
-	<result column="password" property="password"/>
-	<result column="name" property="name"/>
-	<result column="principal" property="principal"/>
-	<result column="logo" property="logo"/>
-	<result column="mobile" property="mobile"/>
-	<result column="address" property="address"/>
-	<result column="status" property="status"/>
-	<result column="expire_time" property="expireTime"/>
-	<result column="addtime" property="addtime"/>
-	<result column="banner" property="banner"/>
+		<result column="id" property="id" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="name" property="name" />
+		<result column="principal" property="principal" />
+		<result column="logo" property="logo" />
+		<result column="mobile" property="mobile" />
+		<result column="address" property="address" />
+		<result column="status" property="status" />
+		<result column="expire_time" property="expireTime" />
+		<result column="addtime" property="addtime" />
+		<result column="banner" property="banner" />
 	</resultMap>
-	
-	
+
+
 	<insert id="insert" parameterType="com.ola.qh.entity.Business">
-	insert into business(id,username,password,name,principal,logo,mobile,address,
-	status,addtime,expire_time,banner)values(#{id},#{username},#{password},#{name},#{principal},#{logo},#{mobile},#{address},
-	#{status},#{addtime},#{expireTime},#{banner})
+		insert into
+		business(id,username,password,name,principal,logo,mobile,address,
+		status,addtime,expire_time,banner)values(#{id},#{username},#{password},#{name},#{principal},#{logo},#{mobile},#{address},
+		#{status},#{addtime},#{expireTime},#{banner})
 	</insert>
-	
+
 	<select id="selectList" resultMap="BusinessMap">
-	select * from business where 1=1
-	<if test="name!=null and name!='' ">
-	 and name=#{name}
-	</if>
-	<if test="address!=null and address!='' ">
-	 and address like concat(concat('%',#{address},'%'))
-	</if>
-	<if test="fromdate!='' and fromdate!=null ">
-	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
-	</if>
-	<if test="todate!='' and todate!=null ">
-	and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
-	</if>
-	order by addtime desc
-	<if test="pageSize!=0">
-	limit #{pageNo},#{pageSize}
-	</if>
+		select b.*,bb.surplusaccount surplusaccount,bb.payaccount
+		payaccount,bb.account account from business b
+		left join business_book
+		bb on bb.business_id=b.id
+		where 1=1
+		<if test="name!=null and name!='' ">
+			and b.name=#{name}
+		</if>
+		<if test="address!=null and address!='' ">
+			and b.address like concat(concat('%',#{address},'%'))
+		</if>
+		<if test="fromdate!='' and fromdate!=null ">
+			and
+			UNIX_TIMESTAMP(b.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+		</if>
+		<if test="todate!='' and todate!=null ">
+			and UNIX_TIMESTAMP(b.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+		</if>
+		<if test="expireOrders==1">
+			<!-- 升序 -->
+			order by b.expire_time asc
+		</if>
+		<if test="expireOrders==2">
+			<!-- 降序 -->
+			order by b.expire_time desc
+		</if>
+		<if test="superOrders==1">
+
+			order by bb.surplusaccount asc
+		</if>
+		<if test="superOrders==2">
+
+			order by bb.surplusaccount desc
+		</if>
+		<if test="expireOrders==0 and superOrders==0 ">
+			order by b.addtime desc
+		</if>
+
+		<if test="pageSize!=0">
+			limit #{pageNo},#{pageSize}
+		</if>
 	</select>
-	
-	
+
+
 	<select id="selectListCount" resultType="int">
-	select count(id) from business where 1=1
-	<if test="name!=null and name!='' ">
-	 and name=#{name}
-	</if>
-	<if test="address!=null and address!='' ">
-	 and address like concat(concat('%',#{address},'%'))
-	</if>
-	<if test="fromdate!='' and fromdate!=null ">
-	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
-	</if>
-	<if test="todate!='' and todate!=null ">
-	and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
-	</if>
-	
+		select count(id) from business where 1=1
+		<if test="name!=null and name!='' ">
+			and name=#{name}
+		</if>
+		<if test="address!=null and address!='' ">
+			and address like concat(concat('%',#{address},'%'))
+		</if>
+		<if test="fromdate!='' and fromdate!=null ">
+			and
+			UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+		</if>
+		<if test="todate!='' and todate!=null ">
+			and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+		</if>
+
 	</select>
-	
+
 	<select id="exist" resultType="int">
-	select count(id) from business where 1=1
-	<if test="name!=null and name!='' ">
-	and name=#{name}
-	</if>
-	<if test="address!=null and address!=''">
-	and address like concat(concat('%',#{address},'%'))
-	</if>
+		select count(id) from business where 1=1
+		<if test="name!=null and name!='' ">
+			and name=#{name}
+		</if>
+		<if test="address!=null and address!=''">
+			and address like concat(concat('%',#{address},'%'))
+		</if>
+		<if test="username!=null and username!='' ">
+		    and username=#{username}
+		</if>
+		and status=0
 	</select>
-	
+
 	<update id="update" parameterType="com.ola.qh.entity.Business">
-	update business set
-	<if test="username!=null and username!='' ">
-	username=#{username},
-	</if>
-	<if test="password!=null and password!='' ">
-	password=#{password},
-	</if>
-	<if test="name!=null and name!='' ">
-	name=#{name},
-	</if>
-	<if test="principal!=null and principal!='' ">
-	principal=#{principal},
-	</if>
-	<if test="logo!=null and logo!='' ">
-	logo=#{logo},
-	</if>
-	<if test="mobile!=null and mobile!='' ">
-	mobile=#{mobile},
-	</if>
-	<if test="address!=null and address!='' ">
-	address=#{address},
-	</if>
-	<if test="status!=null and status!='' ">
-	status=#{status},
-	</if>
-	<if test="expireTime!=null">
-	expire_time=#{expireTime},
-	</if>
-	<if test="banner!=null and banner!='' ">
-	banner=#{banner},
-	</if>
-	updatetime=#{updatetime}
-	where id=#{id}
+		update business set
+		<if test="username!=null and username!='' ">
+			username=#{username},
+		</if>
+		<if test="password!=null and password!='' ">
+			password=#{password},
+		</if>
+		<if test="name!=null and name!='' ">
+			name=#{name},
+		</if>
+		<if test="principal!=null and principal!='' ">
+			principal=#{principal},
+		</if>
+		<if test="logo!=null and logo!='' ">
+			logo=#{logo},
+		</if>
+		<if test="mobile!=null and mobile!='' ">
+			mobile=#{mobile},
+		</if>
+		<if test="address!=null and address!='' ">
+			address=#{address},
+		</if>
+		<if test="status!=null and status!='' ">
+			status=#{status},
+		</if>
+		<if test="expireTime!=null">
+			expire_time=#{expireTime},
+		</if>
+		<if test="banner!=null and banner!='' ">
+			banner=#{banner},
+		</if>
+		updatetime=#{updatetime}
+		where id=#{id}
 	</update>
-	
+
 	<select id="single" resultMap="BusinessMap">
-	select * from business where 1=1
-	<if test="id!=null and id!=''">
-	and id=#{id}
-	</if>
-	<if test="username!=null and username!=''">
-	and username=#{username}
-	</if>
-	<if test="password!=null and password!=''">
-	and password=#{password}
-	</if>
+		select * from business where 1=1
+		<if test="id!=null and id!=''">
+			and id=#{id}
+		</if>
+		<if test="username!=null and username!=''">
+			and username=#{username}
+		</if>
+		<if test="password!=null and password!=''">
+			and password=#{password}
+		</if>
 	</select>
-	
+
 	<delete id="delete">
-	delete from business where id=#{id}
+		delete from business where id=#{id}
 	</delete>
-	
+
 	<!-- 加盟商的结束############################################# -->
-	
-	
+
+
 	<!-- 账本开始############################################# -->
 	<resultMap type="com.ola.qh.entity.BusinessBook" id="BusinessBookMap">
-	<result column="id" property="id"/>
-	<result column="business_id" property="businessId"/>
-	<result column="account" property="account"/>
-	<result column="payaccount" property="payaccount"/>
-	<result column="usedaccount" property="usedaccount"/>
-	<result column="surplusaccount" property="surplusaccount"/>
-	<result column="sales_name" property="salesName"/>
-	<result column="addtime" property="addtime"/>
+		<result column="id" property="id" />
+		<result column="business_id" property="businessId" />
+		<result column="account" property="account" />
+		<result column="payaccount" property="payaccount" />
+		<result column="usedaccount" property="usedaccount" />
+		<result column="surplusaccount" property="surplusaccount" />
+		<result column="sales_name" property="salesName" />
+		<result column="addtime" property="addtime" />
 	</resultMap>
-	
+
 	<insert id="insertbook" parameterType="com.ola.qh.entity.BusinessBook">
-	insert into business_book(id,business_id,account,usedaccount,surplusaccount,
-	sales_name,addtime,payaccount)values(#{id},#{businessId},#{account},#{usedaccount},
-	#{surplusaccount},#{salesName},#{addtime},#{payaccount})
+		insert into
+		business_book(id,business_id,account,usedaccount,surplusaccount,
+		sales_name,addtime,payaccount)values(#{id},#{businessId},#{account},#{usedaccount},
+		#{surplusaccount},#{salesName},#{addtime},#{payaccount})
 	</insert>
-	
+
 	<select id="singlebook" resultMap="BusinessBookMap">
-	select * from business_book where 1=1
-	<if test="businessId!=null and businessId!='' ">
-	and business_id=#{businessId}
-	</if>
-	<if test="salesName!=null and salesName!='' ">
-	and sales_name=#{salesName}
-	</if>
+		select * from business_book where 1=1
+		<if test="businessId!=null and businessId!='' ">
+			and business_id=#{businessId}
+		</if>
+		<if test="salesName!=null and salesName!='' ">
+			and sales_name=#{salesName}
+		</if>
 	</select>
-	
-	
+
+
 	<update id="updatebook" parameterType="com.ola.qh.entity.BusinessBook">
-	update business_book set 
-	<if test="account!=null">
-	account=#{account},
-	</if>
-	<if test="usedaccount!=null">
-	usedaccount=#{usedaccount},
-	</if>
-	<if test="surplusaccount!=null">
-	surplusaccount=#{surplusaccount},
-	</if>
-	<if test="payaccount!=null">
-	payaccount=#{payaccount},
-	</if>
-	updatetime=#{updatetime}
-	where 1=1
-	<if test="businessId!=null and businessId!='' ">
-	and business_id=#{businessId}
-	</if>
-	<if test="salesName!=null and salesName!='' ">
-	and sales_name=#{salesName}
-	</if>
+		update business_book set
+		<if test="account!=null">
+			account=#{account},
+		</if>
+		<if test="usedaccount!=null">
+			usedaccount=#{usedaccount},
+		</if>
+		<if test="surplusaccount!=null">
+			surplusaccount=#{surplusaccount},
+		</if>
+		<if test="payaccount!=null">
+			payaccount=#{payaccount},
+		</if>
+		updatetime=#{updatetime}
+		where 1=1
+		<if test="businessId!=null and businessId!='' ">
+			and business_id=#{businessId}
+		</if>
+		<if test="salesName!=null and salesName!='' ">
+			and sales_name=#{salesName}
+		</if>
 	</update>
 	<!-- 账本结束############################################# -->
-	
-	
+
+
 	<!-- 账本记录表开始############################################# -->
 	<resultMap type="com.ola.qh.entity.BusinessBookHistory" id="BusinessBookHistoryMap">
-	<result column="id" property="id"/>
-	<result column="course_ways" property="courseWays"/>
-	<result column="business_id" property="businessId"/>
-	<result column="sales_people" property="salesPeople"/>
-	<result column="sales_mobile" property="salesMobile"/>
-	<result column="types" property="types"/>
-	<result column="payaccount" property="payaccount"/>
-	<result column="account" property="account"/>
-	<result column="buy_course_id" property="buyCourseId"/>
-	<result column="addtime" property="addtime"/>
+		<result column="id" property="id" />
+		<result column="course_ways" property="courseWays" />
+		<result column="business_id" property="businessId" />
+		<result column="sales_people" property="salesPeople" />
+		<result column="sales_mobile" property="salesMobile" />
+		<result column="types" property="types" />
+		<result column="payaccount" property="payaccount" />
+		<result column="account" property="account" />
+		<result column="buy_course_id" property="buyCourseId" />
+		<result column="addtime" property="addtime" />
 	</resultMap>
-	
-	
+
+
 	<insert id="insertBookHistory" parameterType="com.ola.qh.entity.BusinessBookHistory">
-	insert into business_book_history(id,course_ways,business_id,sales_people,sales_mobile,
-	types,payaccount,account,buy_course_id,addtime)values(#{id},#{courseWays},#{businessId},
-	#{salesPeople},#{salesMobile},#{types},#{payaccount},#{account},#{buyCourseId},#{addtime})
+		insert into
+		business_book_history(id,course_ways,business_id,sales_people,sales_mobile,
+		types,payaccount,account,buy_course_id,addtime)values(#{id},#{courseWays},#{businessId},
+		#{salesPeople},#{salesMobile},#{types},#{payaccount},#{account},#{buyCourseId},#{addtime})
 	</insert>
-		
+
 	<!-- 账本记录表结束############################################# -->
-	
+
 	<!-- 加盟商和用户的关联表开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<insert id="insertBusinessUser">
-	insert into business_user(id,business_id,user_id)values(#{id},#{businessId},#{userId})
+		insert into
+		business_user(id,business_id,user_id)values(#{id},#{businessId},#{userId})
 	</insert>
 	<select id="singleBusinessUser" resultType="java.lang.String">
-	select business_id from business_user where 1=1
-	<if test="businessId!=null and businessId!=''">
-	and business_id=#{businessId}
-	</if>
-	<if test="userId!=null and userId!=''">
-	and user_id=#{userId}
-	</if>
+		select business_id from business_user where 1=1
+		<if test="businessId!=null and businessId!=''">
+			and business_id=#{businessId}
+		</if>
+		<if test="userId!=null and userId!=''">
+			and user_id=#{userId}
+		</if>
 	</select>
 	<delete id="deleteBusinessUser">
-	delete from business_user where business_id=#{businessId}
+		delete from business_user where
+		business_id=#{businessId}
 	</delete>
-	
+
 	<!-- 加盟商和用户的关联表结束~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 </mapper>

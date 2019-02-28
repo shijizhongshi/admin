@@ -15,13 +15,14 @@ public interface BusinessDao {
 	public List<Business> selectList(@Param("name")String name,
 			@Param("address")String address,@Param("fromdate")String fromdate,
 			@Param("todate")String todate,@Param("pageNo")int pageNo,
-			@Param("pageSize")int pageSize);
+			@Param("pageSize")int pageSize,@Param("expireOrders")int expireOrders,
+			@Param("superOrders")int superOrders);
 	
 	public int selectListCount(@Param("name")String name,
 			@Param("address")String address,@Param("fromdate")String fromdate,
 			@Param("todate")String todate);
 	
-	public int exist(@Param("name")String name,@Param("address")String address);
+	public int exist(@Param("name")String name,@Param("address")String address,@Param("username")String username);
 	
 	public int update(Business b);
 	

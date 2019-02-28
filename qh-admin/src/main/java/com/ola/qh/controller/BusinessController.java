@@ -42,6 +42,23 @@ public class BusinessController {
 	}
 	
 	/**
+	 * status==3停用的状态
+	 * <p>Title: closeBusiness</p>  
+	 * <p>Description: </p>  
+	 * @param businessId
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("/closeBusiness")
+	public Results<String> closeBusiness(@RequestParam(name="businessId",required=true)String businessId){
+		
+		Business b=new Business();
+		b.setId(businessId);
+		b.setStatus("3");
+		return businessService.save(b);
+	}
+	
+	/**
 	 * id必须
 	 * payaccount:实际支付金额
 	 * account:兑换课程金额
@@ -60,12 +77,14 @@ public class BusinessController {
 			@RequestParam(name="address",required=false)String address,
 			@RequestParam(name="fromdate",required=false)String fromdate,
 			@RequestParam(name="todate",required=false)String todate,
-			@RequestParam(name="page",required=false)int page){
+			@RequestParam(name="page",required=false)int page,
+			@RequestParam(name="expireOrders",required=false)String expireOrders,
+			@RequestParam(name="superOrders",required=false)String superOrders){
 		
 		Results<List<Business>> result=new Results<List<Business>>();
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		List<Business> list = businessService.list(name, address, fromdate, todate, pageNo, pageSize);
+		List<Business> list = businessService.list(name, address, fromdate, todate, pageNo, pageSize,expireOrders,superOrders);
 		result.setCount(businessService.selectListCount(name, address, fromdate, todate));
 		result.setStatus("0");
 		result.setData(list);

@@ -64,6 +64,11 @@ public class BuyCourseService implements IBuyCourseService {
 					result.setMessage("钱不够了");
 					return result;
 				}
+				if("3".equals(business.getStatus())){
+					result.setStatus("1");
+					result.setMessage("该账号已经被停用,请联系管理员");
+					return result;
+				}
 				if("2".equals(business.getStatus()) || business.getExpireTime().getTime()<new Date().getTime()){
 					result.setStatus("1");
 					result.setMessage("到期了");
