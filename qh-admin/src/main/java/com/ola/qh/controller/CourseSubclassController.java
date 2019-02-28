@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseSection;
@@ -133,6 +135,17 @@ public class CourseSubclassController {
 		 }
 		 return  courseSubclassService.courseSectionSaveUpdate(cs);
 	}
+	
+	
+	
+	@RequestMapping(value="/upload/section",method=RequestMethod.POST,consumes = "multipart/form-data")
+	public Results<String> uploadSection(@RequestParam(name="file",required=true) MultipartFile file,
+			@RequestParam(name="courseChapterId",required=true)String courseChapterId) throws Exception{
+		
+		return courseSubclassService.importExcel(file, courseChapterId);
+	}
+	
+	
 	
 	@RequestMapping("/section/delete")
 	public Results<String> sectiondelete(@RequestParam("sectionId")String sectionId){

@@ -152,5 +152,11 @@
 	delete from course_section where id=#{id}
 	</delete>
 	
+	<select id="existSection" resultType="int">
+	select count(id) from course_section where section_name=#{sectionName} and course_chapter_id=#{courseChapterId} 
+	
+	</select>
+	
+	
 	<!-- 课程节的结束############################################## -->
 </mapper>
