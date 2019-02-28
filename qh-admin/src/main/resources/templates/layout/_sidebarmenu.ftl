@@ -216,15 +216,19 @@
                  <li id="sidebarmenu-patientmanage" >
                     <a>
                        <i class="linecons-cog"></i>
-                        <span class="title">评论信息管理</span>
+                        <span class="title">发布管理</span>
                     </a>
                     <ul>
                         <li id="sidebarmenu-patientmanage-patient">
                             <a href="/web/patientmanage/patient">
-                                <span class="title">信息简述</span>
+                                <span class="title">评论管理</span>
                             </a>
                         </li>
-                         
+                         <li id="sidebarmenu-patientmanage-uservideo">
+                            <a href="/web/patientmanage/uservideo">
+                                <span class="title">短视频管理</span>
+                            </a>
+                        </li>
                        </ul>
                 </li>
                 

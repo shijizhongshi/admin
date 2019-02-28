@@ -44,7 +44,7 @@ app.controller("patientController", function($scope, $http){
 				$http.get("/api/patient/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
-						$scope.patientList();
+						location.reload();
 					}
 				})
 				}

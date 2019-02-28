@@ -2,12 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="评论信息管理" />
+<@h.header title="短视频管理" />
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/patientmanage/patient.js"></script>
-<@b.body menu="sidebarmenu-patientmanage" submenu="sidebarmenu-patientmanage-patient">
-<div ng-controller="patientController">
+<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
+<script src="/scripts/patientmanage/uservideo.js"></script>
+<@b.body menu="sidebarmenu-patientmanage" submenu="sidebarmenu-patientmanage-uservideo">
+<div ng-controller="uservideoController">
 	
 		<div class="details" style="width: 100%">
 			<div class="details-nav">
@@ -16,7 +17,7 @@
 					<li>/</li>
 					<li>发布管理</li>
 					<li>/</li>
-					<li>评论管理</li>
+					<li>短视频管理</li>
 				</ul>
 			</div>
 			<div class="details-frame">
@@ -27,11 +28,11 @@
 							<ul style="height: 80px;" class="managr-dianpu">
 
 								<div class="select-3" style="width: 10%;margin-right:5px">
-									<span>信息标题</span> <input type="text" ng-model="title" />
+									<span>视频名称</span> <input type="text" ng-model="videoName" />
 								</div>
 								<div>
 									<input type="button" class="btn-lg im-key"
-										ng-click="patientList()" value="立即检索" />
+										ng-click="uservideoList()" value="立即检索" />
 								</div>
 
 							</ul>
@@ -39,13 +40,10 @@
 						<ul class="show">
 
 
-							<li ng-click="patientdelete()" style="background: #F86846;"><span
+							<li ng-click="uservideodelete()" style="background: #F86846;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-							<li><span class="glyphicon glyphicon-sort-by-attributes"
-								class="move-down"></span>&nbsp;下移</li>
-								<li ng-click="details(id)" style="background: #F9CD33;"><span
-								class="glyphicon glyphicon-trash"></span>&nbsp;查看详情</li>
+							<li ng-click="viewvideo()" style="background: #F9CD33;"><span
+								class="glyphicon glyphicon-trash"></span>&nbsp;查看视频</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
 								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
@@ -53,18 +51,28 @@
 
 							<table>
 								<tr>
-									<th>问题类别</th>
-									<th>问题标题</th>
+									<th>用户昵称</th>
+									<th>用户类型</th>
+									<th>视频的标题</th>
+									<th>视频名称</th>
+									<th>封面图</th>
 									<th>点赞数</th>
-									<th>问题创建时间</th>
+									<th>评论个数</th>
+									<th>创建时间</th>
+									<th>操作</th>
 								</tr>
 
-								<tr ng-repeat="p in patientlist" ng-click="checkpatient(p)"
-									ng-class="{'selected':selected==p}">
-									<th>{{p.category}}</th>
-									<th>{{p.title}}</th>
-									<th>{{p.likes}}</th>
-									<th>{{p.showtime}}</th>
+								<tr ng-repeat="uv in uservideolist" ng-click="checkvideo(uv)"
+									ng-class="{'selected':selected==uv}">
+									<th>{{uv.nickname}}</th>
+									<th>{{uv.type}}</th>
+									<th>{{uv.title}}</th>
+									<th>{{uv.videoName}}</th>
+									<th><img ng-src="{{uv.firstImage}}"></th>
+									<th>{{uv.likeNumber}}</th>
+									<th>{{uv.commentNumber}}</th>
+									<th>{{uv.showtime}}</th>
+									<th><span class="xiangqing" ng-click="details(uv.id)">查看评论</span></th>
 								</tr>
 
 							</table>
@@ -74,10 +82,25 @@
 									ng-model="current" items-per-page="pageSize" max-size="5"
 									class="pagination-sm" previous-text="&lsaquo;"
 									next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-									ng-click="patientList()">
+									ng-click="uservideoList()">
 								</ul>
 							</div>
 						</div>
+						
+					<!--弹窗-->
+			<div class="poop" id="add" style="width: auto; height: auto;">
+				<form id="myform">
+					<div>
+						
+						<div id='polyved'></div>
+						
+				</div>
+					<div class="end">
+						<input name="esc" type="reset" value="取消"
+							ng-click="cancel()" class="esc" />
+					</div>
+				</form>
+			</div>
 
 
 					</div>

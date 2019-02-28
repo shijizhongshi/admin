@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.UserVideoDao">
+	<resultMap type="com.ola.qh.entity.UserVideo"  id="UserVideoMap">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="doctor_id" property="doctorId" />
+		<result column="video_id" property="videoId" />
+		<result column="first_image" property="firstImage" />
+		<result column="video_name" property="videoName" />
+		<result column="nickname" property="nickname" />
+		<result column="professional" property="professional" />
+		<result column="title" property="title"/>
+		<result column="shopname" property="shopname" />
+		<result column="shop_id" property="shopId" />
+		<result column="status" property="status" />
+		<result column="like_number" property="likeNumber" />
+		<result column="comment_number" property="commentNumber" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+		
+		
+	</resultMap>
+	<select id="videoList" resultMap="UserVideoMap">
+		select  id,user_id,doctor_id,video_id,first_image,video_name,nickname,professional,
+		title,shopname,shop_id,status,like_number,comment_number,addtime
+		from user_video 
+		where 1=1
+		<if test="videoName!=null and videoName!=''">
+		and video_name like concat(concat('%',#{videoName},'%'))
+		</if>
+		order by addtime desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="videoCount" resultType="int">
+		select count(id)
+		from user_video 
+		where 1=1
+		<if test="videoName!=null and videoName!=''">
+		and video_name=#{videoName}
+		</if>
+		
+	</select>
+	
+	<delete id="deleteVideo">
+		delete from user_video where id=#{id}
+	</delete>
+</mapper>

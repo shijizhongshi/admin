@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="评论信息管理" />
+<@h.header title="发布管理" />
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/patientmanage/replypatient.js"></script>
@@ -14,9 +14,11 @@
 				<ul>
 					<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 					<li>/</li>
-					<li>评论信息管理</li>
+					<li>发布管理</li>
 					<li>/</li>
-					<li>信息详情</li>
+					<li>评论管理</li>
+					<li>/</li>
+					<li>评论详情</li>
 				</ul>
 			</div>
 			<div class="details-frame">
