@@ -34,7 +34,7 @@ public class OpenCourse {
 	@NotEmpty
 	private String userId;
 	@NotNull
-	private int courseWays;
+	private int courseWays;////1:销售人员开课 2:加盟商开课
 	
 	
 

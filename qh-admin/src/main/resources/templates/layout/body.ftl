@@ -29,7 +29,7 @@
                         </a>
                         <ul class="dropdown-menu user-profile-menu list-unstyled">
                             <li class="last">
-                                <a href="/web/user/logout">
+                                <a href="/">
                                     <i class="fa-lock"></i>
                                     登出
                                 </a>

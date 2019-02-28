@@ -38,6 +38,7 @@
             <ul id="main-menu" class="main-menu">
                 <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                 <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+                 <#if admin>
                   <li id="sidebarmenu-system" >
                     <a>
                         <i class="linecons-cog"></i>
@@ -68,6 +69,7 @@
                         
                     </ul>
                 </li>
+                
                 <li id="sidebarmenu-course">
                     <a>
                         <i class="linecons-cog"></i>
@@ -181,14 +183,15 @@
                                 <span class="title">用户信息</span>
                             </a>
                         </li>
-                       <li id="sidebarmenu-user-franchisee">
-                            <a href="/web/user/franchisee">
+                       <li id="sidebarmenu-user-business">
+                            <a href="/web/user/business">
                                 <span class="title">加盟商信息管理</span>
                             </a>
                         </li>
                          </ul>
                 </li>
-                
+                 </#if>
+                 <#if admin || jiamengshang>
                   <li id="sidebarmenu-student" >
                     <a>
                        <i class="linecons-cog"></i>
@@ -200,19 +203,21 @@
                                 <span class="title">学员管理</span>
                             </a>
                         </li>
-                          <li id="sidebarmenu-student-Online-course">
-                            <a href="/web/student/Online-course">
-                                <span class="title">学员网课订购记录</span>
+                          <li id="sidebarmenu-student-classbuy">
+                            <a href="/web/student/classbuy?classId=">
+                                <span class="title">学员班级订购记录</span>
                             </a>
                         </li>
-                         <li id="sidebarmenu-student-student-course">
-                            <a href="/web/student/student-course">
+                         <li id="sidebarmenu-student-coursebuy">
+                            <a href="/web/student/coursebuy?courseId=">
                                 <span class="title">学员课程订购记录</span>
                             </a>
                         </li>
                        
                          </ul>
                 </li>
+                </#if>
+                <#if admin>
                  <li id="sidebarmenu-patientmanage" >
                     <a>
                        <i class="linecons-cog"></i>
@@ -231,7 +236,7 @@
                         </li>
                        </ul>
                 </li>
-                
+                </#if>
                 
                 
              </ul>

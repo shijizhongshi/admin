@@ -40,9 +40,12 @@ app.controller("businessController", function($scope, $http){
 	$scope.total=0;
 	$scope.current=1;
 	$scope.pageSize=20;
+	$scope.superOrders=0;
+	$scope.expireOrders=0;
 	$scope.loaddata=function(){
 		$http.get("/api/business/list",{"params": {"name":$scope.name,"fromdate":changeDate($scope.fromdate),
-			"todate":changeDate($scope.todate),"address":$scope.address,"page":$scope.current}},{'Content-Type': 'application/json;charset=UTF-8'})
+			"todate":changeDate($scope.todate),"address":$scope.address,"page":$scope.current,
+			"expireOrders":$scope.expireOrders,"superOrders":$scope.superOrders}},{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.businesslist=data.data;
@@ -94,6 +97,24 @@ app.controller("businessController", function($scope, $http){
 		})
 	};	
 	
+	$scope.uploadmainimage1 = function(file){
+		
+		if(!file.files || file.files.length < 1) return;
+	    var fd = new FormData();
+	    fd.append("file", file.files[0]);
+		$http.post("/api/upload/single",fd,{
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	        
+	    })
+	    .success(function(data){
+	    	$scope.business.banner=data.data;
+	    	
+		})
+	};	
+	
+	
 	$scope.saveUpdateBusiness=function(){
 		$scope.business.address=$scope.address;
 		if($scope.business.confirmPassword!=$scope.business.password){
@@ -110,11 +131,28 @@ app.controller("businessController", function($scope, $http){
 	    		}
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.loaddata();
+	    	}else{
+	    		alert(data.message);
 	    	}
 	    })
 	};
 	
-	
+	$scope.closeBusiness=function(){
+		if($scope.businessId!=null){
+			$http.get("/api/business/closeBusiness",{"params": {"businessId":$scope.businessId}},{'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=="0"){
+					alert("该加盟商已经被停用~");
+					$scope.loaddata();
+				}else{
+					alert(data.message);
+				}
+			})
+			
+		}else{
+			alert("请选中信息~");
+		}
+	}
 	$scope.deleteBusiness=function(){
 		if($scope.businessId!=null){
 			 if(confirm("您确定要删除这条加盟商记录吗")){
@@ -122,6 +160,7 @@ app.controller("businessController", function($scope, $http){
 				.success(function(data){
 					if(data.status=="0"){
 						alert("删除成功~");
+						$scope.loaddata();
 					}
 				})
 			}

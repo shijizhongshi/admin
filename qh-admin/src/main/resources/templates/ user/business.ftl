@@ -54,6 +54,23 @@
 		<select  ng-options="city.cityName for city in citylist" ng-model="city" ng-change="getCityName(city)">
 		</select>
 	</div>
+	<div class="select-3">
+		<span>到期时间排序</span>
+		<img src="/images/sjk-xl.png">
+		<select ng-model="expireOrders">
+		<option value="1">升序</option>
+		<option value="2">降序</option>
+		</select>
+	</div>
+	<div class="select-3">
+		<span>开课余额</span>
+		<img src="/images/sjk-xl.png">
+		<select ng-model="superOrders">
+		<option value="1">升序</option>
+		<option value="2">降序</option>
+		</select>
+	</div>
+	
 	
 			<div style="float:left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()" value="检索">
@@ -66,8 +83,7 @@
 		<li style="background:#F9CD33;" ng-click="update()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改加盟商</li>
 		<li style="background:#F86846;" ng-click="deleteBusiness()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除加盟商</li>
 		<li  ng-click="tocharge()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;加盟商充值</li>
-		<li><span class="glyphicon glyphicon-briefcase"></span>&nbsp;停用</li>
-
+		<li ng-click="closeBusiness()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;停用</li>
  
 	</ul>
 	<div class="admin-table">
@@ -162,11 +178,17 @@
 	</div>
 	<div style="width:49%;float:right;">
 	<div class="costs-uploadfile-div">
-	<b>加盟商LOGO</b> <input type="file" id="file" value="上传加盟商LOGO" 
+	<b>加盟商LOGO</b> <input type="file" value="上传加盟商LOGO" 
 	accept="image/gif, image/jpeg, image/png, image/jpg"
 	onchange="angular.element(this).scope().uploadmainimage(this)">
 	<div style="height: 130px; margin-top: 3px;">
 	<img src="{{business.logo}}" style="height: 130px;"/>
+	</div>
+	<b>加盟商banner</b> <input type="file" value="上传加盟商banner" 
+	accept="image/gif, image/jpeg, image/png, image/jpg"
+	onchange="angular.element(this).scope().uploadmainimage1(this)">
+	<div style="height: 130px; margin-top: 3px;">
+	<img src="{{business.banner}}" style="height: 130px;"/>
 	</div>
 	<div class="select-radio" style="margin:24px 0;">
 		<ul><li>账户状态</li>  

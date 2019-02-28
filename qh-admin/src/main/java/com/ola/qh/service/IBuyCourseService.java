@@ -2,6 +2,7 @@ package com.ola.qh.service;
 
 import java.util.List;
 
+
 import com.ola.qh.entity.BuyCourseDomain;
 import com.ola.qh.entity.OpenCourse;
 import com.ola.qh.entity.UserBuyCourse;
@@ -13,6 +14,8 @@ public interface IBuyCourseService {
 	
 	public Results<List<UserBuyCourse>> buyRecord(BuyCourseDomain bcd);
 	
+	public int existOpenCourse(String courseId, String userId, String classId);
 	
+	public int updateBuy(String classId,String courseId);
 	
 }

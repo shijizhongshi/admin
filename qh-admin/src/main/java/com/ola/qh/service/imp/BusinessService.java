@@ -30,22 +30,59 @@ public class BusinessService implements IBusinessService{
 		///////保存加盟商的信息
 		Results<String> result=new Results<String>();
 		if(b.getId()!=null && !"".equals(b.getId())){
-			///////修改用户的基本信息
-			businessDao.update(b);
-			if("1".equals(b.getStatus()) && "2".equals(b.getStatus())){
+			if("1".equals(b.getStatus()) || "2".equals(b.getStatus()) || "3".equals(b.getStatus())){
 				////////学员不在属于这个加盟商
 				businessDao.deleteBusinessUser(b.getId());
 			}
+			if("0".equals(b.getStatus())){
+				//////这个是将加盟商变成正常的状态
+				////////先查看这个地区/名称/账号/的加盟商是否已经存在了
+					int namecount = businessDao.exist(b.getName(),null,null);
+					if(namecount>0){
+						result.setStatus("1");
+						result.setMessage("该名称的加盟商已经存在了");
+						return result;
+					}
+					
+					int addresscount = businessDao.exist(null, b.getAddress(),null);
+					if(addresscount>0){
+						result.setStatus("1");
+						result.setMessage("该地址的加盟商已经存在了");
+						return result;
+					}
+					int usernamecount = businessDao.exist(null,null,b.getUsername());
+					if(usernamecount>0){
+						result.setStatus("1");
+						result.setMessage("该账号的加盟商已经存在了");
+						return result;
+					}
+			}
+		    ///////修改加盟商的的基本信息
+			businessDao.update(b);
 			result.setStatus("0");
 			return result;
 		}else{
-			String businessId=KeyGen.uuid();
-			int count = businessDao.exist(b.getName());
-			if(count>0){
+			int namecount = businessDao.exist(b.getName(),null,null);
+			if(namecount>0){
 				result.setStatus("1");
 				result.setMessage("该名称的加盟商已经存在了");
 				return result;
 			}
+			
+			int addresscount = businessDao.exist(null, b.getAddress(),null);
+			if(addresscount>0){
+				result.setStatus("1");
+				result.setMessage("该地址的加盟商已经存在了");
+				return result;
+			}
+			int usernamecount = businessDao.exist(null,null,b.getUsername());
+			if(usernamecount>0){
+				result.setStatus("1");
+				result.setMessage("该账号的加盟商已经存在了");
+				return result;
+			}
+			
+			String businessId=KeyGen.uuid();
 			b.setId(businessId);
 			Date date=new Date();
 			b.setAddtime(date);
@@ -88,7 +125,27 @@ public class BusinessService implements IBusinessService{
 		Results<String> result=new Results<String>();
 		///////充值金额必须大于0;;;;;;
 		if(b.getPayaccount().compareTo(BigDecimal.ZERO)==1 && b.getAccount().compareTo(BigDecimal.ZERO)==1){
-			Business bnew = businessDao.single(b.getId());
+			Business bnew = businessDao.single(b.getId(),null,null);
+			int namecount = businessDao.exist(bnew.getName(),null,null);
+			if(namecount>0){
+				result.setStatus("1");
+				result.setMessage("该名称的加盟商已经存在了");
+				return result;
+			}
+			
+			int addresscount = businessDao.exist(null, bnew.getAddress(),null);
+			if(addresscount>0){
+				result.setStatus("1");
+				result.setMessage("该地址的加盟商已经存在了");
+				return result;
+			}
+			int usernamecount = businessDao.exist(null,null,bnew.getUsername());
+			if(usernamecount>0){
+				result.setStatus("1");
+				result.setMessage("该账号的加盟商已经存在了");
+				return result;
+			}
+			
 			if(bnew.getExpireTime()!=null){
 				//////过期时间不为空
 				if(bnew.getExpireTime().getTime()>=new Date().getTime()){
@@ -143,16 +200,17 @@ public class BusinessService implements IBusinessService{
 	}
 
 	@Override
-	public List<Business> list(String name, String address, String fromdate, String todate, int pageNo, int pageSize) {
+	public List<Business> list(String name, String address, String fromdate, String todate, int pageNo, int pageSize,String expireOrders,String superOrders) {
 		// TODO Auto-generated method stub
-		List<Business> list = businessDao.selectList(name, address, fromdate, todate, pageNo, pageSize);
-		for (Business business : list) {
-			BusinessBook bb = businessDao.singlebook(business.getId(), null);
-			business.setSurplusaccount(bb.getSurplusaccount());/////剩余多少兑换课程的金额
-			business.setPayaccount(bb.getPayaccount());/////总共充值的钱数
-			business.setAccount(bb.getAccount());////总的兑换金额
+		int eorder=0;
+		int sorder=0;
+		if(expireOrders!=null){
+			eorder=Integer.parseInt(expireOrders);
 		}
-		return list;
+		if(superOrders!=null){
+			sorder=Integer.parseInt(superOrders);
+		}
+		return businessDao.selectList(name, address, fromdate, todate, pageNo, pageSize,eorder,sorder);
 	}
 
 	@Transactional
@@ -161,6 +219,12 @@ public class BusinessService implements IBusinessService{
 		// TODO Auto-generated method stub
 		businessDao.deleteBusinessUser(id);
 		return businessDao.delete(id);
+	}
+
+	@Override
+	public int selectListCount(String name, String address, String fromdate, String todate) {
+		// TODO Auto-generated method stub
+		return businessDao.selectListCount(name, address, fromdate, todate);
 	}
 
 

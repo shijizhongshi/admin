@@ -32,7 +32,6 @@ public class AddressPcdService implements IAddressPcdService {
 
 	@Override
 	public List<AddressPcd> selectCity(int provinceId) {
-		
 		return addresspcddao.selectCity(provinceId);
 	}
 
