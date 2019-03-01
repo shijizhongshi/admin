@@ -1,8 +1,7 @@
 app.controller("bankController", function($scope, $http,$sce){
 
 	
-	
-	
+	//$scope.urls = "https://p.bokecc.com/player?vid=9A116EDEE6EA91B29C33DC5901307461&siteid=91DD94C27B488135&autoStart=false&width=600&height=490&playerid=023C4DD30D07346E&playertype=1"
 //上传主展示图片
 	$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
@@ -18,7 +17,19 @@ app.controller("bankController", function($scope, $http,$sce){
 	    	
 		})
 	};
-	
+	$http.get("/api/uservideo/getVideo")
+	.success(function(data){
+		if(data.status=="0"){
+			$scope.uservideo=data.data;
+			$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+$scope.uservideo.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+			 $scope.serverUrl = 'https://www.baidu.com/';
+		     $scope.trustSrc = function() {
+		         return $sce.trustAsResourceUrl($scope.scriptss1);
+		     }
+		     $scope.scriptss2="cciframe_"+$scope.uservideo.videoId;
+			
+		}
+	})
 
 /*$http.get("/api/coursenofree/polyv",{"params": {"vid":"b826fec7541e00ae5c2364c1a6c42870_b"}}, {'Content-Type': 'application/json;charset=UTF-8'})
 .success(function(data){
@@ -42,12 +53,8 @@ app.controller("bankController", function($scope, $http,$sce){
 	var scr = document.createElement('script');
 	scr.innerText='https://p.bokecc.com/player?vid=7E8E3E5FFA79D1C69C33DC5901307461&siteid=91DD94C27B488135&autoStart=false&width=600&height=490&playerid=023C4DD30D07346E&playertype=1'
 	document.body.appendChild(scr)*/
-	$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid=7E8E3E5FFA79D1C69C33DC5901307461&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
-	 $scope.serverUrl = 'https://www.baidu.com/';
-     $scope.trustSrc = function() {
-         return $sce.trustAsResourceUrl($scope.scriptss1);
-     }
-     $scope.scriptss2="cciframe_7E8E3E5FFA79D1C69C33DC5901307461";
+	
+     $scope.scriptss3="9A116EDEE6EA91B29C33DC5901307461"
 });
 
 

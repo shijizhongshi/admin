@@ -14,9 +14,9 @@
 				<ul>
 					<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 					<li>/</li>
-					<li>评论信息管理</li>
+					<li>发布管理</li>
 					<li>/</li>
-					<li>信息简述</li>
+					<li>评论管理</li>
 				</ul>
 			</div>
 			<div class="details-frame">

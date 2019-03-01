@@ -31,12 +31,8 @@
 				<span>广告横幅的位置</span> <img src="/images/sjk-xl.png" /> <select
 					ng-model="types">
 					<option value="0">查看全部</option>
-					<option value="1">首页banner</option>
-					<option value="2">学院banner</option>
-					<option value="3">商城首页banner</option>
-					<option value="4">商城首页的品牌热卖</option>
-					<option value="5">商城首页的中间的图片</option>
-					<option value="6">学院的banner图</option>
+					<option value="1">学院的banner</option>
+					<option value="2">学院水印logo</option>
 				</select>
 
 			</div>
@@ -83,12 +79,8 @@
 								ng-class="{'selected':selected==b}">
 								<td><img ng-src="{{b.imageurl}}"
 									style="width: 50px; height: 30px;" /></td>
-								<td ng-show="{{b.type==1}}">首页banner</td>
-								<td ng-show="{{b.type==2}}">学院banner</td>
-								<td ng-show="{{b.type==3}}">商城首页banner</td>
-								<td ng-show="{{b.type==4}}">商城首页的品牌热卖</td>
-								<td ng-show="{{b.type==5}}">商城首页的中间的图片</td>
-								<td ng-show="{{b.type==6}}">学院的banner图</td>
+								<td ng-show="{{b.type==1}}">学院的banner</td>
+								<td ng-show="{{b.type==2}}">学院水印logo</td>
 
 								<td>{{b.outLinks}}</td>
 								<td ng-show="{{b.isshow==1}}">是</td>
@@ -123,12 +115,9 @@
 							<img src="/images/sjk-xl.png" /> <span>级别:</span> <select
 								ng-model="banner.type" name="type">
 								<option ng-show="bannerId==null" selected value="">请选择</option>
-								<option ng-selected="banner.type==1" value="1">首页banner</option>
-								<option ng-selected="banner.type==2" value="2">学院banner</option>
-								<option ng-selected="banner.type==3" value="3">商城首页banner</option>
-								<option ng-selected="banner.type==4" value="4">商城首页的品牌热卖</option>
-								<option ng-selected="banner.type==5" value="5">商城首页的中间的图片</option>
-								<option ng-selected="banner.type==6" value="6">学院的banner图</option>
+								<option ng-selected="banner.type==1" value="1">学院的banner</option>
+								<option ng-selected="banner.type==2" value="2">学院水印logo</option>
+								
 							</select>
 						</div>
 						<div class=" select-2">

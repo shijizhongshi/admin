@@ -37,7 +37,20 @@ public class CourseClassController {
 		int pageNo=(page-1)*pageSize;
 		
 		List<CourseClass> list=courseClassService.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName,className);
-		results.setCount(courseClassService.selectCourseClassCount(courseTypeName, courseTypeSubclassName));
+		results.setCount(courseClassService.selectCourseClassCount(courseTypeName, courseTypeSubclassName,className));
+		results.setStatus("0");
+		results.setData(list);
+		return results;
+	}
+	
+	@RequestMapping(value="/list",method=RequestMethod.GET)
+	public Results<List<CourseClass>> selectCourseClass(
+			@RequestParam(name="courseTypeName")String courseTypeName,
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName
+			){
+		
+		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
+		List<CourseClass> list=courseClassService.listCourseClass(courseTypeName, courseTypeSubclassName);
 		results.setStatus("0");
 		results.setData(list);
 		return results;

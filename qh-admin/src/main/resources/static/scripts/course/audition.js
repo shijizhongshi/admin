@@ -7,6 +7,12 @@ app.controller("CourseNofreeController",function($scope,$http){
    //一页显示多少条
    $scope.pageSize = 20;
    
+   $scope.total1 = 0;
+   //当前的页数
+   $scope.page1 = 1;
+   //一页显示多少条
+   $scope.pageSize1 = 20;
+   
    $scope.id=null;
    $scope.video=null;
    $scope.teachers=null;
@@ -287,10 +293,11 @@ app.controller("CourseNofreeController",function($scope,$http){
 	//////教师的集合
 	$scope.teacherList=function(){
 		$http.get("/api/courseteacher/select",{"params": {"courseTypeName":$scope.courseTypeName,"teacherName":$scope.teacherName,
-			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page1}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.teacherlist=data.data;
+				$scope.total1=data.count;
 			}
 		})
 			

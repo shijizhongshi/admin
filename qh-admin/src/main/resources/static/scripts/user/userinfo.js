@@ -1,8 +1,12 @@
 app.controller("userinfoController", function($scope, $http){
 	
-	
+	if($("#nickname").val()!=''){
+		
+		$scope.nickname=$("#nickname").val();
+	}else{
+		$scope.nickname=null;
+	}
 	$scope.mobile=null;
-	$scope.nickname=null;
 	$scope.userrole=null;
 	
 		//总页数
@@ -31,6 +35,14 @@ app.controller("userinfoController", function($scope, $http){
 						user.disabled="禁用";
 					}
 					
+					if(user.isdoctor==0){
+						
+						user.isdoctors="普通用户";
+					}
+					else if(user.isdoctor==1){
+						user.isdoctors="医生用户";
+					}
+					
 					if(user.userrole==0){
 						
 						user.userroles="普通用户";
@@ -38,6 +50,8 @@ app.controller("userinfoController", function($scope, $http){
 					else if(user.userrole==1){
 						user.userroles="商家用户";
 					}
+					
+					
 				}); 
 			}
 		})

@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="评论信息管理" />
+<@h.header title="发布管理" />
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/patientmanage/replypatient.js"></script>
@@ -14,9 +14,11 @@
 				<ul>
 					<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 					<li>/</li>
-					<li>评论信息管理</li>
+					<li>发布管理</li>
 					<li>/</li>
-					<li>信息详情</li>
+					<li>评论管理</li>
+					<li>/</li>
+					<li>评论详情</li>
 				</ul>
 			</div>
 			<div class="details-frame">
@@ -51,7 +53,7 @@
 										</li>
 										<li class="name" style="text-align:center;">
 										
-												<span style="text-align:center;font-size:20px;position: relative;">{{replypatient.publisher}}</span>
+												<span ng-click="touser(replypatient.publisher)"  style="text-align:center;font-size:20px;position: relative;">{{replypatient.publisher}}</span>
 									
 										</li>
 										<li class="position" style="text-align:center;">
@@ -73,7 +75,7 @@
 										</div>
 									</div>
 									<div  class="timeandlikes" style="text-align:right;">
-											<span><b>赞</b>:{{replypatient.likes}}&nbsp;&nbsp;<b>时间</b>:{{replypatient.showtime}}</span>
+											<span><b>赞:{{replypatient.likes}}</b>&nbsp;&nbsp;<b>时间:{{replypatient.showtime}}</b></span>
 									</div>
 								</div>
 							</div>
@@ -88,7 +90,7 @@
 										</li>
 										<li class="name" style="text-align:center;">
 										
-												<span style="text-align:center;font-size:20px;position: relative;">{{rl.replyName}}</span>
+												<span ng-click="touser(rl.replyName)" style="text-align:center;font-size:20px;position: relative;">{{rl.replyName}}</span>
 									
 										</li>
 										
@@ -96,14 +98,14 @@
 								</div>
 								<div class="patient-message">
 									<div class="patients">
-										<div class="describes" style="min-height:270px;">
+										<div class="describes" style="min-height:275px;padding-bottom:10px;">
 										<i ng-click="deletereply(rl)" class="glyphicon glyphicon-remove" style="float: right; color: #666; font-size: 1.1rem"></i>
 											<span>{{rl.replyContent}}</span>
 										</div>
 										
 									</div>
 									<div  class="timeandlikes" style="text-align:right;">
-											<span><b>赞</b>:{{rl.likes}}&nbsp;&nbsp;<b>时间</b>:{{rl.showtime}}</span>
+											<span><b>赞:{{rl.likes}}</b>&nbsp;&nbsp;<b>时间:{{rl.showtime}}</b></span>
 									</div>
 								</div>
 							</div>

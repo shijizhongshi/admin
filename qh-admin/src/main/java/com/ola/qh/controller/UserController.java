@@ -61,7 +61,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value="/saveupdate",method=RequestMethod.GET)
+	@RequestMapping(value="/saveupdate",method=RequestMethod.POST)
 	public Results<String> saveUser(@RequestBody @Valid User user,BindingResult valid){
 		Results<String> result=new Results<String>();
 		if(user.getId()==null || "".equals(user.getId())){
@@ -82,5 +82,25 @@ public class UserController {
 		userService.deleteUser(id);
 		result.setStatus("0");
 		return result;
+	}
+	
+	@RequestMapping("/select/student")
+	public Results<List<User>> selectStudent(
+			@RequestParam(name="fromdate",required=false)String fromdate,
+			@RequestParam(name="todate",required=false)String todate,
+			@RequestParam(name="realnameORmobile",required=false)String realnameORmobile,
+			@RequestParam(name="status",required=false)String status,
+			@RequestParam(name="page",required=true)int page
+			){
+		
+		Results<List<User>> result=new Results<List<User>>();
+		int pageSize=Patterns.pageSize;
+		int pageNo=(page-1)*pageSize;
+		List<User> list = userService.selectStudent(fromdate, todate, realnameORmobile, status, pageNo, pageSize);
+		result.setCount(userService.selectStudentCount(fromdate, todate, realnameORmobile, status));
+		result.setStatus("0");
+		result.setData(list);
+		return result;
+		
 	}
 }

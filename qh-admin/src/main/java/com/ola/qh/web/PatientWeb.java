@@ -21,5 +21,16 @@ public class PatientWeb {
 		request.getSession().setAttribute("id", id);
 		return "patientmanage/replypatient";
 	}
+	
+	@RequestMapping(value="/uservideo",method=RequestMethod.GET)
+	public String uservideo(){
+		return "patientmanage/uservideo";
+	}
+	
+	@RequestMapping(value="/videopatient",method=RequestMethod.GET)
+	public String videopatient(@RequestParam(name="vid") String vid,HttpServletRequest request){
+		request.getSession().setAttribute("vid", vid);
+		return "patientmanage/videopatient";
+	}
 }
 

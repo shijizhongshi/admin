@@ -2,6 +2,8 @@ package com.ola.qh.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseSection;
 import com.ola.qh.util.Results;
@@ -25,4 +27,7 @@ public interface ICourseSubclassService {
 	public int deleteSerction(String id);
 	
 	public Results<String> courseSectionSaveUpdate(CourseSection cs);
+	
+	
+	public Results<String> importExcel(MultipartFile file,String courseChapterId)throws Exception;
 }

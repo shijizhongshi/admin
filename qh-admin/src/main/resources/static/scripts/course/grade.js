@@ -271,4 +271,30 @@ app.controller("gradeController", function($scope, $http){
 		location.reload();
 	}
 	
+	$scope.goBuyCourse=function(){
+		//////跳转到购买记录页面
+		if($scope.classId!=null){
+			location.href="/web/student/classbuy?classId="+$scope.classId;
+		}else{
+			alert("请选中信息~");
+		}
+		
+	}
+	
+	$scope.removeStudent=function(){
+		if($scope.classId!=null){
+			$http.get("/api/btl/remove/student",{"params": {"classId":$scope.classId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function(data){
+				if(data.status=='0'){
+					alert("移除学员成功~");
+				}else{
+					alert(data.message);
+				}
+			})
+		}else{
+			alert("请选中信息~");
+		}
+		
+	}
+	
 });

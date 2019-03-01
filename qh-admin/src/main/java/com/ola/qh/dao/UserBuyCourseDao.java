@@ -13,6 +13,10 @@ public interface UserBuyCourseDao {
 	
 	public List<UserBuyCourse> selectUserBuyCourse(BuyCourseDomain bcd);
 	
+	public int selectUserBuyCount(BuyCourseDomain bcd);
+	
 	public int selectUserBuyCourseCount(@Param("userId")String userId,
 			@Param("classId")String classId,@Param("courseId")String courseId);
+	
+	public int updateBuy(@Param("classId")String classId,@Param("courseId")String courseId);
 }

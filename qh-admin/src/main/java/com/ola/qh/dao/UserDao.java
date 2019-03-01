@@ -24,4 +24,12 @@ public interface UserDao {
 	
 	public String adminLogin(@Param("username")String username,@Param("password")String password);
 	
+	
+	public List<User> selectStudent(@Param("fromdate")String fromdate,@Param("todate")String todate,
+			@Param("realnameORmobile")String realnameORmobile,@Param("status")String status,
+			@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	
+	public int selectStudentCount(@Param("fromdate")String fromdate,@Param("todate")String todate,
+			@Param("realnameORmobile")String realnameORmobile,@Param("status")String status);
+	
 }

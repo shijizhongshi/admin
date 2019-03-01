@@ -4,6 +4,8 @@ public class Patterns {
 
     public static final int pageSize = 20;
     
+    public static final String INTERNAL_MOBILE_PATTERN = "^((13)|(14)|(15)|(16)|(17)|(18)|(19))\\d{9}$";
+    
     public static final String wxmchId="1526334321";
     
     public static final String wxappId="wxfc7f0bca7a44cbb8";

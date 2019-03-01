@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.UserVideoCommentDao">
+	<resultMap type="com.ola.qh.entity.UserVideoComment"  id="UserVideoCommentMap">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="vid" property="vid" />
+		<result column="types" property="types" />
+		<result column="commentid" property="commentid" />
+		<result column="comments" property="comments" />
+		<result column="likes_number" property="likesNumber" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+		
+		
+	</resultMap>
+	<select id="videoCommentList" resultMap="UserVideoCommentMap">
+		select uvc.id id,user_id,vid,uvc.types,commentid,comments,likes_number,uvc.addtime,nickname
+		from user_video_comment uvc left join user u on user_id=u.id
+		where vid=#{vid} and types=1
+		
+		order by uvc.addtime desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="videoCommentsList" resultMap="UserVideoCommentMap">
+		select uvc.id id,user_id,vid,uvc.types,commentid,comments,likes_number,uvc.addtime,nickname
+		from user_video_comment uvc left join user u on user_id=u.id
+		where vid=#{vid} and types=2 and commentid=#{id}
+		
+		order by uvc.addtime desc limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="videoCommentsCount" resultType="int">
+		select count(id)
+		from user_video_comment 
+		where vid=#{vid} and types=2 and commentid=#{id}
+		
+		
+	</select>
+	
+	<select id="videoCommentCount" resultType="int">
+		select count(id)
+		from user_video_comment 
+		where vid=#{vid} and types=1
+		
+		
+	</select>
+	
+	<delete id="videoCommentDelete">
+		delete from user_video_comment where 1=1
+		
+		<if test="id!=null and id!=''">
+		and id=#{id}
+		</if>
+		<if test="vid!=null and vid!=''">
+		and vid=#{vid}
+		</if>
+		<if test="commentid!=null and commentid!=''">
+		and commentid=#{commentid}
+		</if>
+		
+	</delete>
+</mapper>

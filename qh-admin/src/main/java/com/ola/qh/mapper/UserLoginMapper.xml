@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<select id="selectUserLogin" resultType="com.ola.qh.entity.UserLogin">
-		select id,user_id,device_name,device_id,device_token,device_type,addtime from user_login where user_id=#{userId}
+		select id,user_id,device_name,device_id,device_token,device_type,addtime,updatetime from user_login where user_id=#{userId}
 	</select>
 	
 	<insert id="saveUserLogin" parameterType="com.ola.qh.entity.UserLogin" >

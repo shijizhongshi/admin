@@ -34,6 +34,18 @@ public class User {
 	
 	private String realname;/////真实姓名
 	
+	private String logintime;////最后一次登录的时间
+	
+	
+	
+	public String getLogintime() {
+		return logintime;
+	}
+
+	public void setLogintime(String logintime) {
+		this.logintime = logintime;
+	}
+
 	public String getAddress() {
 		return address;
 	}

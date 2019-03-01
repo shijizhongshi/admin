@@ -46,7 +46,10 @@
 		<if test="className!=null and className!=''">
 		and class_name LIKE CONCAT(CONCAT('%',#{className},'%'))
 		</if>
-		order by addtime desc limit #{pageNo},#{pageSize}
+		order by addtime desc
+		<if test="pageSize!=0">
+		 limit #{pageNo},#{pageSize}
+		</if>
 	</select>
 	
 	<select id="selectCourseClassCount" resultType="int">
@@ -58,7 +61,7 @@
 		and course_type_subclass_name=#{courseTypeSubclassName}
 		</if>
 		<if test="className!=null and className!='' ">
-		and class_name=#{className}
+		and class_name LIKE CONCAT(CONCAT('%',#{className},'%'))
 		</if>
 	</select>
 	

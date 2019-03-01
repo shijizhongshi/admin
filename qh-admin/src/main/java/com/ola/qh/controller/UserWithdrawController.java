@@ -29,7 +29,7 @@ public class UserWithdrawController {
 
 		Results<List<UserWithdraw>> results = new Results<List<UserWithdraw>>();
 
-		int pageSize=Patterns.pageSize;
+		int pageSize=1;
 		int pageNo=(page-1)*pageSize;
 		List<UserWithdraw> select = userWithdrawService.selectUserWithdraw(mobile, payStatus,fromdate, todate, pageNo, pageSize);
 		int count = userWithdrawService.selectUserWithdrawCount(mobile, payStatus, fromdate, todate);

@@ -54,7 +54,7 @@
 	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
 	and course_type_subclass_name=#{courseTypeSubclassName}
 	</if>
-	order by addtime desc
+	order by addtime asc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
@@ -136,6 +136,7 @@
 	<if test="courseChapterId!=null">
 	and  course_chapter_id=#{courseChapterId}
 	</if>
+	order by addtime asc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
@@ -150,6 +151,12 @@
 	<delete id="deleteSerction">
 	delete from course_section where id=#{id}
 	</delete>
+	
+	<select id="existSection" resultType="int">
+	select count(id) from course_section where section_name=#{sectionName} and course_chapter_id=#{courseChapterId} 
+	
+	</select>
+	
 	
 	<!-- 课程节的结束############################################## -->
 </mapper>
