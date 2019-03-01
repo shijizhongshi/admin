@@ -126,6 +126,27 @@ app.controller("sectionController", function($scope, $http){
 		
 	}
 	
+	$scope.uploadS=function(){
+		document.getElementById('revise').style.display="block"; 
+	}
+	$scope.uploadSection=function(){
+		var fd = new FormData();
+	    fd.append("file", $("#file")[0].files[0]);
+	    fd.append("courseChapterId",$("#chapterId").val());
+	    
+	    
+	    $http.post("/api/course/subclass/upload/section",fd,{
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    })
+	    .success(function(data){
+	    	alert("上传成功~");
+	    	document.getElementById('revise').style.display="none"; 
+	    	$scope.sectionBases();
+		})
+	}
+	
 	$scope.deleteSection=function(){
 		if($scope.sectionId!=null){
 			////删除课程/

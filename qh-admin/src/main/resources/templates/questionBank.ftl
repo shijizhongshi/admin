@@ -44,6 +44,7 @@ xiaohaiyaoguan11111
 
 </div>
 <script src='' type='text/javascript'></script>
+<video><playcode><![CDATA[
 -->
 
 <div ng-controller="bankController">
@@ -52,8 +53,10 @@ xiaohaiyaoguan11111
 上传视频
 <input type="file" id="file" onchange="angular.element(this).scope().uploadmainimage(this)"/>
 </div>
-<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600">
-</iframe>
+
+<iframe id="{{scriptss2}}" 
+src="{{trustSrc()}}" 
+frameborder="0" height="490" width="600"></iframe>
 
 </div>
 

@@ -47,6 +47,7 @@
         <script src="/assets/js/xenon-custom.js"></script>
         <script src="/assets/js/md5-min.js"></script>
         <script src="/scripts/layout/app.js"></script>
+        <script src="/scripts/islogin.js"></script>
         
     </head>
 </#macro>

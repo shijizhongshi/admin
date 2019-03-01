@@ -40,7 +40,7 @@
 				<li style="width: 90px;"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
 				<li style="width: 90px;"><span
 					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
-				<!--<li  onclick="showDiv3()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;导入节内容</li>-->
+				<li  ng-click="uploadS()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;导入节内容</li>
 
 			</ul>
 
@@ -125,6 +125,34 @@
 					</div>
 				</form>
 			</div>
+			
+				<div class="poop" id="revise" style="width: auto; height: auto;">
+				<form id="myform">
+					<div>
+						<h3>批量添加节</h3>
+						
+						<div>
+							<input type="file" id="file" accept=".xlsx, .xls" />
+						</div>
+
+					</div>
+					<div class="end">
+						<input name="git" type="submit"
+							value="提交" ng-click="uploadSection()" style="background: #5ED8A9;" />
+						<input name="esc" type="reset" value="取消"
+							onclick="CloseDiv();formReset()" class="esc" />
+					</div>
+				</form>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</div>
 
 	</div>

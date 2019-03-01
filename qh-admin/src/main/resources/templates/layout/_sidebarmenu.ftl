@@ -6,7 +6,7 @@
     <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
     
     <div class="sidebar-menu toggle-others fixed">
-        <div class="sidebar-menu-inner" >
+        <div class="sidebar-menu-inner" ng-controller="IsloginController">
             <header class="logo-env" style="background-color:#e9484d">
                 <!-- logo -->
                 <div class="logo">
