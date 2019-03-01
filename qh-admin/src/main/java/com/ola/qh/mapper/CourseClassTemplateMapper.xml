@@ -41,7 +41,7 @@
 	<select id="selectTemplateCount"  resultType="int">
 		select count(id) from course_class_template where 1=1
 		<if test="templateName!=null and templateName!=''">
-		template_name LIKE CONCAT(CONCAT('%',#{templateName},'%'))
+		and template_name LIKE CONCAT(CONCAT('%',#{templateName},'%'))
 		</if>
 		
 	</select>

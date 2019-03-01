@@ -300,8 +300,8 @@
 							</table>
 						</div>
 						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total"
-								ng-model="page" items-per-page="pageSize" max-size="5"
+							<ul uib-pagination boundary-links="true" total-items="total1"
+								ng-model="page1" items-per-page="pageSize1" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 								ng-change="courseBases()">

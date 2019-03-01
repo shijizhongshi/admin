@@ -80,7 +80,7 @@
 		and content_types=#{contentTypes}
 		</if>
 		<if test="title!=null and title!='' ">
-		and title like concat(concat("%",title,"%"))
+		and title like concat(concat("%",#{title},"%"))
 		</if>
 	</select>
 	<select id="singlenews" parameterType="String" resultType="com.ola.qh.entity.News">

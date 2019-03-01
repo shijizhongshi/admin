@@ -37,7 +37,7 @@ public class CourseClassController {
 		int pageNo=(page-1)*pageSize;
 		
 		List<CourseClass> list=courseClassService.selectCourseClass(id, pageNo, pageSize, courseTypeName, courseTypeSubclassName,className);
-		results.setCount(courseClassService.selectCourseClassCount(courseTypeName, courseTypeSubclassName));
+		results.setCount(courseClassService.selectCourseClassCount(courseTypeName, courseTypeSubclassName,className));
 		results.setStatus("0");
 		results.setData(list);
 		return results;

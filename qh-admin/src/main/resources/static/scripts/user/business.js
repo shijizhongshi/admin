@@ -49,6 +49,7 @@ app.controller("businessController", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.businesslist=data.data;
+				$scope.total=data.count;
 			}
 		})
 	}

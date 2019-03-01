@@ -5,7 +5,7 @@ app.controller("withdrawController", function($scope, $http){
     //当前的页数
     $scope.current = 1;
     //一页显示多少条
-    $scope.pageSize = 20;
+    $scope.pageSize = 1;
     
     var formatDate = function (date) { 
 		if(date){
