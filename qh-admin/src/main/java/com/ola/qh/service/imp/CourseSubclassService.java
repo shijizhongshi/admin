@@ -135,29 +135,31 @@ public class CourseSubclassService implements ICourseSubclassService{
 	public Results<String> importExcel(MultipartFile file,String courseChapterId) throws Exception{
 		Results<String> result = new Results<String>();
 			Workbook wb = WorkbookFactory.create(file.getInputStream());
-			for (int z = 0; z < wb.getNumberOfSheets(); z++) {
-				Sheet sheet = wb.getSheetAt(z);
+			/*for (int z = 0; z < wb.getNumberOfSheets(); z++) {*/
+				Sheet sheet = wb.getSheetAt(0);
 				int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 				Iterator<Row> rowIterator = sheet.rowIterator();
+				Row titleRow = rowIterator.next();
+				//int columnNumber = titleRow.getLastCellNum();
 				for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 					Row row = rowIterator.next();
 						////// 保存题库的信息
-					CourseSection sc = new CourseSection();
-					sc.setAddtime(new Date());
-					sc.setId(KeyGen.uuid());
-					sc.setIsshow("1");////可见
-					sc.setCourseChapterId(courseChapterId);
-					sc.setSectionName(checkNull(0,row));
-					sc.setVideoId(checkNull(1,row));
-					///////这个章下的这一节是否已经存在了
 					int count = courseSubclassDao.existSection(checkNull(0,row), courseChapterId);
 					if(count==0){
+						CourseSection sc = new CourseSection();
+						sc.setAddtime(new Date());
+						sc.setId(KeyGen.uuid());
+						sc.setIsshow("1");////可见
+						sc.setCourseChapterId(courseChapterId);
+						sc.setSectionName(checkNull(0,row));
+						sc.setVideoId(checkNull(1,row));
+						///////这个章下的这一节是否已经存在了
 						courseSubclassDao.insertCourseSection(sc);
 					}
 					
 				}
 
-			}
+			/*}*/
 			result.setStatus("0");
 			return result;
 		

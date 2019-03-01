@@ -43,7 +43,7 @@ public interface CourseSubclassDao {
 	public int insertCourseSection(CourseSection sc);
 	
 	
-	public int existSection(String sectionName,String courseChapterId);
+	public int existSection(@Param("sectionName")String sectionName,@Param("courseChapterId")String courseChapterId);
 	
 	public int updateCourseSection(CourseSection sc);
 }

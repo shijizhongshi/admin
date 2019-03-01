@@ -126,18 +126,12 @@ app.controller("sectionController", function($scope, $http){
 		
 	}
 	
-	$scope.uploadmainimage = function(file){
-		
-	    
-	    
-		
-	};
 	$scope.uploadS=function(){
 		document.getElementById('revise').style.display="block"; 
 	}
 	$scope.uploadSection=function(){
 		var fd = new FormData();
-	    fd.append("file", $("#file").files[0]);
+	    fd.append("file", $("#file")[0].files[0]);
 	    fd.append("courseChapterId",$("#chapterId").val());
 	    
 	    
