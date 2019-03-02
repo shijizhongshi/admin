@@ -20,7 +20,7 @@ app.controller("sectionController", function($scope, $http){
 	
 	
 	$scope.sectionBases();
-	$scope.video=null;
+	//$scope.video=null;
 	/*$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
 		var formData = new FormData();
@@ -49,7 +49,7 @@ app.controller("sectionController", function($scope, $http){
 			
 		});
 	};*/
-	
+	/*
 	$scope.polyv=function(videoId){
 		$http.get("/api/coursenofree/polyv",{"params": {"vid":videoId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
@@ -76,9 +76,46 @@ app.controller("sectionController", function($scope, $http){
 		$scope.polyv(videoId);
 	};
 	
-	$scope.polyv();
+	$scope.polyv();*/
 	
 	////////////////以上是通过不同的条件查章节的集合的	
+	
+	
+	////视频上传
+	$scope.uploadmainimage = function(file){
+		if(!file.files || file.files.length < 1) return;
+	    var fd = new FormData();
+	    fd.append("file", file.files[0]);
+		$http.post("/api/upload/video",fd,{
+	        withCredentials: true,                                                                                               
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    })
+	    .success(function(data){
+	    	alert("上传成功~");
+	    	$scope.videoId=data;
+	    	document.getElementById('revise').style.display="none"; 
+	    	$scope.sectionBases();
+	    	
+		})
+	};
+	$http.get("/api/uservideo/getVideo")
+	.success(function(data){
+		if(data.status=="0"){
+			$scope.uservideo=data.data;
+			$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+$scope.uservideo.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+			 $scope.serverUrl = 'https://www.baidu.com/';
+		     $scope.trustSrc = function() {
+		         return $sce.trustAsResourceUrl($scope.scriptss1);
+		     }
+		     $scope.scriptss2="cciframe_"+$scope.uservideo.videoId;
+			
+		}
+	})
+
+	$scope.scriptss3="9A116EDEE6EA91B29C33DC5901307461"
+	
+	
 	$scope.sectionId=null;
 	
 	$scope.addSection=function(){
@@ -117,8 +154,8 @@ app.controller("sectionController", function($scope, $http){
 	////点击修改的按钮先看看是否已经选中了
 	$scope.updateSection=function(){
 		if($scope.sectionId!=null){
-			document.getElementById('polyved').style.display="block"; 
-			$scope.polyv($scope.videoId);
+			/*document.getElementById('polyved').style.display="block"; 
+			$scope.polyv($scope.videoId);*/
 			document.getElementById('add').style.display="block"; 
 		}else{
 			alert("请选中信息~");
@@ -126,7 +163,7 @@ app.controller("sectionController", function($scope, $http){
 		
 	}
 	
-	$scope.uploadS=function(){
+	/*$scope.uploadS=function(){
 		document.getElementById('revise').style.display="block"; 
 	}
 	$scope.uploadSection=function(){
@@ -145,7 +182,7 @@ app.controller("sectionController", function($scope, $http){
 	    	document.getElementById('revise').style.display="none"; 
 	    	$scope.sectionBases();
 		})
-	}
+	}*/
 	
 	$scope.deleteSection=function(){
 		if($scope.sectionId!=null){

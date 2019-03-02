@@ -30,6 +30,7 @@ public class UploadStoreController {
 		return result;
 	}
 
+	@RequestMapping(value = "/api/upload/video", method = RequestMethod.POST, consumes = "multipart/form-data")
 	private String process(MultipartFile file) throws Exception {
 		byte[] contents = file.getBytes();
 		String fname = file.getOriginalFilename();
