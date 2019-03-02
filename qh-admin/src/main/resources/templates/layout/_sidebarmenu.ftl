@@ -247,23 +247,15 @@
                                 <span class="title">课程章节/单元管理</span>
                             </a>
                         </li>
-                        <li id="sidebarmenu-questionBank-questionJie">
-                            <a href="/web/questionBank/questionJie">
-                                <span class="title">课程章节管理</span>
-                            </a>
-                        </li>
+                      
                         <li id="sidebarmenu-questionBank-examination">
                             <a href="/web/questionBank/examination">
                                 <span class="title">试卷管理</span>
                             </a>
                         </li>
-                        <li id="sidebarmenu-questionBank-examination-element">
-                            <a href="/web/questionBank/examination-element">
-                                <span class="title">试卷单元管理</span>
-                            </a>
-                        </li>
-                         <li id="sidebarmenu-questionBank- feedback">
-                            <a href="/web/questionBank/ feedback">
+                       
+                         <li id="sidebarmenu-questionBank-feedback">
+                            <a href="/web/questionBank/feedback">
                                 <span class="title">试题错误信息反馈</span>
              </a></li>
                        </ul>

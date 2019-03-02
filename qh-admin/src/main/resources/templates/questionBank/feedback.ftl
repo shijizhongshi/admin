@@ -4,10 +4,10 @@
 <html lang="en">
 <@h.header title="试题错误信息反馈"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/course/teacher.js"></script>
+<link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-questionBank" submenu="sidebarmenu-questionBank- feedback">
+<@b.body menu="sidebarmenu-questionBank" submenu="sidebarmenu-questionBank-feedback">
 
 <div >
 	<div class="details" style="width: 100%;">
@@ -54,7 +54,7 @@
 			</div>
 			<div class="manage">
 				<ul class="show">
-					<li ng-click="update()" style="background: #F9CD33;">
+					<li onclick="showDiv3()" style="background: #F9CD33;">
 					<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改试题</li>
 					<li  style="background: #F9CD33;">
 					<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看信息</li>
@@ -97,7 +97,70 @@
 					</div>
 				
 
+<!-- 修改试题 -->
+<div id="resource" class="resource" style="width:600px;min-width:600px;left:20%;">
+	<form id="myform3" class="ng-pristine ng-valid">
+	<h3 style="margin-bottom:0;">修改试题</h3>
+	<p style="border-bottom:1px solid #999;padding-bottom:5px;"><span>试题所属节：{}</span><span style="margin-left:10%;">试题类型：{单选题}</span></p>
+	<div>
+	<div style="float:left;width:49%;">
+	<div class="grade-text">
+	<span>试题标题</span>
+	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	</div>
+	
+	<div class="select-2">
+		<span>解析视频ID<i class="bitian">*</i></span>
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="视频ID" >
+	</div>
+	<div class="select-2">
+		<span>试题考点ID<i class="bitian">*</i></span>
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="考点ID" >
+	</div></div>
+	<div style="width:49%;float:right;">
+	<div class="shiti">
+	<ul><li style="background:#F5F6F8">试题1</li><li>试题2</li><li>试题3</li></ul>
+	<p>标题</p>
+	<div class="xiugaibt">
+	<textarea></textarea>
+	</div>
+	</div>
 
+
+<!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
+<div class="daan">
+<p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
+<table>
+<tbody>
+<tr>
+<td><input type="text"/></td>
+<td>
+<div class="dw">
+<img src="/images/sjk-xl.png"><select class="ng-pristine ng-untouched ng-valid ng-empty">
+			<option value="">正确</option>
+			<option value="">错误</option>
+		</select></div>
+		</td>
+</tr>
+
+
+</tbody>
+</table>
+	</div>
+	<div class="grade-text">
+	<span>答案解析</span>
+	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	</div>
+</div>
+</div>
+
+	<div class="end" style="margin-top:10px;">
+			<input name="git" type="submit" value="修改" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
+			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" class="esc">
+		</div>
+</form>
+
+</div>
 			
 
 				</div>
@@ -214,6 +277,23 @@ div.costs-uploadfile-div .allBtn {
 	height: 30px;
 	float: left;
 }
+
+#resource .grade-text , #resource .select-2 {width:auto;}
+#resource .grade-text textarea{height:50px;}
+.shiti ul {display:flex;justify-content: left;margin-bottom: 0;}
+.shiti ul li{margin-right: 3px;border-radius: 7px 7px 0px 0;background:#CBD2D8;text-align: center;padding: 0 5px;}
+.shiti p{padding-top: 7px;width:100%;padding-left: 2%;background: #F5F6F8;margin: 0;font-size: 1.3rem;padding-bottom: 5px;}
+.xiugaibt{width:100%;background: #F5F6F8;padding: 0 2%;height: 60px;}
+.xiugaibt textarea{width:100%;background:#FFFFFF;height: 53px;}
+.daan table{overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
+.daan table tr{background:#F7F8FC;font-size:1.3rem;}
+.daan table tr:nth-child(1){background:#F7F8FC;color:black;}
+.daan table tr td:nth-child(1){border-right:1px solid #ebe1e1;}
+.daan table tr:nth-child(1) td{}
+.dw{position: relative;width: 65px;}
+.dw img{position: absolute;right:0;top: 11px;width: 12px;}
+.daan table tr .dw select{margin-left:0; border:none;}
+.daan table tr:nth-child(2n-1){background:#F7F8FC;}
 </style>
 
 <script type="text/javascript">
