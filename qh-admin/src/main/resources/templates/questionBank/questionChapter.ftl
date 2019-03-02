@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/student/management.js"></script>
-<script src="/scripts/indent/excle.js"></script>
+<script src="/scripts/questionBank/questionChapter.js"></script>
 <@b.body menu="sidebarmenu-questionBank" submenu="sidebarmenu-questionBank-questionChapter">
-<div >
+<div ng-controller="questionChapter">
 
 <div class="classify" >
 		<ul class="menu">
@@ -80,7 +80,7 @@
 		<li style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除章</li>
 		<li  onclick="showDiv2()"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
 		<li><span class="glyphicon glyphicon-sort"></span>&nbsp;下移</li>
-		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;节内容管理</li>
+		<li ng-click="jie()" ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;节内容管理</li>
  
 	</ul>
 	<div class="admin-table">

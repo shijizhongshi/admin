@@ -23,8 +23,8 @@ public class questionBank {
 	public String element(){
 		return "questionBank/examination-element";
 	}
-	@RequestMapping("/ feedback")
+	@RequestMapping("/feedback")
 	public String  feedback(){
-		return "questionBank/ feedback";
+		return "questionBank/feedback";
 	}
 	}

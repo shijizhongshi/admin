@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-
 <@b.body menu="sidebarmenu-questionBank" submenu="sidebarmenu-questionBank-examination-element">
 <div>
 
@@ -230,10 +229,7 @@
 	<span>试题标题</span>
 	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
-	<div class="grade-text">
-	<span>答案解析</span>
-	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
-	</div>
+	
 	<div class="select-2">
 		<span>解析视频ID<i class="bitian">*</i></span>
 <input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="视频ID" >
@@ -254,18 +250,27 @@
 
 <!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
 <div class="daan">
+<p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
 <tbody>
 <tr>
-<td>正确选项</td>
-<td>选项</td>
+<td><input type="text"/></td>
+<td>
+<div class="dw">
+<img src="/images/sjk-xl.png"><select class="ng-pristine ng-untouched ng-valid ng-empty">
+			<option value="">正确</option>
+			<option value="">错误</option>
+		</select></div>
+		</td>
 </tr>
-<tr>
-<td><input type="checkbox"/></td>
-<td>答案答案答案答案答案答案答案答案</td>
-</tr>
+
+
 </tbody>
 </table>
+	</div>
+	<div class="grade-text">
+	<span>答案解析</span>
+	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
 </div>
 </div>
@@ -276,7 +281,7 @@
 		</div>
 </form>
 
-</idv>
+</div>
 
 
 </div>
@@ -307,16 +312,20 @@
 #guanli li{float:left;padding:0 20px;background:#F4F4F4;font-size:1.3rem;font-weight: bold;height:40px;line-height: 40px;box-shadow:inset 0px -3px 7px -3px #c2c0c0;}
 #resource .grade-text , #resource .select-2 {width:auto;}
 #resource .grade-text textarea{height:50px;}
-.shiti{}
 .shiti ul {display:flex;justify-content: left;margin-bottom: 0;}
 .shiti ul li{margin-right: 3px;border-radius: 7px 7px 0px 0;background:#CBD2D8;text-align: center;padding: 0 5px;}
 .shiti p{padding-top: 7px;width:100%;padding-left: 2%;background: #F5F6F8;margin: 0;font-size: 1.3rem;padding-bottom: 5px;}
-.xiugaibt{width:100%;background: #F5F6F8;padding: 0 2%;height: 80px;}
-.xiugaibt textarea{width:100%;background:#FFFFFF;height: 73px;}
-.daan table{margin-top:10px;overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
+.xiugaibt{width:100%;background: #F5F6F8;padding: 0 2%;height: 60px;}
+.xiugaibt textarea{width:100%;background:#FFFFFF;height: 53px;}
+.daan table{overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
 .daan table tr{background:#F7F8FC;font-size:1.3rem;}
-.daan table tr:nth-child(1){background:#dddedf;color:black;}
-.daan table tr td:nth-child(1){border-right:1px solid #999;}
+.daan table tr:nth-child(1){background:#F7F8FC;color:black;}
+.daan table tr td:nth-child(1){border-right:1px solid #ebe1e1;}
+.daan table tr:nth-child(1) td{}
+.dw{position: relative;width: 65px;}
+.dw img{position: absolute;right:0;top: 11px;width: 12px;}
+.daan table tr .dw select{margin-left:0; border:none;}
+.daan table tr:nth-child(2n-1){background:#F7F8FC;}
 </style>
 <script>
 function go(n){
