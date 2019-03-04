@@ -8,7 +8,7 @@ app.controller("bankController", function($scope, $http,$sce){
 	    var fd = new FormData();
 	    fd.append("file", file.files[0]);
 		$http.post("/api/upload/video",fd,{
-	        withCredentials: true,
+	        withCredentials: true,                                                                                               
 	        headers: {'Content-Type': undefined },
 	        transformRequest: angular.identity
 	    })

@@ -61,7 +61,7 @@
 		and course_type_subclass_name=#{courseTypeSubclassName}
 		</if>
 		<if test="className!=null and className!='' ">
-		and class_name=#{className}
+		and class_name LIKE CONCAT(CONCAT('%',#{className},'%'))
 		</if>
 	</select>
 	

@@ -102,16 +102,20 @@
 							</span>
 						</div>
 						<div class=" select-2" style="clear: both">
-							<span>视频的videoId:</span> <input type="text"
+							<span>视频的videoId:</span> 
+							<input type="file" id="file" onclick="angular.element(this).scope().uploadmainimage(this)"/>
+							<!--<input type="text"
 								ng-model="section.videoId" placeholder="视频的videoId"
-								style="width: 230px; text-indent: 2em;" ng-keyup="polyvnew(section.videoId)"/>
+								style="width: 230px; text-indent: 2em;" ng-keyup="polyvnew(section.videoId)"/>-->
 						</div>
 						<div>
+						
+						<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600"></iframe>
 							<!--<input type="file" id="file"
 								onchange="angular.element(this).scope().uploadmainimage(this)"
 								accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" />-->
 
-							<div id='polyved'></div>
+							<!--<div id='polyved'></div>-->
 						</div>
 
 					</div>

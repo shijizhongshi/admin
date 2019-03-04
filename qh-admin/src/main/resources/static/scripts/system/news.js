@@ -89,7 +89,10 @@ $scope.uploadmainimage = function(file){
 	}
 	
 	$scope.newsupdate=function(){
+
 		//$scope.news.content = ue.getContent();
+
+		$scope.news.imgUrl = $scope.imgUrl;
 		$http.post("/api/news/update",$scope.news,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){

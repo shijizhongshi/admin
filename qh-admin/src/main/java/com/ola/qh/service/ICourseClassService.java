@@ -11,7 +11,7 @@ public interface ICourseClassService {
 	
 	public List<CourseClass> listCourseClass(String courseTypeName,String courseTypeSubclassName);
 	
-	public int selectCourseClassCount(String courseTypeName,String courseTypeSubclassName);
+	public int selectCourseClassCount(String courseTypeName,String courseTypeSubclassName,String className);
 	
 	public Results<String> insertCourseClass(CourseClass courseClass);
 	

@@ -88,7 +88,7 @@
 						</div>
 						
 					<!--弹窗-->
-			<div class="poop" id="add" style="width: auto; height: auto;">
+			<div class="poop" id="add" style="width: auto; height: auto;left:30%;">
 				<form id="myform">
 					<div>
 						

@@ -190,8 +190,7 @@
                         </li>
                          </ul>
                 </li>
-                 </#if>
-                 <#if admin || jiamengshang>
+
                   <li id="sidebarmenu-student" >
                     <a>
                        <i class="linecons-cog"></i>
@@ -216,8 +215,7 @@
                        
                          </ul>
                 </li>
-                </#if>
-                <#if admin>
+
                  <li id="sidebarmenu-patientmanage" >
                     <a>
                        <i class="linecons-cog"></i>
@@ -228,14 +226,41 @@
                             <a href="/web/patientmanage/patient">
                                 <span class="title">评论管理</span>
                             </a>
-                        </li>
+                            
+                        </li>   
                          <li id="sidebarmenu-patientmanage-uservideo">
                             <a href="/web/patientmanage/uservideo">
                                 <span class="title">短视频管理</span>
+
+                            </a>
+                        </li>              
+             </ul></li>
+                   
+                   <li id="sidebarmenu-questionBank" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">题库管理</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-questionBank-questionChapter">
+                            <a href="/web/questionBank/questionChapter">
+                                <span class="title">课程章节/单元管理</span>
                             </a>
                         </li>
+                      
+                        <li id="sidebarmenu-questionBank-examination">
+                            <a href="/web/questionBank/examination">
+                                <span class="title">试卷管理</span>
+                            </a>
+                        </li>
+                       
+                         <li id="sidebarmenu-questionBank-feedback">
+                            <a href="/web/questionBank/feedback">
+                                <span class="title">试题错误信息反馈</span>
+             </a></li>
                        </ul>
                 </li>
+
                 </#if>
                 
                 
