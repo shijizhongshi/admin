@@ -33,11 +33,6 @@ app.controller("uservideoController", function($scope, $http,$sce){
 							uservideo.type="普通用户";
 						}
 						
-						uservideo.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+uservideo.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
-						$scope.trustSrc = function() {
-					         return $sce.trustAsResourceUrl(uservideo.scriptss1);
-					     }
-						uservideo.scriptss2="cciframe_"+uservideo.videoId;
 					})
 				}else{
 					alert("没有符合条件的信息")
@@ -62,12 +57,28 @@ app.controller("uservideoController", function($scope, $http,$sce){
 		}
 		
 	   $scope.viewvideo=function(){
+		   
+		   
 		   if($scope.id!=null){
-		   $scope.polyv($scope.videoId);
+			   if($scope.videoId!=null || $scope.videoId!=""){
+			   
+			$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+$scope.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+			$scope.trustSrc = function() {
+			         return $sce.trustAsResourceUrl($scope.scriptss1);
+			     }
+			$scope.scriptss2="cciframe_"+$scope.videoId;
+			
+			
+		   //$scope.polyv($scope.videoId);
 		   document.getElementById('add').style.display="block"; 
+			   }else{
+				   
+				   alert("无视频信息");
+			   }
 	   		}else{
 			alert("请先选中信息~");
-	   		}	
+	   		}
+		   
 		}
 	   
 	   $scope.uservideodelete=function(){
@@ -85,7 +96,7 @@ app.controller("uservideoController", function($scope, $http,$sce){
 			}
 		}
 	   
-	   $scope.video=null;
+	   /*$scope.video=null;
 	   $scope.polyv=function(videoId){
 			$http.get("/api/coursenofree/polyv",{"params": {"vid":videoId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
@@ -109,7 +120,7 @@ app.controller("uservideoController", function($scope, $http,$sce){
 			})
 		}
 	   
-	   $scope.polyv();
+	   $scope.polyv();*/
 	   
 	   $scope.details=function(id){
 		   $scope.id=id;
