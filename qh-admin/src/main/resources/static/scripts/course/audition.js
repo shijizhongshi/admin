@@ -138,11 +138,11 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 			
 		});
 	};*/
-	$scope.polyvnew=function(videoId){
+	/*$scope.polyvnew=function(videoId){
 		document.getElementById('polyved').style.display="block"; 
 		$scope.polyv(videoId);
 	};
-	/*$scope.uploadmainimage1 = function(file){
+	*//*$scope.uploadmainimage1 = function(file){
 		if(!file.files || file.files.length < 1) return;
 	    var formData={
 	    		"title" : "测试11",
@@ -211,7 +211,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		$scope.imgUrl=null;
 		$scope.courseNofree=null;
 		$scope.id=null;
-		$scope.polyv();
+		//$scope.polyv();
 		document.getElementById('add').style.display="block"; 
 	};
 	
@@ -251,9 +251,9 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
 		if($scope.id!=null){
-			document.getElementById('polyved').style.display="block";
+			//document.getElementById('polyved').style.display="block";
 			document.getElementById('add').style.display="block"; 
-			$scope.polyv($scope.videoId);
+			//$scope.polyv($scope.videoId);
 		}else{
 			alert("请选中信息~");
 		}
