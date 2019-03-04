@@ -14,14 +14,14 @@ app.controller("sectionController", function($scope, $http,$sce){
 			if(data.status=="0"){
 				$scope.sectionlist=data.data;
 				$scope.total=data.count;
-				angular.forEach($scope.sectionlist, function(section){  
+				/*angular.forEach($scope.sectionlist, function(section){  
 					
 				section.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+section.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
 				$scope.trustSrc = function() {
 			         return $sce.trustAsResourceUrl(section.scriptss1);
 			     }
 				section.scriptss2="cciframe_"+section.videoId;
-				})
+				})*/
 			}
 		})
 	}
@@ -87,8 +87,16 @@ app.controller("sectionController", function($scope, $http,$sce){
 	$scope.polyv();*/
 	
 	////////////////以上是通过不同的条件查章节的集合的	
-	
-	
+	$scope.ccvideo=false;
+	$scope.ccnew=function(videoId){
+		$scope.ccvideo=true;
+		/*document.getElementById('polyved').style.display="block"; */
+		$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+		$scope.trustSrc = function() {
+	         return $sce.trustAsResourceUrl($scope.scriptss1);
+	     }
+		$scope.scriptss2="cciframe_"+videoId;
+	};
 	$scope.sectionId=null;
 	
 	$scope.addSection=function(){
@@ -115,13 +123,17 @@ app.controller("sectionController", function($scope, $http,$sce){
 		$scope.section=c;
 		$scope.sectionId=c.id;
 		$scope.videoId=c.videoId;
-		$scope.scriptss1=c.scriptss1;
-		$scope.scriptss2=c.scriptss2;
+		$scope.ccvideo=true;
+		$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+c.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+		$scope.trustSrc = function() {
+	         return $sce.trustAsResourceUrl($scope.scriptss1);
+	     }
+		$scope.scriptss2="cciframe_"+c.videoId;
 	}
 	$scope.add=function(){
 		$scope.section=null;
 		$scope.sectionId=null;
-		$scope.polyv();
+		//$scope.polyv();
 		document.getElementById('add').style.display="block"; 
 		
 		

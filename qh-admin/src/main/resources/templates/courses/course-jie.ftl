@@ -103,14 +103,13 @@
 						</div>
 						<div class=" select-2" style="clear: both">
 							<span>视频的videoId:</span> 
-							<span>{{videoId}}</span> 
-							<!--<input type="text"
+							<input type="text"
 								ng-model="section.videoId" placeholder="视频的videoId"
-								style="width: 230px; text-indent: 2em;" ng-keyup="polyvnew(section.videoId)"/>-->
+								style="width: 230px; text-indent: 2em;" ng-keyup="ccnew(section.videoId)"/>
 						</div>
-						<div>
+						<div ng-show="ccvideo">
 						
-						<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600"></iframe>
+						<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="200" width="90%"></iframe>
 							<!--<input type="file" id="file"
 								onchange="angular.element(this).scope().uploadmainimage(this)"
 								accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb" />-->

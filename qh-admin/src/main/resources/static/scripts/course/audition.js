@@ -62,11 +62,6 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 						audition.remmend="推荐";
 					}
 					
-					audition.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+audition.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
-					$scope.trustSrc = function() {
-				         return $sce.trustAsResourceUrl(audition.scriptss1);
-				     }
-					audition.scriptss2="cciframe_"+audition.videoId;
 				})
 			}
 			else{
@@ -222,7 +217,13 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		$scope.courseNofree=a;
 		$scope.id=a.id;
 		$scope.videoId=a.videoId;
-		$scope.videoUrl=$scope.courseNofree.videoUrl;
+		
+		$scope.ccvideo=true;
+		$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+$scope.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+		$scope.trustSrc = function() {
+	         return $sce.trustAsResourceUrl($scope.scriptss1);
+	     }
+		$scope.scriptss2="cciframe_"+$scope.videoId;
 	};
 	
 	/*$scope.polyv=function(videoId){
@@ -247,7 +248,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	}
 	
 	$scope.polyv();*/
-	
+	$scope.ccvideo=false;
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){
 		if($scope.id!=null){
@@ -258,6 +259,18 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 			alert("请选中信息~");
 		}
 		
+	};
+	
+	
+	
+	$scope.ccnew=function(videoId){
+		$scope.ccvideo=true;
+		/*document.getElementById('polyved').style.display="block"; */
+		$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+		$scope.trustSrc = function() {
+	         return $sce.trustAsResourceUrl($scope.scriptss1);
+	     }
+		$scope.scriptss2="cciframe_"+videoId;
 	};
 ////修改
 	$scope.updateAudition=function(){
