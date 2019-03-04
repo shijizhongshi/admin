@@ -1,5 +1,5 @@
 app.controller("newController", function($scope, $http){
-	var ue = UE.getEditor('editor');
+	//var ue = UE.getEditor('editor');
 	 //总条数
     $scope.total = 0;
     //当前的页数
@@ -49,7 +49,7 @@ $scope.uploadmainimage = function(file){
 	
 	$scope.newadd=function(){
 		$scope.news.imgUrl=$scope.imgUrl;
-		$scope.news.content = ue.getContent();
+		//$scope.news.content = ue.getContent();
 		$http.post("/api/news/save",$scope.news,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
@@ -81,7 +81,7 @@ $scope.uploadmainimage = function(file){
 			 alert("请选择信息~")
 		 }else{
 			 if($scope.news.content!=null){
-			 ue.setContent($scope.news.content);
+			// ue.setContent($scope.news.content);
 			 
 			 }
 			 document.getElementById('add').style.display="block"; 
@@ -89,7 +89,7 @@ $scope.uploadmainimage = function(file){
 	}
 	
 	$scope.newsupdate=function(){
-		$scope.news.content = ue.getContent();
+		//$scope.news.content = ue.getContent();
 		$http.post("/api/news/update",$scope.news,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){

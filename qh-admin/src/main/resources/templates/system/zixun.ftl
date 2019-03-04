@@ -160,11 +160,15 @@
 							</div>
 
 							<div class="template-right">
-								<p style="height: 40px; font-size: 1.3rem;">文本内容</p>
+								<!--<p style="height: 40px; font-size: 1.3rem;">文本内容</p>-->
+								<div class="grade-text">
+									<span>文本内容</span>
+									<textarea ng-model="news.content"></textarea>
+								</div>
 								<!--<textarea id="editor" ></textarea>
-								<script type="text/javascript">var ue = UE.getEditor('editor');</script>-->
+								<script type="text/javascript">var ue = UE.getEditor('editor');</script>
 								<script id="editor" type="text/plain"
-									style="width: 90%; height: auto;"></script>
+									style="width: 90%; height: auto;"></script>-->
 							</div>
 					</form>
 					<div class="end">
