@@ -1,4 +1,4 @@
-app.controller("CourseNofreeController",function($scope,$http){
+app.controller("CourseNofreeController",function($scope,$http,$sce){
 	
 	
 	$scope.total = 0;
@@ -28,6 +28,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
 				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
 				$scope.auditionBases();
+				
 			}
 		})
 	};
@@ -60,6 +61,12 @@ app.controller("CourseNofreeController",function($scope,$http){
 					else if(audition.isremmend==1){
 						audition.remmend="推荐";
 					}
+					
+					audition.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+audition.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+					$scope.trustSrc = function() {
+				         return $sce.trustAsResourceUrl(audition.scriptss1);
+				     }
+					audition.scriptss2="cciframe_"+audition.videoId;
 				})
 			}
 			else{
@@ -218,7 +225,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		$scope.videoUrl=$scope.courseNofree.videoUrl;
 	};
 	
-	$scope.polyv=function(videoId){
+	/*$scope.polyv=function(videoId){
 		$http.get("/api/coursenofree/polyv",{"params": {"vid":videoId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -239,7 +246,7 @@ app.controller("CourseNofreeController",function($scope,$http){
 		})
 	}
 	
-	$scope.polyv();
+	$scope.polyv();*/
 	
 	////点击修改的按钮先看看是否已经选中了
 	$scope.update=function(){

@@ -243,8 +243,8 @@
 							<div style="width: 100%; clear: both;">
 									<div class=" select-2">
 
-										<span>视频的videoId:</span> <input type="text"
-											ng-model="courseNofree.videoId" placeholder="请输入视频的videoId" ng-keyup="polyvnew(courseNofree.videoId)"/>
+										<span>视频的videoId:</span> 
+										<span>{{videoId}}</span>
 									</div>
 								</div>
 							<div class="costs-uploadfile-div">
@@ -252,7 +252,7 @@
 									accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb"
 									onchange="angular.element(this).scope().uploadmainimage1(this)" />-->
 								<div style="margin-top: 3px;">
-									<div id='polyved'></div>
+									<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600"></iframe>
 								</div>
 							</div>
 						</div>

@@ -1,4 +1,4 @@
-app.controller("uservideoController", function($scope, $http){
+app.controller("uservideoController", function($scope, $http,$sce){
 	
 		$scope.total = 0;
 	   //当前的页数
@@ -32,6 +32,12 @@ app.controller("uservideoController", function($scope, $http){
 						else if(uservideo.doctorId==null && uservideo.shopId==null ){
 							uservideo.type="普通用户";
 						}
+						
+						uservideo.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+uservideo.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+						$scope.trustSrc = function() {
+					         return $sce.trustAsResourceUrl(uservideo.scriptss1);
+					     }
+						uservideo.scriptss2="cciframe_"+uservideo.videoId;
 					})
 				}else{
 					alert("没有符合条件的信息")

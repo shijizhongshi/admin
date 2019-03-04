@@ -1,4 +1,4 @@
-app.controller("sectionController", function($scope, $http){
+app.controller("sectionController", function($scope, $http,$sce){
 
 	 //总条数
     $scope.total = 0;
@@ -14,6 +14,14 @@ app.controller("sectionController", function($scope, $http){
 			if(data.status=="0"){
 				$scope.sectionlist=data.data;
 				$scope.total=data.count;
+				angular.forEach($scope.sectionlist, function(section){  
+					
+				section.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+section.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+				$scope.trustSrc = function() {
+			         return $sce.trustAsResourceUrl(section.scriptss1);
+			     }
+				section.scriptss2="cciframe_"+section.videoId;
+				})
 			}
 		})
 	}
@@ -81,41 +89,6 @@ app.controller("sectionController", function($scope, $http){
 	////////////////以上是通过不同的条件查章节的集合的	
 	
 	
-	////视频上传
-	$scope.uploadmainimage = function(file){
-		if(!file.files || file.files.length < 1) return;
-	    var fd = new FormData();
-	    fd.append("file", file.files[0]);
-		$http.post("/api/upload/video",fd,{
-	        withCredentials: true,                                                                                               
-	        headers: {'Content-Type': undefined },
-	        transformRequest: angular.identity
-	    })
-	    .success(function(data){
-	    	alert("上传成功~");
-	    	$scope.videoId=data;
-	    	document.getElementById('revise').style.display="none"; 
-	    	$scope.sectionBases();
-	    	
-		})
-	};
-	$http.get("/api/uservideo/getVideo")
-	.success(function(data){
-		if(data.status=="0"){
-			$scope.uservideo=data.data;
-			$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+$scope.uservideo.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
-			 $scope.serverUrl = 'https://www.baidu.com/';
-		     $scope.trustSrc = function() {
-		         return $sce.trustAsResourceUrl($scope.scriptss1);
-		     }
-		     $scope.scriptss2="cciframe_"+$scope.uservideo.videoId;
-			
-		}
-	})
-
-	$scope.scriptss3="9A116EDEE6EA91B29C33DC5901307461"
-	
-	
 	$scope.sectionId=null;
 	
 	$scope.addSection=function(){
@@ -142,6 +115,8 @@ app.controller("sectionController", function($scope, $http){
 		$scope.section=c;
 		$scope.sectionId=c.id;
 		$scope.videoId=c.videoId;
+		$scope.scriptss1=c.scriptss1;
+		$scope.scriptss2=c.scriptss2;
 	}
 	$scope.add=function(){
 		$scope.section=null;
@@ -163,7 +138,7 @@ app.controller("sectionController", function($scope, $http){
 		
 	}
 	
-	/*$scope.uploadS=function(){
+	$scope.uploadS=function(){
 		document.getElementById('revise').style.display="block"; 
 	}
 	$scope.uploadSection=function(){
@@ -182,7 +157,7 @@ app.controller("sectionController", function($scope, $http){
 	    	document.getElementById('revise').style.display="none"; 
 	    	$scope.sectionBases();
 		})
-	}*/
+	}
 	
 	$scope.deleteSection=function(){
 		if($scope.sectionId!=null){
@@ -204,4 +179,12 @@ app.controller("sectionController", function($scope, $http){
 		}
 	}
 
+	$scope.reset1=function(){
+		
+		document.getElementById('add').style.display="none"; 
+	}
+	$scope.reset=function(){
+		
+		document.getElementById('revise').style.display="none"; 
+	}
 });

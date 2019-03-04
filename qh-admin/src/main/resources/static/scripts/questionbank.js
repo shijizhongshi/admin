@@ -17,13 +17,12 @@ app.controller("bankController", function($scope, $http,$sce){
 	    	
 		})
 	};
-	$http.get("/api/uservideo/getVideo")
+	
 	.success(function(data){
 		if(data.status=="0"){
-			$scope.uservideo=data.data;
+			
 			$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+$scope.uservideo.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
-			 $scope.serverUrl = 'https://www.baidu.com/';
-		     $scope.trustSrc = function() {
+			 $scope.trustSrc = function() {
 		         return $sce.trustAsResourceUrl($scope.scriptss1);
 		     }
 		     $scope.scriptss2="cciframe_"+$scope.uservideo.videoId;

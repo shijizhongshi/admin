@@ -103,7 +103,7 @@
 						</div>
 						<div class=" select-2" style="clear: both">
 							<span>视频的videoId:</span> 
-							<input type="file" id="file" onclick="angular.element(this).scope().uploadmainimage(this)"/>
+							<span>{{videoId}}</span> 
 							<!--<input type="text"
 								ng-model="section.videoId" placeholder="视频的videoId"
 								style="width: 230px; text-indent: 2em;" ng-keyup="polyvnew(section.videoId)"/>-->
@@ -125,7 +125,7 @@
 						<input name="git" type="submit" ng-show="sectionId!=null"
 							value="修改" ng-click="addSection()" style="background: #5ED8A9;" />
 						<input name="esc" type="reset" value="取消"
-							onclick="CloseDiv();formReset()" class="esc" />
+							ng-click="reset1()" class="esc" />
 					</div>
 				</form>
 			</div>
@@ -144,7 +144,7 @@
 						<input name="git" type="submit"
 							value="提交" ng-click="uploadSection()" style="background: #5ED8A9;" />
 						<input name="esc" type="reset" value="取消"
-							onclick="CloseDiv();formReset()" class="esc" />
+							ng-click="reset()" class="esc" />
 					</div>
 				</form>
 			</div>
