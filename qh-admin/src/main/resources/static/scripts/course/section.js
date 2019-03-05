@@ -7,6 +7,7 @@ app.controller("sectionController", function($scope, $http,$sce){
     //一页显示多少条
     $scope.pageSize = 20;
     $scope.section=null;
+    $scope.sectionlist=[];
 	$scope.sectionBases=function(){
 		$http.get("/api/course/subclass/courseSectionList",{"params": {"page":$scope.current,"courseChapterId":$("#chapterId").val()}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
@@ -190,7 +191,54 @@ app.controller("sectionController", function($scope, $http,$sce){
 			alert("请选中信息~");
 		}
 	}
-
+	$scope.sectionMoveApi=function(operateType){
+		$http.get("/api/course/subclass/sectionOrders",{"params": {"id":$scope.sectionId,
+			"orders":$scope.section.orders,"operateType":operateType}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=='0'){
+				$scope.section.orders = data.data;
+			}else{
+				alert("移动失败~");
+			}
+		})
+	}
+	
+	$scope.sectionmove=function(types){
+		if($scope.sectionId!=null){
+			if(types==1){
+				/////上移
+				 var index=$scope.sectionlist.indexOf($scope.section);
+				  var tmp=angular.copy($scope.sectionlist[index-1]);
+				  if(index==0){
+				  alert('已经是第一个了，不能再向上移动了！');
+				  return ;
+				  }
+				  $scope.sectionlist[index-1]=$scope.sectionlist[index];
+				  $scope.sectionlist[index]=tmp;
+				  
+				$scope.sectionMoveApi("up");
+			}
+			if(types==2){
+				/////下移
+				var index=$scope.sectionlist.indexOf($scope.section);
+				 
+				  if(index==$scope.sectionlist.length-1){
+				  alert('已经是最后一个了，不能再向下移动了！');
+				  return ;
+				  }
+				  var tmp=angular.copy($scope.sectionlist[index+1]);
+				 
+				  $scope.sectionlist[index+1]=$scope.sectionlist[index];
+				  $scope.sectionlist[index]=tmp;
+				  $scope.sectionMoveApi("down");
+			}
+			
+		}else{
+			alert("请选中信息~");
+		}
+		
+	}
+	
 	$scope.reset1=function(){
 		
 		document.getElementById('add').style.display="none"; 

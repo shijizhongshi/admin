@@ -98,11 +98,12 @@
 	<result column="video_url" property="videoUrl"/>
 	<result column="isshow" property="isshow"/>
 	<result column="addtime" property="addtime"/>
+	<result column="orders" property="orders"/>
 	</resultMap>
 	
 	<insert id="insertCourseSection" parameterType="com.ola.qh.entity.CourseSection">
-	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url)
-	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl})
+	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url,orders)
+	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl},#{orders})
 	</insert>
 	
 	<update id="updateCourseSection" parameterType="com.ola.qh.entity.CourseSection">
@@ -136,7 +137,7 @@
 	<if test="courseChapterId!=null">
 	and  course_chapter_id=#{courseChapterId}
 	</if>
-	order by addtime asc
+	order by orders asc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
@@ -157,6 +158,43 @@
 	
 	</select>
 	
+	<!-- 节排序 -->
+	
+	
+	<select id="selectOrder" resultType="java.lang.Integer">
+	SELECT ifnull(orders, 1) previousOrder
+    FROM course_section    
+    WHERE 1=1
+    <if test="type=='up'">
+    <!-- 读取上一条记录 -->
+    and orders <![CDATA[ < ]]> #{orders}
+    order by orders desc
+    </if>
+    <if test="type=='down'">
+    <!-- 读取下一条记录 -->
+    and  orders <![CDATA[ > ]]> #{orders}
+      order by orders asc
+    </if>
+    limit 0,1
+	</select>
+	
+	
+	
+	<update id="updateOrders">
+	update course_section set orders=#{orders} where 1=1
+	<if test="id!=null and id!='' ">
+	and id=#{id}
+	</if>
+	<if test="originalOrder!=0">
+	and orders=#{originalOrder}
+	</if>
+	</update>
 	
 	<!-- 课程节的结束############################################## -->
+	
+	
+	
+	
+	
+	
 </mapper>

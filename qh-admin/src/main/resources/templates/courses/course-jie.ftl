@@ -37,8 +37,8 @@
 				<li ng-click="deleteSection()"
 					style="background: #F86846; width: 100px;"><span
 					class="glyphicon glyphicon-trash"></span>&nbsp;删除节</li>
-				<li style="width: 90px;"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
-				<li style="width: 90px;"><span
+				<li style="width: 90px;" ng-click="sectionmove(1)"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
+				<li style="width: 90px;" ng-click="sectionmove(2)"><span
 					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
 				<li  ng-click="uploadS()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;导入节内容</li>
 

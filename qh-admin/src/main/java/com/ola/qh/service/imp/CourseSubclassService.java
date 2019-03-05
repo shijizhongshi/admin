@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -173,6 +174,34 @@ public class CourseSubclassService implements ICourseSubclassService{
 		}
 		return null;
 	}
+
+	@Transactional
+	@Override
+	public Results<String> sectionOrders(String id, int orders, String operateType) {
+		// TODO Auto-generated method stub
+		Results<String> result=new Results<String>();
+		if ("down".equals(operateType)) { //下移
+            //获取下一条记录iorder
+            int nextOrder = courseSubclassDao.selectOrder("down", orders);
+            //修改下一条的为当前值
+            courseSubclassDao.updateOrders(null, nextOrder, orders);
+            //修改自己的排序为下一条
+            courseSubclassDao.updateOrders(id, 0, nextOrder);
+            result.setData(String.valueOf(nextOrder));
+        }
+        if ("up".equals(operateType)) { //上移
+            //获取上一条记录iorder
+        	int previousOrder = courseSubclassDao.selectOrder("up", orders);
+            //修改上一条的为当前值
+        	 courseSubclassDao.updateOrders(null, previousOrder, orders);
+            //修改自己的排序为上一条
+        	 courseSubclassDao.updateOrders(id, 0, previousOrder);
+        	 result.setData(String.valueOf(previousOrder));
+        }
+        result.setStatus("0");
+		return result;
+	}
+	
 	
 	
 }
