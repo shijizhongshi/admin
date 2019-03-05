@@ -117,9 +117,7 @@ public class ShopService implements IShopService{
 		newUser.setUserrole(userrole+"");
 		userDao.updateUser(newUser);
 		shopDao.updateShop(id, islimits,isrecommend);
-		//////////////网易云信注册账号开始//////////////////////////////////////
-				
-		//////////////网易云信注册账号结束///////////////////////////////////////	
+		
 		result.setStatus("0");
 		return result;
 	}
@@ -128,6 +126,36 @@ public class ShopService implements IShopService{
 	public int selectCount(String address, String shopName, String isrecommend, int islimits, int shopType) {
 		// TODO Auto-generated method stub
 		return shopDao.selectCount(address, shopName, isrecommend, islimits, shopType);
+	}
+
+	@Override
+	public int insertShortShop(Shop shop) {
+		// TODO Auto-generated method stub
+		return shopDao.insertShortShop(shop);
+	}
+
+	@Override
+	public List<Shop> listShortShop(int shopType, int pageNo, int pageSize) {
+		// TODO Auto-generated method stub
+		return shopDao.listShortShop(shopType, pageNo, pageSize);
+	}
+
+	@Override
+	public int updateShortShop(Shop shop) {
+		// TODO Auto-generated method stub
+		return shopDao.updateShortShop(shop);
+	}
+
+	@Override
+	public int deleteShortShop(String id) {
+		// TODO Auto-generated method stub
+		return shopDao.deleteShortShop(id);
+	}
+
+	@Override
+	public int listShortShopCount(int shopType) {
+		// TODO Auto-generated method stub
+		return shopDao.listShortShopCount(shopType);
 	}
 
 }

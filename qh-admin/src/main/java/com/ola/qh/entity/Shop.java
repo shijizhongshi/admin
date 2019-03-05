@@ -15,7 +15,7 @@ public class Shop {
 
 private String id;
 	
-	@NotEmpty(message="用户的标识不能为空")
+	
 	private String userId;
 	@NotNull(message="必须选择店铺的类型")
 	private int shopType;////1:服务店铺    2:商城店铺
@@ -31,7 +31,7 @@ private String id;
 	
 	@NotEmpty(message="详细地址不能为空")
 	private String address;////
-	@NotEmpty(message="营业执照图片不能为空")
+	
 	private String businessLicenseUrl;/////营业执照图片
 	
 	@NotEmpty(message="门口图片不能为空")
@@ -46,9 +46,7 @@ private String id;
 	private String remarked;////备注
 	
 	private String businessHours;////营业时间
-	@Valid
-	@NotNull
-	@Size(min=1)
+	
 	private List<ShopImg> imgList=new ArrayList<ShopImg>();//执业资格证书
 	
 	private List<ShopImg> environmentImgList=new ArrayList<ShopImg>();////门头照片
@@ -60,7 +58,6 @@ private String id;
 
 	private String isrecommend;////0:后台没有设置推荐   1:后台设置推荐的店铺
 	
-	@NotEmpty(message="负责人身份证号不能为空")
 	private String idcard;////负责人的身份证号
 	
 	private double commentGrade;////评价的评分

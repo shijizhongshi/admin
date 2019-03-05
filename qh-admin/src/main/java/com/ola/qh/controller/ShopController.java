@@ -1,14 +1,22 @@
 package com.ola.qh.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.Shop;
 import com.ola.qh.service.IShopService;
+import com.ola.qh.util.KeyGen;
+import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -72,5 +80,73 @@ public class ShopController {
 		results.setStatus("0");
 		return results;
 
+	}
+	
+	
+	
+	
+	/**
+	 * 保存临时店铺的信息
+	 * <p>Title: insertShortShop</p>  
+	 * <p>Description: </p>  
+	 * @param shop
+	 * @param valid
+	 * @return
+	 */
+	@RequestMapping(value="/saveUpdateShort",method=RequestMethod.POST)
+	public Results<String> insertShortShop(@RequestBody @Valid Shop shop,BindingResult valid){
+		
+		Results<String> result=new Results<String>();
+		if(shop.getId()!=null && !"".equals(shop.getId())){
+			shopService.updateShortShop(shop);
+		}else{
+			if(valid.hasErrors()){
+				result.setStatus("1");
+				result.setMessage("临时店铺信息不完整~");
+				return result;
+			}
+			shop.setId(KeyGen.uuid());
+			shop.setAddtime(new Date());
+			shopService.insertShortShop(shop);
+		}
+		
+		result.setStatus("0");
+		return result;
+	}
+	
+	/**
+	 * 删除临时店铺
+	 * <p>Title: deleteShortShop</p>  
+	 * <p>Description: </p>  
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/deleteshort",method=RequestMethod.GET)
+	public Results<String> deleteShortShop(@RequestParam(name="id",required=true)String id){
+		Results<String> result=new Results<String>();
+		shopService.deleteShortShop(id);
+		result.setStatus("0");
+		return result;
+	}
+	/**
+	 * 临时店铺的集合
+	 * <p>Title: listshortShop</p>  
+	 * <p>Description: </p>  
+	 * @param page
+	 * @param shopType
+	 * @return
+	 */
+	@RequestMapping("/listshort")
+	public Results<List<Shop>> listshortShop(@RequestParam(name="page",required=true)int page){
+		
+		Results<List<Shop>> result=new Results<List<Shop>>();
+		int pageSize=Patterns.pageSize;
+		int pageNo=(page-1)*pageSize;
+		List<Shop> list = shopService.listShortShop(0, pageNo, pageSize);
+		int count = shopService.listShortShopCount(0);
+		result.setCount(count);
+		result.setStatus("0");
+		result.setData(list);
+		return result;
 	}
 }

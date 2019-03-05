@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/web/league")
-public class league {
+public class LeagueWeb {
 
 	@RequestMapping("/fuwu")
 	public String fuwu(){
@@ -29,5 +29,11 @@ public class league {
 			request.getSession().setAttribute("shopId", shopId);
 			
 		return "league/xiangmu";
+	}
+	
+	
+	@RequestMapping(value="/shortshop",method=RequestMethod.GET)
+	public String shortShop(){
+		return "league/short_shop";
 	}
 }
