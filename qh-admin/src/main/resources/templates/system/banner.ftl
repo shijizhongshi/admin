@@ -40,7 +40,7 @@
 
 			<div style="float: left;">
 				<input type="button" class="btn-lg im-key" ng-click="loaddata()"
-					value="立即检索" ng-click="search()" style="background: #E9484D" />
+					value="立即检索"  style="background: #E9484D" />
 			</div>
 
 		</div>
