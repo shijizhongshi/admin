@@ -250,8 +250,8 @@ submenu="sidebarmenu-questionBank-questionChapter">
 </div>
 
 	<div class="end" style="margin-top:10px;">
-			<input name="git" type="submit" value="修改" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
-			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" class="esc">
+			<input name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
+			<input name="esc" type="reset" value="取消" ng-click="resetbank()" class="esc">
 		</div>
 </form>
 

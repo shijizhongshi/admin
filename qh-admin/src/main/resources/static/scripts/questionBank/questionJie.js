@@ -126,7 +126,7 @@ app.controller("questionJieController", function($scope, $http){
 	$scope.deletequestion=function(){
 		if($scope.id!=null){
 			
-			if(confirm("您确定要删出这个题库章节吗")){
+			if(confirm("您确定要删除这个题库章节吗")){
 				$http.get("/api/questionsubcategory/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
@@ -175,6 +175,28 @@ app.controller("questionJieController", function($scope, $http){
 		})
 	};
 	
+	$scope.updatequestionbank=function(){
+		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				alert("修改成功")
+			location.reload();
+			}
+			
+		})
+	};
+	
+	$scope.update=function(){
+		if($scope.bankid!=null){
+			
+		document.getElementById('resource').style.display="block"; 
+		
+		}
+		else{
+			alert("请选中信息");
+		}
+	}
+	
 	$scope.checkquestionsub=function(qbc){
 		
 		$scope.selecteds=qbc.id;
@@ -191,5 +213,33 @@ app.controller("questionJieController", function($scope, $http){
 			$scope.selected=null;
 			$scope.bankid=null;
 		}
+	}
+	
+	$scope.deletequestionbank=function(){
+		if($scope.bankid!=null){
+			
+			if(confirm("您确定要删除这个试题吗")){
+				$http.get("/api/questionbank/delete",{"params": {"id":$scope.bankid}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=='0'){
+						alert("删除成功~");
+						$scope.bankid=null;
+						location.reload();
+					}else{
+						alert("删除失败~");
+					}
+				})
+			}
+			
+		}else{
+			alert("请选中信息~");
+		}
+	}
+	
+	$scope.resetbank=function(){
+		
+		document.getElementById('resource').style.display="none"; 
+		$scope.selected=null;
+		$scope.bankid=null;
 	}
 })
