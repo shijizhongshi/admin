@@ -229,7 +229,10 @@
 	<span>试题标题</span>
 	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
-	
+		<div class="grade-text">
+	<span>答案解析</span>
+	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	</div>
 	<div class="select-2">
 		<span>解析视频ID<i class="bitian">*</i></span>
 <input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="视频ID" >
@@ -268,10 +271,7 @@
 </tbody>
 </table>
 	</div>
-	<div class="grade-text">
-	<span>答案解析</span>
-	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
-	</div>
+
 </div>
 </div>
 
