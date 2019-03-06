@@ -154,8 +154,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <th>正确答案项</th>
 	<th>答案解析</th>
 	<th>创建时间</th>
-	<th>操作</th>
-	
+
 	</tr>
 	<tr ng-repeat="qb in questionbanklist"
 								ng-click="checkquestionbank(qb)"
@@ -165,8 +164,10 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	<th>{{qb.types}}</th>
 	<th>{{qb.correct}}</th>
 	<th>{{qb.analysis}}</th>
-	<th>{{qb.showtime}}</th>
-	<th><span class="xiangqing" ng-click="">查看详情</span></th>
+	<th><ul style="margin: 0;  padding: 0;">
+	<li style="width:100%;border-bottom: 1px solid #f6f6f6c4;line-height: 20px;clear: both;height: 20px;"><span style="float: left;">123w233ww2121</span><span style="float: right;">正确</span></li>
+	</ul></th>
+
 	</tr>
 
 
@@ -233,16 +234,21 @@ submenu="sidebarmenu-questionBank-questionChapter">
 
 <!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
 <div class="daan">
+<p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
 <tbody>
 <tr>
-<td>正确选项</td>
-<td>选项</td>
+<td><input type="text"/></td>
+<td>
+<div class="dw">
+<img src="/images/sjk-xl.png"><select class="ng-pristine ng-untouched ng-valid ng-empty">
+			<option value="">正确</option>
+			<option value="">错误</option>
+		</select></div>
+		</td>
 </tr>
-<tr>
-<td><input type="checkbox"/></td>
-<td>答案答案答案答案答案答案答案答案</td>
-</tr>
+
+
 </tbody>
 </table>
 	</div>
@@ -291,10 +297,15 @@ submenu="sidebarmenu-questionBank-questionChapter">
 .shiti p{padding-top: 7px;width:100%;padding-left: 2%;background: #F5F6F8;margin: 0;font-size: 1.3rem;padding-bottom: 5px;}
 .xiugaibt{width:100%;background: #F5F6F8;padding: 0 2%;height: 80px;}
 .xiugaibt textarea{width:100%;background:#FFFFFF;height: 73px;}
-.daan table{margin-top:10px;overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
+.daan table{overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
 .daan table tr{background:#F7F8FC;font-size:1.3rem;}
-.daan table tr:nth-child(1){background:#dddedf;color:black;}
-.daan table tr td:nth-child(1){border-right:1px solid #999;}
+.daan table tr:nth-child(1){background:#F7F8FC;color:black;}
+.daan table tr td:nth-child(1){border-right:1px solid #ebe1e1;}
+.daan table tr:nth-child(1) td{}
+.dw{position: relative;width: 65px;}
+.dw img{position: absolute;right:0;top: 11px;width: 12px;}
+.daan table tr .dw select{margin-left:0; border:none;}
+.daan table tr:nth-child(2n-1){background:#F7F8FC;}
 ul.menu .list:before{display:none;}
 </style>
 <script>
