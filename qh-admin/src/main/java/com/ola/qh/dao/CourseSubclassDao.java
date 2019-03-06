@@ -52,4 +52,7 @@ public interface CourseSubclassDao {
 	
 	public int updateOrders(@Param("id")String id,@Param("originalOrder")int originalOrder,
 			@Param("orders")int orders,@Param("tables")String tables);
+	
+	///////得到记录中最大的orders
+	public int selectMaxOrder(@Param("tables")String tables);
 }

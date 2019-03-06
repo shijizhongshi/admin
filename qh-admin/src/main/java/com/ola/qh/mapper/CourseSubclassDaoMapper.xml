@@ -20,8 +20,8 @@
 	</resultMap>
 	
 	<insert id="insertCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
-	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime)
-	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime})
+	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime,orders)
+	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime},#{orders})
 	</insert>
 	<update id="updateCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
 	update course_chapter set 
@@ -160,7 +160,17 @@
 	</select>
 	
 	<!-- 节排序 -->
-	
+	<select id="selectMaxOrder" resultType="java.lang.Integer">
+	select orders from 
+	<if test="tables=='cs'">
+	course_section    
+	</if>
+    <if test="tables=='cc'">
+    course_chapter
+    </if>
+    order by orders desc
+    limit 0,1
+	</select>
 	
 	<select id="selectOrder" resultType="java.lang.Integer">
 	SELECT ifnull(orders, 1) previousOrder
