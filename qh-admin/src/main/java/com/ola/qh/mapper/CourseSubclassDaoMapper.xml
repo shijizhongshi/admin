@@ -15,7 +15,7 @@
 	<!-- 是否付费 -->
 	<result column="course_type_name" property="courseTypeName"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
-	
+	<result column="orders" property="orders"/>
 	<result column="addtime" property="addtime"/>
 	</resultMap>
 	
@@ -40,7 +40,7 @@
 	
 	<!-- 课程章的查询 -->
 	<select id="courseChapterList" resultMap="CourseChapterMap">
-	select id,course_id,course_lecturer,course_chapter_name,ispay,addtime from course_chapter
+	select id,course_id,course_lecturer,course_chapter_name,ispay,addtime,orders from course_chapter
 	where  1=1
 	<if test="courseId!=null and courseId!='' ">
 	and course_id=#{courseId}
@@ -54,7 +54,7 @@
 	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
 	and course_type_subclass_name=#{courseTypeSubclassName}
 	</if>
-	order by addtime asc
+	order by orders asc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
@@ -83,6 +83,7 @@
 	delete from course_chapter where id=#{id}
 	</delete>
 	
+
 	<!-- 课程章的结束############################################## -->
 	
 	
@@ -163,7 +164,12 @@
 	
 	<select id="selectOrder" resultType="java.lang.Integer">
 	SELECT ifnull(orders, 1) previousOrder
-    FROM course_section    
+	<if test="tables=='cs'">
+	FROM course_section    
+	</if>
+    <if test="tables=='cc'">
+    from course_chapter
+    </if>
     WHERE 1=1
     <if test="type=='up'">
     <!-- 读取上一条记录 -->
@@ -181,7 +187,14 @@
 	
 	
 	<update id="updateOrders">
-	update course_section set orders=#{orders} where 1=1
+	update 
+	<if test="tables=='cs'">
+	course_section    
+	</if>
+    <if test="tables=='cc'">
+    course_chapter
+    </if> 
+    set orders=#{orders} where 1=1
 	<if test="id!=null and id!='' ">
 	and id=#{id}
 	</if>

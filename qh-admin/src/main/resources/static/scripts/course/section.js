@@ -193,7 +193,7 @@ app.controller("sectionController", function($scope, $http,$sce){
 	}
 	$scope.sectionMoveApi=function(operateType){
 		$http.get("/api/course/subclass/sectionOrders",{"params": {"id":$scope.sectionId,
-			"orders":$scope.section.orders,"operateType":operateType}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"orders":$scope.section.orders,"operateType":operateType,"tables":"cs"}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.section.orders = data.data;

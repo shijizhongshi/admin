@@ -40,7 +40,17 @@ public class CourseChapter {
 	
 	private String chapterOrders;//////章排序
 	
+	private int orders;///按照他排序
 	
+	
+	
+	public int getOrders() {
+		return orders;
+	}
+
+	public void setOrders(int orders) {
+		this.orders = orders;
+	}
 
 	public String getChapterOrders() {
 		return chapterOrders;

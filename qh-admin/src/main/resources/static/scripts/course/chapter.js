@@ -192,4 +192,52 @@ app.controller("ChapterController", function($scope, $http){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
+	$scope.chapterMoveApi=function(operateType){
+		$http.get("/api/course/subclass/sectionOrders",{"params": {"id":$scope.chapterId,
+			"orders":$scope.chapter.orders,"operateType":operateType,"tables":"cc"}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=='0'){
+				$scope.chapter.orders = data.data;
+			}else{
+				alert("移动失败~");
+			}
+		})
+	}
+	
+	$scope.chaptermove=function(types){
+		if($scope.chapterId!=null){
+			if(types==1){
+				/////上移
+				 var index=$scope.chapterlist.indexOf($scope.chapter);
+				  var tmp=angular.copy($scope.chapterlist[index-1]);
+				  if(index==0){
+				  alert('已经是第一个了，不能再向上移动了！');
+				  return ;
+				  }
+				  $scope.chapterlist[index-1]=$scope.chapterlist[index];
+				  $scope.chapterlist[index]=tmp;
+				  
+				$scope.chapterMoveApi("up");
+			}
+			if(types==2){
+				/////下移
+				var index=$scope.chapterlist.indexOf($scope.chapter);
+				 
+				  if(index==$scope.chapterlist.length-1){
+				  alert('已经是最后一个了，不能再向下移动了！');
+				  return ;
+				  }
+				  var tmp=angular.copy($scope.chapterlist[index+1]);
+				 
+				  $scope.chapterlist[index+1]=$scope.chapterlist[index];
+				  $scope.chapterlist[index]=tmp;
+				  $scope.chapterMoveApi("down");
+			}
+			
+		}else{
+			alert("请选中信息~");
+		}
+		
+	}
 });

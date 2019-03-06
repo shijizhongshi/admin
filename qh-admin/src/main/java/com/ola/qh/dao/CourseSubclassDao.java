@@ -48,8 +48,8 @@ public interface CourseSubclassDao {
 	public int updateCourseSection(CourseSection sc);
 	
 	
-	public int selectOrder(@Param("type")String type,@Param("orders")int orders);
+	public int selectOrder(@Param("type")String type,@Param("orders")int orders,@Param("tables")String tables);
 	
 	public int updateOrders(@Param("id")String id,@Param("originalOrder")int originalOrder,
-			@Param("orders")int orders);
+			@Param("orders")int orders,@Param("tables")String tables);
 }
