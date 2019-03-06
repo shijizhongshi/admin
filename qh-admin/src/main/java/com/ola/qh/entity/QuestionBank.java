@@ -20,6 +20,8 @@ public class QuestionBank {
 	
 	private String correct;///正确的答案
 	
+	private String showtime;///正确的答案
+	
 	private Date addtime;
 	
 	private Date updatetime;
@@ -124,6 +126,14 @@ public class QuestionBank {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
 	}
 	
 	

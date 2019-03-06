@@ -16,6 +16,11 @@
 	
 	<select id="selectQuestionSubCategory" resultMap="QuestionSubCategoryMap">
 	select id,name,times,purposes,isshow,addtime from question_bank_subcategory where category_id=#{categoryId}
+	order by addtime limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="countSubCategory" resultType="int">
+	select count(id) from question_bank_subcategory where category_id=#{categoryId}
 	</select>
 	
 	<insert id="insertQuestionSubCategory"  parameterType="com.ola.qh.entity.QuestionSubCategory">
@@ -24,16 +29,16 @@
 	
 	<update id="updateQuestionSubCategory"  parameterType="com.ola.qh.entity.QuestionSubCategory">
 	update question_bank_subcategory set 
-	<if test="name!=null">
+	<if test="name!=null and name!=''">
 	name=#{name},
 	</if>
-	<if test="times!=null">
+	<if test="times!=null and times!=''">
 	times=#{times},
 	</if>
-	<if test="purposes!=null">
+	<if test="purposes!=null and purposes!=''">
 	purposes=#{purposes},
 	</if>
-	<if test="isshow!=null">
+	<if test="isshow!=null and isshow!=''">
 	isshow=#{isshow},
 	</if>
 	updatetime=#{updatetime} where id=#{id}

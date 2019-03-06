@@ -26,21 +26,10 @@ public class QuestionSubcategoryController {
 	private IQuestionSubcategoryService questionSubCategoryService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<QuestionSubCategory>> selectQuestionSubCategory(@RequestParam(name="categoryId",required=true)String categoryId){
+	public Results<List<QuestionSubCategory>> selectQuestionSubCategory(@RequestParam(name="pageNo",required=true)int pageNo
+			,@RequestParam(name="pageSize",required=true)int pageSize,@RequestParam(name="categoryId",required=true)String categoryId){
 		
-		Results<List<QuestionSubCategory>> results=new Results<List<QuestionSubCategory>>();
-		
-		List<QuestionSubCategory> list=questionSubCategoryService.selectQuestionSubCategory(categoryId);
-		
-		if(list==null || list.size()==0){
-			
-			results.setStatus("1");
-			return results;
-		}
-		
-		results.setData(list);
-		results.setStatus("0");
-		return results;
+		return questionSubCategoryService.selectQuestionSubCategory(pageNo, pageSize, categoryId);
 		
 	}
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
@@ -50,7 +39,7 @@ public class QuestionSubcategoryController {
 		
 		if(valid.hasErrors()){
 			results.setMessage("信息填写不完整，请检查");
-			results.setStatus("0");
+			results.setStatus("1");
 			return results;
 		}
 		

@@ -1,6 +1,7 @@
 package com.ola.qh.service.imp;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -214,12 +215,14 @@ public class QuestionBankService implements IQuestionBankService {
 
 	@Transactional
 	@Override
-	public Results<List<QuestionBank>> selectQuestionBank(String subId) {
+	public Results<List<QuestionBank>> selectQuestionBank(String subId,int pageNo,int pageSize) {
 		
 		Results<List<QuestionBank>> results=new Results<List<QuestionBank>>();
-		try {
+		//try {
 			
-			List<QuestionBank> listbank=questionBankDao.selectQuestionBank(subId);
+			List<QuestionBank> listbank=questionBankDao.selectQuestionBank(subId,pageNo,pageSize);
+			
+			int count=questionBankDao.countQuestionBank(subId);
 			
 			for (QuestionBank questionBank : listbank) {
 				
@@ -236,19 +239,23 @@ public class QuestionBankService implements IQuestionBankService {
 					questionUnit.setUnitAnswer(listanswerunit);
 				}
 				questionBank.setUnit(listunit);
+				
+				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				questionBank.setShowtime(sf.format(questionBank.getAddtime()));
 			}
 			
 			
 			
 			results.setData(listbank);
+			results.setCount(count);
 			results.setStatus("0");
 			return results;
 			
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
 			return results;
-		}
+		}*/
 		
 	}
 
@@ -327,7 +334,6 @@ public class QuestionBankService implements IQuestionBankService {
 		
 	}
 
-	
 	
 	
 

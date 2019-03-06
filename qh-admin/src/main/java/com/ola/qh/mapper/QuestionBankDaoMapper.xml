@@ -31,7 +31,13 @@
 	</insert>
 	
 	<select id="selectQuestionBank" resultMap="QuestionBankMap"> 
-	select id,sub_id,number_no,title,types,analysis,correct from question_bank where sub_id=#{subId}
+	select id,sub_id,number_no,title,types,analysis,correct,addtime from question_bank where sub_id=#{subId}
+	order by number_no limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="countQuestionBank" resultType="int"> 
+	select count(id) from question_bank where sub_id=#{subId}
+	
 	</select>
 	
 	<delete id="deleteQuestionBank">
