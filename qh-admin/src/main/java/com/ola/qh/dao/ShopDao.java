@@ -18,4 +18,16 @@ public interface ShopDao {
 	public List<ShopImg> selectImgList(@Param("shopId")String shopId,@Param("subtype")int subtype);
 	
 	public int selectCount(@Param("address")String address,@Param("shopName")String shopName,@Param("isrecommend")String isrecommend,@Param("islimits")int islimits,@Param("shopType")int shopType);
+	
+	
+	/////临时店铺的添加
+	public int insertShortShop(Shop shop);
+	
+	public List<Shop> listShortShop(@Param("shopType")int shopType,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	
+	public int listShortShopCount(@Param("shopType")int shopType);
+	
+	public int updateShortShop(Shop shop);
+	
+	public int deleteShortShop(@Param("id")String id);
 }

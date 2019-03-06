@@ -34,6 +34,17 @@ public class CourseSection {
 	private Date updatetime;
 	
 	private int sectionOrders;///第1节 第2节
+	
+	private int orders;////排序用的   上传和下移用的呀
+	
+
+	public int getOrders() {
+		return orders;
+	}
+
+	public void setOrders(int orders) {
+		this.orders = orders;
+	}
 
 	public int getSectionOrders() {
 		return sectionOrders;

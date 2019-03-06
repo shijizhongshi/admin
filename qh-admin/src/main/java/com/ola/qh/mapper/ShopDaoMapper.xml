@@ -90,4 +90,64 @@
 	<select id="selectImgList" resultMap="ShopImgMap">
 	select id,img_url,subtype from shop_img where shop_id=#{shopId} and subtype=#{subtype}
 	</select>
+	
+	
+	<!-- 临时店铺的导入 -->
+	<insert id="insertShortShop" parameterType="com.ola.qh.entity.Shop">
+	insert into short_time_shop(id,shop_name,shop_type,leader_name,leader_mobile,door_head_url,shop_logo,address,islimits,addtime)
+	values(#{id},#{shopName},#{shopType},#{leaderName},#{leaderMobile},#{doorHeadUrl},#{shopLogo},#{address},#{islimits},#{addtime}) 
+	</insert>
+	
+	<select id="listShortShop" resultMap="ShopMap">
+	select * from short_time_shop where 1=1
+	<if test="shopType!=0">
+	shop_type=#{shopType}
+	</if>
+	order by addtime desc
+	<if test="pageSize!=0">
+	limit #{pageNo},#{pageSize}
+	</if>
+	</select>
+	
+	<select id="listShortShopCount" resultType="int">
+	select count(id) from short_time_shop where 1=1
+	<if test="shopType!=0">
+	shop_type=#{shopType}
+	</if>
+	</select>
+	
+	<update id="updateShortShop" parameterType="com.ola.qh.entity.Shop">
+	update short_time_shop set 
+	<if test="shopName!=null and shopName!='' ">
+	shop_name=#{shopName},
+	</if>
+	<if test="shopType!=0">
+	shop_type=#{shopType},
+	</if>
+	<if test="leaderName!=null and leaderName!='' ">
+	leader_name=#{leaderName},
+	</if>
+	<if test="leaderMobile!=null and leaderMobile!='' ">
+	leader_mobile=#{leaderMobile},
+	</if>
+	<if test="doorHeadUrl!=null and doorHeadUrl!='' ">
+	door_head_url=#{doorHeadUrl},
+	</if>
+	<if test="shopLogo!=null and shopLogo!='' ">
+	shop_logo=#{shopLogo},
+	</if>
+	<if test="address!=null and address!='' ">
+	address=#{address},
+	</if>
+	<if test="islimits!=null and islimits!='' ">
+	islimits=#{islimits},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+	
+	
+	<delete id="deleteShortShop">
+	delete from short_time_shop where id=#{id}
+	</delete>
 </mapper>

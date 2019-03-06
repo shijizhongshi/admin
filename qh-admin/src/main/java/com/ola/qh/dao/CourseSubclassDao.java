@@ -46,4 +46,13 @@ public interface CourseSubclassDao {
 	public int existSection(@Param("sectionName")String sectionName,@Param("courseChapterId")String courseChapterId);
 	
 	public int updateCourseSection(CourseSection sc);
+	
+	
+	public int selectOrder(@Param("type")String type,@Param("orders")int orders,@Param("tables")String tables);
+	
+	public int updateOrders(@Param("id")String id,@Param("originalOrder")int originalOrder,
+			@Param("orders")int orders,@Param("tables")String tables);
+	
+	///////得到记录中最大的orders
+	public int selectMaxOrder(@Param("tables")String tables);
 }

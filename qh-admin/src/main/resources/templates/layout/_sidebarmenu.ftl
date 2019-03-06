@@ -142,6 +142,11 @@
                                 <span class="title">项目管理</span>
                             </a>
                         </li>
+                         <li id="sidebarmenu-league-shortshop">
+                            <a href="/web/league/shortshop">
+                                <span class="title">临时店铺管理</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                    <li id="sidebarmenu-orders" >

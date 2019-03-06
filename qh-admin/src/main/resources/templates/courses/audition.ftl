@@ -244,10 +244,12 @@
 									<div class=" select-2">
 
 										<span>视频的videoId:</span> 
-										<span>{{videoId}}</span>
+										<input type="text"
+								ng-model="section.videoId" placeholder="视频的videoId"
+								style="width: 230px; text-indent: 2em;" ng-keyup="ccnew(section.videoId)"/>
 									</div>
 								</div>
-							<div class="costs-uploadfile-div">
+							<div class="costs-uploadfile-div" ng-show="ccvideo">
 								<!--<b>添加试听课程</b> <input type="file" id="file" value="上传试听课视频"
 									accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb"
 									onchange="angular.element(this).scope().uploadmainimage1(this)" />-->

@@ -30,4 +30,9 @@ public interface ICourseSubclassService {
 	
 	
 	public Results<String> importExcel(MultipartFile file,String courseChapterId)throws Exception;
+	
+	
+	
+	public Results<String> sectionOrders(String id,int orders,String operateType,String tables);
+	
 }

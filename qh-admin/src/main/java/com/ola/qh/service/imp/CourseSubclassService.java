@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +55,8 @@ public class CourseSubclassService implements ICourseSubclassService{
 			//////保存用户的信息
 			ccp.setId(KeyGen.uuid());
 			ccp.setAddtime(new Date());
+			int ordersMax = courseSubclassDao.selectMaxOrder("cc");
+			ccp.setOrders(ordersMax+1);
 			int num = courseSubclassDao.insertCourseChapter(ccp);
 			if(num>0){
 				result.setStatus("0");
@@ -95,6 +98,8 @@ public class CourseSubclassService implements ICourseSubclassService{
 		//////保存用户的信息
 		cs.setId(KeyGen.uuid());
 		cs.setAddtime(new Date());
+		int ordersMax = courseSubclassDao.selectMaxOrder("cs");
+		cs.setOrders(ordersMax+1);
 		int num = courseSubclassDao.insertCourseSection(cs);
 		if(num>0){
 			result.setStatus("0");
@@ -154,6 +159,8 @@ public class CourseSubclassService implements ICourseSubclassService{
 						sc.setSectionName(checkNull(0,row));
 						sc.setVideoId(checkNull(1,row));
 						///////这个章下的这一节是否已经存在了
+						int ordersMax = courseSubclassDao.selectMaxOrder("cs");
+						sc.setOrders(ordersMax+1);
 						courseSubclassDao.insertCourseSection(sc);
 					}
 					
@@ -173,6 +180,34 @@ public class CourseSubclassService implements ICourseSubclassService{
 		}
 		return null;
 	}
+
+	@Transactional
+	@Override
+	public Results<String> sectionOrders(String id, int orders, String operateType,String tables) {
+		// TODO Auto-generated method stub
+		Results<String> result=new Results<String>();
+		if ("down".equals(operateType)) { //下移
+            //获取下一条记录iorder
+            int nextOrder = courseSubclassDao.selectOrder("down", orders,tables);
+            //修改下一条的为当前值
+            courseSubclassDao.updateOrders(null, nextOrder, orders,tables);
+            //修改自己的排序为下一条
+            courseSubclassDao.updateOrders(id, 0, nextOrder,tables);
+            result.setData(String.valueOf(nextOrder));
+        }
+        if ("up".equals(operateType)) { //上移
+            //获取上一条记录iorder
+        	int previousOrder = courseSubclassDao.selectOrder("up", orders,tables);
+            //修改上一条的为当前值
+        	 courseSubclassDao.updateOrders(null, previousOrder, orders,tables);
+            //修改自己的排序为上一条
+        	 courseSubclassDao.updateOrders(id, 0, previousOrder,tables);
+        	 result.setData(String.valueOf(previousOrder));
+        }
+        result.setStatus("0");
+		return result;
+	}
+	
 	
 	
 }

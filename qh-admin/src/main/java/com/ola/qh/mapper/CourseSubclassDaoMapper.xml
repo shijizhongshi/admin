@@ -15,13 +15,13 @@
 	<!-- 是否付费 -->
 	<result column="course_type_name" property="courseTypeName"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
-	
+	<result column="orders" property="orders"/>
 	<result column="addtime" property="addtime"/>
 	</resultMap>
 	
 	<insert id="insertCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
-	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime)
-	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime})
+	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime,orders)
+	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime},#{orders})
 	</insert>
 	<update id="updateCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
 	update course_chapter set 
@@ -40,7 +40,7 @@
 	
 	<!-- 课程章的查询 -->
 	<select id="courseChapterList" resultMap="CourseChapterMap">
-	select id,course_id,course_lecturer,course_chapter_name,ispay,addtime from course_chapter
+	select id,course_id,course_lecturer,course_chapter_name,ispay,addtime,orders from course_chapter
 	where  1=1
 	<if test="courseId!=null and courseId!='' ">
 	and course_id=#{courseId}
@@ -54,7 +54,7 @@
 	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
 	and course_type_subclass_name=#{courseTypeSubclassName}
 	</if>
-	order by addtime asc
+	order by orders asc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
@@ -83,6 +83,7 @@
 	delete from course_chapter where id=#{id}
 	</delete>
 	
+
 	<!-- 课程章的结束############################################## -->
 	
 	
@@ -98,11 +99,12 @@
 	<result column="video_url" property="videoUrl"/>
 	<result column="isshow" property="isshow"/>
 	<result column="addtime" property="addtime"/>
+	<result column="orders" property="orders"/>
 	</resultMap>
 	
 	<insert id="insertCourseSection" parameterType="com.ola.qh.entity.CourseSection">
-	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url)
-	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl})
+	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url,orders)
+	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl},#{orders})
 	</insert>
 	
 	<update id="updateCourseSection" parameterType="com.ola.qh.entity.CourseSection">
@@ -136,7 +138,7 @@
 	<if test="courseChapterId!=null">
 	and  course_chapter_id=#{courseChapterId}
 	</if>
-	order by addtime asc
+	order by orders asc
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>
@@ -157,6 +159,65 @@
 	
 	</select>
 	
+	<!-- 节排序 -->
+	<select id="selectMaxOrder" resultType="java.lang.Integer">
+	select orders from 
+	<if test="tables=='cs'">
+	course_section    
+	</if>
+    <if test="tables=='cc'">
+    course_chapter
+    </if>
+    order by orders desc
+    limit 0,1
+	</select>
+	
+	<select id="selectOrder" resultType="java.lang.Integer">
+	SELECT ifnull(orders, 1) previousOrder
+	<if test="tables=='cs'">
+	FROM course_section    
+	</if>
+    <if test="tables=='cc'">
+    from course_chapter
+    </if>
+    WHERE 1=1
+    <if test="type=='up'">
+    <!-- 读取上一条记录 -->
+    and orders <![CDATA[ < ]]> #{orders}
+    order by orders desc
+    </if>
+    <if test="type=='down'">
+    <!-- 读取下一条记录 -->
+    and  orders <![CDATA[ > ]]> #{orders}
+      order by orders asc
+    </if>
+    limit 0,1
+	</select>
+	
+	
+	
+	<update id="updateOrders">
+	update 
+	<if test="tables=='cs'">
+	course_section    
+	</if>
+    <if test="tables=='cc'">
+    course_chapter
+    </if> 
+    set orders=#{orders} where 1=1
+	<if test="id!=null and id!='' ">
+	and id=#{id}
+	</if>
+	<if test="originalOrder!=0">
+	and orders=#{originalOrder}
+	</if>
+	</update>
 	
 	<!-- 课程节的结束############################################## -->
+	
+	
+	
+	
+	
+	
 </mapper>
