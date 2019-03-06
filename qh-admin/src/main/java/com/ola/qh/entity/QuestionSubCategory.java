@@ -23,6 +23,10 @@ public class QuestionSubCategory {
 	@NotEmpty(message="是否可见不能为空")
 	private String isshow;
 	
+	private String showtime;
+	
+	private int count;
+	
 	private Date addtime;
 	
 	private Date updatetime;
@@ -89,6 +93,22 @@ public class QuestionSubCategory {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public String getShowtime() {
+		return showtime;
+	}
+
+	public void setShowtime(String showtime) {
+		this.showtime = showtime;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	

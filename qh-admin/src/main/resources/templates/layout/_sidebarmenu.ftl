@@ -249,13 +249,13 @@
                     <ul>
                         <li id="sidebarmenu-questionBank-questionChapter">
                             <a href="/web/questionBank/questionChapter">
-                                <span class="title">课程章节/单元管理</span>
+                                <span class="title">题库章节管理</span>
                             </a>
                         </li>
                       
                         <li id="sidebarmenu-questionBank-examination">
                             <a href="/web/questionBank/examination">
-                                <span class="title">试卷管理</span>
+                                <span class="title">题库试卷管理</span>
                             </a>
                         </li>
                        

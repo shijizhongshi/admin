@@ -11,7 +11,7 @@ public interface IQuestionBankService {
 
 	public Results<String> importExcel(MultipartFile file) throws Exception;
 	
-	public Results<List<QuestionBank>> selectQuestionBank(String subId);
+	public Results<List<QuestionBank>> selectQuestionBank(String subId,int pageNo,int pageSize);
 	
 	public Results<String> updateQuestionBank(QuestionBank questionBank);
 	

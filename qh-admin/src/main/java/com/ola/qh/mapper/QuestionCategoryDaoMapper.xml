@@ -43,13 +43,25 @@
 		<result column="name" property="name"/>
 		<result column="isshow" property="isshow"/>
 		<result column="addtime" property="addtime"/>
-		<result column="udpatetime" property="udpatetime"/>
+		<result column="updatetime" property="updatetime"/>
 	</resultMap>
 	
 	<select id="selectCategory" resultMap="QuestionCategoryMap">
 	select id,course_type_subclass_name,name,isshow,addtime from question_bank_category 
 	where course_type_subclass_name=#{courseTypeSubclassName} and types=#{types}
+	order by addtime limit #{pageNo},#{pageSize}
 	</select>
+	
+	<select id="countCategory" resultType="int">
+	select count(id) from question_bank_category 
+	where course_type_subclass_name=#{courseTypeSubclassName} and types=#{types}
+	
+	</select>
+	
+	<delete id="deleteCategory">
+	delete from question_bank_category where id=#{id}
+	</delete>
+	
 	<update id="updateCategory" parameterType="com.ola.qh.entity.QuestionCategory">
 	update question_bank_category set 
 	<if test="name!=null">
@@ -58,6 +70,6 @@
 	<if test="isshow!=null">
 	isshow=#{isshow},
 	</if>
-	udpatetime=#{udpatetime} where id=#{id}
+	updatetime=#{updatetime} where id=#{id}
 	</update>
 	</mapper>

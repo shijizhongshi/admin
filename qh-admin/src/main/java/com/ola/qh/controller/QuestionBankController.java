@@ -39,9 +39,10 @@ public class QuestionBankController {
 	}
 
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public Results<List<QuestionBank>> selectQuestionBank(@RequestParam(value = "subId",required=true) String subId){
+	public Results<List<QuestionBank>> selectQuestionBank(@RequestParam(value = "subId",required=true) String subId,
+			@RequestParam(value = "pageNo",required=true) int pageNo,@RequestParam(value = "pageSize",required=true) int pageSize){
 		
-		return questionBankService.selectQuestionBank(subId);
+		return questionBankService.selectQuestionBank(subId, pageNo, pageSize);
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

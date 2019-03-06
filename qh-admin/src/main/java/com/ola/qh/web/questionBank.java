@@ -1,7 +1,11 @@
 package com.ola.qh.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/web/questionBank")
@@ -11,8 +15,12 @@ public class questionBank {
 	public String questionChapter(){
 		return "questionBank/questionChapter";
 	}
-	@RequestMapping("/questionJie")
-	public String questionJie(){
+	@RequestMapping(value="/questionJie",method=RequestMethod.GET)
+	public String questionJie(@RequestParam(name="id",required=true)String id,
+			@RequestParam(name="name",required=true)String name,HttpServletRequest request){
+		
+		request.getSession().setAttribute("id", id);
+		request.getSession().setAttribute("name", name);
 		return "questionBank/questionJie";
 	}
 	@RequestMapping("/examination")
