@@ -71,6 +71,7 @@
 	
 	<select id="selectQuestionAnswer" resultMap="QuestionAnswerMap"> 
 	select id,bank_unit_id,answers,options,correct,orders from question_bank_answer where bank_unit_id=#{bankUnitId}
+	order by options asc
 	</select>
 	
 	<delete id="deleteQuestionAnswer">

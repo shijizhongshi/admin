@@ -169,13 +169,67 @@ app.controller("questionJieController", function($scope, $http){
 				$scope.questionbanklist=data.data;
 				$scope.total1=data.count;
 				angular.forEach($scope.questionbanklist, function(questionbank){  
+					if(questionbank.types=="单选"){
+						
+						$scope.questionanswerlist=questionbank.answer;
+						
+						angular.forEach($scope.questionanswerlist, function(questionanswer){  
+							
+							if(questionanswer.correct==true){
+								
+								questionanswer.corrects="正确";
+							}else{
+								
+								questionanswer.corrects="错误";
+							}
+						})
+					}
 					
+					else if(questionbank.types=="共用题干")	{
+						
+						$scope.questionunitlist=questionbank.unit;
+						
+						
+							for(i=0;i<$scope.questionunitlist.length;i++){
+								
+								$scope.questionunitlist[i].shiti="试题"+(i+1);
+								
+								if($scope.questionunitlist[i].correct==true){
+									
+									$scope.questionunitlist[i].corrects="正确";
+								}else{
+									
+									$scope.questionunitlist[i].corrects="错误";
+								}
+								
+								
+							}
+							
+							
+							
+							
+							/*angular.forEach($scope.questionunitanswerlist, function(questionunitanswer){  
+								
+								if(questionunitanswer.correct==true){
+									
+									questionunitanswer.corrects="正确";
+								}else{
+									
+									questionunitanswer.corrects="错误";
+								}
+							})*/
+							
+						
+						
+					}
 				})
 			}
 		})
 	};
 	
 	$scope.updatequestionbank=function(){
+		$scope.questionBank=$scope.questionbanks;
+		$scope.questionBank.answer=$scope.questionanswers;
 		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -186,10 +240,20 @@ app.controller("questionJieController", function($scope, $http){
 		})
 	};
 	
-	$scope.update=function(){
+	$scope.updatebank=function(){
 		if($scope.bankid!=null){
-			
-		document.getElementById('resource').style.display="block"; 
+			if($scope.types=="单选"){
+				
+				document.getElementById('resources').style.display="none"; 
+				document.getElementById('resource').style.display="block"; 
+			}
+			else if($scope.types=="共用题干"){
+				
+				document.getElementById('resources').style.display="block"; 
+				document.getElementById('resource').style.display="none"; 
+				$scope.checkshiti($scope.questionunitlist[0]);
+				
+			}
 		
 		}
 		else{
@@ -197,10 +261,20 @@ app.controller("questionJieController", function($scope, $http){
 		}
 	}
 	
+	
+	
+	$scope.checkshiti=function(qbul){
+		
+		$scope.questionunitanswerlist=qbul.unitAnswer;
+		$scope.questionunitlists=qbul;
+		$scope.typeselected=qbul;
+	}
+	
 	$scope.checkquestionsub=function(qbc){
 		
 		$scope.selecteds=qbc.id;
 		$scope.subId=qbc.id;
+		$scope.subName=qbc.name;
 		$scope.questionbank();
 	}
 	
@@ -208,10 +282,16 @@ app.controller("questionJieController", function($scope, $http){
 		
 		if($scope.selected!=qb){
 		$scope.selected=qb;
+		$scope.questionbanks=qb;
 		$scope.bankid=qb.id;
+		$scope.types=qb.types;
+		$scope.questionanswers=qb.answer;
 		}else{
 			$scope.selected=null;
+			$scope.questionbanks=null;
 			$scope.bankid=null;
+			$scope.types=null;
+			$scope.questionanswers=null;
 		}
 	}
 	
@@ -238,8 +318,18 @@ app.controller("questionJieController", function($scope, $http){
 	
 	$scope.resetbank=function(){
 		
-		document.getElementById('resource').style.display="none"; 
+		if($scope.types=="单选"){
+			
+			document.getElementById('resource').style.display="none"; 
+		}
+		else if($scope.types=="共用题干"){
+			
+			document.getElementById('resources').style.display="none"; 
+		}
 		$scope.selected=null;
+		$scope.questionbanks=null;
 		$scope.bankid=null;
+		$scope.types=null;
+		$scope.questionanswers=null;
 	}
 })

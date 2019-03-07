@@ -324,11 +324,11 @@ public class QuestionBankService implements IQuestionBankService {
 				}
 			}
 			
-			results.setMessage("0");
+			results.setStatus("0");
 			return results;
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			results.setMessage("1");
+			results.setStatus("1");
 			return results;
 		}
 		
