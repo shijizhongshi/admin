@@ -149,7 +149,7 @@ app.controller("questionChapter", function($scope, $http){
 	$scope.deletequestion=function(){
 		if($scope.cateId!=null){
 			
-			if(confirm("您确定要删出这个题库章节吗")){
+			if(confirm("您确定要删除这个题库章节吗")){
 				$http.get("/api/questionCategory/delete",{"params": {"id":$scope.cateId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
