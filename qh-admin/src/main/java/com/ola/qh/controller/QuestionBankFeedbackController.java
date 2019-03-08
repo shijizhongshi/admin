@@ -21,10 +21,12 @@ public class QuestionBankFeedbackController {
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public Results<List<QuestionBankFeedback>> feedbacklist(@RequestParam(name="pageNo",required=true)int pageNo,
-			@RequestParam(name="pageSize",required=true)int pageSize,@RequestParam(name="status",required=true)int status){
+			@RequestParam(name="pageSize",required=true)int pageSize,@RequestParam(name="status",required=true)int status,
+			@RequestParam(name="nickname",required=false)String nickname,@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
+			@RequestParam(name="name",required=false)String name){
 		
 		
-				return questionBankFeedbackService.feedbackList(pageNo, pageSize, status);
+				return questionBankFeedbackService.feedbackList(pageNo, pageSize, status, nickname, courseTypeSubclassName, name);
 		
 	}
 	

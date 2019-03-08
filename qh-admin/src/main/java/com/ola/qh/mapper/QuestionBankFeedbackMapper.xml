@@ -15,8 +15,22 @@
 	</resultMap>
 
 	<select id="feedbackList" resultMap="QuestionBankFeedbackMap">
-		select id,user_id,category_id,bank_id,types,status,addtime from question_bank_feedback 
+		select qbf.id id,user_id,category_id,bank_id,qbf.types types,status,qbf.addtime addtime,course_type_subclass_name,name
+		,nickname
+		from question_bank_feedback qbf
+		left join question_bank_category qbc on qbf.category_id=qbc.id 
+		left join user u on qbf.user_id=u.id
+		left join question_bank qb on qb.id=qbf.bank_id
 		where status=#{status}
+		<if test="nickname!=null and nickname!=''">
+		nickname=#{nickname}
+		</if>
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+		course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		<if test="name!=null and name!=''">
+		name=#{name}
+		</if>
 		order by addtime desc limit #{pageNo},#{pageSize}
 	</select>
 	

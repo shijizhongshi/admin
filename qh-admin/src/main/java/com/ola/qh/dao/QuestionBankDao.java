@@ -18,6 +18,8 @@ public interface QuestionBankDao {
 	
 	public List<QuestionBank> selectQuestionBank(@Param("subId")String subId,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
+	public QuestionBank singleQuestionBank(@Param("id")String id);
+	
 	public int countQuestionBank(@Param("subId")String subId);
 	
 	public List<QuestionAnswer> selectQuestionAnswer(String bankUnitId);

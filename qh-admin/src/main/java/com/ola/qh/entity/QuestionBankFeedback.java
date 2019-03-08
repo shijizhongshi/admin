@@ -14,6 +14,8 @@ public class QuestionBankFeedback {
 	
 	private String types;
 	
+	private QuestionBank bank;
+	
 	private int status;
 	
 	private Date addtime;
@@ -92,6 +94,14 @@ public class QuestionBankFeedback {
 
 	public void setShowtime(String showtime) {
 		this.showtime = showtime;
+	}
+
+	public QuestionBank getBank() {
+		return bank;
+	}
+
+	public void setBank(QuestionBank bank) {
+		this.bank = bank;
 	}
 	
 	

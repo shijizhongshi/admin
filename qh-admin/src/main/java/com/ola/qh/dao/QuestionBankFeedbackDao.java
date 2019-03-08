@@ -8,7 +8,8 @@ import com.ola.qh.entity.QuestionBankFeedback;
 
 public interface QuestionBankFeedbackDao {
 
-	public List<QuestionBankFeedback> feedbackList(@Param("pageNo")int pageNo,@Param("pageSize")int pageSize,@Param("status")int status);
+	public List<QuestionBankFeedback> feedbackList(@Param("pageNo")int pageNo,@Param("pageSize")int pageSize,@Param("status")int status,
+			@Param("nickname")String nickname,@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("name")String name);
 	
 	public int feedbackCount(@Param("status")int status);
 	

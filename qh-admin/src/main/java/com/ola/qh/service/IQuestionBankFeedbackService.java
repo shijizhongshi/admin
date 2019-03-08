@@ -7,7 +7,7 @@ import com.ola.qh.util.Results;
 
 public interface IQuestionBankFeedbackService {
 
-	public Results<List<QuestionBankFeedback>> feedbackList(int pageNo,int pageSize,int status);
+	public Results<List<QuestionBankFeedback>> feedbackList(int pageNo,int pageSize,int status,String nickname,String courseTypeSubclassName,String name);
 	
 	public int updateFeedback(String id,int status);
 	

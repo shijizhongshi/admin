@@ -35,6 +35,11 @@
 	order by number_no limit #{pageNo},#{pageSize}
 	</select>
 	
+	<select id="singleQuestionBank" resultType="com.ola.qh.entity.QuestionBank"> 
+	select id,sub_id,number_no,title,types,analysis,correct,addtime from question_bank where id=#{id}
+	
+	</select>
+	
 	<select id="countQuestionBank" resultType="int"> 
 	select count(id) from question_bank where sub_id=#{subId}
 	
