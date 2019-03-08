@@ -245,7 +245,7 @@
 
 										<span>视频的videoId:</span> 
 										<input type="text"
-								ng-model="section.videoId" placeholder="视频的videoId"
+								ng-model="courseNofree.videoId" placeholder="视频的videoId"
 								style="width: 230px; text-indent: 2em;" ng-keyup="ccnew(section.videoId)"/>
 									</div>
 								</div>
