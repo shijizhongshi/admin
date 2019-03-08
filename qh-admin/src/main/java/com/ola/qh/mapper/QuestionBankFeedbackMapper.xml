@@ -6,30 +6,34 @@
 	<resultMap type="com.ola.qh.entity.QuestionBankFeedback"  id="QuestionBankFeedbackMap">
 		<result column="id" property="id" />
 		<result column="user_id" property="userId" />
-		<result column="category_id" property="categoryId" />
 		<result column="bank_id" property="bankId" />
+		<result column="content" property="content" />
 		<result column="types" property="types" />
 		<result column="status" property="status" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="name" property="name" />
+		<result column="nickname" property="nickname" />
+		<result column="course_type_subclass_name" property="courseTypeSubclassName" />
 	</resultMap>
 
 	<select id="feedbackList" resultMap="QuestionBankFeedbackMap">
-		select qbf.id id,user_id,category_id,bank_id,qbf.types types,status,qbf.addtime addtime,course_type_subclass_name,name
-		,nickname
+		select qbf.id id,user_id,bank_id,qbf.types types,status,qbf.addtime addtime,content,
+		qbc.course_type_subclass_name course_type_subclass_name,qbc.name name,nickname
 		from question_bank_feedback qbf
-		left join question_bank_category qbc on qbf.category_id=qbc.id 
 		left join user u on qbf.user_id=u.id
 		left join question_bank qb on qb.id=qbf.bank_id
+		left join question_bank_subcategory qbs on qbs.id=qb.sub_id
+		left join question_bank_category qbc on qbs.category_id=qbc.id 
 		where status=#{status}
 		<if test="nickname!=null and nickname!=''">
-		nickname=#{nickname}
+		and nickname like concat(concat('%',#{nickname},'%'))
 		</if>
 		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
-		course_type_subclass_name=#{courseTypeSubclassName}
+		and course_type_subclass_name like concat(concat('%',#{courseTypeSubclassName},'%'))
 		</if>
 		<if test="name!=null and name!=''">
-		name=#{name}
+		and name like concat(concat('%',#{name},'%'))
 		</if>
 		order by addtime desc limit #{pageNo},#{pageSize}
 	</select>

@@ -8,11 +8,11 @@ public class QuestionBankFeedback {
 	
 	private String userId;
 	
-	private String categoryId;
-	
 	private String bankId;
 	
 	private String types;
+	
+	private String content;
 	
 	private QuestionBank bank;
 	
@@ -23,6 +23,12 @@ public class QuestionBankFeedback {
 	private Date updatetime;
 	
 	private String showtime;
+	
+	private String name;
+	
+	private String nickname;
+	
+	private String courseTypeSubclassName;
 
 	public String getId() {
 		return id;
@@ -38,14 +44,6 @@ public class QuestionBankFeedback {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
 	}
 
 	public String getBankId() {
@@ -102,6 +100,38 @@ public class QuestionBankFeedback {
 
 	public void setBank(QuestionBank bank) {
 		this.bank = bank;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getCourseTypeSubclassName() {
+		return courseTypeSubclassName;
+	}
+
+	public void setCourseTypeSubclassName(String courseTypeSubclassName) {
+		this.courseTypeSubclassName = courseTypeSubclassName;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	

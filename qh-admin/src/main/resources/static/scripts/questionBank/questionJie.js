@@ -86,15 +86,6 @@ app.controller("questionJieController", function($scope, $http){
 		}
 	}
 	
-	$scope.questionSub=function(typename,sub,$event){
-		$event.stopPropagation();
-		$scope.courseTypeName=typename;
-		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
-		$scope.questionsubcate();
-		$scope.typeSelected=sub.courseTypeSubclassName;
-	
-	}
-	
 	$scope.update=function(){
 		if($scope.id!=null){
 			
@@ -270,8 +261,8 @@ app.controller("questionJieController", function($scope, $http){
 		$scope.typeselected=qbul;
 	}
 	
-	$scope.checkquestionsub=function(qbc){
-		
+	$scope.checkquestionsub=function(qbc,$event){
+		$event.stopPropagation();
 		$scope.selecteds=qbc.id;
 		$scope.subId=qbc.id;
 		$scope.subName=qbc.name;

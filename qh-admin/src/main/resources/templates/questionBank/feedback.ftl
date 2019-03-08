@@ -6,10 +6,10 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-
+<script src="/scripts/questionBank/feedback.js"></script>
 <@b.body menu="sidebarmenu-questionBank" submenu="sidebarmenu-questionBank-feedback">
 
-<div >
+<div ng-controller="feedbackController">
 	<div class="details" style="width: 100%;">
 		<div class="details-nav">
 			<ul>
@@ -26,30 +26,34 @@
 				<div class="select-3" style="width: 15%;">
 					<span>学员</span>
 					<form id="search">
-						<input type="text"  placeholder="请输入学员名称" />
+						<input type="text"  ng-model="nickname" placeholder="请输入学员名称" />
 					</form>
 				</div>
 				<div class="select-3" style="width: 15%;">
 					<span>专业</span>
 					<form id="search">
-						<input type="text"  placeholder="请输入专业名称" />
+						<input type="text"  ng-model="courseTypeSubclassName"  placeholder="请输入专业名称" />
 					</form>
 				</div>
 				<div class="select-3" style="width: 15%;">
 					<span>课程章</span>
 					<form id="search">
-						<input type="text"  placeholder="请输入课程章名称" />
+						<input type="text"  ng-model="name"  placeholder="请输入课程章名称" />
 					</form>
 				</div>
 				<div class="select-3" style="width: 15%;">
-					<span>试题</span>
+					<img src="/images/sjk-xl.png" /> <span>是否已读</span>
 					<form id="search">
-						<input type="text"  placeholder="" />
+					
+						<select ng-model="status">
+							<option ng-selected="status==0" value=0>未读</option>
+							<option ng-selected="status==1" value=1>已读</option>
+						</select>
 					</form>
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="立即检索"
-						ng-click="teacherBases()" />
+						ng-click="feedbackList()" />
 				</div>
 			</div>
 			<div class="manage">
@@ -60,29 +64,34 @@
 					<span class="glyphicon glyphicon-pencil"></span>&nbsp;查看信息</li>
 					<li ng-click="deleteTeacher()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除信息</li>
+						<li  style="background: #F9CD33;">
+						<span class="glyphicon glyphicon-pencil"  ng-click="updatefeedback()">标记已读</span></li>
 					<li style="float: right; margin-right: 20px; background: none;"><img
-						src="/images/sjk-f5.png" name="changyi" ng-click="reset()" /></li>
+						src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
+						
 				</ul>
 				<div class="admin-table">
 
 					<table>
 						<tr>
 							<th>学员</th>
+							<th>反馈留言</th>
 							<th>专业</th>
 							<th>课程章</th>
-							<th>试题</th>
 							<th>错误分类</th>
-							<th>反馈留言</th>
+							
 							<th>创建日期</th>
+							
 						</tr>
-						<tr>
-							<th>学员</th>
-							<th>专业</th>
-							<th>课程章</th>
-							<th>试题</th>
-							<th>错误分类</th>
-							<th>反馈留言</th>
-							<th>创建日期</th>
+						<tr ng-repeat="fl in feedbacklist" ng-click="checkfeedback(fl)" ng-class="{'selected':selected==fl}">
+							<th>{{fl.nickname}}</th>
+							<th>{{fl.content}}</th>
+							<th>{{fl.courseTypeSubclassName}}</th>
+							<th>{{fl.name}}</th>
+							<th>{{fl.types}}</th>
+							
+							<th>{{fl.showtime}}</th>
+							
 						</tr>
 					</table>
 					</div>
@@ -92,7 +101,7 @@
 							ng-model="current" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-click="teacherBases()">
+							ng-click="feedbackList()">
 						</ul>
 					</div>
 				
