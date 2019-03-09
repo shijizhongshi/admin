@@ -70,7 +70,7 @@ app.controller("fuwushopController", function($scope, $http) {
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.shop.doorHeadUrl=data.data;
+	    	$scope.doorHeadUrl=data.data;
 		})
 	};
 
@@ -84,7 +84,7 @@ app.controller("fuwushopController", function($scope, $http) {
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data){
-	    	$scope.shop.shopLogo=data.data;
+	    	$scope.shopLogo=data.data;
 		})
 	};
 	
@@ -111,6 +111,7 @@ app.controller("fuwushopController", function($scope, $http) {
 	}
 	$scope.deleteshort=function(){
 		if($scope.shopId!=null){
+			if(confirm("您确定要删除这个信息吗")){
 			$http.get("/api/shop/deleteshort", {
 				"params" : {
 					"id" : $scope.shopId
@@ -125,6 +126,7 @@ app.controller("fuwushopController", function($scope, $http) {
 					alert(data.message);
 				}
 			})
+			}
 		}else{
 			alert("请选择信息");
 		}

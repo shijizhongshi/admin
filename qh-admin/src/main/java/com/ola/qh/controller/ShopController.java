@@ -94,13 +94,13 @@ public class ShopController {
 	 * @return
 	 */
 	@RequestMapping(value="/saveUpdateShort",method=RequestMethod.POST)
-	public Results<String> insertShortShop(@RequestBody @Valid Shop shop,BindingResult valid){
+	public Results<String> insertShortShop(@RequestBody Shop shop){
 		
 		Results<String> result=new Results<String>();
 		if(shop.getId()!=null && !"".equals(shop.getId())){
 			shopService.updateShortShop(shop);
 		}else{
-			if(valid.hasErrors()){
+			if(shop.getShopName()==null || shop.getAddress()==null || shop.getDoorHeadUrl()==null){
 				result.setStatus("1");
 				result.setMessage("临时店铺信息不完整~");
 				return result;
