@@ -43,7 +43,7 @@
 							<li ng-click="guanli()"><span
 								class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;项目管理</li>-->
 							<li style="float: right; margin-right: 20px; background: none;"><img
-								src="/images/sjk-f5.png" name="changyi" ng-click="shopList()" /></li>
+								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
 						<div class="admin-table">
 
@@ -123,14 +123,14 @@
 											门头照片<input type="file" name="file" accept="image/*"
 												value="上传门头照片" onchange="angular.element(this).scope().uploadmainimage(this)" />
 											<div class="costs-img">
-												<img ng-src="{{shop.doorHeadUrl}}"/>
+												<img src="{{doorHeadUrl}}"/>
 											</div>
 										</div>
 										<div class="costs-uploadfile-div">
 											店面标志<input type="file" name="file" accept="image/*"
 												value="上传店面logo" onchange="angular.element(this).scope().uploadmainimage11(this)" />
 											<div class="costs-img">
-												<img src="{{shop.shopLogo}}" />
+												<img src="{{shopLogo}}" />
 											</div>
 										</div>
 										
@@ -140,7 +140,7 @@
 							<div class="end">
 								<input name="git" type="submit" value="提交" ng-show="shopId==null" style="background: #5ED8A9;" ng-click="saveUpdateShop()"/> 
 								<input name="git" type="submit" value="修改" ng-show="shopId!=null" style="background: #5ED8A9;" ng-click="saveUpdateShop()"/> 
-								<input name="esc" type="reset" value="取消" onclick="CloseDiv();formReset()" class="esc" />
+								<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc" />
 							</div>
 						</div>
 					</div>

@@ -26,9 +26,13 @@ app.controller("fuwushopController", function($scope, $http) {
 	$scope.shopList();
 	$scope.shop = null;
 	$scope.shopId = null;
+	
 	$scope.add = function() {
 		$scope.shop = null;
 		$scope.shopId = null;
+		$scope.doorHeadUrl=null;
+		$scope.shopLogo=null;
+		$scope.selected = null;
 		document.getElementById('add').style.display="block"; 
 	};
 
@@ -40,10 +44,20 @@ app.controller("fuwushopController", function($scope, $http) {
 		}
 	};
 	$scope.checkshop = function(shop) {
+		if($scope.selected !=shop){
 		$scope.selected = shop;
 		$scope.shop = shop;
+		$scope.doorHeadUrl=$scope.shop.doorHeadUrl ;
+		$scope.shopLogo=$scope.shop.shopLogo;
 		$scope.shopId = shop.id;
 
+		}else{
+			$scope.selected = null;
+			$scope.shop = null;
+			$scope.doorHeadUrl=null ;
+			$scope.shopLogo=null;
+			$scope.shopId = null;
+		}
 	}
 	
 	$scope.uploadmainimage = function(file){
@@ -75,6 +89,8 @@ app.controller("fuwushopController", function($scope, $http) {
 	};
 	
 	$scope.saveUpdateShop=function(){
+		$scope.shop.doorHeadUrl=$scope.doorHeadUrl;
+		$scope.shop.shopLogo=$scope.shopLogo;
 		$http.post("/api/shop/saveUpdateShort",$scope.shop,{
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(data) {
@@ -85,6 +101,7 @@ app.controller("fuwushopController", function($scope, $http) {
 					alert("修改成功~");
 				}
 				document.getElementById('add').style.display="none"; 
+				$scope.selected = null;
 				$scope.shopList();
 			} else {
 				alert(data.message);
@@ -114,6 +131,19 @@ app.controller("fuwushopController", function($scope, $http) {
 		
 	};
 	
+	$scope.reset=function(){
+		
+		document.getElementById('add').style.display="none"; 
+		$scope.selected = null;
+		$scope.shop = null;
+		$scope.doorHeadUrl=null ;
+		$scope.shopLogo=null;
+		$scope.shopId = null;
+	}
 	
+	$scope.refresh=function(){
+		
+		location.reload();
+	}
 	
 })
