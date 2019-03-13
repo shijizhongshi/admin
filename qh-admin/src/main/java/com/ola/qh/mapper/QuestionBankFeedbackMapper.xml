@@ -19,7 +19,8 @@
 
 	<select id="feedbackList" resultMap="QuestionBankFeedbackMap">
 		select qbf.id id,user_id,bank_id,qbf.types types,status,qbf.addtime addtime,content,
-		qbc.course_type_subclass_name course_type_subclass_name,qbc.name name,nickname
+		qbc.course_type_subclass_name course_type_subclass_name,qbc.name name,nickname,
+		qbs.name sectionname,qb.types bankTypes
 		from question_bank_feedback qbf
 		left join user u on qbf.user_id=u.id
 		left join question_bank qb on qb.id=qbf.bank_id
