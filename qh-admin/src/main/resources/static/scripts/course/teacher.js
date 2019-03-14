@@ -65,6 +65,14 @@ app.controller("teacherController", function($scope, $http){
 				
 			}
 		})
+		
+		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":7}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeSubclass6=data.data;
+				
+			}
+		})
 	
 	
 	

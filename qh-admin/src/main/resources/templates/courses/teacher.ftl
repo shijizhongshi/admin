@@ -189,6 +189,21 @@
 														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
 											</ul>
 										</dd>
+										
+										
+										<dt>
+											<span onclick="showHide(this,'items5');">建筑资格</span>
+											<!--  <input type="checkbox" class="jian" />-->
+										</dt>
+										<dd id="items5" style="display: none;">
+											<ul>
+
+												<li ng-repeat="sub in courseTypeSubclass6"><span><input
+														type="checkbox"
+														ng-checked="isSelected(sub.courseTypeSubclassName)"
+														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
+											</ul>
+										</dd>
 
 									</dl>
 								</div>
