@@ -118,6 +118,7 @@
 										ng-model="news.contentTypes">
 										<option ng-selected="news.contentTypes==1" value="1">新闻</option>
 										<option ng-selected="news.contentTypes==2" value="2">话题</option>
+										<option ng-selected="news.contentTypes==3" value="3">头条</option>
 									</select>
 								</div>
 								<div class=" select-2" style="clear: both;">

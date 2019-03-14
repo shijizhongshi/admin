@@ -51,7 +51,14 @@
 			</li>
 
 
-
+			<li class="list" ng-click="typeList('建筑资格',7)">建筑资格
+				<ul class="items" ng-class="{'active':active==7}">
+					<li ng-repeat="sub in courseTypeSubclass"
+						ng-click="typeSub('建筑资格',sub,$event)"
+						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
+				</ul>
+			</li>
+			
 		</ul>
 	</div>
 	<div class="details">
