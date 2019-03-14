@@ -200,7 +200,12 @@
          <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('健康管理师',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
       </ul>
       </li>
-      
+      <li class="list">
+      <b>建筑资格</b> 
+      <ul class="items" ng-class="{'active':active==7}">
+         <li ng-repeat="sub in courseTypeSubclass" ng-click="typeSub('建筑资格',sub)" ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
+      </ul>
+      </li>
       
       
       </ul>
