@@ -1,4 +1,5 @@
-<#import "/layout/header.ftl" as h/> <#import "/layout/body.ftl" as b/>
+<#import "/layout/header.ftl" as h/>
+<#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -143,6 +144,21 @@
 							<div class="select-2">
 								<span>直播名称<i class="bitian">*</i></span> <input type="text"
 									ng-model="live.liveName"
+									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="select-2">
+								<span>直播id<i class="bitian">*</i></span> <input type="text"
+									ng-model="live.liveId"
+									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="select-2">
+								<span>直播间id<i class="bitian">*</i></span> <input type="text"
+									ng-model="live.liveRoomId"
+									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="select-2">
+								<span>回放id<i class="bitian">*</i></span> <input type="text"
+									ng-model="live.liveBackId"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							<div class="add-jie-radio">

@@ -125,8 +125,8 @@
 	<!-- 热门直播的开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<insert id="insertLive" parameterType="com.ola.qh.entity.CourseLineShow">
 	insert into course_line_show(id,course_type_name,course_type_subclass_name,live_name,
-	img_url,isremmend,isshow,addtime,out_links)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
-	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},#{outLinks})
+	img_url,isremmend,isshow,addtime,out_links,live_room_id,live_id,live_back_id)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
+	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},#{outLinks},#{liveRoomId},#{liveId},#{liveBackId})
 	</insert>
 	<resultMap type="com.ola.qh.entity.CourseLineShow" id="liveMap">
 	
@@ -136,6 +136,10 @@
 	<result column="live_name" property="liveName"/>
 	<result column="img_url" property="imgUrl"/>
 	<result column="out_links" property="outLinks"/>
+	
+	<result column="live_room_id" property="liveRoomId"/>
+	<result column="live_id" property="liveId"/>
+	<result column="live_back_id" property="liveBackId"/>
 
 	
 	</resultMap>
@@ -185,6 +189,15 @@
 	</if>
 	<if test="outLinks!=null and outLinks!=''">
 	out_links=#{outLinks},
+	</if>
+	<if test="liveId!=null and liveId!='' ">
+	live_id=#{liveId},
+	</if>
+	<if test="liveRoomId!=null and liveRoomId!='' ">
+	live_room_id=#{liveRoomId},
+	</if>
+	<if test="liveBackId!=null and liveBackId!='' ">
+	live_back_id=#{liveBackId},
 	</if>
 	updatetime=#{updatetime}
 	where id=#{id}
