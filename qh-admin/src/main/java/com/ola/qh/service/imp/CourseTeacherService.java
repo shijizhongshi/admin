@@ -76,7 +76,7 @@ public class CourseTeacherService implements ICourseTeacherService{
 					typename=typename+","+string;
 				}
 			}
-			courseTeacher.setCourseTypeNames("医师资格,药师资格,中医基础理论,卫生资格,健康管理师");
+			courseTeacher.setCourseTypeNames("医师资格,药师资格,中医基础理论,卫生资格,健康管理师,建筑资格");
 			courseTeacher.setCourseTypeSubclassNames(typename);
 			courseTeacherDao.insertCourseTeacher(courseTeacher);
 		
