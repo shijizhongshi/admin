@@ -12,6 +12,8 @@ public class QuestionBankFeedback {
 	
 	private String types;
 	
+	private String bankTypes;
+	
 	private String content;
 	
 	private QuestionBank bank;
@@ -24,11 +26,13 @@ public class QuestionBankFeedback {
 	
 	private String showtime;
 	
-	private String name;
+	private String name;////章名称
+	
+	private String sectionname;//节名称
 	
 	private String nickname;
 	
-	private String courseTypeSubclassName;
+	private String courseTypeSubclassName;//////子专业名称
 
 	public String getId() {
 		return id;
@@ -132,6 +136,22 @@ public class QuestionBankFeedback {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getSectionname() {
+		return sectionname;
+	}
+
+	public void setSectionname(String sectionname) {
+		this.sectionname = sectionname;
+	}
+
+	public String getBankTypes() {
+		return bankTypes;
+	}
+
+	public void setBankTypes(String bankTypes) {
+		this.bankTypes = bankTypes;
 	}
 	
 	

@@ -20,7 +20,45 @@ app.controller("feedbackController", function($scope, $http){
 			if(data.status=="0"){
 				$scope.feedbacklist=data.data;
 				$scope.total=data.count;
-				
+				angular.forEach($scope.feedbacklist, function(Feedback){  
+					if(Feedback.bank.types=="单选"){
+						
+						$scope.questionanswerlist=Feedback.bank.answer;
+						
+						angular.forEach($scope.questionanswerlist, function(questionanswer){  
+							
+							if(questionanswer.correct==true){
+								
+								questionanswer.corrects="正确";
+							}else{
+								
+								questionanswer.corrects="错误";
+							}
+						})
+					}
+					
+					else if(Feedback.bank.types=="共用题干")	{
+						
+						$scope.questionunitlist=Feedback.bank.unit;
+						
+						
+							for(i=0;i<$scope.questionunitlist.length;i++){
+								
+								$scope.questionunitlist[i].shiti="试题"+(i+1);
+								
+								if($scope.questionunitlist[i].correct==true){
+									
+									$scope.questionunitlist[i].corrects="正确";
+								}else{
+									
+									$scope.questionunitlist[i].corrects="错误";
+								}
+								
+								
+							}
+							
+					}
+				})
 			}
 		})
 	};
@@ -51,11 +89,19 @@ app.controller("feedbackController", function($scope, $http){
 		
 		if($scope.selected!=fl){
 		$scope.selected=fl;
+		$scope.feedback=fl;
+		$scope.questionbanks=fl.bank;
+		$scope.types=$scope.questionbanks.types;
 		$scope.id=fl.id;
+		$scope.questionanswers=$scope.questionbanks.answer;
 		
 		}else{
 			$scope.selected=null;
+			$scope.feedback=null;
+			$scope.questionbanks=null;
+			$scope.types=null;
 			$scope.id=null;
+			$scope.questionanswers=null;
 		}
 	}
 	
@@ -89,11 +135,96 @@ app.controller("feedbackController", function($scope, $http){
 		}
 	}
 	
+	
+	
+	$scope.update=function(){
+		if($scope.id!=null){
+			if($scope.types=="单选"){
+				
+				document.getElementById('resources').style.display="none"; 
+				document.getElementById('resource').style.display="block"; 
+				alert($scope.questionanswers[0].answers)
+			}
+			else if($scope.types=="共用题干"){
+				
+				document.getElementById('resources').style.display="block"; 
+				document.getElementById('resource').style.display="none"; 
+				$scope.checkshiti($scope.questionunitlist[0]);
+				
+			}
+			
+		}
+		else{
+			alert("请选中信息");
+		}
+	}
+	
+	
+	
+	
+	
 	$scope.refresh=function(){
 		
 		location.reload();
 	}
 	
+	$scope.checkshiti=function(qbul){
+		
+		$scope.questionunitanswerlist=qbul.unitAnswer;
+		$scope.questionunitlists=qbul;
+		$scope.typeselected=qbul;
+	}
+	
+	$scope.updatequestionbank=function(){
+		$scope.questionBank=$scope.questionbanks;
+		$scope.questionBank.answer=$scope.questionanswers;
+		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				alert("修改成功")
+			
+			}
+			
+		})
+	};
+	
+	$scope.deletefeedback=function(){
+		if($scope.id!=null){
+			
+			if(confirm("您确定要删除这个试题吗")){
+				$http.get("/api/feedback/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=='0'){
+						alert("删除成功~");
+						$scope.id=null;
+						location.reload();
+					}else{
+						alert("删除失败~");
+					}
+				})
+			}
+			
+		}else{
+			alert("请选中信息~");
+		}
+	}
 	
 	
+	$scope.resetbank=function(){
+		
+		if($scope.types=="单选"){
+			
+			document.getElementById('resource').style.display="none"; 
+		}
+		else if($scope.types=="共用题干"){
+			
+			document.getElementById('resources').style.display="none"; 
+		}
+		$scope.selected=null;
+		$scope.feedback=null;
+		$scope.questionbanks=null;
+		$scope.types=null;
+		$scope.id=null;
+		$scope.questionanswers=null;
+	}
 })

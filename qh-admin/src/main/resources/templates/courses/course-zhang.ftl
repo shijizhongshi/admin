@@ -56,7 +56,13 @@
 				</ul>
 			</li>
 
-
+			<li class="list" ng-click="typeList('建筑资格',7)">建筑资格
+				<ul class="items" ng-class="{'active':active==7}">
+					<li ng-repeat="sub in courseTypeSubclass"
+						ng-click="typeSub('建筑资格',sub,$event)"
+						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
+				</ul>
+			</li>
 
 		</ul>
 	</div>
@@ -96,8 +102,8 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改章</li>
 					<li ng-click="deleteChapter()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除章</li>
-					<li ng-click="chaptermove(1)"><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-					<li ng-click="chaptermove(2)"><span class="glyphicon glyphicon-sort-by-attributes"
+					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+					<li><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;下移</li>
 					<li ng-click="section()"><span
 						class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;节管理</li>
