@@ -11,9 +11,9 @@
 .poop .select-2{width:96%;}
 .poop .select-2 input , .poop .select-3 select {border-radius:5px;border:#F0F1F3 1px solid;}
 .poop .select-3{width:45%;}
-/*Íø¿Î±¨°à,¿Î³Ì±¨Ãû£¬Ö±²¥±¨°à*/
+/*ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½,ï¿½Î³Ì±ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .resource{min-width:950px;}
-.resource{width:85%;left:2%;border-radius:10px;top:-35%;}
+.resource{width:85%;left:2%;border-radius:10px;top:0%;}
 
 .classify ul.menu .list{background:#F5F6F8;}
 .resource h3{padding:15px 0;}
@@ -33,7 +33,7 @@ ul.menu .active:before{content:'+';font-size:2rem;font-weight:bold;color:black;b
 .yixuanbanji{width:100%;margin-bottom:20px;}
 .yixuanbanji li{height:40px;line-height:40px;font-size:1.3rem;background:#F3F4F6;border:1px solid #D4D5D7;padding-left:10px;}
 .yixuanbanji li:nth-child(2){border-top:none;}
-/*Ãâ·ÑÖØÑ§*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§*/
 .xinxixuanze {display: flex; justify-content: space-between;clear:both;}
 .xinxixuanze li{position:relative;}
 .xinxixuanze li img{position:absolute;right:6px;top:6px;}

@@ -10,7 +10,7 @@ public abstract class AndroidNotification extends UmengNotification
     // Keys can be set in the payload level
     protected static final HashSet<String> PAYLOAD_KEYS = new HashSet<String>(Arrays.asList(new String[]
     {
-	    "display_type"
+	    "display_type" 
     }));
 
     // Keys can be set in the body level
