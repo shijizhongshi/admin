@@ -166,8 +166,8 @@
 								style="float: left; margin-right: 5%; width: 35%;">
 								<img src="/images/sjk-xl.png" /> <span>是否展示</span> <select
 									ng-model="course.courseShow">
-									<option ng-selected="course.courseShow==1" value="1">是</option>
-									<option ng-selected="course.courseShow==0" value="0">否</option>
+									<option ng-selected="course.courseShow==0" value="0">是</option>
+									<option ng-selected="course.courseShow==1" value="1">否</option>
 								</select>
 							</div>
 							<div class="select-2" style="float: left; width: 35%;">
