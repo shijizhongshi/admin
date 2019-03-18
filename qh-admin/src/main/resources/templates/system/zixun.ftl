@@ -129,7 +129,6 @@
 										<option ng-selected="news.typename=='中医适宜技术'" value="中医适宜技术">中医适宜技术</option>
 										<option ng-selected="news.typename=='卫生资格'" value="卫生资格">卫生资格</option>
 										<option ng-selected="news.typename=='健康管理师'" value="健康管理师">健康管理师</option>
-										<option ng-selected="news.typename=='中医基础理论'" value="中医基础理论">中医基础理论</option>
 										<option ng-selected="news.typename=='建筑资格'" value="建筑资格">建筑资格</option>
 									</select>
 								</div>

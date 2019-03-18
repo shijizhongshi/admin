@@ -127,8 +127,8 @@ submenu="sidebarmenu-questionBank-questionChapter">
 			<li style="background:#9DE879;"><span class="glyphicon glyphicon-plus" ></span>&nbsp;导入试题</li>
 			<li style="background:#9DE879;" ><span class="glyphicon glyphicon-plus" ></span>&nbsp;导入原有系统试题</li>
 			<li style="background:#9DE879;" onclick="showDiv2()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;从文件导入试题</li>
-		<li style="background:#F9CD33;" onclick="showDiv3()"> <span class="glyphicon glyphicon-pencil"></span>&nbsp;修改试题</li>
-		<li style="background:#F86846;"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除试题</li>
+		<li style="background:#F9CD33;" ng-click="updatebank()"> <span class="glyphicon glyphicon-pencil"></span>&nbsp;修改试题</li>
+		<li style="background:#F86846;" ng-click="deletequestionbank()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除试题</li>
  
 	</ul>
 	<div style="clear:both;padding-top:20px;padding-left:20px;overflow:hidden;">
@@ -137,7 +137,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 		<ul class="menu" style="width:87%;" >
 
 			<li ng-repeat="qbc in questionsubcatelist" class="list" 
-			ng-click="checkquestionsub(qbc)" ng-class="{'selected':selecteds==qbc.id}">{{qbc.name}}</li>
+			ng-click="checkquestionsub(qbc,$event)" ng-class="{'selected':selecteds==qbc.id}">{{qbc.name}}</li>
 			
 		</ul>
 	</div>
@@ -154,8 +154,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <th>正确答案项</th>
 	<th>答案解析</th>
 	<th>创建时间</th>
-	<th>操作</th>
-	
+
 	</tr>
 	<tr ng-repeat="qb in questionbanklist"
 								ng-click="checkquestionbank(qb)"
@@ -165,8 +164,11 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	<th>{{qb.types}}</th>
 	<th>{{qb.correct}}</th>
 	<th>{{qb.analysis}}</th>
-	<th>{{qb.showtime}}</th>
-	<th><span class="xiangqing" ng-click="">查看详情</span></th>
+	<th><ul style="margin: 0;  padding: 0;">
+	<li ng-repeat="qba in qb.answer" style="width:100%;border-bottom: 1px solid #f6f6f6c4;line-height: 20px;clear: both;height: 20px;">
+	<span style="float: left;">{{qba.options}}.{{qba.answers}}</span><span style="float: right;">{{qba.corrects}}</span></li>
+	</ul></th>
+
 	</tr>
 
 
@@ -202,16 +204,16 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <div id="resource" class="resource" style="width:600px;min-width:600px;left:20%;">
 	<form id="myform3" class="ng-pristine ng-valid">
 	<h3 style="margin-bottom:0;">修改试题</h3>
-	<p style="border-bottom:1px solid #999;padding-bottom:5px;"><span>试题所属节：{}</span><span style="margin-left:10%;">试题类型：{单选题}</span></p>
+	<p style="border-bottom:1px solid #999;padding-bottom:5px;"><span>试题所属节：{{subName}}</span><span style="margin-left:10%;">试题类型：{{questionbanks.types}}</span></p>
 	<div>
 	<div style="float:left;width:49%;">
 	<div class="grade-text">
 	<span>试题标题</span>
-	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	<textarea ng-model="questionbanks.title" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
 	<div class="grade-text">
 	<span>答案解析</span>
-	<textarea ng-model="courseNofree.describes" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	<textarea ng-model="questionbanks.analysis" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
 	<div class="select-2">
 		<span>解析视频ID<i class="bitian">*</i></span>
@@ -222,27 +224,27 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="考点ID" >
 	</div></div>
 	<div style="width:49%;float:right;">
-	<div class="shiti">
-	<ul><li style="background:#F5F6F8">试题1</li><li>试题2</li><li>试题3</li></ul>
-	<p>标题</p>
-	<div class="xiugaibt">
-	<textarea></textarea>
-	</div>
-	</div>
+	
 
 
 <!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
 <div class="daan">
+<p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
 <tbody>
-<tr>
-<td>正确选项</td>
-<td>选项</td>
+<tr ng-repeat="qbas in questionanswers">
+<td><input type="text"/ ng-model="qbas.answers"></td>
+<td>
+<div class="dw">
+<img src="/images/sjk-xl.png">
+<select class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbas.correct">
+			<option ng-selected="qbas.correct==true" value=true>正确</option>
+			<option ng-selected="qbas.correct==false" value=false>错误</option>
+		</select></div>
+		</td>
 </tr>
-<tr>
-<td><input type="checkbox"/></td>
-<td>答案答案答案答案答案答案答案答案</td>
-</tr>
+
+
 </tbody>
 </table>
 	</div>
@@ -250,13 +252,88 @@ submenu="sidebarmenu-questionBank-questionChapter">
 </div>
 
 	<div class="end" style="margin-top:10px;">
-			<input name="git" type="submit" value="修改" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
-			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" class="esc">
+			<input name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
+			<input name="esc" type="reset" value="取消" ng-click="resetbank()" class="esc">
 		</div>
 </form>
 
-</idv>
+</div>
 
+
+
+
+
+
+<!-- 共用题干修改试题 -->
+<div id="resources" class="resource" style="width:600px;min-width:600px;left:20%;">
+	<form id="myform3" class="ng-pristine ng-valid">
+	<h3 style="margin-bottom:0;">修改试题</h3>
+	<p style="border-bottom:1px solid #999;padding-bottom:5px;"><span>试题所属节：{{subName}}</span><span style="margin-left:10%;">试题类型：{{questionbanks.types}}</span></p>
+	<div>
+	<div style="float:left;width:49%;">
+	<div class="grade-text">
+	<span>试题标题</span>
+	<textarea ng-model="questionbanks.title" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	</div>
+	
+	<div class="select-2">
+		<span>解析视频ID<i class="bitian">*</i></span>
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="视频ID" >
+	</div>
+	<div class="select-2">
+		<span>试题考点ID<i class="bitian">*</i></span>
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="考点ID" >
+	</div></div>
+	
+	
+	
+	<div  style="width:49%;float:right;">
+	<div class="shiti" >
+	<ul  >
+	<li ng-repeat="qbul in questionunitlist" ng-class="{'typeselected':typeselected==qbul}"  ng-click="checkshiti(qbul)">{{qbul.shiti}}</li>
+	
+	</ul>
+	<p>标题</p>
+	<div class="xiugaibt">
+	<textarea ng-model="questionunitlists.title"></textarea>
+	</div>
+	</div>
+
+<div class="grade-text">
+	<span>答案解析</span>
+	<textarea ng-model="questionunitlists.analysis" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
+	</div>
+<!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
+<div class="daan">
+<p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
+<table>
+<tbody>
+<tr ng-repeat="qbual in questionunitanswerlist">
+<td><input type="text"/ ng-model="qbual.answers"></td>
+<td>
+<div class="dw">
+<img src="/images/sjk-xl.png">
+<select class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbual.correct">
+			<option ng-selected="qbual.correct==true" value=true>正确</option>
+			<option ng-selected="qbual.correct==false" value=false>错误</option>
+		</select></div>
+		</td>
+</tr>
+
+
+</tbody>
+</table>
+	</div>
+</div>
+</div>
+
+	<div class="end" style="margin-top:10px;">
+			<input name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
+			<input name="esc" type="reset" value="取消" ng-click="resetbank()" class="esc">
+		</div>
+</form>
+
+</div>
 
 </div>
 
@@ -287,15 +364,21 @@ submenu="sidebarmenu-questionBank-questionChapter">
 #resource .grade-text textarea{height:50px;}
 .shiti{}
 .shiti ul {display:flex;justify-content: left;margin-bottom: 0;}
-.shiti ul li{margin-right: 3px;border-radius: 7px 7px 0px 0;background:#CBD2D8;text-align: center;padding: 0 5px;}
+.shiti ul li{margin-right: 3px;border-radius: 7px 7px 0px 0;text-align: center;padding: 0 5px;}
 .shiti p{padding-top: 7px;width:100%;padding-left: 2%;background: #F5F6F8;margin: 0;font-size: 1.3rem;padding-bottom: 5px;}
 .xiugaibt{width:100%;background: #F5F6F8;padding: 0 2%;height: 80px;}
 .xiugaibt textarea{width:100%;background:#FFFFFF;height: 73px;}
-.daan table{margin-top:10px;overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
+.daan table{overflow:hidden;border-radius:10px; border-collapse: collapse;text-align: center;}
 .daan table tr{background:#F7F8FC;font-size:1.3rem;}
-.daan table tr:nth-child(1){background:#dddedf;color:black;}
-.daan table tr td:nth-child(1){border-right:1px solid #999;}
+.daan table tr:nth-child(1){background:#F7F8FC;color:black;}
+.daan table tr td:nth-child(1){border-right:1px solid #ebe1e1;}
+.daan table tr:nth-child(1) td{}
+.dw{position: relative;width: 65px;}
+.dw img{position: absolute;right:0;top: 11px;width: 12px;}
+.daan table tr .dw select{margin-left:0; border:none;}
+.daan table tr:nth-child(2n-1){background:#F7F8FC;}
 ul.menu .list:before{display:none;}
+.typeselected{background-color:#CBD2D8;}
 </style>
 <script>
 function go(n){

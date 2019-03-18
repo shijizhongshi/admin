@@ -28,7 +28,10 @@ public class questionBank {
 		return "questionBank/examination";
 	}
 	@RequestMapping("/examination-element")
-	public String element(){
+	public String element(@RequestParam(name="id",required=true)String id,
+			@RequestParam(name="name",required=true)String name,HttpServletRequest request){
+		request.getSession().setAttribute("id", id);
+		request.getSession().setAttribute("name", name);
 		return "questionBank/examination-element";
 	}
 	@RequestMapping("/feedback")

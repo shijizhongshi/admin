@@ -17,19 +17,48 @@ public class CourseLineShow {
 	private String outLinks;
 	@NotEmpty
 	private String imgUrl;
-	
-	private String isremmend;////1是推荐
-	
-	private String isshow;///1:可见
-	
+
+	private String isremmend;//// 1是推荐
+
+	private String isshow;/// 1:可见
+
 	private Date addtime;
-	
+
 	private Date updatetime;
-	
+
 	private String showtime;
+
+	private String liveRoomId;
+
+	private String liveId;
+
+	private String liveBackId;
+
 	
 	
-	
+	public String getLiveRoomId() {
+		return liveRoomId;
+	}
+
+	public void setLiveRoomId(String liveRoomId) {
+		this.liveRoomId = liveRoomId;
+	}
+
+	public String getLiveId() {
+		return liveId;
+	}
+
+	public void setLiveId(String liveId) {
+		this.liveId = liveId;
+	}
+
+	public String getLiveBackId() {
+		return liveBackId;
+	}
+
+	public void setLiveBackId(String liveBackId) {
+		this.liveBackId = liveBackId;
+	}
 
 	public String getOutLinks() {
 		return outLinks;
@@ -118,6 +147,5 @@ public class CourseLineShow {
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
-	
-	
+
 }

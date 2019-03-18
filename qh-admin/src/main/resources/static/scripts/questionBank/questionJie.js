@@ -86,15 +86,6 @@ app.controller("questionJieController", function($scope, $http){
 		}
 	}
 	
-	$scope.questionSub=function(typename,sub,$event){
-		$event.stopPropagation();
-		$scope.courseTypeName=typename;
-		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
-		$scope.questionsubcate();
-		$scope.typeSelected=sub.courseTypeSubclassName;
-	
-	}
-	
 	$scope.update=function(){
 		if($scope.id!=null){
 			
@@ -126,7 +117,7 @@ app.controller("questionJieController", function($scope, $http){
 	$scope.deletequestion=function(){
 		if($scope.id!=null){
 			
-			if(confirm("您确定要删出这个题库章节吗")){
+			if(confirm("您确定要删除这个题库章节吗")){
 				$http.get("/api/questionsubcategory/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
@@ -169,16 +160,112 @@ app.controller("questionJieController", function($scope, $http){
 				$scope.questionbanklist=data.data;
 				$scope.total1=data.count;
 				angular.forEach($scope.questionbanklist, function(questionbank){  
+					if(questionbank.types=="单选"){
+						
+						$scope.questionanswerlist=questionbank.answer;
+						
+						angular.forEach($scope.questionanswerlist, function(questionanswer){  
+							
+							if(questionanswer.correct==true){
+								
+								questionanswer.corrects="正确";
+							}else{
+								
+								questionanswer.corrects="错误";
+							}
+						})
+					}
 					
+					else if(questionbank.types=="共用题干")	{
+						
+						$scope.questionunitlist=questionbank.unit;
+						
+						
+							for(i=0;i<$scope.questionunitlist.length;i++){
+								
+								$scope.questionunitlist[i].shiti="试题"+(i+1);
+								
+								if($scope.questionunitlist[i].correct==true){
+									
+									$scope.questionunitlist[i].corrects="正确";
+								}else{
+									
+									$scope.questionunitlist[i].corrects="错误";
+								}
+								
+								
+							}
+							
+							
+							
+							
+							/*angular.forEach($scope.questionunitanswerlist, function(questionunitanswer){  
+								
+								if(questionunitanswer.correct==true){
+									
+									questionunitanswer.corrects="正确";
+								}else{
+									
+									questionunitanswer.corrects="错误";
+								}
+							})*/
+							
+						
+						
+					}
 				})
 			}
 		})
 	};
 	
-	$scope.checkquestionsub=function(qbc){
+	$scope.updatequestionbank=function(){
+		$scope.questionBank=$scope.questionbanks;
+		$scope.questionBank.answer=$scope.questionanswers;
+		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				alert("修改成功")
+			location.reload();
+			}
+			
+		})
+	};
+	
+	$scope.updatebank=function(){
+		if($scope.bankid!=null){
+			if($scope.types=="单选"){
+				
+				document.getElementById('resources').style.display="none"; 
+				document.getElementById('resource').style.display="block"; 
+			}
+			else if($scope.types=="共用题干"){
+				
+				document.getElementById('resources').style.display="block"; 
+				document.getElementById('resource').style.display="none"; 
+				$scope.checkshiti($scope.questionunitlist[0]);
+				
+			}
 		
+		}
+		else{
+			alert("请选中信息");
+		}
+	}
+	
+	
+	
+	$scope.checkshiti=function(qbul){
+		
+		$scope.questionunitanswerlist=qbul.unitAnswer;
+		$scope.questionunitlists=qbul;
+		$scope.typeselected=qbul;
+	}
+	
+	$scope.checkquestionsub=function(qbc,$event){
+		$event.stopPropagation();
 		$scope.selecteds=qbc.id;
 		$scope.subId=qbc.id;
+		$scope.subName=qbc.name;
 		$scope.questionbank();
 	}
 	
@@ -186,10 +273,54 @@ app.controller("questionJieController", function($scope, $http){
 		
 		if($scope.selected!=qb){
 		$scope.selected=qb;
+		$scope.questionbanks=qb;
 		$scope.bankid=qb.id;
+		$scope.types=qb.types;
+		$scope.questionanswers=qb.answer;
 		}else{
 			$scope.selected=null;
+			$scope.questionbanks=null;
 			$scope.bankid=null;
+			$scope.types=null;
+			$scope.questionanswers=null;
 		}
+	}
+	
+	$scope.deletequestionbank=function(){
+		if($scope.bankid!=null){
+			
+			if(confirm("您确定要删除这个试题吗")){
+				$http.get("/api/questionbank/delete",{"params": {"id":$scope.bankid}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=='0'){
+						alert("删除成功~");
+						$scope.bankid=null;
+						location.reload();
+					}else{
+						alert("删除失败~");
+					}
+				})
+			}
+			
+		}else{
+			alert("请选中信息~");
+		}
+	}
+	
+	$scope.resetbank=function(){
+		
+		if($scope.types=="单选"){
+			
+			document.getElementById('resource').style.display="none"; 
+		}
+		else if($scope.types=="共用题干"){
+			
+			document.getElementById('resources').style.display="none"; 
+		}
+		$scope.selected=null;
+		$scope.questionbanks=null;
+		$scope.bankid=null;
+		$scope.types=null;
+		$scope.questionanswers=null;
 	}
 })

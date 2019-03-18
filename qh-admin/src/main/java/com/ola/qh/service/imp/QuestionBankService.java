@@ -218,7 +218,7 @@ public class QuestionBankService implements IQuestionBankService {
 	public Results<List<QuestionBank>> selectQuestionBank(String subId,int pageNo,int pageSize) {
 		
 		Results<List<QuestionBank>> results=new Results<List<QuestionBank>>();
-		//try {
+		try {
 			
 			List<QuestionBank> listbank=questionBankDao.selectQuestionBank(subId,pageNo,pageSize);
 			
@@ -251,11 +251,11 @@ public class QuestionBankService implements IQuestionBankService {
 			results.setStatus("0");
 			return results;
 			
-		/*} catch (Exception e) {
+		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
 			return results;
-		}*/
+		}
 		
 	}
 
@@ -324,11 +324,11 @@ public class QuestionBankService implements IQuestionBankService {
 				}
 			}
 			
-			results.setMessage("0");
+			results.setStatus("0");
 			return results;
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			results.setMessage("1");
+			results.setStatus("1");
 			return results;
 		}
 		
