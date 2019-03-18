@@ -6,8 +6,9 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
+<script src="/scripts/super/super_admin.js"></script>
 <@b.body menu="sidebarmenu-sidebarmenu" submenu="sidebarmenu-sidebarmenu-super-superAdmin">
-<div>
+<div ng-app="app" ng-controller="superAdminController">
 <div class="details" style="width: 100%;">
 		<div class="details-nav">
 			<ul>
@@ -52,9 +53,9 @@
 			</div>
 			<div class="manage">
 				<ul class="show">
-				<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加账号</li>
+				<li style="background:#9DE879;" ng-click="addshow()"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加账号</li>
 					<li ng-click="update()" style="background: #F9CD33;">
-					<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改试题</li>
+					<span class="glyphicon glyphicon-pencil"></span>&nbsp;修改账号</li>
 					
 					<li ng-click="deletefeedback()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除信息</li>
@@ -99,19 +100,19 @@
 					<!-- 添加修改账号 -->
 				<div id="resource" class="resource">
 	<form id="myform3" class="ng-pristine ng-valid">
-	<h3 style="margin-bottom:0;">{添加/修改}账号</h3>
+	<h3 style="margin-bottom:0;">{{html}}账号</h3>
 	<div>
 	<div style="float:left;width:49%;">
 	<div class="select-2">
-		<span>账号名称<i class="bitian">*</i></span>
-<input type="text" placeholder="请输入名称" >
+		<span>账号昵称<i class="bitian">*</i></span>
+<input type="text" placeholder="请输入昵称" ng-model="userRole.nickname">
 	</div>
 					
 				<div class="select-2">
 					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
 					<form id="search">
 					
-						<select ng-model="status">
+						<select ng-model="userRole.ctegory">
 							<option ng-selected="status==0" value=0>教务</option>
 							<option ng-selected="status==1" value=1>加盟商</option>
 						</select>
@@ -119,15 +120,15 @@
 				</div>
 	<div class="select-2">
 		<span>设置账号<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请设置账号名称" >
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请设置账号名称" ng-model="userRole.account">
 	</div>
 		<div class="select-2">
 		<span>设置密码<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请设置密码" >
+<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请设置密码" ng-model="userRole.password">
 	</div>
 		<div class="select-2">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
+<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" ng-model="password">
 	</div>
 	</div>
 	<div style="width:49%;float:right;">
@@ -149,13 +150,14 @@
 
 
 	<div class="end" style="margin-top:10px;">
-			<input name="git" type="submit" value="修改" ng-click="updatequestionbank()"  style="background:#5ED8A9;">
+			<input id="addbutton" name="git" type="submit" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
+			<input id="updatebutton" name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" class="esc">
 		</div>
 </form>
 
 </div>
-<div class="poop" style="display:block;" id="add">
+<div class="poop" style="display:none;" id="add">
 <span class="close" onclick="CloseDiv()">X</span>
 <p>账号权限 </p>
 <ul>
