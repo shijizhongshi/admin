@@ -265,6 +265,20 @@
              </a></li>
                        </ul>
                 </li>
+ <li id="sidebarmenu-super" >
+                    <a>
+                       <i class="linecons-cog"></i>
+                        <span class="title">管理员账号</span>
+                    </a>
+                    <ul>
+                        <li id="sidebarmenu-super-superAdmin">
+                            <a href="/web/super/superAdmin">
+                                <span class="title">账号管理</span>
+                            </a>
+                        </li>
+                 
+                       </ul>
+                </li>
 
                 </#if>
                 
