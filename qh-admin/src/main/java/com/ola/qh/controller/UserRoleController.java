@@ -2,7 +2,10 @@ package com.ola.qh.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,7 +53,7 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "insert",method = RequestMethod.POST)
-	public Results<UserRole> insert(@RequestBody UserRole userRole) {
+	public Results<UserRole> insert(@RequestBody @Valid UserRole userRole,BindingResult valid) {
 		Results<UserRole> results = new Results<UserRole>();
 		results = userRoleService.insert(userRole);
 		

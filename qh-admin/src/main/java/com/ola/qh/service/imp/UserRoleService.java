@@ -100,6 +100,16 @@ public class UserRoleService implements IUserRoleService {
 			// 根据username字段查询
 			UserRole userRoles = UserRoleDao.selectByUsername(userRole.getUsername());
 			if (userRoles == null) {
+				List<String> limitsList=userRole.getMenus();
+				String limits=null;
+				for (String menus : limitsList) {
+					if(limits==null){
+						limits=menus;
+					}else{
+						limits=limits+","+menus;
+					}
+				}
+				userRole.setLimits(limits);
 				userRole.setAddtime(new Date());
 				userRole.setId(KeyGen.uuid());
 				UserRoleDao.saveUserRole(userRole);
