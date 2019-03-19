@@ -8,7 +8,7 @@ import com.ola.qh.entity.UserRole;
 
 public interface UserRoleDao {
 
-	public UserRole single(@Param("id") String id,@Param("account")String account);
+	public UserRole single(@Param("id") String id,@Param("username")String username);
 
 	public Integer update(UserRole userRole);
 

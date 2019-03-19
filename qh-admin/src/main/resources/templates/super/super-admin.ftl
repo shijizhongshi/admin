@@ -151,7 +151,7 @@
 	<div class="end" style="margin-top:10px;">
 			<input id="addbutton" name="git" type="submit" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
 			<input id="updatebutton" name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
-			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" class="esc">
+			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" ng-click="resetbank()" class="esc">
 		</div>
 </form>
 

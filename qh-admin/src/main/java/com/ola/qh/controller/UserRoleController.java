@@ -38,9 +38,9 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "update",method = RequestMethod.POST)
-	public Results<UserRole> update(@RequestBody UserRole userRole,@RequestParam(name="password",required = true) String password) {
+	public Results<UserRole> update(@RequestBody UserRole userRole) {
 		Results<UserRole> results = new Results<UserRole>();
-		results = userRoleService.update(userRole,password);
+		results = userRoleService.update(userRole);
 		
 		return results;
 	} 
@@ -50,9 +50,9 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "insert",method = RequestMethod.POST)
-	public Results<UserRole> insert(@RequestBody UserRole userRole,@RequestParam(name="password",required = true) String password) {
+	public Results<UserRole> insert(@RequestBody UserRole userRole) {
 		Results<UserRole> results = new Results<UserRole>();
-		results = userRoleService.insert(userRole,password);
+		results = userRoleService.insert(userRole);
 		
 		return results;
 	}

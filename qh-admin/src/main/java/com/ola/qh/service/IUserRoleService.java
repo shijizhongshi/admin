@@ -9,9 +9,9 @@ public interface IUserRoleService {
 	
 	public Results<UserRole> selectById(String id);
 
-	public Results<UserRole> update(UserRole userRole,String password);
+	public Results<UserRole> update(UserRole userRole);
 
-	public Results<UserRole> insert(UserRole userRole,String password);
+	public Results<UserRole> insert(UserRole userRole);
 
 	public Results<UserRole> deleteById(String id);
 

@@ -18,11 +18,16 @@ app.controller("superAdminController", function($scope,$http) {
 	//点击事件 点击添加按钮实现添加功能
 	$scope.userRole = null;
 	$scope.insertquestionbank = function () {
-		$http.post("/api/userRole/insert",$scope.userRole,{"params":{"password":$scope.password}},{'Content-Type':'application/json;charset=UTF-8'})
+		if ($scope.userRole.password != $scope.password) {
+			alert("两次密码输入不一致！");
+			return;
+		}
+		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
 				alert("添加成功");
 				document.getElementById('resource').style.display="none";
+				$scope.selectCategory();
 			}else {
 				alert(result.message);
 			}
@@ -31,7 +36,11 @@ app.controller("superAdminController", function($scope,$http) {
 	//点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
 	$scope.uodatequestionbank = function () {
-		$http.post("/api/userRole/update",$scope.userRole,{"params":{"password":$scope.password}},{'Content-Type':'application/json;charset=UTF-8'})
+		if ($scope.userRole.password != $scope.password) {
+			alert("两次密码输入不一致！");
+			return;
+		}
+		$http.post("/api/userRole/update",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
 				alert("修改成功");
@@ -52,7 +61,14 @@ app.controller("superAdminController", function($scope,$http) {
 		}) 
 	}
 	$scope.selectCategory();
-	
+	//点击事件，点击取消按钮 清空表单
+	$scope.resetbank = function () {
+		$scope.password = null;
+		$scope.userRole.password = null;
+		$scope.userRole.username= null;
+		$scope.userRole.category = null;
+		$scope.userRole.nickname = null;
+	}
 });
 
 
