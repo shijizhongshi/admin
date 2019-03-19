@@ -89,16 +89,14 @@
 						
 					<!--弹窗-->
 			<div class="poop" id="add" style="width: auto; height: auto;left:30%;">
+			<p class="close" ng-click="cancel()" style="font-size:2.0rem;">X</p>
 				<form id="myform">
 					<div>
 						
 						<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600"></iframe>
 						
 				</div>
-					<div class="end">
-						<input name="esc" type="reset" value="取消"
-							ng-click="cancel()" class="esc" />
-					</div>
+
 				</form>
 			</div>
 

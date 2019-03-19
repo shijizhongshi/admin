@@ -59,11 +59,14 @@
 	
 	<!--查询user_category表  -->
 	<select id="selectCategory" resultType="java.lang.String">
-	select category from user_category
+	select category from user_category 
 	</select>
 	
-	<!--根据username查询数量  -->
-	<select id="selectUsername" resultType="int">
-	select username from user_role 
+	<!--根据username字段查询  -->
+	<select id="selectByUsername" resultMap="UserRoleMap">
+	select * from user_role where 1=1
+	<if test="username!=null and username!=''">
+	and username = #{username}
+	</if>
 	</select>
 </mapper>

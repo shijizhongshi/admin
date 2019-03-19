@@ -38,9 +38,9 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "update",method = RequestMethod.POST)
-	public Results<UserRole> update(@RequestBody UserRole userRole) {
+	public Results<UserRole> update(@RequestBody UserRole userRole,@RequestParam(name="password",required = true) String password) {
 		Results<UserRole> results = new Results<UserRole>();
-		results = userRoleService.update(userRole);
+		results = userRoleService.update(userRole,password);
 		
 		return results;
 	} 
@@ -50,7 +50,7 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "insert",method = RequestMethod.POST)
-	public Results<UserRole> insert(@RequestBody UserRole userRole,@RequestParam(name="password" ,required = true) String password) {
+	public Results<UserRole> insert(@RequestBody UserRole userRole,@RequestParam(name="password",required = true) String password) {
 		Results<UserRole> results = new Results<UserRole>();
 		results = userRoleService.insert(userRole,password);
 		
@@ -68,6 +68,10 @@ public class UserRoleController {
 		
 		return results;
 	}
+	/**
+	 * 查询角色类别
+	 * @return
+	 */
 	@RequestMapping(value = "selectCategory",method = RequestMethod.GET)
 	public List<String> selectCategory () {
 		List<String> list = userRoleService.selectCategory();

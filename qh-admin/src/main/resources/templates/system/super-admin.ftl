@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/super/super_admin.js"></script>
-<@b.body menu="sidebarmenu-sidebarmenu" submenu="sidebarmenu-sidebarmenu-super-superAdmin">
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-superAdmin">
 <div ng-app="app" ng-controller="superAdminController">
 <div class="details" style="width: 100%;">
 		<div class="details-nav">
@@ -112,9 +112,8 @@
 					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
 					<form id="search">
 					
-						<select ng-model="userRole.ctegory">
-							<option ng-selected="status==0" value=0>教务</option>
-							<option ng-selected="status==1" value=1>加盟商</option>
+						<select ng-model="userRole.category" ng-options="x for x in category">
+							<option ng-selected="status==0" value=0 ></option>
 						</select>
 					</form>
 				</div>

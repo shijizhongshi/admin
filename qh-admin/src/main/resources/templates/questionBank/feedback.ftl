@@ -249,56 +249,7 @@
 </div>
  
 <style type="text/css">
-.poop {
-	overflow-y: scroll;
-	width: 60%;
-	height: 600px;
-	position: absolute;
-	left: 15%;
-	top: 5%;
-}
 
-@media screen and (max-width: 1501px) {
-	.poop {
-		width: 750px;
-		left: 0%;
-		top: 5%
-	}
-}
-
-.poop span {
-	font-size: 1.5rem;
-}
-
-.template-add {
-	width: 100%;
-	border-top: 1px solid #F5F6F8;
-	height: 80%;
-	padding-top: 10px;
-	margin-top: 10px;
-}
-
-.template-left, .template-right {
-	width: 50%;
-	float: left;
-	height: auto;
-	overflow: auto;
-}
-
-.template-right .grade-text {
-	width: 80%;
-}
-
-.template-right .grade-text textarea {
-	width: 100%;
-	height: 110px;
-	font-size: 1.5rem
-}
-
-position
-:relative
-;
-}
 div.costs-uploadfile-div #textfield {
 	width: 40%;
 	height: 30px;
@@ -357,7 +308,7 @@ div.costs-uploadfile-div .allBtn {
 #resource .grade-text , #resource .select-2 {width:auto;}
 #resource .grade-text textarea{height:50px;}
 .shiti ul {display:flex;justify-content: left;margin-bottom: 0;}
-.shiti ul li{margin-right: 3px;border-radius: 7px 7px 0px 0;text-align: center;padding: 0 5px;}
+.shiti ul li{margin-right: 3px;border-radius: 7px 7px 0px 0;text-align: center;padding: 0 5px;cursor: pointer;}
 .shiti p{padding-top: 7px;width:100%;padding-left: 2%;background: #F5F6F8;margin: 0;font-size: 1.3rem;padding-bottom: 5px;}
 .xiugaibt{width:100%;background: #F5F6F8;padding: 0 2%;height: 60px;}
 .xiugaibt textarea{width:100%;background:#FFFFFF;height: 53px;}
@@ -372,122 +323,5 @@ div.costs-uploadfile-div .allBtn {
 .daan table tr:nth-child(2n-1){background:#F7F8FC;}
 .typeselected{background-color:#CBD2D8;}
 </style>
-
-<script type="text/javascript">
-	function getObject(objectId) {
-		if (document.getElementById && document.getElementById(objectId)) {
-			return document.getElementById(objectId);
-		} else if (document.all && document.all(objectId)) {
-			return document.all(objectId);
-		} else if (document.layers && document.layers[objectId]) {
-			return document.layers[objectId];
-		} else {
-			return false;
-		}
-	}
-
-	function showHide(e, objname) {
-		var obj = getObject(objname);
-		if (obj.style.display == "none") {
-			obj.style.display = "block";
-			e.className = "minus";
-		} else {
-			obj.style.display = "none";
-			e.className = "plus";
-		}
-	}
-	$(function() {
-		//实现全选反选
-		$(".yi").on(
-				'click',
-				function() {
-					$("#items0 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items0 input:checkbox")
-				.on(
-						'click',
-						function() {
-							//当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
-							if ($("#items0 input:checkbox").length === $("#items0 input:checked").length) {
-								$(".yi").prop("checked", true);
-							} else {
-								$(".yi").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".yao").on(
-				'click',
-				function() {
-					$("#items1 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items1 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items1 input:checkbox").length === $("#items1 input:checked").length) {
-								$(".yao").prop("checked", true);
-							} else {
-								$(".yao").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".zhong").on(
-				'click',
-				function() {
-					$("#items2 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items2 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items2 input:checkbox").length === $("#items2 input:checked").length) {
-								$(".zhong").prop("checked", true);
-							} else {
-								$(".zhong").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".wei").on(
-				'click',
-				function() {
-					$("#items3 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items3 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items3 input:checkbox").length === $("#items3 input:checked").length) {
-								$(".wei").prop("checked", true);
-							} else {
-								$(".wei").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".jian").on(
-				'click',
-				function() {
-					$("#items4 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items4 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items4 input:checkbox").length === $("#items4 input:checked").length) {
-								$(".jian").prop("checked", true);
-							} else {
-								$(".jian").prop("checked", false);
-							}
-						})
-	})
-</script>
 </@b.body>  
 </html>

@@ -18,6 +18,6 @@ public interface UserRoleDao {
 
 	public List<String> selectCategory();
 
-	public Integer selectUsername(String username);
+	public UserRole selectByUsername(@Param("username")String username);
 
 }
