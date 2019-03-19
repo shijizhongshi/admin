@@ -143,7 +143,7 @@ app.controller("feedbackController", function($scope, $http){
 				
 				document.getElementById('resources').style.display="none"; 
 				document.getElementById('resource').style.display="block"; 
-				alert($scope.questionanswers[0].answers)
+			
 			}
 			else if($scope.types=="C"){
 				
