@@ -43,7 +43,7 @@ public class UserRoleService implements IUserRoleService {
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Results<UserRole> update(UserRole userRole) {
+	public Results<UserRole> update(UserRole userRole, String password) {
 		Results<UserRole> results = new Results<UserRole>();
 		try {
 			// 首先判断账户是否存在
@@ -96,26 +96,30 @@ public class UserRoleService implements IUserRoleService {
 
 				return results;
 			}
-			// 第三 判断username不能与本身表中重复
-			String username = userRole.getUsername();
-			Integer count = UserRoleDao.selectUsername(username);
-			if (true) {
+			// 第三判断 username不能与本身表中重复
+			// 根据username字段查询
+			UserRole userRoles = UserRoleDao.selectByUsername(userRole.getUsername());
+			if (userRoles == null) {
 				// 判断账号密码有效性(两次输入一致)
 				if (!password.equals(userRole.getPassword())) {
 					results.setStatus("1");
 					results.setMessage("两次密码输入不一致  请核对！");
 
 					return results;
-				}
-				userRole.setAddtime(new Date());
-				userRole.setId(KeyGen.uuid());
-				UserRoleDao.saveUserRole(userRole);
-				results.setStatus("0");
-				results.setMessage("添加成功");
+				} else {
+					userRole.setAddtime(new Date());
+					userRole.setId(KeyGen.uuid());
+					UserRoleDao.saveUserRole(userRole);
+					results.setStatus("0");
+					results.setMessage("添加成功");
 
-				return results;
+					return results;
+				}
 			}
-			return null;
+			results.setStatus("1");
+			results.setMessage("添加失败");
+
+			return results;
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");

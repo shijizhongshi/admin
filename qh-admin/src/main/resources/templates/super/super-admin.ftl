@@ -112,9 +112,8 @@
 					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
 					<form id="search">
 					
-						<select ng-model="userRole.ctegory">
-							<option ng-selected="status==0" value=0>教务</option>
-							<option ng-selected="status==1" value=1>加盟商</option>
+						<select ng-model="userRole.category" ng-options="x for x in category">
+							<option ng-selected="status==0" value=0 ></option>
 						</select>
 					</form>
 				</div>
