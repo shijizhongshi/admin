@@ -66,7 +66,7 @@
                                 <span class="title">分类管理</span>
                             </a>
                         </li>
-                         <li id="sidebarmenu-super-superAdmin">
+                         <li id="sidebarmenu-system-superAdmin">
                             <a href="/web/system/superAdmin">
                                 <span class="title">账号管理</span>
                             </a>

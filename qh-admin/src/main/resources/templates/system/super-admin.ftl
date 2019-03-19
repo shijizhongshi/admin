@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/super/super_admin.js"></script>
-<@b.body menu="sidebarmenu-sidebarmenu" submenu="sidebarmenu-sidebarmenu-system-superAdmin">
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-superAdmin">
 <div ng-app="app" ng-controller="superAdminController">
 <div class="details" style="width: 100%;">
 		<div class="details-nav">
