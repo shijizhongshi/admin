@@ -6,11 +6,11 @@ public class UserRole {
 
 	private String id;
 
-	private String category;//类别
-	
-	private String nickname;//昵称
+	private String category;// 类别
 
-	private String account;// 账号
+	private String nickname;// 昵称
+
+	private String username;// 账号
 
 	private String password;// 密码
 
@@ -19,9 +19,6 @@ public class UserRole {
 	private Date addtime;
 
 	private Date updatetime;// 更新时间
-	
-	
-	
 
 	public String getNickname() {
 		return nickname;
@@ -47,12 +44,12 @@ public class UserRole {
 		this.category = category;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

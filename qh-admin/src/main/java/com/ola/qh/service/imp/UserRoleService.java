@@ -30,7 +30,7 @@ public class UserRoleService implements IUserRoleService {
 	@Override
 	public Results<UserRole> selectById(String id) {
 		Results<UserRole> results = new Results<UserRole>();
-		UserRole userRole = UserRoleDao.single(id,null);
+		UserRole userRole = UserRoleDao.single(id, null);
 		results.setMessage("查询成功");
 		results.setStatus("0");
 		results.setData(userRole);
@@ -47,7 +47,7 @@ public class UserRoleService implements IUserRoleService {
 		Results<UserRole> results = new Results<UserRole>();
 		try {
 			// 首先判断账户是否存在
-			if (userRole.getAccount() == null) {
+			if (userRole.getUsername() == null) {
 				results.setStatus("1");
 				results.setMessage("该账户不存在，请核对后重新输入");
 
@@ -78,41 +78,44 @@ public class UserRoleService implements IUserRoleService {
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Results<UserRole> insert(UserRole userRole) {
+	public Results<UserRole> insert(UserRole userRole, String password) {
 		Results<UserRole> results = new Results<UserRole>();
 		try {
 			// 第一判断 账号名不能为admin
-			if (userRole.getAccount().equals("admin")) {
+			if (userRole.getUsername().equals("admin")) {
 				results.setStatus("1");
 				results.setMessage("用户名不能为admin！");
 
 				return results;
 			}
 			// 第二判断 不能与加盟商账号冲突
-			Business business = BusinessDao.single(null, userRole.getAccount(), null);
-			System.out.println(business);
+			Business business = BusinessDao.single(null, userRole.getUsername(), null);
 			if (business != null) {
 				results.setStatus("1");
 				results.setMessage("与加盟商账号冲突，请重新输入！");
 
 				return results;
 			}
-			// 第三判断 不能与本表中账号名重复
-			UserRole userRoles = UserRoleDao.single(null,userRole.getAccount());
-			if (userRoles != null) {
-				results.setStatus("1");
-				results.setMessage("该账号已存在");
+			// 第三 判断username不能与本身表中重复
+			String username = userRole.getUsername();
+			Integer count = UserRoleDao.selectUsername(username);
+			if (true) {
+				// 判断账号密码有效性(两次输入一致)
+				if (!password.equals(userRole.getPassword())) {
+					results.setStatus("1");
+					results.setMessage("两次密码输入不一致  请核对！");
+
+					return results;
+				}
+				userRole.setAddtime(new Date());
+				userRole.setId(KeyGen.uuid());
+				UserRoleDao.saveUserRole(userRole);
+				results.setStatus("0");
+				results.setMessage("添加成功");
 
 				return results;
 			}
-			// 添加
-			userRole.setAddtime(new Date());
-			userRole.setId(KeyGen.uuid());
-			UserRoleDao.saveUserRole(userRole);
-			results.setStatus("0");
-			results.setMessage("添加成功");
-
-			return results;
+			return null;
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");

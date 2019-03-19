@@ -18,7 +18,7 @@ app.controller("superAdminController", function($scope,$http) {
 	//点击事件 点击添加按钮实现添加功能
 	$scope.userRole = null;
 	$scope.insertquestionbank = function () {
-		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
+		$http.post("/api/userRole/insert",$scope.userRole,{"params":{"password":$scope.password}},{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
 				alert("添加成功");

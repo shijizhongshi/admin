@@ -18,4 +18,6 @@ public interface UserRoleDao {
 
 	public List<String> selectCategory();
 
+	public Integer selectUsername(String username);
+
 }

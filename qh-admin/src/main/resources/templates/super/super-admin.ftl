@@ -120,7 +120,7 @@
 				</div>
 	<div class="select-2">
 		<span>设置账号<i class="bitian">*</i></span>
-<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请设置账号名称" ng-model="userRole.account">
+<input type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请设置账号名称" ng-model="userRole.username">
 	</div>
 		<div class="select-2">
 		<span>设置密码<i class="bitian">*</i></span>

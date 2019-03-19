@@ -8,7 +8,7 @@
 		<result column="id" property="id" />
 		<result column="category"  property="category" />
 		<result column="nickname"  property="nickname" />
-		<result column="account"  property="account" />
+		<result column="username"  property="username" />
 		<result column="password"  property="password" />
 		<result column="limits"  property="limits" />
 		<result column="addtime" property="addtime"/>
@@ -20,13 +20,13 @@
 		<if test="id!=null and id!=''">
 		and id=#{id}
 		</if>
-		<if test="account!=null and account!=''">
-		and account=#{account}
+		<if test="username!=null and username!=''">
+		and username=#{username}
 		</if>
 	</select>
 	
 	<insert id="saveUserRole" parameterType="com.ola.qh.entity.UserRole">
-		insert into user_role(id,category,nickname,account,password,limits,addtime) values(#{id},#{category},#{nickname},#{account},#{password},#{limits},#{addtime})
+		insert into user_role(id,category,nickname,username,password,limits,addtime) values(#{id},#{category},#{nickname},#{username},#{password},#{limits},#{addtime})
 	</insert>
 	
 	<update id="updateUserRole" parameterType="com.ola.qh.entity.UserRole">
@@ -37,8 +37,8 @@
 		<if test="nickname!=null and nickname!=''">
 		nickname=#{nickname},
 		</if>
-		<if test="account!=null and account!=''">
-		account=#{account},
+		<if test="username!=null and username!=''">
+		username=#{username},
 		</if>
 		<if test="password!=null and password!=''">
 		password=#{password},
@@ -57,5 +57,10 @@
 	<!--查询user_category表  -->
 	<select id="selectCategory" resultType="java.lang.String">
 	select category from user_category
+	</select>
+	
+	<!--根据username查询数量  -->
+	<select id="selectUsername" resultType="int">
+	select username from user_role 
 	</select>
 </mapper>
