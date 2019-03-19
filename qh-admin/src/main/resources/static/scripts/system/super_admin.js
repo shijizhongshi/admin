@@ -22,6 +22,7 @@ app.controller("superAdminController", function($scope,$http) {
 			alert("两次密码输入不一致！");
 			return;
 		}
+		$scope.userRole.menus=$scope.limitsselected;
 		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
@@ -33,6 +34,21 @@ app.controller("superAdminController", function($scope,$http) {
 			}
 		})
 	}
+	 $scope.limitsselected = [];
+	    var updateSelected = function(action, menus) {
+	      if(action == 'add' & $scope.limitsselected.indexOf(menus) == -1) $scope.limitsselected.push(menus);
+	      if(action == 'remove' && $scope.limitsselected.indexOf(menus) != -1) $scope.limitsselected.splice($scope.limitsselected.indexOf(menus), 1);
+	    };
+	 
+	    $scope.updateSelection = function($event, menus) {
+	      var checkbox = $event.target;
+	      var action = (checkbox.checked ? 'add' : 'remove');
+	      updateSelected(action, menus);
+	    };
+	 
+	    $scope.isSelected = function(menus) {
+	      return $scope.limitsselected.indexOf(menus) >= 0;
+	    };   
 	//点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
 	$scope.uodatequestionbank = function () {

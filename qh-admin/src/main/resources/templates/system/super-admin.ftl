@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/super/super_admin.js"></script>
+<script src="/scripts/system/super_admin.js"></script>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-superAdmin">
 <div ng-app="app" ng-controller="superAdminController">
 <div class="details" style="width: 100%;">
@@ -134,14 +134,15 @@
 <div class="qx">
 <p>权限设置</p>
 <ul ng-model="userRole.limits">
-<li><input type="checkbox" />网课资源</li>
-<li><input type="checkbox" />题库资源</li>
-<li><input type="checkbox" />公共资源管理</li>
-<li><input type="checkbox" />订单管理</li>
-<li><input type="checkbox" />加盟商管理</li>
-<li><input type="checkbox" />用户管理</li>
-<li><input type="checkbox" />学员信息管理</li>
-<li><input type="checkbox" />发布管理</li>
+
+<li><input type="checkbox" ng-checked="isSelected('网课资源管理')" ng-click="updateSelection($event,'网课资源管理')"/>网课资源管理</li>
+<li><input type="checkbox" ng-checked="isSelected('题库资源管理')" ng-click="updateSelection($event,'题库资源管理')"/>题库资源管理</li>
+<li><input type="checkbox" ng-checked="isSelected('公共资源管理')" ng-click="updateSelection($event,'公共资源管理')"/>公共资源管理</li>
+<li><input type="checkbox" ng-checked="isSelected('订单管理')" ng-click="updateSelection($event,'订单管理')"/>订单管理</li>
+<li><input type="checkbox" ng-checked="isSelected('加盟商管理')" ng-click="updateSelection($event,'加盟商管理')"/>加盟商管理</li>
+<li><input type="checkbox" ng-checked="isSelected('用户管理')" ng-click="updateSelection($event,'用户管理')"/>用户管理</li>
+<li><input type="checkbox" ng-checked="isSelected('学员信息管理')" ng-click="updateSelection($event,'学员信息管理')"/>学员信息管理</li>
+<li><input type="checkbox" ng-checked="isSelected('发布管理')" ng-click="updateSelection($event,'发布管理')"/>发布管理</li>
 </ul>
 </div>
 	</div>
