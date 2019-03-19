@@ -23,6 +23,9 @@
 		<if test="username!=null and username!=''">
 		and username=#{username}
 		</if>
+		<if test="password!=null and password!=''">
+		and password=#{password}
+		</if>
 	</select>
 	
 	<insert id="saveUserRole" parameterType="com.ola.qh.entity.UserRole">

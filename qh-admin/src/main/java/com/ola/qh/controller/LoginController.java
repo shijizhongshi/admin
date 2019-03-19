@@ -1,5 +1,7 @@
 package com.ola.qh.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,5 +29,11 @@ public class LoginController {
 		return userService.adminLogin(username, password,request);
 	}
 	
+	
+	@RequestMapping("/islogin")
+	public Results<List<String>> islogin(HttpServletRequest request){
+		
+		return userService.adminisLogin(request);
+	} 
 	
 }
