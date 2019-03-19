@@ -30,7 +30,7 @@ public class UserRoleService implements IUserRoleService {
 	@Override
 	public Results<UserRole> selectById(String id) {
 		Results<UserRole> results = new Results<UserRole>();
-		UserRole userRole = UserRoleDao.single(id, null);
+		UserRole userRole = UserRoleDao.single(id, null,null);
 		results.setMessage("查询成功");
 		results.setStatus("0");
 		results.setData(userRole);

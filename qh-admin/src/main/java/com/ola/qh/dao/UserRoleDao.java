@@ -8,7 +8,8 @@ import com.ola.qh.entity.UserRole;
 
 public interface UserRoleDao {
 
-	public UserRole single(@Param("id") String id,@Param("username")String username);
+	public UserRole single(@Param("id") String id, @Param("username") String username,
+			@Param("password") String password);
 
 	public Integer update(UserRole userRole);
 
@@ -18,6 +19,6 @@ public interface UserRoleDao {
 
 	public List<String> selectCategory();
 
-	public UserRole selectByUsername(@Param("username")String username);
+	public UserRole selectByUsername(@Param("username") String username);
 
 }
