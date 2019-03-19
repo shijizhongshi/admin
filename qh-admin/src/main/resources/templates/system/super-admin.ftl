@@ -108,11 +108,11 @@
 <input type="text" placeholder="请输入昵称" ng-model="userRole.nickname">
 	</div>
 					
-				<div class="select-2">
-					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
-					<form id="search">
+				<div class="select-2" >
+					<img src="/images/sjk-xl.png" /> <span >账号属性</span>
+					<form id="search" >
 					
-						<select ng-model="userRole.category" ng-options="x for x in category">
+						<select ng-model="userRole.category" ng-options="x for x in category" >
 							<option ng-selected="status==0" value=0 ></option>
 						</select>
 					</form>
@@ -127,13 +127,13 @@
 	</div>
 		<div class="select-2">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" ng-model="password">
+<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请确认密码" ng-model="password">
 	</div>
 	</div>
 	<div style="width:49%;float:right;">
 <div class="qx">
 <p>权限设置</p>
-<ul >
+<ul ng-model="userRole.limits">
 <li><input type="checkbox" />网课资源</li>
 <li><input type="checkbox" />题库资源</li>
 <li><input type="checkbox" />公共资源管理</li>
@@ -142,6 +142,7 @@
 <li><input type="checkbox" />用户管理</li>
 <li><input type="checkbox" />学员信息管理</li>
 <li><input type="checkbox" />发布管理</li>
+</ul>
 </div>
 	</div>
 	
