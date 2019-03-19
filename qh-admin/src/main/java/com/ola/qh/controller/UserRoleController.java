@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.UserRole;
 import com.ola.qh.service.IUserRoleService;
+import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -25,10 +26,12 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "single",method = RequestMethod.GET)
-	public Results<UserRole> single (@RequestParam(name = "id",required = false) String id) {
-		Results<UserRole> results = new Results<UserRole>();
-		
-		results = userRoleService.selectById(id);
+	public Results<List<UserRole>> single (@RequestParam(name = "id",required = false) String id,
+			@RequestParam(name = "page",required = true)Integer page) {
+		Results<List<UserRole>> results = new Results<List<UserRole>>();
+		int pageSize=Patterns.pageSize;
+		int pageNo=(page-1)*pageSize;
+		results = userRoleService.select(pageNo,pageSize);
 		
 		return results;
 	}

@@ -69,6 +69,18 @@ app.controller("superAdminController", function($scope,$http) {
 		$scope.userRole.category = null;
 		$scope.userRole.nickname = null;
 	}
+	//展示 加载页面时加载此方法
+	$scope.select = function () {
+		$http.get("/api/userRole/single",{"params":{"id":$scope.id,"page":$scope.page=1}},{'Content-Type':'application/json;charset=UTF-8'})
+		.success(function (result) {
+			if (result.status == "0") {
+				$scope.userRole = result.data;
+			}else {
+				alert(result.message);
+			}
+		})
+	}
+	$scope.select();
 });
 
 

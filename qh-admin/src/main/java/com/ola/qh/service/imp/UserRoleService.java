@@ -28,12 +28,13 @@ public class UserRoleService implements IUserRoleService {
 	 * 查
 	 */
 	@Override
-	public Results<UserRole> selectById(String id) {
-		Results<UserRole> results = new Results<UserRole>();
-		UserRole userRole = UserRoleDao.single(id, null,null);
+	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize) {
+		Results<List<UserRole>> results = new Results<List<UserRole>>();
+		//查询  分页展示
+		List<UserRole> list = UserRoleDao.select(pageNo,pageSize);
 		results.setMessage("查询成功");
 		results.setStatus("0");
-		results.setData(userRole);
+		results.setData(list);
 
 		return results;
 	}
@@ -150,4 +151,9 @@ public class UserRoleService implements IUserRoleService {
 		return list;
 	}
 
+	@Override
+	public Results<UserRole> selectById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

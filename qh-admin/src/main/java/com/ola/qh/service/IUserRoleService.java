@@ -16,4 +16,6 @@ public interface IUserRoleService {
 	public Results<UserRole> deleteById(String id);
 
 	public List<String> selectCategory();
+
+	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize);
 }
