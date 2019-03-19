@@ -28,7 +28,7 @@ public class UserRoleController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "single",method = RequestMethod.GET)
+	@RequestMapping(value = "/single",method = RequestMethod.GET)
 	public Results<List<UserRole>> single (@RequestParam(name = "id",required = false) String id,
 			@RequestParam(name = "page",required = true)Integer page) {
 		Results<List<UserRole>> results = new Results<List<UserRole>>();
@@ -43,7 +43,7 @@ public class UserRoleController {
 	 * @param userRole
 	 * @return
 	 */
-	@RequestMapping(value = "update",method = RequestMethod.POST)
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
 	public Results<UserRole> update(@RequestBody UserRole userRole) {
 		Results<UserRole> results = new Results<UserRole>();
 		results = userRoleService.update(userRole);
@@ -55,9 +55,15 @@ public class UserRoleController {
 	 * @param userRole
 	 * @return
 	 */
-	@RequestMapping(value = "insert",method = RequestMethod.POST)
+	@RequestMapping(value = "/insert",method = RequestMethod.POST)
 	public Results<UserRole> insert(@RequestBody @Valid UserRole userRole,BindingResult valid) {
 		Results<UserRole> results = new Results<UserRole>();
+		if (valid.hasErrors()) {
+			results.setStatus("1");
+			results.setMessage("填写信息不完整！");
+			
+			return results;
+		}
 		results = userRoleService.insert(userRole);
 		
 		return results;
@@ -67,7 +73,7 @@ public class UserRoleController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "delete",method = RequestMethod.GET)
+	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	public Results<UserRole> delete (@RequestParam(name = "id",required = true) String id) {
 		Results<UserRole> results = new Results<UserRole>();
 		results = userRoleService.deleteById(id);
@@ -78,7 +84,7 @@ public class UserRoleController {
 	 * 查询角色类别
 	 * @return
 	 */
-	@RequestMapping(value = "selectCategory",method = RequestMethod.GET)
+	@RequestMapping(value = "/selectCategory",method = RequestMethod.GET)
 	public List<String> selectCategory () {
 		List<String> list = userRoleService.selectCategory();
 		
