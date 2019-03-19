@@ -249,56 +249,7 @@
 </div>
  
 <style type="text/css">
-.poop {
-	overflow-y: scroll;
-	width: 60%;
-	height: 600px;
-	position: absolute;
-	left: 15%;
-	top: 5%;
-}
 
-@media screen and (max-width: 1501px) {
-	.poop {
-		width: 750px;
-		left: 0%;
-		top: 5%
-	}
-}
-
-.poop span {
-	font-size: 1.5rem;
-}
-
-.template-add {
-	width: 100%;
-	border-top: 1px solid #F5F6F8;
-	height: 80%;
-	padding-top: 10px;
-	margin-top: 10px;
-}
-
-.template-left, .template-right {
-	width: 50%;
-	float: left;
-	height: auto;
-	overflow: auto;
-}
-
-.template-right .grade-text {
-	width: 80%;
-}
-
-.template-right .grade-text textarea {
-	width: 100%;
-	height: 110px;
-	font-size: 1.5rem
-}
-
-position
-:relative
-;
-}
 div.costs-uploadfile-div #textfield {
 	width: 40%;
 	height: 30px;
