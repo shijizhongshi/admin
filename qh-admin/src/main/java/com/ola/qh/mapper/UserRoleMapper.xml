@@ -69,4 +69,9 @@
 	and username = #{username}
 	</if>
 	</select>
+	
+	<!--分页查询展示  -->
+	<select id="select" resultMap="UserRoleMap">
+	select * from user_role limit #{pageNo},#{pageSize}
+	</select>
 </mapper>

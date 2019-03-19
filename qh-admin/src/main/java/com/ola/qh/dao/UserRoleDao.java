@@ -21,4 +21,6 @@ public interface UserRoleDao {
 
 	public UserRole selectByUsername(@Param("username") String username);
 
+	public List<UserRole> select(@Param("pageNo")Integer pageNo,@Param("pageSize") Integer pageSize);
+
 }

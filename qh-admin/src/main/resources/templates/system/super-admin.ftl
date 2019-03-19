@@ -69,20 +69,20 @@
 					<table>
 						<tr>
 							<th>账号</th>
-							<th>名称</th>
-							<th>账号属性</th>
-							<th>账号状态</th>
-							<th>最后登陆时间</th>
-							<th>IP地址</th>
+							<th>昵称</th>
+							<th>账号密码</th>
+							<th>角色类别</th>
+							<th>添加时间</th>
+							<th>更新时间</th>
 							<th>权限操作</th>
 						</tr>
-						<tr >
-							<th>账号</th>
-							<th>名称</th>
-							<th>账号属性</th>
-							<th>账号状态</th>
-							<th>最后登陆时间</th>
-							<th>IP地址</th>
+						<tr ng-repeat ="u in list">
+							<th>{{u.username}}</th>
+							<th>{{u.nickname}}</th>
+							<th>{{u.password}}</th>
+							<th>{{u.category}}</th>
+							<th>{{u.addtime | date:'yyyy.MM.dd'}}</th>
+							<th>{{u.updatetime | date:'yyyy.MM.dd'}}</th>
 							<th><input type="button" class="btn-lg im-key" value="查看详情" style="padding: 3px 10px; margin: 0;background:#F9CD34;"></th>
 						</tr>
 					</table>
