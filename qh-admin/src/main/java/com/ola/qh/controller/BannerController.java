@@ -29,6 +29,7 @@ import com.ola.qh.util.Results;
 @RestController
 @RequestMapping("/api/banner")
 public class BannerController {
+
 	@Autowired
 	private IBannerService bannerService;
 
