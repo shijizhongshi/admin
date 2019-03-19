@@ -16,6 +16,7 @@ public class Course {
 	
 	private String id;
 	
+	
 	private String userId;////所属人课程的拥有者
 
 	@NotEmpty(message="课程名称不能为空")
