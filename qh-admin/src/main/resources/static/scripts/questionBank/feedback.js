@@ -21,7 +21,7 @@ app.controller("feedbackController", function($scope, $http){
 				$scope.feedbacklist=data.data;
 				$scope.total=data.count;
 				angular.forEach($scope.feedbacklist, function(Feedback){  
-					if(Feedback.bank.types=="单选"){
+					if(Feedback.bank.types=="A"){
 						
 						$scope.questionanswerlist=Feedback.bank.answer;
 						
@@ -37,7 +37,7 @@ app.controller("feedbackController", function($scope, $http){
 						})
 					}
 					
-					else if(Feedback.bank.types=="共用题干")	{
+					else if(Feedback.bank.types=="C")	{
 						
 						$scope.questionunitlist=Feedback.bank.unit;
 						
@@ -139,13 +139,13 @@ app.controller("feedbackController", function($scope, $http){
 	
 	$scope.update=function(){
 		if($scope.id!=null){
-			if($scope.types=="单选"){
+			if($scope.types=="A"){
 				
 				document.getElementById('resources').style.display="none"; 
 				document.getElementById('resource').style.display="block"; 
 				alert($scope.questionanswers[0].answers)
 			}
-			else if($scope.types=="共用题干"){
+			else if($scope.types=="C"){
 				
 				document.getElementById('resources').style.display="block"; 
 				document.getElementById('resource').style.display="none"; 
@@ -212,11 +212,11 @@ app.controller("feedbackController", function($scope, $http){
 	
 	$scope.resetbank=function(){
 		
-		if($scope.types=="单选"){
+		if($scope.types=="A"){
 			
 			document.getElementById('resource').style.display="none"; 
 		}
-		else if($scope.types=="共用题干"){
+		else if($scope.types=="C"){
 			
 			document.getElementById('resources').style.display="none"; 
 		}
