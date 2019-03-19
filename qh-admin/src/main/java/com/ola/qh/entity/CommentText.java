@@ -9,6 +9,7 @@ public class CommentText {
 	private String id;
 	
 	
+	
 	@NotEmpty(message="文本名称不能为空")
 	private String textName;
 	
