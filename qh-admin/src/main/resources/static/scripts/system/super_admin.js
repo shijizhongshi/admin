@@ -17,10 +17,10 @@ app.controller("superAdminController", function($scope,$http) {
     //当前的页数
     $scope.current = 1;
     //一页显示多少条
-    $scope.pageSize = 2;
+    $scope.pageSize = 20;
 	$scope.feedbackList = function () {
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-		$http.get("/api/userRole/single",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}},{'Content-Type':'application/json;charset=UTF-8'})
+		$http.get("/api/userRole/selectList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}},{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
 				$scope.list = result.data;
@@ -66,7 +66,6 @@ app.controller("superAdminController", function($scope,$http) {
 		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				alert("添加成功");
 				document.getElementById('resource').style.display="none";
 				$scope.selectCategory();
 				$scope.select();
@@ -100,8 +99,8 @@ app.controller("superAdminController", function($scope,$http) {
 		$http.post("/api/userRole/update",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				alert("修改成功");
 				document.getElementById('resource').style.display="none";
+				$scope.select();
 			}else {
 				 alert(result.message);
 			}
@@ -138,6 +137,8 @@ app.controller("superAdminController", function($scope,$http) {
 	$scope.checkedUserRole = function (u) {
 		$scope.userRole = u;
 		$scope.selected=u;
+		$scope.limitsselected=u.menus;
+		
 	}
 	
 });

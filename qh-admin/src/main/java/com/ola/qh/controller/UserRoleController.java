@@ -27,7 +27,7 @@ public class UserRoleController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/single",method = RequestMethod.GET)
+	@RequestMapping(value = "/selectList",method = RequestMethod.GET)
 	public Results<List<UserRole>> single (@RequestParam(name = "pageNo",required = false) Integer pageNo,
 			@RequestParam(name = "pageSize",required = false)Integer pageSize) {
 		Results<List<UserRole>> results = new Results<List<UserRole>>();
@@ -42,9 +42,14 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update",method = RequestMethod.POST)
-	public Results<UserRole> update(@RequestBody UserRole userRole) {
+	public Results<UserRole> update(@RequestBody @Valid UserRole userRole,BindingResult valid) {
 		Results<UserRole> results = new Results<UserRole>();
-		
+		if (valid.hasErrors()) {
+			results.setStatus("1");
+			results.setMessage("填写信息不完整");
+			
+			return results;
+		}
 		results = userRoleService.update(userRole);
 		
 		return results;

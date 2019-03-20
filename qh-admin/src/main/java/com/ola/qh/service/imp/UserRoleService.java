@@ -1,5 +1,9 @@
 package com.ola.qh.service.imp;
 
+import static org.mockito.Matchers.contains;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +36,15 @@ public class UserRoleService implements IUserRoleService {
 		Results<List<UserRole>> results = new Results<List<UserRole>>();
 		//查询  分页展示
 		List<UserRole> list = UserRoleDao.select(pageNo,pageSize);
+		for (UserRole userRole : list) {
+			List<String> menus=new ArrayList<String>();
+			if (userRole.getLimits().indexOf(",") >= 0) {
+				menus = Arrays.asList(userRole.getLimits().split(","));
+			}else {
+				menus.add(userRole.getLimits());
+			}
+			userRole.setMenus(menus);
+		}
 		Integer count = UserRoleDao.selectCount();
 		results.setStatus("0");
 		results.setMessage("分页查询 成功");
@@ -49,13 +62,6 @@ public class UserRoleService implements IUserRoleService {
 	public Results<UserRole> update(UserRole userRole) {
 		Results<UserRole> results = new Results<UserRole>();
 		try {
-			// 首先判断账户是否存在
-			if (userRole.getUsername() == null) {
-				results.setStatus("1");
-				results.setMessage("该账户不存在，请核对后重新输入");
-
-				return results;
-			}
 			// 修改操作
 			List<String> limitsList=userRole.getMenus();
 			String limits=null;
@@ -69,15 +75,19 @@ public class UserRoleService implements IUserRoleService {
 			
 			userRole.setUpdatetime(new Date());
 			userRole.setLimits(limits);
-			Integer count = UserRoleDao.update(userRole);
+			Integer count = UserRoleDao.updateUserRole(userRole);
 			if (count == 1) {
 				results.setStatus("0");
 				results.setMessage("修改成功");
 
 				return results;
+			}else {
+				results.setStatus("1");
+				results.setMessage("修改失败");
+				
+				return results;
 			}
-
-			return results;
+			
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");

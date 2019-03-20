@@ -49,7 +49,7 @@
 		<if test="limits!=null and limits!=''">
 		limits=#{limits},
 		</if>
-		updatetime=#{updatetime} where user_id=#{userId}
+		updatetime=#{updatetime} where id=#{id}
 	</update>
 
 	<delete id="deleteById" >
