@@ -128,8 +128,8 @@
 							<th>{{c.courseChapterSize}}</th>
 							<th>{{c.coursePrice}}</th>
 							<th>{{c.courseDiscountPrice}}</th>
-							<th ng-show="{{c.courseShow==1}}">是</th>
-							<th ng-show="{{c.courseShow==0}}">否</th>
+							<th ng-show="{{c.courseShow==1}}">否</th>
+							<th ng-show="{{c.courseShow==0}}">是</th>
 
 						</tr>
 					</table>
