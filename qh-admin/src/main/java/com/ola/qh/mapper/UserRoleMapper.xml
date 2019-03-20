@@ -72,6 +72,11 @@
 	
 	<!--分页查询展示  -->
 	<select id="select" resultMap="UserRoleMap">
-	select * from user_role limit #{pageNo},#{pageSize}
+	select * from user_role order by addtime desc limit #{pageNo},#{pageSize};
+	</select>
+	
+	<!--分页 查询总数量  -->
+	<select id="selectCount" resultType="java.lang.Integer">
+	select count(*) from user_role 
 	</select>
 </mapper>

@@ -32,10 +32,12 @@ public class UserRoleService implements IUserRoleService {
 		Results<List<UserRole>> results = new Results<List<UserRole>>();
 		//查询  分页展示
 		List<UserRole> list = UserRoleDao.select(pageNo,pageSize);
-		results.setMessage("查询成功");
+		Integer count = UserRoleDao.selectCount();
 		results.setStatus("0");
+		results.setMessage("分页查询 成功");
 		results.setData(list);
-
+		results.setCount(count);
+		
 		return results;
 	}
 

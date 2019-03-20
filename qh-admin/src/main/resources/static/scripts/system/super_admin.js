@@ -11,18 +11,26 @@ app.controller("superAdminController", function($scope,$http) {
 		}) 
 	}
 	$scope.selectCategory();
-	// 展示 加载页面时加载此方法
-	$scope.select = function () {
-		$http.get("/api/userRole/single",{"params":{"id":$scope.id,"page":$scope.page=1}},{'Content-Type':'application/json;charset=UTF-8'})
+	// 分页展示 加载页面时加载此方法
+	 //总条数
+    $scope.total = 0;
+    //当前的页数
+    $scope.current = 1;
+    //一页显示多少条
+    $scope.pageSize = 2;
+	$scope.feedbackList = function () {
+		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+		$http.get("/api/userRole/single",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}},{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
 				$scope.list = result.data;
+				$scope.total = result.count;
 			}else {
 				alert(result.message);
 			}
 		})
 	}
-	$scope.select();
+	$scope.feedbackList();
 	// 点击事件,点击弹出添加窗口
 	$scope.addshow = function () {
 		$scope.html = "添加";
@@ -31,10 +39,15 @@ app.controller("superAdminController", function($scope,$http) {
 		document.getElementById('addbutton').style.background="#5ED8A9";
 		document.getElementById('updatebutton').style.display="none";
 		document.getElementById('updateesc').style.display="none";
+		document.getElementById('addesc').style.display="inline-block";
 		document.getElementById('resource').style.display="block";
 	}
 	// 点击事件 点击弹出修改窗口
 	$scope.update = function () {
+		if ($scope.userRole == null) {
+			alert("请先选择一行数据！");
+			return;
+		}
 		$scope.html = "修改";
 		document.getElementById('addbutton').style.display="none";
 		document.getElementById('addesc').style.display="none";
@@ -56,6 +69,7 @@ app.controller("superAdminController", function($scope,$http) {
 				alert("添加成功");
 				document.getElementById('resource').style.display="none";
 				$scope.selectCategory();
+				$scope.select();
 			}else {
 				alert(result.message);
 			}
@@ -79,10 +93,6 @@ app.controller("superAdminController", function($scope,$http) {
 	// 点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
 	$scope.updatequestionbank = function () {
-		if ($scope.userRole == null) {
-			alert("请先选择一行数据！");
-			return;
-		}
 		if ($scope.userRole.password != $scope.password) {
 			alert("两次密码输入不一致！");
 			return;
@@ -124,9 +134,10 @@ app.controller("superAdminController", function($scope,$http) {
 		$scope.userRole.nickname = null;
 	}
 	
-	// 点击事件 点击获取数据回显 192.168.2.103
+	// 点击事件 点击获取数据回显 
 	$scope.checkedUserRole = function (u) {
 		$scope.userRole = u;
+		$scope.selected=u;
 	}
 	
 });
