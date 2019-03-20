@@ -74,7 +74,7 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
-	public Results<UserRole> delete (@RequestParam(name = "id",required = true) String id) {
+	public Results<UserRole> delete (@RequestParam(name = "id")String id) {
 		Results<UserRole> results = new Results<UserRole>();
 		results = userRoleService.deleteById(id);
 		

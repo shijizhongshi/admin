@@ -55,7 +55,18 @@ public class UserRoleService implements IUserRoleService {
 				return results;
 			}
 			// 修改操作
+			List<String> limitsList=userRole.getMenus();
+			String limits=null;
+			for (String menus : limitsList) {
+				if(limits==null){
+					limits=menus;
+				}else{
+					limits=limits+","+menus;
+				}
+			}
+			
 			userRole.setUpdatetime(new Date());
+			userRole.setLimits(limits);
 			Integer count = UserRoleDao.update(userRole);
 			if (count == 1) {
 				results.setStatus("0");
