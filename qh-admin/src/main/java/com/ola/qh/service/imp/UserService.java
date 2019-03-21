@@ -1,7 +1,6 @@
 package com.ola.qh.service.imp;
 
 import java.math.BigDecimal;
-import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -157,7 +156,7 @@ public class UserService implements IUserService{
 
 	@Override
 	public int selectUserCount(String mobile, String nickname, String userrole) {
-		// TODO Auto-generated method stub
+		
 		return userDao.selectUserCount(mobile, nickname, userrole);
 	}
 
