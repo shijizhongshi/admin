@@ -58,42 +58,51 @@
 	
 	
 	<select id="selectStudent" resultMap="UserMap">
-		select * from user 
-		where 1=1
+		select * from user_buy_course as us 
+		left join  user as u
+		on u.id = us.user_id
+		group by us.user_id 
+		having 1=1
 		<if test="fromdate!='' and fromdate!=null ">
-		and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+		and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
 		<if test="todate!='' and todate!=null ">
-		and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+		and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 		</if>
 		
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-		and (realname like concat(concat('%',#{realnameORmobile},'%')) or mobile like concat(concat('%',#{realnameORmobile},'%')))
+		and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or u.mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
-		and isdisabled=#{status}
+		and u.isdisabled=#{status}
 		</if>
-		order by addtime desc limit #{pageNo},#{pageSize}
+		order by us.addtime desc limit #{pageNo},#{pageSize}
 	</select>
 	
 	
 	
 	<select id="selectStudentCount" resultType="int">
-		select count(id) from user 
-		where 1=1
+		select count(*) from (
+		select count(*)  from user_buy_course as us 
+		left join  user as u
+		on u.id = us.user_id 
+		group by us.user_id 
+		having 1=1 
 		<if test="fromdate!='' and fromdate!=null ">
-		and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+		and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
 		<if test="todate!='' and todate!=null ">
-		and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+		and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 		</if>
 		
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-		and (realname like concat(concat('%',#{realnameORmobile},'%')) or mobile like concat(concat('%',#{realnameORmobile},'%')))
+		and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or u.mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
-		and isdisabled=#{status}
+		and u.isdisabled=#{status}
 		</if>
+		)as a
+		
 	</select>
 	
 	
