@@ -137,7 +137,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 		<ul class="menu" style="width:87%;" >
 
 			<li ng-repeat="qbc in questionsubcatelist" class="list" 
-			ng-click="checkquestionsub(qbc,$event)" ng-class="{'selected':selecteds==qbc.id}">{{qbc.name}}</li>
+			ng-click="checkquestionsub(qbc)" ng-class="{'selected':selecteds==qbc.id}">{{qbc.name}}</li>
 			
 		</ul>
 	</div>
