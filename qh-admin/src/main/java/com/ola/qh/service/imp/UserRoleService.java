@@ -1,7 +1,5 @@
 package com.ola.qh.service.imp;
 
-import static org.mockito.Matchers.contains;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -182,11 +180,5 @@ public class UserRoleService implements IUserRoleService {
 		List<String> list = UserRoleDao.selectCategory();
 
 		return list;
-	}
-
-	@Override
-	public Results<UserRole> selectById(String id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

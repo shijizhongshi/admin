@@ -66,9 +66,9 @@ app.controller("superAdminController", function($scope,$http) {
 		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				document.getElementById('resource').style.display="none";
+				$scope.feedbackList();
 				$scope.selectCategory();
-				$scope.select();
+				document.getElementById('resource').style.display="none";
 			}else {
 				alert(result.message);
 			}
@@ -100,7 +100,7 @@ app.controller("superAdminController", function($scope,$http) {
 		.success(function (result) {
 			if (result.status == "0") {
 				document.getElementById('resource').style.display="none";
-				$scope.select();
+				$scope.feedbackList();
 			}else {
 				 alert(result.message);
 			}
@@ -116,7 +116,7 @@ app.controller("superAdminController", function($scope,$http) {
 		.success(function (result) {
 			if (result.status == "0") {
 				alert("删除成功");
-				$scope.select();
+				$scope.feedbackList();
 			}else {
 				alert(result.message);
 			}
@@ -136,9 +136,19 @@ app.controller("superAdminController", function($scope,$http) {
 	// 点击事件 点击获取数据回显 
 	$scope.checkedUserRole = function (u) {
 		$scope.userRole = u;
-		$scope.selected=u;
-		$scope.limitsselected=u.menus;
+		$scope.selected = u;
+		$scope.limitsselected = u.menus;
 		
+	}
+	//点击事件 点击弹出弹窗 展示 limits
+	$scope.userRole = null;
+	$scope.selectLimits = function (menus) {
+		$scope.menus = menus;
+		document.getElementById('selectLimits').style.display="block";
+	}
+	//点击事件 点击关闭弹窗
+	$scope.escLimits = function () {
+		document.getElementById('selectLimits').style.display="none";
 	}
 	
 });
