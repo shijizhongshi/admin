@@ -121,9 +121,7 @@
 <div id="manage" class="manage" style="display:none;">
 	<ul class="show">
 
-			<li style="background:#9DE879;"><span class="glyphicon glyphicon-plus" ></span>&nbsp;导入试题</li>
-			<li style="background:#9DE879;" ><span class="glyphicon glyphicon-plus" ></span>&nbsp;导入原有系统试题</li>
-			<li style="background:#9DE879;" onclick="showDiv2()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;从文件导入试题</li>
+			<li style="background:#9DE879;" ng-click="showrevise()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;从文件导入试题</li>
 		<li style="background:#F9CD33;" ng-click="updatebank()"> <span class="glyphicon glyphicon-pencil"></span>&nbsp;修改试题</li>
 		<li style="background:#F86846;" ng-click="deletequestionbank()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除试题</li>
  
@@ -187,12 +185,12 @@
 		<form id="myform2" class="ng-pristine ng-valid">
 	<h3>从文件导入试题</h3>
 <div class="costs-uploadfile-div">
-							请选择上传的附件<input type="file" name="file"  value="选择文件" onchange="angular.element(this).scope().uploadmainimage(this)">
+							请选择上传的附件<input type="file" name="file"  value="选择文件" id="file">
 
 				
 						</div>
 		<div class="end">
-			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
+			<input name="git" type="submit" value="提交"  ng-click="addfile()" style="background:#5ED8A9;">
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv2()" class="esc">
 		</div>
 		</form>
