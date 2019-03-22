@@ -227,7 +227,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	
 
 
-<!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
+<!-- 答案项  。试题类型是单选题的时候调用 -->
 <div class="daan">
 <p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
@@ -237,7 +237,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <td>
 <div class="dw">
 <img src="/images/sjk-xl.png">
-<select class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbas.correct">
+<select ng-change="changeCorrect(qbas)" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbas.correct">
 			<option ng-selected="qbas.correct==true" value=true>正确</option>
 			<option ng-selected="qbas.correct==false" value=false>错误</option>
 		</select></div>
@@ -303,7 +303,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	<span>答案解析</span>
 	<textarea ng-model="questionunitlists.analysis" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
-<!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
+<!-- 答案项  。试题类型是单选题的时候调用，单选题不调用 -->
 <div class="daan">
 <p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
@@ -313,7 +313,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <td>
 <div class="dw">
 <img src="/images/sjk-xl.png">
-<select class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbual.correct">
+<select ng-change="changeUnitCorrect(qbual)" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbual.correct">
 			<option ng-selected="qbual.correct==true" value=true>正确</option>
 			<option ng-selected="qbual.correct==false" value=false>错误</option>
 		</select></div>

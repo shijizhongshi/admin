@@ -169,7 +169,7 @@ app.controller("questionJieController", function($scope, $http){
 				$scope.questionbanklist=data.data;
 				$scope.total1=data.count;
 				angular.forEach($scope.questionbanklist, function(questionbank){  
-					if(questionbank.types=="单选"){
+					if(questionbank.types=="单选题"){
 						
 						$scope.questionanswerlist=questionbank.answer;
 						
@@ -242,7 +242,7 @@ app.controller("questionJieController", function($scope, $http){
 	
 	$scope.updatebank=function(){
 		if($scope.bankid!=null){
-			if($scope.types=="单选"){
+			if($scope.types=="单选题"){
 				
 				document.getElementById('resources').style.display="none"; 
 				document.getElementById('resource').style.display="block"; 
@@ -318,7 +318,7 @@ app.controller("questionJieController", function($scope, $http){
 	
 	$scope.resetbank=function(){
 		
-		if($scope.types=="单选"){
+		if($scope.types=="单选题"){
 			
 			document.getElementById('resource').style.display="none"; 
 		}
@@ -331,5 +331,35 @@ app.controller("questionJieController", function($scope, $http){
 		$scope.bankid=null;
 		$scope.types=null;
 		$scope.questionanswers=null;
+	}
+	
+	$scope.changeCorrect=function(qbas){
+		
+		if($scope.questionbanks.types=="单选题"){
+		angular.forEach($scope.questionanswers,function(answers){
+			
+			
+			if(qbas.id!=answers.id){
+				
+				answers.correct=false;
+			}
+			
+			
+		})
+		}
+	}
+	
+	$scope.changeUnitCorrect=function(qbual){
+		
+		if($scope.questionunitlists.types=="单选题"){
+		angular.forEach($scope.questionunitanswerlist,function(unitanswers){
+			
+			if(qbual.id!=unitanswers.id){
+				
+				unitanswers.correct=false;
+			}
+			
+		})
+		}
 	}
 })
