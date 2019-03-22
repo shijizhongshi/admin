@@ -12,10 +12,10 @@
 	background-color: #c1ddec
 }
 </style>
-<@b.body menu="sidebarmenu-user" submenu="sidebarmenu-user-userinfo">
+<@b.body menu="sidebarmenu-student" submenu="sidebarmenu-student-studentinfo">
 <div ng-app="app" ng-controller="studentinfoController">
 	<div class="details" style="width: 100%">
-		<input type="hidden" value="${nickname}" id="nickname" />
+		<%-- <input type="hidden" value="${nickname}" id="nickname" /> --%>
 		<div class="details-nav">
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
@@ -66,7 +66,6 @@
 					<li ng-click="applys(3)"><span
 						class="glyphicon glyphicon-briefcase"></span>&nbsp;免费半价重学</li>
 				</ul>
-
 				<div class="admin-table">
 					<table id="tableExcel">
 						<tr>
@@ -74,26 +73,26 @@
 							<th>昵称</th>
 							<th>用户类型</th>
 							<th>用户资质</th>
-							<th>用户状态</th>
+							<th>用户生日</th>
 							<th>注册时间</th>
-							<th>修改用户状态</th>
+							<th>所在地址</th>
 						</tr>
 						
 						<tr ng-repeat="u in userList" ng-click="checkUser(u)"
 							ng-class="{'selected':selected==u}">
 							<th>{{u.mobile}}</th>
 							<th>{{u.nickname}}</th>
-							<th>{{u.userroles}}</th>
-							<th>{{u.isdoctors}}</th>
-							<th>{{u.disabled}}</th>
+							<!--用户类型 展示 -->
+							<th ng-show="{{u.userrole=='0'}}">普通用户</th>
+							<th ng-show="{{u.userrole=='1'}}">服务店铺用户</th>
+							<th ng-show="{{u.userrole=='2'}}">商城店铺用户</th>
+							<th ng-show="{{u.userrole=='3'}}">家里有矿用户</th>
+							<!--用户资质 展示  -->
+							<th ng-show="{{u.isdoctor=='0'}}">医生用户</th>
+							<th ng-show="{{u.isdoctor=='1'}}">普通用户</th>
+							<th>{{u.birthday | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.addtime | date:'yyyy-MM-dd'}}</th>
-							<th><input type="button" ng-click="changedisabled(1,u.id)"
-								ng-show="{{u.isdisabled}}==0" class="btn-lg im-key" value="禁用"
-								style="padding: 3px 10px; margin: 0;" /> <input type="button"
-								ng-click="changedisabled(0,u.id)" ng-show="{{u.isdisabled}}==1"
-								class="btn-lg im-key" value="启用"
-								style="padding: 3px 10px; margin: 0; background: #47e84c;" /></th>
-
+							<th>{{u.address}}</th>
 						</tr>
 					</table>
 				</div>
