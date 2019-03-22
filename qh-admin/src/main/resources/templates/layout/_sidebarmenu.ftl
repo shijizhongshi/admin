@@ -211,6 +211,11 @@
                                 <span class="title">学员管理</span>
                             </a>
                         </li>
+                        <li id="sidebarmenu-student-studentinfo">
+                            <a href="/web/student/studentinfo">
+                                <span class="title">用户开课</span>
+                            </a>
+                        </li>
                           <li id="sidebarmenu-student-classbuy">
                             <a href="/web/student/classbuy?classId=">
                                 <span class="title">学员班级订购记录</span>
