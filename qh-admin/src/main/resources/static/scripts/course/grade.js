@@ -105,7 +105,7 @@ app.controller("gradeController", function($scope, $http){
 	 $scope.courseselected = [];
 	    var updateSelected = function(action, course) {
 	      if(action == 'add' & $scope.courseselected.indexOf(course) == -1) $scope.courseselected.push(course);
-	      if(action == 'remove' && $scope.courseselected.indexOf(course) != -1) $scope.courseselected.splice($scope.selected.indexOf(course), 1);
+	      if(action == 'remove' && $scope.courseselected.indexOf(course) != -1) $scope.courseselected.splice($scope.courseselected.indexOf(course), 1);
 	    };
 	 
 	    $scope.updateSelection = function($event, course) {

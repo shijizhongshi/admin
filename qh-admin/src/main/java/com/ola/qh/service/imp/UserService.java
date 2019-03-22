@@ -2,6 +2,8 @@ package com.ola.qh.service.imp;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,19 +16,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.alibaba.fastjson.JSON;
 import com.ola.qh.dao.BusinessDao;
 import com.ola.qh.dao.UserBookDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
+import com.ola.qh.dao.UserRoleDao;
 import com.ola.qh.entity.Business;
 import com.ola.qh.entity.BusinessBook;
 import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserBook;
 import com.ola.qh.entity.UserLogin;
+import com.ola.qh.entity.UserRole;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
+
 @Service
 public class UserService implements IUserService{
 
@@ -38,6 +44,8 @@ public class UserService implements IUserService{
 	private UserLoginDao userLoginDao;
 	@Autowired
 	private BusinessDao businessDao;
+	@Autowired
+	private UserRoleDao UserRoleDao;
 
 	@Override
 	public int updateUser(String isdisabled, String id) {
@@ -59,8 +67,9 @@ public class UserService implements IUserService{
 				result.setData(un);
 				request.getSession().setAttribute("surplusaccount",0);
 				request.getSession().setAttribute("username", un);
-				request.getSession().setAttribute("admin",true);
+				/*request.getSession().setAttribute("admin",true);*/
 				request.getSession().setAttribute("jiamengshang",false);
+				request.getSession().setAttribute("isrole","1");
 				return result;
 			}else{
 				result.setStatus("1");
@@ -76,16 +85,66 @@ public class UserService implements IUserService{
 				}
 				request.getSession().setAttribute("username", b.getUsername());
 				request.getSession().setAttribute("jiamengshang",true);
-				request.getSession().setAttribute("admin",false);
+				request.getSession().setAttribute("isrole","2");
+				/*request.getSession().setAttribute("admin",false);*/
 				result.setStatus("0");
 				return result;
 			}else{
+				///////其他身份的用户登录
+				UserRole ur=UserRoleDao.single(null, username, password);
+				if(ur!=null){
+					request.getSession().setAttribute("surplusaccount",0);
+					request.getSession().setAttribute("username", ur.getUsername());
+					request.getSession().setAttribute("jiamengshang",false);
+					request.getSession().setAttribute("isrole","3");
+				}
+				
 				result.setStatus("1");
 				result.setMessage("用户名或者密码不对");
 				return result;
 			}
 			
 		}
+		
+	}
+	
+	
+	
+	@Override
+	public Results<List<String>> adminisLogin(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		Results<List<String>> results=new Results<List<String>>();
+		List<String> list=new ArrayList<String>();
+		Object obj = request.getSession().getAttribute("isrole");
+		if (obj != null)
+		{
+			String roles=JSON.toJSONString(obj);
+			if("3".equals(roles)){
+				
+				
+				//////3:权限小的系统用户(按照选择权限展示菜单)
+				Object objname = request.getSession().getAttribute("username");
+				UserRole ur=UserRoleDao.single(null, JSON.toJSONString(objname),null);
+				if(ur.getLimits().indexOf(",")>0){
+					list=Arrays.asList(ur.getLimits().split(","));
+				}else{
+					list.add(ur.getLimits());
+				}
+				
+			}
+			results.setStatus("0");
+			results.setData(list);
+		    return results;
+		}
+		results.setStatus("1");
+		return results;
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		String str="111";
+		System.out.println(str.indexOf(","));
 		
 	}
 
@@ -97,7 +156,7 @@ public class UserService implements IUserService{
 
 	@Override
 	public int selectUserCount(String mobile, String nickname, String userrole) {
-		// TODO Auto-generated method stub
+		
 		return userDao.selectUserCount(mobile, nickname, userrole);
 	}
 
@@ -182,6 +241,7 @@ public class UserService implements IUserService{
 		// TODO Auto-generated method stub
 		return userDao.selectStudentCount(fromdate, todate, realnameORmobile, status);
 	}
+
 	
 	
 	

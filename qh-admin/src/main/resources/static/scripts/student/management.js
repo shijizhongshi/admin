@@ -53,7 +53,7 @@ app.controller("studentController", function($scope, $http){
 	$scope.current=1;
 	$scope.pageSize=20;
 	$scope.loaddata=function(){
-		///////学员的查询(全部查询)
+		///////学员的查询(全部查询)(改成只查询购买过课程的用户)
 		$http.get("/api/user/select/student",{"params": {"fromdate":changeDate($scope.fromdate),
 			"todate":changeDate($scope.todate),"realnameORmobile":$scope.realnameORmobile,
 			"status":$scope.status,"page":$scope.current}}, {'Content-Type': 'application/json;charset=UTF-8'})

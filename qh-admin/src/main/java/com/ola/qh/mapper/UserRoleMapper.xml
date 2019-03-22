@@ -23,6 +23,9 @@
 		<if test="username!=null and username!=''">
 		and username=#{username}
 		</if>
+		<if test="password!=null and password!=''">
+		and password=#{password}
+		</if>
 	</select>
 	
 	<insert id="saveUserRole" parameterType="com.ola.qh.entity.UserRole">
@@ -46,7 +49,7 @@
 		<if test="limits!=null and limits!=''">
 		limits=#{limits},
 		</if>
-		updatetime=#{updatetime} where user_id=#{userId}
+		updatetime=#{updatetime} where id=#{id}
 	</update>
 
 	<delete id="deleteById" >
@@ -56,11 +59,24 @@
 	
 	<!--查询user_category表  -->
 	<select id="selectCategory" resultType="java.lang.String">
-	select category from user_category
+	select category from user_category 
 	</select>
 	
-	<!--根据username查询数量  -->
-	<select id="selectUsername" resultType="int">
-	select username from user_role 
+	<!--根据username字段查询  -->
+	<select id="selectByUsername" resultMap="UserRoleMap">
+	select * from user_role where 1=1
+	<if test="username!=null and username!=''">
+	and username = #{username}
+	</if>
+	</select>
+	
+	<!--分页查询展示  -->
+	<select id="select" resultMap="UserRoleMap">
+	select * from user_role order by addtime desc limit #{pageNo},#{pageSize};
+	</select>
+	
+	<!--分页 查询总数量  -->
+	<select id="selectCount" resultType="java.lang.Integer">
+	select count(*) from user_role 
 	</select>
 </mapper>

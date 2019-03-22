@@ -4,7 +4,7 @@ h3{font-size:1.6rem;margin-top:0;font-weight:bold;}
 .classify{width:13%; background:#FFFFFF;float:left;}
 @media screen and (max-width: 901px) {.classify{width:100%;float:none;}}
 .classify ul.menu .list{background:#FFFFFF;border-bottom:none;font-size:15px;}
-
+.classify ul.menu .list li:hover{color:#3787cf;}
 .classify ul.menu .list a{color:black}
 .menu .list:after:after{color:#E5B70D;content: "\f107";font-family: FontAwesome;}
 .menu .list:before{color:#E5B70D;}
