@@ -320,6 +320,43 @@ app.controller("ElementController", function($scope, $http){
 		}
 	}
 	
+	$scope.addfile=function(){
+		
+		
+		var fd = new FormData();
+	    fd.append("file", $("#file")[0].files[0]);
+	    fd.append("subId", $scope.subId);
+	    
+	   $http.post("/api/questionbank/improtExcel",fd, {
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    })
+		.success(function(data){
+			if(data.status=='0'){
+				alert("导入成功~");
+					$scope.file=null;
+					location.reload();
+				}else{
+					alert("导入失败~");
+				}
+			})
+		
+	}
+	
+	$scope.showrevise=function(){
+		if($scope.subId!=null){
+			document.getElementById('revise').style.display="block"; 
+		}else{
+		alert("请先选中单元~");
+		}
+	}
+	
+	$scope.changefile=function(file){
+		
+		$scope.file=file;
+	}
+	
 	$scope.resetbank=function(){
 		
 		if($scope.types=="单选题"){
