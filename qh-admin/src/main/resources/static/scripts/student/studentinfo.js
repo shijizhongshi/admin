@@ -21,9 +21,7 @@ app.controller("studentinfoController", function($scope, $http){
 		$scope.user = u;
 		$scope.userId = u.id;
 	}
-	//CV工程师   测试
-
-
+	//CV工程师   测试/测试成功
 	$scope.active=1;
 	$scope.typeId=1;
 	$scope.courseTypeName="医师资格";
