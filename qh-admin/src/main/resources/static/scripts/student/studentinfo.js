@@ -1,19 +1,22 @@
 app.controller("studentinfoController", function($scope, $http){
 	//根据昵称或者手机号查询
+	$scope.mobile=null;
+	$scope.nickname=null;
 	$scope.selectUser = function () {
-		if ($scope.mobile == null && $scope.nickname == null) {
+		if ($scope.mobile!='' && $scope.mobile!=null || $scope.nickname!='' && $scope.nickname!=null) {
+			$http.get("/api/user/select",{"params":{"nickname":$scope.nickname,"mobile":$scope.mobile,"page":$scope.page=1}},{'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function (result) {
+				if (result.status == "0") {
+					$scope.userList = result.data;
+					$scope.total = result.count;
+				}else {
+					alert(result.messgae);
+				}
+			})
+		}else {
 			alert("请先填写查询条件！");
 			return;
 		}
-		$http.get("/api/user/select",{"params":{"nickname":$scope.nickname,"mobile":$scope.mobile,"page":$scope.page=1}},{'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function (result) {
-			if (result.status == "0") {
-				$scope.userList = result.data;
-				$scope.total = result.count;
-			}else {
-				alert(result.messgae);
-			}
-		})
 	} 
 	//选中更换样式 数据回显
 	$scope.checkUser = function (u) {
