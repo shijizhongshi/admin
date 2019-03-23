@@ -240,7 +240,6 @@ public class BuyCourseService implements IBuyCourseService {
 
 	@Override
 	public int existOpenCourse(String courseId, String userId, String classId) {
-		// TODO Auto-generated method stub
 		
 		return userBuyCourseDao.selectUserBuyCourseCount(userId, classId, courseId);
 	}
