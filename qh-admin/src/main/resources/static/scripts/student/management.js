@@ -181,33 +181,6 @@ app.controller("studentController", function($scope, $http){
 	}
 	
 	
-	$scope.types=null;
-	$scope.typesName=null;
-	$scope.applys=function(types){
-		if($scope.userId!=null){
-			$scope.openCourse.userId=$scope.userId;
-			if(types==1){
-				$scope.openCourse.types=1;
-				$scope.types="网课报班";
-				$scope.typesName="班级";
-				document.getElementById('revise').style.display="block"; 
-				$scope.classlists();
-			}else if(types==2){
-				$scope.openCourse.types=2;
-				$scope.types="课程报名";
-				$scope.typesName="课程";
-				document.getElementById('revise').style.display="block"; 
-				/////////查这个专业下的所有的课程信息
-				$scope.courselists();
-			}else if(types==3){
-				alert("敬请期待~")
-			}
-			
-		}else{
-			alert("请选中信息~");
-		}
-		
-	}
 	$scope.productId = [];
 	$scope.productlisted = [];
 	$scope.prices=0;
@@ -265,52 +238,7 @@ app.controller("studentController", function($scope, $http){
       return $scope.productId.indexOf(id) >= 0;
     };   
 	
-   
-	$scope.jiamengshang=false;
-	/////首先判断是加盟商还是系统管理员
-	if($("#username").val()=="admin"){
-		////////销售员开课
-		$scope.jiamengshang=false;
-		$scope.courseWays=1;/////销售人员开课
-		$scope.surplusaccount=$("#surplusaccount").val();
-		
-	}else{
-		////////加盟商开课需要加盟商的账号$("#username").val()
-		$scope.surplusaccount=$("#surplusaccount").val();
-		$scope.jiamengshang=true;
-		$scope.adminName=$("#username").val();/////加盟商的账号的时候传账号
-		$scope.courseWays=2;////加盟商开课
-	}
-	
 
-	$scope.openCourses=function(){
-		//alert(parseInt($scope.surplusaccount,10));
-		if($scope.courseWays==1 && $scope.openCourse.salesName==null){
-			alert("销售信息不能为空");
-			return;
-		}
-		/*if($scope.courseWays==2){
-			if(parseInt($scope.surplusaccount)<$scope.prices){
-				alert("剩余兑换课程金额不足~");
-				return;
-			}
-		}*/
-		$scope.openCourse.adminName=$scope.adminName;
-		$scope.openCourse.courseWays=$scope.courseWays;
-		$scope.openCourse.productId=$scope.productId;
-		$scope.openCourse.account=$scope.prices;//////兑换课程的总金额
-		$http.post("/api/btl/open/course",$scope.openCourse,{'Content-Type': 'application/json;charset=UTF-8'})
-	    .success(function(data){
-	    	if(data.status=="0"){
-	    		alert("开课成功~");
-	    		document.getElementById('revise').style.display="none"; 
-	    		$scope.loaddata();
-	    	}else{
-	    		alert(data.message);
-	    	}
-	    })
-	}
-	
 	
 	
 });
