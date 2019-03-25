@@ -4,13 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-<<<<<<< HEAD
-import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.ola.qh.entity.AdminMenus;
-=======
->>>>>>> branch 'dev' of https://github.com/shijizhongshi/admin.git
+
 import com.ola.qh.entity.User;
 import com.ola.qh.util.Results;
 
