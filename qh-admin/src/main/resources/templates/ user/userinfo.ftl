@@ -59,6 +59,7 @@
 						<th>用户资质</th>
 						<th>用户状态</th>
 						<th>真实姓名</th>
+						<th>是否为学员</th>
 						<th>修改用户状态</th>
 					</tr>
 
@@ -70,6 +71,9 @@
 						<th>{{u.isdoctors}}</th>
 						<th>{{u.disabled}}</th>
 						<th>{{u.realname}}</th>
+						<!--是否为学员  -->
+						<th ng-show="{{u.isStudent=='0'}}">非学员</th>
+						<th ng-show="{{u.isStudent=='1'}}">学员</th>
 						<th><input type="button" ng-click="changedisabled(1,u.id)"
 							ng-show="{{u.isdisabled}}==0" class="btn-lg im-key" value="禁用"
 							style="padding: 3px 10px; margin: 0;" /> <input type="button"

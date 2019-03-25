@@ -1,17 +1,25 @@
 package com.ola.qh.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserRole {
 
 	private String id;
-
+	@NotEmpty
 	private String category;// 类别
 
 	private String nickname;// 昵称
-
+	@NotEmpty
 	private String username;// 账号
-
+	@NotEmpty
 	private String password;// 密码
 
 	private String limits;
@@ -19,6 +27,20 @@ public class UserRole {
 	private Date addtime;
 
 	private Date updatetime;// 更新时间
+	@Valid
+	@NotNull
+	@Size(min=1)
+	private List<String> menus=new ArrayList<String>();
+	
+
+
+	public List<String> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<String> menus) {
+		this.menus = menus;
+	}
 
 	public String getNickname() {
 		return nickname;

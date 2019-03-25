@@ -6,7 +6,12 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/super/super_admin.js"></script>
+<script src="/scripts/system/super_admin.js"></script>
+<style type="text/css">
+.selected {
+	background-color: #c1ddec
+}
+</style>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-superAdmin">
 <div ng-app="app" ng-controller="superAdminController">
 <div class="details" style="width: 100%;">
@@ -69,21 +74,21 @@
 					<table>
 						<tr>
 							<th>账号</th>
-							<th>名称</th>
-							<th>账号属性</th>
-							<th>账号状态</th>
-							<th>最后登陆时间</th>
-							<th>IP地址</th>
+							<th>昵称</th>
+							<th>账号密码</th>
+							<th>角色类别</th>
+							<th>添加时间</th>
+							<th>更新时间</th>
 							<th>权限操作</th>
 						</tr>
-						<tr >
-							<th>账号</th>
-							<th>名称</th>
-							<th>账号属性</th>
-							<th>账号状态</th>
-							<th>最后登陆时间</th>
-							<th>IP地址</th>
-							<th><input type="button" class="btn-lg im-key" value="查看详情" style="padding: 3px 10px; margin: 0;background:#F9CD34;"></th>
+						<tr ng-repeat ="u in list" ng-class="{'selected':selected==u}" ng-click="checkedUserRole(u)" >
+							<th>{{u.nickname}}</th>
+							<th>{{u.username}}</th>
+							<th>{{u.password}}</th>
+							<th>{{u.category}}</th>
+							<th>{{u.addtime | date:'yyyy.MM.dd'}}</th>
+							<th>{{u.updatetime | date:'yyyy.MM.dd'}}</th>
+							<th><input type="button" class="btn-lg im-key" value="查看详情" style="padding: 3px 10px; margin: 0;background:#F9CD34;" ng-click="selectLimits(u.menus)"></th>
 						</tr>
 					</table>
 					</div>
@@ -108,11 +113,11 @@
 <input type="text" placeholder="请输入昵称" ng-model="userRole.nickname">
 	</div>
 					
-				<div class="select-2">
-					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
-					<form id="search">
+				<div class="select-2" >
+					<img src="/images/sjk-xl.png" /> <span >账号属性</span>
+					<form id="search" >
 					
-						<select ng-model="userRole.category" ng-options="x for x in category">
+						<select ng-model="userRole.category" ng-options="x for x in category" >
 							<option ng-selected="status==0" value=0 ></option>
 						</select>
 					</form>
@@ -127,21 +132,23 @@
 	</div>
 		<div class="select-2">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" ng-model="password">
+<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请确认密码" ng-model="password">
 	</div>
 	</div>
 	<div style="width:49%;float:right;">
 <div class="qx">
 <p>权限设置</p>
-<ul >
-<li><input type="checkbox" />网课资源</li>
-<li><input type="checkbox" />题库资源</li>
-<li><input type="checkbox" />公共资源管理</li>
-<li><input type="checkbox" />订单管理</li>
-<li><input type="checkbox" />加盟商管理</li>
-<li><input type="checkbox" />用户管理</li>
-<li><input type="checkbox" />学员信息管理</li>
-<li><input type="checkbox" />发布管理</li>
+<ul ng-model="userRole.limits">
+
+<li><input type="checkbox" ng-checked="isSelected('网课资源管理')" ng-click="updateSelection($event,'网课资源管理')"/>网课资源管理</li>
+<li><input type="checkbox" ng-checked="isSelected('题库资源管理')" ng-click="updateSelection($event,'题库资源管理')"/>题库资源管理</li>
+<li><input type="checkbox" ng-checked="isSelected('公共资源管理')" ng-click="updateSelection($event,'公共资源管理')"/>公共资源管理</li>
+<li><input type="checkbox" ng-checked="isSelected('订单管理')" ng-click="updateSelection($event,'订单管理')"/>订单管理</li>
+<li><input type="checkbox" ng-checked="isSelected('加盟商管理')" ng-click="updateSelection($event,'加盟商管理')"/>加盟商管理</li>
+<li><input type="checkbox" ng-checked="isSelected('用户管理')" ng-click="updateSelection($event,'用户管理')"/>用户管理</li>
+<li><input type="checkbox" ng-checked="isSelected('学员信息管理')" ng-click="updateSelection($event,'学员信息管理')"/>学员信息管理</li>
+<li><input type="checkbox" ng-checked="isSelected('发布管理')" ng-click="updateSelection($event,'发布管理')"/>发布管理</li>
+</ul>
 </div>
 	</div>
 	
@@ -151,16 +158,20 @@
 	<div class="end" style="margin-top:10px;">
 			<input id="addbutton" name="git" type="submit" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
 			<input id="updatebutton" name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
-			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" class="esc">
+			<input id="esc" name="esc" type="reset" value="取消" onclick="CloseDiv3()"  class="esc">
+			
 		</div>
-</form>
+
+
 
 </div>
-<div class="poop" style="display:none;" id="add">
-<span class="close" onclick="CloseDiv()">X</span>
+
+<!-- 弹窗 -->
+<div class="poop" style="display:none;" id="selectLimits">
+<span class="close" ng-click="escLimits()">X</span>
 <p>账号权限 </p>
-<ul>
-<li>网课资源</li>
+<ul ng-repeat ="u in menus">
+<li>{{u}}</li>
 </ul>
 </div>
 

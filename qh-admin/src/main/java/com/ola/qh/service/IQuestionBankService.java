@@ -9,7 +9,7 @@ import com.ola.qh.util.Results;
 
 public interface IQuestionBankService {
 
-	public Results<String> importExcel(MultipartFile file) throws Exception;
+	public Results<String> importExcel(MultipartFile file,String subId) throws Exception;
 	
 	public Results<List<QuestionBank>> selectQuestionBank(String subId,int pageNo,int pageSize);
 	

@@ -38,8 +38,8 @@
             <ul id="main-menu" class="main-menu">
                 <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                 <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-                 <#if admin>
-                  <li id="sidebarmenu-system" >
+                 
+                  <li id="sidebarmenu-system" ng-show="systems">
                     <a>
                         <i class="linecons-cog"></i>
                         <span class="title">公共资源管理</span>
@@ -79,7 +79,7 @@
                     </ul>
                 </li>
                 
-                <li id="sidebarmenu-course">
+                <li id="sidebarmenu-course" ng-show="courses">
                     <a>
                         <i class="linecons-cog"></i>
                         <span class="title">网课资源管理</span>
@@ -125,7 +125,7 @@
                         </li>
                     </ul>
                 </li>
-                <li id="sidebarmenu-league" >
+                <li id="sidebarmenu-league" ng-show="leagues">
                     <a>
                         <i class="linecons-cog"></i>
                         <span class="title">加盟商管理</span>
@@ -158,7 +158,7 @@
                         </li>
                     </ul>
                 </li>
-                   <li id="sidebarmenu-orders" >
+                   <li id="sidebarmenu-orders" ng-show="orders">
                     <a>
                        <i class="linecons-cog"></i>
                         <span class="title">订单管理</span>
@@ -181,7 +181,7 @@
                         </li>
                          </ul>
                 </li>
-                      <li id="sidebarmenu-user" >
+                      <li id="sidebarmenu-user" ng-show="users">
                     <a>
                        <i class="linecons-cog"></i>
                         <span class="title">用户管理</span>
@@ -205,7 +205,7 @@
                          </ul>
                 </li>
 
-                  <li id="sidebarmenu-student" >
+                  <li id="sidebarmenu-student" ng-show="students">
                     <a>
                        <i class="linecons-cog"></i>
                         <span class="title">学员信息管理</span>
@@ -214,6 +214,11 @@
                         <li id="sidebarmenu-student-management">
                             <a href="/web/student/management">
                                 <span class="title">学员管理</span>
+                            </a>
+                        </li>
+                        <li id="sidebarmenu-student-studentinfo">
+                            <a href="/web/student/studentinfo">
+                                <span class="title">用户开课</span>
                             </a>
                         </li>
                           <li id="sidebarmenu-student-classbuy">
@@ -230,7 +235,7 @@
                          </ul>
                 </li>
 
-                 <li id="sidebarmenu-patientmanage" >
+                 <li id="sidebarmenu-patientmanage" ng-show="manages">
                     <a>
                        <i class="linecons-cog"></i>
                         <span class="title">发布管理</span>
@@ -250,7 +255,7 @@
                         </li>              
              </ul></li>
                    
-                   <li id="sidebarmenu-questionBank" >
+                   <li id="sidebarmenu-questionBank" ng-show="banks">
                     <a>
                        <i class="linecons-cog"></i>
                         <span class="title">题库管理</span>
@@ -276,7 +281,7 @@
                 </li>
 
 
-                </#if>
+                
                 
                 
              </ul>
