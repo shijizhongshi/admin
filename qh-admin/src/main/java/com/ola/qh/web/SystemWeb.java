@@ -28,8 +28,5 @@ public class SystemWeb {
 	public String superadmin(){
 		return "system/super-admin";
 	}
-	@RequestMapping("/recommended")
-	public String recommended(){
-		return "system/recommended";
-	}
+	
 }
