@@ -1,21 +1,60 @@
 app.controller("superAdminController", function($scope,$http) {
-	//点击事件,点击弹出添加窗口
+	// 查询类别 为下拉框提供数据
+	$scope.selectCategory = function () {
+		$http.get("/api/userRole/selectCategory",{'Content-Type':'application/json;charset=UTF-8'})
+		.success(function (list) {
+			if (list != null) {
+				$scope.category = list;
+			}else {
+				alert("下拉列表数据返回错误!")
+			}
+		}) 
+	}
+	$scope.selectCategory();
+	// 分页展示 加载页面时加载此方法
+	 //总条数
+    $scope.total = 0;
+    //当前的页数
+    $scope.current = 1;
+    //一页显示多少条
+    $scope.pageSize = 20;
+	$scope.userRoleList = function () {
+		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+		$http.get("/api/userRole/selectList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}},{'Content-Type':'application/json;charset=UTF-8'})
+		.success(function (result) {
+			if (result.status == "0") {
+				$scope.list = result.data;
+				$scope.total = result.count;
+			}else {
+				alert(result.message);
+			}
+		})
+	}
+	$scope.userRoleList();
+	// 点击事件,点击弹出添加窗口
 	$scope.addshow = function () {
+		$scope.userRole=null;
+		$scope.password=null;
+		$scope.selected=null;
+		
 		$scope.html = "添加";
 		document.getElementById('addbutton').style.display="inline-block";
-		//style="background:#5ED8A9;"
-		document.getElementById('addbutton').style.background="#5ED8A9";
+		// style="background:#5ED8A9;"
 		document.getElementById('updatebutton').style.display="none";
 		document.getElementById('resource').style.display="block";
 	}
-	//点击事件 点击弹出修改窗口
+	// 点击事件 点击弹出修改窗口
 	$scope.update = function () {
+		if ($scope.userRole == null) {
+			alert("请先选择一行数据！");
+			return;
+		}
 		$scope.html = "修改";
 		document.getElementById('addbutton').style.display="none";
 		document.getElementById('updatebutton').style.display="inline-block";
 		document.getElementById('resource').style.display="block";
 	}
-	//点击事件 点击添加按钮实现添加功能
+	// 点击事件 点击添加按钮实现添加功能
 	$scope.userRole = null;
 	$scope.insertquestionbank = function () {
 		if ($scope.userRole.password != $scope.password) {
@@ -26,9 +65,9 @@ app.controller("superAdminController", function($scope,$http) {
 		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				alert("添加成功");
-				document.getElementById('resource').style.display="none";
+				$scope.userRoleList();
 				$scope.selectCategory();
+				document.getElementById('resource').style.display="none";
 			}else {
 				alert(result.message);
 			}
@@ -47,11 +86,20 @@ app.controller("superAdminController", function($scope,$http) {
 	    };
 	 
 	    $scope.isSelected = function(menus) {
-	      return $scope.limitsselected.indexOf(menus) >= 0;
+	    	for(var i=0;i<$scope.limitsselected.length;i++){
+		    	 if($scope.limitsselected[i]==menus & $scope.userRole!=null){
+		    		 return true;
+		    		 break;
+		    	 
+		     }
+	    	}
+	    	return false;
+	    	 
+	     // return $scope.limitsselected.indexOf(menus) >= 0;
 	    };   
-	//点击事件 点击修改按钮实现修改功能
+	// 点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
-	$scope.uodatequestionbank = function () {
+	$scope.updatequestionbank = function () {
 		if ($scope.userRole.password != $scope.password) {
 			alert("两次密码输入不一致！");
 			return;
@@ -59,44 +107,51 @@ app.controller("superAdminController", function($scope,$http) {
 		$http.post("/api/userRole/update",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				alert("修改成功");
+				document.getElementById('resource').style.display="none";
+				$scope.userRoleList();
 			}else {
 				 alert(result.message);
 			}
 		})
 	}
-	//查询类别 为下拉框提供数据
-	$scope.selectCategory = function () {
-		$http.get("/api/userRole/selectCategory",{'Content-Type':'application/json;charset=UTF-8'})
-		.success(function (list) {
-			if (list != null) {
-				$scope.category = list;
-			}else {
-				alert("下拉列表数据返回错误!")
-			}
-		}) 
-	}
-	$scope.selectCategory();
-	//点击事件，点击取消按钮 清空表单
-	$scope.resetbank = function () {
-		$scope.password = null;
-		$scope.userRole.password = null;
-		$scope.userRole.username= null;
-		$scope.userRole.category = null;
-		$scope.userRole.nickname = null;
-	}
-	//展示 加载页面时加载此方法
-	$scope.select = function () {
-		$http.get("/api/userRole/single",{"params":{"id":$scope.id,"page":$scope.page=1}},{'Content-Type':'application/json;charset=UTF-8'})
+	// 点击事件 点击删除
+	$scope.deletefeedback = function () {
+		if ($scope.userRole== null) {
+			alert("请先选中一行数据");
+			return;
+		}
+		$http.get("/api/userRole/delete",{"params":{"id":$scope.userRole.id}},{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				$scope.list = result.data;
+				alert("删除成功");
+				$scope.userRoleList();
 			}else {
 				alert(result.message);
 			}
 		})
+		
 	}
-	$scope.select();
+	
+	
+	// 点击事件 点击获取数据回显 
+	$scope.checkedUserRole = function (u) {
+		$scope.userRole = u;
+		$scope.selected = u;
+		$scope.limitsselected = u.menus;
+		
+	}
+	//点击事件 点击弹出弹窗 展示 limits
+	$scope.userRole = null;
+	$scope.selectLimits = function (menus) {
+		$scope.menus = menus;
+		document.getElementById('selectLimits').style.display="block";
+	}
+	//点击事件 点击关闭弹窗
+	$scope.escLimits = function () {
+		$scope.menus = null;
+		document.getElementById('selectLimits').style.display="none";
+	}
+	
 });
 
 

@@ -11,7 +11,7 @@ public interface UserRoleDao {
 	public UserRole single(@Param("id") String id, @Param("username") String username,
 			@Param("password") String password);
 
-	public Integer update(UserRole userRole);
+	public Integer updateUserRole(UserRole userRole);
 
 	public void saveUserRole(UserRole userRole);
 
@@ -22,5 +22,7 @@ public interface UserRoleDao {
 	public UserRole selectByUsername(@Param("username") String username);
 
 	public List<UserRole> select(@Param("pageNo")Integer pageNo,@Param("pageSize") Integer pageSize);
+
+	public Integer selectCount();
 
 }

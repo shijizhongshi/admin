@@ -1,7 +1,6 @@
 package com.ola.qh.service.imp;
 
 import java.math.BigDecimal;
-import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -159,22 +158,28 @@ public class UserService implements IUserService{
 		
 	}
 	
-	public static void main(String[] args) {
-		
-		String str="111";
-		System.out.println(str.indexOf(","));
-		
-	}
-
+	
 	@Override
 	public List<User> selectUser(int pageNo,int pageSize, String mobile, String nickname, String userrole) {
-		// TODO Auto-generated method stub
-		return userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+		
+		List<User> list = userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+		for (User user : list) {
+			//循环遍历 在user_buy_course表中查询是否存在
+			Integer count = userDao.selectCountByUserId(user.getId());
+			if (count == 0) {
+				//查不到 非学员
+				user.setIsStudent(0);
+			}else {
+				//user_buy_course表中有记录 是学员
+				user.setIsStudent(1);
+			}
+		}
+		return list;
 	}
 
 	@Override
 	public int selectUserCount(String mobile, String nickname, String userrole) {
-		// TODO Auto-generated method stub
+		
 		return userDao.selectUserCount(mobile, nickname, userrole);
 	}
 

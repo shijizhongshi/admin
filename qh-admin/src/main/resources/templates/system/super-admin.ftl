@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/system/super_admin.js"></script>
+<style type="text/css">
+.selected {
+	background-color: #c1ddec
+}
+</style>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-superAdmin">
 <div ng-app="app" ng-controller="superAdminController">
 <div class="details" style="width: 100%;">
@@ -76,14 +81,14 @@
 							<th>更新时间</th>
 							<th>权限操作</th>
 						</tr>
-						<tr ng-repeat ="u in list">
-							<th>{{u.username}}</th>
+						<tr ng-repeat ="u in list" ng-class="{'selected':selected==u}" ng-click="checkedUserRole(u)" >
 							<th>{{u.nickname}}</th>
+							<th>{{u.username}}</th>
 							<th>{{u.password}}</th>
 							<th>{{u.category}}</th>
 							<th>{{u.addtime | date:'yyyy.MM.dd'}}</th>
 							<th>{{u.updatetime | date:'yyyy.MM.dd'}}</th>
-							<th><input type="button" class="btn-lg im-key" value="查看详情" style="padding: 3px 10px; margin: 0;background:#F9CD34;"></th>
+							<th><input type="button" class="btn-lg im-key" value="查看详情" style="padding: 3px 10px; margin: 0;background:#F9CD34;" ng-click="selectLimits(u.menus)"></th>
 						</tr>
 					</table>
 					</div>
@@ -153,16 +158,20 @@
 	<div class="end" style="margin-top:10px;">
 			<input id="addbutton" name="git" type="submit" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
 			<input id="updatebutton" name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
-			<input name="esc" type="reset" value="取消" onclick="CloseDiv3()" ng-click="resetbank()" class="esc">
+			<input id="esc" name="esc" type="reset" value="取消" onclick="CloseDiv3()"  class="esc">
+			
 		</div>
-</form>
+
+
 
 </div>
-<div class="poop" style="display:none;" id="add">
-<span class="close" onclick="CloseDiv()">X</span>
+
+<!-- 弹窗 -->
+<div class="poop" style="display:none;" id="selectLimits">
+<span class="close" ng-click="escLimits()">X</span>
 <p>账号权限 </p>
-<ul>
-<li>网课资源</li>
+<ul ng-repeat ="u in menus">
+<li>{{u}}</li>
 </ul>
 </div>
 

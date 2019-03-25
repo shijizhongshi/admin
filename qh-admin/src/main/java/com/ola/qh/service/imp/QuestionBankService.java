@@ -38,7 +38,7 @@ public class QuestionBankService implements IQuestionBankService {
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Results<String> importExcel(MultipartFile file) throws Exception{
+	public Results<String> importExcel(MultipartFile file,String subId) throws Exception{
 		Results<String> result = new Results<String>();
 			Workbook wb = WorkbookFactory.create(file.getInputStream());
 			for (int z = 0; z < wb.getNumberOfSheets(); z++) {
@@ -49,48 +49,9 @@ public class QuestionBankService implements IQuestionBankService {
 				int columnNumber = titleRow.getLastCellNum();
 				/*String[][] table = new String[rowNumber][columnNumber];*/
 				String categoryId = null;/////
-				String subId = KeyGen.uuid();
 				String bankId = null;
 				for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 					Row row = rowIterator.next();
-					if (i == 0) {
-						QuestionCategory qc1 = questionCategoryDao.singleCategory(checkNull(2, row), checkNull(1, row));
-						if(qc1==null){
-						///// 保存question_bank_category的信息
-							QuestionCategory qc = new QuestionCategory();
-							categoryId=KeyGen.uuid();
-							qc.setId(categoryId);
-							qc.setCourseTypeName(checkNull(0, row));
-							qc.setCourseTypeSubclassName(checkNull(1, row));
-							qc.setTypes(checkNull(2, row));
-							qc.setName(checkNull(2, row));
-							qc.setIsshow("1");
-							qc.setAddtime(new Date());
-							questionCategoryDao.insertCategory(qc);
-						}else{
-							/////重新赋值
-							categoryId=qc1.getId();
-						}
-						
-					}
-					if (i == 1) {
-						if(questionCategoryDao.existSubCategory(categoryId, checkNull(0, row)).intValue()!=0){
-							result.setStatus("1");
-							result.setMessage("这个类别下的题库已经上传过了请检查");
-							return result;
-						}
-						///// 保存question_bank_subcategory的信息
-						QuestionSubCategory qsc = new QuestionSubCategory();
-						qsc.setId(subId);
-						qsc.setCategoryId(categoryId);
-						qsc.setIsshow("1");
-						qsc.setName(checkNull(0, row));
-						qsc.setTimes(checkNull(1, row));
-						qsc.setPurposes(checkNull(2, row));
-						qsc.setAddtime(new Date());
-						questionCategoryDao.insertSubCategory(qsc);
-					} 
-					if(i!=0 && i!=1) {
 						////// 保存题库的信息
 						if ("共用题干".equals(checkNull(0, row))) {
 							/// 保存他下边的集合
@@ -98,13 +59,13 @@ public class QuestionBankService implements IQuestionBankService {
 							qb.setAddtime(new Date());
 							bankId = KeyGen.uuid();
 							qb.setId(bankId);
-							qb.setNumberNo(i-1);
+							qb.setNumberNo(i+1);
 							qb.setTitle(checkNull(1, row));
 							qb.setTypes(checkNull(0, row));
 							qb.setSubId(subId);
 							questionBankDao.insertQuestionBank(qb);
 						}
-						if ("单选".equals(checkNull(0, row)) || "多选".equals(checkNull(0, row))) {
+						if ("单选题".equals(checkNull(0, row)) || "多选题".equals(checkNull(0, row))) {
 							QuestionBank qb = new QuestionBank();
 							qb.setAddtime(new Date());
 							String unitId = KeyGen.uuid();
@@ -185,13 +146,11 @@ public class QuestionBankService implements IQuestionBankService {
 							} else {
 								/////// 单纯的单选或者多选的问题
 								qb.setAnalysis(checkNull(8, row));
-								qb.setNumberNo(i-1);
+								qb.setNumberNo(i+1);
 								questionBankDao.insertQuestionBank(qb);
 							}
 
 						}
-					}
-
 				}
 
 			}

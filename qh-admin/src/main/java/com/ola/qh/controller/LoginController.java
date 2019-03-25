@@ -3,7 +3,6 @@ package com.ola.qh.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,6 @@ public class LoginController {
 		
 		return userService.adminLogin(username, password,request);
 	}
-	
 	
 	@RequestMapping("/islogin")
 	public Results<List<AdminMenus>> islogin(HttpServletRequest request){
