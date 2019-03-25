@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/web/student")
-public class studentWeb {
+public class StudentWeb {
 
 	@RequestMapping("/management")
 	public String management(){
