@@ -160,7 +160,7 @@ div.costs-uploadfile-div .allBtn{
     }
     .costs-uploadfile-div input{width:80%;}
  .poop img:ACTIVE , .resource img:ACTIVE { transform: scale(7.0);position: fixed;}
-.admin-table table tr th img:ACTIVE{ transform: scale(9.0);position: fixed;}
+.admin-table table tr th img:ACTIVE{ transform: scale(9.0);transition: all 0.6s;}
 .costs-uploadfile-div img{height:100px;}
 .costs-img{height:100px;}
 .admin-table table tr .xiangqing{background:#F9CE33;border-radius: 20px;color: white;padding: 5px;font-size: 1.3rem;cursor: pointer;}
