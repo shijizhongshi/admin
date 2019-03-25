@@ -30,13 +30,13 @@
 				<div class="select-3" style="width: 15%;">
 					<span>账号</span>
 					<form id="search">
-						<input type="text"  ng-model="nickname" placeholder="" />
+						<input type="text"  ng-model="username" placeholder="输入账号" />
 					</form>
 				</div>
 				<div class="select-3" style="width: 15%;">
 					<span>账号名称</span>
 					<form id="search">
-						<input type="text"  ng-model="courseTypeSubclassName"  placeholder="" />
+						<input type="text"  ng-model="nickname"  placeholder="输入账号昵称" />
 					</form>
 				</div>
 				
@@ -44,15 +44,15 @@
 					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
 					<form id="search">
 					
-						<select ng-model="status">
-							<option ng-selected="status==0" value=0>教务</option>
-							<option ng-selected="status==1" value=1>加盟商</option>
+						<select ng-model="categorys">
+							<option ng-selected="categorys=='教务' " value="教务">教务</option>
+							<option ng-selected="categorys=='加盟商' " value="加盟商">加盟商</option>
 						</select>
 					</form>
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="立即检索"
-						ng-click="" />
+						ng-click="userRoleList()" />
 				</div>			
 				
 			</div>
@@ -98,7 +98,7 @@
 							ng-model="current" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-click="feedbackList()">
+							ng-click="userRoleList()">
 						</ul>
 					</div>
 					

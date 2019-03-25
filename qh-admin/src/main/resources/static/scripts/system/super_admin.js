@@ -18,9 +18,15 @@ app.controller("superAdminController", function($scope,$http) {
     $scope.current = 1;
     //一页显示多少条
     $scope.pageSize = 20;
+    
+    $scope.username=null;
+    $scope.nickname=null;
+    $scope.categorys=null;
+    
 	$scope.userRoleList = function () {
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
-		$http.get("/api/userRole/selectList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}},{'Content-Type':'application/json;charset=UTF-8'})
+		$http.get("/api/userRole/selectList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
+			"username":$scope.username,"nickname":$scope.nickname,"category":$scope.categorys}},{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
 				$scope.list = result.data;
@@ -152,6 +158,9 @@ app.controller("superAdminController", function($scope,$http) {
 		document.getElementById('selectLimits').style.display="none";
 	}
 	
+	$scope.refresh=function(){
+		location.reload();
+	}
 });
 
 
