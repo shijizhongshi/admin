@@ -45,6 +45,7 @@
 					<form id="search">
 					
 						<select ng-model="categorys">
+							<option ng-selected="categorys=='' " value="">查看全部</option>
 							<option ng-selected="categorys=='教务' " value="教务">教务</option>
 							<option ng-selected="categorys=='加盟商' " value="加盟商">加盟商</option>
 						</select>

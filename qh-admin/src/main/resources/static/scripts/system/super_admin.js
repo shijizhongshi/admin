@@ -21,7 +21,7 @@ app.controller("superAdminController", function($scope,$http) {
     
     $scope.username=null;
     $scope.nickname=null;
-    $scope.categorys=null;
+    $scope.categorys="";
     
 	$scope.userRoleList = function () {
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
