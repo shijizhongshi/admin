@@ -33,13 +33,14 @@ app.controller("superAdminController", function($scope,$http) {
 	$scope.feedbackList();
 	// 点击事件,点击弹出添加窗口
 	$scope.addshow = function () {
+		$scope.userRole=null;
+		$scope.password=null;
+		$scope.selected=null;
+		
 		$scope.html = "添加";
 		document.getElementById('addbutton').style.display="inline-block";
 		// style="background:#5ED8A9;"
-		document.getElementById('addbutton').style.background="#5ED8A9";
 		document.getElementById('updatebutton').style.display="none";
-		document.getElementById('updateesc').style.display="none";
-		document.getElementById('addesc').style.display="inline-block";
 		document.getElementById('resource').style.display="block";
 	}
 	// 点击事件 点击弹出修改窗口
@@ -50,9 +51,7 @@ app.controller("superAdminController", function($scope,$http) {
 		}
 		$scope.html = "修改";
 		document.getElementById('addbutton').style.display="none";
-		document.getElementById('addesc').style.display="none";
 		document.getElementById('updatebutton').style.display="inline-block";
-		document.getElementById('updateesc').style.display="inline-block";
 		document.getElementById('resource').style.display="block";
 	}
 	// 点击事件 点击添加按钮实现添加功能
@@ -87,7 +86,14 @@ app.controller("superAdminController", function($scope,$http) {
 	    };
 	 
 	    $scope.isSelected = function(menus) {
-	      return $scope.limitsselected.indexOf(menus) >= 0;
+	    	for(var i=0;i<$scope.limitsselected.length;i++){
+		    	 if($scope.userRole!=null){
+		    		 return true;
+		    	 }else{
+		    		 return false;
+		    	 }
+		     }
+	     // return $scope.limitsselected.indexOf(menus) >= 0;
 	    };   
 	// 点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
@@ -124,14 +130,6 @@ app.controller("superAdminController", function($scope,$http) {
 		
 	}
 	
-	// 点击事件，点击取消按钮 清空表单
-	$scope.resetbank = function () {
-		$scope.password = null;
-		$scope.userRole.password = null;
-		$scope.userRole.username= null;
-		$scope.userRole.category = null;
-		$scope.userRole.nickname = null;
-	}
 	
 	// 点击事件 点击获取数据回显 
 	$scope.checkedUserRole = function (u) {
@@ -148,6 +146,7 @@ app.controller("superAdminController", function($scope,$http) {
 	}
 	//点击事件 点击关闭弹窗
 	$scope.escLimits = function () {
+		$scope.menus = null;
 		document.getElementById('selectLimits').style.display="none";
 	}
 	
