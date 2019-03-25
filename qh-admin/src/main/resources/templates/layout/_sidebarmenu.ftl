@@ -71,6 +71,11 @@
                                 <span class="title">账号管理</span>
                             </a>
                         </li>
+                        <li id="sidebarmenu-system-recommended">
+                            <a href="/web/system/recommended">
+                                <span class="title">活动推荐</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 
