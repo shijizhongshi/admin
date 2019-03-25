@@ -1,5 +1,7 @@
 app.controller("bannerController", function($scope, $http){
 	
+	$("#sidebarmenu-system").addClass("active").addClass("expanded").addClass("opened");
+    $("#sidebarmenu-system-banner").addClass("active");
 	 //总条数
     $scope.total = 0;
     //当前的页数

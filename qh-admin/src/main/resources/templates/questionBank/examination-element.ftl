@@ -132,7 +132,7 @@
 		<ul class="menu" style="width:87%;" >
 
 			<li ng-repeat="qbc in questionsubcatelist" class="list" 
-			ng-click="checkquestionsub(qbc,$event)" ng-class="{'selected':selecteds==qbc.id}">{{qbc.name}}</li>
+			ng-click="checkquestionsub(qbc,$event)" ng-class="{'typeselected':selecteds==qbc.id}">{{qbc.name}}</li>
 			
 		</ul>
 	</div>
@@ -373,7 +373,7 @@
 .daan table tr .dw select{margin-left:0; border:none;}
 .daan table tr:nth-child(2n-1){background:#F7F8FC;}
 ul.menu .list:before{display:none;}
-.typeselected{background-color:#CBD2D8;}
+.typeselected{background-color:#CBD2D8 !important;}
 </style>
 <script>
 function go(n){

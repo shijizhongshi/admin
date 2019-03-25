@@ -30,10 +30,10 @@ public class UserRoleService implements IUserRoleService {
 	 * 查
 	 */
 	@Override
-	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize) {
+	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize, String username, String nickname, String category) {
 		Results<List<UserRole>> results = new Results<List<UserRole>>();
 		//查询  分页展示
-		List<UserRole> list = UserRoleDao.select(pageNo,pageSize);
+		List<UserRole> list = UserRoleDao.select(pageNo, pageSize, username, nickname, category);
 		for (UserRole userRole : list) {
 			List<String> menus=new ArrayList<String>();
 			if (userRole.getLimits().indexOf(",") >= 0) {
@@ -43,7 +43,7 @@ public class UserRoleService implements IUserRoleService {
 			}
 			userRole.setMenus(menus);
 		}
-		Integer count = UserRoleDao.selectCount();
+		Integer count = UserRoleDao.selectCount(username, nickname, category);
 		results.setStatus("0");
 		results.setMessage("分页查询 成功");
 		results.setData(list);

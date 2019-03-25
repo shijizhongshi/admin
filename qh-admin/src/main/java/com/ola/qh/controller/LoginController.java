@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.Results;
 
@@ -29,7 +30,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/islogin")
-	public Results<List<String>> islogin(HttpServletRequest request){
+	public Results<List<AdminMenus>> islogin(HttpServletRequest request){
 		
 		return userService.adminisLogin(request);
 	} 

@@ -28,11 +28,12 @@ public class UserRoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/selectList",method = RequestMethod.GET)
-	public Results<List<UserRole>> single (@RequestParam(name = "pageNo",required = false) Integer pageNo,
-			@RequestParam(name = "pageSize",required = false)Integer pageSize) {
+	public Results<List<UserRole>> single (@RequestParam(name = "pageNo",required = true) Integer pageNo,
+			@RequestParam(name = "pageSize",required = true)Integer pageSize,@RequestParam(name = "username",required = false)String username,
+			@RequestParam(name = "nickname",required = false)String nickname,@RequestParam(name = "category",required = false)String category) {
 		Results<List<UserRole>> results = new Results<List<UserRole>>();
 		
-		results = userRoleService.select(pageNo,pageSize);
+		results = userRoleService.select(pageNo, pageSize, username, nickname, category);
 		
 		return results;
 	}
