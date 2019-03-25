@@ -154,4 +154,12 @@
 	<select id="adminLogin" resultType="java.lang.String">
 	select nickname from user where nickname=#{username} and password=#{password}
 	</select>
+	
+	<!--根据userID查询user_buy_course表中数量  -->
+	<select id="selectCountByUserId" resultType="java.lang.Integer">
+	select count(*) from user_buy_course where 1=1 
+	<if test="userId!=null and userId!=''">
+	and user_id = #{userId}
+	</if>
+	</select>
 </mapper>
