@@ -1,3 +1,4 @@
+.page-container{min-width:1100px;}
 *{ margin: 0px; padding: 0px;border:0px; font-size:14px;list-style: none;border:none;outline:none;font-size:14px;}
 a{text-decoration: none;color: black;}
 h3{font-size:1.6rem;margin-top:0;font-weight:bold;}

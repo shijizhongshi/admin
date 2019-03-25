@@ -1,0 +1,6 @@
+.select-2{width:100%;}
+.select-2 input, .grade-text textarea, .select-3 input{background: white;width:100%}
+.grade-text textarea{height:80px;}
+.tit{font-size:1.8rem;font-weight:bold;width:50%;float: left;margin-bottom£º10px;}
+.tsgs{background:#F7F8FA;padding:10px;width:49%;border: 1px solid #E4E9EC;border-radius:10px;}
+.tstitle{}
