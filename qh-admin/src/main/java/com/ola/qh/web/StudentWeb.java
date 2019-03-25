@@ -1,8 +1,10 @@
 package com.ola.qh.web;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/web/student")
@@ -13,13 +15,15 @@ public class StudentWeb {
 		return "student/management";
 	}
 	
-		@RequestMapping("/Online-course")
-		public String online(){
-			return "student/Online-course";
+		@RequestMapping("/classbuy")
+		public String online(@RequestParam(name="classId") String classId,HttpServletRequest request){
+			request.getSession().setAttribute("classId", classId);
+			return "student/classbuy";
 		}
-		@RequestMapping("/student-course")
-		public String student(){
-			return "student/student-course";
+		@RequestMapping("/coursebuy")
+		public String student(@RequestParam(name="courseId") String courseId,HttpServletRequest request){
+			request.getSession().setAttribute("courseId", courseId);
+			return "student/coursebuy";
 		}
 		
 		
