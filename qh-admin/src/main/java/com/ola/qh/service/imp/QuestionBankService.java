@@ -59,13 +59,13 @@ public class QuestionBankService implements IQuestionBankService {
 							qb.setAddtime(new Date());
 							bankId = KeyGen.uuid();
 							qb.setId(bankId);
-							qb.setNumberNo(i-1);
+							qb.setNumberNo(i+1);
 							qb.setTitle(checkNull(1, row));
 							qb.setTypes(checkNull(0, row));
 							qb.setSubId(subId);
 							questionBankDao.insertQuestionBank(qb);
 						}
-						if ("单选".equals(checkNull(0, row)) || "多选".equals(checkNull(0, row))) {
+						if ("单选题".equals(checkNull(0, row)) || "多选题".equals(checkNull(0, row))) {
 							QuestionBank qb = new QuestionBank();
 							qb.setAddtime(new Date());
 							String unitId = KeyGen.uuid();
@@ -146,7 +146,7 @@ public class QuestionBankService implements IQuestionBankService {
 							} else {
 								/////// 单纯的单选或者多选的问题
 								qb.setAnalysis(checkNull(8, row));
-								qb.setNumberNo(i-1);
+								qb.setNumberNo(i+1);
 								questionBankDao.insertQuestionBank(qb);
 							}
 

@@ -17,11 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.alibaba.fastjson.JSON;
+import com.ola.qh.dao.AdminRoleMenusDao;
 import com.ola.qh.dao.BusinessDao;
 import com.ola.qh.dao.UserBookDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
 import com.ola.qh.dao.UserRoleDao;
+import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.entity.Business;
 import com.ola.qh.entity.BusinessBook;
 import com.ola.qh.entity.User;
@@ -46,6 +48,8 @@ public class UserService implements IUserService{
 	private BusinessDao businessDao;
 	@Autowired
 	private UserRoleDao UserRoleDao;
+	@Autowired
+	private AdminRoleMenusDao adminRoleMenusDao;
 
 	@Override
 	public int updateUser(String isdisabled, String id) {
@@ -111,26 +115,39 @@ public class UserService implements IUserService{
 	
 	
 	@Override
-	public Results<List<String>> adminisLogin(HttpServletRequest request) {
+	public Results<List<AdminMenus>> adminisLogin(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		Results<List<String>> results=new Results<List<String>>();
-		List<String> list=new ArrayList<String>();
+		Results<List<AdminMenus>> results=new Results<List<AdminMenus>>();
+		List<AdminMenus> list=new ArrayList<AdminMenus>();
 		Object obj = request.getSession().getAttribute("isrole");
 		if (obj != null)
 		{
-			String roles=JSON.toJSONString(obj);
+			String roles=String.valueOf(obj);
 			if("3".equals(roles)){
 				
 				
 				//////3:权限小的系统用户(按照选择权限展示菜单)
-				Object objname = request.getSession().getAttribute("username");
+				/*Object objname = request.getSession().getAttribute("username");
 				UserRole ur=UserRoleDao.single(null, JSON.toJSONString(objname),null);
 				if(ur.getLimits().indexOf(",")>0){
 					list=Arrays.asList(ur.getLimits().split(","));
 				}else{
 					list.add(ur.getLimits());
+				}*/
+				
+			}else if("1".equals(roles)){
+				//////查全部的菜单
+				list=adminRoleMenusDao.listmenu(null);
+				for (AdminMenus adminMenus : list) {
+					adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId()));
 				}
 				
+			}else if("2".equals(roles)){
+				/////只查学员管理
+				list=adminRoleMenusDao.listmenu("学员信息管理");
+				for (AdminMenus adminMenus : list) {
+					adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId()));
+				}
 			}
 			results.setStatus("0");
 			results.setData(list);
@@ -141,17 +158,23 @@ public class UserService implements IUserService{
 		
 	}
 	
-	public static void main(String[] args) {
-		
-		String str="111";
-		System.out.println(str.indexOf(","));
-		
-	}
-
+	
 	@Override
 	public List<User> selectUser(int pageNo,int pageSize, String mobile, String nickname, String userrole) {
-		// TODO Auto-generated method stub
-		return userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+		
+		List<User> list = userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+		for (User user : list) {
+			//循环遍历 在user_buy_course表中查询是否存在
+			Integer count = userDao.selectCountByUserId(user.getId());
+			if (count == 0) {
+				//查不到 非学员
+				user.setIsStudent(0);
+			}else {
+				//user_buy_course表中有记录 是学员
+				user.setIsStudent(1);
+			}
+		}
+		return list;
 	}
 
 	@Override

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.ola.qh.dao.AdminRoleMenusDao">
+	
+	<resultMap type="com.ola.qh.entity.AdminMenus" id="AdminMenusMap">
+	<result column="id" property="id"/>
+	<result column="category" property="category"/>
+	<result column="names" property="names"/>
+	<result column="menu_id" property="menuId"/>
+	<result column="out_links" property="outLinks"/>
+	</resultMap>
+	 
+	 <select id="listmenu" resultMap="AdminMenusMap">
+	 select * from admin_menu where 1=1 
+	 <if test="names!=null and names!=''">
+	 and names=#{names}
+	 </if>
+	 </select>
+	 
+	 <select id="listsubmenu" resultMap="AdminMenusMap">
+	  select * from admin_submenu where menu_id=#{menuId}
+	 </select>
+	</mapper>
