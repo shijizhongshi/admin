@@ -18,7 +18,7 @@ app.controller("superAdminController", function($scope,$http) {
     $scope.current = 1;
     //一页显示多少条
     $scope.pageSize = 20;
-	$scope.feedbackList = function () {
+	$scope.userRoleList = function () {
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 		$http.get("/api/userRole/selectList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}},{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
@@ -30,7 +30,7 @@ app.controller("superAdminController", function($scope,$http) {
 			}
 		})
 	}
-	$scope.feedbackList();
+	$scope.userRoleList();
 	// 点击事件,点击弹出添加窗口
 	$scope.addshow = function () {
 		$scope.userRole=null;
@@ -65,7 +65,7 @@ app.controller("superAdminController", function($scope,$http) {
 		$http.post("/api/userRole/insert",$scope.userRole,{'Content-Type':'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				$scope.feedbackList();
+				$scope.userRoleList();
 				$scope.selectCategory();
 				document.getElementById('resource').style.display="none";
 			}else {
@@ -87,12 +87,14 @@ app.controller("superAdminController", function($scope,$http) {
 	 
 	    $scope.isSelected = function(menus) {
 	    	for(var i=0;i<$scope.limitsselected.length;i++){
-		    	 if($scope.userRole!=null){
+		    	 if($scope.limitsselected[i]==menus & $scope.userRole!=null){
 		    		 return true;
-		    	 }else{
-		    		 return false;
-		    	 }
+		    		 break;
+		    	 
 		     }
+	    	}
+	    	return false;
+	    	 
 	     // return $scope.limitsselected.indexOf(menus) >= 0;
 	    };   
 	// 点击事件 点击修改按钮实现修改功能
@@ -106,7 +108,7 @@ app.controller("superAdminController", function($scope,$http) {
 		.success(function (result) {
 			if (result.status == "0") {
 				document.getElementById('resource').style.display="none";
-				$scope.feedbackList();
+				$scope.userRoleList();
 			}else {
 				 alert(result.message);
 			}
@@ -122,7 +124,7 @@ app.controller("superAdminController", function($scope,$http) {
 		.success(function (result) {
 			if (result.status == "0") {
 				alert("删除成功");
-				$scope.feedbackList();
+				$scope.userRoleList();
 			}else {
 				alert(result.message);
 			}
