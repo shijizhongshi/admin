@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/web/questionBank")
-public class questionBank {
+public class QuestionBank {
 
 	@RequestMapping("/questionChapter")
 	public String questionChapter(){
