@@ -42,7 +42,7 @@ public class QuestionBankService implements IQuestionBankService {
 		Results<String> result = new Results<String>();
 			Workbook wb = WorkbookFactory.create(file.getInputStream());
 			for (int z = 0; z < wb.getNumberOfSheets(); z++) {
-				Sheet sheet = wb.getSheetAt(2);
+				Sheet sheet = wb.getSheetAt(z);
 				int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 				Iterator<Row> rowIterator = sheet.rowIterator();
 				Row titleRow = rowIterator.next();
