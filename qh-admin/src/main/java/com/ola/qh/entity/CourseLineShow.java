@@ -13,7 +13,7 @@ public class CourseLineShow {
 	private String courseTypeSubclassName;
 	@NotEmpty
 	private String liveName;
-	@NotEmpty
+	
 	private String outLinks;
 	@NotEmpty
 	private String imgUrl;
@@ -27,7 +27,7 @@ public class CourseLineShow {
 	private Date updatetime;
 
 	private String showtime;
-
+	@NotEmpty
 	private String liveRoomId;
 
 	private String liveId;
