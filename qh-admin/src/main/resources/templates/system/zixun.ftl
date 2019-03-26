@@ -44,9 +44,9 @@
 					<li ng-click="add()" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加新闻/话题</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
-						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
+						class="glyphicon glyphicon-pencil"></span>&nbsp;修改新闻/话题</li>
 					<li ng-click="deletenews()" style="background: #F86846;"><span
-						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+						class="glyphicon glyphicon-trash"></span>&nbsp;删除新闻/话题</li>
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="reset()" /></li>
 				</ul>

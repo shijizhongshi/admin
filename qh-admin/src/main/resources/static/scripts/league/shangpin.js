@@ -13,7 +13,7 @@ app.controller("shangpinshopController", function($scope, $http){
 	   $scope.ispageSize = 20;
 	   
 	   $scope.islimits = 1;
-	   $scope.isrecommend = 0;
+	   $scope.isrecommend = "";
 	   $scope.address = null;
 	   $scope.shopName = null;
 	   $scope.scount=null;
