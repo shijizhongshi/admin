@@ -139,7 +139,7 @@
 	<div style="width:49%;float:right;">
 <div class="qx">
 <p>权限设置</p>
-<ul ng-model="userRole.limits">
+<!-- <ul ng-model="userRole.limits">
 
 <li><input type="checkbox" ng-checked="isSelected('网课资源管理')" ng-click="updateSelection($event,'网课资源管理')"/>网课资源管理</li>
 <li><input type="checkbox" ng-checked="isSelected('题库资源管理')" ng-click="updateSelection($event,'题库资源管理')"/>题库资源管理</li>
@@ -149,7 +149,12 @@
 <li><input type="checkbox" ng-checked="isSelected('用户管理')" ng-click="updateSelection($event,'用户管理')"/>用户管理</li>
 <li><input type="checkbox" ng-checked="isSelected('学员信息管理')" ng-click="updateSelection($event,'学员信息管理')"/>学员信息管理</li>
 <li><input type="checkbox" ng-checked="isSelected('发布管理')" ng-click="updateSelection($event,'发布管理')"/>发布管理</li>
-</ul>
+</ul> -->
+	<ul>
+	<p class="qxtit">网课资源权限</p>
+	<div>
+	<li><input type="checkbox" />子类别</li></div>
+	</ul>
 </div>
 	</div>
 	
@@ -190,7 +195,9 @@
 <style>
 .resource{width:50%;left:10%;min-width:600px;}
 .resource .select-2 , .resource .select-3{width:95%;}
-.qx ul{width:100%;background:#F6F6F6;padding:15px;}
+.qx ul{width:100%;background:#F6F6F6;padding:15px;border-radius:10px;border:1px solid #e3e2e2;}
+.qx ul .qxtit{text-align: center;cursor: pointer;font-size:1.6rem;}
+
 .qx ul li{margin-bottom:5px;font-size:1.5rem;}
 .qx ul li input{margin-right:8px;}
 .poop p{font-size:1.8rem;font-weight:bold;}
