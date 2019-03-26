@@ -43,8 +43,8 @@ function formReset2() {
 	$(window).resize(function(){ 
 	    $("#revise").css({ 
 	        position: "absolute", 
-	        left: ($(".details-frame").width() - $("#revise").outerWidth())/2, 
-	        top: ($(".details-frame").height() - $("#revise").outerHeight())/2 
+	        left: ($(".details").width() - $("#revise").outerWidth())/2, 
+	        top: ($(window).height() - $("#revise").outerHeight())/2 
 	    });        
 	}); 
 	$(window).resize(function(){ 
