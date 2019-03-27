@@ -34,7 +34,7 @@
 							</li>
 							
 							<li style="background: #F86846;" ng-click="deleteshort()">
-							<span class="glyphicon glyphicon-trash"></span>&nbsp;删除
+							<span class="glyphicon glyphicon-trash"></span>&nbsp;删除店铺
 							</li>
 							<!--<li>
 							<span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>

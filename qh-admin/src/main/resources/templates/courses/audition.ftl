@@ -79,14 +79,14 @@
 					<div class="select-3" style="width: 15%;margin-right:0%">
 						<span>搜索课程</span>
 						<form id="search">
-							<input ng-model="courseName" type="text"
+							<input ng-model="courseName" placeholder="请输入课程名称" type="text"
 								style="text-indent: 2em;" />
 						</form>
 					</div>
 					<div class="select-3" style="width: 15%;margin-right:0%;margin-left:20px">
-						<span>搜索老师</span>
+						<span>搜索教师</span>
 						<form id="">
-							<input ng-model="teachers" type="text" style="text-indent: 2em;" />
+							<input ng-model="teachers" placeholder="请输入教师名称" type="text" style="text-indent: 2em;" />
 						</form>
 					</div>
 					<div>
@@ -105,7 +105,7 @@
 							class="glyphicon glyphicon-trash"></span>&nbsp;删除试听课程</li>
 
 						<li ng-click="refresh()"
-							style="float: right; margin-right: 100px; background: none;"><img
+							style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" /></li>
 					</ul>
 					<div class="admin-table">

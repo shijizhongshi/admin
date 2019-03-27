@@ -25,7 +25,7 @@
 				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>模板名称</span>
 					<form id="search">
-						<input type="text" ng-model="templateName" />
+						<input type="text" placeholder="请输入模板名称" ng-model="templateName" />
 					</form>
 				</div>
 				<div>

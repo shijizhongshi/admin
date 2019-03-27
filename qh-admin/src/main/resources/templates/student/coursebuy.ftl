@@ -39,7 +39,7 @@
 	<div class="select-3">
 		<span>学员姓名或电话</span>
 		
-		<input type="text" ng-model="nicknameORmobile" class="ng-pristine ng-untouched ng-valid ng-empty">
+		<input type="text" placeholder="请输入姓名或电话" ng-model="nicknameORmobile" class="ng-pristine ng-untouched ng-valid ng-empty">
 	</div>
 			<!--<div class="select-3">
 		<span>子账户</span>

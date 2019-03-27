@@ -41,7 +41,7 @@
 	<div class="select-3">
 		<span>学员姓名或电话</span>
 		
-		<input type="text" ng-model="realnameORmobile" class="ng-pristine ng-untouched ng-valid ng-empty">
+		<input type="text" ng-model="realnameORmobile" placeholder="请输入姓名或电话"  class="ng-pristine ng-untouched ng-valid ng-empty">
 	</div>
 		<div class="select-3">
 		<span>学员状态</span>

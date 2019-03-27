@@ -44,16 +44,14 @@
 					<ul class="show">
 						<li style="background: none; color: black;"><b>子类的操作</b></li>
 						<li ng-click="addsub()" style="background: #9DE879;"><span
-							class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
+							class="glyphicon glyphicon-plus"></span>&nbsp;添加子类</li>
 						<li ng-click="updateed()" style="background: #F9CD33;"><span
-							class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
+							class="glyphicon glyphicon-pencil"></span>&nbsp;修改子类</li>
 						<li ng-click="deletesub()" style="background: #F86846;"><span
-							class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-						<li><span class="glyphicon glyphicon-sort-by-attributes"
-							class="move-down"></span>&nbsp;下移</li>
+							class="glyphicon glyphicon-trash"></span>&nbsp;删除子类</li>
+						
 						<li ng-click="refresh()"
-							style="float: right; margin-right: 100px; background: none;"><img
+							style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" /></li>
 					</ul>
 					<div class="admin-table">

@@ -77,7 +77,7 @@
 				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>搜索班级</span>
 					<form id="search">
-						<input ng-model="className" type="text" style="text-indent: 2em;" />
+						<input ng-model="className" placeholder="请输入班级名称" type="text" style="text-indent: 2em;" />
 					</form>
 				</div>
 				<div>
@@ -94,9 +94,6 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改班级</li>
 					<li ng-click="deleteClass()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除班级</li>
-					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-					<li><span class="glyphicon glyphicon-sort-by-attributes"
-						class="move-down"></span>&nbsp;下移</li>
 					<li ng-click="goBuyCourse()"><span class="glyphicon glyphicon-sort-by-attributes"
 						class="move-down"></span>&nbsp;学员列表</li>
 					<li ng-click="removeStudent()"><span class="glyphicon glyphicon-sort-by-attributes"

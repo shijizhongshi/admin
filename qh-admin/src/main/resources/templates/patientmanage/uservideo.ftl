@@ -28,7 +28,7 @@
 							<ul style="height: 80px;" class="managr-dianpu">
 
 								<div class="select-3" style="width: 10%;margin-right:5px">
-									<span>视频名称</span> <input type="text" ng-model="videoName" />
+									<span>视频名称</span> <input type="text" placeholder="请输入视频名称" ng-model="videoName" />
 								</div>
 								<div>
 									<input type="button" class="btn-lg im-key"
@@ -41,7 +41,7 @@
 
 
 							<li ng-click="uservideodelete()" style="background: #F86846;"><span
-								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+								class="glyphicon glyphicon-trash"></span>&nbsp;删除视频</li>
 							<li ng-click="viewvideo()" style="background: #F9CD33;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;查看视频</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img

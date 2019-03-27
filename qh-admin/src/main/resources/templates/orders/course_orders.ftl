@@ -36,24 +36,22 @@
 				</div>
 
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>推荐老师</span> <input style=" type="text" ng-model="recommendTeacher" />
+					<span>推荐老师</span> <input style=" type="text" placeholder="请输入老师名称"  ng-model="recommendTeacher" />
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>用户手机号</span> <input style=" type="text" ng-model="mobile" />
+					<span>用户手机号</span> <input style=" type="text" placeholder="请输入手机号码"  ng-model="mobile" />
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>支付订单号</span> <input style="type="text" ng-model="orderno" />
+					<span>支付订单号</span> <input style="type="text" placeholder="请输入订单编号"  ng-model="orderno" />
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
 					<span>订单状态</span><img src="/images/sjk-xl.png" />  <select ng-model="ordersStatus">
-						<option value="">订单状态</option>
+						<option value="">全部状态</option>
 						<option value="NEW">待付款</option>
 						<option value="RECEIVED">已完成</option>
 					</select>
 				</div>
-				<div class="select-3" style="width: 10%;margin-right:15px">
-					<span>推荐老师</span> <input  type="text" />
-				</div>
+				
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
 						value="立即检索" />

@@ -31,7 +31,7 @@
 							<li ng-click="returnpatient()" style="background: #F9CD33;"><span
 								class="glyphicon glyphicon-pencil"></span>&nbsp;返回</li>
 							<li ng-click="patientdelete()" style="background: #F86846;"><span
-									class="glyphicon glyphicon-plus"></span>&nbsp;删除</li>
+									class="glyphicon glyphicon-plus"></span>&nbsp;删除评论</li>
 							
 							<li style="float: right; margin-right: 20px; background: none;"><img
 								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>

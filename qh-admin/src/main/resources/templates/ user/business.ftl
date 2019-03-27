@@ -40,7 +40,7 @@
 	<div class="select-3">
 		<span>加盟商名称</span>
 		
-		<input type="text" ng-model="name" class="ng-pristine ng-untouched ng-valid ng-empty">
+		<input type="text" placeholder="请输入加盟商名称"  ng-model="name" class="ng-pristine ng-untouched ng-valid ng-empty">
 	</div>
 		<div class="select-3">
 		<span>省</span>
