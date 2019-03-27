@@ -159,11 +159,12 @@
 
 .poop {
 	width: 55%;
-	height: 550px;
+	height: auto;
 	position: absolute;
 	left: 15%;
 	top: 10%;
 	display: none;
+	max-height:550px
 }
 
 @media screen and (max-width:1401px) {
@@ -186,7 +187,7 @@
 .poop .grade-left, .poop .grade-center {
 	width: 49%;
 	float: left;
-	height: 720px;
+	height:auto;
 	overflow: auto;
 }
 

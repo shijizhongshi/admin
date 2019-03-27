@@ -37,7 +37,7 @@ function formReset2() {
 	    $("#add").css({ 
 	        position: "absolute", 
 	        left: ($(".details-frame").width() - $("#add").outerWidth())/2, 
-	        top: ($(".details-frame").height() - $("#add").outerHeight())/2 
+	        top: ($(window).height() - $("#add").outerHeight())/2 
 	    });        
 	}); 
 	$(window).resize(function(){ 
