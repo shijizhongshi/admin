@@ -56,8 +56,18 @@ public class Course {
 	private int pageSize;
 	
 	private String classId;
+	
+	private String isbuy;///1:已经购买了  0;未购买
 
 	
+	public String getIsbuy() {
+		return isbuy;
+	}
+
+	public void setIsbuy(String isbuy) {
+		this.isbuy = isbuy;
+	}
+
 	public String getMaxdoudou() {
 		return maxdoudou;
 	}

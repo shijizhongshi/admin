@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseClass;
+import com.ola.qh.service.IBuyCourseService;
 import com.ola.qh.service.ICourseClassService;
+import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
@@ -23,6 +26,12 @@ public class CourseClassController {
 
 	@Autowired
 	private ICourseClassService courseClassService;
+	
+	@Autowired
+	private IBuyCourseService buyCourseService;
+	
+	@Autowired
+	private ICourseService courseService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseClass>> selectCourseClass(@RequestParam(name="id",required=false)String id,
@@ -46,11 +55,35 @@ public class CourseClassController {
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public Results<List<CourseClass>> selectCourseClass(
 			@RequestParam(name="courseTypeName")String courseTypeName,
-			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName
+			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName,
+			@RequestParam(name="userId")String userId
 			){
 		
 		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
-		List<CourseClass> list=courseClassService.listCourseClass(courseTypeName, courseTypeSubclassName);
+		List<CourseClass> list=courseClassService.listCourseClass(null,courseTypeName, courseTypeSubclassName);
+		for (CourseClass courseClass : list) {
+			int count = buyCourseService.existOpenCourse(null, userId, courseClass.getId());
+			if(count==0){
+				
+				
+				int courseCount=0;
+				Course c=new Course();
+				c.setClassId(courseClass.getId());
+				c.setPageNo(0);
+				c.setPageSize(0);
+				List<Course> courseList=courseService.courseList(c);
+				for (Course course : courseList) {
+					courseCount+=buyCourseService.existOpenCourse(course.getId(), userId,null);
+				}
+				if(courseCount==courseList.size()){
+					courseClass.setIsbuy("1");
+				}else{
+					courseClass.setIsbuy("0");
+				}
+			}else{
+				courseClass.setIsbuy("1");
+			}
+		}
 		results.setStatus("0");
 		results.setData(list);
 		return results;

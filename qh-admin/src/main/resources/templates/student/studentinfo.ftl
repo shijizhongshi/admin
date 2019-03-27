@@ -30,22 +30,10 @@ submenu="sidebarmenu-student-studentinfo">
 				<div class="details-frame-content">
 					<ul class="managr-dianpu">
 
-
-						<div class="select-3" style="width: 10%; margin-right: 10px">
-							<span>昵称</span> <input type="text" placeholder="请输入用户昵称"  ng-model="nickname" />
-						</div>
 						<div class="select-3" style="width: 10%; margin-right: 10px">
 							<span>手机号</span> <input type="text" placeholder="请输入手机号码"  ng-model="mobile" />
 						</div>
-						<div class="select-3" style="width: 10%; margin-right: 10px">
-							<img src="/images/sjk-xl.png" /> <span>用户类型</span> <select
-								ng-model="userrole">
-								<option value="">全部用户</option>
-								<option value="0">普通用户</option>
-								<option value="1">商家用户</option>
-							</select>
-						</div>
-
+						
 						<div>
 							<input type="button" class="btn-lg im-key"
 								ng-click="selectUser()" value="立即检索" />
@@ -95,15 +83,6 @@ submenu="sidebarmenu-student-studentinfo">
 							<th>{{u.address}}</th>
 						</tr>
 					</table>
-				</div>
-				<div class="col-sm-6"></div>
-				<div class="col-sm-6">
-					<ul uib-pagination boundary-links="true" total-items="total"
-						ng-model="page" items-per-page="pageSize" max-size="5"
-						class="pagination-sm" previous-text="&lsaquo;"
-						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-click="selectUser()">
-					</ul>
 				</div>
 
 				<!-- 网课/直播报班/课程报名-->
@@ -176,9 +155,10 @@ submenu="sidebarmenu-student-studentinfo">
 											</tr>
 											<tr ng-show="{{typesName=='班级'}}"
 												ng-repeat="class in classlist">
-												<th><input type="checkbox"
+												<th ng-show="{{class.isbuy=='0'}}"><input type="checkbox"
 													ng-checked="isSelected(class.id)"
-													ng-click="updateSelection($event,class.id,class,class.classDiscountPrice)" /></th>
+													ng-click="updateSelection($event,class.id,class,class.classDiscountPrice)"/></th>
+												<th ng-show="{{class.isbuy=='1'}}">已购买</th>
 												<th>{{class.className}}</th>
 												<th>{{class.classPrice}}</th>
 												<th>{{class.classDiscountPrice}}</th>
@@ -186,9 +166,10 @@ submenu="sidebarmenu-student-studentinfo">
 											</tr>
 											<tr ng-show="{{typesName=='课程'}}"
 												ng-repeat="course in courselist">
-												<th><input type="checkbox"
+												<th ng-show="{{course.isbuy=='0'}}"><input type="checkbox"
 													ng-checked="isSelected(course.id)"
 													ng-click="updateSelection($event,course.id,course,course.courseDiscountPrice)" /></th>
+												<th ng-show="{{course.isbuy=='1'}}">已购买</th>
 												<th>{{course.courseName}}</th>
 												<th>{{course.coursePrice}}</th>
 												<th>{{course.courseDiscountPrice}}</th>
