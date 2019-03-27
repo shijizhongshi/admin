@@ -17,9 +17,55 @@
 	 <if test="names!=null and names!=''">
 	 and names=#{names}
 	 </if>
+	 <if test="id!=null and id!=''">
+	 and id=#{id}
+	 </if>
 	 </select>
 	 
 	 <select id="listsubmenu" resultMap="AdminMenusMap">
-	  select * from admin_submenu where menu_id=#{menuId}
+	  select * from admin_submenu where 1=1
+	  <if test="menuId!=null and menuId!=''">
+	  and  menu_id=#{menuId} 
+	  </if>
+	   <if test="id!=null and id!=''">
+	   and id=#{id}
+	  </if>
+	 
 	 </select>
+	 
+	 <resultMap type="com.ola.qh.entity.AdminRoleMenu" id="AdminRoleMenuMap">
+	<result column="id" property="id"/>
+	<result column="role_id" property="roleId"/>
+	<result column="menu_id" property="menuId"/>
+	<result column="submenu_id" property="submenuId"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	<insert id="insertRoleMenu" parameterType="com.ola.qh.entity.AdminRoleMenu">
+	insert into admin_role_menu(id,role_id,menu_id,submenu_id,addtime)
+	values(#{id},#{roleId},#{menuId},#{submenuId},#{addtime})
+	</insert>
+	
+	<update id="updateRoleMenu" parameterType="com.ola.qh.entity.AdminRoleMenu">
+	update admin_role_menu set 
+	<if test="submenuId!=null and submenuId!=''">
+	submenu_id=#{submenuId},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+	
+	<delete id="deleteRoleMenu">
+	delete admin_role_menu from admin_role_menu where role_id=#{roleId} and menu_id=#{menuId}
+	</delete>
+	
+	<select id="listRoleMenu" resultMap="AdminRoleMenuMap">
+	select * from admin_role_menu where 1=1
+	<if test="roleId!=null and roleId!=''">
+	and role_id=#{roleId}
+	</if>
+	<if test="menuId!=null and menuId!=''">
+	and menu_id=#{menuId}
+	</if>
+	</select>
 	</mapper>
