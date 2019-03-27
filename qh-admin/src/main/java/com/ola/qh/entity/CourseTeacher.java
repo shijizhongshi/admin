@@ -38,11 +38,21 @@ public class CourseTeacher {
 	
 	private List<String> typename;///子类别的集合 
 	
+	private List<String> names;///大类别的集合 
+	
 	private Date addtime;
 	
 	private Date updatetime;
 	
 	
+
+	public List<String> getNames() {
+		return names;
+	}
+
+	public void setNames(List<String> names) {
+		this.names = names;
+	}
 
 	public List<String> getTypename() {
 		return typename;

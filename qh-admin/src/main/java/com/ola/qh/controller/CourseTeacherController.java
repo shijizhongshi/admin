@@ -95,6 +95,11 @@ public class CourseTeacherController {
 			results.setMessage("缺少id");
 			return results;
 		}
+		
+		
+		
+		
+		
 		courseTeacher.setUpdatetime(new Date());
 		int update=courseTeacherService.updateCourseTeacher(courseTeacher);
 		

@@ -23,7 +23,7 @@ public class DoctorsService implements IDoctorsService{
 	private UserDao userDao;
 	
 	@Override 
-	public List<Doctors> selectDoctors(int islimit,String name,String offices,int isvirtual,int pageNo,int pageSize) {
+	public List<Doctors> selectDoctors(int islimit,String name,String offices,String isvirtual,int pageNo,int pageSize) {
 		
 		return doctorsDao.selectDoctors(islimit, name, offices, isvirtual, pageNo, pageSize);
 	}

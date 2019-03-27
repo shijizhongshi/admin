@@ -29,9 +29,12 @@ import com.ola.qh.util.Results;
 @RestController
 @RequestMapping("/api/banner")
 public class BannerController {
+
 	@Autowired
 	private IBannerService bannerService;
 
+	
+	
 	@RequestMapping(value = "/selectlist", method = RequestMethod.GET)
 	public Results<List<Banner>> selectBanner(@RequestParam(name = "type", required = false) int type,
 			@RequestParam(name = "pageNo", required = false) int pageNo,

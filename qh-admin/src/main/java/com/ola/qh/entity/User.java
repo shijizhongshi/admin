@@ -36,8 +36,18 @@ public class User {
 	
 	private String logintime;////最后一次登录的时间
 	
+	private Integer isStudent;//是否为学员  | 0：不是学员 | 1：是学员
 	
 	
+	
+	public Integer getIsStudent() {
+		return isStudent;
+	}
+
+	public void setIsStudent(Integer isStudent) {
+		this.isStudent = isStudent;
+	}
+
 	public String getLogintime() {
 		return logintime;
 	}

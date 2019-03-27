@@ -1,19 +1,15 @@
 package com.ola.qh.service.imp;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseSection;
-import com.ola.qh.entity.QuestionAnswer;
-import com.ola.qh.entity.QuestionBank;
-import com.ola.qh.entity.QuestionCategory;
-import com.ola.qh.entity.QuestionSubCategory;
 import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;

@@ -50,20 +50,20 @@
 								ng-model="todate" />
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>用户手机号</span> <input type="text" ng-model="mobile" />
+							<span>用户手机号</span> <input type="text" placeholder="请输入手机号码"  ng-model="mobile" />
 						</div>
 						<div class="select-3" >
 							<span>订单状态</span><img src="/images/sjk-xl.png" /> <select
 								ng-options="s.status as s.name for s in statusNames"
 								ng-model="ordersStatus">
-
+								
 							</select>
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>姓名</span> <input  type="text" ng-model="receiver" />
+							<span>姓名</span> <input  type="text" placeholder="请输入学员名称"  ng-model="receiver" />
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>订单号</span> <input type="text" ng-model="orderno" />
+							<span>订单号</span> <input type="text" placeholder="请输入订单编号"  ng-model="orderno" />
 						</div>
 						
 

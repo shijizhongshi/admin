@@ -16,6 +16,7 @@ public class Course {
 	
 	private String id;
 	
+	
 	private String userId;////所属人课程的拥有者
 
 	@NotEmpty(message="课程名称不能为空")
@@ -55,8 +56,18 @@ public class Course {
 	private int pageSize;
 	
 	private String classId;
+	
+	private String isbuy;///1:已经购买了  0;未购买
 
 	
+	public String getIsbuy() {
+		return isbuy;
+	}
+
+	public void setIsbuy(String isbuy) {
+		this.isbuy = isbuy;
+	}
+
 	public String getMaxdoudou() {
 		return maxdoudou;
 	}

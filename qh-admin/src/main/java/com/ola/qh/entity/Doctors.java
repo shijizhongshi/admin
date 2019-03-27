@@ -52,7 +52,7 @@ public class Doctors {
 	
 	private int isrecommend;
 	
-	private int isvirtual;
+	private String isvirtual;
 	
 	private String showtime;
 
@@ -232,11 +232,11 @@ public class Doctors {
 		this.isrecommend = isrecommend;
 	}
 
-	public int getIsvirtual() {
+	public String getIsvirtual() {
 		return isvirtual;
 	}
 
-	public void setIsvirtual(int isvirtual) {
+	public void setIsvirtual(String isvirtual) {
 		this.isvirtual = isvirtual;
 	}
 

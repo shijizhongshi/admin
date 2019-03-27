@@ -43,9 +43,7 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改教师</li>
 					<li ng-click="deleteTeacher()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除教师</li>
-					<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-					<li><span class="glyphicon glyphicon-sort-by-attributes"
-						class="move-down"></span>&nbsp;下移</li>
+					
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="reset()" /></li>
 				</ul>
@@ -120,95 +118,23 @@
 								<b style="margin: 5px 0; font-size: 1.5rem;">讲授课程</b>
 								<!--医师药师复选框-->
 								<div class="xuanzekuang">
-									<dl>
+									<dl ng-repeat="ctl in courseTypeList">
 										<dt>
-											<span onclick="showHide(this,'items0');">医师资格</span>
-											<!--  <input type="checkbox" class="yi" /> -->
+											<span ng-click="showCourseTypeSubclassList(ctl.id)">{{ctl.courseTypeName}}</span>
 										</dt>
-										<dd id="items0">
-											<ul>
+										<dd id="items0" ng-show="ddshow==ctl.id">
+											<ul ng-model="teacher.typename">
 
-												<li ng-repeat="sub in courseTypeSubclass1"><span><input
+												<li ng-repeat="sub in courseTypeSubclass"><span><input
 														type="checkbox"
 														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
+														ng-click="updateSelection($event,ctl.courseTypeName,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
 											</ul>
 										</dd>
 									</dl>
 
-									<dl>
-										<dt>
-											<span onclick="showHide(this,'items1');">药师资格</span>
-											<!--  <input type="checkbox" class="yao" /> -->
-										</dt>
-										<dd id="items1" style="display: none;">
-											<ul>
-
-												<li ng-repeat="sub in courseTypeSubclass2"><span><input
-														type="checkbox"
-														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
-											</ul>
-										</dd>
-										<dt>
-											<span onclick="showHide(this,'items2');">中医适宜技术</span>
-											<!-- <input type="checkbox" class="zhong" /> -->
-										</dt>
-										<dd id="items2" style="display: none;">
-											<ul>
-
-												<li ng-repeat="sub in courseTypeSubclass3"><span><input
-														type="checkbox"
-														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
-											</ul>
-										</dd>
-										<dt>
-											<span onclick="showHide(this,'items3');">卫生资格</span>
-											<!--  <input type="checkbox" class="wei" />-->
-										</dt>
-										<dd id="items3" style="display: none;">
-											<ul>
-
-												<li ng-repeat="sub in courseTypeSubclass4"><span><input
-														type="checkbox"
-														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
-											</ul>
-										</dd>
-										<dt>
-											<span onclick="showHide(this,'items4');">健康管理师</span>
-											<!--  <input type="checkbox" class="jian" />-->
-										</dt>
-										<dd id="items4" style="display: none;">
-											<ul>
-
-												<li ng-repeat="sub in courseTypeSubclass5"><span><input
-														type="checkbox"
-														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
-											</ul>
-										</dd>
-										
-										
-										<dt>
-											<span onclick="showHide(this,'items5');">建筑资格</span>
-											<!--  <input type="checkbox" class="jian" />-->
-										</dt>
-										<dd id="items5" style="display: none;">
-											<ul>
-
-												<li ng-repeat="sub in courseTypeSubclass6"><span><input
-														type="checkbox"
-														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
-											</ul>
-										</dd>
-
-									</dl>
+									
 								</div>
-
-
 
 
 							</div>
@@ -367,121 +293,6 @@ div.costs-uploadfile-div .allBtn {
 }
 </style>
 
-<script type="text/javascript">
-	function getObject(objectId) {
-		if (document.getElementById && document.getElementById(objectId)) {
-			return document.getElementById(objectId);
-		} else if (document.all && document.all(objectId)) {
-			return document.all(objectId);
-		} else if (document.layers && document.layers[objectId]) {
-			return document.layers[objectId];
-		} else {
-			return false;
-		}
-	}
 
-	function showHide(e, objname) {
-		var obj = getObject(objname);
-		if (obj.style.display == "none") {
-			obj.style.display = "block";
-			e.className = "minus";
-		} else {
-			obj.style.display = "none";
-			e.className = "plus";
-		}
-	}
-	$(function() {
-		//实现全选反选
-		$(".yi").on(
-				'click',
-				function() {
-					$("#items0 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items0 input:checkbox")
-				.on(
-						'click',
-						function() {
-							//当选中的长度等于checkbox的长度的时候,就让控制全选反选的checkbox设置为选中,否则就为未选中
-							if ($("#items0 input:checkbox").length === $("#items0 input:checked").length) {
-								$(".yi").prop("checked", true);
-							} else {
-								$(".yi").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".yao").on(
-				'click',
-				function() {
-					$("#items1 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items1 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items1 input:checkbox").length === $("#items1 input:checked").length) {
-								$(".yao").prop("checked", true);
-							} else {
-								$(".yao").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".zhong").on(
-				'click',
-				function() {
-					$("#items2 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items2 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items2 input:checkbox").length === $("#items2 input:checked").length) {
-								$(".zhong").prop("checked", true);
-							} else {
-								$(".zhong").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".wei").on(
-				'click',
-				function() {
-					$("#items3 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items3 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items3 input:checkbox").length === $("#items3 input:checked").length) {
-								$(".wei").prop("checked", true);
-							} else {
-								$(".wei").prop("checked", false);
-							}
-						})
-	})
-	$(function() {
-		$(".jian").on(
-				'click',
-				function() {
-					$("#items4 input:checkbox").prop("checked",
-							$(this).prop('checked'));
-				})
-		$("#items4 input:checkbox")
-				.on(
-						'click',
-						function() {
-							if ($("#items4 input:checkbox").length === $("#items4 input:checked").length) {
-								$(".jian").prop("checked", true);
-							} else {
-								$(".jian").prop("checked", false);
-							}
-						})
-	})
-</script>
 </@b.body>  
 </html>

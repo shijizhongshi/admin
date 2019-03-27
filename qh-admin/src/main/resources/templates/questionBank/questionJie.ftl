@@ -124,9 +124,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <div id="manage" class="manage" style="display:none;">
 	<ul class="show">
 
-			<li style="background:#9DE879;"><span class="glyphicon glyphicon-plus" ></span>&nbsp;导入试题</li>
-			<li style="background:#9DE879;" ><span class="glyphicon glyphicon-plus" ></span>&nbsp;导入原有系统试题</li>
-			<li style="background:#9DE879;" onclick="showDiv2()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;从文件导入试题</li>
+			<li style="background:#9DE879;" ng-click="showrevise()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;从文件导入试题</li>
 		<li style="background:#F9CD33;" ng-click="updatebank()"> <span class="glyphicon glyphicon-pencil"></span>&nbsp;修改试题</li>
 		<li style="background:#F86846;" ng-click="deletequestionbank()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除试题</li>
  
@@ -137,7 +135,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 		<ul class="menu" style="width:87%;" >
 
 			<li ng-repeat="qbc in questionsubcatelist" class="list" 
-			ng-click="checkquestionsub(qbc,$event)" ng-class="{'selected':selecteds==qbc.id}">{{qbc.name}}</li>
+			ng-click="checkquestionsub(qbc)" ng-class="{'typeselected':selecteds==qbc.id}">{{qbc.name}}</li>
 			
 		</ul>
 	</div>
@@ -190,12 +188,12 @@ submenu="sidebarmenu-questionBank-questionChapter">
 		<form id="myform2" class="ng-pristine ng-valid">
 	<h3>从文件导入试题</h3>
 <div class="costs-uploadfile-div">
-							请选择上传的附件<input type="file" name="file"  value="选择文件" onchange="angular.element(this).scope().uploadmainimage(this)">
+							请选择上传的附件<input type="file" name="file"  value="选择文件" id="file">
 
 				
 						</div>
 		<div class="end">
-			<input name="git" type="submit" value="提交" ng-show="courseId==null" ng-click="addCourse()" style="background:#5ED8A9;">
+			<input name="git" type="submit" value="提交"  ng-click="addfile()" style="background:#5ED8A9;">
 			<input name="esc" type="reset" value="取消" onclick="CloseDiv2()" class="esc">
 		</div>
 		</form>
@@ -227,7 +225,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	
 
 
-<!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
+<!-- 答案项  。试题类型是单选题的时候调用 -->
 <div class="daan">
 <p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
@@ -237,7 +235,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <td>
 <div class="dw">
 <img src="/images/sjk-xl.png">
-<select class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbas.correct">
+<select ng-change="changeCorrect(qbas)" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbas.correct">
 			<option ng-selected="qbas.correct==true" value=true>正确</option>
 			<option ng-selected="qbas.correct==false" value=false>错误</option>
 		</select></div>
@@ -303,7 +301,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	<span>答案解析</span>
 	<textarea ng-model="questionunitlists.analysis" class="ng-pristine ng-untouched ng-valid ng-empty"></textarea>
 	</div>
-<!-- 答案项  。试题类型是公共选项的时候调用，单选题不调用 -->
+<!-- 答案项  。试题类型是单选题的时候调用，单选题不调用 -->
 <div class="daan">
 <p style="margin:10px 0px 0px 3px;"><span>答案项</span><span style="float:right;margin-right:8px;">是否正确</span></p>
 <table>
@@ -313,7 +311,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <td>
 <div class="dw">
 <img src="/images/sjk-xl.png">
-<select class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbual.correct">
+<select ng-change="changeUnitCorrect(qbual)" class="ng-pristine ng-untouched ng-valid ng-empty" ng-model="qbual.correct">
 			<option ng-selected="qbual.correct==true" value=true>正确</option>
 			<option ng-selected="qbual.correct==false" value=false>错误</option>
 		</select></div>
@@ -378,7 +376,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 .daan table tr .dw select{margin-left:0; border:none;}
 .daan table tr:nth-child(2n-1){background:#F7F8FC;}
 ul.menu .list:before{display:none;}
-.typeselected{background-color:#CBD2D8;}
+.typeselected{background-color:#CBD2D8 !important;}
 </style>
 <script>
 function go(n){

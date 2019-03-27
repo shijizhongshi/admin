@@ -33,9 +33,10 @@ public class QuestionBankController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/improtExcel", method = RequestMethod.POST)
-	public Results<String> improtExcel(@RequestParam(value = "file") MultipartFile file) throws Exception {
-		return questionBankService.importExcel(file);
+	@RequestMapping(value = "/improtExcel", method = RequestMethod.POST,consumes = "multipart/form-data")
+	public Results<String> improtExcel(@RequestParam(value = "file") MultipartFile file,@RequestParam(value="subId")String subId) throws Exception {
+		
+		return questionBankService.importExcel(file,subId);
 	}
 
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
