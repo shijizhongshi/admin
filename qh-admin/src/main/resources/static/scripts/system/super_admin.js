@@ -62,10 +62,9 @@ app.controller("superAdminController", function($scope, $http) {
 		$scope.selected = null;
 
 		$scope.html = "添加";
-		document.getElementById('addbutton').style.display = "inline-block";
-		// style="background:#5ED8A9;"
-		document.getElementById('updatebutton').style.display = "none";
-		document.getElementById('resource').style.display = "block";
+
+		document.getElementById('resource').style.display="block";
+
 	}
 	// 点击事件 点击弹出修改窗口
 	$scope.update = function() {
@@ -74,13 +73,13 @@ app.controller("superAdminController", function($scope, $http) {
 			return;
 		}
 		$scope.html = "修改";
-		document.getElementById('addbutton').style.display = "none";
-		document.getElementById('updatebutton').style.display = "inline-block";
-		document.getElementById('resource').style.display = "block";
+		document.getElementById('resource').style.display="block";
+
 	}
 	// 点击事件 点击添加按钮实现添加功能
-	$scope.userRole = null;
-	$scope.insertquestionbank = function() {
+
+	$scope.insertquestionbank = function () {
+
 		if ($scope.userRole.password != $scope.password) {
 			alert("两次密码输入不一致！");
 			return;
@@ -186,8 +185,9 @@ app.controller("superAdminController", function($scope, $http) {
 	};
 
 	// 点击事件 点击修改按钮实现修改功能
-	$scope.userRole = null;
-	$scope.updatequestionbank = function() {
+
+	$scope.updatequestionbank = function () {
+
 		if ($scope.userRole.password != $scope.password) {
 			alert("两次密码输入不一致！");
 			return;
@@ -234,8 +234,9 @@ app.controller("superAdminController", function($scope, $http) {
 
 	}
 	//点击事件 点击弹出弹窗 展示 limits
-	$scope.userRole = null;
-	$scope.selectLimits = function(menus) {
+
+	$scope.selectLimits = function (menus) {
+
 		$scope.menus = menus;
 		document.getElementById('selectLimits').style.display = "block";
 	}
