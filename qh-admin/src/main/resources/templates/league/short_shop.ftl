@@ -221,7 +221,7 @@
 
 .grade-text textarea {
 	height: 70px;
-	width: 50%;
+	width: 100%;
 }
 
 .manage .managr-dianpu .select-3 {
@@ -286,7 +286,7 @@
 	float: right;
 	color: #999;
 }
-
+.select-2, .select-3{width:100%;}
 .end {
 	float: none;
 	margin-left: auto;
