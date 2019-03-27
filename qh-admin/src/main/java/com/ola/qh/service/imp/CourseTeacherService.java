@@ -41,6 +41,15 @@ public class CourseTeacherService implements ICourseTeacherService{
 				typename.add(courseTeacher.getCourseTypeSubclassNames());
 			}
 			courseTeacher.setTypename(typename);
+			
+			List<String> names=new ArrayList<String>();
+			if(courseTeacher.getCourseTypeNames().indexOf(",")>0){
+				String[] tnames=courseTeacher.getCourseTypeNames().split(",");
+				names = Arrays.asList(tnames);
+			}else{
+				names.add(courseTeacher.getCourseTypeNames());
+			}
+			courseTeacher.setNames(names);
 		}
 		return list;
 	}
@@ -76,7 +85,16 @@ public class CourseTeacherService implements ICourseTeacherService{
 					typename=typename+","+string;
 				}
 			}
-			courseTeacher.setCourseTypeNames("医师资格,药师资格,中医基础理论,卫生资格,健康管理师,建筑资格");
+			
+			String names="";
+			for(String string : courseTeacher.getNames()) {
+				if("".equals(names)){
+					names=string;
+				}else{
+					names=names+","+string;
+				}
+			}
+			courseTeacher.setCourseTypeNames(names);
 			courseTeacher.setCourseTypeSubclassNames(typename);
 			courseTeacherDao.insertCourseTeacher(courseTeacher);
 		
@@ -92,6 +110,31 @@ public class CourseTeacherService implements ICourseTeacherService{
 
 	@Override
 	public int updateCourseTeacher(CourseTeacher courseTeacher) {
+		List<String> list = courseTeacher.getTypename();
+		if(list!=null && list.size()!=0){
+			String typename="";
+			for(String string : list) {
+				if("".equals(typename)){
+					typename=string;
+				}else{
+					typename=typename+","+string;
+				}
+			}
+			courseTeacher.setCourseTypeSubclassNames(typename);
+		}
+		
+		if(courseTeacher.getNames()!=null && courseTeacher.getNames().size()!=0){
+			String names="";
+			for(String string : courseTeacher.getNames()) {
+				if("".equals(names)){
+					names=string;
+				}else{
+					names=names+","+string;
+				}
+			}
+			courseTeacher.setCourseTypeNames(names);
+		}
+		
 		
 		return courseTeacherDao.updateCourseTeacher(courseTeacher);
 	}

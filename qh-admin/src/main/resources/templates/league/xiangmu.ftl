@@ -49,10 +49,10 @@
 						<form>
 							<ul style="height: 80px;" class="managr-dianpu">
 								<div class="select-3" style="width: 10%;margin-right:5px">
-									<span>商品名称</span> <input type="text" ng-model="drugName" />
+									<span>商品名称</span> <input type="text" placeholder="请输入商品名称"  ng-model="drugName" />
 								</div>
 								<div class="select-3" style="width: 10%;margin-right:5px">
-									<span>店铺名称</span> <input type="text" ng-model="shopName" />
+									<span>店铺名称</span> <input type="text" placeholder="请输入店铺名称"  ng-model="shopName" />
 								</div>
 								<div class="select-3" style="width: 10%;margin-right:5px" ng-mouseleave="subcategoryList()">
 									<img src="/images/sjk-xl.png" /> <span>商品大类别</span> <select
@@ -94,11 +94,9 @@
 
 						<ul class="show">
 							<li ng-click="deletetemplate()" style="background: #F86846;"><span
-								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-							<li><span class="glyphicon glyphicon-sort-by-attributes"
-								class="move-down"></span>&nbsp;下移</li>
-							<li style="float: right; margin-right: 100px; background: none;"><img
+								class="glyphicon glyphicon-trash"></span>&nbsp;删除商品</li>
+							
+							<li style="float: right; margin-right: 20px; background: none;"><img
 								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
 						<div class="admin-table">
@@ -381,10 +379,10 @@
 					<form id="myform1">
 						<ul style="height: 80px;" class="managr-dianpu">
 							<div class="select-3" style="width: 10%;margin-right:5px">
-								<span>项目名称</span> <input type="text" ng-model="serveName" />
+								<span>项目名称</span> <input type="text" placeholder="请输入项目名称"  ng-model="serveName" />
 							</div>
 							<div class="select-3" style="width: 10%;margin-right:5px">
-								<span>店铺名称</span> <input type="text" ng-model="shopName" />
+								<span>店铺名称</span> <input type="text" placeholder="请输入店铺名称"  ng-model="shopName" />
 							</div>
 							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>项目分类</span> <select
@@ -415,10 +413,8 @@
 					</form>
 					<ul class="show">
 						<li ng-click="deletetemplate()" style="background: #F86846;"><span
-							class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-						<li><span class="glyphicon glyphicon-sort-by-attributes"
-							class="move-down"></span>&nbsp;下移</li>
+							class="glyphicon glyphicon-trash"></span>&nbsp;删除项目</li>
+						
 						<li style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 					</ul>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.ola.qh.dao.AdminRoleMenusDao">
+	
+	<resultMap type="com.ola.qh.entity.AdminMenus" id="AdminMenusMap">
+	<result column="id" property="id"/>
+	<result column="category" property="category"/>
+	<result column="names" property="names"/>
+	<result column="menu_id" property="menuId"/>
+	<result column="out_links" property="outLinks"/>
+	</resultMap>
+	 
+	 <select id="listmenu" resultMap="AdminMenusMap">
+	 select * from admin_menu where 1=1 
+	 <if test="names!=null and names!=''">
+	 and names=#{names}
+	 </if>
+	 <if test="id!=null and id!=''">
+	 and id=#{id}
+	 </if>
+	 order by id asc
+	 </select>
+	 
+	 <select id="listsubmenu" resultMap="AdminMenusMap">
+	  select * from admin_submenu where 1=1
+	  <if test="menuId!=null and menuId!=''">
+	  and  menu_id=#{menuId} 
+	  </if>
+	   <if test="id!=null and id!=''">
+	   and id=#{id}
+	  </if>
+	 order by id asc
+	 </select>
+	 
+	 <resultMap type="com.ola.qh.entity.AdminRoleMenu" id="AdminRoleMenuMap">
+	<result column="id" property="id"/>
+	<result column="role_id" property="roleId"/>
+	<result column="menu_id" property="menuId"/>
+	<result column="submenu_id" property="submenuId"/>
+	<result column="addtime" property="addtime"/>
+	</resultMap>
+	
+	<insert id="insertRoleMenu" parameterType="com.ola.qh.entity.AdminRoleMenu">
+	insert into admin_role_menu(id,role_id,menu_id,submenu_id,addtime)
+	values(#{id},#{roleId},#{menuId},#{submenuId},#{addtime})
+	</insert>
+	
+	<update id="updateRoleMenu" parameterType="com.ola.qh.entity.AdminRoleMenu">
+	update admin_role_menu set 
+	<if test="submenuId!=null and submenuId!=''">
+	submenu_id=#{submenuId},
+	</if>
+	updatetime=#{updatetime}
+	where id=#{id}
+	</update>
+	
+	<delete id="deleteRoleMenu">
+	delete admin_role_menu from admin_role_menu where role_id=#{roleId} and menu_id=#{menuId}
+	</delete>
+	
+	<select id="listRoleMenu" resultMap="AdminRoleMenuMap">
+	select * from admin_role_menu where 1=1
+	<if test="roleId!=null and roleId!=''">
+	and role_id=#{roleId}
+	</if>
+	<if test="menuId!=null and menuId!=''">
+	and menu_id=#{menuId}
+	</if>
+	order by menu_id asc
+	</select>
+	</mapper>

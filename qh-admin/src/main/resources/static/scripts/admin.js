@@ -27,4 +27,30 @@ function formReset2() {
 	function formReset3() {
 		  document.getElementById("myform3").reset()
 		  }
-		  
+
+
+
+	$(function(){ 
+	    $(window).resize(); 
+	})
+	$(window).resize(function(){ 
+	    $("#add").css({ 
+	        position: "absolute", 
+	        left: ($(".details-frame").width() - $("#add").outerWidth())/2, 
+	        top: ($(window).height() - $("#add").outerHeight())/2 
+	    });        
+	}); 
+	$(window).resize(function(){ 
+	    $("#revise").css({ 
+	        position: "absolute", 
+	        left: ($(".details").width() - $("#revise").outerWidth())/2, 
+	        top: ($(window).height() - $("#revise").outerHeight())/2 
+	    });        
+	}); 
+	$(window).resize(function(){ 
+	    $("#resource").css({ 
+	        position: "absolute", 
+	        left: ($(".details-frame").width() - $("#resource").outerWidth())/2, 
+	        top: ($(".details-frame").height() - $("#resource").outerHeight())/2 
+	    });        
+	}); 

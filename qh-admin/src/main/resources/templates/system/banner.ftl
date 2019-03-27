@@ -30,9 +30,9 @@
 			<div class="select-3" style="width: 15%;margin-right:0%" >
 				<span>广告横幅的位置</span> <img src="/images/sjk-xl.png" /> <select
 					ng-model="types">
-					<option value="0">查看全部</option>
-					<option value="1">学院的banner</option>
-					<option value="2">学院水印logo</option>
+					<option ng-selected="types==0" value="0">查看全部</option>
+					<option ng-selected="types==1" value="1">学院的banner</option>
+					<option ng-selected="types==2" value="2">学院水印logo</option>
 				</select>
 
 			</div>
@@ -48,14 +48,12 @@
 			<ul class="show">
 
 				<li ng-click="add()" style="background: #9DE879;"><span
-					class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
+					class="glyphicon glyphicon-plus"></span>&nbsp;添加图片</li>
 				<li ng-click="updatebanner()" style="background: #F9CD33;"><span
-					class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
+					class="glyphicon glyphicon-pencil"></span>&nbsp;修改图片</li>
 				<li ng-click="deletebanner()" style="background: #F86846;"><span
-					class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-				<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-				<li><span class="glyphicon glyphicon-sort-by-attributes"
-					class="move-down"></span>&nbsp;下移</li>
+					class="glyphicon glyphicon-trash"></span>&nbsp;删除图片</li>
+				
 				<li style="float: right; margin-right: 20px; background: none;"><img
 					src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 			</ul>
@@ -103,9 +101,8 @@
 
 				<!--弹窗-->
 				<div class="poop" id="add" style="height: 520px;">
-					<form id="myform">
+					
 						<h3>添加/修改广告</h3>
-						<input type="hidden" ng-model="bannerId" />
 						<div class="select-2 ">
 							<span>链接:</span> <input type="text" ng-model="banner.outLinks"
 								placeholder="请输入跳转链接" />
@@ -114,7 +111,7 @@
 						<div class="select-2 ">
 							<img src="/images/sjk-xl.png" /> <span>级别:</span> <select
 								ng-model="banner.type" name="type">
-								<option ng-show="bannerId==null" selected value="">请选择</option>
+								<option ng-show="bannerId==null"  selected value="">请选择</option>
 								<option ng-selected="banner.type==1" value="1">学院的banner</option>
 								<option ng-selected="banner.type==2" value="2">学院水印logo</option>
 								
@@ -154,7 +151,7 @@
 						</div>
 				</div>
 
-				</form>
+				
 			</div>
 
 

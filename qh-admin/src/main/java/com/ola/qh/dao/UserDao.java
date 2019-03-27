@@ -32,4 +32,6 @@ public interface UserDao {
 	public int selectStudentCount(@Param("fromdate")String fromdate,@Param("todate")String todate,
 			@Param("realnameORmobile")String realnameORmobile,@Param("status")String status);
 	
+	public Integer selectCountByUserId(@Param("userId")String id);
+	
 }

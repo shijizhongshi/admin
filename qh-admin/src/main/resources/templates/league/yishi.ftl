@@ -32,7 +32,7 @@
 					<form action="">
 						<ul style="height: 80px;" class="managr-dianpu">
 							<div class="select-3" style="width: 10%;margin-right:5px">
-								<span>医师名称</span> <input type="text" ng-model="name" />
+								<span>医师名称</span> <input type="text" placeholder="请输入医师名称" ng-model="name" />
 							</div>
 							<div class="select-3" style="width: 10%;margin-right:5px">
 								<img src="/images/sjk-xl.png" /> <span>医院科室</span> <select
@@ -46,7 +46,7 @@
 								<img src="/images/sjk-xl.png" /> <span>是否真实</span> <select
 									ng-model="isvirtual">
 
-									<option value="0">是</option>
+									<option ng-selected="isvirtual==0" value="0">是</option>
 									<option value="1">否</option>
 								</select>
 							</div>
@@ -61,10 +61,8 @@
 
 
 						<li style="background: #F86846;"><span
-							class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-						<li><span class="glyphicon glyphicon-sort-by-attributes"
-							class="move-down"></span>&nbsp;下移</li>
+							class="glyphicon glyphicon-trash"></span>&nbsp;删除医师</li>
+						
 						<li style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 					</ul>
@@ -260,7 +258,7 @@
 					</h4>
 					<div class="details-frame-heshen">
 						<div class="select-3" style="width: 15%;margin-right:0%">
-							<span>医师姓名</span> <input type="text" ng-model="name" />
+							<span>医师姓名</span> <input type="text" placeholder="请输入医师名称" ng-model="name" />
 
 						</div>
 						<div>

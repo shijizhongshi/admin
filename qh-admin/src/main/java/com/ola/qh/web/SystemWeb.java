@@ -24,5 +24,13 @@ public class SystemWeb {
 	public String fenlei(){
 		return "system/fenlei";
 	}
+	@RequestMapping("/superAdmin")
+	public String superadmin(){
+		return "system/super-admin";
+	}
+	@RequestMapping("/recommended")
+	public String recommended(){
+		return "system/recommended";
+	}
 	
 }

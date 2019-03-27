@@ -21,6 +21,9 @@ app.controller("questionJieController", function($scope, $http){
 			if(data.status=="0"){
 				$scope.questionsubcatelist=data.data;
 				$scope.total=data.count;
+				$scope.subId=$scope.questionsubcatelist[0].id;
+				$scope.selecteds=$scope.questionsubcatelist[0].id;
+				$scope.questionbank();
 				angular.forEach($scope.questionsubcatelist, function(questionSubCategory){  
 					
 					if(questionSubCategory.isshow==0){
@@ -84,6 +87,15 @@ app.controller("questionJieController", function($scope, $http){
 			$scope.id=null;
 			$scope.name=null;
 		}
+	}
+	
+	$scope.questionSub=function(typename,sub,$event){
+		$event.stopPropagation();
+		$scope.courseTypeName=typename;
+		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
+		$scope.questionsubcate();
+		$scope.typeSelected=sub.courseTypeSubclassName;
+	
 	}
 	
 	$scope.update=function(){
@@ -160,7 +172,7 @@ app.controller("questionJieController", function($scope, $http){
 				$scope.questionbanklist=data.data;
 				$scope.total1=data.count;
 				angular.forEach($scope.questionbanklist, function(questionbank){  
-					if(questionbank.types=="单选"){
+					if(questionbank.types=="单选题"){
 						
 						$scope.questionanswerlist=questionbank.answer;
 						
@@ -233,7 +245,7 @@ app.controller("questionJieController", function($scope, $http){
 	
 	$scope.updatebank=function(){
 		if($scope.bankid!=null){
-			if($scope.types=="单选"){
+			if($scope.types=="单选题"){
 				
 				document.getElementById('resources').style.display="none"; 
 				document.getElementById('resource').style.display="block"; 
@@ -261,9 +273,8 @@ app.controller("questionJieController", function($scope, $http){
 		$scope.typeselected=qbul;
 	}
 	
-	$scope.checkquestionsub=function(qbc,$event){
-		$event.stopPropagation();
-		$scope.selecteds=qbc.id;
+	$scope.checkquestionsub=function(qbc){
+		
 		$scope.subId=qbc.id;
 		$scope.subName=qbc.name;
 		$scope.questionbank();
@@ -307,9 +318,43 @@ app.controller("questionJieController", function($scope, $http){
 		}
 	}
 	
+	$scope.addfile=function(){
+		
+		
+		var fd = new FormData();
+	    fd.append("file", $("#file")[0].files[0]);
+	    fd.append("subId", $scope.subId);
+	    
+	   $http.post("/api/questionbank/improtExcel",fd, {
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    })
+		.success(function(data){
+			if(data.status=='0'){
+				alert("导入成功~");
+					$scope.file=null;
+					location.reload();
+				}else{
+					alert("导入失败~");
+				}
+			})
+		
+	}
+	
+	$scope.showrevise=function(){
+		if($scope.subId!=null){
+			document.getElementById('revise').style.display="block"; 
+		}else{
+		alert("请先选中单元~");
+		}
+	}
+	
+	
+	
 	$scope.resetbank=function(){
 		
-		if($scope.types=="单选"){
+		if($scope.types=="单选题"){
 			
 			document.getElementById('resource').style.display="none"; 
 		}
@@ -322,5 +367,35 @@ app.controller("questionJieController", function($scope, $http){
 		$scope.bankid=null;
 		$scope.types=null;
 		$scope.questionanswers=null;
+	}
+	
+	$scope.changeCorrect=function(qbas){
+		
+		if($scope.questionbanks.types=="单选题"){
+		angular.forEach($scope.questionanswers,function(answers){
+			
+			
+			if(qbas.id!=answers.id){
+				
+				answers.correct=false;
+			}
+			
+			
+		})
+		}
+	}
+	
+	$scope.changeUnitCorrect=function(qbual){
+		
+		if($scope.questionunitlists.types=="单选题"){
+		angular.forEach($scope.questionunitanswerlist,function(unitanswers){
+			
+			if(qbual.id!=unitanswers.id){
+				
+				unitanswers.correct=false;
+			}
+			
+		})
+		}
 	}
 })

@@ -7,13 +7,14 @@ import com.ola.qh.util.Results;
 
 public interface IUserRoleService {
 	
-	public Results<UserRole> selectById(String id);
-
 	public Results<UserRole> update(UserRole userRole);
 
-	public Results<UserRole> insert(UserRole userRole,String password);
+	public Results<UserRole> insert(UserRole userRole);
 
 	public Results<UserRole> deleteById(String id);
 
 	public List<String> selectCategory();
+
+	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize,String username,String nickname,String category);
+
 }

@@ -8,7 +8,7 @@ import com.ola.qh.util.Results;
 
 public interface IDoctorsService {
 
-	public List<Doctors> selectDoctors(int islimit,String name,String offices,int isvirtual,int pageNo,int pageSize);
+	public List<Doctors> selectDoctors(int islimit,String name,String offices,String isvirtual,int pageNo,int pageSize);
 	
 	public Results<String> updateDoctors(String id,int islimit,int isrecommend,Date updatetime);
 	

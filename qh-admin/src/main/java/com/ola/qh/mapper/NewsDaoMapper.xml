@@ -69,9 +69,9 @@
 		<if test="title!=null and title!='' ">
 		and title like concat(concat("%",#{title},"%"))
 		</if>
-		<if test="pageNo!=0">
+		
 			limit #{pageNo},#{pageSize}  
-		</if>
+		
 	</select>
 
 	<select id="selectNewListCount" resultType="int">

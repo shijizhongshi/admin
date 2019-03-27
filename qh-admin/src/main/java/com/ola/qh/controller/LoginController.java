@@ -1,13 +1,15 @@
 package com.ola.qh.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.Results;
 
@@ -27,5 +29,19 @@ public class LoginController {
 		return userService.adminLogin(username, password,request);
 	}
 	
+	@RequestMapping("/islogin")
+	public Results<List<AdminMenus>> islogin(HttpServletRequest request){
+		
+		return userService.adminisLogin(request);
+	} 
+	
+	
+	@RequestMapping("/menus")
+	public Results<List<AdminMenus>> menus(){
+		Results<List<AdminMenus>> result=new Results<List<AdminMenus>>();
+		result.setStatus("0");
+		result.setData(userService.listmenu());
+		return result;
+	} 
 	
 }

@@ -33,14 +33,14 @@
 						<div class="select-3" style="width: 10%;margin-right:10px">
 							<img src="/images/sjk-xl.png"> <span>核审状态</span> <select
 								ng-model="payStatus">
-								<option value="">核审状态</option>
+								<option value="">全部状态</option>
 								<option value="1">通过</option>
 								<option value="2">未通过</option>
 								<option value="0">未审核</option>
 							</select>
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
-							<span>手机号</span> <input type="text" ng-model="mobile" />
+							<span>手机号</span> <input type="text" placeholder="请输入手机号码"  ng-model="mobile" />
 						</div>
 						<div class="select-3" style="width: 10%;margin-right:10px">
 							<span>申请时间</span> <input type="date" ng-model="fromdate"

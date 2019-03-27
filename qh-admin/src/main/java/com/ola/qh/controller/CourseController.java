@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ola.qh.entity.Course;
+import com.ola.qh.entity.CourseClass;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
+import com.ola.qh.service.IBuyCourseService;
+import com.ola.qh.service.ICourseClassService;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Results;
 /**
@@ -30,6 +33,12 @@ public class CourseController {
 
 	@Autowired
 	private ICourseService courseService;
+	
+	@Autowired
+	private ICourseClassService courseClassService;
+	
+	@Autowired
+	private IBuyCourseService buyCourseService;
 
 	/**
 	 * 大类别的集合
@@ -38,7 +47,7 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping("/courseTypeList")
-	public Results<List<CourseType>> listCourseType(@RequestParam(name="title",required=true)String title) {
+	public Results<List<CourseType>> listCourseType() {
 		Results<List<CourseType>> result = new Results<List<CourseType>>();
 		List<CourseType> list = courseService.courseTypeList();
 		result.setData(list);
@@ -144,7 +153,8 @@ public class CourseController {
 			@RequestParam(name = "pageSize", required = true) int pageSize,
 			@RequestParam(name = "courseTypeName", required = false) String courseTypeName,
 			@RequestParam(name = "courseTypeSubclassName", required = false) String courseTypeSubclassName,
-			@RequestParam(name = "courseName", required = false) String courseName) {
+			@RequestParam(name = "courseName", required = false) String courseName,
+			@RequestParam(name = "userId", required = false) String userId) {
 
 		Results<List<Course>> result = new Results<List<Course>>();
 		
@@ -154,9 +164,24 @@ public class CourseController {
 		course.setPageNo(pageNo);
 		course.setPageSize(pageSize);
 		course.setCourseName(courseName);
-		
-		result.setData(courseService.courseList(course));
+		List<Course> list=courseService.courseList(course);
+		for(Course course2 : list) {
+			int count=buyCourseService.existOpenCourse(course2.getId(), userId,null);
+			if(count==0){
+				
+				List<CourseClass> classlist=courseClassService.listCourseClass(course2.getClassId(), null, null);
+				int classcount=buyCourseService.existOpenCourse(null, userId, classlist.get(0).getId());
+				if(classcount==0){
+					course2.setIsbuy("0");
+				}else{
+					course2.setIsbuy("1");
+				}
+			}else{
+				course2.setIsbuy("1");
+			}
+		}
 		result.setStatus("0");
+		result.setData(list);
 		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName,courseName));
 		return result;
 	}

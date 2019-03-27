@@ -9,7 +9,7 @@ import com.ola.qh.entity.Doctors;
 
 public interface DoctorsDao {
 
-	public List<Doctors> selectDoctors(@Param("islimit")int islimit,@Param("name")String name,@Param("offices")String offices,@Param("isvirtual")int isvirtual,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+	public List<Doctors> selectDoctors(@Param("islimit")int islimit,@Param("name")String name,@Param("offices")String offices,@Param("isvirtual")String isvirtual,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
 	public String selectUserId(@Param("id")String id);
 	
