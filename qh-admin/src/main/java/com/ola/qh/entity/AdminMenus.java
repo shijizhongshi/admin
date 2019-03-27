@@ -18,6 +18,16 @@ public class AdminMenus {
 	private List<AdminMenus> list=new ArrayList<AdminMenus>();
 	
 	
+	private List<AdminMenus> adminSubMenus=new ArrayList<AdminMenus>();
+	
+	
+	public List<AdminMenus> getAdminSubMenus() {
+		return adminSubMenus;
+	}
+
+	public void setAdminSubMenus(List<AdminMenus> adminSubMenus) {
+		this.adminSubMenus = adminSubMenus;
+	}
 
 	public String getOutLinks() {
 		return outLinks;

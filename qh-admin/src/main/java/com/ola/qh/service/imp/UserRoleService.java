@@ -210,11 +210,11 @@ public class UserRoleService implements IUserRoleService {
 			if (userRoles == null) {
 				List<AdminMenus> limitsList=userRole.getMenus();
 				String menuId=null;
-				String submenuId=null;
+				
 				String roleId=KeyGen.uuid();
 				//////大菜单的集合
 				for (AdminMenus menus : limitsList) {
-					
+					String submenuId=null;
 						menuId=menus.getId();
 					
 					//////大菜单对应小菜单的集合

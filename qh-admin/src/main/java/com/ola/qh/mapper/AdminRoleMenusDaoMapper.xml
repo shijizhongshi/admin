@@ -20,6 +20,7 @@
 	 <if test="id!=null and id!=''">
 	 and id=#{id}
 	 </if>
+	 order by id asc
 	 </select>
 	 
 	 <select id="listsubmenu" resultMap="AdminMenusMap">
@@ -30,7 +31,7 @@
 	   <if test="id!=null and id!=''">
 	   and id=#{id}
 	  </if>
-	 
+	 order by id asc
 	 </select>
 	 
 	 <resultMap type="com.ola.qh.entity.AdminRoleMenu" id="AdminRoleMenuMap">
@@ -67,5 +68,6 @@
 	<if test="menuId!=null and menuId!=''">
 	and menu_id=#{menuId}
 	</if>
+	order by menu_id asc
 	</select>
 	</mapper>

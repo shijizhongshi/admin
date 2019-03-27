@@ -102,6 +102,8 @@ public class UserService implements IUserService{
 					request.getSession().setAttribute("username", ur.getUsername());
 					request.getSession().setAttribute("jiamengshang",false);
 					request.getSession().setAttribute("isrole","3");
+					result.setStatus("0");
+					return result;
 				}
 				
 				result.setStatus("1");
@@ -288,6 +290,16 @@ public class UserService implements IUserService{
 	public int selectStudentCount(String fromdate, String todate, String realnameORmobile, String status) {
 		// TODO Auto-generated method stub
 		return userDao.selectStudentCount(fromdate, todate, realnameORmobile, status);
+	}
+
+	@Override
+	public List<AdminMenus> listmenu() {
+		// TODO Auto-generated method stub
+		List<AdminMenus> list=adminRoleMenusDao.listmenu(null,null);
+		for (AdminMenus adminMenus : list) {
+			adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId(),null));
+		}
+		return list;
 	}
 
 	
