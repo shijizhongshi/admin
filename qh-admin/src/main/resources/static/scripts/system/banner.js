@@ -62,7 +62,7 @@ $scope.uploadmainimage = function(file){
 		})
 	};
 	$scope.bannerId=null;
-	$scope.focus = false;
+	
 	$scope.checkedbanner=function(b){
 		$scope.selected = b;
 		$scope.bannerId=b.id;

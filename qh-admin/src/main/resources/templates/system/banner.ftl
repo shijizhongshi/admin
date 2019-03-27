@@ -101,9 +101,8 @@
 
 				<!--弹窗-->
 				<div class="poop" id="add" style="height: 520px;">
-					<form id="myform">
+					
 						<h3>添加/修改广告</h3>
-						<input type="hidden" ng-model="bannerId" />
 						<div class="select-2 ">
 							<span>链接:</span> <input type="text" ng-model="banner.outLinks"
 								placeholder="请输入跳转链接" />
@@ -152,7 +151,7 @@
 						</div>
 				</div>
 
-				</form>
+				
 			</div>
 
 
