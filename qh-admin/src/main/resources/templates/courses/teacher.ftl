@@ -128,7 +128,7 @@
 												<li ng-repeat="sub in courseTypeSubclass"><span><input
 														type="checkbox"
 														ng-checked="isSelected(sub.courseTypeSubclassName)"
-														ng-click="updateSelection($event,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
+														ng-click="updateSelection($event,ctl.courseTypeName,sub.courseTypeSubclassName)" /></span>{{sub.courseTypeSubclassName}}</li>
 											</ul>
 										</dd>
 									</dl>
