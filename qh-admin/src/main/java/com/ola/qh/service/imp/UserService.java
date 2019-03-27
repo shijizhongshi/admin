@@ -126,6 +126,7 @@ public class UserService implements IUserService{
 			if("3".equals(roles)){
 				
 				
+				
 				//////3:权限小的系统用户(按照选择权限展示菜单)
 				/*Object objname = request.getSession().getAttribute("username");
 				UserRole ur=UserRoleDao.single(null, JSON.toJSONString(objname),null);
