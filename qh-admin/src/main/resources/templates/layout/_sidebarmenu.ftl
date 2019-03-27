@@ -82,6 +82,6 @@
     </script>
 <style>
 .active .menuxy{transform:rotate(90deg);-webkit-transform:rotate(90deg);
-    -moz-transform:rotate(90deg);transition: all 0.6s;}
+    -moz-transform:rotate(90deg);transition: all 0.3s;}
 </style>
 </#macro>

@@ -23,7 +23,7 @@ public class StudentWeb {
 
 	@RequestMapping("/coursebuy")
 	public String coursebuy(@RequestParam(name="courseId") String courseId,HttpServletRequest request) {
-		request.getSession().setAttribute("courseId", courseId);
+		request.getSession().setAttribute("courseId",courseId);
 		return "student/coursebuy";
 	}
 	
