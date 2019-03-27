@@ -248,4 +248,10 @@ app.controller("superAdminController", function($scope, $http) {
 	$scope.refresh = function() {
 		location.reload();
 	}
+	//点击事件展开循环的数据
+	$scope.unfolf = function(menuId) {
+		$scope.sj=menuId;
+		$scope.fuhao=menuId;
+		
+	}
 });
