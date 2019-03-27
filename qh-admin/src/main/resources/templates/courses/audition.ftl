@@ -14,51 +14,14 @@
 		<div class="classify">
 			<ul class="menu">
 
-				<li class="list" ng-click="typeList('医师资格',1)">医师资格
-					<ul class="items" ng-class="{'active':active==1}">
-						<li ng-repeat="sub in courseTypeSubclass"
-							ng-click="auditionSub('医师资格',sub,$event)"
-							ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-
-					</ul>
-				</li>
-				<li class="list" ng-click="typeList('药师资格',2)">药师资格
-					<ul class="items" ng-class="{'active':active==2}">
-						<li ng-repeat="sub in courseTypeSubclass"
-							ng-click="auditionSub('药师资格',sub,$event)"
-							ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-
-					</ul>
-				</li>
-				<li class="list" ng-click="typeList('中医基础理论',3)">中医基础理论
-					<ul class="items" ng-class="{'active':active==3}">
-						<li ng-repeat="sub in courseTypeSubclass"
-							ng-click="auditionSub('中医基础理论',sub,$event)"
-							ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-					</ul>
-				</li>
-				<li class="list" ng-click="typeList('卫生资格',4)">卫生资格
-					<ul class="items" ng-class="{'active':active==4}">
-						<li ng-repeat="sub in courseTypeSubclass"
-							ng-click="auditionSub('卫生资格',sub,$event)"
-							ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-
-					</ul>
-				</li>
-				<li class="list" ng-click="typeList('健康管理师',5)">健康管理师</a>
-					<ul class="items" ng-class="{'active':active==5}">
-						<li ng-repeat="sub in courseTypeSubclass"
-							ng-click="auditionSub('健康管理师',sub,$event)"
-							ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-					</ul></li>
-
-				<li class="list" ng-click="typeList('建筑资格',7)">建筑资格
-				<ul class="items" ng-class="{'active':active==7}">
+				<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
+				<ul class="items" ng-class="{'active':active==ctl.id}">
 					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="auditionSub('建筑资格',sub,$event)"
+						ng-click="auditionSub(ctl.courseTypeName,sub,$event)"
 						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
+
 				</ul>
-			</li>
+				</li>
 
 
 			</ul>
