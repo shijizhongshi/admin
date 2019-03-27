@@ -6,7 +6,15 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/patientmanage/replypatient.js"></script>
+<style>
+.message{background:#fbfbfd;padding:10px;border:1px solid #E5E5E5;border:1px solid #E5E5E5;border-radius:10px;margin-bottom:5px; }
+.user-message{border-right:1px solid #ece8e8;}
+.patient-message{height:auto}
+.describes{min-height:auto}
+.describes span{font-size:1.5rem;}
+</style>
 <@b.body menu="sidebarmenu-patientmanage" submenu="sidebarmenu-patientmanage-patient">
+
 <div ng-controller="replyPatientController">
 	<div class="details" style="width: 100%">
 	<input type="hidden" value="${id}" id="id" />
@@ -38,26 +46,26 @@
 						</ul>
 						<div class="admin-table">
 
-							<div class="message" style="padding:10px">
+							<div class="message" style="border-bottom: none;">
 								<span style="float:left;margin-left: 10px;text-align:center;font-size:24px;position: relative;">{{replypatient.title}}</span>
 								<span style="float:right;margin-right: 10px;margin-top: 6px;text-align:center;font-size:16px;position: relative;">{{replypatient.category}}</span>
 							</div>
 							
-							<div class="message" style="border-top:0;">
-								<div class="user-message">
-									<ul>
+							<div class="message">
+								<div class="user-message" style="">
+									<ul> 
 										<li class="head-img" style="text-align:center;">
-											<div >
-												<img style="height:100%;width: 100%;" src="{{replypatient.publisherHeadImg}}">
+											<div style="height:auto" >
+												<img style="width:80%;margin:0 auto;" src="{{replypatient.publisherHeadImg}}">
 											</div>
 										</li>
 										<li class="name" style="text-align:center;">
 										
-												<span ng-click="touser(replypatient.publisher)"  style="text-align:center;font-size:20px;position: relative;">{{replypatient.publisher}}</span>
+												<p ng-click="touser(replypatient.publisher)"  style="text-align:center;font-size:1.8rem;font-weight:bold;position: relative;">{{replypatient.publisher}}</p>
 									
 										</li>
 										<li class="position" style="text-align:center;">
-												<span style="text-align:center;font-size:20px;position: relative;">{{replypatient.publisherPosition}}</span>
+												<p style="text-align:center;font-size:1.6rem;;position: relative;color: #69b1ea;">{{replypatient.publisherPosition}}</p>
 										</li>
 									</ul>
 								</div>
@@ -80,25 +88,25 @@
 								</div>
 							</div>
 							
-							<div class="message" style="border-top:0;"ng-repeat="rl in replyList">
-								<div class="user-message" >
+							<div class="message" style="border-top:none;"ng-repeat="rl in replyList">
+								<div class="user-message" style="min-height:auto" >
 									<ul>
 										<li class="head-img" style="text-align:center;">
-											<div >
-												<img style="height:100%;width: 100%;" src="{{rl.replyHeadImg}}">
+											<div style="height:auto">
+												<img style="width: 80%;margin:0 auto;" src="{{rl.replyHeadImg}}">
 											</div>
 										</li>
 										<li class="name" style="text-align:center;">
 										
-												<span ng-click="touser(rl.replyName)" style="text-align:center;font-size:20px;position: relative;">{{rl.replyName}}</span>
+												<span ng-click="touser(rl.replyName)" style="text-align:center;font-size:1.5rem;position: relative;">{{rl.replyName}}</span>
 									
 										</li>
 										
 									</ul>
 								</div>
-								<div class="patient-message">
+								<div class="patient-message" style="min-height:auto">
 									<div class="patients">
-										<div class="describes" style="min-height:275px;padding-bottom:10px;">
+										<div class="describes" style="padding-bottom:10px;">
 										<i ng-click="deletereply(rl)" class="glyphicon glyphicon-remove" style="float: right; color: #666; font-size: 1.1rem"></i>
 											<span>{{rl.replyContent}}</span>
 										</div>

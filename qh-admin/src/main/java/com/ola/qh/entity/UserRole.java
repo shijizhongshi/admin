@@ -30,15 +30,16 @@ public class UserRole {
 	@Valid
 	@NotNull
 	@Size(min=1)
-	private List<String> menus=new ArrayList<String>();
+	private List<AdminMenus> menus=new ArrayList<AdminMenus>();///////菜单的集合
 	
 
 
-	public List<String> getMenus() {
+	
+	public List<AdminMenus> getMenus() {
 		return menus;
 	}
 
-	public void setMenus(List<String> menus) {
+	public void setMenus(List<AdminMenus> menus) {
 		this.menus = menus;
 	}
 

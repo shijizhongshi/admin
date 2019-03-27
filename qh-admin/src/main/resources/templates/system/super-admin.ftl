@@ -29,27 +29,27 @@
 
 				<div class="select-3" style="width: 15%;">
 					<span>账号</span>
-					<form id="search">
+					
 						<input type="text"  ng-model="username" placeholder="输入账号" />
-					</form>
+					
 				</div>
 				<div class="select-3" style="width: 15%;">
 					<span>账号名称</span>
-					<form id="search">
+					
 						<input type="text"  ng-model="nickname"  placeholder="输入账号昵称" />
-					</form>
+					
 				</div>
 				
 				<div class="select-3" style="width: 15%;">
 					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
-					<form id="search">
+					
 					
 						<select ng-model="categorys">
 							<option ng-selected="categorys=='' " value="">查看全部</option>
 							<option ng-selected="categorys=='教务' " value="教务">教务</option>
 							<option ng-selected="categorys=='加盟商' " value="加盟商">加盟商</option>
 						</select>
-					</form>
+					
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="立即检索"
@@ -150,10 +150,13 @@
 <li><input type="checkbox" ng-checked="isSelected('学员信息管理')" ng-click="updateSelection($event,'学员信息管理')"/>学员信息管理</li>
 <li><input type="checkbox" ng-checked="isSelected('发布管理')" ng-click="updateSelection($event,'发布管理')"/>发布管理</li>
 </ul> -->
-	<ul>
-	<p class="qxtit">网课资源权限</p>
-	<div>
-	<li><input type="checkbox" />子类别</li></div>
+	<ul ng-repeat="menu in menus">
+	<p class="qxtit"><input type="checkbox" ng-checked="isSelected(menu.names)" ng-click="updateSelection($event,menu)"/>{{menu.names}}</p>
+		<div>
+			<li ng-repeat="sub in menu.adminSubMenus">
+			<input type="checkbox" ng-checked="isSubSelected(sub.names)" ng-click="updateSubSelection($event,sub,menu)"/>{{sub.names}}
+			</li>
+		</div>
 	</ul>
 </div>
 	</div>
