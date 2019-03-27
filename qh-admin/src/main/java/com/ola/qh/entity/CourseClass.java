@@ -67,7 +67,17 @@ public class CourseClass {
 	
 	private List<Course> listCourse=new ArrayList<Course>();//
 	
+	private String isbuy;///1:已经买过  0:没有买过
+
 	
+	public String getIsbuy() {
+		return isbuy;
+	}
+
+	public void setIsbuy(String isbuy) {
+		this.isbuy = isbuy;
+	}
+
 	public String getMaxdoudou() {
 		return maxdoudou;
 	}

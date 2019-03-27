@@ -92,6 +92,7 @@ public class UserService implements IUserService{
 				request.getSession().setAttribute("jiamengshang",true);
 				request.getSession().setAttribute("isrole","2");
 				/*request.getSession().setAttribute("admin",false);*/
+				result.setData("2");
 				result.setStatus("0");
 				return result;
 			}else{
@@ -103,6 +104,7 @@ public class UserService implements IUserService{
 					request.getSession().setAttribute("jiamengshang",false);
 					request.getSession().setAttribute("isrole","3");
 					result.setStatus("0");
+					result.setData("3");
 					return result;
 				}
 				
