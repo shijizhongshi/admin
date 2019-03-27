@@ -29,50 +29,39 @@ app.controller("teacherController", function($scope, $http){
 		}
 	}*/
 
-	
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":1}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.courseTypeSubclass1=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":2}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass2=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":3}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass3=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":4}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass4=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":5}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass5=data.data;
+				$scope.courseTypeList=data.data;
 				
 			}
 		})
 		
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":7}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	}
+	$scope.typesList();
+	
+	$scope.courseTypeId="1";
+	
+	$scope.showCourseTypeSubclassList=function(courseTypeId){
+		
+		$scope.courseTypeId=courseTypeId;
+		$scope.courseTypeSubclassList();
+		$scope.ddshow=courseTypeId;
+		
+	}
+	
+	
+	$scope.courseTypeSubclassList=function(){
+		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.courseTypeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.courseTypeSubclass6=data.data;
+				$scope.courseTypeSubclass=data.data;
 				
 			}
 		})
+	}
 	
 	
 	
