@@ -49,6 +49,18 @@ app.controller("ChapterController", function($scope, $http){
 		})
 		
 	};
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeList=data.data;
+				
+			}
+		})
+		
+	}
+	$scope.typesList();
 	if($("#typeId").val()!=''){
 		////说明是在课程点进章来的
 		

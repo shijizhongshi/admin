@@ -33,6 +33,18 @@ app.controller("gradeController", function($scope, $http){
 		$scope.typeSelected=sub.courseTypeSubclassName;
 		
 	}
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeList=data.data;
+				
+			}
+		})
+		
+	}
+	$scope.typesList();
 	$scope.typeBases();//////保证已经来有默认的参数
 	 //总条数
     $scope.total = 0;

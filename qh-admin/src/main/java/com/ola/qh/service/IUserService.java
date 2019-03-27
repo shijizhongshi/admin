@@ -31,4 +31,6 @@ public interface IUserService {
 	
 	public int selectStudentCount(String fromdate,String todate,
 			String realnameORmobile,String status);
+	
+	public List<AdminMenus> listmenu();
 }

@@ -28,6 +28,18 @@ app.controller("liveShowController", function($scope, $http) {
 			}
 		})
 	};
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeList=data.data;
+				
+			}
+		})
+		
+	}
+	$scope.typesList();
 	$scope.typeBases();// ////保证已经来有默认的参数
 	
 	

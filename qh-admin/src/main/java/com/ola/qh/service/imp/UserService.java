@@ -24,6 +24,7 @@ import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
 import com.ola.qh.dao.UserRoleDao;
 import com.ola.qh.entity.AdminMenus;
+import com.ola.qh.entity.AdminRoleMenu;
 import com.ola.qh.entity.Business;
 import com.ola.qh.entity.BusinessBook;
 import com.ola.qh.entity.User;
@@ -101,6 +102,8 @@ public class UserService implements IUserService{
 					request.getSession().setAttribute("username", ur.getUsername());
 					request.getSession().setAttribute("jiamengshang",false);
 					request.getSession().setAttribute("isrole","3");
+					result.setStatus("0");
+					return result;
 				}
 				
 				result.setStatus("1");
@@ -122,31 +125,55 @@ public class UserService implements IUserService{
 		Object obj = request.getSession().getAttribute("isrole");
 		if (obj != null)
 		{
+			
 			String roles=String.valueOf(obj);
 			if("3".equals(roles)){
-				
-				
 				//////3:权限小的系统用户(按照选择权限展示菜单)
-				/*Object objname = request.getSession().getAttribute("username");
-				UserRole ur=UserRoleDao.single(null, JSON.toJSONString(objname),null);
-				if(ur.getLimits().indexOf(",")>0){
-					list=Arrays.asList(ur.getLimits().split(","));
+				UserRole ur=UserRoleDao.single(null, String.valueOf(request.getSession().getAttribute("username")), null);
+				if(ur!=null){
+					List<AdminRoleMenu> menuList=adminRoleMenusDao.listRoleMenu(ur.getId(), null);
+					for (AdminRoleMenu adminRoleMenu : menuList) {
+						AdminMenus menu=new AdminMenus();
+						List<AdminMenus> newmenus=adminRoleMenusDao.listmenu(null,adminRoleMenu.getMenuId());
+						menu=newmenus.get(0);
+						List<String> submenuId=new ArrayList<String>();
+						if(adminRoleMenu.getSubmenuId().indexOf(",")>=0){
+							submenuId=Arrays.asList(adminRoleMenu.getSubmenuId().split(","));
+						}else{
+							submenuId.add(adminRoleMenu.getSubmenuId());
+						}
+						List<AdminMenus> sublist=new ArrayList<AdminMenus>();
+						for (String subId : submenuId) {
+							List<AdminMenus> newsubmenus=adminRoleMenusDao.listsubmenu(null, subId);
+							sublist.add(newsubmenus.get(0));
+							
+						}
+						menu.setList(sublist);
+						list.add(menu);
+					}
+					
+					
+					
+					
 				}else{
-					list.add(ur.getLimits());
-				}*/
+					results.setStatus("1");
+					results.setMessage("该账号不存在");
+					return results;
+				}
+				
 				
 			}else if("1".equals(roles)){
 				//////查全部的菜单
-				list=adminRoleMenusDao.listmenu(null);
+				list=adminRoleMenusDao.listmenu(null,null);
 				for (AdminMenus adminMenus : list) {
-					adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId()));
+					adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId(),null));
 				}
 				
 			}else if("2".equals(roles)){
 				/////只查学员管理
-				list=adminRoleMenusDao.listmenu("学员信息管理");
+				list=adminRoleMenusDao.listmenu("学员信息管理",null);
 				for (AdminMenus adminMenus : list) {
-					adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId()));
+					adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId(),null));
 				}
 			}
 			results.setStatus("0");
@@ -263,6 +290,16 @@ public class UserService implements IUserService{
 	public int selectStudentCount(String fromdate, String todate, String realnameORmobile, String status) {
 		// TODO Auto-generated method stub
 		return userDao.selectStudentCount(fromdate, todate, realnameORmobile, status);
+	}
+
+	@Override
+	public List<AdminMenus> listmenu() {
+		// TODO Auto-generated method stub
+		List<AdminMenus> list=adminRoleMenusDao.listmenu(null,null);
+		for (AdminMenus adminMenus : list) {
+			adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId(),null));
+		}
+		return list;
 	}
 
 	

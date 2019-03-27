@@ -34,6 +34,18 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	};
 	$scope.active=1;
 	$scope.typeId=1;
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeList=data.data;
+				
+			}
+		})
+		
+	}
+	$scope.typesList();
 	$scope.typeBases();
 	$scope.typeList=function(typename,typeId){
 			$scope.active=typeId;
