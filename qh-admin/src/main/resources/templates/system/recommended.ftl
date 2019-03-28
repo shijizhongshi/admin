@@ -120,7 +120,6 @@
 </div>
 <div class="fl">
 <p class="fltit">按一下条件进行推送</p>
-
 <ul>
 <li>性别</li>
 <li style="background:#5ed8a9;border:none;color:white;padding-top:6px;">不限</li>
