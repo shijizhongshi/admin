@@ -236,6 +236,18 @@ app.controller("studentinfoController", function($scope, $http){
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//CV工程师上线 (以下代码剪切自 学员管理页面)
+	//点击事件 点击弹出添加弹窗
+	$scope.add = function () {
+		document.getElementById('add').style.display="block"; 
+	}
+	//点击事件 点击弹出修改弹窗
+	$scope.update=function(){
+		if($scope.userId!=null){
+			 document.getElementById('add').style.display="block";
+		}else{
+			alert("请选中信息~");
+		}
+	}
 	//保存和修改学员的信息
 	$scope.saveORupdateUser=function(){
 		if($scope.user.password!=$scope.confirmPassword){
