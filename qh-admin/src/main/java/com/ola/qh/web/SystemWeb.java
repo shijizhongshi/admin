@@ -32,4 +32,5 @@ public class SystemWeb {
 	public String recommended(){
 		return "system/recommended";
 	}
+	
 }

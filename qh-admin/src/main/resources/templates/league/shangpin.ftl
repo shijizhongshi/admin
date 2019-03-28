@@ -35,7 +35,7 @@ submenu="sidebarmenu-league-shangpin">
 							<ul style="height: 80px;" class="managr-dianpu">
 
 								<div class="select-3" style="width: 10%;margin-right:5px">
-									<span>店铺名称</span> <input type="text" ng-model="shopName" />
+									<span>店铺名称</span> <input type="text" placeholder="请输入店铺名称"  ng-model="shopName" />
 								</div>
 								<div class="select-3" style="width: 10%;margin-right:5px">
 									<img src="/images/sjk-xl.png" /> <span>所在地区</span> <select
@@ -48,6 +48,7 @@ submenu="sidebarmenu-league-shangpin">
 								<div class="select-3" style="width: 10%;margin-right:5px">
 									<img src="/images/sjk-xl.png" /> <span>推荐级别</span> <select
 										ng-model="isrecommend">
+										<option ng-selected="isrecommend==''" value="">查看全部</option>
 										<option value="0">不推荐</option>
 										<option value="1">推荐</option>
 									</select>
@@ -63,10 +64,8 @@ submenu="sidebarmenu-league-shangpin">
 
 
 							<li style="background: #F86846;"><span
-								class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-							<li><span class="glyphicon glyphicon-sort-by-attributes"
-								class="move-down"></span>&nbsp;下移</li>
+								class="glyphicon glyphicon-trash"></span>&nbsp;删除店铺</li>
+							
 							<li ng-click="guanli()"><span
 								class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;项目管理</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
@@ -208,7 +207,7 @@ submenu="sidebarmenu-league-shangpin">
 						<form>
 							<div class="details-frame-heshen">
 								<div class="select-3" style="width: 15%;margin-right:0%">
-									<span>店铺名称</span> <input type="text" ng-model="shopName" />
+									<span>店铺名称</span> <input type="text" placeholder="请输入店铺名称"  ng-model="shopName" />
 
 								</div>
 

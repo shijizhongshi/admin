@@ -9,7 +9,7 @@ public interface ICourseClassService {
 
 	public List<CourseClass> selectCourseClass(String id,int pageNo,int pageSize,String courseTypeName,String courseTypeSubclassName,String className);
 	
-	public List<CourseClass> listCourseClass(String courseTypeName,String courseTypeSubclassName);
+	public List<CourseClass> listCourseClass(String id,String courseTypeName,String courseTypeSubclassName);
 	
 	public int selectCourseClassCount(String courseTypeName,String courseTypeSubclassName,String className);
 	

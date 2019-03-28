@@ -15,6 +15,6 @@ public interface IUserRoleService {
 
 	public List<String> selectCategory();
 
-	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize);
+	public Results<List<UserRole>> select(Integer pageNo,Integer pageSize,String username,String nickname,String category);
 
 }

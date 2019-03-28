@@ -33,16 +33,16 @@ public class UserWeb {
 	
 	@RequestMapping("/web/user/withdrawlist")
 	public String fuwu(){
-		return " user/withdrawlist";
+		return "user/withdrawlist";
 	}
 	@RequestMapping("/web/user/userinfo")
 	public String shangpin(@RequestParam(name="nickname") String nickname,HttpServletRequest request){
 		request.getSession().setAttribute("nickname", nickname);
-		return " user/userinfo";
+		return "user/userinfo";
 	}
 	@RequestMapping("/web/user/business")
 	public String franchisee(){
-		return " user/business";
+		return "user/business";
 	}
 
 }

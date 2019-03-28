@@ -1,9 +1,8 @@
 app.controller("studentinfoController", function($scope, $http){
 	//根据昵称或者手机号查询
-	$scope.mobile=null;
-	$scope.nickname=null;
+	
 	$scope.selectUser = function () {
-		if ($scope.mobile!='' && $scope.mobile!=null || $scope.nickname!='' && $scope.nickname!=null) {
+		if ($scope.mobile!='' && $scope.mobile!=null && $scope.mobile.length==11) {
 			$http.get("/api/user/select",{"params":{"nickname":$scope.nickname,"mobile":$scope.mobile,"page":$scope.page=1}},{'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function (result) {
 				if (result.status == "0") {
@@ -11,7 +10,7 @@ app.controller("studentinfoController", function($scope, $http){
 						alert(result.message);
 					}
 					$scope.userList = result.data;
-					$scope.total = result.count;
+					$scope.openCourse=$scope.userList[0]; 
 				}else {
 					alert(result.messgae);
 				}
@@ -20,6 +19,7 @@ app.controller("studentinfoController", function($scope, $http){
 			alert("请先填写查询条件！");
 			return;
 		}
+
 	}
 	$scope.list = function () {
 		if ($scope.mobile!='' && $scope.mobile!=null || $scope.nickname!='' && $scope.nickname!=null) {
@@ -77,70 +77,12 @@ app.controller("studentinfoController", function($scope, $http){
 	$scope.typeBases();//////保证已经来有默认的参数
 	
 	
-	
-	var changeDate = function (date) { 
-		if(date){
-		  	var y = date.getFullYear();  
-		    var m = date.getMonth() + 1;  
-		    m = m < 10 ? '0' + m : m;  
-		    var d = date.getDate();  
-		    d = d < 10 ? ('0' + d) : d;  
-		    return y + '-' + m + '-' + d;
-		} else{
-			return '';
-		}
-	      
-	};
-	
-	
-	
-	$http.get("/api/AddressPcd/selectprovince")
-	.success(function(data){
-		if(data.status=="0"){
-			$scope.provincelist=data.data;
-			$scope.openCourse=data.data[0];
-		}
-	})
-	
-	$scope.address=null;
-	$scope.getCity=function(p){
-		$scope.provinceName=p.provinceName;
-		$scope.address=$scope.provinceName;
-		$http.get("/api/AddressPcd/selectcity",{"params": {"provinceId":p.provinceId}},{'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.citylist=data.data;
-			}
-		})
-	}
-	$scope.getCityName=function(city){
-		if(city!=null){
-			$scope.address=$scope.provinceName+city.cityName;
-		}
-	}
-	
-	$scope.user=null;
-	$scope.userId=null;
-	$scope.add=function(){
-		$scope.user=null;
-		 document.getElementById('add').style.display="block";
-	}
 
-	
-	
-	$scope.update=function(){
-		if($scope.userId!=null){
-			 document.getElementById('add').style.display="block";
-		}else{
-			alert("请选中信息~");
-		}
-		
-	}
 	///////////////////////////////////////处理报班的信息开始////////////////////////////
 	
 	$scope.classlists=function(){
 		/////////查这个专业下的所有的班级信息
-		$http.get("/api/courseclass/list",{"params": {"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}},{'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/courseclass/list",{"params": {"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"userId":$scope.userId}},{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.classlist=data.data;
@@ -151,7 +93,7 @@ app.controller("studentinfoController", function($scope, $http){
 	$scope.courselists=function(){
 /////////查这个专业下的所有的课程信息
 		$http.get("/api/course/courseList",{"params": {"courseTypeName":$scope.courseTypeName,
-			"courseTypeSubclassName":$scope.courseTypeSubclassName,"pageNo":0,"pageSize":0,}},{'Content-Type': 'application/json;charset=UTF-8'})
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,"pageNo":0,"pageSize":0,"userId":$scope.userId}},{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.courselist=data.data;

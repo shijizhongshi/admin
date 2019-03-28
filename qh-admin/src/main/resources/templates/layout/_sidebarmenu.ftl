@@ -48,6 +48,7 @@
                     <a>
                         <i class="linecons-cog"></i>
                         <span class="title">{{menu.names}}</span>
+                        <i style="float: right;" class="menuxy" >></i>
                     </a>
                     <ul ng-class="{'displeyactive':displeyactive==menu}">
                         <li ng-repeat="sub in menu.list" >
@@ -79,5 +80,8 @@
         	
 		});
     </script>
-
+<style>
+.active .menuxy{transform:rotate(90deg);-webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);transition: all 0.3s;}
+</style>
 </#macro>

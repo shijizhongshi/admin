@@ -29,71 +29,65 @@ app.controller("teacherController", function($scope, $http){
 		}
 	}*/
 
-	
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":1}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.courseTypeSubclass1=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":2}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass2=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":3}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass3=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":4}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass4=data.data;
-				
-			}
-		})
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":5}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.courseTypeSubclass5=data.data;
+				$scope.courseTypeList=data.data;
 				
 			}
 		})
 		
-		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":7}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	}
+	$scope.typesList();
+	
+	$scope.courseTypeId="1";
+	
+	$scope.showCourseTypeSubclassList=function(courseTypeId){
+		
+		$scope.courseTypeId=courseTypeId;
+		$scope.courseTypeSubclassList();
+		$scope.ddshow=courseTypeId;
+		
+	}
+	
+	
+	$scope.courseTypeSubclassList=function(){
+		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.courseTypeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.courseTypeSubclass6=data.data;
+				$scope.courseTypeSubclass=data.data;
 				
 			}
 		})
+	}
 	
 	
 	
     $scope.subtypeselected = [];
-    var updateSelected = function(action, subName) {
-	      if(action == 'add' & $scope.subtypeselected.indexOf(subName) == -1) $scope.subtypeselected.push(subName);
-	      if(action == 'remove' && $scope.subtypeselected.indexOf(subName) != -1) $scope.subtypeselected.splice($scope.subtypeselected.indexOf(subName), 1);
+    $scope.typeselected = [];
+    var updateSelected = function(action,typeNames,subName) {
+	      if(action == 'add' && $scope.subtypeselected.indexOf(subName) == -1){
+	    	  $scope.subtypeselected.push(subName);
+	    	  if($scope.typeselected.indexOf(typeNames) == -1){
+	    		  $scope.typeselected.push(typeNames);
+	    	  }
+	    	  
+	      }
+	      if(action == 'remove' && $scope.subtypeselected.indexOf(subName) != -1){
+	    	  $scope.subtypeselected.splice($scope.subtypeselected.indexOf(subName), 1);
+	      }
 	    };
-    $scope.updateSelection = function($event, subName) {
+    $scope.updateSelection = function($event,typeNames, subName) {
 	      var checkbox = $event.target;
 	      var action = (checkbox.checked ? 'add' : 'remove');
-	      updateSelected(action, subName);
+	      updateSelected(action,typeNames,subName);
 	    
 	    };
     
     $scope.isSelected = function(subName) {
-    	if($scope.teacher!=null){
-	    return $scope.subtypeselected.indexOf(subName) >= 0;
-    	}else{
-    		return false;
-    	}
+    	return $scope.subtypeselected.indexOf(subName)>=0;
 	};  
 	 //总条数
     $scope.total = 0;
@@ -138,6 +132,7 @@ app.controller("teacherController", function($scope, $http){
 	
 	$scope.addteacher=function(){
 		$scope.teacher.typename=$scope.subtypeselected;
+		$scope.teacher.names=$scope.typeselected;
 		$scope.teacher.imgUrl=$scope.imgUrl;
 		if($scope.teacherId==null){
 			$http.post("/api/courseteacher/save",$scope.teacher,{'Content-Type': 'application/json;charset=UTF-8'})
@@ -153,6 +148,8 @@ app.controller("teacherController", function($scope, $http){
 		}else{
 			/////修改
 			$scope.teacher.id=$scope.teacherId;
+			$scope.teacher.typename=$scope.subtypeselected;
+			$scope.teacher.names=$scope.typeselected;
 			$http.post("/api/courseteacher/update",$scope.teacher,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
 		    	if(data.status=="0"){
@@ -174,11 +171,15 @@ app.controller("teacherController", function($scope, $http){
 		$scope.teacher=t;
 		$scope.teacherId=t.id;
 		$scope.imgUrl=t.imgUrl;
+		$scope.subtypeselected=t.typename;
+		$scope.typeselected=t.names;
 	}
 	$scope.add=function(){
 		$scope.imgUrl=null;
 		$scope.teacher=null;
 		$scope.teacherId=null;
+		$scope.subtypeselected=[];
+		$scope.typeselected=[];
 		document.getElementById('add').style.display="block"; 
 		
 		

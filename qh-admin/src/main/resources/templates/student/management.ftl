@@ -23,12 +23,47 @@ submenu="sidebarmenu-student-management">
 				<li>学员管理</li>
 			</ul>
 		</div>
+<<<<<<< HEAD
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
 					<span>学员注册时间</span> <input type="date" name="search"
 						ng-model="fromdate"
 						class="ng-pristine ng-untouched ng-valid ng-empty">
+=======
+<div class="details-frame">
+	<div class="details-frame-content">
+		<div class="select-3">
+							<span>学员注册时间</span>
+								<input type="date" name="search" ng-model="fromdate" class="ng-pristine ng-untouched ng-valid ng-empty">
+						</div>
+						<div class="select-3" style="font-size: 1.6rem;width: 1%;text-align: center;">
+							
+								&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
+						</div>
+						<div class="select-3">
+							<span>&nbsp;</span>
+								<input type="date" name="search" ng-model="todate" class="ng-pristine ng-untouched ng-valid ng-empty">
+						</div>
+					
+	<div class="select-3">
+		<span>学员姓名或电话</span>
+		
+		<input type="text" ng-model="realnameORmobile" placeholder="请输入姓名或电话"  class="ng-pristine ng-untouched ng-valid ng-empty">
+	</div>
+		<div class="select-3">
+		<span>学员状态</span>
+		<img src="/images/sjk-xl.png">
+		<select ng-model="status">
+			<option value="">全部</option>
+			<option value="0">正常</option>
+			<option value="1">停用</option>
+		</select>
+	</div>
+	
+			<div style="float:left;">
+					<input type="button" class="btn-lg im-key" ng-click="loaddata()" value="检索">
+>>>>>>> 182a68c22d99a774269383bb175994db729f2f10
 				</div>
 				<div class="select-3"
 					style="font-size: 1.6rem; width: 1%; text-align: center;">

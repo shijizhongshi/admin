@@ -34,7 +34,7 @@
 							</li>
 							
 							<li style="background: #F86846;" ng-click="deleteshort()">
-							<span class="glyphicon glyphicon-trash"></span>&nbsp;删除
+							<span class="glyphicon glyphicon-trash"></span>&nbsp;删除店铺
 							</li>
 							<!--<li>
 							<span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
@@ -159,11 +159,12 @@
 
 .poop {
 	width: 55%;
-	height: 550px;
+	height: auto;
 	position: absolute;
 	left: 15%;
 	top: 10%;
 	display: none;
+	max-height:550px
 }
 
 @media screen and (max-width:1401px) {
@@ -186,7 +187,7 @@
 .poop .grade-left, .poop .grade-center {
 	width: 49%;
 	float: left;
-	height: 720px;
+	height:auto;
 	overflow: auto;
 }
 
@@ -220,7 +221,7 @@
 
 .grade-text textarea {
 	height: 70px;
-	width: 50%;
+	width: 100%;
 }
 
 .manage .managr-dianpu .select-3 {
@@ -285,7 +286,7 @@
 	float: right;
 	color: #999;
 }
-
+.select-2, .select-3{width:100%;}
 .end {
 	float: none;
 	margin-left: auto;

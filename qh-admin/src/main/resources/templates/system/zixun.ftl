@@ -44,9 +44,9 @@
 					<li ng-click="add()" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-plus"></span>&nbsp;添加新闻/话题</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
-						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
+						class="glyphicon glyphicon-pencil"></span>&nbsp;修改新闻/话题</li>
 					<li ng-click="deletenews()" style="background: #F86846;"><span
-						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+						class="glyphicon glyphicon-trash"></span>&nbsp;删除新闻/话题</li>
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="reset()" /></li>
 				</ul>
@@ -124,12 +124,8 @@
 								<div class=" select-2" style="clear: both;">
 									<img src="/images/sjk-xl.png" /> <span>选择类型</span> <select
 										ng-model="news.typename">
-										<option ng-selected="news.typename=='医师资格'" value="医师资格">医师资格</option>
-										<option ng-selected="news.typename=='药师资格'" value="药师资格">药师资格</option>
-										<option ng-selected="news.typename=='中医适宜技术'" value="中医适宜技术">中医适宜技术</option>
-										<option ng-selected="news.typename=='卫生资格'" value="卫生资格">卫生资格</option>
-										<option ng-selected="news.typename=='健康管理师'" value="健康管理师">健康管理师</option>
-										<option ng-selected="news.typename=='建筑资格'" value="建筑资格">建筑资格</option>
+										<option ng-repeat="ctl in courseTypeList" ng-selected="news.typename==ctl.courseTypeName" value={{ctl.courseTypeName}}>{{ctl.courseTypeName}}</option>
+										
 									</select>
 								</div>
 								<div class="costs-uploadfile-div">

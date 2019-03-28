@@ -72,11 +72,32 @@
 	
 	<!--分页查询展示  -->
 	<select id="select" resultMap="UserRoleMap">
-	select * from user_role order by addtime desc limit #{pageNo},#{pageSize};
+	select * from user_role 
+	where 1=1
+	<if test="username!=null and username!=''">
+	and username like concat(concat('%',#{username},'%'))
+	</if>
+	<if test="nickname!=null and nickname!=''">
+	and nickname like concat(concat('%',#{nickname},'%'))
+	</if>
+	<if test="category!=null and category!=''">
+	and category like concat(concat('%',#{category},'%'))
+	</if>
+	order by addtime desc limit #{pageNo},#{pageSize};
 	</select>
 	
 	<!--分页 查询总数量  -->
 	<select id="selectCount" resultType="java.lang.Integer">
 	select count(*) from user_role 
+	where 1=1
+	<if test="username!=null and username!=''">
+	and username like concat(concat('%',#{username},'%'))
+	</if>
+	<if test="nickname!=null and nickname!=''">
+	and nickname like concat(concat('%',#{nickname},'%'))
+	</if>
+	<if test="category!=null and category!=''">
+	and category like concat(concat('%',#{category},'%'))
+	</if>
 	</select>
 </mapper>

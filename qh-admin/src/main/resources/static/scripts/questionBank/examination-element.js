@@ -11,8 +11,7 @@ app.controller("ElementController", function($scope, $http){
     //一页显示多少条
     $scope.pageSize = 20;
 	
-	
-	$scope.questionsubcate=function(){
+    $scope.questionsubcate=function(){
 		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
 		$http.get("/api/questionsubcategory/select",{"params": {"pageNo":$scope.pageNo,
 			"pageSize":$scope.pageSize,
@@ -21,6 +20,9 @@ app.controller("ElementController", function($scope, $http){
 			if(data.status=="0"){
 				$scope.questionsubcatelist=data.data;
 				$scope.total=data.count;
+				$scope.subId=$scope.questionsubcatelist[0].id;
+				$scope.selecteds=$scope.questionsubcatelist[0].id;
+				$scope.questionbank();
 				angular.forEach($scope.questionsubcatelist, function(questionSubCategory){  
 					
 					if(questionSubCategory.isshow==0){
@@ -276,7 +278,6 @@ app.controller("ElementController", function($scope, $http){
 	
 	$scope.checkquestionsub=function(qbc){
 		
-		$scope.selecteds=qbc.id;
 		$scope.subId=qbc.id;
 		$scope.subName=qbc.name;
 		$scope.questionbank();

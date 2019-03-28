@@ -21,6 +21,9 @@ app.controller("questionJieController", function($scope, $http){
 			if(data.status=="0"){
 				$scope.questionsubcatelist=data.data;
 				$scope.total=data.count;
+				$scope.subId=$scope.questionsubcatelist[0].id;
+				$scope.selecteds=$scope.questionsubcatelist[0].id;
+				$scope.questionbank();
 				angular.forEach($scope.questionsubcatelist, function(questionSubCategory){  
 					
 					if(questionSubCategory.isshow==0){
@@ -272,7 +275,6 @@ app.controller("questionJieController", function($scope, $http){
 	
 	$scope.checkquestionsub=function(qbc){
 		
-		$scope.selecteds=qbc.id;
 		$scope.subId=qbc.id;
 		$scope.subName=qbc.name;
 		$scope.questionbank();

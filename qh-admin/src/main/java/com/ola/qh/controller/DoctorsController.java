@@ -28,7 +28,7 @@ public class DoctorsController {
 	
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
-	public Results<List<Doctors>> selectDoctors(@RequestParam(name="islimit",required=false)int islimit,@RequestParam(name="isvirtual",required=false)int isvirtual,
+	public Results<List<Doctors>> selectDoctors(@RequestParam(name="islimit",required=false)int islimit,@RequestParam(name="isvirtual",required=false)String isvirtual,
 			@RequestParam(name="name",required=false)String name,@RequestParam(name="offices",required=false)String offices,
 			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize){
 		

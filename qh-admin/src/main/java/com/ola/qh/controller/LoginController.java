@@ -35,4 +35,13 @@ public class LoginController {
 		return userService.adminisLogin(request);
 	} 
 	
+	
+	@RequestMapping("/menus")
+	public Results<List<AdminMenus>> menus(){
+		Results<List<AdminMenus>> result=new Results<List<AdminMenus>>();
+		result.setStatus("0");
+		result.setData(userService.listmenu());
+		return result;
+	} 
+	
 }

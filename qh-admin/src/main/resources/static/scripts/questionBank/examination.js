@@ -36,6 +36,18 @@ app.controller("questionChapter", function($scope, $http){
 			}
 		})
 	};
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeList=data.data;
+				
+			}
+		})
+		
+	}
+	$scope.typesList();
 	$scope.typeBases();
 	
 	$scope.questioncate=function(){

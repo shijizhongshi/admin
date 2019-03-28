@@ -13,52 +13,15 @@
 	<div class="classify">
 		<ul class="menu">
 
-			<li class="list" ng-click="typeList('医师资格',1)">医师资格
-				<ul class="items" ng-class="{'active':active==1}">
+			<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
+				<ul class="items" ng-class="{'active':active==ctl.id}">
 					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="typeSub('医师资格',sub,$event)"
+						ng-click="typeSub(ctl.courseTypeName,sub,$event)"
 						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
 
 				</ul>
 			</li>
-			<li class="list" ng-click="typeList('药师资格',2)">药师资格
-				<ul class="items" ng-class="{'active':active==2}">
-					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="typeSub('药师资格',sub,$event)"
-						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-
-				</ul>
-			</li>
-			<li class="list" ng-click="typeList('中医基础理论',3)">中医基础理论
-				<ul class="items" ng-class="{'active':active==3}">
-					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="typeSub('中医基础理论',sub,$event)"
-						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-				</ul>
-			</li>
-			<li class="list" ng-click="typeList('卫生资格',4)">卫生资格
-				<ul class="items" ng-class="{'active':active==4}">
-					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="typeSub('卫生资格',sub,$event)"
-						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-
-				</ul>
-			</li>
-			<li class="list" ng-click="typeList('健康管理师',5)">健康管理师
-				<ul class="items" ng-class="{'active':active==5}">
-					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="typeSub('健康管理师',sub,$event)"
-						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-				</ul>
-			</li>
-
-			<li class="list" ng-click="typeList('建筑资格',7)">建筑资格
-				<ul class="items" ng-class="{'active':active==7}">
-					<li ng-repeat="sub in courseTypeSubclass"
-						ng-click="typeSub('建筑资格',sub,$event)"
-						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
-				</ul>
-			</li>
+			
 
 		</ul>
 	</div>
@@ -79,7 +42,7 @@
 				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>直播名称</span>
 					<form id="">
-						<input type="text" ng-model="liveName" />
+						<input type="text" placeholder="请输入直播名称" ng-model="liveName" />
 					</form>
 				</div>
 				<div>
@@ -91,9 +54,9 @@
 				<ul class="show">
 
 					<li ng-click="add()" style="background: #9DE879;"><span
-						class="glyphicon glyphicon-plus"></span>&nbsp;添加</li>
+						class="glyphicon glyphicon-plus"></span>&nbsp;添加直播</li>
 					<li ng-click="update()" style="background: #F9CD33;"><span
-						class="glyphicon glyphicon-pencil"></span>&nbsp;修改</li>
+						class="glyphicon glyphicon-pencil"></span>&nbsp;修改直播</li>
 					<li ng-click="deleteLive()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
 					<li ng-click="liveBases()"

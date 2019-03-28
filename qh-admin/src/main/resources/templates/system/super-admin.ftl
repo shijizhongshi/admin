@@ -8,9 +8,8 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/system/super_admin.js"></script>
 <style type="text/css">
-.selected {
-	background-color: #c1ddec
-}
+
+
 </style>
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-superAdmin">
 <div ng-app="app" ng-controller="superAdminController">
@@ -29,30 +28,31 @@
 
 				<div class="select-3" style="width: 15%;">
 					<span>账号</span>
-					<form id="search">
-						<input type="text"  ng-model="nickname" placeholder="" />
-					</form>
+					
+						<input type="text"  ng-model="username" placeholder="输入账号" />
+					
 				</div>
 				<div class="select-3" style="width: 15%;">
 					<span>账号名称</span>
-					<form id="search">
-						<input type="text"  ng-model="courseTypeSubclassName"  placeholder="" />
-					</form>
+					
+						<input type="text"  ng-model="nickname"  placeholder="输入账号昵称" />
+					
 				</div>
 				
 				<div class="select-3" style="width: 15%;">
 					<img src="/images/sjk-xl.png" /> <span>账号属性</span>
-					<form id="search">
 					
-						<select ng-model="status">
-							<option ng-selected="status==0" value=0>教务</option>
-							<option ng-selected="status==1" value=1>加盟商</option>
+					
+						<select ng-model="categorys">
+							<option ng-selected="categorys=='' " value="">查看全部</option>
+							<option ng-selected="categorys=='教务' " value="教务">教务</option>
+							<option ng-selected="categorys=='加盟商' " value="加盟商">加盟商</option>
 						</select>
-					</form>
+					
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="立即检索"
-						ng-click="" />
+						ng-click="userRoleList()" />
 				</div>			
 				
 			</div>
@@ -98,7 +98,7 @@
 							ng-model="current" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-click="feedbackList()">
+							ng-click="userRoleList()">
 						</ul>
 					</div>
 					
@@ -138,7 +138,7 @@
 	<div style="width:49%;float:right;">
 <div class="qx">
 <p>权限设置</p>
-<ul ng-model="userRole.limits">
+<!-- <ul ng-model="userRole.limits">
 
 <li><input type="checkbox" ng-checked="isSelected('网课资源管理')" ng-click="updateSelection($event,'网课资源管理')"/>网课资源管理</li>
 <li><input type="checkbox" ng-checked="isSelected('题库资源管理')" ng-click="updateSelection($event,'题库资源管理')"/>题库资源管理</li>
@@ -148,7 +148,21 @@
 <li><input type="checkbox" ng-checked="isSelected('用户管理')" ng-click="updateSelection($event,'用户管理')"/>用户管理</li>
 <li><input type="checkbox" ng-checked="isSelected('学员信息管理')" ng-click="updateSelection($event,'学员信息管理')"/>学员信息管理</li>
 <li><input type="checkbox" ng-checked="isSelected('发布管理')" ng-click="updateSelection($event,'发布管理')"/>发布管理</li>
-</ul>
+</ul> -->
+<div class="qxul">
+	<ul ng-repeat="menu in menus">
+	<p class="qxtit" ng-click="unfolf(menu.id)" ng-class="{'fuhao':fuhao==menu.id}">
+	<span class="jian">-</span>
+	<span class="jia">+</span>
+	<input type="checkbox" ng-checked="isSelected(menu.names)" ng-click="updateSelection($event,menu)" style="margin-left:5px;margin-right:20px;"/>{{menu.names}}</p>
+		<div class="sj" ng-show="sj==menu.id">
+			<li ng-repeat="sub in menu.adminSubMenus">
+			<input type="checkbox" ng-checked="isSubSelected(sub.names)" ng-click="updateSubSelection($event,sub,menu)"/>{{sub.names}}
+			</li>
+			<p style="width: 60%;height: 3px;border: 1px solid #e6e2e2;"></p>
+		</div>
+	</ul>
+	</div>
 </div>
 	</div>
 	
@@ -156,8 +170,8 @@
 
 
 	<div class="end" style="margin-top:10px;">
-			<input id="addbutton" name="git" type="submit" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
-			<input id="updatebutton" name="git" type="submit" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
+			<input id="addbutton" name="git" type="submit" ng-show="userRole==null" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
+			<input id="updatebutton" name="git" type="submit" ng-show="userRole!=null" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
 			<input id="esc" name="esc" type="reset" value="取消" onclick="CloseDiv3()"  class="esc">
 			
 		</div>
@@ -189,12 +203,24 @@
 <style>
 .resource{width:50%;left:10%;min-width:600px;}
 .resource .select-2 , .resource .select-3{width:95%;}
-.qx ul{width:100%;background:#F6F6F6;padding:15px;}
-.qx ul li{margin-bottom:5px;font-size:1.5rem;}
+.qx .qxul{width:100%;background:#F6F6F6;padding:15px;border-radius:10px;border:1px solid #e3e2e2;}
+.qx .qxul .qxtit{cursor: pointer;font-size:1.6rem;margin:0;}
+
+.qx ul li{margin:5px 0;font-size:1.5rem;text-indent:4em;}
 .qx ul li input{margin-right:8px;}
 .poop p{font-size:1.8rem;font-weight:bold;}
 .poop ul{display: flex; justify-content: space-between; flex-wrap: wrap;}
 .poop ul li{padding: 3px 12px;background:#F8F8F8;border:1px solid #F3F4F4;border-radius: 20px;display: inline-block;margin-right:8px;margin-bottom:8px;}
+.qxtit .jia , .qxtit .jian{float:left;display: contents;}
+.fuhao{display: inline-block;padding:0 10px;font-weight: bold;font-size:1.3rem}
+.qxtit .jian{display: none;font-size: 3rem;}
+.qxtit .jia{font-size: 2.3rem;}
+.fuhao .jia{display: none;}
+.fuhao .jian{display:contents;}
+.selected {
+	background-color: #c1ddec
+}
+.end{clear: both;}
 </style>
 
 </@b.body>  
