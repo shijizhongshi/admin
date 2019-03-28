@@ -49,12 +49,8 @@ public class UserController {
 
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		List<User> list=userService.selectUser(pageNo, pageSize, mobile, nickname, userrole);
-		int count=userService.selectUserCount(mobile, nickname, userrole);
+		results = userService.selectUser(pageNo, pageSize, mobile, nickname, userrole);
 		
-		results.setData(list);
-		results.setStatus("0");
-		results.setCount(count);
 		return results;
 	}
 	
@@ -63,7 +59,7 @@ public class UserController {
 	
 	@RequestMapping(value="/saveupdate",method=RequestMethod.POST)
 	public Results<String> saveUser(@RequestBody @Valid User user,BindingResult valid){
-		Results<String> result=new Results<String>();
+ 		Results<String> result=new Results<String>();
 		if(user.getId()==null || "".equals(user.getId())){
 			if(valid.hasErrors()){
 				result.setStatus("1");

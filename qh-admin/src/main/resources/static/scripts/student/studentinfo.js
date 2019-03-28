@@ -6,6 +6,9 @@ app.controller("studentinfoController", function($scope, $http){
 			$http.get("/api/user/select",{"params":{"nickname":$scope.nickname,"mobile":$scope.mobile,"page":$scope.page=1}},{'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function (result) {
 				if (result.status == "0") {
+					if (result.message != null) {
+						alert(result.message);
+					}
 					$scope.userList = result.data;
 					$scope.openCourse=$scope.userList[0]; 
 				}else {
@@ -16,8 +19,22 @@ app.controller("studentinfoController", function($scope, $http){
 			alert("请先填写查询条件！");
 			return;
 		}
-	} 
-	
+
+	}
+	$scope.list = function () {
+		if ($scope.mobile!='' && $scope.mobile!=null || $scope.nickname!='' && $scope.nickname!=null) {
+			$http.get("/api/user/select",{"params":{"nickname":$scope.nickname,"mobile":$scope.mobile,"page":$scope.page=1}},{'Content-Type': 'application/json;charset=UTF-8'})
+			.success(function (result) {
+				if (result.status == "0") {
+					$scope.userList = result.data;
+					$scope.total = result.count;
+				}else {
+					alert(result.messgae);
+				}
+			})
+		}
+	}
+	$scope.list();
 	//选中更换样式 数据回显
 	$scope.checkUser = function (u) {
 		$scope.selected = u;
@@ -215,7 +232,48 @@ app.controller("studentinfoController", function($scope, $http){
 	    	}
 	    })
 	}
-	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//CV工程师上线 (以下代码剪切自 学员管理页面)
+	//保存和修改学员的信息
+	$scope.saveORupdateUser=function(){
+		if($scope.user.password!=$scope.confirmPassword){
+			alert("输入两次密码不一致~");
+			return;
+		}
+		$scope.user.address=$scope.address;
+		$http.post("/api/user/saveupdate",$scope.user,{'Content-Type': 'application/json;charset=UTF-8'})
+	    .success(function(data){
+	    	if(data.status=="0"){
+	    		if($scope.userId!=null){
+	    			alert("修改成功~");
+	    		}else{
+	    			alert("添加成功~");
+	    		}
+	    			document.getElementById('add').style.display="none"; 
+	    			$scope.list();
+	    	}else{
+	    		alert(data.message);
+	    	}
+	    })
+	}
+	//删除学员信息
+	$scope.deleteUser=function(){
+		if($scope.userId!=null){
+			 if(confirm("您确定要删除这条学员信息吗")){
+				$http.get("/api/user/delete",{"params": {"id":$scope.userId}},{'Content-Type': 'application/json;charset=UTF-8'})
+				.success(function(data){
+					if(data.status=="0"){
+						alert("删除成功~");
+						$scope.list();
+					}else{
+						alert(data.message);
+					}
+				})
+			}
+		}else{
+			alert("请选中信息~");
+		}
+	}
 	
 
 })
