@@ -304,7 +304,9 @@ public class UserService implements IUserService{
 	@Override
 	public int selectStudentCount(String fromdate, String todate, String realnameORmobile, String status) {
 		// TODO Auto-generated method stub
-		return userDao.selectStudentCount(fromdate, todate, realnameORmobile, status);
+		int count =  userDao.selectStudentCount(fromdate, todate, realnameORmobile, status);
+		System.out.println("aaaaaaaaaaaaaaaa"+count);
+		return count;
 	}
 
 	@Override

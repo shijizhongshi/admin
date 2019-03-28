@@ -96,7 +96,7 @@
 		</if>
 		
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-		and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or u.mobile like concat(concat('%',#{realnameORmobile},'%')))
+		and (u.mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
 		and u.isdisabled=#{status}
