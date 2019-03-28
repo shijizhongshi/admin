@@ -3,7 +3,6 @@ package com.ola.qh.service.imp;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.alibaba.fastjson.JSON;
 import com.ola.qh.dao.AdminRoleMenusDao;
 import com.ola.qh.dao.BusinessDao;
 import com.ola.qh.dao.UserBookDao;
@@ -160,9 +158,17 @@ public class UserService implements IUserService{
 	
 	
 	@Override
-	public List<User> selectUser(int pageNo,int pageSize, String mobile, String nickname, String userrole) {
+	public Results<List<User>> selectUser(int pageNo,int pageSize, String mobile, String nickname, String userrole) {
+		Results<List<User>> results = new Results<List<User>>();
 		
 		List<User> list = userDao.selectUser(pageNo,pageSize,mobile, nickname, userrole);
+		//如果根据查询条件没有查询出用户 给页面一条提示
+		if (list.size() == 0) {
+			results.setStatus("0");
+			results.setMessage("根据条件查询为空");
+			
+			return results;
+		}
 		for (User user : list) {
 			//循环遍历 在user_buy_course表中查询是否存在
 			Integer count = userDao.selectCountByUserId(user.getId());
@@ -174,13 +180,12 @@ public class UserService implements IUserService{
 				user.setIsStudent(1);
 			}
 		}
-		return list;
-	}
-
-	@Override
-	public int selectUserCount(String mobile, String nickname, String userrole) {
+		int count = userDao.selectUserCount(mobile, nickname, userrole);
+		results.setStatus("0");
+		results.setData(list);
+		results.setCount(count);
 		
-		return userDao.selectUserCount(mobile, nickname, userrole);
+		return results;
 	}
 
 	@Transactional(rollbackFor = Exception.class)
@@ -198,9 +203,16 @@ public class UserService implements IUserService{
 			}
 			if(user.getId()!=null && !"".equals(user.getId())){
 				//////编辑学员信息
-				userDao.updateUser(user);
-				result.setStatus("0");
-				return result;
+				Integer count = userDao.updateUser(user);
+				if (count != 0) {
+					result.setStatus("0");
+					return result;
+				}else {
+					result.setStatus("1");
+					result.setMessage("修改失败");
+					
+					return result;
+				}
 			}else{
 				int count=userDao.selectUserCount(user.getMobile(), null, null);
 				if (count!=0) {

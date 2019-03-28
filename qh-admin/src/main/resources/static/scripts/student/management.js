@@ -114,48 +114,6 @@ app.controller("studentController", function($scope, $http){
 		}
 		
 	}
-	
-	
-	////////保存和修改学员的信息
-	$scope.saveORupdateUser=function(){
-		if($scope.user.password!=$scope.confirmPassword){
-			alert("输入两次密码不一致~");
-			return;
-		}
-		$scope.user.address=$scope.address;
-		$http.post("/api/user/saveupdate",$scope.user,{'Content-Type': 'application/json;charset=UTF-8'})
-	    .success(function(data){
-	    	if(data.status=="0"){
-	    		if($scope.userId!=null){
-	    			alert("修改成功~");
-	    		}else{
-	    			alert("添加成功~");
-	    		}
-	    			document.getElementById('add').style.display="none"; 
-	    			$scope.loaddata();
-	    	}else{
-	    		alert(data.message);
-	    	}
-	    })
-	}
-	
-	$scope.deleteUser=function(){
-		if($scope.userId!=null){
-			 if(confirm("您确定要删除这条学员信息吗")){
-				$http.get("/api/user/delete",{"params": {"id":$scope.userId}},{'Content-Type': 'application/json;charset=UTF-8'})
-				.success(function(data){
-					if(data.status=="0"){
-						alert("删除成功~");
-					}else{
-						alert(data.message);
-					}
-				})
-			}
-		}else{
-			alert("请选中信息~");
-		}
-	}
-	
 	///////////////////////////////////////处理报班的信息开始////////////////////////////
 	
 	$scope.classlists=function(){

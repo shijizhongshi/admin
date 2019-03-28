@@ -57,6 +57,12 @@ submenu="sidebarmenu-student-studentinfo">
 
 			<div class="admin-table">
 				<ul class="show">
+					<li style="background: #9DE879;" ng-click="add()"><span
+						class="glyphicon glyphicon-plus"></span>&nbsp;添加学员</li>
+					<li style="background: #F9CD33;" ng-click="update()"><span
+						class="glyphicon glyphicon-pencil"></span>&nbsp;修改学员</li>
+					<li style="background: #F86846;" ng-click="deleteUser()"><span
+						class="glyphicon glyphicon-trash"></span>&nbsp;删除学员</li>
 					<li ng-click="applys(1)" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-briefcase"></span>&nbsp;网课报班</li>
 					<li ng-click="applys(2)" style="background: #F9CD33;"><span
@@ -251,8 +257,8 @@ submenu="sidebarmenu-student-studentinfo">
 						</div>
 					</form>
 				</div>
-				
-				
+
+
 				<!-- 免费半价重学 -->
 				<div class="resource" id="resource">
 					<form id="formReset3">
@@ -356,7 +362,69 @@ submenu="sidebarmenu-student-studentinfo">
 						</div>
 					</form>
 				</div>
+				<!--添加/修改弹窗  -->
+				<!--添加修改学员-->
+				<div class="poop" id="add">
+					<form id="myform" class="ng-pristine ng-valid">
+						<h3 ng-show="userId==null">添加学员</h3>
+						<h3 ng-show="userId!=null">修改学员</h3>
+						<div class="select-2">
+							<span>真实姓名<i class="bitian">*</i></span> <input type="text"
+								ng-model="user.realname"
+								class="ng-pristine ng-untouched ng-valid ng-empty"
+								placeholder="请输入学员姓名">
+						</div>
+						<div class="select-2">
+							<span>学员电话<i class="bitian">*</i></span> <input type="text"
+								ng-model="user.mobile"
+								class="ng-pristine ng-untouched ng-valid ng-empty"
+								placeholder="请输入学员电话">
+						</div>
+						<div class="select-2">
+							<span>用户密码<i class="bitian">*</i></span> <input type="text"
+								ng-model="user.password"
+								class="ng-pristine ng-untouched ng-valid ng-empty"
+								placeholder="请输入用户密码">
+						</div>
+						<div class="select-2">
+							<span>确认密码<i class="bitian">*</i></span> <input type="text"
+								ng-model="confirmPassword"
+								class="ng-pristine ng-untouched ng-valid ng-empty"
+								placeholder="请确认密码">
+						</div>
+						<div class="select-3">
+							<span>所在地区</span> <img src="/images/sjk-xl.png"> <select
+								ng-model="p" ng-options="p.provinceName for p in provincelist"
+								ng-change="getCity(p)">
 
+							</select>
+						</div>
+						<div class="select-3">
+							<span>&nbsp;</span> <img src="/images/sjk-xl.png"> <select
+								ng-options="city.cityName for city in citylist"
+								ng-model="cityName" ng-change="getCityName(cityName)">
+
+							</select>
+						</div>
+						<div class="select-radio ">
+							<ul>
+								<li>学员状态</li>
+								<li><input type="radio" ng-value="0"
+									ng-model="user.isdisabled"> 正常</li>
+								<li><input type="radio" ng-value="1"
+									ng-model="user.isdisabled">禁用</li>
+							</ul>
+						</div>
+						<div class="end">
+							<input name="git" type="submit" value="提交" ng-show="userId==null"
+								ng-click="saveORupdateUser()" style="background: #5ED8A9;">
+							<input name="git" type="submit" value="修改" ng-show="userId!=null"
+								ng-click="saveORupdateUser()" style="background: #5ED8A9;">
+							<input name="esc" type="reset" value="取消" onclick="CloseDiv()"
+								class="esc">
+						</div>
+					</form>
+				</div>
 			</div>
 
 

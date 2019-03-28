@@ -13,9 +13,7 @@ public interface IUserService {
 	
 	public Results<String> saveUsers(User user);
 	
-	public List<User> selectUser(int pageNo,int pageSize,String mobile,String nickname,String userrole);
-	
-	public int selectUserCount(String mobile,String nickname,String userrole);
+	public Results<List<User>> selectUser(int pageNo,int pageSize,String mobile,String nickname,String userrole);
 	
 	public int updateUser(String isdisabled,String id);
 	
