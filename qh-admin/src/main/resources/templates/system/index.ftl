@@ -5,7 +5,7 @@
 <@h.header title="banner广告管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
-<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-banner">
+<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-index">
 <div class="details" style="width: 100%">
 	<div class="details-nav">
 		<ul>

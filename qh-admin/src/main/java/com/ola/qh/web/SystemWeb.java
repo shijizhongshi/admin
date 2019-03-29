@@ -36,4 +36,9 @@ public class SystemWeb {
 	public String index(){
 		return "system/index";
 	}
+	@RequestMapping("/operating")
+	public String operating(){
+		return "system/operating";
+	}
+	
 }
