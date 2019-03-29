@@ -288,6 +288,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	$scope.updateAudition=function(){
 		$scope.courseNofree.imgUrl=$scope.imgUrl;
 		$scope.courseNofree.videoUrl=$scope.videoUrl;
+		$scope.courseNofree.teachers=$scope.teacher;
 		$http.post("/api/coursenofree/update",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
