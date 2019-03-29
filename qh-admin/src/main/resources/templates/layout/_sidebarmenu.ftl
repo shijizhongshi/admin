@@ -14,7 +14,7 @@
                 <!-- logo -->
                 <div class="logo">
                     <a href="/" class="logo-expanded">
-                         <img src="/images/sjk-.png" width="100%" alt=""/>
+                         <span style="font-size:2.5rem;font-weight:bold;color:white;">优渼后台管理</span>
                     </a>
                     <a href="/" class="logo-collapsed">
                         <img src="/assets/images/logo-collapsed@2x.png" width="40" alt=""/>
