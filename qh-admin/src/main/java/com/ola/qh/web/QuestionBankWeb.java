@@ -38,4 +38,8 @@ public class QuestionBankWeb {
 	public String  feedback(){
 		return "questionBank/feedback";
 	}
+	@RequestMapping("/calendar")
+	public String  calendar(){
+		return "questionBank/calendar";
+	}
 	}
