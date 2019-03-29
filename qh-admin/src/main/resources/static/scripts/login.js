@@ -7,7 +7,7 @@ $scope.login = function(){
     	if(data.status=="0"){
     		alert("登录页成功~");
     		if(data.data=="admin"){
-    			location.href="/web/system/banner";
+    			location.href="/web/system/index";
     		}else{
     			location.href="/web/student/management";
     		}
