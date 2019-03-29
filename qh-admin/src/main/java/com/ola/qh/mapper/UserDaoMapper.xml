@@ -83,7 +83,7 @@
 	
 	<select id="selectStudentCount" resultType="int">
 		select count(*) from (
-		select count(*)  from user_buy_course as us 
+		select count(us.user_id)  from user_buy_course as us 
 		left join  user as u
 		on u.id = us.user_id 
 		group by us.user_id 

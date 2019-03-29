@@ -49,6 +49,40 @@
 <span>&nbsp;</span>
 <input type="date" >
 </div>
+<div class="fl">
+<p class="fltit">按一下条件进行推送</p>
+
+<ul>
+<li>性别</li>
+<li style="background:#5ed8a9;border:none;color:white;padding-top:6px;">不限</li>
+<li>男</li>
+<li>女</li>
+</ul>
+<ul>
+<li>专业</li>
+<li>不限</li>
+<li>专业1</li>
+<li>专业2</li>
+</ul>
+<ul>
+<li>用户属性</li>
+<li>全部</li>
+<li>护士</li>
+<li>学员</li>
+<li>普通用户</li>
+</ul>
+<ul>
+<li>推送方式</li>
+<li>全部</li>
+<li>短信</li>
+<li>公众号</li>
+<li>APP</li>
+</ul>
+<ul>
+<li>其他</li>
+<li>生日</li>
+</ul>
+</div>
 <div class="end">
 <input name="git" type="submit" value="发送"style="background: #5ED8A9;">
 </div>
@@ -83,6 +117,39 @@
 <div class="select-3">
 <span>&nbsp;</span>
 <input type="date" >
+</div>
+<div class="fl">
+<p class="fltit">按一下条件进行推送</p>
+<ul>
+<li>性别</li>
+<li style="background:#5ed8a9;border:none;color:white;padding-top:6px;">不限</li>
+<li>男</li>
+<li>女</li>
+</ul>
+<ul>
+<li>专业</li>
+<li>不限</li>
+<li>专业1</li>
+<li>专业2</li>
+</ul>
+<ul>
+<li>用户属性</li>
+<li>全部</li>
+<li>护士</li>
+<li>学员</li>
+<li>普通用户</li>
+</ul>
+<ul>
+<li>推送方式</li>
+<li>全部</li>
+<li>短信</li>
+<li>公众号</li>
+<li>APP</li>
+</ul>
+<ul>
+<li>其他</li>
+<li>生日</li>
+</ul>
 </div>
 <div class="end">
 <input name="git" type="submit" value="发送"style="background: #5ED8A9;">

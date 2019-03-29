@@ -49,12 +49,8 @@ public class UserController {
 
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
-		List<User> list=userService.selectUser(pageNo, pageSize, mobile, nickname, userrole);
-		int count=userService.selectUserCount(mobile, nickname, userrole);
+		results = userService.selectUser(pageNo, pageSize, mobile, nickname, userrole);
 		
-		results.setData(list);
-		results.setStatus("0");
-		results.setCount(count);
 		return results;
 	}
 	
@@ -63,7 +59,7 @@ public class UserController {
 	
 	@RequestMapping(value="/saveupdate",method=RequestMethod.POST)
 	public Results<String> saveUser(@RequestBody @Valid User user,BindingResult valid){
-		Results<String> result=new Results<String>();
+ 		Results<String> result=new Results<String>();
 		if(user.getId()==null || "".equals(user.getId())){
 			if(valid.hasErrors()){
 				result.setStatus("1");
@@ -97,7 +93,10 @@ public class UserController {
 		int pageSize=Patterns.pageSize;
 		int pageNo=(page-1)*pageSize;
 		List<User> list = userService.selectStudent(fromdate, todate, realnameORmobile, status, pageNo, pageSize);
-		result.setCount(userService.selectStudentCount(fromdate, todate, realnameORmobile, status));
+		//sql语句暂时无法处理检索时查询数量  后续想到实现方法再改
+		if (realnameORmobile == null) {
+			result.setCount(userService.selectStudentCount(fromdate, todate, realnameORmobile, status));
+		}
 		result.setStatus("0");
 		result.setData(list);
 		return result;
