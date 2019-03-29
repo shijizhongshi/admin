@@ -19,13 +19,14 @@ import com.ola.qh.service.IBuyCourseService;
 import com.ola.qh.service.ICourseClassService;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Results;
+
 /**
  * 
-* @ClassName: CourseController  
-* @Description:课程的类别和课程的处理  
-* @author guoyuxue  
-* @date 2018年11月20日  
-*
+ * @ClassName: CourseController
+ * @Description:课程的类别和课程的处理
+ * @author guoyuxue
+ * @date 2018年11月20日
+ *
  */
 @RestController
 @RequestMapping("/api/course")
@@ -33,17 +34,22 @@ public class CourseController {
 
 	@Autowired
 	private ICourseService courseService;
-	
+
 	@Autowired
 	private ICourseClassService courseClassService;
-	
+
 	@Autowired
 	private IBuyCourseService buyCourseService;
 
 	/**
 	 * 大类别的集合
-	 * <p>Title: listCourseType</p>  
-	 * <p>Description: </p>  
+	 * <p>
+	 * Title: listCourseType
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/courseTypeList")
@@ -54,25 +60,27 @@ public class CourseController {
 		result.setStatus("0");
 		return result;
 	}
-	
-	
+
 	/**
 	 * 保存大类别或者是小类别简单保存
-	 * <p>Title: saveCourseType</p>  
-	 * <p>Description: </p>  
+	 * <p>
+	 * Title: saveCourseType
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
 	 * @param id
 	 * @param courseTypeName
 	 * @param courseTypeId
 	 * @return
 	 */
 	@RequestMapping("/courseTypeSave")
-	public Results<String> saveCourseType(
-			@RequestParam(name="courseTypeName",required=true)String courseTypeName,
-			@RequestParam(name="courseTypeId",required=false)String courseTypeId
-			){
-		Results<String> result=new Results<String>();
-		int num= courseService.insertCourseType(courseTypeName,courseTypeId);
-		if(num>0){
+	public Results<String> saveCourseType(@RequestParam(name = "courseTypeName", required = true) String courseTypeName,
+			@RequestParam(name = "courseTypeId", required = false) String courseTypeId) {
+		Results<String> result = new Results<String>();
+		int num = courseService.insertCourseType(courseTypeName, courseTypeId);
+		if (num > 0) {
 			result.setStatus("0");
 			return result;
 		}
@@ -80,24 +88,28 @@ public class CourseController {
 		result.setMessage("保存失败");
 		return result;
 	}
+
 	/**
 	 * 修改大类别和小类别
-	 * <p>Title: updateCourseType</p>  
-	 * <p>Description: </p>  
+	 * <p>
+	 * Title: updateCourseType
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
 	 * @param id
 	 * @param courseTypeName
 	 * @param courseTypeId
 	 * @return
 	 */
 	@RequestMapping("/courseTypeUpdate")
-	public Results<String> updateCourseType(
-			@RequestParam(name="id",required=true)String id,
-			@RequestParam(name="courseTypeName",required=true)String courseTypeName,
-			@RequestParam(name="courseTypeId",required=false)String courseTypeId
-			){
+	public Results<String> updateCourseType(@RequestParam(name = "id", required = true) String id,
+			@RequestParam(name = "courseTypeName", required = true) String courseTypeName,
+			@RequestParam(name = "courseTypeId", required = false) String courseTypeId) {
 		Results<String> result = new Results<String>();
-		int num= courseService.updateCourseType(courseTypeName, id, courseTypeId);
-		if(num>0){
+		int num = courseService.updateCourseType(courseTypeName, id, courseTypeId);
+		if (num > 0) {
 			result.setStatus("0");
 			return result;
 		}
@@ -105,15 +117,16 @@ public class CourseController {
 		result.setMessage("修改失败");
 		return result;
 	}
-	
-	
-	
-	
 
 	/**
 	 * 子类别的集合
-	 * <p>Title: listCourseTypeSubclass</p>  
-	 * <p>Description: </p>  
+	 * <p>
+	 * Title: listCourseTypeSubclass
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
 	 * @param courseTypeId
 	 * @return
 	 */
@@ -128,8 +141,6 @@ public class CourseController {
 		return result;
 
 	}
-	
-	
 
 	/**
 	 * 
@@ -148,8 +159,7 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping("/courseList")
-	public Results<List<Course>> listCourse(
-			@RequestParam(name = "pageNo", required = true) int pageNo,
+	public Results<List<Course>> listCourse(@RequestParam(name = "pageNo", required = true) int pageNo,
 			@RequestParam(name = "pageSize", required = true) int pageSize,
 			@RequestParam(name = "courseTypeName", required = false) String courseTypeName,
 			@RequestParam(name = "courseTypeSubclassName", required = false) String courseTypeSubclassName,
@@ -157,57 +167,62 @@ public class CourseController {
 			@RequestParam(name = "userId", required = false) String userId) {
 
 		Results<List<Course>> result = new Results<List<Course>>();
-		
+
 		Course course = new Course();
 		course.setCourseTypeName(courseTypeName);
 		course.setCourseTypeSubclassName(courseTypeSubclassName);
 		course.setPageNo(pageNo);
 		course.setPageSize(pageSize);
 		course.setCourseName(courseName);
-		List<Course> list=courseService.courseList(course);
-		for(Course course2 : list) {
-			int count=buyCourseService.existOpenCourse(course2.getId(), userId,null);
-			if(count==0){
-				
-				List<CourseClass> classlist=courseClassService.listCourseClass(course2.getClassId(), null, null);
-				int classcount=buyCourseService.existOpenCourse(null, userId, classlist.get(0).getId());
-				if(classcount==0){
+		List<Course> list = courseService.courseList(course);
+		for (Course course2 : list) {
+			int count = buyCourseService.existOpenCourse(course2.getId(), userId, null);
+			if (count == 0) {
+
+				List<CourseClass> classlist = courseClassService.listCourseClass(course2.getClassId(), null, null);
+				int classcount = buyCourseService.existOpenCourse(null, userId, classlist.get(0).getId());
+				if (classcount == 0) {
 					course2.setIsbuy("0");
-				}else{
+				} else {
 					course2.setIsbuy("1");
 				}
-			}else{
+			} else {
 				course2.setIsbuy("1");
 			}
 		}
 		result.setStatus("0");
 		result.setData(list);
-		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName,courseName));
+		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName, courseName));
 		return result;
 	}
-	
+
 	/**
 	 * 课程的保存和修改
-	 * <p>Title: courseSaveUpdate</p>  
-	 * <p>Description: </p>  
+	 * <p>
+	 * Title: courseSaveUpdate
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
 	 * @param course
 	 * @param valid
 	 * @return
 	 */
-	@RequestMapping(value="/courseSaveUpdate",method=RequestMethod.POST)
-	public Results<String> courseSaveUpdate(@RequestBody @Valid Course course,BindingResult valid){
-		
-		Results<String> result=new Results<String>();
-		if(course.getId()==null || "".equals(course.getId())){
-			////修改课程的基本信息
-			if(valid.hasErrors()){
+	@RequestMapping(value = "/courseSaveUpdate", method = RequestMethod.POST)
+	public Results<String> courseSaveUpdate(@RequestBody @Valid Course course, BindingResult valid) {
+
+		Results<String> result = new Results<String>();
+		if (course.getId() == null || "".equals(course.getId())) {
+			//// 修改课程的基本信息
+			if (valid.hasErrors()) {
 				result.setStatus("1");
 				result.setMessage("添加课程信息不完整");
 				return result;
 			}
 		}
 		int num = courseService.insertUpdateCourse(course);
-		if(num>0){
+		if (num > 0) {
 			result.setStatus("0");
 			return result;
 		}
@@ -216,12 +231,12 @@ public class CourseController {
 		return result;
 
 	}
-	
+
 	@RequestMapping("/deleteCourse")
-	public Results<String> deleteCourse(@RequestParam(name="courseId",required=true)String courseId){
-		Results<String> result=new Results<String>();
+	public Results<String> deleteCourse(@RequestParam(name = "courseId", required = true) String courseId) {
+		Results<String> result = new Results<String>();
 		int num = courseService.deleteCourse(courseId);
-		if(num>0){
+		if (num > 0) {
 			result.setStatus("0");
 			return result;
 		}
@@ -230,6 +245,22 @@ public class CourseController {
 		return result;
 
 	}
+	/**
+	 * 推送页面  专业下拉列表
+	 * @return
+	 */
+	@RequestMapping(value = "selectCourseTypeSubclassNameAll", method = RequestMethod.GET)
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclassNameAll() {
+		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
+		results = courseService.selectCourseTypeSubclassNameAll();	
+		
+		return results;
+	}
 	
+	@RequestMapping(value="send", method = RequestMethod.POST)
+	public Results<CourseTypeSubclass> send () {
+		
+		return null;
+	}
 
 }

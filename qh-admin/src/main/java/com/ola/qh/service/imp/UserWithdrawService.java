@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alipay.api.AlipayApiException;
 import com.ola.qh.dao.UserMessageDao;
 import com.ola.qh.dao.UserWithdrawDao;
 import com.ola.qh.entity.UserMessage;

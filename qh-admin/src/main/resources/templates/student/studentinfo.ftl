@@ -65,6 +65,7 @@ submenu="sidebarmenu-student-studentinfo">
 						<tr>
 							<th>手机号</th>
 							<th>昵称</th>
+							<th>真实姓名</th>
 							<th>用户类型</th>
 							<th>用户资质</th>
 							<th>用户生日</th>
@@ -76,14 +77,15 @@ submenu="sidebarmenu-student-studentinfo">
 							ng-class="{'selected':selected==u}">
 							<th>{{u.mobile}}</th>
 							<th>{{u.nickname}}</th>
+							<th>{{u.realname}}</th>
 							<!--用户类型 展示 -->
 							<th ng-show="{{u.userrole=='0'}}">普通用户</th>
 							<th ng-show="{{u.userrole=='1'}}">服务店铺用户</th>
 							<th ng-show="{{u.userrole=='2'}}">商城店铺用户</th>
 							<th ng-show="{{u.userrole=='3'}}">家里有矿用户</th>
 							<!--用户资质 展示  -->
-							<th ng-show="{{u.isdoctor=='0'}}">医生用户</th>
-							<th ng-show="{{u.isdoctor=='1'}}">普通用户</th>
+							<th ng-show="{{u.isdoctor=='0'}}">普通用户</th>
+							<th ng-show="{{u.isdoctor=='1'}}">医生用户</th>
 							<th>{{u.birthday | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.addtime | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.address}}</th>

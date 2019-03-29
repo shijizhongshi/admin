@@ -15,6 +15,7 @@ import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.KeyGen;
+import com.ola.qh.util.Results;
 /**
  * 
 * @ClassName: CourseService  
@@ -105,6 +106,24 @@ public class CourseService implements ICourseService{
 	public int courseCount(String courseTypeName, String courseTypeSubclassName,String courseName) {
 		
 		return courseDao.courseCount(courseTypeName, courseTypeSubclassName,courseName);
+	}
+	/**
+	 * 推送页面  专业下拉列表
+	 */
+	@Override
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclassNameAll() {
+		Results<List<CourseTypeSubclass>> results = new Results<>();
+		List<CourseTypeSubclass> list = courseDao.selectCourseTypeSubclassNameAll();
+		if (list == null) {
+			results.setStatus("1");
+			results.setMessage("下拉列表数据查询 失败！");
+			
+			return results;
+		}
+		results.setStatus("0");
+		results.setData(list);
+		
+		return results;
 	}
 
 }
