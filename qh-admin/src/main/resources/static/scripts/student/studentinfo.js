@@ -17,6 +17,7 @@ app.controller("studentinfoController", function($scope, $http){
 			})
 		}else if ($scope.mobile.length >= 0 && $scope.mobile.length != 11) {
 			alert("请输入正确格式的手机号！");
+			return;
 		}else {
 			alert("请先填写查询条件！");
 			return;

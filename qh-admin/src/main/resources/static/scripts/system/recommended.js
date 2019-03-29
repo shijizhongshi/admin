@@ -30,13 +30,14 @@ app.controller("recommendedController", function($scope, $http) {
 	};
 	// -------------------------------------------------------------------------------------------//
 	// 获取各个条件
-
-	$scope.clicksex = function() {
+	
+	$("#sexs li").click(function() {
+		console.log($(this).attr('value'))
 		alert("点击了性别栏");
-		var a=document.getElementById('sex').innerHTML;
-		var b=document.getElementById('sex').value;
-		alert(a);
-	};
+	})
+	/*$scope.clicksex = function() {
+		alert($(this).attr('value'));
+	};*/
 	
 	// ===========================================================================================//
 	// 点击事件 点击发送按钮

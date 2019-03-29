@@ -7,39 +7,47 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User {
 
 	private String id;
-	
+
 	private String nickname;
-	
-	@NotEmpty(message="密码不能为空")
+
+	@NotEmpty(message = "密码不能为空")
 	private String password;
-	
+
 	private String verification;
-	
+
 	private Date addtime;
-	
+
 	private String headimg;
-	
+
 	private String userrole;
-	
+
 	private String isdoctor;
-	
-	@NotEmpty(message="手机号不能为空")
+
+	@NotEmpty(message = "手机号不能为空")
 	private String mobile;
-	
+
 	private Date updatetime;
-	
+
 	private String isdisabled;
-	
-	private String address;/////地址
-	
-	private String realname;/////真实姓名
-	
-	private String logintime;////最后一次登录的时间
-	
-	private Integer isStudent;//是否为学员  | 0：不是学员 | 1：是学员
-	
-	
-	
+
+	private String address;///// 地址
+
+	private String realname;///// 真实姓名
+
+	private String logintime;//// 最后一次登录的时间
+
+	private Integer isStudent;// 是否为学员 | 0：不是学员 | 1：是学员
+
+	private String usertype;//service层拼接userrole和isdoctor字段 在页面展示
+
+	public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
+
 	public Integer getIsStudent() {
 		return isStudent;
 	}
@@ -120,7 +128,6 @@ public class User {
 		this.headimg = headimg;
 	}
 
-
 	public String getMobile() {
 		return mobile;
 	}
@@ -161,8 +168,4 @@ public class User {
 		this.isdisabled = isdisabled;
 	}
 
-	
-	
-	
-	
 }

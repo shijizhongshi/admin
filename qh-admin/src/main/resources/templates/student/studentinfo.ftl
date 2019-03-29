@@ -46,11 +46,11 @@ submenu="sidebarmenu-student-studentinfo">
 			<div class="admin-table">
 				<ul class="show">
 					<li style="background: #9DE879;" ng-click="add()"><span
-						class="glyphicon glyphicon-plus"></span>&nbsp;添加学员</li>
+						class="glyphicon glyphicon-plus"></span>&nbsp;添加用户</li>
 					<li style="background: #F9CD33;" ng-click="update()"><span
-						class="glyphicon glyphicon-pencil"></span>&nbsp;修改学员</li>
+						class="glyphicon glyphicon-pencil"></span>&nbsp;修改用户</li>
 					<li style="background: #F86846;" ng-click="deleteUser()"><span
-						class="glyphicon glyphicon-trash"></span>&nbsp;删除学员</li>
+						class="glyphicon glyphicon-trash"></span>&nbsp;删除用户</li>
 					<li ng-click="applys(1)" style="background: #9DE879;"><span
 						class="glyphicon glyphicon-briefcase"></span>&nbsp;网课报班</li>
 					<li ng-click="applys(2)" style="background: #F9CD33;"><span
@@ -64,31 +64,35 @@ submenu="sidebarmenu-student-studentinfo">
 					<table id="tableExcel">
 						<tr>
 							<th>手机号</th>
-							<th>昵称</th>
 							<th>真实姓名</th>
+							<th>昵称</th>
 							<th>用户类型</th>
-							<th>用户资质</th>
 							<th>用户生日</th>
 							<th>注册时间</th>
 							<th>所在地址</th>
+							<th>用户状态</th>
 						</tr>
 
 						<tr ng-repeat="u in userList" ng-click="checkUser(u)"
 							ng-class="{'selected':selected==u}">
 							<th>{{u.mobile}}</th>
-							<th>{{u.nickname}}</th>
 							<th>{{u.realname}}</th>
+							<th>{{u.nickname}}</th>
 							<!--用户类型 展示 -->
-							<th ng-show="{{u.userrole=='0'}}">普通用户</th>
-							<th ng-show="{{u.userrole=='1'}}">服务店铺用户</th>
-							<th ng-show="{{u.userrole=='2'}}">商城店铺用户</th>
-							<th ng-show="{{u.userrole=='3'}}">家里有矿用户</th>
-							<!--用户资质 展示  -->
-							<th ng-show="{{u.isdoctor=='0'}}">普通用户</th>
-							<th ng-show="{{u.isdoctor=='1'}}">医生用户</th>
+							<th ng-show="{{u.usertype=='0'}}">普通用户</th>
+							<th ng-show="{{u.usertype=='1'}}">服务店铺用户</th>
+							<th ng-show="{{u.usertype=='2'}}">商城店铺用户</th>
+							<th ng-show="{{u.usertype=='3'}}">两种店铺都有</th>
+							<th ng-show="{{u.usertype=='10'}}">医生用户</th>
+							<th ng-show="{{u.usertype=='11'}}">既是医生又是服务店铺</th>
+							<th ng-show="{{u.usertype=='12'}}">既是医生又是商城店铺</th>
+							<th ng-show="{{u.usertype=='13'}}">医生/服务店铺/商城店铺</th>
 							<th>{{u.birthday | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.addtime | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.address}}</th>
+							<!--用户状态  -->
+							<th ng-show="{{u.isdisabled=='0'}}">未禁用</th>
+							<th ng-show="{{u.isdisabled=='1'}}">禁用</th>
 						</tr>
 					</table>
 				</div>
