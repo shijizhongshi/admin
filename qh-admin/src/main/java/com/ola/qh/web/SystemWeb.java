@@ -32,5 +32,13 @@ public class SystemWeb {
 	public String recommended(){
 		return "system/recommended";
 	}
+	@RequestMapping("/index")
+	public String index(){
+		return "system/index";
+	}
+	@RequestMapping("/operating")
+	public String operating(){
+		return "system/operating";
+	}
 	
 }

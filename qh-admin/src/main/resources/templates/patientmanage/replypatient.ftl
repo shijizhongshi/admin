@@ -7,7 +7,7 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/patientmanage/replypatient.js"></script>
 <style>
-.message{background:#fbfbfd;padding:10px;border:1px solid #E5E5E5;border:1px solid #E5E5E5;border-radius:10px;margin-bottom:5px; }
+.message{background:#fbfbfd;padding:10px;border:1px solid #E5E5E5;border:1px solid #E5E5E5;}
 .user-message{border-right:1px solid #ece8e8;}
 .patient-message{height:auto}
 .describes{min-height:auto}
