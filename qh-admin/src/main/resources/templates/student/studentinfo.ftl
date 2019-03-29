@@ -101,45 +101,14 @@ submenu="sidebarmenu-student-studentinfo">
 								<p class="xiaobiaoti">选择专业</p>
 								<ul class="menu" style="box-shadow: none;">
 
-									<li class="list" ng-click="typeList(1)"><b>医师资格 </b>
-										<ul class="items" ng-class="{'active':active==1}">
-											<li ng-repeat="sub in courseTypeSubclass"
-												ng-click="typeSub('医师资格',sub)"
-												ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
+									<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.id)">{{ctl.courseTypeName}}
+										<ul class="items" ng-class="{'active':active==ctl.id}">
+									<li ng-repeat="sub in courseTypeSubclass"
+										ng-click="typeSub(ctl.courseTypeName,sub)"
+											ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
 
-										</ul></li>
-									<li class="list" ng-click="typeList(2)"><b>药师资格</b>
-										<ul class="items" ng-class="{'active':active==2}">
-											<li ng-repeat="sub in courseTypeSubclass"
-												ng-click="typeSub('药师资格',sub)"
-												ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-
-										</ul></li>
-									<li class="list" ng-click="typeList(3)"><b>中医基础理论</b>
-										<ul class="items" ng-class="{'active':active==3}">
-											<li ng-repeat="sub in courseTypeSubclass"
-												ng-click="typeSub('中医基础理论',sub)"
-												ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-										</ul></li>
-									<li class="list" ng-click="typeList(4)"><b>卫生资格</b>
-										<ul class="items" ng-class="{'active':active==4}">
-											<li ng-repeat="sub in courseTypeSubclass"
-												ng-click="typeSub('卫生资格 ',sub)"
-												ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-
-										</ul></li>
-									<li class="list" ng-click="typeList(5)"><b>健康管理师</b>
-										<ul class="items" ng-class="{'active':active==5}">
-											<li ng-repeat="sub in courseTypeSubclass"
-												ng-click="typeSub('健康管理师',sub)"
-												ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-										</ul></li>
-									<li class="list" ng-click="typeList(7)"><b>建筑资格</b>
-										<ul class="items" ng-class="{'active':active==7}">
-											<li ng-repeat="sub in courseTypeSubclass"
-												ng-click="typeSub('建筑资格',sub)"
-												ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-										</ul></li>
+									</ul>
+									</li>
 
 
 								</ul>
