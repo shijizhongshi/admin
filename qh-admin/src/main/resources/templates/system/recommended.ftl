@@ -10,7 +10,17 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/system/recommended.js"></script>
 
-
+<style>
+.sss{
+	background: #5ed8a9; border: none; color: white; padding-top: 6px;
+}
+.property{
+	background: #5ed8a9; border: none; color: white; padding-top: 6px;
+}
+.major{
+	background: #5ed8a9; border: none; color: white; padding-top: 6px;
+}
+</style>
 <@b.body menu="sidebarmenu-system"
 submenu="sidebarmenu-system-recommended">
 <div class="class=" details" style="width: 100%;" ng-app="app" ng-controller="recommendedController">
@@ -59,26 +69,28 @@ submenu="sidebarmenu-system-recommended">
 				<div class="fl">
 					<p class="fltit">按以下条件进行推送</p>
 
-					<ul  ng-click="clicksex()" id="sexs">
+					<ul id="sexs">
 						<li>性别</li>
-						<li id="sex" value="1" style="background: #5ed8a9; border: none; color: white; padding-top: 6px;">不限</li>
-						<li id="sex" value="2">男</li>
-						<li id="sex" value="3">女</li>
+						<li ng-click="clicksex()" ng-class="{'sss':sss==0}" id="sex" value="0">不限</li>
+						<li ng-click="clicksex()" ng-class="{'sss':sss==1}" id="sex" value="1">男</li>
+						<li ng-click="clicksex()" ng-class="{'sss':sss==2}" id="sex" value="2">女</li>
 					</ul>
-					<ul>
+					<ul id="major">
 						<li>专业</li>
-						<li>不限</li>
-						<li>
-							<select ng-model="courseTypeSubclassName" ng-options="a for a  in nameList">
+						<li ng-click="clickmajor()" ng-class="{'major':major==0}" value = "0">不限</li>
+						<li value = "1">
+							<select ng-model="courseTypeSubclassName" ng-options="a for a in nameList" >
 							</select>
 						</li>
 					</ul>
-					<ul>
+					<ul id="property">
 						<li>用户属性</li>
-						<li>全部</li>
-						<li>护士</li>
-						<li>学员</li>
-						<li>普通用户</li>
+						<li ng-click="clickproperty()" ng-class="{'property':property==0}" value="0">不限</li>
+						<li ng-click="clickproperty()" ng-class="{'property':property==1}" value="1">医护</li>
+						<li ng-click="clickproperty()" ng-class="{'property':property==2}" value="2">服务店铺</li>
+						<li ng-click="clickproperty()" ng-class="{'property':property==3}" value="3">商品店铺</li>
+						<li ng-click="clickproperty()" ng-class="{'property':property==4}" value="4">服务店铺/商品店铺</li>
+						<li ng-click="clickproperty()" ng-class="{'property':property==5}" value="5">普通用户</li>
 					</ul>
 					<ul>
 						<li>其他</li>
