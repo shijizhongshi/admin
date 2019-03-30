@@ -91,7 +91,7 @@ submenu="sidebarmenu-student-studentinfo">
 							<th>{{u.addtime | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.address}}</th>
 							<!--用户状态  -->
-							<th ng-show="{{u.isdisabled=='0'}}">未禁用</th>
+							<th ng-show="{{u.isdisabled=='0'}}">正常</th>
 							<th ng-show="{{u.isdisabled=='1'}}">禁用</th>
 						</tr>
 					</table>
