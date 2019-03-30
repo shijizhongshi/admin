@@ -193,18 +193,12 @@ public class UserService implements IUserService {
 			return results;
 		}
 		for (User user : list) {
-			//遍历 组合isdoctor字段和userrole字段
-			if (user.getIsdoctor().equals("1") && user.getUserrole().equals("0")) {
-				user.setUsertype("10");
+			//遍历 如果isdoctor字段 == 1， 组合isdoctor字段和userrole字段
+			if (user.getIsdoctor().equals("1") ) {
+				user.setUsertype(user.getIsdoctor()+user.getUserrole());
 			}
-			if (user.getIsdoctor().equals("1") && user.getUserrole().equals("1")) {
-				user.setUsertype("11");
-			}
-			if (user.getIsdoctor().equals("1") && user.getUserrole().equals("2")) {
-				user.setUsertype("12");
-			}
-			if (user.getIsdoctor().equals("1") && user.getUserrole().equals("3")) {
-				user.setUsertype("13");
+			if (user.getIsdoctor().equals("0")) {
+				user.setUsertype(user.getUserrole());
 			}
 			// 循环遍历 在user_buy_course表中查询是否存在
 			Integer count = userDao.selectCountByUserId(user.getId());

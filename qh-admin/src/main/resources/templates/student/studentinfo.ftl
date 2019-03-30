@@ -82,11 +82,11 @@ submenu="sidebarmenu-student-studentinfo">
 							<th ng-show="{{u.usertype=='0'}}">普通用户</th>
 							<th ng-show="{{u.usertype=='1'}}">服务店铺用户</th>
 							<th ng-show="{{u.usertype=='2'}}">商城店铺用户</th>
-							<th ng-show="{{u.usertype=='3'}}">两种店铺都有</th>
+							<th ng-show="{{u.usertype=='3'}}">服务店铺用户/商城店铺用户</th>
 							<th ng-show="{{u.usertype=='10'}}">医生用户</th>
-							<th ng-show="{{u.usertype=='11'}}">既是医生又是服务店铺</th>
-							<th ng-show="{{u.usertype=='12'}}">既是医生又是商城店铺</th>
-							<th ng-show="{{u.usertype=='13'}}">医生/服务店铺/商城店铺</th>
+							<th ng-show="{{u.usertype=='11'}}">医生/服务店铺用户</th>
+							<th ng-show="{{u.usertype=='12'}}">医生/商城店铺用户</th>
+							<th ng-show="{{u.usertype=='13'}}">医生/服务店铺用户/商城店铺用户</th>
 							<th>{{u.birthday | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.addtime | date:'yyyy-MM-dd'}}</th>
 							<th>{{u.address}}</th>
