@@ -162,4 +162,25 @@
 	and user_id = #{userId}
 	</if>
 	</select>
+	
+	<!--推送页面-->
+	<!--根据条件查询user表  -->
+	<select id="send" resultMap="UserMap">
+	select * from user where 1=1 
+	<if test="sex!=null and sex!=''">
+	and sex = #{sex}
+	</if>
+	<if test="userrole!=null and userrole!=''">
+	and userrole = #{userrole}
+	</if>
+	<if test="isdoctor!=null and isdoctor!=''">
+	and isdoctor = #{isdoctor}
+	</if>
+	<if test="birthday!=null and birthday!=''">
+	and birthday = #{birthday}
+	</if>
+	</select>
+	<!--专业名不为空时  进行联合查询  -->
+	<!--根据专业名字段查询 学员 -->
+	
 </mapper>

@@ -33,5 +33,7 @@ public interface UserDao {
 			@Param("realnameORmobile")String realnameORmobile,@Param("status")String status);
 	
 	public Integer selectCountByUserId(@Param("userId")String id);
+
+	public List<User> send(@Param("sex")String sex,@Param("userrole") String userrole,@Param("isdoctor") String isdoctor,@Param("birthday") String birthday);
 	
 }

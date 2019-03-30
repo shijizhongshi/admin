@@ -24,5 +24,9 @@
 		values(#{id},#{userId},#{types},#{title},#{describe},#{headStatus},#{ordersId},#{patientId},#{addtime},#{subType})
 		</insert>
 		
-		
+		<!--推送页面信息保存到表中  -->
+		<insert id="insertMessage" parameterType="com.ola.qh.entity.UserMessage">
+		insert into user_message(id,user_id,title,`describe`,types,addtime)
+		 values(#{id},#{userId},#{title},#{describe},#{types},#{addtime})
+		</insert>
 	</mapper>

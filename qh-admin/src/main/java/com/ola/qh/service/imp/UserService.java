@@ -21,6 +21,7 @@ import com.ola.qh.dao.BusinessDao;
 import com.ola.qh.dao.UserBookDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
+import com.ola.qh.dao.UserMessageDao;
 import com.ola.qh.dao.UserRoleDao;
 import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.entity.AdminRoleMenu;
@@ -30,6 +31,7 @@ import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserBook;
 import com.ola.qh.entity.UserLogin;
 import com.ola.qh.entity.UserRole;
+import com.ola.qh.service.IPushService;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
@@ -50,6 +52,10 @@ public class UserService implements IUserService {
 	private UserRoleDao UserRoleDao;
 	@Autowired
 	private AdminRoleMenusDao adminRoleMenusDao;
+	@Autowired
+	private UserMessageDao usermessage;
+	@Autowired
+	private IPushService PushService;
 
 	@Override
 	public int updateUser(String isdisabled, String id) {
@@ -193,9 +199,9 @@ public class UserService implements IUserService {
 			return results;
 		}
 		for (User user : list) {
-			//遍历 如果isdoctor字段 == 1， 组合isdoctor字段和userrole字段
-			if (user.getIsdoctor().equals("1") ) {
-				user.setUsertype(user.getIsdoctor()+user.getUserrole());
+			// 遍历 如果isdoctor字段 == 1， 组合isdoctor字段和userrole字段
+			if (user.getIsdoctor().equals("1")) {
+				user.setUsertype(user.getIsdoctor() + user.getUserrole());
 			}
 			if (user.getIsdoctor().equals("0")) {
 				user.setUsertype(user.getUserrole());
@@ -316,6 +322,35 @@ public class UserService implements IUserService {
 			adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId(), null));
 		}
 		return list;
+	}
+
+	/**
+	 * 推送页面
+	 */
+	@Override
+	public Results<List<User>> send(String title, String content, String sex, String courseTypeSubclassName,
+			String userrole, String isdoctor, String birthday) {
+		Results<List<User>> results = new Results<>();
+		List<User> list = new ArrayList<>();
+		if (courseTypeSubclassName == null) {
+			list = userDao.send(sex, userrole, isdoctor, birthday);
+		}
+		for (User user : list) {
+			// 把标题和内容存放到user_message表中
+			Date addtimeDate = new Date();
+			String id = KeyGen.uuid();
+			usermessage.insertMessage(id, addtimeDate, title, content, user.getId(), 5);
+			// 遍历发送功能 为每个用户发送 失败回滚
+			try {
+				PushService.send(user.getId(), title, content);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		results.setStatus("0");
+		results.setMessage("发送成功");
+
+		return results;
 	}
 
 }

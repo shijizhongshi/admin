@@ -257,10 +257,4 @@ public class CourseController {
 		return results;
 	}
 	
-	@RequestMapping(value="send", method = RequestMethod.POST)
-	public Results<CourseTypeSubclass> send () {
-		
-		return null;
-	}
-
 }
