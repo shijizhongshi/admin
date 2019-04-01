@@ -231,7 +231,13 @@ app.controller("superAdminController", function($scope, $http) {
 		$scope.userRole = u;
 		$scope.userRoleId=u.id;
 		$scope.selected = u;
-		$scope.limitsselected = u.menus;
+		angular.forEach(u.menus, function(item){  
+			$scope.adminMenusNames.push(item.names);
+			angular.forEach(item.list, function(submenu){  
+				$scope.adminSubMenusName.push(submenu.names);
+				
+			}); 
+		}); 
 
 	}
 	//点击事件 点击弹出弹窗 展示 limits
