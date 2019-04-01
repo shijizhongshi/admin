@@ -82,8 +82,8 @@
 							<th>权限操作</th>
 						</tr>
 						<tr ng-repeat ="u in list" ng-class="{'selected':selected==u}" ng-click="checkedUserRole(u)" >
-							<th>{{u.nickname}}</th>
 							<th>{{u.username}}</th>
+							<th>{{u.nickname}}</th>
 							<th>{{u.password}}</th>
 							<th>{{u.category}}</th>
 							<th>{{u.addtime | date:'yyyy.MM.dd'}}</th>
