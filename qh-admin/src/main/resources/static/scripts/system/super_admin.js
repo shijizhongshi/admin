@@ -69,7 +69,7 @@ app.controller("superAdminController", function($scope, $http) {
 	}
 	// 点击事件 点击弹出修改窗口
 	$scope.update = function() {
-		if ($scope.userRole == null) {
+		if ($scope.userRoleId==null) {
 			alert("请先选择一行数据！");
 			return;
 		}
@@ -225,10 +225,11 @@ app.controller("superAdminController", function($scope, $http) {
 		})
 
 	}
-
+	$scope.userRoleId=null;
 	// 点击事件 点击获取数据回显 
 	$scope.checkedUserRole = function(u) {
 		$scope.userRole = u;
+		$scope.userRoleId=u.id;
 		$scope.selected = u;
 		$scope.limitsselected = u.menus;
 
