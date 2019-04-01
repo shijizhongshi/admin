@@ -16,7 +16,7 @@ app.controller("operatingController", function($scope, $http) {
 				"pageNo" : $scope.pageNo,
 				"pageSize" : $scope.pageSize,
 				"userRoleCategory" : $scope.userRoleCategory,
-				"userRoleNickname" : $scope.userRoleNickname,
+				"userRoleUsername" : $scope.userRoleUsername,
 				"operatingScope" : $scope.operatingScope,
 				"operatingStatus" : $scope.operatingStatus,
 			}

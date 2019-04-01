@@ -281,6 +281,7 @@ app.controller("ElementController", function($scope, $http){
 		$scope.subId=qbc.id;
 		$scope.subName=qbc.name;
 		$scope.questionbank();
+		$scope.selecteds=qbc.id;
 	}
 	
 	$scope.checkquestionbank=function(qb){

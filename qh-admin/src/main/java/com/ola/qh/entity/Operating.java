@@ -2,18 +2,25 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Operating {
 
 	private String id;
 	
+	@NotEmpty
 	private String userRoleId;///////管理员id
 	
-	private String userRoleNickname;//////////管理员昵称
+	@NotEmpty
+	private String userRoleUsername;//////////管理员昵称
 	
+	@NotEmpty
 	private String userRoleCategory;///////管理员类型
 	
+	@NotEmpty
 	private String operatingScope;////////改动区域
 	
+	@NotEmpty
 	private String operatingStatus;////////进行的操作
 	
 	private String operatingUser;////////被该动人
@@ -86,12 +93,12 @@ public class Operating {
 		this.showtime = showtime;
 	}
 
-	public String getUserRoleNickname() {
-		return userRoleNickname;
+	public String getUserRoleUsername() {
+		return userRoleUsername;
 	}
 
-	public void setUserRoleNickname(String userRoleNickname) {
-		this.userRoleNickname = userRoleNickname;
+	public void setUserRoleUsername(String userRoleUsername) {
+		this.userRoleUsername = userRoleUsername;
 	}
 	
 	

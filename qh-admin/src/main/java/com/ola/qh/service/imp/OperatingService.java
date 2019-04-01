@@ -21,15 +21,15 @@ public class OperatingService implements IOperatingService{
 
 	@Transactional
 	@Override
-	public Results<List<Operating>> operatingList(String userRoleCategory,String userRoleNickname, String operatingScope, String operatingStatus,
+	public Results<List<Operating>> operatingList(String userRoleCategory,String userRoleUsername, String operatingScope, String operatingStatus,
 			int pageNo, int pageSize) {
 		
 		Results<List<Operating>> results=new Results<List<Operating>>();
 		
 		try {
 			
-			List<Operating> list=operatingDao.operatingList(userRoleCategory,userRoleNickname, operatingScope, operatingStatus, pageNo, pageSize);
-			int count=operatingDao.operatingCount(userRoleCategory,userRoleNickname, operatingScope, operatingStatus);
+			List<Operating> list=operatingDao.operatingList(userRoleCategory,userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize);
+			int count=operatingDao.operatingCount(userRoleCategory,userRoleUsername, operatingScope, operatingStatus);
 			for (Operating operating : list) {
 				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				operating.setShowtime(sf.format(operating.getAddtime()));

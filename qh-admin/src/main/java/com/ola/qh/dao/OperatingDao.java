@@ -8,11 +8,11 @@ import com.ola.qh.entity.Operating;
 
 public interface OperatingDao {
 
-	public List<Operating> operatingList(@Param("userRoleCategory")String userRoleCategory,@Param("userRoleNickname")String userRoleNickname,
+	public List<Operating> operatingList(@Param("userRoleCategory")String userRoleCategory,@Param("userRoleUsername")String userRoleUsername,
 			@Param("operatingScope")String operatingScope,@Param("operatingStatus")String operatingStatus,
 			@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
-	public int operatingCount(@Param("userRoleCategory")String userRoleCategory,@Param("userRoleNickname")String userRoleNickname,
+	public int operatingCount(@Param("userRoleCategory")String userRoleCategory,@Param("userRoleUsername")String userRoleUsername,
 			@Param("operatingScope")String operatingScope,@Param("operatingStatus")String operatingStatus);
 	
 	public int insertOperating(Operating operating);
