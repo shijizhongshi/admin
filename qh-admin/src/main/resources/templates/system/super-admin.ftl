@@ -170,8 +170,8 @@
 
 
 	<div class="end" style="margin-top:10px;">
-			<input id="addbutton" name="git" type="submit" ng-show="$scope.userRoleId==null" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
-			<input id="updatebutton" name="git" type="submit" ng-show="$scope.userRoleId!=null" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
+			<input id="addbutton" name="git" type="submit" ng-show="userRoleId==null" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
+			<input id="updatebutton" name="git" type="submit" ng-show="userRoleId!=null" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
 			<input id="esc" name="esc" type="reset" value="取消" onclick="CloseDiv3()"  class="esc">
 			
 		</div>
