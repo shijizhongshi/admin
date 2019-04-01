@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.OperatingDao">
+	<resultMap type="com.ola.qh.entity.Operating" id="OperatingMap">
+		<result column="id" property="id" />
+		<result column="user_role_id" property="userRoleId" />
+		<result column="user_role_nickname" property="userRoleNickname" />
+		<result column="user_role_category" property="userRoleCategory" />
+		<result column="operating_scope" property="operatingScope" />
+		<result column="operating_status" property="operatingStatus" />
+		<result column="operating_user" property="operatingUser" />
+		<result column="addtime" property="addtime" />
+		
+	</resultMap>
+	
+	<select id="operatingList"  resultMap="OperatingMap">
+		select id,user_role_id,user_role_nickname,user_role_category,operating_scope,operating_status,operating_user,addtime from operating
+		where 1=1
+		<if test="userRoleCategory!=null and userRoleCategory!=''">
+			and user_role_category=#{userRoleCategory}
+		</if>
+		<if test="userRoleNickname!=null and userRoleNickname!=''">
+			and user_role_nickname like concat(concat('%',#{userRoleNickname},'%'))
+		</if>
+		<if test="operatingScope!=null and operatingScope!=''">
+			and operating_scope=#{operatingScope}
+		</if>
+		<if test="operatingStatus!=null and operatingStatus!=''">
+			and operating_status=#{operatingStatus}
+		</if>
+		order by addtime limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="operatingCount"  resultType="int">
+		select count(id) from operating
+		where 1=1
+		<if test="userRoleCategory!=null and userRoleCategory!=''">
+			and user_role_category=#{userRoleCategory}
+		</if>
+		<if test="userRoleNickname!=null and userRoleNickname!=''">
+			and user_role_nickname like concat(concat('%',#{userRoleNickname},'%'))
+		</if>
+		<if test="operatingScope!=null and operatingScope!=''">
+			and operating_scope=#{operatingScope}
+		</if>
+		<if test="operatingStatus!=null and operatingStatus!=''">
+			and operating_status=#{operatingStatus}
+		</if>
+		
+	</select>
+	
+	<insert id="insertOperating" parameterType="com.ola.qh.entity.Operating" >
+		insert into operating(id,user_role_id,user_role_nickname,user_role_category,operating_scope,operating_status,operating_user,addtime)
+		values(#{id},#{userRoleId},#{userRoleNickname},#{userRoleCategory},#{operatingScope},#{operatingStatus},#{operatingUser},#{addtime})
+	
+	</insert>
+	
+	
+	<delete id="deleteOperating">
+		delete from operating where id=#{id}
+		
+	</delete>
+</mapper>
