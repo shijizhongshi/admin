@@ -18,9 +18,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
-				<li>公共资源管理</li>
+				<li>题库资源管理</li>
 				<li>/</li>
-				<li>账号管理</li>
+				<li>试题错误信息反馈</li>
 			</ul>
 		</div>
 		<div class="details-frame">

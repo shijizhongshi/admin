@@ -53,7 +53,7 @@ public class QuestionBankService implements IQuestionBankService {
 				for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 					Row row = rowIterator.next();
 						////// 保存题库的信息
-						if ("共用题干".equals(checkNull(0, row))) {
+						if ("共用题干".equals(checkNull(0, row)) || "共用选项".equals(checkNull(0, row))) {
 							/// 保存他下边的集合
 							QuestionBank qb = new QuestionBank();
 							qb.setAddtime(new Date());
