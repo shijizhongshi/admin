@@ -102,7 +102,17 @@ public class UserController {
 		return result;
 		
 	}
-	
+	/**
+	 * 单播推送页面
+	 * @param title
+	 * @param content
+	 * @param sex
+	 * @param courseTypeSubclassName
+	 * @param userrole
+	 * @param isdoctor
+	 * @param birthday
+	 * @return
+	 */
 	@RequestMapping(value = "/send",method = RequestMethod.GET)
 	public Results<List<User>> send (@RequestParam(name = "title",required=false)String title,
 			@RequestParam(name = "content",required=false) String content,

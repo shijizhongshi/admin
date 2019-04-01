@@ -18,7 +18,9 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.AdminRoleMenusDao;
 import com.ola.qh.dao.BusinessDao;
+import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.UserBookDao;
+import com.ola.qh.dao.UserBuyCourseDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
 import com.ola.qh.dao.UserMessageDao;
@@ -27,8 +29,10 @@ import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.entity.AdminRoleMenu;
 import com.ola.qh.entity.Business;
 import com.ola.qh.entity.BusinessBook;
+import com.ola.qh.entity.Course;
 import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserBook;
+import com.ola.qh.entity.UserBuyCourse;
 import com.ola.qh.entity.UserLogin;
 import com.ola.qh.entity.UserRole;
 import com.ola.qh.service.IPushService;
@@ -56,6 +60,10 @@ public class UserService implements IUserService {
 	private UserMessageDao usermessage;
 	@Autowired
 	private IPushService PushService;
+	@Autowired
+	private CourseDao courseDao;
+	@Autowired
+	private UserBuyCourseDao userBuyCourseDao;
 
 	@Override
 	public int updateUser(String isdisabled, String id) {
@@ -332,22 +340,69 @@ public class UserService implements IUserService {
 			String userrole, String isdoctor, String birthday) {
 		Results<List<User>> results = new Results<>();
 		List<User> list = new ArrayList<>();
+		Integer i = 0;
 		if (courseTypeSubclassName == null) {
 			list = userDao.send(sex, userrole, isdoctor, birthday);
-		}
-		for (User user : list) {
-			// 把标题和内容存放到user_message表中
-			Date addtimeDate = new Date();
-			String id = KeyGen.uuid();
-			usermessage.insertMessage(id, addtimeDate, title, content, user.getId(), 5);
-			// 遍历发送功能 为每个用户发送 失败回滚
-			try {
-				PushService.send(user.getId(), title, content);
-			} catch (Exception e) {
-				e.printStackTrace();
+			for (User user : list) {
+				// 把标题和内容存放到user_message表中
+				Date addtimeDate = new Date();
+				String id = KeyGen.uuid();
+				usermessage.insertMessage(id, addtimeDate, title, content, user.getId(), 5);
+				// 遍历发送功能 为每个用户发送
+				try {
+					PushService.send(user.getId(), title, content);
+					i++;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			results.setStatus("0");
+			results.setMessage("发送成功");
+
+			return results;
+		} else if (courseTypeSubclassName != null) {
+			//计数器
+			
+			// 根据course_type_subclass_name查询course表 返回集合
+			List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
+			for (Course course : courselist) {
+				//根据classid是否为空判断user_buy_course表与哪个表进行关联查询
+				if (course.getClassId().length() != 0) {
+					// 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(course.getClassId());
+					for (UserBuyCourse userBuyCourse : userBuyCourses) {
+						// 信息保存到user_message表中
+						Date addtimeDate = new Date();
+						String id = KeyGen.uuid();
+						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
+						// 调发送接口
+						try {
+							PushService.send(userBuyCourse.getUserId(), title, content);
+							i++;
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				} else if (course.getClassId().length() == 0) {
+					// 使用course_id 查询course表左外链接user_buy_course表(course表为主表)
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId());
+					for (UserBuyCourse userBuyCourse : userBuyCourses) {
+						// 信息保存到user_message表中
+						Date addtimeDate = new Date();
+						String id = KeyGen.uuid();
+						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
+						try {
+							PushService.send(userBuyCourse.getUserId(), title, content);
+							i++;
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		}
 		results.setStatus("0");
+		results.setCount(i);
 		results.setMessage("发送成功");
 
 		return results;

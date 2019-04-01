@@ -22,7 +22,7 @@ app.controller("recommendedController", function($scope, $http) {
 			document.getElementById('birthday').style.color = "white";
 		} else if (a == 1) {
 			// 重置
-			$scope.birthday = 0;
+			$scope.birthday = null;
 			document.getElementById('birthday').value = 0;
 			document.getElementById('birthday').style.background = "none";
 			document.getElementById('birthday').style.color = "black";
@@ -102,7 +102,7 @@ app.controller("recommendedController", function($scope, $http) {
 		$http.get("/api/user/send",{"params":{"title":$scope.title,"content":$scope.content,"sex":$scope.sex,"courseTypeSubclassName":$scope.courseTypeSubclassName,"userrole":$scope.userrole,"isdoctor":$scope.isdoctor,"birthday":$scope.birthday}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				alert("发送成功");
+				alert("发送成功，共发送了"+result.count+"条信息");
 			}else {
 				alert(result.message);
 			}

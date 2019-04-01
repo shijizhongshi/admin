@@ -26,6 +26,5 @@ public interface ICourseService {
 	public int deleteCourse(String id);
 
 	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclassNameAll();
-	
-	
+
 }
