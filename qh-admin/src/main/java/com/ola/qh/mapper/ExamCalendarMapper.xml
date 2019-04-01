@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.ExamCalendarDao">
+	<resultMap type="com.ola.qh.entity.ExamCalendar" id="ExamCalendarMap">
+		<result column="id" property="id" />
+		<result column="exam_name" property="examName" />
+		<result column="years" property="years" />
+		<result column="apply_time" property="applyTime" />
+		<result column="card_time" property="cardTime" />
+		<result column="grade_time" property="gradeTime" />
+		<result column="certificate_time" property="certificateTime" />
+		<result column="course_type_subclass_name" property="courseTypeSubclassName" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	
+	<select id="calendarList" resultMap="ExamCalendarMap">
+		select id,exam_name,years,apply_time,card_time,grade_time,certificate_time,course_type_subclass_name from exam_calendar 
+		where course_type_subclass_name=#{courseTypeSubclassName}
+	</select>
+	
+	<insert id="insertCalendar" parameterType="com.ola.qh.entity.ExamCalendar">
+		insert into exam_calendar(id,exam_name,years,apply_time,card_time,grade_time,certificate_time,
+		course_type_subclass_name,addtime) 
+		values(#{id},#{examName},#{years},#{applyTime},#{cardTime},#{gradeTime},#{certificateTime},#{courseTypeSubclassName},#{addtime})
+	</insert>
+	
+	<update id="updateCalendar" parameterType="com.ola.qh.entity.ExamCalendar">
+		update exam_calendar set  
+			<if test="examName!=null and examName!=''">
+			exam_name=#{examName},
+			</if>
+			<if test="years!=null and years!=''">
+			years=#{years},
+			</if>
+			<if test="applyTime!=null and applyTime!=''">
+			apply_time=#{applyTime},
+			</if>
+			<if test="cardTime!=null and cardTime!=''">
+			card_time=#{cardTime},
+			</if>
+			<if test="gradeTime!=null and gradeTime!=''">
+			grade_time=#{gradeTime},
+			</if>
+			<if test="certificateTime!=null and certificateTime!=''">
+			certificate_time=#{certificateTime},
+			</if>
+			<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+			course_type_subclass_name=#{courseTypeSubclassName},
+			</if>
+			updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteCalendar">
+		delete from exam_calendar where id=#{id}
+	</delete>
+	
+</mapper>

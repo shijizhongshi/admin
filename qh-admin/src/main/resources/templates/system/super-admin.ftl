@@ -18,9 +18,9 @@
 			<ul>
 				<li><img src="/images/sjk-home.png" style="color: red;" />我的主页</li>
 				<li>/</li>
-				<li>公共资源管理</li>
+				<li>题库资源管理</li>
 				<li>/</li>
-				<li>账号管理</li>
+				<li>试题错误信息反馈</li>
 			</ul>
 		</div>
 		<div class="details-frame">
@@ -82,8 +82,8 @@
 							<th>权限操作</th>
 						</tr>
 						<tr ng-repeat ="u in list" ng-class="{'selected':selected==u}" ng-click="checkedUserRole(u)" >
-							<th>{{u.nickname}}</th>
 							<th>{{u.username}}</th>
+							<th>{{u.nickname}}</th>
 							<th>{{u.password}}</th>
 							<th>{{u.category}}</th>
 							<th>{{u.addtime | date:'yyyy.MM.dd'}}</th>
@@ -170,8 +170,8 @@
 
 
 	<div class="end" style="margin-top:10px;">
-			<input id="addbutton" name="git" type="submit" ng-show="userRole==null" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
-			<input id="updatebutton" name="git" type="submit" ng-show="userRole!=null" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
+			<input id="addbutton" name="git" type="submit" ng-show="userRoleId==null" value="添加" ng-click="insertquestionbank()"  style="background:#5ED8A9;">
+			<input id="updatebutton" name="git" type="submit" ng-show="userRoleId!=null" value="修改" ng-click="updatequestionbank()" style="background:#5ED8A9;">
 			<input id="esc" name="esc" type="reset" value="取消" onclick="CloseDiv3()"  class="esc">
 			
 		</div>
