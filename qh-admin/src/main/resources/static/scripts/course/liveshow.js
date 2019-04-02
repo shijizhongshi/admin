@@ -154,7 +154,7 @@ app.controller("liveShowController", function($scope, $http) {
 	$scope.deleteLive = function() {
 		if ($scope.liveId != null) {
 			// //删除课程/
-			if (confirm("您确定要删出这个直播资料吗?")) {
+			if (confirm("您确定要删除这个直播资料吗?")) {
 				$http.get("/api/courselive/delete", {
 					"params" : {
 						"id" : $scope.liveId
