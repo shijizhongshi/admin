@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.ola.qh.dao.CourseClassDao;
 import com.ola.qh.dao.CourseClassTeacherDao;
 import com.ola.qh.dao.CourseTeacherDao;
-import com.ola.qh.entity.CourseClassTeacher;
 import com.ola.qh.entity.CourseTeacher;
 import com.ola.qh.service.ICourseTeacherService;
 import com.ola.qh.util.KeyGen;

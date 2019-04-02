@@ -11,7 +11,8 @@
 	<div class="classify">
 		<ul class="menu">
 
-			<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
+			<li ng-repeat="ctl in courseTypeList" class="list"
+				ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
 				<ul class="items" ng-class="{'active':active==ctl.id}">
 					<li ng-repeat="sub in courseTypeSubclass"
 						ng-click="typeSub(ctl.courseTypeName,sub,$event)"
@@ -19,7 +20,7 @@
 
 				</ul>
 			</li>
-			
+
 		</ul>
 	</div>
 	<div class="details">
@@ -35,10 +36,11 @@
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-3" style="width: 15%;margin-right:0%">
+				<div class="select-3" style="width: 15%; margin-right: 0%">
 					<span>搜索班级</span>
 					<form id="search">
-						<input ng-model="className" placeholder="请输入班级名称" type="text" style="text-indent: 2em;" />
+						<input ng-model="className" placeholder="请输入班级名称" type="text"
+							style="text-indent: 2em;" />
 					</form>
 				</div>
 				<div>
@@ -55,10 +57,10 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改班级</li>
 					<li ng-click="deleteClass()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除班级</li>
-					<li ng-click="goBuyCourse()"><span class="glyphicon glyphicon-sort-by-attributes"
-						class="move-down"></span>&nbsp;学员列表</li>
-					<li ng-click="removeStudent()"><span class="glyphicon glyphicon-sort-by-attributes"
-						class="move-down"></span>&nbsp;移除所有学员</li>
+					<li ng-click="goBuyCourse()"><span
+						class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;学员列表</li>
+					<li ng-click="removeStudent()"><span
+						class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;移除所有学员</li>
 					<!--<li  onclick="showDiv3()"  style="width: 200px;"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;班级课程及赠送管理</li>
 		<li ><span class="glyphicon glyphicon-briefcase"></span>&nbsp;关闭城市管理</li>-->
 					<li style="float: right; margin-right: 20px; background: none;"><img
@@ -277,25 +279,98 @@
 </div>
 </body>
 
- <style type="text/css">
-	
-	.poop{overflow-y: scroll;width: 80%;height: 600px;position: absolute;left: 5%;top: 5%;}
-	@media screen and (max-width: 1401px){.poop{width:850px;left:0%;top: 5%;}}
-	.poop span{font-size: 1.5rem;}
-	.grade-add{width: 100%;border-top:1px solid #F5F6F8;height: 80%;padding-top: 10px;margin-top:10px ;}
-	.grade-left,.grade-center,.grade-right{width: 33%;float: left;height:auto;overflow:auto;}
-	.grade-left ul{height: 50px;line-height: 50px; font-size: 2rem;}
-	.grade-left ul li{float: left;margin-right: 5px;}
-	.grade-left ul li:nth-child(1){margin-right: 10px;}
-	.grade-center .grade-text{width: 80%;}
-	.grade-center .grade-text textarea{width: 100%;height:100px;font-size:1.5rem}
-	.grade-right label{width: 80%;height: auto;border-radius:20px;text-indent: 2em;font-size: 1.6rem;}
-	.grade-right label input{margin-right: 5px;width:17px;height: 17px;}
-	.grade-add-bottom{width: 100%;clear:both;}
-	.grade-add-bottom textarea{width: 100%;height: 250px;background:#EDEEF0;border-radius:20px;text-indent: 2em;}
-	div.costs-uploadfile-div{
-    position:relative;
+ 
+<style type="text/css">
+.poop {
+	overflow-y: scroll;
+	width: 80%;
+	height: 600px;
+	position: absolute;
+	left: 5%;
+	top: 5%;
+}
 
+@media screen and (max-width: 1401px) {
+	.poop {
+		width: 850px;
+		left: 0%;
+		top: 5%;
+	}
+}
+
+.poop span {
+	font-size: 1.5rem;
+}
+
+.grade-add {
+	width: 100%;
+	border-top: 1px solid #F5F6F8;
+	height: 80%;
+	padding-top: 10px;
+	margin-top: 10px;
+}
+
+.grade-left, .grade-center, .grade-right {
+	width: 33%;
+	float: left;
+	height: auto;
+	overflow: auto;
+}
+
+.grade-left ul {
+	height: 50px;
+	line-height: 50px;
+	font-size: 2rem;
+}
+
+.grade-left ul li {
+	float: left;
+	margin-right: 5px;
+}
+
+.grade-left ul li:nth-child(1) {
+	margin-right: 10px;
+}
+
+.grade-center .grade-text {
+	width: 80%;
+}
+
+.grade-center .grade-text textarea {
+	width: 100%;
+	height: 100px;
+	font-size: 1.5rem
+}
+
+.grade-right label {
+	width: 80%;
+	height: auto;
+	border-radius: 20px;
+	text-indent: 2em;
+	font-size: 1.6rem;
+}
+
+.grade-right label input {
+	margin-right: 5px;
+	width: 17px;
+	height: 17px;
+}
+
+.grade-add-bottom {
+	width: 100%;
+	clear: both;
+}
+
+.grade-add-bottom textarea {
+	width: 100%;
+	height: 250px;
+	background: #EDEEF0;
+	border-radius: 20px;
+	text-indent: 2em;
+}
+
+div.costs-uploadfile-div {
+	position: relative;
 }
 
 @media screen and (max-width: 1401px) {
@@ -354,7 +429,7 @@
 	width: 80%;
 	height: auto;
 	background: #F7F8FC;
-	border-radius:5px;
+	border-radius: 5px;
 	text-indent: 2em;
 	font-size: 1.6rem;
 }
@@ -373,7 +448,7 @@
 .grade-add-bottom textarea {
 	width: 100%;
 	height: 250px;
-	background:#F7F8FC;
+	background: #F7F8FC;
 	border-radius: 20px;
 	text-indent: 2em;
 }

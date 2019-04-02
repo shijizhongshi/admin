@@ -19,4 +19,8 @@ public interface UserBuyCourseDao {
 			@Param("classId")String classId,@Param("courseId")String courseId);
 	
 	public int updateBuy(@Param("classId")String classId,@Param("courseId")String courseId);
+	
+	public List<UserBuyCourse> selectByClassId(@Param("classId")String classId);
+
+	public List<UserBuyCourse> selectByCourseId(@Param("courseId")String id);
 }

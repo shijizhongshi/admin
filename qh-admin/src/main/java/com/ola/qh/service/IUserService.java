@@ -31,4 +31,7 @@ public interface IUserService {
 			String realnameORmobile,String status);
 	
 	public List<AdminMenus> listmenu();
+
+	public Results<List<User>> send(String title, String content, String sex, String courseTypeSubclassName, String userrole,
+			String isdoctor, String birthday);
 }
