@@ -48,6 +48,9 @@ app.controller("questionJieController", function($scope, $http){
 		$http.post("/api/questionsubcategory/insert",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				$scope.operating.operatingStatus="添加章节";
+		    	$scope.operating.operatingUser=$scope.questionSubCategory.name;
+		    	$scope.insertOperating();
 				alert("添加成功")
 			location.reload();
 			}
@@ -61,6 +64,9 @@ app.controller("questionJieController", function($scope, $http){
 		$http.post("/api/questionsubcategory/update",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				$scope.operating.operatingStatus="修改章节";
+		    	$scope.operating.operatingUser=$scope.questionSubCategory.name;
+		    	$scope.insertOperating();
 				alert("修改成功")
 			location.reload();
 			}
@@ -133,6 +139,9 @@ app.controller("questionJieController", function($scope, $http){
 				$http.get("/api/questionsubcategory/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除章节";
+				    	$scope.operating.operatingUser=$scope.questionSubCategory.name;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.id=null;
 						location.reload();
@@ -236,6 +245,9 @@ app.controller("questionJieController", function($scope, $http){
 		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				$scope.operating.operatingStatus="修改试题";
+		    	$scope.operating.operatingUser=$scope.questionBank.title;
+		    	$scope.insertOperating();
 				alert("修改成功")
 			location.reload();
 			}
@@ -305,6 +317,9 @@ app.controller("questionJieController", function($scope, $http){
 				$http.get("/api/questionbank/delete",{"params": {"id":$scope.bankid}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除试题";
+				    	$scope.operating.operatingUser=$scope.questionBank.title;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.bankid=null;
 						location.reload();
@@ -333,6 +348,8 @@ app.controller("questionJieController", function($scope, $http){
 	    })
 		.success(function(data){
 			if(data.status=='0'){
+				$scope.operating.operatingStatus="导入试题";
+		    	$scope.insertOperating();
 				alert("导入成功~");
 					$scope.file=null;
 					location.reload();
@@ -399,4 +416,10 @@ app.controller("questionJieController", function($scope, $http){
 		})
 		}
 	}
+	$scope.operating={operatingScope:"节内容管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 })

@@ -138,6 +138,9 @@ app.controller("teacherController", function($scope, $http){
 			$http.post("/api/courseteacher/save",$scope.teacher,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
 		    	if(data.status=="0"){
+		    		$scope.operating.operatingStatus="添加";
+			    	$scope.operating.operatingUser=$scope.teacher.name;
+			    	$scope.insertOperating();
 		    		alert("保存成功~");
 		    		document.getElementById('add').style.display="none"; 
 		    		$scope.teacherBases();
@@ -153,6 +156,9 @@ app.controller("teacherController", function($scope, $http){
 			$http.post("/api/courseteacher/update",$scope.teacher,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
 		    	if(data.status=="0"){
+		    		$scope.operating.operatingStatus="修改";
+			    	$scope.operating.operatingUser=$scope.teacher.name;
+			    	$scope.insertOperating();
 		    		alert("更新成功~");
 		    		document.getElementById('add').style.display="none"; 
 		    		$scope.teacherBases();
@@ -202,6 +208,9 @@ app.controller("teacherController", function($scope, $http){
 				$http.get("/api/courseteacher/delete",{"params": {"id":$scope.teacherId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.teacher.name;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.teacherBases();
 					}else{
@@ -227,4 +236,11 @@ app.controller("teacherController", function($scope, $http){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
+	$scope.operating={operatingScope:"教师管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

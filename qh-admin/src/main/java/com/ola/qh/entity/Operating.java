@@ -9,13 +9,7 @@ public class Operating {
 	private String id;
 	
 	@NotEmpty
-	private String userRoleId;///////管理员id
-	
-	@NotEmpty
 	private String userRoleUsername;//////////管理员昵称
-	
-	@NotEmpty
-	private String userRoleCategory;///////管理员类型
 	
 	@NotEmpty
 	private String operatingScope;////////改动区域
@@ -35,22 +29,6 @@ public class Operating {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getUserRoleId() {
-		return userRoleId;
-	}
-
-	public void setUserRoleId(String userRoleId) {
-		this.userRoleId = userRoleId;
-	}
-
-	public String getUserRoleCategory() {
-		return userRoleCategory;
-	}
-
-	public void setUserRoleCategory(String userRoleCategory) {
-		this.userRoleCategory = userRoleCategory;
 	}
 
 	public String getOperatingScope() {

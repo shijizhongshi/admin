@@ -83,6 +83,9 @@ app.controller("questionChapter", function($scope, $http){
 		$http.post("/api/questionCategory/insert",$scope.questionCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				$scope.operating.operatingStatus="添加";
+		    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.questionCategory.name;
+		    	$scope.insertOperating();
 				alert("添加成功")
 			location.reload();
 			}
@@ -96,6 +99,9 @@ app.controller("questionChapter", function($scope, $http){
 		$http.post("/api/questionCategory/update",$scope.questionCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				$scope.operating.operatingStatus="修改";
+		    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.questionCategory.name;
+		    	$scope.insertOperating();
 				alert("修改成功")
 			location.reload();
 			}
@@ -165,6 +171,9 @@ app.controller("questionChapter", function($scope, $http){
 				$http.get("/api/questionCategory/delete",{"params": {"id":$scope.cateId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.questionCategory.name;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.id=null;
 						location.reload();
@@ -187,4 +196,10 @@ app.controller("questionChapter", function($scope, $http){
 			alert("请选中信息~");
 		}
 	}
+	$scope.operating={operatingScope:"题库章节管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 })

@@ -37,14 +37,7 @@
 					<span>负责人</span> <input style=" type=" text"="" placeholder="请输入操作人" ng-model="userRoleUsername" class="ng-pristine ng-untouched ng-valid ng-empty">
 				</div>
 				
-				<div class="select-3">
-					<span>管理员类型</span><img src="/images/sjk-xl.png">  
-					<select ng-model="userRoleCategory"   class="ng-pristine ng-untouched ng-valid ng-empty">
-						<option ng-selected="userRoleCategory==''"  value="">查看全部</option>
-						<option ng-repeat="c in category" ng-selected="userRoleCategory==c" value="c">{{c}}</option>
-						
-					</select>
-				</div>
+				
 				
 				<div style="float: left;">
 					<input ng-click="operating()" type="button" class="btn-lg im-key"  value="立即检索">
@@ -57,17 +50,17 @@
 							<tbody>
 							<tr>
 								<th>操作人</th>
-								<th>管理员类型</th>
 								<th>操作区域</th>
                                   <th>操作内容</th>
+                                  <th>被操做者</th>
                                   <th>操作时间</th>
 							</tr>
 							
 							<tr ng-repeat="ol in operatinglist" ng-class="{'selected':selected==ol}" ng-click="checkOperating(ol)">
 								<th>{{ol.userRoleUsername}}</th>
-								<th>{{ol.userRoleCategory}}</th>
 								<th>{{ol.operatingScope}}</th>
                                   <th>{{ol.operatingStatus}}</th>
+                                  <th>{{ol.operatingUser}}</th>
                                   <th>{{ol.showtime}}</th>
 							</tr>
 

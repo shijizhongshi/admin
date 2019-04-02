@@ -154,6 +154,10 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					location.reload();
+					$scope.operating.operatingStatus="添加";
+					$scope.operating.operatingScope="分类管理/大类别";
+					$scope.operating.operatingUser=$scope.name;
+			    	$scope.insertOperating();
 					alert("添加成功")
 					document.getElementById('add').style.display="none"; 
 				}else{
@@ -165,7 +169,10 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			$http.get("/api/shopdrugsubcategory/insert",{"params": {"categoryId":$scope.id,"subName":$scope.name,"imgUrl":$scope.imgUrl}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					
+					$scope.operating.operatingStatus="添加";
+					$scope.operating.operatingScope="分类管理/小类别";
+					$scope.operating.operatingUser=$scope.name;
+			    	$scope.insertOperating();
 					alert("添加成功")
 					document.getElementById('add').style.display="none"; 
 					location.reload();
@@ -184,6 +191,10 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				$http.get("/api/shopdrugsubcategory/delete",{"params": {"id":$scope.subid}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+						$scope.operating.operatingScope="分类管理/小类别";
+						$scope.operating.operatingUser=$scope.name;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						location.reload();
 					}else{
@@ -204,6 +215,10 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				$http.get("/api/shopdrugcategory/delete", {"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+						$scope.operating.operatingScope="分类管理/大类别";
+						$scope.operating.operatingUser=$scope.name;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						location.reload();
 					}else{
@@ -221,6 +236,10 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$http.get("/api/shopdrugsubcategory/update",{"params": {"id":$scope.subid,"subName":$scope.name,"imgUrl":$scope.imgUrl}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
+				$scope.operating.operatingStatus="修改";
+				$scope.operating.operatingScope="分类管理/小类别";
+				$scope.operating.operatingUser=$scope.name;
+		    	$scope.insertOperating();
 				alert("修改成功~");
 				document.getElementById('add').style.display="none"; 
 				location.reload();
@@ -240,4 +259,11 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		
 		location.reload();
 	}
+	
+	$scope.operating={operatingScope:"分类管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

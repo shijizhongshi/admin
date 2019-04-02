@@ -32,6 +32,8 @@ app.controller("replyPatientController", function($scope, $http){
 				$http.get("/api/patient/delete",{"params": {"id":rp.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
+						$scope.operating.operatingStatus="删除评论";
+				    	$scope.insertOperating();
 						$scope.returnpatient();
 					}
 				})
@@ -50,6 +52,8 @@ app.controller("replyPatientController", function($scope, $http){
 				$http.get("/api/replypatient/delete",{"params": {"id":rl.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
+						$scope.operating.operatingStatus="删除回复";
+				    	$scope.insertOperating();
 						location.reload();
 					}
 				})
@@ -62,6 +66,8 @@ app.controller("replyPatientController", function($scope, $http){
 				$http.get("/api/patientimg/delete",{"params": {"id":il.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
+						$scope.operating.operatingStatus="删除回复图片";
+				    	$scope.insertOperating();
 						location.reload();
 					}
 				})
@@ -93,5 +99,10 @@ app.controller("replyPatientController", function($scope, $http){
 				alert("请选中信息~");
 			}
 		}
-		
+	   $scope.operating={operatingScope:"评论详情",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+		$scope.insertOperating = function(){
+			
+			$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+		    
+		};	
 })

@@ -186,6 +186,9 @@ app.controller("gradeController", function($scope, $http){
 			$http.post("/api/courseclass/save",$scope.classes,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
 		    	if(data.status=="0"){
+		    		$scope.operating.operatingStatus="添加";
+			    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.classes.className;
+			    	$scope.insertOperating();
 		    		alert("保存成功~");
 		    		document.getElementById('add').style.display="none"; 
 		    		$scope.classBases();
@@ -198,6 +201,9 @@ app.controller("gradeController", function($scope, $http){
 			$http.post("/api/courseclass/update",$scope.classes,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
 		    	if(data.status=="0"){
+		    		$scope.operating.operatingStatus="修改";
+			    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.classes.className;
+			    	$scope.insertOperating();
 		    		alert("更新成功~");
 		    		document.getElementById('add').style.display="none"; 
 		    		$scope.classBases();
@@ -260,6 +266,9 @@ app.controller("gradeController", function($scope, $http){
 				$http.get("/api/courseclass/delete",{"params": {"id":$scope.classId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.classes.className;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.classBases();
 					}else{
@@ -309,4 +318,10 @@ app.controller("gradeController", function($scope, $http){
 		
 	}
 	
+	$scope.operating={operatingScope:"班级管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

@@ -53,7 +53,9 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		$http.post("/api/classtemplate/save",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		
+	    		$scope.operating.operatingStatus="添加";
+		    	$scope.operating.operatingUser=$scope.courseClassTemplate.templateName;
+		    	$scope.insertOperating();
 	    			alert("保存成功~");
 	    			document.getElementById('add').style.display="none"; 
 		    		$scope.templateBases();
@@ -96,6 +98,9 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 	    .success(function(data){
 	    	if(data.status=="0"){
 	    		
+	    		$scope.operating.operatingStatus="修改";
+		    	$scope.operating.operatingUser=$scope.courseClassTemplate.templateName;
+		    	$scope.insertOperating();
 	    			alert("修改成功~");
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.id=null;
@@ -113,6 +118,9 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 				$http.get("/api/classtemplate/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.courseClassTemplate.templateName;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.id=null;
 						$scope.templateBases();
@@ -151,4 +159,11 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 			location.reload();
 		
 	}
+	
+	$scope.operating={operatingScope:"班级模板",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

@@ -7,10 +7,10 @@ import com.ola.qh.util.Results;
 
 public interface IOperatingService {
 
-	public Results<List<Operating>> operatingList(String userRoleCategory,String userRoleUsername,String operatingScope,
+	public Results<List<Operating>> operatingList(String userRoleUsername,String operatingScope,
 			String operatingStatus,int pageNo,int pageSize);
 	
-	public int insertOperating(Operating operating);
+	public Results<String> insertOperating(Operating operating);
 	
 	public int deleteOperating(String id);
 }

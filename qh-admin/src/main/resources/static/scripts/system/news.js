@@ -65,6 +65,9 @@ $scope.uploadmainimage = function(file){
 		$http.post("/api/news/save",$scope.news,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
+	    		$scope.operating.operatingStatus="添加";
+			    $scope.operating.operatingUser=$scope.news.title;
+			    $scope.insertOperating();
 	    		alert("保存成功~");
 	    		document.getElementById('add').style.display="none"; 
 	    		$scope.loaddata();
@@ -109,6 +112,9 @@ $scope.uploadmainimage = function(file){
 	    .success(function(data){
 	    	if(data.status=="0"){
 	    		alert("更新成功~");
+	    		$scope.operating.operatingStatus="修改";
+			    $scope.operating.operatingUser=$scope.news.title;
+			    $scope.insertOperating();
 	    		document.getElementById('add').style.display="none"; 
 	    		$scope.loaddata();
 	    	}else{
@@ -125,6 +131,11 @@ $scope.uploadmainimage = function(file){
 				 $http.get("/api/news/delete",{"params": {"id":$scope.newsId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				    .success(function(result){
 				    	if(result.status=="0"){
+				    		
+				    	$scope.operating.operatingStatus="删除";
+					    $scope.operating.operatingUser=$scope.news.title;
+					    $scope.insertOperating();
+					    
 				    	alert("删除成功");
 				    	$scope.loaddata();
 				    		
@@ -150,4 +161,11 @@ $scope.uploadmainimage = function(file){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
+	$scope.operating={operatingScope:"咨询/话题管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

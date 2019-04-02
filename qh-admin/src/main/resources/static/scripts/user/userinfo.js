@@ -67,13 +67,15 @@ app.controller("userinfoController", function($scope, $http){
 		}
 		}
 	
-	$scope.changedisabled=function(isdisabled,id){
+	$scope.changedisabled=function(isdisabled,id,mobile){
 		if(confirm("您确定要修改这个用户的状态吗？")){
 				
 				$http.get("/api/user/updateuser",{"params": {"isdisabled":isdisabled,"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status!='0'){
-						
+						$scope.operating.operatingStatus="修改用户状态";
+				    	$scope.operating.operatingUser=$scope.mobile;
+				    	$scope.insertOperating();
 					alert("修改失败~");
 					}
 				})
@@ -81,4 +83,10 @@ app.controller("userinfoController", function($scope, $http){
 			
 		location.reload();
 	}
+	$scope.operating={operatingScope:"用户信息",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 })

@@ -203,7 +203,9 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		
+	    		$scope.operating.operatingStatus="添加";
+		    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.courseNofree.courseName;
+		    	$scope.insertOperating();
 	    			alert("保存成功~");
 	    			document.getElementById('add').style.display="none"; 
 		    		$scope.auditionBases();
@@ -292,6 +294,9 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		$http.post("/api/coursenofree/update",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
+	    		$scope.operating.operatingStatus="修改";
+		    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.courseNofree.courseName;
+		    	$scope.insertOperating();
 	    			alert("修改成功~");
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.id=null;
@@ -309,6 +314,9 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 				$http.get("/api/coursenofree/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.courseNofree.courseName;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.id=null;
 						$scope.auditionBases();
@@ -385,6 +393,13 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		document.getElementById('revise').style.display="none"; 
 		document.getElementById('add').style.display="none"; 
 	
+};
+
+$scope.operating={operatingScope:"试听课程",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+$scope.insertOperating = function(){
+	
+	$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+    
 };
 });
 	
