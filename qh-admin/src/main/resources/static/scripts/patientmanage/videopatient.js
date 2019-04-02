@@ -68,7 +68,7 @@ app.controller("videopatientController", function($scope, $http){
 	   
 	  $scope.videopatientdelete=function(){
 		   if($scope.id!=null){
-			if(confirm("您确定要删除这个信息吗")){
+			if(confirm("您确定要删除这个评论吗")){
 				$http.get("/api/videocomment/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
@@ -98,6 +98,5 @@ app.controller("videopatientController", function($scope, $http){
 			location.reload();
 			
 		}
-	   
 	   
 })

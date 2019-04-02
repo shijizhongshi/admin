@@ -96,8 +96,14 @@ app.controller("fuwushopController", function($scope, $http) {
 		}).success(function(data) {
 			if (data.status == "0") {
 				if($scope.shopId==null){
+					$scope.operating.operatingStatus="添加";
+			    	$scope.operating.operatingUser=$scope.shop.shopName;
+			    	$scope.insertOperating();
 					alert("保存成功~");
 				}else{
+					$scope.operating.operatingStatus="修改";
+			    	$scope.operating.operatingUser=$scope.shop.shopName;
+			    	$scope.insertOperating();
 					alert("修改成功~");
 				}
 				document.getElementById('add').style.display="none"; 
@@ -120,6 +126,9 @@ app.controller("fuwushopController", function($scope, $http) {
 				'Content-Type' : 'application/json;charset=UTF-8'
 			}).success(function(data) {
 				if (data.status=="0") {
+					$scope.operating.operatingStatus="删除";
+			    	$scope.operating.operatingUser=$scope.shop.shopName;
+			    	$scope.insertOperating();
 					alert("删除成功~");
 					$scope.shopList();
 				} else {
@@ -147,5 +156,11 @@ app.controller("fuwushopController", function($scope, $http) {
 		
 		location.reload();
 	}
+	$scope.operating={operatingScope:"临时店铺管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 	
 })

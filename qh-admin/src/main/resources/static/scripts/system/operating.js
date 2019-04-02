@@ -46,17 +46,5 @@ app.controller("operatingController", function($scope, $http) {
 			
 	}
 	
-	// 查询类别 为下拉框提供数据
-	$scope.selectCategory = function() {
-		$http.get("/api/userRole/selectCategory", {
-			'Content-Type' : 'application/json;charset=UTF-8'
-		}).success(function(list) {
-			if (list != null) {
-				$scope.category = list;
-			} else {
-				alert("下拉列表数据返回错误!")
-			}
-		})
-	}
-	$scope.selectCategory();
+	
 })

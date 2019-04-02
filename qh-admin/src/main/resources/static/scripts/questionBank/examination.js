@@ -187,4 +187,5 @@ app.controller("questionChapter", function($scope, $http){
 			alert("请选中信息~");
 		}
 	}
+	
 })

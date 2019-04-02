@@ -203,7 +203,6 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		$http.post("/api/coursenofree/insert",$scope.courseNofree,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		
 	    			alert("保存成功~");
 	    			document.getElementById('add').style.display="none"; 
 		    		$scope.auditionBases();
@@ -386,6 +385,8 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 		document.getElementById('add').style.display="none"; 
 	
 };
+
+
 });
 	
 	

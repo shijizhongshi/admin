@@ -18,11 +18,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.dao.QuestionBankDao;
-import com.ola.qh.dao.QuestionCategoryDao;
 import com.ola.qh.entity.QuestionAnswer;
 import com.ola.qh.entity.QuestionBank;
-import com.ola.qh.entity.QuestionCategory;
-import com.ola.qh.entity.QuestionSubCategory;
 import com.ola.qh.entity.QuestionUnit;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.util.KeyGen;
@@ -32,8 +29,6 @@ import com.ola.qh.util.Results;
 public class QuestionBankService implements IQuestionBankService {
 
 	@Autowired
-	private QuestionCategoryDao questionCategoryDao;
-	@Autowired
 	private QuestionBankDao questionBankDao;
 
 	@Transactional(rollbackFor = Exception.class)
@@ -41,15 +36,15 @@ public class QuestionBankService implements IQuestionBankService {
 	public Results<String> importExcel(MultipartFile file,String subId) throws Exception{
 		Results<String> result = new Results<String>();
 			Workbook wb = WorkbookFactory.create(file.getInputStream());
-			for (int z = 0; z < wb.getNumberOfSheets(); z++) {
-				Sheet sheet = wb.getSheetAt(z);
+			
+				Sheet sheet = wb.getSheetAt(0);
 				int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 				Iterator<Row> rowIterator = sheet.rowIterator();
 				Row titleRow = rowIterator.next();
 				int columnNumber = titleRow.getLastCellNum();
 				/*String[][] table = new String[rowNumber][columnNumber];*/
-				String categoryId = null;/////
 				String bankId = null;
+				int n=0;
 				for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 					Row row = rowIterator.next();
 						////// 保存题库的信息
@@ -59,11 +54,12 @@ public class QuestionBankService implements IQuestionBankService {
 							qb.setAddtime(new Date());
 							bankId = KeyGen.uuid();
 							qb.setId(bankId);
-							qb.setNumberNo(i+1);
+							qb.setNumberNo(n+1);
 							qb.setTitle(checkNull(1, row));
 							qb.setTypes(checkNull(0, row));
 							qb.setSubId(subId);
 							questionBankDao.insertQuestionBank(qb);
+							n++;
 						}
 						if ("单选题".equals(checkNull(0, row)) || "多选题".equals(checkNull(0, row))) {
 							QuestionBank qb = new QuestionBank();
@@ -146,14 +142,16 @@ public class QuestionBankService implements IQuestionBankService {
 							} else {
 								/////// 单纯的单选或者多选的问题
 								qb.setAnalysis(checkNull(8, row));
-								qb.setNumberNo(i+1);
+								qb.setNumberNo(n+1);
 								questionBankDao.insertQuestionBank(qb);
+								n++;
 							}
-
+								
 						}
+						
 				}
 
-			}
+			
 			result.setStatus("0");
 			return result;
 		

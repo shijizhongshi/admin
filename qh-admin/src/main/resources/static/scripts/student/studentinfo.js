@@ -280,6 +280,9 @@ app.controller("studentinfoController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(data) {
 			if (data.status == "0") {
+				$scope.operating.operatingStatus="开课";
+		    	$scope.operating.operatingUser=$scope.user.mobile;
+		    	$scope.insertOperating();
 				alert("开课成功~");
 				document.getElementById('revise').style.display = "none";
 				$scope.selectUser();
@@ -314,8 +317,16 @@ app.controller("studentinfoController", function($scope, $http) {
 		}).success(function(data) {
 			if (data.status == "0") {
 				if ($scope.userId != null) {
+					$scope.operating.operatingStatus="修改";
+			    	$scope.operating.operatingUser=$scope.user.mobile;
+			    	$scope.insertOperating();
+					
 					alert("修改成功~");
 				} else {
+					$scope.operating.operatingStatus="添加";
+			    	$scope.operating.operatingUser=$scope.user.mobile;
+			    	$scope.insertOperating();
+					
 					alert("添加成功~");
 				}
 				document.getElementById('add').style.display = "none";
@@ -337,6 +348,9 @@ app.controller("studentinfoController", function($scope, $http) {
 					'Content-Type' : 'application/json;charset=UTF-8'
 				}).success(function(data) {
 					if (data.status == "0") {
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.user.mobile;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.list();
 					} else {
@@ -379,4 +393,10 @@ app.controller("studentinfoController", function($scope, $http) {
 			$scope.address = $scope.provinceName + city.cityName;
 		}
 	}
+	$scope.operating={operatingScope:"用户信息",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 })

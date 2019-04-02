@@ -72,7 +72,9 @@ app.controller("feedbackController", function($scope, $http){
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				
+				$scope.operating.operatingStatus="标记已读";
+		    	$scope.operating.operatingUser=$scope.feedback.content;
+		    	$scope.insertOperating();
 			location.reload();
 			}
 			else{
@@ -84,14 +86,12 @@ app.controller("feedbackController", function($scope, $http){
 			alert("请先选中信息");
 		}
 	};
-	
 	$scope.checkfeedback=function(fl){
 		
 		if($scope.selected!=fl){
 		$scope.selected=fl;
 		$scope.feedback=fl;
 		$scope.questionbanks=fl.bank;
-		$scope.types=$scope.questionbanks.types;
 		$scope.id=fl.id;
 		$scope.questionanswers=$scope.questionbanks.answer;
 		
@@ -99,7 +99,6 @@ app.controller("feedbackController", function($scope, $http){
 			$scope.selected=null;
 			$scope.feedback=null;
 			$scope.questionbanks=null;
-			$scope.types=null;
 			$scope.id=null;
 			$scope.questionanswers=null;
 		}
@@ -114,38 +113,15 @@ app.controller("feedbackController", function($scope, $http){
 		$scope.questionCategory=null;
 	}
 	
-	$scope.deletequestion=function(){
-		if($scope.cateId!=null){
-			
-			if(confirm("您确定要删除这个试卷吗")){
-				$http.get("/api/questionCategory/delete",{"params": {"id":$scope.cateId}}, {'Content-Type': 'application/json;charset=UTF-8'})
-				.success(function(data){
-					if(data.status=='0'){
-						alert("删除成功~");
-						$scope.id=null;
-						location.reload();
-					}else{
-						alert("删除失败~");
-					}
-				})
-			}
-			
-		}else{
-			alert("请选中信息~");
-		}
-	}
-	
-	
-	
 	$scope.update=function(){
 		if($scope.id!=null){
-			if($scope.types=="A"){
+			if($scope.questionbanks.types=="单选题" || $scope.questionbanks.types=="多选题"){
 				
 				document.getElementById('resources').style.display="none"; 
 				document.getElementById('resource').style.display="block"; 
 			
 			}
-			else if($scope.types=="C"){
+			else if($scope.questionbanks.types=="共用题干" || $scope.questionbanks.types=="共用选项"){
 				
 				document.getElementById('resources').style.display="block"; 
 				document.getElementById('resource').style.display="none"; 
@@ -212,11 +188,11 @@ app.controller("feedbackController", function($scope, $http){
 	
 	$scope.resetbank=function(){
 		
-		if($scope.types=="A"){
+		if($scope.questionbanks.types=="单选题" || $scope.questionbanks.types=="多选题"){
 			
 			document.getElementById('resource').style.display="none"; 
 		}
-		else if($scope.types=="C"){
+		else if($scope.questionbanks.types=="共用题干" || $scope.questionbanks.types=="共用选项"){
 			
 			document.getElementById('resources').style.display="none"; 
 		}
@@ -227,4 +203,5 @@ app.controller("feedbackController", function($scope, $http){
 		$scope.id=null;
 		$scope.questionanswers=null;
 	}
+	
 })

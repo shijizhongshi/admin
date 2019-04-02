@@ -83,7 +83,7 @@ app.controller("uservideoController", function($scope, $http,$sce){
 	   
 	   $scope.uservideodelete=function(){
 			if($scope.id!=null){
-				if(confirm("您确定要删除这个信息吗")){
+				if(confirm("您确定要删除这个短视频吗")){
 				$http.get("/api/uservideo/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
@@ -143,5 +143,5 @@ app.controller("uservideoController", function($scope, $http,$sce){
 			
 		}
 	
-	
+	   
 })

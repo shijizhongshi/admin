@@ -163,10 +163,13 @@ app.controller("doctorsController", function($scope, $http){
 	 $scope.deletedoctors=function(){
 			if($scope.id!=null){
 				
-				if(confirm("您确定要删出这个医师吗")){
+				if(confirm("您确定要删除这个医师吗")){
 					$http.get("/api/doctors/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 					.success(function(data){
 						if(data.status=='0'){
+							$scope.operating.operatingStatus="删除";
+					    	$scope.operating.operatingUser=$scope.doctors.name;
+					    	$scope.insertOperating();
 							alert("删除成功~");
 							location.reload();
 						}else{
@@ -211,6 +214,9 @@ app.controller("doctorsController", function($scope, $http){
 		 $http.post("/api/doctors/insert",$scope.doctors, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
+					$scope.operating.operatingStatus="审核";
+			    	$scope.operating.operatingUser=$scope.doctors.name;
+			    	$scope.insertOperating();
 					alert("添加成功")
 					document.getElementById('add').style.display="none"; 
 					
@@ -240,4 +246,10 @@ app.controller("doctorsController", function($scope, $http){
 			location.reload();
 			
 		}
+	 $scope.operating={operatingScope:"医师管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+		$scope.insertOperating = function(){
+			
+			$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+		    
+		};
 })

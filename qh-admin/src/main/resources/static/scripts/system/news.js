@@ -150,4 +150,5 @@ $scope.uploadmainimage = function(file){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
 });

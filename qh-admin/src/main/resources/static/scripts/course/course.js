@@ -193,6 +193,8 @@ app.controller("CourseController", function($scope, $http){
 			$http.get("/api/btl/remove/student",{"params": {"courseId":$scope.courseId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=='0'){
+					$scope.operating.operatingStatus="移除所有学员";
+			    	$scope.insertOperating();
 					alert("移除学员成功~");
 				}else{
 					alert("移除学员失败~");
@@ -203,4 +205,5 @@ app.controller("CourseController", function($scope, $http){
 		}
 		
 	}
+	
 });
