@@ -40,7 +40,6 @@ import com.ola.qh.service.IUserService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Service
 public class UserService implements IUserService {
