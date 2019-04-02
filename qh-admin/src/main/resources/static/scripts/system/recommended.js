@@ -9,8 +9,8 @@ app.controller("recommendedController", function($scope, $http) {
 			}
 		})
 	};
-	$scope.typeBases(); // 加载页面时调用此方法
-	// 点击事件 点击生日
+	$scope.typeBases(); // 加载页面时调用
+	// 点击事件 点击生日  代码可优化
 	$scope.radiobirthday = function() {
 		var a = document.getElementById('birthday').value;
 		if (a == 0) {
@@ -80,14 +80,14 @@ app.controller("recommendedController", function($scope, $http) {
 			$scope.isdoctor = null;
 		}
 	})
-	//性别赋值
+	//专业赋值
 	$("#major li").click(function() {
 		var value = $(this).attr('value');
 
 		if (value == 0) {
 			$scope.major = 0;
 			$scope.courseTypeSubclassName = null
-		}else if ($scope.courseTypeSubclassName != null) {
+		}else {
 			$scope.major = 1;
 		}
 	})

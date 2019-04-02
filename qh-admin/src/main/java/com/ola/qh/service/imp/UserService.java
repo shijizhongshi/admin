@@ -340,6 +340,7 @@ public class UserService implements IUserService {
 			String userrole, String isdoctor, String birthday) {
 		Results<List<User>> results = new Results<>();
 		List<User> list = new ArrayList<>();
+		//计数器 i
 		Integer i = 0;
 		if (courseTypeSubclassName == null) {
 			list = userDao.send(sex, userrole, isdoctor, birthday);
@@ -351,22 +352,29 @@ public class UserService implements IUserService {
 				// 遍历发送功能 为每个用户发送
 				try {
 					PushService.send(user.getId(), title, content);
-					i++;
+					++i;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+			if (i == 0) {
+				results.setStatus("1");
+				results.setMessage("根据条件未查询到用户");
+				
+				return results;
+			}
 			results.setStatus("0");
+			results.setCount(i);
 			results.setMessage("发送成功");
 
 			return results;
 		} else if (courseTypeSubclassName != null) {
-			//计数器
-			
+			// 计数器
+
 			// 根据course_type_subclass_name查询course表 返回集合
 			List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
 			for (Course course : courselist) {
-				//根据classid是否为空判断user_buy_course表与哪个表进行关联查询
+				// 根据classid是否为空判断user_buy_course表与哪个表进行关联查询
 				if (course.getClassId().length() != 0) {
 					// 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
 					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(course.getClassId());
@@ -378,7 +386,7 @@ public class UserService implements IUserService {
 						// 调发送接口
 						try {
 							PushService.send(userBuyCourse.getUserId(), title, content);
-							i++;
+							++i;
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -400,6 +408,13 @@ public class UserService implements IUserService {
 					}
 				}
 			}
+		}
+		//根据计数器判断返回数据
+		if (i == 0) {
+			results.setStatus("1");
+			results.setMessage("根据条件未查询到用户");
+
+			return results;
 		}
 		results.setStatus("0");
 		results.setCount(i);

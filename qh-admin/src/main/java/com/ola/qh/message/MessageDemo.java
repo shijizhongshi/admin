@@ -27,8 +27,8 @@ public class MessageDemo
 	unicast.setTicker(ticker);
 	unicast.setTitle(title);
 	unicast.setText(text);
-	// 跳转到指定的页面(问安卓他们的这个是什么)
-	unicast.goActivityAfterOpen("com.ola.qh.act.personal.HomeMessageAct");
+	// 跳转到指定的页面(问安卓他们的这个是什么)com.ola.qh.act.personal.HomeMessageAct
+	unicast.goActivityAfterOpen("com.sjzs.masterblack.ui.activity.msg.MsgActivityS");
 	unicast.setDisplayType(AndroidNotification.DisplayType.NOTIFICATION);
 	unicast.setPlayVibrate(true);
 	unicast.setPlaySound(true);
@@ -63,8 +63,8 @@ public class MessageDemo
     @RequestMapping(value = "/api/message/test", method = RequestMethod.GET)
     public void send() throws Exception
     {
-	///sendAndroidUnicast("测试通知", "测试通知","请查看通知", "e82ae395580dd0669fe3cf6f9e83743610c4a68d5092398186b7ce41d5712c59");
-	sendIOSUnicast("3333","111","e82ae395580dd0669fe3cf6f9e83743610c4a68d5092398186b7ce41d5712c59");
+	sendAndroidUnicast("测试通知", "测试通知","请查看通知", "AkPAFTVvQDuNgqK1DUoe5mQQAMDBn0iLaQFz8kWE3efo");
+	//sendIOSUnicast("3333","111","e82ae395580dd0669fe3cf6f9e83743610c4a68d5092398186b7ce41d5712c59");
     
     }
 

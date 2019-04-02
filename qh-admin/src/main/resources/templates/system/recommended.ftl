@@ -57,23 +57,23 @@ submenu="sidebarmenu-system-recommended">
 					<span>跳转连接</span> <input type="text" placeholder="不默认打开应用" />
 				</div>
 				<div class="select-3">
-					<span>加盟商注册时间</span> <input type="date">
+					<span>加盟商注册时间</span> <input type="date" ng-model="lefttime">
 				</div>
 				<div class="select-3"
 					style="font-size: 1.6rem; width: 1%; text-align: center;">
 					&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
 				</div>
 				<div class="select-3">
-					<span>&nbsp;</span> <input type="date">
+					<span>&nbsp;</span> <input type="date" ng-model="righttime">
 				</div>
 				<div class="fl">
 					<p class="fltit">按以下条件进行推送</p>
 
 					<ul id="sexs">
 						<li>性别</li>
-						<li ng-click="clicksex()" ng-class="{'sss':sss==0}" id="sex" value="0">不限</li>
-						<li ng-click="clicksex()" ng-class="{'sss':sss==1}" id="sex" value="1">男</li>
-						<li ng-click="clicksex()" ng-class="{'sss':sss==2}" id="sex" value="2">女</li>
+						<li ng-click="clicksex()" ng-class="{'sss':sss==0}" value="0">不限</li>
+						<li ng-click="clicksex()" ng-class="{'sss':sss==1}" value="1">男</li>
+						<li ng-click="clicksex()" ng-class="{'sss':sss==2}" value="2">女</li>
 					</ul>
 					<ul id="major">
 						<li>专业</li>
