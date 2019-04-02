@@ -72,8 +72,6 @@ app.controller("videopatientController", function($scope, $http){
 				$http.get("/api/videocomment/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
-						$scope.operating.operatingStatus="删除";
-				    	$scope.insertOperating();
 						location.reload();
 					}
 				})
@@ -101,10 +99,4 @@ app.controller("videopatientController", function($scope, $http){
 			
 		}
 	   
-	   $scope.operating={operatingScope:"短视频评论管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-		$scope.insertOperating = function(){
-			
-			$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-		    
-		};	
 })

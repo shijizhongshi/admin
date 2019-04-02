@@ -144,9 +144,6 @@ app.controller("doctorsController", function($scope, $http){
 				"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					$scope.operating.operatingStatus="添修改";
-			    	$scope.operating.operatingUser=$scope.doctors.name;
-			    	$scope.insertOperating();
 					alert("修改成功")
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();

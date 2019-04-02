@@ -106,9 +106,6 @@ app.controller("liveShowController", function($scope, $http) {
 						'Content-Type' : 'application/json;charset=UTF-8'
 					}).success(function(data) {
 				if (data.status == "0") {
-					$scope.operating.operatingStatus="添加";
-			    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.live.liveName;
-			    	$scope.insertOperating();
 					alert("保存成功~");
 					document.getElementById('add').style.display = "none";
 					$scope.liveBases();
@@ -122,9 +119,6 @@ app.controller("liveShowController", function($scope, $http) {
 						'Content-Type' : 'application/json;charset=UTF-8'
 					}).success(function(data) {
 				if (data.status == "0") {
-					$scope.operating.operatingStatus="修改";
-			    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.live.liveName;
-			    	$scope.insertOperating();
 					alert("更新成功~");
 					document.getElementById('add').style.display = "none";
 					$scope.liveBases();
@@ -169,9 +163,6 @@ app.controller("liveShowController", function($scope, $http) {
 					'Content-Type' : 'application/json;charset=UTF-8'
 				}).success(function(data) {
 					if (data.status == '0') {
-						$scope.operating.operatingStatus="删除";
-				    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.live.liveName;
-				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.liveBases();
 					} else {
@@ -193,10 +184,4 @@ app.controller("liveShowController", function($scope, $http) {
 		document.getElementById('add').style.display="none"; 
 	}
 	
-	$scope.operating={operatingScope:"直播管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-	$scope.insertOperating = function(){
-		
-		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-	    
-	};
 });

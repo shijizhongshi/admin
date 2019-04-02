@@ -53,9 +53,6 @@ $scope.uploadmainimage = function(file){
 		$http.post("/api/banner/saveBanner",$scope.banner,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		$scope.operating.operatingStatus="添加";
-	    		$scope.operating.operatingUser=$scope.imageurl;
-	    		$scope.insertOperating();
 	    		alert("保存成功~");
 	    		document.getElementById('add').style.display="none"; 
 	    		$scope.loaddata();
@@ -96,9 +93,6 @@ $scope.uploadmainimage = function(file){
 		$http.post("/api/banner/updateBanner",$scope.banner,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		$scope.operating.operatingStatus="修改";
-	    		$scope.operating.operatingUser=$scope.imageurl;
-	    		$scope.insertOperating();
 	    		alert("更新成功~");
 	    		document.getElementById('add').style.display="none"; 
 	    		$scope.loaddata();
@@ -117,9 +111,6 @@ $scope.uploadmainimage = function(file){
 				 $http.get("/api/banner/deleteBanner",{"params": {"id":$scope.bannerId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				    .success(function(result){
 				    	if(result.status=="0"){
-				    	$scope.operating.operatingStatus="删除";
-				    	$scope.operating.operatingUser=$scope.imageurl;
-				    	$scope.insertOperating();
 				    	alert("删除成功");
 				    	$scope.loaddata();
 				    	
@@ -144,11 +135,5 @@ $scope.uploadmainimage = function(file){
 		
 		location.reload();
 	}
-	$scope.operating={operatingScope:"banner管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-	$scope.insertOperating = function(){
-		
-		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-	    
-	};
-
+	
 });

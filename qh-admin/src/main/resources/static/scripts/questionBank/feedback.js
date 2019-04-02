@@ -157,9 +157,6 @@ app.controller("feedbackController", function($scope, $http){
 		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.operating.operatingStatus="修改试题";
-		    	$scope.operating.operatingUser=$scope.feedback.content;
-		    	$scope.insertOperating();
 				alert("修改成功")
 			
 			}
@@ -174,9 +171,6 @@ app.controller("feedbackController", function($scope, $http){
 				$http.get("/api/feedback/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
-						$scope.operating.operatingStatus="删除";
-				    	$scope.operating.operatingUser=$scope.feedback.content;
-				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.id=null;
 						location.reload();
@@ -209,10 +203,5 @@ app.controller("feedbackController", function($scope, $http){
 		$scope.id=null;
 		$scope.questionanswers=null;
 	}
-	$scope.operating={operatingScope:"试题错误信息反馈",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-	$scope.insertOperating = function(){
-		
-		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-	    
-	};
+	
 })

@@ -106,9 +106,6 @@ app.controller("calendarController", function($scope, $http){
 		$http.post("/api/calendar/insert",$scope.calendar, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.operating.operatingStatus="添加";
-		    	$scope.operating.operatingUser=$scope.courseTypeSubclassName+"/"+$scope.calendar.examName;
-		    	$scope.insertOperating();
 				alert("添加成功")
 			location.reload();
 			}
@@ -121,9 +118,6 @@ app.controller("calendarController", function($scope, $http){
 		$http.post("/api/calendar/update",$scope.calendar, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				$scope.operating.operatingStatus="修改";
-		    	$scope.operating.operatingUser=$scope.courseTypeSubclassName+"/"+$scope.calendar.examName;
-		    	$scope.insertOperating();
 				alert("修改成功")
 			location.reload();
 			}
@@ -139,9 +133,6 @@ app.controller("calendarController", function($scope, $http){
 				$http.get("/api/calendar/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
-						$scope.operating.operatingStatus="删除";
-				    	$scope.operating.operatingUser=$scope.courseTypeSubclassName+"/"+$scope.calendar.examName;
-				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.id=null;
 						location.reload();
@@ -155,10 +146,5 @@ app.controller("calendarController", function($scope, $http){
 			alert("请选中信息~");
 		}
 	}
-	$scope.operating={operatingScope:"考试日历",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-	$scope.insertOperating = function(){
-		
-		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-	    
-	};
+	
 })

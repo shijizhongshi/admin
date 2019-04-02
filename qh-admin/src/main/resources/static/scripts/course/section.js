@@ -107,14 +107,8 @@ app.controller("sectionController", function($scope, $http,$sce){
 	    .success(function(data){
 	    	if(data.status=="0"){
 	    		if($scope.sectionId!=null){
-	    			$scope.operating.operatingStatus="修改";
-			    	$scope.operating.operatingUser=$scope.section.sectionName;
-			    	$scope.insertOperating();
 	    			alert("更新成功~");
 	    		}else{
-	    			$scope.operating.operatingStatus="添加";
-			    	$scope.operating.operatingUser=$scope.section.sectionName;
-			    	$scope.insertOperating();
 	    			alert("保存成功~");
 	    		}
 	    		document.getElementById('add').style.display="none"; 
@@ -185,9 +179,6 @@ app.controller("sectionController", function($scope, $http,$sce){
 				$http.get("/api/course/subclass/section/delete",{"params": {"sectionId":$scope.sectionId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
-						$scope.operating.operatingStatus="删除";
-				    	$scope.operating.operatingUser=$scope.section.sectionName;
-				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.sectionBases();
 					}else{
@@ -257,10 +248,5 @@ app.controller("sectionController", function($scope, $http,$sce){
 		document.getElementById('revise').style.display="none"; 
 	}
 	
-	$scope.operating={operatingScope:"课程节管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-	$scope.insertOperating = function(){
-		
-		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-	    
-	};
+	
 });

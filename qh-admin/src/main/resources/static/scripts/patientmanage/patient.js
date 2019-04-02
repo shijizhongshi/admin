@@ -46,9 +46,6 @@ app.controller("patientController", function($scope, $http){
 				if(confirm("您确定要删除这个信息吗")){
 				$http.get("/api/patient/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
-					$scope.operating.operatingStatus="删除";
-			    	$scope.operating.operatingUser=$scope.courseTypeName+"/"+$scope.courseTypeSubclassName+"/"+$scope.patient.title;
-			    	$scope.insertOperating();
 					if(data.status=="0"){
 						location.reload();
 					}
@@ -75,10 +72,5 @@ app.controller("patientController", function($scope, $http){
 			location.reload();
 			
 		}
-	   $scope.operating={operatingScope:"考试日历",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-		$scope.insertOperating = function(){
-			
-			$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-		    
-		};
+	  
 })
