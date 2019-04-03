@@ -243,7 +243,7 @@
 							<div>
 								<span>课程资源</span> <label ng-repeat="course in courselist">
 									<p>
-										<input type="checkbox" ng-checked="isSelected(course)"
+										<input type="checkbox" ng-checked="isSelected(course.courseName)"
 											ng-click="updateSelection($event,course)" />{{course.courseName}}
 									</p>
 								</label>
@@ -251,7 +251,7 @@
 							<div>
 								<span>班级教师</span> <label ng-repeat="teacher in teacherlist">
 									<p>
-										<input type="checkbox" ng-checked="isTeacherSelected(teacher)"
+										<input type="checkbox" ng-checked="isTeacherSelected(teacher.name)"
 											ng-click="updateTeacherSelection($event,teacher)" />{{teacher.name}}
 									</p>
 								</label>
