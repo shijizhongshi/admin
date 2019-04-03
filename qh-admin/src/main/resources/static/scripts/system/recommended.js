@@ -15,8 +15,8 @@ app.controller("recommendedController", function($scope, $http) {
 		var a = document.getElementById('birthday').value;
 		if (a == 0) {
 			// 获取当前时间戳
-			var date = new Date();
-			$scope.birthday = date.getTime();
+			var date = new Date();//getTime()
+			$scope.birthday = date.toLocaleDateString();
 			document.getElementById('birthday').value = 1;
 			document.getElementById('birthday').style.background = "#5ed8a9";
 			document.getElementById('birthday').style.color = "white";

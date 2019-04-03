@@ -23,7 +23,7 @@ app.controller("studentinfoController", function($scope, $http) {
 					alert(result.messgae);
 				}
 			})
-		} else if ($scope.mobile.length >= 0 && $scope.mobile.length != 11) {
+		} else if ($scope.mobile != null && $scope.mobile.length != 11) {
 			alert("请输入正确格式的手机号！");
 			return;
 		} else {
