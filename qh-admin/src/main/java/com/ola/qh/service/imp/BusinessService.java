@@ -39,7 +39,7 @@ public class BusinessService implements IBusinessService {
 				Business business = businessDao.single(b.getId(), null, null);
 				////// 这个是将加盟商变成正常的状态
 				//////// 先查看这个地区/名称/账号/的加盟商是否已经存在了
-				if (business.getName() != b.getName()) {
+				if (!business.getName().equals(b.getName())) {
 					int namecount = businessDao.exist(b.getName(), null, null);
 					if (namecount > 0) {
 						result.setStatus("1");
@@ -47,7 +47,7 @@ public class BusinessService implements IBusinessService {
 						return result;
 					}
 				}
-				if (business.getAddress() != b.getAddress()) {
+				if (!business.getAddress().equals(b.getAddress())) {
 					int addresscount = businessDao.exist(null, b.getAddress(), null);
 					if (addresscount > 0) {
 						result.setStatus("1");
@@ -55,7 +55,7 @@ public class BusinessService implements IBusinessService {
 						return result;
 					}
 				}
-				if (business.getUsername() != b.getUsername()) {
+				if (!business.getUsername().equals(b.getUsername())) {
 					int usernamecount = businessDao.exist(null, null, b.getUsername());
 					if (usernamecount > 0) {
 						result.setStatus("1");

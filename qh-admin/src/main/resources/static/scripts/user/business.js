@@ -59,8 +59,9 @@ app.controller("businessController", function($scope, $http){
 	$scope.businessId=null;
 	
 	$scope.add=function(){
-		$scope.=null;
-		 document.getElementById('add').style.display="block";
+		$scope.business=null;
+		$scope.businessId=null;
+		document.getElementById('add').style.display="block";
 	}
 	
 	$scope.checkBusiness=function(business){
