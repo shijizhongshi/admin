@@ -172,7 +172,7 @@
 	<!--推送页面 -->
 	<!--根据条件查询user表 -->
 	<select id="send" resultMap="UserMap">
-		select * from user where 1=1
+		select id from user where 1=1
 		<if test="sex!=null and sex!=''">
 			and sex = #{sex}
 		</if>
@@ -183,7 +183,7 @@
 			and isdoctor = #{isdoctor}
 		</if>
 		<if test="birthday!=null and birthday!=''">
-			and birthday = #{birthday}
+			and birthday like (concat('%',#{birthday},'%'))
 		</if>
 	</select>
 	<!--专业名不为空时 进行联合查询 -->

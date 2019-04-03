@@ -14,9 +14,18 @@ app.controller("recommendedController", function($scope, $http) {
 	$scope.radiobirthday = function() {
 		var a = document.getElementById('birthday').value;
 		if (a == 0) {
-			// 获取当前时间戳
-			var date = new Date();//getTime()
-			$scope.birthday = date.toLocaleDateString();
+			// 获取当前时间 格式为MM-dd
+			var date = new Date();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			if (month < 10) {
+			    month = "0" + month;
+			}
+			if (day < 10) {
+			    day = "0" + day;
+			}
+			$scope.birthday = month + "-" + day;
+			
 			document.getElementById('birthday').value = 1;
 			document.getElementById('birthday').style.background = "#5ed8a9";
 			document.getElementById('birthday').style.color = "white";
@@ -52,6 +61,8 @@ app.controller("recommendedController", function($scope, $http) {
 		
 		if (value == 0) {
 			$scope.property = 0;
+			$scope.userrole = null;
+			$scope.isdoctor = null;
 		} else if (value == 1) {
 			$scope.property = 1;
 			
@@ -99,6 +110,11 @@ app.controller("recommendedController", function($scope, $http) {
 	// 点击事件 点击发送按钮
 	//暂时写成get请求 能封装到user对象里post传参最好
 	$scope.send = function() {
+		//标题、内容不为空判断 (应该能优化吧...)
+		if ($scope.content == null || $scope.title == null || $scope.content == '' || $scope.title == '') {
+			alert("标题和内容为必填项，请填写！");
+			return;
+		}
 		$http.get("/api/user/send",{"params":{"title":$scope.title,"content":$scope.content,"sex":$scope.sex,"courseTypeSubclassName":$scope.courseTypeSubclassName,"userrole":$scope.userrole,"isdoctor":$scope.isdoctor,"birthday":$scope.birthday}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
