@@ -369,15 +369,14 @@ public class UserService implements IUserService {
 
 			return results;
 		} else if (courseTypeSubclassName != null) {
-			// 计数器
-
 			// 根据course_type_subclass_name查询course表 返回集合
 			List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
 			for (Course course : courselist) {
 				// 根据classid是否为空判断user_buy_course表与哪个表进行关联查询
 				if (course.getClassId().length() != 0) {
 					// 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
-					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(course.getClassId());
+					//birthday是string类型？
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(course.getClassId(),sex,userrole,isdoctor,birthday);
 					for (UserBuyCourse userBuyCourse : userBuyCourses) {
 						// 信息保存到user_message表中
 						Date addtimeDate = new Date();
@@ -393,7 +392,7 @@ public class UserService implements IUserService {
 					}
 				} else if (course.getClassId().length() == 0) {
 					// 使用course_id 查询course表左外链接user_buy_course表(course表为主表)
-					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId());
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(),sex,userrole,isdoctor,birthday);
 					for (UserBuyCourse userBuyCourse : userBuyCourses) {
 						// 信息保存到user_message表中
 						Date addtimeDate = new Date();

@@ -133,9 +133,23 @@
 	select * from user_buy_course as ubc 
 	right join course_class as cc
 	on ubc.class_id = cc.id 
+	left join user as u 
+	on u.id = ubc.user_id
 	where 1=1 
 	<if test="classId !=null and classId!=''">
 	and class_id = #{classId}
+	</if>
+	<if test="sex!=null and sex!=''">
+	and u.sex = #{sex}
+	</if>
+	<if test="userrole!=null and userrole!=''">
+	and u.userrole = #{userrole}
+	</if>
+	<if test="isdoctor!=null and isdoctor!=''">
+	and u.isdoctor = #{isdoctor}
+	</if>
+	<if test="birthday!=null and birthday!=''">
+	and u.birthday like (concat('%',#{birthday},'%'))
 	</if>
 	</select>
 	<!--根据courseID多表查询  -->
@@ -143,9 +157,23 @@
 	select * from  course as c
 	left join user_buy_course as ubc
 	on ubc.course_id = c.id
+	left join user as u 
+	on u.id = ubc.user_id
 	where 1=1 
 	<if test="courseId!=null and courseId!=''">
 	and c.id = #{courseId}
 	</if> 
+	<if test="sex!=null and sex!=''">
+	and u.sex = #{sex}
+	</if>
+	<if test="userrole!=null and userrole!=''">
+	and u.userrole = #{userrole}
+	</if>
+	<if test="isdoctor!=null and isdoctor!=''">
+	and u.isdoctor = #{isdoctor}
+	</if>
+	<if test="birthday!=null and birthday!=''">
+	and u.birthday like (concat('%',#{birthday},'%'))
+	</if>
 	</select>
 </mapper>

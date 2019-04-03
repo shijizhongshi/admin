@@ -183,7 +183,7 @@
 			and isdoctor = #{isdoctor}
 		</if>
 		<if test="birthday!=null and birthday!=''">
-			and birthday = #{birthday}
+			and birthday like (concat('%',#{birthday},'%'))
 		</if>
 	</select>
 	<!--专业名不为空时 进行联合查询 -->
