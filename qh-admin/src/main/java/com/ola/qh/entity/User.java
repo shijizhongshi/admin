@@ -39,6 +39,8 @@ public class User {
 	private Integer isStudent;// 是否为学员 | 0：不是学员 | 1：是学员
 
 	private String usertype;//service层拼接userrole和isdoctor字段 在页面展示
+	
+	private String birthday;
 
 	public String getUsertype() {
 		return usertype;
@@ -168,4 +170,13 @@ public class User {
 		this.isdisabled = isdisabled;
 	}
 
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	
 }

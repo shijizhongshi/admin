@@ -24,8 +24,6 @@ public class UserVideoComment {
 	
 	private Date updatetime;
 	
-	private String showtime;
-	
 	public String getId() {
 		return id;
 	}
@@ -96,14 +94,6 @@ public class UserVideoComment {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
-	}
-
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
 	}
 
 	public String getNickname() {

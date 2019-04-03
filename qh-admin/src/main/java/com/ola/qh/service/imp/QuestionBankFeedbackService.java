@@ -1,13 +1,10 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-
 import com.ola.qh.dao.QuestionBankDao;
 import com.ola.qh.dao.QuestionBankFeedbackDao;
 import com.ola.qh.entity.QuestionAnswer;
@@ -38,9 +35,6 @@ public class QuestionBankFeedbackService implements IQuestionBankFeedbackService
 		List<QuestionBankFeedback> list=questionBankFeedbackDao.feedbackList(pageNo, pageSize, status,nickname,courseTypeSubclassName, name);
 		
 		for (QuestionBankFeedback questionBankFeedback : list) {
-			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			questionBankFeedback.setShowtime(sf.format(questionBankFeedback.getAddtime()));
-			
 			QuestionBank bank=questionBankDao.singleQuestionBank(questionBankFeedback.getBankId());
 			
 			List<QuestionAnswer> listanswer=questionBankDao.selectQuestionAnswer(questionBankFeedback.getBankId());

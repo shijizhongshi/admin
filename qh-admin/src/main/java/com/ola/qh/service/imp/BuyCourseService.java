@@ -1,7 +1,9 @@
 package com.ola.qh.service.imp;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,8 +152,52 @@ public class BuyCourseService implements IBuyCourseService {
 		} else if (oc.getTypes() == 2) {
 			//// 报网课学习课程
 			List<String> productIds = oc.getProductId();
+			List<String> classIdList=new ArrayList<String>();
 			for (String courseId : productIds) {
 				Course c = courseDao.existCourse(courseId);
+				if(c.getClassId()!=null){
+					classIdList.add(c.getClassId());
+				}
+			}
+			HashSet<String> h = new HashSet<String>(classIdList);   
+			classIdList.clear();   
+			classIdList.addAll(h);  
+			
+			
+			for (String classId : classIdList) {
+				List<String> courseIdList = new ArrayList<String>();
+				List<String> existCourseId = new ArrayList<String>();
+				List<Course> courseList = courseDao.existCourseList(classId);
+				for (Course course : courseList) {
+					courseIdList.add(course.getId());
+				}
+				for(int i=0;i<courseIdList.size();i++){
+					String courseId1=courseIdList.get(i);
+					for(int j=0;j<productIds.size();j++){
+						String courseId2=productIds.get(j);
+						if(courseId1.equals(courseId2)){
+							
+							existCourseId.add(courseId1);
+						}
+					}
+				}
+				if(existCourseId.size()==courseIdList.size()){
+					for(int i=0;i<existCourseId.size();i++){
+						
+						if(existCourseId.size()==1){
+							
+						}
+					}
+					result.setStatus("1");
+					result.setMessage("只能报网课或者是报班");
+					return result;
+				}
+			}
+			
+			
+			for (String courseId : productIds) {
+				Course c = courseDao.existCourse(courseId);
+				
 				account = account.add(c.getCourseDiscountPrice());
 				////////保证这个用户没有开过这个课程的时候
 				/*int count = userBuyCourseDao.selectUserBuyCourseCount(oc.getUserId(), null, courseId);

@@ -98,7 +98,7 @@
 								<th>{{a.videoId}}</th>
 								<th>{{a.remmend}}</th>
 								<th>{{a.courseUseDifference}}</th>
-								<th>{{a.showtime}}</th>
+								<th>{{a.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
 						</table>
 						<div class="col-sm-6"></div>

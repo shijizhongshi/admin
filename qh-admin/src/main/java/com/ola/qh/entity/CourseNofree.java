@@ -46,16 +46,6 @@ public class CourseNofree {
 	
 	private Date updatetime;
 	
-	private String Showtime;
-	
-	public String getShowtime() {
-		return Showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.Showtime = showtime;
-	}
-
 	public String getVideoId() {
 		return videoId;
 	}

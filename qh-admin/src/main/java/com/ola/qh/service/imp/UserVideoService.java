@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +36,8 @@ public class UserVideoService implements IUserVideoService{
 			int videoCount=userVideoCommentDao.videoCommentCount(userVideo.getId());
 			userVideo.setCommentNumber(videoCount);
 			
-			SimpleDateFormat sf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			userVideo.setShowtime(sf1.format(userVideo.getAddtime()));
+			
 		}
-		
-		
 		
 		results.setStatus("0");
 		results.setData(videoList);

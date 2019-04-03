@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -194,8 +193,7 @@ public class QuestionBankService implements IQuestionBankService {
 				}
 				questionBank.setUnit(listunit);
 				
-				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				questionBank.setShowtime(sf.format(questionBank.getAddtime()));
+				
 			}
 			
 			
