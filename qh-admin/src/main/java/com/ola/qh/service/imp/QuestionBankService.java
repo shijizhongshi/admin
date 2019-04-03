@@ -139,6 +139,7 @@ public class QuestionBankService implements IQuestionBankService {
 								qb.setBankId(bankId);
 								qb.setAnalysis(checkNull(8, row));
 								qb.setNumberNo(n+1);
+								
 								questionBankDao.insertQuestionUnit(qb);
 								n++;
 							} else {
