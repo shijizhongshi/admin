@@ -400,7 +400,7 @@ public class UserService implements IUserService {
 						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
 						try {
 							PushService.send(userBuyCourse.getUserId(), title, content);
-							i++;
+							++i;
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

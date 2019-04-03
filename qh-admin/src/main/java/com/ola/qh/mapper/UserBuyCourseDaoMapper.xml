@@ -130,7 +130,7 @@
 	
 	<!--根据classid多表查询  -->
 	<select id="selectByClassId" resultMap="UserBuyCourseMap">
-	select * from user_buy_course as ubc 
+	select ubc.user_id from user_buy_course as ubc 
 	right join course_class as cc
 	on ubc.class_id = cc.id 
 	left join user as u 
@@ -154,7 +154,7 @@
 	</select>
 	<!--根据courseID多表查询  -->
 	<select id="selectByCourseId" resultMap="UserBuyCourseMap">
-	select * from  course as c
+	select c.user_id from  course as c
 	left join user_buy_course as ubc
 	on ubc.course_id = c.id
 	left join user as u 

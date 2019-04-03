@@ -193,7 +193,7 @@
 	</select>
 	<!--根据CourseTypeSubclassName  和上面重复  后续优化  -->
 	<select id="selectByCourseTypeSubclassName" resultMap="CourseMap">
-	select * from course where 1=1 
+	select id,class_id from course where 1=1 
 	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
 	and course_type_subclass_name = #{courseTypeSubclassName}
 	</if>

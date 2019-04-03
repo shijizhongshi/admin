@@ -110,6 +110,11 @@ app.controller("recommendedController", function($scope, $http) {
 	// 点击事件 点击发送按钮
 	//暂时写成get请求 能封装到user对象里post传参最好
 	$scope.send = function() {
+		//标题、内容不为空判断 (应该能优化吧...)
+		if ($scope.content == null || $scope.title == null || $scope.content == '' || $scope.title == '') {
+			alert("标题和内容为必填项，请填写！");
+			return;
+		}
 		$http.get("/api/user/send",{"params":{"title":$scope.title,"content":$scope.content,"sex":$scope.sex,"courseTypeSubclassName":$scope.courseTypeSubclassName,"userrole":$scope.userrole,"isdoctor":$scope.isdoctor,"birthday":$scope.birthday}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
