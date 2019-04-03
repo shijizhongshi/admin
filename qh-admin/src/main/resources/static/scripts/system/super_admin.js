@@ -92,6 +92,9 @@ app.controller("superAdminController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
 			if (result.status == "0") {
+				$scope.operating.operatingStatus="添加";
+		    	$scope.operating.operatingUser=$scope.userRole.username;
+		    	$scope.insertOperating();
 				$scope.userRoleList();
 				$scope.selectCategory();
 				document.getElementById('resource').style.display = "none";
@@ -198,6 +201,9 @@ app.controller("superAdminController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
 			if (result.status == "0") {
+				$scope.operating.operatingStatus="修改";
+		    	$scope.operating.operatingUser=$scope.userRole.username;
+		    	$scope.insertOperating();
 				document.getElementById('resource').style.display = "none";
 				$scope.userRoleList();
 			} else {
@@ -219,6 +225,9 @@ app.controller("superAdminController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
 			if (result.status == "0") {
+				$scope.operating.operatingStatus="删除";
+		    	$scope.operating.operatingUser=$scope.userRole.username;
+		    	$scope.insertOperating();
 				alert("删除成功");
 				$scope.userRoleList();
 			} else {
@@ -264,4 +273,10 @@ app.controller("superAdminController", function($scope, $http) {
 		$scope.fuhao=menuId;
 		
 	}
+	$scope.operating={operatingScope:"考试日历",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

@@ -74,10 +74,10 @@
 						<!--是否为学员  -->
 						<th ng-show="{{u.isStudent=='0'}}">非学员</th>
 						<th ng-show="{{u.isStudent=='1'}}">学员</th>
-						<th><input type="button" ng-click="changedisabled(1,u.id)"
+						<th><input type="button" ng-click="changedisabled(1,u.id,u.mobile)"
 							ng-show="{{u.isdisabled}}==0" class="btn-lg im-key" value="禁用"
 							style="padding: 3px 10px; margin: 0;" /> <input type="button"
-							ng-click="changedisabled(0,u.id)" ng-show="{{u.isdisabled}}==1"
+							ng-click="changedisabled(0,u.id,u.mobile)" ng-show="{{u.isdisabled}}==1"
 							class="btn-lg im-key" value="启用"
 							style="padding: 3px 10px; margin: 0; background: #47e84c;" /></th>
 

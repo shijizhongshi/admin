@@ -183,4 +183,5 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
 });

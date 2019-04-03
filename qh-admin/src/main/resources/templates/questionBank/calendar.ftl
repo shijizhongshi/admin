@@ -58,7 +58,7 @@ submenu="sidebarmenu-questionBank-calendar">
 
 						<tbody>
 							<tr>
-								<th>阶段名称</th>
+								<th>考试名称</th>
 								<th>学年</th>
 								<th>网上报名</th>
 								<th>打印准考证</th>

@@ -32,7 +32,7 @@ public class QuestionBankFeedbackService implements IQuestionBankFeedbackService
 		
 		Results<List<QuestionBankFeedback>> results=new Results<List<QuestionBankFeedback>>();
 		
-		try {
+		//try {
 			
 		
 		List<QuestionBankFeedback> list=questionBankFeedbackDao.feedbackList(pageNo, pageSize, status,nickname,courseTypeSubclassName, name);
@@ -68,11 +68,11 @@ public class QuestionBankFeedbackService implements IQuestionBankFeedbackService
 		results.setStatus("0");
 		return results;
 		
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
 			return results;
-		}
+		}*/
 	}
 
 	@Override

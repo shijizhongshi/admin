@@ -247,4 +247,6 @@ app.controller("sectionController", function($scope, $http,$sce){
 		
 		document.getElementById('revise').style.display="none"; 
 	}
+	
+	
 });

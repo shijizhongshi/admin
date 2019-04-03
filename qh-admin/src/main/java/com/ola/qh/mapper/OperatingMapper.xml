@@ -5,9 +5,7 @@
 <mapper namespace="com.ola.qh.dao.OperatingDao">
 	<resultMap type="com.ola.qh.entity.Operating" id="OperatingMap">
 		<result column="id" property="id" />
-		<result column="user_role_id" property="userRoleId" />
 		<result column="user_role_username" property="userRoleUsername" />
-		<result column="user_role_category" property="userRoleCategory" />
 		<result column="operating_scope" property="operatingScope" />
 		<result column="operating_status" property="operatingStatus" />
 		<result column="operating_user" property="operatingUser" />
@@ -16,11 +14,8 @@
 	</resultMap>
 	
 	<select id="operatingList"  resultMap="OperatingMap">
-		select id,user_role_id,user_role_username,user_role_category,operating_scope,operating_status,operating_user,addtime from operating
+		select id,user_role_username,operating_scope,operating_status,operating_user,addtime from operating
 		where 1=1
-		<if test="userRoleCategory!=null and userRoleCategory!=''">
-			and user_role_category=#{userRoleCategory}
-		</if>
 		<if test="userRoleUsername!=null and userRoleUsername!=''">
 			and user_role_username like concat(concat('%',#{userRoleUsername},'%'))
 		</if>
@@ -30,15 +25,12 @@
 		<if test="operatingStatus!=null and operatingStatus!=''">
 			and operating_status=#{operatingStatus}
 		</if>
-		order by addtime limit #{pageNo},#{pageSize}
+		order by addtime DESC limit #{pageNo},#{pageSize}
 	</select>
 	
 	<select id="operatingCount"  resultType="int">
 		select count(id) from operating
 		where 1=1
-		<if test="userRoleCategory!=null and userRoleCategory!=''">
-			and user_role_category=#{userRoleCategory}
-		</if>
 		<if test="userRoleUsername!=null and userRoleUsername!=''">
 			and user_role_username like concat(concat('%',#{userRoleUsername},'%'))
 		</if>
@@ -52,8 +44,8 @@
 	</select>
 	
 	<insert id="insertOperating" parameterType="com.ola.qh.entity.Operating" >
-		insert into operating(id,user_role_id,user_role_username,user_role_category,operating_scope,operating_status,operating_user,addtime)
-		values(#{id},#{userRoleId},#{userRoleUsername},#{userRoleCategory},#{operatingScope},#{operatingStatus},#{operatingUser},#{addtime})
+		insert into operating(id,user_role_username,operating_scope,operating_status,operating_user,addtime)
+		values(#{id},#{userRoleUsername},#{operatingScope},#{operatingStatus},#{operatingUser},#{addtime})
 	
 	</insert>
 	

@@ -252,4 +252,5 @@ app.controller("ChapterController", function($scope, $http){
 		}
 		
 	}
+	
 });

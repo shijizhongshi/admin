@@ -1,6 +1,5 @@
 package com.ola.qh.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.Operating;
 import com.ola.qh.service.IOperatingService;
-import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -26,13 +24,13 @@ public class OperatingController {
 	private IOperatingService operatingService;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public Results<List<Operating>> operatingList(@RequestParam(name="userRoleCategory",required=false)String userRoleCategory,
+	public Results<List<Operating>> operatingList(
 			@RequestParam(name="userRoleUsername",required=false)String userRoleUsername,
 			@RequestParam(name="operatingScope",required=false)String operatingScope,
 			@RequestParam(name="operatingStatus",required=false)String operatingStatus,
 			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize){
 		
-			return operatingService.operatingList(userRoleCategory,userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize);
+			return operatingService.operatingList(userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize);
 		}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
@@ -44,17 +42,7 @@ public class OperatingController {
 			results.setStatus("1");
 			return results;
 		}
-		operating.setAddtime(new Date());
-		operating.setId(KeyGen.uuid());
-		int insert=operatingService.insertOperating(operating);
-		
-		if(insert<=0){
-			
-			results.setStatus("1");
-			return results;
-		}
-		results.setStatus("0");
-		return results;
+		return operatingService.insertOperating(operating);
 		}
 	
 	

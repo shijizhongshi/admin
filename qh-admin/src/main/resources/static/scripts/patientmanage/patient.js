@@ -25,15 +25,18 @@ app.controller("patientController", function($scope, $http){
 		}
 	   $scope.patientList();
 	   
+	   $scope.patient=null;
 	   $scope.checkpatient=function(p){
 			
 			 if($scope.selected!=p){
 					$scope.selected=p;
+					$scope.patient=p;
 			 		$scope.id=p.id;
 			 		
 			 		
 			 }else{
 						$scope.selected=null;
+						$scope.patient=null;
 						$scope.id=null;
 					}
 		}
@@ -69,5 +72,5 @@ app.controller("patientController", function($scope, $http){
 			location.reload();
 			
 		}
-		
+	  
 })

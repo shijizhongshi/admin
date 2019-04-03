@@ -122,6 +122,9 @@ app.controller("shopServeControllered", function($scope, $http){
 			"id":id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				$scope.operating.operatingStatus="审核";
+		    	$scope.operating.operatingUser=$scope.shop.serveName;
+		    	$scope.insertOperating();
 				alert("修改成功");
 				document.getElementById('add').style.display="none"; 
 				$scope.serveList();
@@ -140,6 +143,12 @@ app.controller("shopServeControllered", function($scope, $http){
 		location.reload();
 		
 	}
+	 $scope.operating={operatingScope:"项目管理/项目管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+		$scope.insertOperating = function(){
+			
+			$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+		    
+		};
 })
 
 //app.controller("shopServeControllered", function($scope, $http){
