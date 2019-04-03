@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +32,7 @@ public class UserWithdrawService implements IUserWithdrawService{
 	@Override
 	public List<UserWithdraw> selectUserWithdraw(String mobile,String payStatus,String fromdate,String todate,int pageNo,int pageSize) {
 		List<UserWithdraw> list = userWithdrawDao.selectUserWithdraw(mobile, payStatus, fromdate, todate, pageNo, pageSize);
-		for (UserWithdraw userWithdraw : list) {
-			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			userWithdraw.setShowtime(sf.format(userWithdraw.getAddtime()));
-		}
+		
 		return list;
 	}
 	@Override

@@ -36,8 +36,6 @@ public class UserVideo {
 	
 	private Date updatetime;
 	
-	private String showtime;
-
 	public String getId() {
 		return id;
 	}
@@ -166,15 +164,5 @@ public class UserVideo {
 		this.updatetime = updatetime;
 	}
 
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
-	}
-	
-	
-	
 	
 }

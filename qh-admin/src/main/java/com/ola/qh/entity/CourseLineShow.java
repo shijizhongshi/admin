@@ -26,7 +26,6 @@ public class CourseLineShow {
 
 	private Date updatetime;
 
-	private String showtime;
 	@NotEmpty
 	private String liveRoomId;
 
@@ -66,14 +65,6 @@ public class CourseLineShow {
 
 	public void setOutLinks(String outLinks) {
 		this.outLinks = outLinks;
-	}
-
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
 	}
 
 	public Date getUpdatetime() {

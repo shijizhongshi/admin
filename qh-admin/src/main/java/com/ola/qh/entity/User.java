@@ -40,17 +40,7 @@ public class User {
 
 	private String usertype;//service层拼接userrole和isdoctor字段 在页面展示
 	
-	private Date birthday;//用户生日
-
-	
-	
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+	private String birthday;
 
 	public String getUsertype() {
 		return usertype;
@@ -180,4 +170,13 @@ public class User {
 		this.isdisabled = isdisabled;
 	}
 
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	
 }

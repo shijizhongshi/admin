@@ -21,8 +21,6 @@ public class Operating {
 	
 	private Date addtime;
 	
-	private String showtime;
-
 	public String getId() {
 		return id;
 	}
@@ -61,14 +59,6 @@ public class Operating {
 
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
-	}
-
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
 	}
 
 	public String getUserRoleUsername() {

@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,14 +50,10 @@ public class DoctorPatientService implements IDoctorPatientService{
 			single.setListimg(imgList);
 			
 			List<DoctorReplyPatient> replyList=doctorReplyPatientDao.selectDoctorReplyPatient(single.getId());
-			for (DoctorReplyPatient doctorReplyPatient : replyList) {
-				SimpleDateFormat sf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				doctorReplyPatient.setShowtime(sf1.format(doctorReplyPatient.getAddtime()));
-			}
+			
 			single.setListreply(replyList);
 			
-			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			single.setShowtime(sf.format(single.getAddtime()));
+			
 		
 		results.setStatus("0");
 		results.setData(single);

@@ -41,18 +41,6 @@ private String id;
 	
 	private String mobile;
 	
-	private String showtime;
-	
-	
-	
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
-	}
-
 	public String getMobile() {
 		return mobile;
 	}

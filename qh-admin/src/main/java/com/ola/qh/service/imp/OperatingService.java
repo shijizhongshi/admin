@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +32,6 @@ public class OperatingService implements IOperatingService{
 			
 			List<Operating> list=operatingDao.operatingList(userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize);
 			int count=operatingDao.operatingCount(userRoleUsername, operatingScope, operatingStatus);
-			for (Operating operating : list) {
-				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				operating.setShowtime(sf.format(operating.getAddtime()));
-			}
 			
 			results.setData(list);
 			results.setCount(count);
