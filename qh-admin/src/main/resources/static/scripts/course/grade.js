@@ -115,9 +115,16 @@ app.controller("gradeController", function($scope, $http){
 	
 	///////////选中课程ID的集合开始////////////////////////////////
 	 $scope.courseselected = [];
+	 $scope.courseNameselected=[];
 	    var updateSelected = function(action, course) {
-	      if(action == 'add' & $scope.courseselected.indexOf(course) == -1) $scope.courseselected.push(course);
-	      if(action == 'remove' && $scope.courseselected.indexOf(course) != -1) $scope.courseselected.splice($scope.courseselected.indexOf(course), 1);
+	      if(action == 'add' && $scope.courseselected.indexOf(course) == -1){
+	    	  $scope.courseselected.push(course);
+	    	  $scope.courseNameselected.push(course.courseName);
+	      }
+	      if(action == 'remove' && $scope.courseselected.indexOf(course) != -1){
+	    	  $scope.courseselected.splice($scope.courseselected.indexOf(course), 1);
+	    	  $scope.courseNameselected.splice($scope.courseNameselected.indexOf(course.courseName), 1);
+	      }
 	    };
 	 
 	    $scope.updateSelection = function($event, course) {
@@ -126,24 +133,25 @@ app.controller("gradeController", function($scope, $http){
 	      updateSelected(action, course);
 	    };
 	 
-	    $scope.isSelected = function(course) {
-	     for(var i=0;i<$scope.courseselected.length;i++){
-	    	 if($scope.courseselected[i].id==course.id && $scope.classId!=null){
-	    		 return true;
-	    	 }else{
-	    		 return false;
-	    	 }
-	     }
-	      //return $scope.courseselected.indexOf(course) >= 0;
+	    $scope.isSelected = function(courseName) {
+	     
+	      return $scope.courseNameselected.indexOf(courseName) >= 0;
 	    };   /*checkbox选中*/
 
 	    ///////////选中课程ID的集合结束////////////////////////////////
 	    
 	    ////////////选中教师的Id开始////////////////////////////////
 	    $scope.teacherselected = [];
+	    $scope.teacherNameselected = [];
 	    var updateTeacherSelected = function(action, teacher) {
-		      if(action == 'add' & $scope.teacherselected.indexOf(teacher) == -1) $scope.teacherselected.push(teacher);
-		      if(action == 'remove' && $scope.teacherselected.indexOf(teacher) != -1) $scope.teacherselected.splice($scope.teacherselected.indexOf(teacher), 1);
+		      if(action == 'add' && $scope.teacherselected.indexOf(teacher) == -1){
+		    	  $scope.teacherselected.push(teacher);
+		    	  $scope.teacherNameselected.push(teacher.name);
+		      }
+		      if(action == 'remove' && $scope.teacherselected.indexOf(teacher) != -1){
+		    	  $scope.teacherselected.splice($scope.teacherselected.indexOf(teacher), 1);
+		    	  $scope.teacherselected.splice($scope.teacherselected.indexOf(teacher.name), 1);
+		      } 
 		    };
 	    $scope.updateTeacherSelection = function($event, teacher) {
 		      var checkbox = $event.target;
@@ -152,15 +160,9 @@ app.controller("gradeController", function($scope, $http){
 		    
 		    };
 	    
-	    $scope.isTeacherSelected = function(teacher) {
-	    	for(var i=0;i<$scope.teacherselected.length;i++){
-		    	 if($scope.teacherselected[i].id==teacher.id && $scope.classId!=null){
-		    		 return true;
-		    	 }else{
-		    		 return false;
-		    	 }
-		     }
-		     // return $scope.teacherselected.indexOf(teacher) >= 0;
+	    $scope.isTeacherSelected = function(teacherName) {
+	    	
+		      return $scope.teacherNameselected.indexOf(teacherName) >= 0;
 		};  
 	    ////////////选中教师的Id结束////////////////////////////////
 	    
@@ -216,11 +218,16 @@ app.controller("gradeController", function($scope, $http){
 		$scope.selected=c;
 		$scope.classes=c;
 		$scope.classId=c.id;
-		$scope.courseselected=c.listCourse;
+		
 		$scope.imgUrl=c.imgUrl;
-		console.log($scope.courseselected);
-		$scope.teacherselected=c.listTeacher;
-		console.log($scope.teacherselected);
+		angular.forEach(c.listCourse,function(course){
+			$scope.courseNameselected.push(course.courseName);
+		});
+		angular.forEach(c.listTeacher,function(teacher){
+			$scope.teacherNameselected.push(teacher.name);
+		});
+		console.log($scope.courseNameselected);
+		console.log($scope.teacherNameselected);
 		}
 		else{
 			$scope.selected=null;
@@ -236,6 +243,10 @@ app.controller("gradeController", function($scope, $http){
 		$scope.templateBases();
 		$scope.teacherBases();
 		$scope.courseBases();
+		$scope.courseselected = [];
+		 $scope.courseNameselected=[];
+		 $scope.teacherselected = [];
+		 $scope.teacherNameselected = [];
 		document.getElementById('add').style.display="block"; 
 		
 	}
