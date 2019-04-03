@@ -60,7 +60,9 @@ app.controller("superAdminController", function($scope, $http) {
 		$scope.userRole = null;
 		$scope.password = null;
 		$scope.selected = null;
-
+		$scope.adminMenus = [];
+		$scope.adminSubMenusName = [];
+		$scope.adminMenusNames = [];
 		$scope.html = "添加";
 		document.getElementById('addbutton').style.display = "inline-block";
 		// style="background:#5ED8A9;"
@@ -252,8 +254,9 @@ app.controller("superAdminController", function($scope, $http) {
 	//点击事件 点击弹出弹窗 展示 limits
 	$scope.userRole = null;
 	$scope.selectLimits = function(menus) {
-		$scope.menus = menus;
-		document.getElementById('selectLimits').style.display = "block";
+		/*$scope.menus = menus;
+		document.getElementById('selectLimits').style.display = "block";*/
+		alert("敬请期待~");
 	}
 	//点击事件 点击关闭弹窗
 	$scope.escLimits = function() {
