@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,6 @@ public class QuestionCategoryService implements IQuestionCategoryService{
 			int countsub=questionSubcategoryDao.countSubCategory(questionCategory.getId());
 			questionCategory.setCount(countsub);
 			
-			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			questionCategory.setShowtime(sf.format(questionCategory.getAddtime()));
 		}
 		
 		

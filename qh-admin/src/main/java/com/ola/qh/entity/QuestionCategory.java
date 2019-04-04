@@ -25,9 +25,6 @@ public class QuestionCategory {
 	
 	private Date updatetime;
 	
-	private String showtime;
-
-	
 	public String getId() {
 		return id;
 	}
@@ -90,14 +87,6 @@ public class QuestionCategory {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
-	}
-
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
 	}
 
 	public int getCount() {

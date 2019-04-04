@@ -52,7 +52,7 @@
 									
 									<th>{{vp.comments}}</th>
 									<th>{{vp.likesNumber}}</th>
-									<th>{{vp.showtime}}</th>
+									<th>{{vp.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 									<th><span class="xiangqing" ng-click="seeconnmet(vp.id)">查看回复</span></th>
 									
 								</tr>
@@ -84,7 +84,7 @@
 									
 									<th>{{vpl.comments}}</th>
 									<th>{{vpl.likesNumber}}</th>
-									<th>{{vpl.showtime}}</th>
+									<th>{{vpl.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 									<th><span class="xiangqing" ng-click="videopatientsdelete(vpl.id)">删除</span></th>
 									
 								</tr>

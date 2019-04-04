@@ -113,8 +113,6 @@ public class ShopDrug {
 	
 	private String shopName;/////商家
 	
-	private String showtime;/////商家
-
 	public String getIstimes() {
 		return istimes;
 	}
@@ -509,13 +507,6 @@ public class ShopDrug {
 		this.approvalTime = approvalTime;
 	}
 
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
-	}
 	
 	
 }

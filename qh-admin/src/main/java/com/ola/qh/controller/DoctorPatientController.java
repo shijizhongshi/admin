@@ -1,6 +1,5 @@
 package com.ola.qh.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,6 @@ public class DoctorPatientController {
 		Results<List<DoctorPatient>> results=new Results<List<DoctorPatient>>();
 		
 		List<DoctorPatient> list= doctorPatientService.selectDoctorPatient(pageNo, pageSize, title);
-		
-		for (DoctorPatient doctorPatient : list) {
-			
-			SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			doctorPatient.setShowtime(sf.format(doctorPatient.getAddtime()));
-		}
 		
 		int count=doctorPatientService.DoctorPatientCount(title);
 			

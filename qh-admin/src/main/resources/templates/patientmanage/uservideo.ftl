@@ -71,7 +71,7 @@
 									<th><img ng-src="{{uv.firstImage}}"></th>
 									<th>{{uv.likeNumber}}</th>
 									<th>{{uv.commentNumber}}</th>
-									<th>{{uv.showtime}}</th>
+									<th>{{uv.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 									<th><span class="xiangqing" ng-click="details(uv.id)">查看评论</span></th>
 								</tr>
 

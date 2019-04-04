@@ -61,7 +61,7 @@
 								<th>{{ol.operatingScope}}</th>
                                   <th>{{ol.operatingStatus}}</th>
                                   <th>{{ol.operatingUser}}</th>
-                                  <th>{{ol.showtime}}</th>
+                                  <th>{{ol.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
 
 						</tbody></table>

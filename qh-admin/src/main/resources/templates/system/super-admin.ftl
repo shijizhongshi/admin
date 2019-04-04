@@ -86,8 +86,8 @@
 							<th>{{u.nickname}}</th>
 							<th>{{u.password}}</th>
 							<th>{{u.category}}</th>
-							<th>{{u.addtime | date:'yyyy.MM.dd'}}</th>
-							<th>{{u.updatetime | date:'yyyy.MM.dd'}}</th>
+							<th>{{u.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
+							<th>{{u.updatetime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							<th><input type="button" class="btn-lg im-key" value="查看详情" style="padding: 3px 10px; margin: 0;background:#F9CD34;" ng-click="selectLimits(u.menus)"></th>
 						</tr>
 					</table>

@@ -80,7 +80,7 @@
 							<th><img ng-src="{{l.imgUrl}}" /></th>
 							<th ng-show="l.isshow==1">是</th>
 							<th ng-show="l.isshow==0">否</th>
-							<th>{{l.showtime}}</th>
+							<th>{{l.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 
 						</tr>
 					</table>

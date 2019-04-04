@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -54,12 +53,12 @@ public class QuestionBankService implements IQuestionBankService {
 							qb.setAddtime(new Date());
 							bankId = KeyGen.uuid();
 							qb.setId(bankId);
-							qb.setNumberNo(n+1);
+							//qb.setNumberNo(n+1);
 							qb.setTitle(checkNull(1, row));
 							qb.setTypes(checkNull(0, row));
 							qb.setSubId(subId);
 							questionBankDao.insertQuestionBank(qb);
-							n++;
+							//n++;
 						}
 						if ("单选题".equals(checkNull(0, row)) || "多选题".equals(checkNull(0, row))) {
 							QuestionBank qb = new QuestionBank();
@@ -138,7 +137,10 @@ public class QuestionBankService implements IQuestionBankService {
 								///// 共同题干的问题
 								qb.setBankId(bankId);
 								qb.setAnalysis(checkNull(8, row));
+								qb.setNumberNo(n+1);
+								
 								questionBankDao.insertQuestionUnit(qb);
+								n++;
 							} else {
 								/////// 单纯的单选或者多选的问题
 								qb.setAnalysis(checkNull(8, row));
@@ -194,8 +196,7 @@ public class QuestionBankService implements IQuestionBankService {
 				}
 				questionBank.setUnit(listunit);
 				
-				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				questionBank.setShowtime(sf.format(questionBank.getAddtime()));
+				
 			}
 			
 			

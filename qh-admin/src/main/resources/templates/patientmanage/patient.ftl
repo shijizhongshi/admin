@@ -62,7 +62,7 @@
 									<th>{{p.category}}</th>
 									<th>{{p.title}}</th>
 									<th>{{p.likes}}</th>
-									<th>{{p.showtime}}</th>
+									<th>{{p.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								</tr>
 
 							</table>

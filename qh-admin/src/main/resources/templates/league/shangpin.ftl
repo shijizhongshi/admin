@@ -95,7 +95,7 @@ submenu="sidebarmenu-league-shangpin">
 									<th><img ng-src="{{s.doorHeadUrl}}"></th>
 									<th>{{s.leaderName}}</th>
 									<th>{{s.leaderMobile}}</th>
-									<th>{{s.showtime}}</th>
+									<th>{{s.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(s)">查看详情</span></th>
 								</tr>
 
@@ -234,7 +234,7 @@ submenu="sidebarmenu-league-shangpin">
 									<th>{{i.shopName}}</th>
 									<th>{{i.address}}</th>
 									<th>{{i.leaderName}}</th>
-									<th>{{i.showtime}}</th>
+									<th>{{i.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 									<th><span class="xiangqing" ng-click="checkedAll(i)">查看详情</span></th>
 								</tr>
 
