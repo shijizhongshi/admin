@@ -38,17 +38,15 @@ public class User {
 
 	private Integer isStudent;// 是否为学员 | 0：不是学员 | 1：是学员
 
-	private String usertype;//service层拼接userrole和isdoctor字段 在页面展示
-	
-	private Date birthday;//用户生日
+	private String usertype;// service层拼接userrole和isdoctor字段 在页面展示
 
-	
-	
-	public Date getBirthday() {
+	private String birthday;// 用户生日
+
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
