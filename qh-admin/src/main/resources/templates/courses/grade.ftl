@@ -57,6 +57,9 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改班级</li>
 					<li ng-click="deleteClass()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除班级</li>
+						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+					<li><span class="glyphicon glyphicon-sort-by-attributes"
+						class="move-down"></span>&nbsp;下移</li>
 					<li ng-click="goBuyCourse()"><span
 						class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;学员列表</li>
 					<li ng-click="removeStudent()"><span

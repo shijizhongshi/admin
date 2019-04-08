@@ -5,6 +5,7 @@
 <@h.header title="短视频管理" />
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
+<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/patientmanage/uservideo.js"></script>
 <@b.body menu="sidebarmenu-patientmanage" submenu="sidebarmenu-patientmanage-uservideo">
 <div ng-controller="uservideoController">
