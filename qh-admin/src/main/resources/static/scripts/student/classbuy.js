@@ -15,11 +15,11 @@ app.controller("classBuyController", function($scope, $http){
 	};
 	//加载时展示页面
 	$scope.total=0;
-	$scope.current=1;
+	$scope.page=1;
 	$scope.pageSize=20;
 	$scope.loaddata=function(){
 		$http.get("/api/btl/record",{"params": {"nicknameORmobile":$scope.nicknameORmobile,
-			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"page":$scope.current,"types":1,"classId":$("#classId").val()}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"page":$scope.page,"types":1,"classId":$("#classId").val()}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.classrecord=data.data;
