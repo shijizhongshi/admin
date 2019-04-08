@@ -61,7 +61,9 @@
 						</form>
 						<ul class="show">
 
-
+							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+							<li><span class="glyphicon glyphicon-sort-by-attributes"
+								class="move-down"></span>&nbsp;下移</li>
 							<li style="background: #F86846;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;删除店铺</li>
 							

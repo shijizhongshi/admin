@@ -95,7 +95,9 @@
 						<ul class="show">
 							<li ng-click="deletetemplate()" style="background: #F86846;"><span
 								class="glyphicon glyphicon-trash"></span>&nbsp;删除商品</li>
-							
+							<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+							<li><span class="glyphicon glyphicon-sort-by-attributes"
+								class="move-down"></span>&nbsp;下移</li>
 							<li style="float: right; margin-right: 20px; background: none;"><img
 								src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 						</ul>
@@ -414,7 +416,9 @@
 					<ul class="show">
 						<li ng-click="deletetemplate()" style="background: #F86846;"><span
 							class="glyphicon glyphicon-trash"></span>&nbsp;删除项目</li>
-						
+						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
+						<li><span class="glyphicon glyphicon-sort-by-attributes"
+							class="move-down"></span>&nbsp;下移</li>
 						<li style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
 					</ul>
