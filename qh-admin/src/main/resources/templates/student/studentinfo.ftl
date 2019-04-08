@@ -167,14 +167,14 @@ submenu="sidebarmenu-student-studentinfo">
 
 
 
-									<ul class="yixuanbanji" ng-show="{{typesName=='课程'}}"
+									<ul class="yixuanbanji" ng-show="typesName=='课程'"
 										ng-repeat="productcourse in productlisted">
 										<li><span style="color: red">{{productcourse.courseTypeSubclassName}}-</span>{{productcourse.courseName}}</li>
 										<li>价格：{{productcourse.coursePrice}} <span
 											style="color: red; margin-left: 20px;">折扣价：{{productcourse.courseDiscountPrice}}</span></li>
 									</ul>
 
-									<ul class="yixuanbanji" ng-show="{{typesName=='班级'}}"
+									<ul class="yixuanbanji" ng-show="typesName=='班级'"
 										ng-repeat="productclass in productlisted">
 										<li><span style="color: red">{{productclass.courseTypeSubclassName}}-</span>{{productclass.className}}</li>
 										<li>价格：{{productclass.classPrice}} <span
