@@ -152,49 +152,6 @@ public class BuyCourseService implements IBuyCourseService {
 		} else if (oc.getTypes() == 2) {
 			//// 报网课学习课程
 			List<String> productIds = oc.getProductId();
-			List<String> classIdList=new ArrayList<String>();
-			for (String courseId : productIds) {
-				Course c = courseDao.existCourse(courseId);
-				if(c.getClassId()!=null){
-					classIdList.add(c.getClassId());
-				}
-			}
-			HashSet<String> h = new HashSet<String>(classIdList);   
-			classIdList.clear();   
-			classIdList.addAll(h);  
-			
-			
-			for (String classId : classIdList) {
-				List<String> courseIdList = new ArrayList<String>();
-				List<String> existCourseId = new ArrayList<String>();
-				List<Course> courseList = courseDao.existCourseList(classId);
-				for (Course course : courseList) {
-					courseIdList.add(course.getId());
-				}
-				for(int i=0;i<courseIdList.size();i++){
-					String courseId1=courseIdList.get(i);
-					for(int j=0;j<productIds.size();j++){
-						String courseId2=productIds.get(j);
-						if(courseId1.equals(courseId2)){
-							
-							existCourseId.add(courseId1);
-						}
-					}
-				}
-				if(existCourseId.size()==courseIdList.size()){
-					for(int i=0;i<existCourseId.size();i++){
-						
-						if(existCourseId.size()==1){
-							
-						}
-					}
-					result.setStatus("1");
-					result.setMessage("只能报网课或者是报班");
-					return result;
-				}
-			}
-			
-			
 			for (String courseId : productIds) {
 				Course c = courseDao.existCourse(courseId);
 				
@@ -297,4 +254,66 @@ public class BuyCourseService implements IBuyCourseService {
 		return userBuyCourseDao.updateBuy(classId, courseId);
 	}
 
+
+	@Override
+	public Results<String> existCourseId(List<String> productId) {
+		
+		Results<String> results=new Results<String>();
+		List<String> classIdList=new ArrayList<String>();
+		for (String courseId : productId) {
+			Course c = courseDao.existCourse(courseId);
+			if(c.getClassId()!=null){
+				classIdList.add(c.getClassId());
+			}
+		}
+		HashSet<String> h = new HashSet<String>(classIdList);   
+		classIdList.clear();   
+		classIdList.addAll(h);  
+		
+		
+		for (String classId : classIdList) {
+			List<String> courseIdList = new ArrayList<String>();
+			List<String> existCourseId = new ArrayList<String>();
+			List<Course> courseList = courseDao.existCourseList(classId);
+			for (Course course : courseList) {
+				courseIdList.add(course.getId());
+			}
+			for(int i=0;i<courseIdList.size();i++){
+				String courseId1=courseIdList.get(i);
+				for(int j=0;j<productId.size();j++){
+					String courseId2=productId.get(j);
+					if(courseId1.equals(courseId2)){
+						
+						existCourseId.add(courseId1);
+					}
+				}
+			}
+			if(existCourseId.size()==courseIdList.size()){
+				
+				String courseShowName="";
+				String className=courseClassDao.single(courseDao.existCourse(existCourseId.get(0)).getClassId()).getClassName();
+				for(int i=0;i<existCourseId.size();i++){
+					String courseName=courseDao.existCourse(existCourseId.get(i)).getCourseName();
+					
+					if(existCourseId.size()>1){
+						if(i==0){
+							courseShowName=courseShowName+courseName;
+						}else{
+						courseShowName=courseShowName+","+courseName;
+						}
+					}else{
+						courseShowName=courseName;
+					}
+				}
+				String showName="课程"+"("+courseShowName+")"+"属于"+"("+className+")班级,请前往开通班级";
+				results.setStatus("1");
+				results.setMessage(showName);
+				return results;
+			}
+		}
+		results.setStatus("0");
+		return results;
+	}
+
+	
 }

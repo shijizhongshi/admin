@@ -18,4 +18,5 @@ public interface IBuyCourseService {
 	
 	public int updateBuy(String classId,String courseId);
 	
+	public Results<String> existCourseId(List<String> productId);
 }

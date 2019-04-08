@@ -4,7 +4,6 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/course/audition.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-audition">
