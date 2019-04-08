@@ -39,7 +39,6 @@ public class CourseClassTemplateController {
 			pageNo=(page-1)*pageSize;
 		}
 		
-		
 		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id,templateName, pageNo, pageSize);
 		int count=courseClassTemplateService.selectTemplateCount(templateName);
 		
