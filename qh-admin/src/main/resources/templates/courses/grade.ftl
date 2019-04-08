@@ -283,7 +283,7 @@
 <style type="text/css">
 .poop {
 	overflow-y: scroll;
-	width: 80%;
+	width: 60%;
 	height: 600px;
 	position: absolute;
 	left: 5%;
