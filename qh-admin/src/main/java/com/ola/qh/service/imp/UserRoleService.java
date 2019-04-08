@@ -119,7 +119,7 @@ public class UserRoleService implements IUserRoleService {
 							armupdate.setSubmenuId(submenuId);
 							adminRoleMenusDao.updateRoleMenu(armupdate);
 						}
-						break;
+						
 					}
 				}
 				if(j==menuList.size()){

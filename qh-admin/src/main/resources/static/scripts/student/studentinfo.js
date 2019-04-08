@@ -1,6 +1,7 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
 	
+
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -32,28 +33,12 @@ app.controller("studentinfoController", function($scope, $http) {
 		}
 
 	}
-	$scope.list = function() {
-		if ($scope.mobile != '' && $scope.mobile != null
-				|| $scope.nickname != '' && $scope.nickname != null) {
-			$http.get("/api/user/select", {
-				"params" : {
-					"nickname" : $scope.nickname,
-					"mobile" : $scope.mobile,
-					"page" : $scope.page = 1
-				}
-			}, {
-				'Content-Type' : 'application/json;charset=UTF-8'
-			}).success(function(result) {
-				if (result.status == "0") {
-					$scope.userList = result.data;
-					$scope.total = result.count;
-				} else {
-					alert(result.messgae);
-				}
-			})
+	//键盘事件 回车
+	$scope.todoSelect = function ($event) {
+		if ($event.keyCode == 13) {
+			alert("按了回车键");
 		}
-	}
-	$scope.list();
+	};
 	// 选中更换样式 数据回显
 	$scope.checkUser = function(u) {
 		$scope.selected = u;

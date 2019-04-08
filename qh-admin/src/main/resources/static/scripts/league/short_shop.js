@@ -2,14 +2,14 @@ app.controller("fuwushopController", function($scope, $http) {
 
 	$scope.total = 0;
 	//当前的页数
-	$scope.current = 1;
+	$scope.page = 1;
 	//一页显示多少条
 	$scope.pageSize = 20;
 
 	$scope.shopList = function() {
 		$http.get("/api/shop/listshort", {
 			"params" : {
-				"page" : $scope.current
+				"page" : $scope.page
 			}
 		}, {
 			'Content-Type' : 'application/json;charset=UTF-8'

@@ -178,7 +178,6 @@ public class CourseController {
 		for (Course course2 : list) {
 			int count = buyCourseService.existOpenCourse(course2.getId(), userId, null);
 			if (count == 0) {
-
 				List<CourseClass> classlist = courseClassService.listCourseClass(course2.getClassId(), null, null);
 				int classcount = buyCourseService.existOpenCourse(null, userId, classlist.get(0).getId());
 				if (classcount == 0) {

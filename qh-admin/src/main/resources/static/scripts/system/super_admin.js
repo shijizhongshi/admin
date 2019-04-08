@@ -25,7 +25,7 @@ app.controller("superAdminController", function($scope, $http) {
 	//总条数
 	$scope.total = 0;
 	//当前的页数
-	$scope.current = 1;
+	$scope.page = 1;
 	//一页显示多少条
 	$scope.pageSize = 20;
 
@@ -34,7 +34,7 @@ app.controller("superAdminController", function($scope, $http) {
 	$scope.categorys = "";
 
 	$scope.userRoleList = function() {
-		$scope.pageNo = ($scope.current - 1) * $scope.pageSize;
+		$scope.pageNo = ($scope.page - 1) * $scope.pageSize;
 		$http.get("/api/userRole/selectList", {
 			"params" : {
 				"pageNo" : $scope.pageNo,
@@ -49,6 +49,9 @@ app.controller("superAdminController", function($scope, $http) {
 			if (result.status == "0") {
 				$scope.list = result.data;
 				$scope.total = result.count;
+				$scope.adminMenus = [];
+				$scope.adminSubMenusName = [];
+				$scope.adminMenusNames = [];
 			} else {
 				alert(result.message);
 			}
@@ -154,36 +157,44 @@ app.controller("superAdminController", function($scope, $http) {
 	}
 
 	var updateSubSelected = function(action, sub, menus) {
-		if (action == 'add' && menus.list.indexOf(sub) == -1) {
-			if ($scope.adminMenus.indexOf(menus) == -1) {
+		if ($scope.adminSubMenusName.indexOf(sub.names) == -1) {
+			if ($scope.adminMenusNames.indexOf(menus.names) == -1) {
 				$scope.adminMenus.push(menus);
 				$scope.adminMenusNames.push(menus.names);
-				menus.list.push(sub);
+				
+				$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.names)].list.push(sub);
 				$scope.adminSubMenusName.push(sub.names);
 			}else{
-				menus.list.push(sub);
+				$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.names)].list.push(sub);
 				$scope.adminSubMenusName.push(sub.names);
 			}
 
 		}
 
-		if (action == 'remove' && menus.list.indexOf(sub) != -1) {
+		if ($scope.adminSubMenusName.indexOf(sub.names) != -1) {
 			////////如果大菜单不存在的话
-			if($scope.adminMenus.indexOf(menus) == -1){
+			if($scope.adminMenusNames.indexOf(menus.names) == -1){
 				$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
 				
 			}else{/////如果大菜单存在的话
 				
-				if(menus.list.length==1){
+				if($scope.adminMenus[$scope.adminMenusNames.indexOf(menus.names)].list.length==1){
 					//////表示只有一个子菜单 并且要移除   所以大类别也要进行移除
-					$scope.adminMenus.splice($scope.adminMenus.indexOf(menus), 1);
+					$scope.adminMenus.splice($scope.adminMenusNames
+							.indexOf(menus.names), 1);
 					$scope.adminMenusNames.splice($scope.adminMenusNames
 							.indexOf(menus.names), 1);
-				}
+				}else{
 				//////在集合中移除
-				menus.list.splice(menus.list.indexOf(sub), 1);
-				/////在subname中移除
-				$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
+					
+					$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.names)].list.splice(
+							$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.names)].list.indexOf(sub), 1);
+					/*$scope.adminMenus.splice($scope.adminSubMenusName.indexOf(sub.names), 1);*/
+					/////在subname中移除
+					$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
+					console.log($scope.adminMenus);
+				}
+				
 				
 			}
 
@@ -197,6 +208,7 @@ app.controller("superAdminController", function($scope, $http) {
 			alert("两次密码输入不一致！");
 			return;
 		}
+		$scope.userRole.menus = $scope.adminMenus;
 		$http.post("/api/userRole/update", $scope.userRole, {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
@@ -244,11 +256,14 @@ app.controller("superAdminController", function($scope, $http) {
 		$scope.selected = u;
 		angular.forEach(u.menus, function(item){  
 			$scope.adminMenusNames.push(item.names);
-			angular.forEach(item.list, function(submenu){  
+			$scope.adminMenus.push(item);
+			angular.forEach(item.list, function(submenu){ 
 				$scope.adminSubMenusName.push(submenu.names);
 				
 			}); 
-		}); 
+		});
+		console.log($scope.adminMenus);
+		console.log($scope.adminSubMenusName);
 
 	}
 	//点击事件 点击弹出弹窗 展示 limits

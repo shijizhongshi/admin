@@ -4,9 +4,9 @@ app.controller("questionChapter", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
-    $scope.pageSize = 20;
+    $scope.pageSize = 20 ;
 	
 	$scope.active=1;
 	$scope.typeId=1;
@@ -51,7 +51,7 @@ app.controller("questionChapter", function($scope, $http){
 	$scope.typeBases();
 	
 	$scope.questioncate=function(){
-		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 		$http.get("/api/questionCategory/select",{"params": {"pageNo":$scope.pageNo,
 			"pageSize":$scope.pageSize,
 			"courseTypeSubclassName":$scope.courseTypeSubclassName,

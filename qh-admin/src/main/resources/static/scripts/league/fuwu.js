@@ -2,7 +2,7 @@ app.controller("fuwushopController", function($scope, $http){
 	
 		$scope.total = 0;
 	   //当前的页数
-	   $scope.current = 1;
+	   $scope.page = 1;
 	   //一页显示多少条
 	   $scope.pageSize = 20;
 	
@@ -20,7 +20,7 @@ app.controller("fuwushopController", function($scope, $http){
 	   $scope.fcount=null;
 	   
 		$scope.shopList=function(){
-			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+			$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 			$http.get("/api/shop/shopList",{"params": {"pageNo":$scope.pageNo,"shopType":1,
 				"address":$scope.address,"shopName":$scope.shopName,"isrecommend":$scope.isrecommend,
 				"islimits":$scope.islimits,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
