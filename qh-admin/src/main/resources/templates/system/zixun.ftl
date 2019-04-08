@@ -94,7 +94,7 @@
 
 				<!--弹窗-->
 				<div class="poop" id="add"
-					style="width: 60%; position: absolute; left: 15%; top: 15%;">
+					style="width: 60%; height: 600px; position: absolute; left: 15%; top: 15%;">
 					<form id="myform">
 						<h3>添加咨询/话题</h3>
 						<div class="template-add">
