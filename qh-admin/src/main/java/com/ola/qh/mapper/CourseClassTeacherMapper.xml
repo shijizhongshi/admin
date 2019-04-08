@@ -16,10 +16,10 @@
 		left join course_teacher ct on ct.id=cct.teacher_id
 		where 1=1
 		
-		<if test="classId!=null">
+		<if test="classId!=null and classId!=''">
 		and cct.class_id=#{classId}
 		</if>
-		<if test="teacherId!=null">
+		<if test="teacherId!=null and teacherId!='' ">
 		and cct.teacher_id=#{teacherId}
 		</if>
 		 

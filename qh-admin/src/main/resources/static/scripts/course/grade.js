@@ -62,6 +62,10 @@ app.controller("gradeController", function($scope, $http){
 			if(data.status=="0"){
 				$scope.classlist=data.data;
 				$scope.total=data.count;
+				$scope.courseselected = [];
+				 $scope.courseNameselected=[];
+				 $scope.teacherselected = [];
+				 $scope.teacherNameselected = [];
 			}
 		})
 	}
@@ -90,6 +94,8 @@ app.controller("gradeController", function($scope, $http){
 	.success(function(data){
 		if(data.status=="0"){
 			$scope.courselist=data.data;
+			
+			
 		}
 	})
 	}
@@ -117,12 +123,12 @@ app.controller("gradeController", function($scope, $http){
 	 $scope.courseselected = [];
 	 $scope.courseNameselected=[];
 	    var updateSelected = function(action, course) {
-	      if(action == 'add' && $scope.courseselected.indexOf(course) == -1){
+	      if(action == 'add' && $scope.courseNameselected.indexOf(course.courseName) == -1){
 	    	  $scope.courseselected.push(course);
 	    	  $scope.courseNameselected.push(course.courseName);
 	      }
-	      if(action == 'remove' && $scope.courseselected.indexOf(course) != -1){
-	    	  $scope.courseselected.splice($scope.courseselected.indexOf(course), 1);
+	      if(action == 'remove' && $scope.courseNameselected.indexOf(course.courseName)!= -1){
+	    	  $scope.courseselected.splice($scope.courseNameselected.indexOf(course.courseName), 1);
 	    	  $scope.courseNameselected.splice($scope.courseNameselected.indexOf(course.courseName), 1);
 	      }
 	    };
@@ -144,13 +150,13 @@ app.controller("gradeController", function($scope, $http){
 	    $scope.teacherselected = [];
 	    $scope.teacherNameselected = [];
 	    var updateTeacherSelected = function(action, teacher) {
-		      if(action == 'add' && $scope.teacherselected.indexOf(teacher) == -1){
+		      if(action == 'add' && $scope.teacherNameselected.indexOf(teacher.name) == -1){
 		    	  $scope.teacherselected.push(teacher);
 		    	  $scope.teacherNameselected.push(teacher.name);
 		      }
-		      if(action == 'remove' && $scope.teacherselected.indexOf(teacher) != -1){
-		    	  $scope.teacherselected.splice($scope.teacherselected.indexOf(teacher), 1);
-		    	  $scope.teacherselected.splice($scope.teacherselected.indexOf(teacher.name), 1);
+		      if(action == 'remove' && $scope.teacherNameselected.indexOf(teacher.name) != -1){
+		    	  $scope.teacherselected.splice($scope.teacherNameselected.indexOf(teacher.name), 1);
+		    	  $scope.teacherNameselected.splice($scope.teacherNameselected.indexOf(teacher.name), 1);
 		      } 
 		    };
 	    $scope.updateTeacherSelection = function($event, teacher) {
@@ -222,12 +228,12 @@ app.controller("gradeController", function($scope, $http){
 		$scope.imgUrl=c.imgUrl;
 		angular.forEach(c.listCourse,function(course){
 			$scope.courseNameselected.push(course.courseName);
+			$scope.courseselected.push(course);
 		});
 		angular.forEach(c.listTeacher,function(teacher){
 			$scope.teacherNameselected.push(teacher.name);
+			$scope.teacherselected.push(teacher);
 		});
-		console.log($scope.courseNameselected);
-		console.log($scope.teacherNameselected);
 		}
 		else{
 			$scope.selected=null;

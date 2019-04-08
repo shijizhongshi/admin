@@ -161,7 +161,7 @@ public class CourseClassService implements ICourseClassService {
 				int j = 0;
 				for (; j < courseset.size(); j++) {
 
-					if (course.get(i).getClassId().equals(courseset.get(j).getId())) {
+					if (course.get(i).getId().equals(courseset.get(j).getId())) {
 
 						break;
 

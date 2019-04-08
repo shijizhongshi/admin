@@ -294,6 +294,9 @@ app.controller("studentinfoController", function($scope, $http) {
 		    	$scope.insertOperating();
 				alert("开课成功~");
 				document.getElementById('revise').style.display = "none";
+				$scope.productId = [];
+				$scope.productlisted = [];
+				$scope.prices = 0;
 				$scope.selectUser();
 				$scope.typesName=null;
 			} else {
