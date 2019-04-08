@@ -2,7 +2,7 @@ app.controller("uservideoController", function($scope, $http,$sce){
 	
 		$scope.total = 0;
 	   //当前的页数
-	   $scope.current = 1;
+	   $scope.page = 1;
 	   //一页显示多少条
 	   $scope.pageSize = 20;
 	   
@@ -10,7 +10,7 @@ app.controller("uservideoController", function($scope, $http,$sce){
 	   $scope.videoName=null;
 	   
 	   $scope.uservideoList=function(){
-			$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+			$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 			$http.get("/api/uservideo/list",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
 				"videoName":$scope.videoName}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){

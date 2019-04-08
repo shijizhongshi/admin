@@ -92,13 +92,13 @@ app.controller("teacherController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
     $scope.teacher=null;
     $scope.imgUrl=null;
 	$scope.teacherBases=function(){
-		$http.get("/api/courseteacher/select",{"params": {"page":$scope.current,"teacherName":$scope.teacherName}}, 
+		$http.get("/api/courseteacher/select",{"params": {"page":$scope.page,"teacherName":$scope.teacherName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

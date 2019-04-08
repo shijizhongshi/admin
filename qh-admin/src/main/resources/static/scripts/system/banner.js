@@ -5,7 +5,7 @@ app.controller("bannerController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
 //上传主展示图片
@@ -13,7 +13,7 @@ app.controller("bannerController", function($scope, $http){
     $scope.banner=null;
     $scope.imageurl=null;
 $scope.loaddata = function(){
-	$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+	$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 	$http.get("/api/banner/selectlist",{"params": {"type":$scope.types,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){

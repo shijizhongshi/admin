@@ -72,12 +72,12 @@ app.controller("ChapterController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
 	
 	$scope.chapterBases=function(){
-		$scope.pageNo=($scope.current-1)*$scope.pageSize;
+		$scope.pageNo=($scope.page-1)*$scope.pageSize;
 		$http.get("/api/course/subclass/courseChapterList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
 			"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"courseId":$scope.courseId
 			,"courseChapterName":$scope.courseChapterName}}, 

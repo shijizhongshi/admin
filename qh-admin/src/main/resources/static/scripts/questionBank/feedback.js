@@ -4,14 +4,14 @@ app.controller("feedbackController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
     
     $scope.status = 0;
 	
 	$scope.feedbackList=function(){
-		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 		$http.get("/api/feedback/list",{"params": {"pageNo":$scope.pageNo,
 			"pageSize":$scope.pageSize,"status":$scope.status,"nickname":$scope.nickname,
 			"courseTypeSubclassName":$scope.courseTypeSubclassName,"name":$scope.name}}, 

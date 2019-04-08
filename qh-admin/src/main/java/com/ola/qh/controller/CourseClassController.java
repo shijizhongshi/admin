@@ -75,7 +75,7 @@ public class CourseClassController {
 				for (Course course : courseList) {
 					courseCount+=buyCourseService.existOpenCourse(course.getId(), userId,null);
 				}
-				if(courseCount==courseList.size()){
+				if(courseCount==courseList.size() && courseCount!=0){
 					courseClass.setIsbuy("1");
 				}else{
 					courseClass.setIsbuy("0");

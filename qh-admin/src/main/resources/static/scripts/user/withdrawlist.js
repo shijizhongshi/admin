@@ -3,7 +3,7 @@ app.controller("withdrawController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
     
@@ -22,7 +22,7 @@ app.controller("withdrawController", function($scope, $http){
 	};  
  
 $scope.loaddata = function(){
-	$http.get("/api/userwithdraw/select",{"params": {"page":$scope.current,"fromdate":formatDate($scope.fromdate),"todate":formatDate($scope.todate),"mobile":$scope.mobile,"payStatus":$scope.payStatus}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	$http.get("/api/userwithdraw/select",{"params": {"page":$scope.page,"fromdate":formatDate($scope.fromdate),"todate":formatDate($scope.todate),"mobile":$scope.mobile,"payStatus":$scope.payStatus}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){
     		$scope.withdrwlist=result.data;
