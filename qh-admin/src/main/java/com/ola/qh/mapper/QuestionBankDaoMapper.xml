@@ -21,8 +21,8 @@
 	</insert>
 	
 	<insert id="insertQuestionUnit" parameterType="com.ola.qh.entity.QuestionBank">
-	insert into question_bank_unit(id,bank_id,title,types,analysis,correct,addtime)
-	values(#{id},#{bankId},#{title},#{types},#{analysis},#{correct},#{addtime})
+	insert into question_bank_unit(id,bank_id,number_no,title,types,analysis,correct,addtime,sub_id)
+	values(#{id},#{bankId},#{numberNo},#{title},#{types},#{analysis},#{correct},#{addtime},#{subId})
 	</insert>
 	
 	<insert id="insertQuestionAnswer" parameterType="com.ola.qh.entity.QuestionAnswer">

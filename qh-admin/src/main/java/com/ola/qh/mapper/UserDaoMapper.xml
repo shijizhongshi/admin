@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.ola.qh.dao.UserDao">
 	<resultMap type="com.ola.qh.entity.User" id="UserMap">
 		<result column="id" property="id" />
@@ -16,150 +16,176 @@
 		<result column="updatetime" property="updatetime" />
 		<result column="birthday" property="birthday" />
 		<result column="isdisabled" property="isdisabled" />
-		<result column="address" property="address"/>
-		<result column="realname" property="realname"/>
+		<result column="address" property="address" />
+		<result column="realname" property="realname" />
 	</resultMap>
 
 	<insert id="insertUser" parameterType="com.ola.qh.entity.User">
-	insert into user(id,password,nickname,mobile,address,realname,addtime)
-	values(#{id},#{password},#{nickname},#{mobile},#{address},#{realname},#{addtime})
+		insert into user(id,password,nickname,mobile,address,realname,addtime)
+		values(#{id},#{password},#{nickname},#{mobile},#{address},#{realname},#{addtime})
 	</insert>
-	
+
 	<select id="selectUser" resultMap="UserMap">
-	select * from user 
-	where 1=1
-	<if test="mobile!=null and mobile!='' ">
-	and  mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
-	</if>
-	<if test="nickname!=null and nickname!='' ">
-	and  nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
-	</if>
-	<if test="userrole!=null and userrole!='' ">
-	and  userrole=#{userrole} 
-	</if>
-	
-	order by addtime desc limit #{pageNo},#{pageSize}
+		select * from user
+		where 1=1
+		<if test="mobile!=null and mobile!='' ">
+			and mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
+		</if>
+		<if test="nickname!=null and nickname!='' ">
+			and nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
+		</if>
+		<if test="userrole!=null and userrole!='' ">
+			and userrole=#{userrole}
+		</if>
+
+		order by addtime desc limit #{pageNo},#{pageSize}
 	</select>
-	
+
 	<select id="selectUserCount" resultType="int">
-	select count(id) from user 
-	where 1=1
-	<if test="mobile!=null and mobile!='' ">
-	and  mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
-	</if>
-	<if test="nickname!=null and nickname!='' ">
-	and  nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
-	</if>
-	<if test="userrole!=null and userrole!='' ">
-	and  userrole=#{userrole} 
-	</if>
-	
+		select count(id) from user
+		where 1=1
+		<if test="mobile!=null and mobile!='' ">
+			and mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))
+		</if>
+		<if test="nickname!=null and nickname!='' ">
+			and nickname LIKE CONCAT(CONCAT('%',#{nickname},'%'))
+		</if>
+		<if test="userrole!=null and userrole!='' ">
+			and userrole=#{userrole}
+		</if>
+
 	</select>
-	
-	
+
+
 	<select id="selectStudent" resultMap="UserMap">
-		select * from user_buy_course as us 
-		left join  user as u
+		select * from user_buy_course as us
+		left join user as u
 		on u.id = us.user_id
-		group by us.user_id 
+		group by us.user_id
 		having 1=1
 		<if test="fromdate!='' and fromdate!=null ">
-		and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+			and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
 		<if test="todate!='' and todate!=null ">
-		and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+			and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 		</if>
-		
+
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-		and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or u.mobile like concat(concat('%',#{realnameORmobile},'%')))
+			and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or
+			u.mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
-		and u.isdisabled=#{status}
+			and u.isdisabled=#{status}
 		</if>
 		order by us.addtime desc limit #{pageNo},#{pageSize}
 	</select>
-	
-	
-	
+
+
+
 	<select id="selectStudentCount" resultType="int">
 		select count(*) from (
-		select count(us.user_id)  from user_buy_course as us 
-		left join  user as u
-		on u.id = us.user_id 
-		group by us.user_id 
-		having 1=1 
+		select count(us.user_id) from user_buy_course as
+		us
+		left join user as u
+		on u.id = us.user_id
+		group by us.user_id
+		having 1=1
 		<if test="fromdate!='' and fromdate!=null ">
-		and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+			and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
 		<if test="todate!='' and todate!=null ">
-		and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+			and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 		</if>
-		
+
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-		and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or u.mobile like concat(concat('%',#{realnameORmobile},'%')))
+			and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or
+			u.mobile like concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
-		and u.isdisabled=#{status}
+			and u.isdisabled=#{status}
 		</if>
 		)as a
-		
+
 	</select>
-	
-	
-	
-	
-	
-	
-	<update id="updateUser" parameterType="com.ola.qh.entity.User" >
-		update user set 
+
+
+
+
+
+
+	<update id="updateUser" parameterType="com.ola.qh.entity.User">
+		update user set
 		<if test="userrole!=null and userrole!='' ">
-		userrole=#{userrole},
+			userrole=#{userrole},
 		</if>
 		<if test="isdoctor!=null and isdoctor!='' ">
-		isdoctor=#{isdoctor},
+			isdoctor=#{isdoctor},
 		</if>
 		<if test="isdisabled!=null and isdisabled!='' ">
-		isdisabled=#{isdisabled},
+			isdisabled=#{isdisabled},
 		</if>
 		<if test="password!=null and password!='' ">
-		password=#{password},
+			password=#{password},
 		</if>
 		<if test="nickname!=null and nickname!='' ">
-		nickname=#{nickname},
+			nickname=#{nickname},
 		</if>
 		<if test="mobile!=null and mobile!='' ">
-		mobile=#{mobile},
+			mobile=#{mobile},
 		</if>
 		<if test="address!=null and address!='' ">
-		address=#{address},
+			address=#{address},
 		</if>
 		<if test="realname!=null and realname!='' ">
-		realname=#{realname},
+			realname=#{realname},
 		</if>
-		updatetime=#{updatetime} where id=#{id} 
+		updatetime=#{updatetime} where id=#{id}
 	</update>
-	
+
 	<select id="singleUser" resultMap="UserMap">
-		select * from user where id=#{id}
+		select * from user where
+		id=#{id}
 	</select>
 	<delete id="delete">
-	delete from user where id=#{id}
+		delete from user where id=#{id}
 	</delete>
-	
-	
+
+
 	<update id="updateFavorite" parameterType="String">
-		update user_favorite set status=1 where product_id=#{productId}
+		update user_favorite
+		set status=1 where product_id=#{productId}
 	</update>
-	
+
 	<select id="adminLogin" resultType="java.lang.String">
-	select nickname from user where nickname=#{username} and password=#{password}
+		select nickname from user where nickname=#{username} and
+		password=#{password}
 	</select>
-	
-	<!--根据userID查询user_buy_course表中数量  -->
+
+	<!--根据userID查询user_buy_course表中数量 -->
 	<select id="selectCountByUserId" resultType="java.lang.Integer">
-	select count(*) from user_buy_course where 1=1 
-	<if test="userId!=null and userId!=''">
-	and user_id = #{userId}
-	</if>
+		select count(*) from user_buy_course where 1=1
+		<if test="userId!=null and userId!=''">
+			and user_id = #{userId}
+		</if>
 	</select>
+
+	<!--推送页面 -->
+	<!--根据条件查询user表 -->
+	<select id="send" resultMap="UserMap">
+		select id from user where 1=1
+		<if test="sex!=null and sex!=''">
+			and sex = #{sex}
+		</if>
+		<if test="userrole!=null and userrole!=''">
+			and userrole = #{userrole}
+		</if>
+		<if test="isdoctor!=null and isdoctor!=''">
+			and isdoctor = #{isdoctor}
+		</if>
+		<if test="birthday!=null and birthday!=''">
+			and birthday like (concat('%',#{birthday},'%'))
+		</if>
+	</select>
+	<!--专业名不为空时 进行联合查询 -->
+	
 </mapper>

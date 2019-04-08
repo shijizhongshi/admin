@@ -79,7 +79,7 @@
 								<th>{{w.money}}</th>
 								<th ng-show="{{w.types==1}}">支付宝</th>
 								<th ng-show="{{w.types==2}}">微信</th>
-								<th>{{w.showtime}}</th>
+								<th>{{w.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								<th></th>
 							</tr>
 

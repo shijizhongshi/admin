@@ -1,12 +1,8 @@
 package com.ola.qh.service;
 
-import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ola.qh.entity.UserWithdraw;
-import com.ola.qh.util.Results;
 
 public interface IUserWithdrawService {
 

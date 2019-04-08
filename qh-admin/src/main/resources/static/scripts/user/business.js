@@ -60,7 +60,8 @@ app.controller("businessController", function($scope, $http){
 	
 	$scope.add=function(){
 		$scope.business=null;
-		 document.getElementById('add').style.display="block";
+		$scope.businessId=null;
+		document.getElementById('add').style.display="block";
 	}
 	
 	$scope.checkBusiness=function(business){
@@ -126,8 +127,14 @@ app.controller("businessController", function($scope, $http){
 	    .success(function(data){
 	    	if(data.status=="0"){
 	    		if($scope.businessId!=null){
+	    			$scope.operating.operatingStatus="修改";
+			    	$scope.operating.operatingUser=$scope.business.name;
+			    	$scope.insertOperating();
 	    			alert("修改成功~");
 	    		}else{
+	    			$scope.operating.operatingStatus="添加";
+			    	$scope.operating.operatingUser=$scope.business.name;
+			    	$scope.insertOperating();
 	    			alert("添加成功~");
 	    		}
 	    			document.getElementById('add').style.display="none"; 
@@ -143,6 +150,9 @@ app.controller("businessController", function($scope, $http){
 			$http.get("/api/business/closeBusiness",{"params": {"businessId":$scope.businessId}},{'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
+					$scope.operating.operatingStatus="停用";
+			    	$scope.operating.operatingUser=$scope.business.name;
+			    	$scope.insertOperating();
 					alert("该加盟商已经被停用~");
 					$scope.loaddata();
 				}else{
@@ -160,6 +170,9 @@ app.controller("businessController", function($scope, $http){
 				$http.get("/api/business/delete",{"params": {"id":$scope.businessId}},{'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
+						$scope.operating.operatingStatus="删除";
+				    	$scope.operating.operatingUser=$scope.business.name;
+				    	$scope.insertOperating();
 						alert("删除成功~");
 						$scope.loaddata();
 					}
@@ -187,6 +200,9 @@ app.controller("businessController", function($scope, $http){
 			$http.post("/api/business/tocharge",$scope.newBusiness,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
 		    	if(data.status=="0"){
+		    		$scope.operating.operatingStatus="充值";
+			    	$scope.operating.operatingUser=$scope.newBusiness.name;
+			    	$scope.insertOperating();
 		    		alert("充值成功~");
 		    		document.getElementById('revise').style.display="none"; 
 		    		$scope.loaddata();
@@ -198,4 +214,10 @@ app.controller("businessController", function($scope, $http){
 		
 	}
 	
+	$scope.operating={operatingScope:"加盟商信息管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.insertOperating = function(){
+		
+		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+	    
+	};
 });

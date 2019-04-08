@@ -165,7 +165,6 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			$http.get("/api/shopdrugsubcategory/insert",{"params": {"categoryId":$scope.id,"subName":$scope.name,"imgUrl":$scope.imgUrl}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
-					
 					alert("添加成功")
 					document.getElementById('add').style.display="none"; 
 					location.reload();
@@ -240,4 +239,5 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		
 		location.reload();
 	}
+	
 });

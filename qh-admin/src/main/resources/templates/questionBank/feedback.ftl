@@ -89,7 +89,7 @@
 							<th>{{fl.name}}</th>
 							<th>{{fl.types}}</th>
 							
-							<th>{{fl.showtime}}</th>
+							<th>{{fl.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							
 						</tr>
 					</table>

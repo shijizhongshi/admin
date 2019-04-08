@@ -83,7 +83,7 @@
 										</div>
 									</div>
 									<div  class="timeandlikes" style="text-align:right;">
-											<span><b>赞:{{replypatient.likes}}</b>&nbsp;&nbsp;<b>时间:{{replypatient.showtime}}</b></span>
+											<span><b>赞:{{replypatient.likes}}</b>&nbsp;&nbsp;<b>时间:{{replypatient.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</b></span>
 									</div>
 								</div>
 							</div>
@@ -113,7 +113,7 @@
 										
 									</div>
 									<div  class="timeandlikes" style="text-align:right;">
-											<span><b>赞:{{rl.likes}}</b>&nbsp;&nbsp;<b>时间:{{rl.showtime}}</b></span>
+											<span><b>赞:{{rl.likes}}</b>&nbsp;&nbsp;<b>时间:{{rl.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</b></span>
 									</div>
 								</div>
 							</div>

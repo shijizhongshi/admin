@@ -72,9 +72,6 @@ public class Orders {
 	
 	private String shopServeDomain;
 	
-	
-	
-	
 	public String getShopName() {
 		return shopName;
 	}

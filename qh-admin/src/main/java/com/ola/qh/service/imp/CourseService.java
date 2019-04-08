@@ -15,96 +15,115 @@ import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.KeyGen;
+import com.ola.qh.util.Results;
+
 /**
  * 
-* @ClassName: CourseService  
-* @Description: 类别的查询和课程的查询  
-* @author guoyuxue  
-* @date 2018年11月19日  
-*
+ * @ClassName: CourseService
+ * @Description: 类别的查询和课程的查询
+ * @author guoyuxue
+ * @date 2018年11月19日
+ *
  */
 @Service
-public class CourseService implements ICourseService{
+public class CourseService implements ICourseService {
 
-	
 	@Autowired
 	private CourseDao courseDao;
 	@Autowired
-	private  UserDao userDao;
-	
+	private UserDao userDao;
+
 	@Override
 	public List<CourseType> courseTypeList() {
 		// TODO Auto-generated method stub
-		return courseDao.courseTypeList();/////大类别的查询
+		return courseDao.courseTypeList();///// 大类别的查询
 	}
+
 	@Override
-	public int insertCourseType(String courseTypeName,String courseTypeId) {
+	public int insertCourseType(String courseTypeName, String courseTypeId) {
 		// TODO Auto-generated method stub
-		String id=KeyGen.uuid();
-		if(courseTypeId!=null && !"".equals(courseTypeId)){
+		String id = KeyGen.uuid();
+		if (courseTypeId != null && !"".equals(courseTypeId)) {
 			return courseDao.insertCourseTypeSubclass(courseTypeName, id, courseTypeId);
-		}else{
+		} else {
 			return courseDao.insertCourseType(courseTypeName, id);
 		}
-		
+
 	}
+
 	@Override
-	public int updateCourseType(String courseTypeName, String id,String courseTypeId) {
+	public int updateCourseType(String courseTypeName, String id, String courseTypeId) {
 		// TODO Auto-generated method stub
-		if(courseTypeId!=null && !"".equals(courseTypeId)){
+		if (courseTypeId != null && !"".equals(courseTypeId)) {
 			return courseDao.updateCourseTypeSubclass(courseTypeName, id, courseTypeId);
-		}else{
+		} else {
 			return courseDao.updateCourseType(courseTypeName, id);
 		}
 	}
 
-	
-	
 	@Override
 	public List<CourseTypeSubclass> courseTypeSubclassList(String courseTypeId) {
 		// TODO Auto-generated method stub
-		return courseDao.courseTypeSubclassList(courseTypeId);////子类别的查询
+		return courseDao.courseTypeSubclassList(courseTypeId);//// 子类别的查询
 	}
-	
 
-	
-	
 	@Override
 	public List<Course> courseList(Course course) {
 		// TODO Auto-generated method stub
 		return courseDao.courseList(course);
 	}
+
 	@Transactional
 	@Override
 	public int insertUpdateCourse(Course course) {
 		// TODO Auto-generated method stub
 		try {
-			
-		if(course.getId()!=null && !"".equals(course.getId())){
-			course.setUpdatetime(new Date());
-			userDao.updateFavorite(course.getId());
-			return courseDao.updateCourese(course);
-			
-		}
-		course.setId(KeyGen.uuid());
-		course.setAddtime(new Date());
-		course.setUserId("1");
-		return courseDao.insertCourse(course);
-		
+
+			if (course.getId() != null && !"".equals(course.getId())) {
+				course.setUpdatetime(new Date());
+				userDao.updateFavorite(course.getId());
+				return courseDao.updateCourese(course);
+
+			}
+			course.setId(KeyGen.uuid());
+			course.setAddtime(new Date());
+			course.setUserId("1");
+			return courseDao.insertCourse(course);
+
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			return 0;
 		}
 	}
+
 	@Override
 	public int deleteCourse(String id) {
 		// TODO Auto-generated method stub
 		return courseDao.deleteCourse(id);
 	}
+
 	@Override
-	public int courseCount(String courseTypeName, String courseTypeSubclassName,String courseName) {
-		
-		return courseDao.courseCount(courseTypeName, courseTypeSubclassName,courseName);
+	public int courseCount(String courseTypeName, String courseTypeSubclassName, String courseName) {
+
+		return courseDao.courseCount(courseTypeName, courseTypeSubclassName, courseName);
 	}
 
+	/**
+	 * 推送页面 专业下拉列表
+	 */
+	@Override
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclassNameAll() {
+		Results<List<CourseTypeSubclass>> results = new Results<>();
+		List<CourseTypeSubclass> list = courseDao.selectCourseTypeSubclassNameAll();
+		if (list == null) {
+			results.setStatus("1");
+			results.setMessage("下拉列表数据查询 失败！");
+
+			return results;
+		}
+		results.setStatus("0");
+		results.setData(list);
+
+		return results;
+	}
 }

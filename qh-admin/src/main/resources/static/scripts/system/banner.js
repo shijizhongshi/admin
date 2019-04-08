@@ -56,6 +56,7 @@ $scope.uploadmainimage = function(file){
 	    		alert("保存成功~");
 	    		document.getElementById('add').style.display="none"; 
 	    		$scope.loaddata();
+	    		
 	    	}else{
 	    		alert(data.message)
 	    	}
@@ -95,6 +96,7 @@ $scope.uploadmainimage = function(file){
 	    		alert("更新成功~");
 	    		document.getElementById('add').style.display="none"; 
 	    		$scope.loaddata();
+	    		
 	    	}else{
 	    		alert(data.message)
 	    	}
@@ -111,7 +113,7 @@ $scope.uploadmainimage = function(file){
 				    	if(result.status=="0"){
 				    	alert("删除成功");
 				    	$scope.loaddata();
-				    		
+				    	
 				    	}else{
 				    		alert(result.message);
 				    	}
@@ -133,5 +135,5 @@ $scope.uploadmainimage = function(file){
 		
 		location.reload();
 	}
-
+	
 });

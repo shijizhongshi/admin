@@ -308,7 +308,7 @@
 								</ul>
 								<ul>
 									<li>审批的时间</li>
-									<li>{{d.showtime}}</li>
+									<li>{{d.approvalTime | date:'yyyy.MM.dd HH:mm:ss'}}</li>
 								</ul>
 							</div>
 						</div>

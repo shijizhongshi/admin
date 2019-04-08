@@ -14,16 +14,13 @@ public class QuestionSubCategory {
 	@NotEmpty(message="节名称不能为空")
 	private String name;////节名称
 	
-	@NotEmpty(message="考试时间不能为空")
-	private String times;///考试时间
+	private int times;///考试时间
 	
 	@NotEmpty(message="章id不能为空")
 	private String purposes;///用途(试卷还是章节联系)
 	
 	@NotEmpty(message="是否可见不能为空")
 	private String isshow;
-	
-	private String showtime;
 	
 	private int count;
 	
@@ -55,11 +52,11 @@ public class QuestionSubCategory {
 		this.name = name;
 	}
 
-	public String getTimes() {
+	public int getTimes() {
 		return times;
 	}
 
-	public void setTimes(String times) {
+	public void setTimes(int times) {
 		this.times = times;
 	}
 
@@ -93,14 +90,6 @@ public class QuestionSubCategory {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
-	}
-
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
 	}
 
 	public int getCount() {

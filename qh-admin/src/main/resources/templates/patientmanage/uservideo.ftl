@@ -5,7 +5,6 @@
 <@h.header title="短视频管理" />
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/admin.js"></script>
-<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/patientmanage/uservideo.js"></script>
 <@b.body menu="sidebarmenu-patientmanage" submenu="sidebarmenu-patientmanage-uservideo">
 <div ng-controller="uservideoController">
@@ -71,7 +70,7 @@
 									<th><img ng-src="{{uv.firstImage}}"></th>
 									<th>{{uv.likeNumber}}</th>
 									<th>{{uv.commentNumber}}</th>
-									<th>{{uv.showtime}}</th>
+									<th>{{uv.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 									<th><span class="xiangqing" ng-click="details(uv.id)">查看评论</span></th>
 								</tr>
 

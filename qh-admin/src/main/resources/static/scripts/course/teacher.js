@@ -227,4 +227,5 @@ app.controller("teacherController", function($scope, $http){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
+	
 });

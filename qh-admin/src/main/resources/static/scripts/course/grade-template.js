@@ -53,7 +53,6 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		$http.post("/api/classtemplate/save",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		
 	    			alert("保存成功~");
 	    			document.getElementById('add').style.display="none"; 
 		    		$scope.templateBases();
@@ -95,7 +94,6 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 		$http.post("/api/classtemplate/update",$scope.courseClassTemplate,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
-	    		
 	    			alert("修改成功~");
 	    			document.getElementById('add').style.display="none"; 
 	    			$scope.id=null;
@@ -151,4 +149,6 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 			location.reload();
 		
 	}
+	
+	
 });

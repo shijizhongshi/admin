@@ -67,7 +67,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 								<th>{{qbc.times}}</th>
 								<th>{{qbc.show}}</th>
 								<th>{{qbc.purposes}}</th>
-								<th>{{qbc.showtime}}</th>
+								<th>{{qbc.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
 
 
@@ -93,7 +93,7 @@ submenu="sidebarmenu-questionBank-questionChapter">
 <input ng-model="questionSubCategory.name" type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入节名称" >
 	</div>
 	<div class="select-2">
-		<span>考试时间<i class="bitian">*</i></span>
+		<span>考试时间(分钟)<i class="bitian">*</i></span>
 <input ng-model="questionSubCategory.times" type="text" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="" >
 	</div>
 	<div class="select-2">

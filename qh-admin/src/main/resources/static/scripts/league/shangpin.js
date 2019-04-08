@@ -99,6 +99,9 @@ app.controller("shangpinshopController", function($scope, $http){
 				"id":s.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
+					$scope.operating.operatingStatus="审核";
+			    	$scope.operating.operatingUser=$scope.shop.shopName;
+			    	$scope.insertOperating();
 					alert("修改成功")
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
@@ -143,4 +146,10 @@ app.controller("shangpinshopController", function($scope, $http){
 				location.reload();
 				
 			}
+			$scope.operating={operatingScope:"商品店铺",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+			$scope.insertOperating = function(){
+				
+				$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
+			    
+			};
 })

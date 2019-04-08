@@ -24,8 +24,6 @@ public class QuestionBankFeedback {
 	
 	private Date updatetime;
 	
-	private String showtime;
-	
 	private String name;////章名称
 	
 	private String sectionname;//节名称
@@ -88,14 +86,6 @@ public class QuestionBankFeedback {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
-	}
-
-	public String getShowtime() {
-		return showtime;
-	}
-
-	public void setShowtime(String showtime) {
-		this.showtime = showtime;
 	}
 
 	public QuestionBank getBank() {

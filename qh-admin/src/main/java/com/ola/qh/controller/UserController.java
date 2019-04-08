@@ -102,4 +102,29 @@ public class UserController {
 		return result;
 		
 	}
+	/**
+	 * 单播推送页面
+	 * @param title
+	 * @param content
+	 * @param sex
+	 * @param courseTypeSubclassName
+	 * @param userrole
+	 * @param isdoctor
+	 * @param birthday
+	 * @return
+	 */
+	@RequestMapping(value = "/send",method = RequestMethod.GET)
+	public Results<List<User>> send (@RequestParam(name = "title",required=false)String title,
+			@RequestParam(name = "content",required=false) String content,
+			@RequestParam(name = "sex",required=false) String sex,
+			@RequestParam(name = "courseTypeSubclassName",required=false) String courseTypeSubclassName,
+			@RequestParam(name = "userrole",required=false) String userrole,
+			@RequestParam(name = "isdoctor",required=false) String isdoctor,
+			@RequestParam(name = "birthday",required=false) String birthday
+			) {
+		Results<List<User>> results = new Results<>();
+		results = userService.send(title,content,sex,courseTypeSubclassName,userrole,isdoctor,birthday);
+		
+		return results;
+	}
 }

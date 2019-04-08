@@ -1,7 +1,9 @@
 package com.ola.qh.service.imp;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +154,7 @@ public class BuyCourseService implements IBuyCourseService {
 			List<String> productIds = oc.getProductId();
 			for (String courseId : productIds) {
 				Course c = courseDao.existCourse(courseId);
+				
 				account = account.add(c.getCourseDiscountPrice());
 				////////保证这个用户没有开过这个课程的时候
 				/*int count = userBuyCourseDao.selectUserBuyCourseCount(oc.getUserId(), null, courseId);
@@ -251,4 +254,66 @@ public class BuyCourseService implements IBuyCourseService {
 		return userBuyCourseDao.updateBuy(classId, courseId);
 	}
 
+
+	@Override
+	public Results<String> existCourseId(List<String> productId) {
+		
+		Results<String> results=new Results<String>();
+		List<String> classIdList=new ArrayList<String>();
+		for (String courseId : productId) {
+			Course c = courseDao.existCourse(courseId);
+			if(c.getClassId()!=null){
+				classIdList.add(c.getClassId());
+			}
+		}
+		HashSet<String> h = new HashSet<String>(classIdList);   
+		classIdList.clear();   
+		classIdList.addAll(h);  
+		
+		
+		for (String classId : classIdList) {
+			List<String> courseIdList = new ArrayList<String>();
+			List<String> existCourseId = new ArrayList<String>();
+			List<Course> courseList = courseDao.existCourseList(classId);
+			for (Course course : courseList) {
+				courseIdList.add(course.getId());
+			}
+			for(int i=0;i<courseIdList.size();i++){
+				String courseId1=courseIdList.get(i);
+				for(int j=0;j<productId.size();j++){
+					String courseId2=productId.get(j);
+					if(courseId1.equals(courseId2)){
+						
+						existCourseId.add(courseId1);
+					}
+				}
+			}
+			if(existCourseId.size()==courseIdList.size()){
+				
+				String courseShowName="";
+				String className=courseClassDao.single(courseDao.existCourse(existCourseId.get(0)).getClassId()).getClassName();
+				for(int i=0;i<existCourseId.size();i++){
+					String courseName=courseDao.existCourse(existCourseId.get(i)).getCourseName();
+					
+					if(existCourseId.size()>1){
+						if(i==0){
+							courseShowName=courseShowName+courseName;
+						}else{
+						courseShowName=courseShowName+","+courseName;
+						}
+					}else{
+						courseShowName=courseName;
+					}
+				}
+				String showName="课程"+"("+courseShowName+")"+"属于"+"("+className+")班级,请前往开通班级";
+				results.setStatus("1");
+				results.setMessage(showName);
+				return results;
+			}
+		}
+		results.setStatus("0");
+		return results;
+	}
+
+	
 }

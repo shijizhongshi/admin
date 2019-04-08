@@ -1,6 +1,5 @@
 package com.ola.qh.service.imp;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +28,7 @@ public class UserVideoCommentService implements IUserVideoCommentService{
 					
 					List<UserVideoComment> list=userVideoCommentDao.videoCommentList(pageNo, pageSize, vid);
 					
-					for (UserVideoComment userVideoComment : list) {
-						
-						SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-						userVideoComment.setShowtime(sf.format(userVideoComment.getAddtime()));
-						
-					}
+					
 					
 					int count=userVideoCommentDao.videoCommentCount(vid);
 					 
@@ -79,13 +73,6 @@ public class UserVideoCommentService implements IUserVideoCommentService{
 		try {
 			
 			List<UserVideoComment> list=userVideoCommentDao.videoCommentsList(pageNo, pageSize, vid, id);
-			
-			for (UserVideoComment userVideoComment : list) {
-				
-				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				userVideoComment.setShowtime(sf.format(userVideoComment.getAddtime()));
-				
-			}
 			
 			int count=userVideoCommentDao.videoCommentsCount(vid, id);
 			 

@@ -93,5 +93,5 @@ app.controller("replyPatientController", function($scope, $http){
 				alert("请选中信息~");
 			}
 		}
-		
+	  	
 })

@@ -77,7 +77,7 @@
 								<th>{{qc.count}}</th>
 
 								<th>{{qc.show}}</th>
-								<th>{{qc.showtime}}</th>
+								<th>{{qc.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
 
 

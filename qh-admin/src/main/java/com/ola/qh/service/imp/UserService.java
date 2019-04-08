@@ -18,18 +18,24 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.AdminRoleMenusDao;
 import com.ola.qh.dao.BusinessDao;
+import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.UserBookDao;
+import com.ola.qh.dao.UserBuyCourseDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.dao.UserLoginDao;
+import com.ola.qh.dao.UserMessageDao;
 import com.ola.qh.dao.UserRoleDao;
 import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.entity.AdminRoleMenu;
 import com.ola.qh.entity.Business;
 import com.ola.qh.entity.BusinessBook;
+import com.ola.qh.entity.Course;
 import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserBook;
+import com.ola.qh.entity.UserBuyCourse;
 import com.ola.qh.entity.UserLogin;
 import com.ola.qh.entity.UserRole;
+import com.ola.qh.service.IPushService;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
@@ -50,6 +56,14 @@ public class UserService implements IUserService {
 	private UserRoleDao UserRoleDao;
 	@Autowired
 	private AdminRoleMenusDao adminRoleMenusDao;
+	@Autowired
+	private UserMessageDao usermessage;
+	@Autowired
+	private IPushService PushService;
+	@Autowired
+	private CourseDao courseDao;
+	@Autowired
+	private UserBuyCourseDao userBuyCourseDao;
 
 	@Override
 	public int updateUser(String isdisabled, String id) {
@@ -193,6 +207,13 @@ public class UserService implements IUserService {
 			return results;
 		}
 		for (User user : list) {
+			// 遍历 如果isdoctor字段 == 1， 组合isdoctor字段和userrole字段
+			if (user.getIsdoctor().equals("1")) {
+				user.setUsertype(user.getIsdoctor() + user.getUserrole());
+			}
+			if (user.getIsdoctor().equals("0")) {
+				user.setUsertype(user.getUserrole());
+			}
 			// 循环遍历 在user_buy_course表中查询是否存在
 			Integer count = userDao.selectCountByUserId(user.getId());
 			if (count == 0) {
@@ -309,6 +330,97 @@ public class UserService implements IUserService {
 			adminMenus.setList(adminRoleMenusDao.listsubmenu(adminMenus.getId(), null));
 		}
 		return list;
+	}
+
+	/**
+	 * 推送页面
+	 */
+	@Override
+	public Results<List<User>> send(String title, String content, String sex, String courseTypeSubclassName,
+			String userrole, String isdoctor, String birthday) {
+		Results<List<User>> results = new Results<>();
+		List<User> list = new ArrayList<>();
+		//计数器 i
+		Integer i = 0;
+		//根据专业名是否为空 选择不同的查询方式
+		if (courseTypeSubclassName == null) {
+			list = userDao.send(sex, userrole, isdoctor, birthday);
+			for (User user : list) {
+				// 把标题和内容存放到user_message表中
+				Date addtimeDate = new Date();
+				String id = KeyGen.uuid();
+				usermessage.insertMessage(id, addtimeDate, title, content, user.getId(), 5);
+				// 遍历发送功能 为每个用户发送
+				try {
+					PushService.send(user.getId(), title, content);
+					++i;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (i == 0) {
+				results.setStatus("1");
+				results.setMessage("根据条件未查询到用户");
+				
+				return results;
+			}
+			results.setStatus("0");
+			results.setCount(i);
+			results.setMessage("发送成功");
+
+			return results;
+		} else if (courseTypeSubclassName != null) {
+			// 根据course_type_subclass_name查询course表 返回集合
+			List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
+			for (Course course : courselist) {
+				// 根据classid是否为空判断user_buy_course表与哪个表进行关联查询
+				if (course.getClassId().length() != 0) {
+					// 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
+					//birthday是string类型？
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(course.getClassId(),sex,userrole,isdoctor,birthday);
+					for (UserBuyCourse userBuyCourse : userBuyCourses) {
+						// 信息保存到user_message表中
+						Date addtimeDate = new Date();
+						String id = KeyGen.uuid();
+						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
+						// 调发送接口
+						try {
+							PushService.send(userBuyCourse.getUserId(), title, content);
+							++i;
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				} else if (course.getClassId().length() == 0) {
+					// 使用course_id 查询course表左外链接user_buy_course表(course表为主表)
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(),sex,userrole,isdoctor,birthday);
+					for (UserBuyCourse userBuyCourse : userBuyCourses) {
+						// 信息保存到user_message表中
+						Date addtimeDate = new Date();
+						String id = KeyGen.uuid();
+						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
+						try {
+							PushService.send(userBuyCourse.getUserId(), title, content);
+							++i;
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		//根据计数器判断返回数据
+		if (i == 0) {
+			results.setStatus("1");
+			results.setMessage("根据条件未查询到用户");
+
+			return results;
+		}
+		results.setStatus("0");
+		results.setCount(i);
+		results.setMessage("发送成功");
+
+		return results;
 	}
 
 }

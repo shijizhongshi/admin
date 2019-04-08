@@ -67,31 +67,6 @@ app.controller("studentController", function($scope, $http){
 	$scope.loaddata();
 	
 	
-	$http.get("/api/AddressPcd/selectprovince")
-	.success(function(data){
-		if(data.status=="0"){
-			$scope.provincelist=data.data;
-			$scope.openCourse=data.data[0];
-		}
-	})
-	
-	$scope.address=null;
-	$scope.getCity=function(p){
-		$scope.provinceName=p.provinceName;
-		$scope.address=$scope.provinceName;
-		$http.get("/api/AddressPcd/selectcity",{"params": {"provinceId":p.provinceId}},{'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function(data){
-			if(data.status=="0"){
-				$scope.citylist=data.data;
-			}
-		})
-	}
-	$scope.getCityName=function(city){
-		if(city!=null){
-			$scope.address=$scope.provinceName+city.cityName;
-		}
-	}
-	
 	$scope.user=null;
 	$scope.userId=null;
 	$scope.add=function(){

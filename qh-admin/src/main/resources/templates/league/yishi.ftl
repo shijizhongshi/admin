@@ -86,7 +86,7 @@
 								<th>{{d.offices}}</th>
 								<th>{{d.professional}}</th>
 								<th>{{d.recommend}}</th>
-								<th>{{d.showtime}}</th>
+								<th>{{d.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								<th><span class="xiangqing" ng-click="checkedAll(d)">查看详情</span></th>
 							</tr>
 
