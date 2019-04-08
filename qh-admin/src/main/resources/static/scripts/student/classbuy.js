@@ -13,7 +13,7 @@ app.controller("classBuyController", function($scope, $http){
 		}
 	      
 	};
-	
+	//加载时展示页面
 	$scope.total=0;
 	$scope.current=1;
 	$scope.pageSize=20;

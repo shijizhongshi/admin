@@ -184,6 +184,10 @@ app.controller("gradeController", function($scope, $http){
 		$scope.classes.listCourse=$scope.courseselected;
 		$scope.classes.courseTypeName=$scope.courseTypeName;
 		$scope.classes.courseTypeSubclassName=$scope.courseTypeSubclassName;
+		if ($scope.classes.classPrice < $scope.classes.classDiscountPrice) {
+			alert("折扣价不能高于原价！");
+			return;
+		}
 		if($scope.classId==null){
 			$http.post("/api/courseclass/save",$scope.classes,{'Content-Type': 'application/json;charset=UTF-8'})
 		    .success(function(data){
@@ -213,7 +217,7 @@ app.controller("gradeController", function($scope, $http){
 		
 	};
 	///////做选中的时候用
-	$scope.checkedclass=function(c){
+	$scope.checkedclass = function(c){
 		if($scope.selected!=c){
 		$scope.selected=c;
 		$scope.classes=c;
@@ -267,7 +271,7 @@ app.controller("gradeController", function($scope, $http){
 	$scope.deleteClass=function(){
 		if($scope.classId!=null){
 			////删除课程/
-			if(confirm("您确定要删出这个班级吗")){
+			if(confirm("您确定要删除这个班级吗")){
 				$http.get("/api/courseclass/delete",{"params": {"id":$scope.classId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){

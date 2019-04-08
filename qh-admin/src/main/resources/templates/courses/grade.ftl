@@ -119,7 +119,7 @@
 								</div>
 
 								<div style="width: 100%; height: 90px; clear: both;">
-									<div class=" select-2" style="float: left;">
+									<div class="select-2" style="float: left;">
 										<img src="/images/sjk-xl.png" ng-click="openTemplate()" /> <span>班级模板：</span>
 
 										<select ng-model="classes"
