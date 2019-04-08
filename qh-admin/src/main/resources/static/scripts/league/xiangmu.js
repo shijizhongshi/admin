@@ -3,7 +3,7 @@ app.controller("shopServeControllered", function($scope, $http){
 	
 		$scope.servetotal = 0;
 	   //当前的页数
-	   $scope.servecurrent = 1;
+	   $scope.page = 1;
 	   //一页显示多少条
 	   $scope.servepageSize = 20;
 	   
@@ -27,7 +27,7 @@ app.controller("shopServeControllered", function($scope, $http){
 	   
 	  
 	   $scope.serveList=function(){
-			$scope.pageNo=( $scope.servecurrent-1)*$scope.servepageSize;
+			$scope.pageNo=( $scope.page-1)*$scope.servepageSize;
 			$http.get("/api/shopserve/list",{"params": {"shopName":$scope.shopName,"serveName":$scope.serveName,
 				"serveType":$scope.serveType,"pageNo":$scope.pageNo,"pageSize":$scope.servepageSize,"serveStatus":$scope.serveStatus,"shopId":$scope.shopId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){

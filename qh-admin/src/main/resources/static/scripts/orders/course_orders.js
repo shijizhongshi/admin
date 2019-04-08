@@ -3,7 +3,7 @@ app.controller("courseOrdersController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
 
@@ -25,7 +25,7 @@ app.controller("courseOrdersController", function($scope, $http){
  
 $scope.loaddata = function(){
 	
-	$http.get("/api/orders/list",{"params": {"page":$scope.current,"ordersType":$scope.ordersType,
+	$http.get("/api/orders/list",{"params": {"page":$scope.page,"ordersType":$scope.ordersType,
 		"mobile":$scope.mobile,"todate":formatDate($scope.todate),"fromdate":formatDate($scope.fromdate),
 		"recommendTeacher":$scope.recommendTeacher,"orderno":$scope.orderno,"ordersStatus":$scope.ordersStatus}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){

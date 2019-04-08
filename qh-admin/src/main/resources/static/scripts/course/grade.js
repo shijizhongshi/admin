@@ -49,14 +49,14 @@ app.controller("gradeController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
     $scope.classes=null;
     
 	$scope.classBases=function(){
 		
-		$http.get("/api/courseclass/select",{"params": {"page":$scope.current,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"className":$scope.className}}, 
+		$http.get("/api/courseclass/select",{"params": {"page":$scope.page,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"className":$scope.className}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

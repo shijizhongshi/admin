@@ -46,14 +46,14 @@ app.controller("liveShowController", function($scope, $http) {
 	// 总条数
 	$scope.total = 0;
 	// 当前的页数
-	$scope.current = 1;
+	$scope.page = 1;
 	// 一页显示多少条
 	$scope.pageSize = 20;
 
 	$scope.liveBases = function() {
 		$http.get("/api/courselive/list", {
 			"params" : {
-				"page" : $scope.current,
+				"page" : $scope.page,
 				"courseTypeName" : $scope.courseTypeName,
 				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
 				"liveName":$scope.liveName
