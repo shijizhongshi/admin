@@ -25,6 +25,4 @@ public interface UserBuyCourseDao {
 
 	public List<UserBuyCourse> selectByCourseId(@Param("courseId") String id, @Param("sex") String sex,
 			@Param("userrole") String userrole, @Param("isdoctor") String isdoctor, @Param("birthday") String birthday);
-	
-	public int existCourseId(List<String> productId);
 }

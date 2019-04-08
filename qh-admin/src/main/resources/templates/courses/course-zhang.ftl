@@ -11,14 +11,13 @@
 <div ng-controller="ChapterController">
 	<input type="hidden" value="${typeId}" id="typeId"> <input
 		type="hidden" value="${courseId}" id="courseId"> <input
-		type="hidden" value="${courseTypeName}" id="courseTypeName"> <input
-		type="hidden" value="${courseTypeSubclassName}"
+		type="hidden" value="${courseTypeName}" id="courseTypeName">
+	<input type="hidden" value="${courseTypeSubclassName}"
 		id="courseTypeSubclassName">
 	<div class="classify">
 		<ul class="menu">
 
-			<li ng-repeat="ctl in courseTypeList" class="list"
-				ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
+			<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
 				<ul class="items" ng-class="{'active':active==ctl.id}">
 					<li ng-repeat="sub in courseTypeSubclass"
 						ng-click="typeSub(ctl.courseTypeName,sub,$event)"
@@ -45,11 +44,10 @@
 		<div class="details-frame">
 			<div class="details-frame-content">
 
-				<div class="select-3" style="width: 15%; margin-right: 0%">
+				<div class="select-3" style="width: 15%;margin-right:0%">
 					<span>搜索课程</span>
 					<form id="search">
-						<input type="text" placeholder="请输入章名称"
-							ng-model="courseChapterName" />
+						<input type="text" placeholder="请输入章名称" ng-model="courseChapterName" />
 					</form>
 				</div>
 				<div>
@@ -107,17 +105,12 @@
 						<div class="select">
 							<input type="text" ng-model="chapter.courseChapterName"
 								placeholder="请输入章名称" />
-						</div>
-						<!-- 选择老师  -->
-						<div style="width: 100%; clear: both;">
-							<div class=" select-2">
-								<span>老师：</span> <i
-									ng-click="showteacher(courseTypeSubclassName)"
-									style="position: absolute; right: 10px; top: 40px; display: inherit; cursor: pointer;"
-									class="glyphicon glyphicon-search"> </i> <input type="text"
-									ng-model="name" disabled="disabled" />
 
-							</div>
+						</div>
+						<div class="select">
+							<input type="text" ng-model="chapter.courseLecturer" class=""
+								placeholder="主讲老师" />
+
 						</div>
 						<div class="select">
 							<span>选择课程</span> <select ng-model="chapter.courseId"
@@ -136,53 +129,6 @@
 						</div>
 						</p>
 					</form>
-				</div>
-				<!--选择老师的弹窗  -->
-				<div id="revise" class="resource" style="width: 720px;">
-					<form id="myform2">
-
-						<div class="select-2" style="width: 100%;">
-							<span>搜索老师名称</span> <input type="text" ng-model="teacherName" />
-							<p ng-click="teacherList()"
-								style="position: absolute; right: 10px; top: 40px; cursor: pointer;">
-								<i class="glyphicon glyphicon-search"></i>搜索
-							</p>
-						</div>
-
-						<div class="admin-table">
-							<table>
-								<tr>
-									<th>选择</th>
-									<th>教师名称</th>
-									<th>教师图片</th>
-									<th>所属专业</th>
-
-								</tr>
-								<tr ng-repeat="t in teacherlist">
-									<th><input type="radio" name="browser" ng-click="radio(t)"/></th>
-									<th>{{t.name}}</th>
-									<th><img ng-src="{{t.imgUrl}}"
-										style="width: 50px; height: 30px;" /></th>
-									<th>{{t.courseTypeSubclassNames}}</th>
-								</tr>
-							</table>
-						</div>
-						<div class="col-sm-6">
-							<ul uib-pagination boundary-links="true" total-items="total1"
-								ng-model="page1" items-per-page="pageSize1" max-size="5"
-								class="pagination-sm" previous-text="&lsaquo;"
-								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
-							</ul>
-						</div>
-
-					</form>
-					<div class="end" style="clear: both;">
-						<input name="git" type="submit" value="提交" ng-click="addteacher()"
-							style="background: #5ED8A9;" /> <input name="esc" type="reset"
-							value="取消" ng-click="reset()" class="esc" />
-					</div>
-
 				</div>
 
 			</div>

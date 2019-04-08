@@ -35,8 +35,8 @@ function formReset2() {
 	})
 	$(window).resize(function(){ 
 	    $("#add").css({ 
-	        position: "fixed", 
-	        left: ($(window).width() - $("#add").outerWidth())/2, 
+	        position: "absolute", 
+	        left: ($(".details-frame").width() - $("#add").outerWidth())/2, 
 	        top: ($(window).height() - $("#add").outerHeight())/2 
 	    });        
 	}); 

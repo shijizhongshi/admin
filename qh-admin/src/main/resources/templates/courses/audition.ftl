@@ -4,6 +4,7 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
+<script src='https://player.polyv.net/script/polyvplayer.min.js'></script>
 <script src="/scripts/course/audition.js"></script>
 <script src="/scripts/admin.js"></script>
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-audition">
@@ -13,14 +14,13 @@
 		<div class="classify">
 			<ul class="menu">
 
-				<li ng-repeat="ctl in courseTypeList" class="list"
-					ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
-					<ul class="items" ng-class="{'active':active==ctl.id}">
-						<li ng-repeat="sub in courseTypeSubclass"
-							ng-click="auditionSub(ctl.courseTypeName,sub,$event)"
-							ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
+				<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
+				<ul class="items" ng-class="{'active':active==ctl.id}">
+					<li ng-repeat="sub in courseTypeSubclass"
+						ng-click="auditionSub(ctl.courseTypeName,sub,$event)"
+						ng-class="{'selected':typeSelected==sub.courseTypeSubclassName}">{{sub.courseTypeSubclassName}}</li>
 
-					</ul>
+				</ul>
 				</li>
 
 
@@ -39,19 +39,17 @@
 			<div class="details-frame">
 				<div class="details-frame-content">
 
-					<div class="select-3" style="width: 15%; margin-right: 0%">
+					<div class="select-3" style="width: 15%;margin-right:0%">
 						<span>搜索课程</span>
 						<form id="search">
 							<input ng-model="courseName" placeholder="请输入课程名称" type="text"
 								style="text-indent: 2em;" />
 						</form>
 					</div>
-					<div class="select-3"
-						style="width: 15%; margin-right: 0%; margin-left: 20px">
+					<div class="select-3" style="width: 15%;margin-right:0%;margin-left:20px">
 						<span>搜索教师</span>
 						<form id="">
-							<input ng-model="teachers" placeholder="请输入教师名称" type="text"
-								style="text-indent: 2em;" />
+							<input ng-model="teachers" placeholder="请输入教师名称" type="text" style="text-indent: 2em;" />
 						</form>
 					</div>
 					<div>
@@ -213,21 +211,20 @@
 								</div>
 							</div>
 							<div style="width: 100%; clear: both;">
-								<div class=" select-2">
+									<div class=" select-2">
 
-									<span>视频的videoId:</span> <input type="text"
-										ng-model="courseNofree.videoId" placeholder="视频的videoId"
-										style="width: 230px; text-indent: 2em;"
-										ng-keyup="ccnew(section.videoId)" />
+										<span>视频的videoId:</span> 
+										<input type="text"
+								ng-model="courseNofree.videoId" placeholder="视频的videoId"
+								style="width: 230px; text-indent: 2em;" ng-keyup="ccnew(section.videoId)"/>
+									</div>
 								</div>
-							</div>
 							<div class="costs-uploadfile-div" ng-show="ccvideo">
 								<!--<b>添加试听课程</b> <input type="file" id="file" value="上传试听课视频"
 									accept=".avi, .wmv, .mp4, .mp3, .mov, .flv, .mkv, .rmvb"
 									onchange="angular.element(this).scope().uploadmainimage1(this)" />-->
 								<div style="margin-top: 3px;">
-									<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0"
-										height="490" width="600"></iframe>
+									<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600"></iframe>
 								</div>
 							</div>
 						</div>

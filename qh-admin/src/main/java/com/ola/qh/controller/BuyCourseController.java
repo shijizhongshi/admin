@@ -126,11 +126,6 @@ public class BuyCourseController {
 		
 	}
 	
-	@RequestMapping("/existCourseId")
-	public Results<String> existCourseId(@RequestParam(name="productId",required=true)List<String> productId){
-		
-		return buyCourseService.existCourseId(productId);
-		
-	}
+	
 	
 }
