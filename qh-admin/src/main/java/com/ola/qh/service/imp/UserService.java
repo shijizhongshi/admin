@@ -342,7 +342,6 @@ public class UserService implements IUserService {
 		List<User> list = new ArrayList<>();
 		//计数器 i
 		Integer i = 0;
-		//根据专业名是否为空 选择不同的查询方式
 		if (courseTypeSubclassName == null) {
 			list = userDao.send(sex, userrole, isdoctor, birthday);
 			for (User user : list) {
