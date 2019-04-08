@@ -1,6 +1,8 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
-
+	
+	$scope.status=0;
+	
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -200,6 +202,7 @@ app.controller("studentinfoController", function($scope, $http) {
 						$scope.productId.push(id);
 						$scope.productlisted.push(product);
 						$scope.prices = $scope.prices + price;
+						$scope.existCourseId();
 					}
 				})
 			}
@@ -220,6 +223,7 @@ app.controller("studentinfoController", function($scope, $http) {
 						$scope.productId.push(id);
 						$scope.productlisted.push(product);
 						$scope.prices = $scope.prices + price;
+						$scope.existCourseId();
 					}
 				})
 
@@ -264,10 +268,14 @@ app.controller("studentinfoController", function($scope, $http) {
 
 	$scope.openCourses = function() {
 		// alert(parseInt($scope.surplusaccount,10));
+		$scope.existCourseId();
+		
+		if($scope.status==0){
 		if ($scope.courseWays == 1 && $scope.openCourse.salesName == null) {
 			alert("销售信息不能为空");
 			return;
 		}
+		
 		/*
 		 * if($scope.courseWays==2){ if(parseInt($scope.surplusaccount)<$scope.prices){
 		 * alert("剩余兑换课程金额不足~"); return; } }
@@ -280,6 +288,7 @@ app.controller("studentinfoController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(data) {
 			if (data.status == "0") {
+				$scope.status=0;
 				$scope.operating.operatingStatus="开课";
 		    	$scope.operating.operatingUser=$scope.user.mobile;
 		    	$scope.insertOperating();
@@ -289,10 +298,13 @@ app.controller("studentinfoController", function($scope, $http) {
 				$scope.productlisted = [];
 				$scope.prices = 0;
 				$scope.selectUser();
+				$scope.typesName=null;
 			} else {
 				alert(data.message);
 			}
 		})
+		
+		}
 	}
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CV工程师上线 (以下代码剪切自 学员管理页面)
@@ -402,4 +414,21 @@ app.controller("studentinfoController", function($scope, $http) {
 		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
 	    
 	};
+	
+	$scope.existCourseId = function() {
+		
+		$http.get("/api/btl/existCourseId", {"params" : {"productId" : $scope.productId}}, {'Content-Type' : 'application/json;charset=UTF-8'})
+		.success(function(data) {
+			if (data.status == "1") {
+				alert(data.message);
+			}
+		})
+	}
+	
+	$scope.reset=function(){
+		$scope.typesName=null;
+		$scope.productlisted=null;
+		document.getElementById('revise').style.display = "none";
+		$scope.status=0;
+	}
 })

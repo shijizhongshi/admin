@@ -208,7 +208,7 @@ submenu="sidebarmenu-student-studentinfo">
 						<div class="end">
 							<input name="git" type="submit" value="提交"
 								ng-click="openCourses()" style="background: #5ED8A9;"> <input
-								name="esc" type="reset" value="取消" onclick="CloseDiv2()"
+								name="esc" type="reset" value="取消" ng-click="reset()"
 								class="esc">
 						</div>
 					</form>
