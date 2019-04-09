@@ -175,20 +175,17 @@ public class CourseController {
 		course.setPageSize(pageSize);
 		course.setCourseName(courseName);
 		List<Course> list = courseService.courseList(course);
-		for (Course course2 : list) {
-			int count = buyCourseService.existOpenCourse(course2.getId(), userId, null);
-			if (count == 0) {
-				List<CourseClass> classlist = courseClassService.listCourseClass(course2.getClassId(), null, null);
-				int classcount = buyCourseService.existOpenCourse(null, userId, classlist.get(0).getId());
-				if (classcount == 0) {
+		if(userId!=null && !"".equals(userId)){
+			for (Course course2 : list) {
+				int count = buyCourseService.existOpenCourse(course2.getId(), userId, null);
+				if (count == 0) {
 					course2.setIsbuy("0");
 				} else {
 					course2.setIsbuy("1");
 				}
-			} else {
-				course2.setIsbuy("1");
 			}
 		}
+		
 		result.setStatus("0");
 		result.setData(list);
 		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName, courseName));

@@ -61,29 +61,17 @@ public class CourseClassController {
 		
 		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
 		List<CourseClass> list=courseClassService.listCourseClass(null,courseTypeName, courseTypeSubclassName);
-		for (CourseClass courseClass : list) {
-			int count = buyCourseService.existOpenCourse(null, userId, courseClass.getId());
-			if(count==0){
-				
-				
-				int courseCount=0;
-				Course c=new Course();
-				c.setClassId(courseClass.getId());
-				c.setPageNo(0);
-				c.setPageSize(0);
-				List<Course> courseList=courseService.courseList(c);
-				for (Course course : courseList) {
-					courseCount+=buyCourseService.existOpenCourse(course.getId(), userId,null);
-				}
-				if(courseCount==courseList.size() && courseCount!=0){
-					courseClass.setIsbuy("1");
-				}else{
+		if(userId!=null && !"".equals(userId)){
+			for (CourseClass courseClass : list) {
+				int count = buyCourseService.existOpenCourse(null, userId, courseClass.getId());
+				if(count==0){
 					courseClass.setIsbuy("0");
+				}else{
+					courseClass.setIsbuy("1");
 				}
-			}else{
-				courseClass.setIsbuy("1");
 			}
 		}
+		
 		results.setStatus("0");
 		results.setData(list);
 		return results;
