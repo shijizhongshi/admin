@@ -231,7 +231,7 @@ app.controller("studentinfoController", function($scope, $http) {
 
 	$scope.jiamengshang = false;
 	// ///首先判断是加盟商还是系统管理员
-	if ($("#username").val() == "admin") {
+	if ($("#isrole").val()!="2") {
 		// //////销售员开课
 		$scope.jiamengshang = false;
 		$scope.courseWays = 1;// ///销售人员开课
@@ -242,7 +242,7 @@ app.controller("studentinfoController", function($scope, $http) {
 		$scope.surplusaccount = $("#surplusaccount").val();
 		$scope.jiamengshang = true;
 		$scope.adminName = $("#username").val();// ///加盟商的账号的时候传账号
-		$scope.courseWays = 2;// //加盟商开课
+		$scope.courseWays = 2;////加盟商开课
 	}
 
 	$scope.openCourses = function() {

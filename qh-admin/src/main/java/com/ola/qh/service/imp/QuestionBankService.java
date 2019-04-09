@@ -162,10 +162,13 @@ public class QuestionBankService implements IQuestionBankService {
 	public static String checkNull(int i, Row row) {
 
 		Cell cell = row.getCell(i);
-		cell.setCellType(CellType.STRING);
-		if (cell.getStringCellValue() != null && !"".equals(cell.getStringCellValue())) {
-			return cell.getStringCellValue();
+		if(cell!=null){
+			cell.setCellType(CellType.STRING);
+			if (cell.getStringCellValue() != null && !"".equals(cell.getStringCellValue())) {
+				return cell.getStringCellValue();
+			}
 		}
+		
 		return null;
 	}
 
