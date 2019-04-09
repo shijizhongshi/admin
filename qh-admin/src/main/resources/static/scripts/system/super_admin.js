@@ -25,7 +25,7 @@ app.controller("superAdminController", function($scope, $http) {
 	//总条数
 	$scope.total = 0;
 	//当前的页数
-	$scope.current = 1;
+	$scope.page = 1;
 	//一页显示多少条
 	$scope.pageSize = 20;
 
@@ -34,7 +34,7 @@ app.controller("superAdminController", function($scope, $http) {
 	$scope.categorys = "";
 
 	$scope.userRoleList = function() {
-		$scope.pageNo = ($scope.current - 1) * $scope.pageSize;
+		$scope.pageNo = ($scope.page - 1) * $scope.pageSize;
 		$http.get("/api/userRole/selectList", {
 			"params" : {
 				"pageNo" : $scope.pageNo,

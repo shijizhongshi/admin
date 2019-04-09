@@ -3,7 +3,7 @@ app.controller("newController", function($scope, $http){
 	 //总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
 //上传主展示图片
@@ -13,7 +13,7 @@ app.controller("newController", function($scope, $http){
     $scope.imgUrl=null;
 $scope.loaddata = function(){
 	
-	$http.get("/api/news/newLists",{"params": {"title":$scope.title,"page":$scope.current}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	$http.get("/api/news/newLists",{"params": {"title":$scope.title,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){
     		$scope.newlist=result.data;

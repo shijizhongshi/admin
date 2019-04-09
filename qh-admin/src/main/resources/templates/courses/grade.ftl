@@ -99,7 +99,7 @@
 					<div class="col-sm-6"></div>
 					<div class="col-sm-6">
 						<ul uib-pagination boundary-links="true" total-items="total"
-							ng-model="current" items-per-page="pageSize" max-size="5"
+							ng-model="page" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 							ng-click="classBases()">
@@ -122,7 +122,7 @@
 								</div>
 
 								<div style="width: 100%; height: 90px; clear: both;">
-									<div class=" select-2" style="float: left;">
+									<div class="select-2" style="float: left;">
 										<img src="/images/sjk-xl.png" ng-click="openTemplate()" /> <span>班级模板：</span>
 
 										<select ng-model="classes"

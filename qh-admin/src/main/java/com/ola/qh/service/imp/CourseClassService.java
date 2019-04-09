@@ -1,9 +1,11 @@
 package com.ola.qh.service.imp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,7 +90,13 @@ public class CourseClassService implements ICourseClassService {
 			for (Course courseNew : course) {
 
 				Course c=new Course();
-				c.setClassId(courseClass.getId());
+				///////之前没有课程
+				if(courseNew.getClassId()!=null && courseNew.getClassId()!=""){
+					c.setClassId(courseNew.getClassId()+","+courseClass.getId());
+				}else{
+					c.setClassId(courseClass.getId());
+				}
+				
 				c.setId(courseNew.getId());
 				c.setUpdatetime(new Date());
 				courseDao.updateCourese(c);
@@ -169,8 +177,15 @@ public class CourseClassService implements ICourseClassService {
 
 				}
 				if (j == courseset.size()) {
-
-					courseDao.updateClass(courseClass.getId());
+					
+					String idlist=course.get(i).getClassId();
+					if(idlist.contains(courseClass.getId())){
+						List<String> ids=Arrays.asList(idlist.split(","));
+						ids.remove(courseClass.getId());
+						String str = StringUtils.join(ids, ",");
+						////////修改课程的classId为多个的
+						courseDao.updateClass(course.get(i).getId(),str);
+					}
 
 				}
 			}
@@ -178,10 +193,14 @@ public class CourseClassService implements ICourseClassService {
 				/*Course exist = courseDao.existCourse(courseinsert.getId());
 				if (exist.getClassId() == null) {*/
 
-					Course courseOn = new Course();
-					courseOn.setId(courseinsert.getId());
-					courseOn.setClassId(courseClass.getId());
-					courseDao.updateCourese(courseOn);
+					
+					if(!courseinsert.getClassId().contains(courseClass.getId())){
+						Course courseOn = new Course();
+						courseOn.setId(courseinsert.getId());
+						courseOn.setClassId(courseinsert.getClassId()+","+courseClass.getId());
+						courseDao.updateCourese(courseOn);
+					};
+					
 				/*}*/
 			}
 

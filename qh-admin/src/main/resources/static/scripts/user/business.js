@@ -38,13 +38,13 @@ app.controller("businessController", function($scope, $http){
 	      
 	};
 	$scope.total=0;
-	$scope.current=1;
+	$scope.page=1;
 	$scope.pageSize=20;
 	$scope.superOrders=0;
 	$scope.expireOrders=0;
 	$scope.loaddata=function(){
 		$http.get("/api/business/list",{"params": {"name":$scope.name,"fromdate":changeDate($scope.fromdate),
-			"todate":changeDate($scope.todate),"address":$scope.address,"page":$scope.current,
+			"todate":changeDate($scope.todate),"address":$scope.address,"page":$scope.page,
 			"expireOrders":$scope.expireOrders,"superOrders":$scope.superOrders}},{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

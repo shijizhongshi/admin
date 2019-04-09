@@ -36,7 +36,7 @@ submenu="sidebarmenu-student-studentinfo">
 						
 						<div>
 							<input type="button" class="btn-lg im-key"
-								ng-click="selectUser()" value="立即检索" />
+								ng-keydown="todoSelect($event)" ng-click="selectUser()" value="立即检索" />
 						</div>
 					</ul>
 			</form>
@@ -134,23 +134,23 @@ submenu="sidebarmenu-student-studentinfo">
 												<th>{{typesName}}年限</th>
 
 											</tr>
-											<tr ng-show="{{typesName=='班级'}}"
+											<tr ng-show="typesName=='班级'"
 												ng-repeat="class in classlist">
-												<th ng-show="{{class.isbuy=='0'}}"><input type="checkbox"
+												<th ng-show="class.isbuy=='0'"><input type="checkbox"
 													ng-checked="isSelected(class.id)"
 													ng-click="updateSelection($event,class.id,class,class.classDiscountPrice)"/></th>
-												<th ng-show="{{class.isbuy=='1'}}">已购买</th>
+												<th ng-show="class.isbuy=='1'">已购买</th>
 												<th>{{class.className}}</th>
 												<th>{{class.classPrice}}</th>
 												<th>{{class.classDiscountPrice}}</th>
 												<th>{{class.classYear}}</th>
 											</tr>
-											<tr ng-show="{{typesName=='课程'}}"
+											<tr ng-show="typesName=='课程'"
 												ng-repeat="course in courselist">
-												<th ng-show="{{course.isbuy=='0'}}"><input type="checkbox"
+												<th ng-show="course.isbuy=='0'"><input type="checkbox"
 													ng-checked="isSelected(course.id)"
 													ng-click="updateSelection($event,course.id,course,course.courseDiscountPrice)" /></th>
-												<th ng-show="{{course.isbuy=='1'}}">已购买</th>
+												<th ng-show="course.isbuy=='1'">已购买</th>
 												<th>{{course.courseName}}</th>
 												<th>{{course.coursePrice}}</th>
 												<th>{{course.courseDiscountPrice}}</th>
@@ -167,14 +167,14 @@ submenu="sidebarmenu-student-studentinfo">
 
 
 
-									<ul class="yixuanbanji" ng-show="{{typesName=='课程'}}"
+									<ul class="yixuanbanji" ng-show="typesName=='课程'"
 										ng-repeat="productcourse in productlisted">
 										<li><span style="color: red">{{productcourse.courseTypeSubclassName}}-</span>{{productcourse.courseName}}</li>
 										<li>价格：{{productcourse.coursePrice}} <span
 											style="color: red; margin-left: 20px;">折扣价：{{productcourse.courseDiscountPrice}}</span></li>
 									</ul>
 
-									<ul class="yixuanbanji" ng-show="{{typesName=='班级'}}"
+									<ul class="yixuanbanji" ng-show="typesName=='班级'"
 										ng-repeat="productclass in productlisted">
 										<li><span style="color: red">{{productclass.courseTypeSubclassName}}-</span>{{productclass.className}}</li>
 										<li>价格：{{productclass.classPrice}} <span
