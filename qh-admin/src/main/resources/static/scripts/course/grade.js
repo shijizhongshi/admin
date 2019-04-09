@@ -94,8 +94,6 @@ app.controller("gradeController", function($scope, $http){
 	.success(function(data){
 		if(data.status=="0"){
 			$scope.courselist=data.data;
-			
-			
 		}
 	})
 	}

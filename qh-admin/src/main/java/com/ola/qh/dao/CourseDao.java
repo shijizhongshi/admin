@@ -39,7 +39,7 @@ public interface CourseDao {
 	
 	public List<Course> existCourseList(@Param("classId")String classId);
 	
-	public int updateClass(@Param("classId")String classId);
+	public int updateClass(@Param("courseId")String courseId,@Param("classIds")String classIds);
 
 	public List<CourseTypeSubclass> selectCourseTypeSubclassNameAll();
 

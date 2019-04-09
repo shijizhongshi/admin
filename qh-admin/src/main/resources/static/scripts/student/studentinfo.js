@@ -1,9 +1,13 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
 	
+
 	$scope.status = 0;
 	
 	// 按条件查询
+
+
+
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -109,7 +113,6 @@ app.controller("studentinfoController", function($scope, $http) {
 		}).success(function(data) {
 			if (data.status == "0") {
 				$scope.classlist = data.data;
-
 			}
 		})
 	};
@@ -128,7 +131,6 @@ app.controller("studentinfoController", function($scope, $http) {
 		}).success(function(data) {
 			if (data.status == "0") {
 				$scope.courselist = data.data;
-
 			}
 		})
 	}
@@ -182,7 +184,6 @@ app.controller("studentinfoController", function($scope, $http) {
 						$scope.productId.push(id);
 						$scope.productlisted.push(product);
 						$scope.prices = $scope.prices + price;
-						$scope.existCourseId();
 					}
 				})
 			}
@@ -203,7 +204,6 @@ app.controller("studentinfoController", function($scope, $http) {
 						$scope.productId.push(id);
 						$scope.productlisted.push(product);
 						$scope.prices = $scope.prices + price;
-						$scope.existCourseId();
 					}
 				})
 
@@ -248,6 +248,7 @@ app.controller("studentinfoController", function($scope, $http) {
 
 	$scope.openCourses = function() {
 		// alert(parseInt($scope.surplusaccount,10));
+
 		$scope.existCourseId();
 
 		if ($scope.status == 0) {
@@ -282,6 +283,38 @@ app.controller("studentinfoController", function($scope, $http) {
 			})
 
 		}
+
+		if ($scope.courseWays == 1 && $scope.openCourse.salesName == null) {
+			alert("销售信息不能为空");
+			return;
+		}
+		
+		/*
+		 * if($scope.courseWays==2){ if(parseInt($scope.surplusaccount)<$scope.prices){
+		 * alert("剩余兑换课程金额不足~"); return; } }
+		 */
+		$scope.openCourse.adminName = $scope.adminName;
+		$scope.openCourse.courseWays = $scope.courseWays;
+		$scope.openCourse.productId = $scope.productId;
+		$scope.openCourse.account = $scope.prices;// ////兑换课程的总金额
+		$http.post("/api/btl/open/course", $scope.openCourse, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(data) {
+			if (data.status == "0") {
+				$scope.operating.operatingStatus="开课";
+		    	$scope.operating.operatingUser=$scope.user.mobile;
+		    	$scope.insertOperating();
+				alert("开课成功~");
+				document.getElementById('revise').style.display = "none";
+				$scope.selectUser();
+				$scope.typesName=null;
+			} else {
+				alert(data.message);
+			}
+		})
+		
+		
+
 	}
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CV工程师上线 (以下代码剪切自 学员管理页面)
@@ -414,10 +447,16 @@ app.controller("studentinfoController", function($scope, $http) {
 		})
 	}
 
+
 	$scope.reset = function() {
 		$scope.typesName = null;
 		$scope.productlisted = null;
 		document.getElementById('revise').style.display = "none";
 		$scope.status = 0;
+
+	
+	$scope.reset=function(){
+		document.getElementById('revise').style.display = "none";
+
 	}
 })

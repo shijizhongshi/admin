@@ -60,6 +60,7 @@ public class Course {
 	private String isbuy;///1:已经购买了  0;未购买
 
 	
+	
 	public String getIsbuy() {
 		return isbuy;
 	}
