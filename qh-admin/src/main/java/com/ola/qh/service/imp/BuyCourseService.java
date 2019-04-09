@@ -262,9 +262,9 @@ public class BuyCourseService implements IBuyCourseService {
 		List<String> classIdList=new ArrayList<String>();
 		for (String courseId : productId) {
 			Course c = courseDao.existCourse(courseId);
-			if(c.getClassId()!=null){
+			/*if(c.getClassId()!=null){
 				classIdList.add(c.getClassId());
-			}
+			}*/
 		}
 		HashSet<String> h = new HashSet<String>(classIdList);   
 		classIdList.clear();   
