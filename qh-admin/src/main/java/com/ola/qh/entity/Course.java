@@ -2,6 +2,7 @@ package com.ola.qh.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 /**
@@ -59,6 +60,7 @@ public class Course {
 	
 	private String isbuy;///1:已经购买了  0;未购买
 
+	
 	
 	public String getIsbuy() {
 		return isbuy;
