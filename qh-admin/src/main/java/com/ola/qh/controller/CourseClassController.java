@@ -58,7 +58,6 @@ public class CourseClassController {
 			@RequestParam(name="courseTypeSubclassName")String courseTypeSubclassName,
 			@RequestParam(name="userId")String userId
 			){
-		
 		Results<List<CourseClass>> results=new Results<List<CourseClass>>();
 		List<CourseClass> list=courseClassService.listCourseClass(null,courseTypeName, courseTypeSubclassName);
 		if(userId!=null && !"".equals(userId)){
