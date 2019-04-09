@@ -398,9 +398,6 @@ app.controller("studentinfoController", function($scope, $http) {
 	}
 	
 	$scope.reset=function(){
-		$scope.typesName=null;
-		$scope.productlisted=null;
-		$scope.typesName =null;
 		document.getElementById('revise').style.display = "none";
 	}
 })
