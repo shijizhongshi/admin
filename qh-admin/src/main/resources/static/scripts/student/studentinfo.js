@@ -1,13 +1,7 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
-	
-
 	$scope.status = 0;
-	
 	// 按条件查询
-
-
-
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -37,9 +31,7 @@ app.controller("studentinfoController", function($scope, $http) {
 			alert("请先填写查询条件！");
 			return;
 		}
-
 	}
-	// 键盘事件 回车
 	// 选中更换样式 数据回显
 	$scope.checkUser = function(u) {
 		$scope.selected = u;
@@ -79,8 +71,7 @@ app.controller("studentinfoController", function($scope, $http) {
 
 			}
 		})
-
-	}
+	};
 	$scope.typesList();
 	// ///点击专业的事件
 	$scope.typeSub = function(typename, sub) {
@@ -95,7 +86,7 @@ app.controller("studentinfoController", function($scope, $http) {
 		}
 		$scope.selected = sub;
 
-	}
+	};
 	$scope.typeBases();// ////保证已经来有默认的参数
 
 	// /////////////////////////////////////处理报班的信息开始////////////////////////////
@@ -133,7 +124,7 @@ app.controller("studentinfoController", function($scope, $http) {
 				$scope.courselist = data.data;
 			}
 		})
-	}
+	};
 
 	$scope.types = null;
 	$scope.typesName = null;
@@ -160,8 +151,7 @@ app.controller("studentinfoController", function($scope, $http) {
 		} else {
 			alert("请选中信息~");
 		}
-
-	}
+	};
 	$scope.productId = [];
 	$scope.productlisted = [];
 	$scope.prices = 0;
@@ -206,9 +196,7 @@ app.controller("studentinfoController", function($scope, $http) {
 						$scope.prices = $scope.prices + price;
 					}
 				})
-
 			}
-
 		}
 		if (action == 'remove' && $scope.productId.indexOf(id) != -1) {
 			$scope.productId.splice($scope.productId.indexOf(id), 1);
@@ -448,11 +436,11 @@ app.controller("studentinfoController", function($scope, $http) {
 	}
 
 
-	$scope.reset = function() {
+	/*$scope.reset = function() {
 		$scope.typesName = null;
 		$scope.productlisted = null;
 		document.getElementById('revise').style.display = "none";
-		$scope.status = 0;
+		$scope.status = 0;*/
 
 	
 	$scope.reset=function(){
