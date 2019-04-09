@@ -151,7 +151,7 @@
 	 and course_type_subclass_name=#{courseTypeSubclassName}
 	</if>
 	<if test="classId!=null and classId!='' ">
-	and class_id in (#{classId})
+	and class_id like concat(concat("%",#{classId},"%"))
 	</if>
 	<if test="courseName!=null and courseName!='' ">
 	and course_name like concat(concat('%',#{courseName},'%'))
@@ -175,7 +175,7 @@
 		select <include refid="sql_base"></include>,class_id from course where id=#{id}
 	</select>
 	<select id="existCourseList" resultMap="CourseMap">
-		select id,class_id from course where class_id in #{classId}
+		select id,class_id from course where class_id like concat(concat("%",#{classId},"%"))
 	</select>
 	<update id="updateClass">
 		update course set class_id=#{classIds} where id=#{courseId}
