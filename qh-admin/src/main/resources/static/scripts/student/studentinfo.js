@@ -32,6 +32,30 @@ app.controller("studentinfoController", function($scope, $http) {
 			return;
 		}
 	}
+	$scope.list = function() {
+		if ($scope.mobile != '' && $scope.mobile != null
+				&& $scope.mobile.length == 11) {
+			$http.get("/api/user/select", {
+				"params" : {
+					"nickname" : $scope.nickname,
+					"mobile" : $scope.mobile,
+					"page" : $scope.page = 1
+				}
+			}, {
+				'Content-Type' : 'application/json;charset=UTF-8'
+			}).success(function(result) {
+				if (result.status == "0") {
+					if (result.message != null) {
+						alert(result.message);
+					}
+					$scope.userList = result.data;
+					$scope.openCourse = $scope.userList[0];
+				} else {
+					alert(result.messgae);
+				}
+			})
+		}
+	}
 	// 选中更换样式 数据回显
 	$scope.checkUser = function(u) {
 		$scope.selected = u;
