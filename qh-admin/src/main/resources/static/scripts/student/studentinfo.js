@@ -1,9 +1,9 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
 	
-	$scope.status=0;
+	$scope.status = 0;
 	
-	//按条件查询  
+	// 按条件查询
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -35,12 +35,7 @@ app.controller("studentinfoController", function($scope, $http) {
 		}
 
 	}
-	//键盘事件 回车
-	$scope.todoSelect = function ($event) {
-		if ($event.keyCode == 13) {
-			alert("按了回车键");
-		}
-	};
+	// 键盘事件 回车
 	// 选中更换样式 数据回显
 	$scope.checkUser = function(u) {
 		$scope.selected = u;
@@ -254,38 +249,38 @@ app.controller("studentinfoController", function($scope, $http) {
 	$scope.openCourses = function() {
 		// alert(parseInt($scope.surplusaccount,10));
 		$scope.existCourseId();
-		
-		if($scope.status==0){
-		if ($scope.courseWays == 1 && $scope.openCourse.salesName == null) {
-			alert("销售信息不能为空");
-			return;
-		}
-		
-		/*
-		 * if($scope.courseWays==2){ if(parseInt($scope.surplusaccount)<$scope.prices){
-		 * alert("剩余兑换课程金额不足~"); return; } }
-		 */
-		$scope.openCourse.adminName = $scope.adminName;
-		$scope.openCourse.courseWays = $scope.courseWays;
-		$scope.openCourse.productId = $scope.productId;
-		$scope.openCourse.account = $scope.prices;// ////兑换课程的总金额
-		$http.post("/api/btl/open/course", $scope.openCourse, {
-			'Content-Type' : 'application/json;charset=UTF-8'
-		}).success(function(data) {
-			if (data.status == "0") {
-				$scope.status=0;
-				$scope.operating.operatingStatus="开课";
-		    	$scope.operating.operatingUser=$scope.user.mobile;
-		    	$scope.insertOperating();
-				alert("开课成功~");
-				document.getElementById('revise').style.display = "none";
-				$scope.selectUser();
-				$scope.typesName=null;
-			} else {
-				alert(data.message);
+
+		if ($scope.status == 0) {
+			if ($scope.courseWays == 1 && $scope.openCourse.salesName == null) {
+				alert("销售信息不能为空");
+				return;
 			}
-		})
-		
+
+			/*
+			 * if($scope.courseWays==2){ if(parseInt($scope.surplusaccount)<$scope.prices){
+			 * alert("剩余兑换课程金额不足~"); return; } }
+			 */
+			$scope.openCourse.adminName = $scope.adminName;
+			$scope.openCourse.courseWays = $scope.courseWays;
+			$scope.openCourse.productId = $scope.productId;
+			$scope.openCourse.account = $scope.prices;// ////兑换课程的总金额
+			$http.post("/api/btl/open/course", $scope.openCourse, {
+				'Content-Type' : 'application/json;charset=UTF-8'
+			}).success(function(data) {
+				if (data.status == "0") {
+					$scope.status = 0;
+					$scope.operating.operatingStatus = "开课";
+					$scope.operating.operatingUser = $scope.user.mobile;
+					$scope.insertOperating();
+					alert("开课成功~");
+					document.getElementById('revise').style.display = "none";
+					$scope.selectUser();
+					$scope.typesName = null;
+				} else {
+					alert(data.message);
+				}
+			})
+
 		}
 	}
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -314,16 +309,16 @@ app.controller("studentinfoController", function($scope, $http) {
 		}).success(function(data) {
 			if (data.status == "0") {
 				if ($scope.userId != null) {
-					$scope.operating.operatingStatus="修改";
-			    	$scope.operating.operatingUser=$scope.user.mobile;
-			    	$scope.insertOperating();
-					
+					$scope.operating.operatingStatus = "修改";
+					$scope.operating.operatingUser = $scope.user.mobile;
+					$scope.insertOperating();
+
 					alert("修改成功~");
 				} else {
-					$scope.operating.operatingStatus="添加";
-			    	$scope.operating.operatingUser=$scope.user.mobile;
-			    	$scope.insertOperating();
-					
+					$scope.operating.operatingStatus = "添加";
+					$scope.operating.operatingUser = $scope.user.mobile;
+					$scope.insertOperating();
+
 					alert("添加成功~");
 				}
 				document.getElementById('add').style.display = "none";
@@ -345,9 +340,9 @@ app.controller("studentinfoController", function($scope, $http) {
 					'Content-Type' : 'application/json;charset=UTF-8'
 				}).success(function(data) {
 					if (data.status == "0") {
-						$scope.operating.operatingStatus="删除";
-				    	$scope.operating.operatingUser=$scope.user.mobile;
-				    	$scope.insertOperating();
+						$scope.operating.operatingStatus = "删除";
+						$scope.operating.operatingUser = $scope.user.mobile;
+						$scope.insertOperating();
 						alert("删除成功~");
 						$scope.list();
 					} else {
@@ -390,27 +385,39 @@ app.controller("studentinfoController", function($scope, $http) {
 			$scope.address = $scope.provinceName + city.cityName;
 		}
 	}
-	$scope.operating={operatingScope:"用户信息",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
-	$scope.insertOperating = function(){
-		
-		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})
-	    
+	$scope.operating = {
+		operatingScope : "用户信息",
+		userRoleUsername : $("#username").val(),
+		operatingStatus : "",
+		operatingUser : ""
+	}
+	$scope.insertOperating = function() {
+
+		$http.post("/api/operating/insert", $scope.operating, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		})
+
 	};
-	
+
 	$scope.existCourseId = function() {
-		
-		$http.get("/api/btl/existCourseId", {"params" : {"productId" : $scope.productId}}, {'Content-Type' : 'application/json;charset=UTF-8'})
-		.success(function(data) {
+
+		$http.get("/api/btl/existCourseId", {
+			"params" : {
+				"productId" : $scope.productId
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(data) {
 			if (data.status == "1") {
 				alert(data.message);
 			}
 		})
 	}
-	
-	$scope.reset=function(){
-		$scope.typesName=null;
-		$scope.productlisted=null;
+
+	$scope.reset = function() {
+		$scope.typesName = null;
+		$scope.productlisted = null;
 		document.getElementById('revise').style.display = "none";
-		$scope.status=0;
+		$scope.status = 0;
 	}
 })
