@@ -36,7 +36,7 @@ submenu="sidebarmenu-student-studentinfo">
 						
 						<div>
 							<input type="button" class="btn-lg im-key"
-								ng-keydown="todoSelect($event)" ng-click="selectUser()" value="立即检索" />
+							 ng-click="selectUser()" value="立即检索" />
 						</div>
 					</ul>
 			</form>

@@ -35,22 +35,22 @@ function formReset2() {
 	})
 	$(window).resize(function(){ 
 	    $("#add").css({ 
-	        position: "absolute", 
-	        left: ($(".details-frame").width() - $("#add").outerWidth())/2, 
+	        position: "fixed", 
+	        left: ($(window).width() - $("#add").outerWidth())/2, 
 	        top: ($(window).height() - $("#add").outerHeight())/2 
 	    });        
 	}); 
 	$(window).resize(function(){ 
 	    $("#revise").css({ 
-	        position: "absolute", 
-	        left: ($(".details").width() - $("#revise").outerWidth())/2, 
+	        position: "fixed", 
+	        left: ($(window).width() - $("#revise").outerWidth())/2, 
 	        top: ($(window).height() - $("#revise").outerHeight())/2 
 	    });        
 	}); 
 	$(window).resize(function(){ 
 	    $("#resource").css({ 
-	        position: "absolute", 
-	        left: ($(".details-frame").width() - $("#resource").outerWidth())/2, 
-	        top: ($(".details-frame").height() - $("#resource").outerHeight())/2 
+	        position: "fixed", 
+	        left: ($(window).width() - $("#resource").outerWidth())/2, 
+	        top: ($(window).height() - $("#resource").outerHeight())/2 
 	    });        
 	}); 
