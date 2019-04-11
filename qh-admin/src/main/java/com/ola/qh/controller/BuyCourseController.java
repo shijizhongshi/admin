@@ -84,6 +84,7 @@ public class BuyCourseController {
 	@RequestMapping(value="/record",method=RequestMethod.GET)
 	public Results<List<UserBuyCourse>> buyRecord(
 			@RequestParam(name="nicknameORmobile",required=false)String nicknameORmobile,
+			@RequestParam(name="courseName",required=false)String courseName,
 			@RequestParam(name="fromdate",required=false)String fromdate,
 			@RequestParam(name="todate",required=false)String todate,
 			@RequestParam(name="businessId",required=false)String businessId,
@@ -93,6 +94,8 @@ public class BuyCourseController {
 			@RequestParam(name="courseId",required=false)String courseId){
 		
 		BuyCourseDomain bcd=new BuyCourseDomain();
+		//新加参数 班级名称
+		bcd.setCourseName(courseName);
 		bcd.setBusinessId(businessId);
 		bcd.setFromdate(fromdate);
 		bcd.setNicknameORmobile(nicknameORmobile);

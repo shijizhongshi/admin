@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.entity.CourseNofree;
 import com.ola.qh.entity.Polyv;
 import com.ola.qh.service.ICourseNofreeService;
@@ -27,6 +28,8 @@ public class CourseNofreeController {
 
 	@Autowired
 	private ICourseNofreeService courseNofreeService;
+	@Autowired
+	private CourseSubclassDao courseSubclassDao;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseNofree>> selectCourseNofree(@RequestParam(name="courseTypeName",required=false)String courseTypeName,
@@ -68,6 +71,8 @@ public class CourseNofreeController {
 		}
 		courseNofree.setAddtime(new Date());
 		courseNofree.setId(KeyGen.uuid());
+		int ordersMax = courseSubclassDao.selectMaxOrder("audition");
+		courseNofree.setOrders(ordersMax+1);
 		int insert=courseNofreeService.insertCourseNofree(courseNofree);
 		
 		if(insert==0){

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.ola.qh.entity.Course;
-import com.ola.qh.entity.CourseClass;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.IBuyCourseService;
@@ -34,9 +34,6 @@ public class CourseController {
 
 	@Autowired
 	private ICourseService courseService;
-
-	@Autowired
-	private ICourseClassService courseClassService;
 
 	@Autowired
 	private IBuyCourseService buyCourseService;

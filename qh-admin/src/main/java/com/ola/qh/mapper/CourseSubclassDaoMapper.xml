@@ -168,6 +168,15 @@
     <if test="tables=='cc'">
     course_chapter
     </if>
+    <if test="tables=='cclass'">
+   	course_class
+    </if>
+    <if test="tables=='course'">
+    course
+    </if>
+    <if test="tables=='audition'">
+    course_nofree
+    </if>
     order by orders desc
     limit 0,1
 	</select>
@@ -180,7 +189,31 @@
     <if test="tables=='cc'">
     from course_chapter
     </if>
+    <if test="tables=='cclass'">
+	FROM course_class
+	</if>
+    <if test="tables=='course'">
+    from course
+    </if>
+    <if test="tables=='audition'">
+    from course_nofree
+    </if>
     WHERE 1=1
+    <if test="tables=='cs'">
+	and course_chapter_id=#{comment}
+	</if>
+    <if test="tables=='cc'">
+    and course_type_subclass_name=#{comment}
+    </if>
+    <if test="tables=='cclass'">
+    and course_type_subclass_name=#{comment}
+    </if>
+    <if test="tables=='course'">
+    and course_type_subclass_name=#{comment}
+    </if>
+    <if test="tables=='audition'">
+    and course_type_subclass_name=#{comment}
+    </if>
     <if test="type=='up'">
     <!-- 读取上一条记录 -->
     and orders <![CDATA[ < ]]> #{orders}
@@ -188,8 +221,8 @@
     </if>
     <if test="type=='down'">
     <!-- 读取下一条记录 -->
-    and  orders <![CDATA[ > ]]> #{orders}
-      order by orders asc
+    and orders <![CDATA[ > ]]> #{orders}
+    order by orders asc
     </if>
     limit 0,1
 	</select>
@@ -204,6 +237,15 @@
     <if test="tables=='cc'">
     course_chapter
     </if> 
+    <if test="tables=='cclass'">
+	course_class
+	</if>
+    <if test="tables=='course'">
+    course
+    </if>
+    <if test="tables=='audition'">
+    course_nofree
+    </if>
     set orders=#{orders} where 1=1
 	<if test="id!=null and id!='' ">
 	and id=#{id}

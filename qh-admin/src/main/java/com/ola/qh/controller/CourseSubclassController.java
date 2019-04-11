@@ -165,7 +165,8 @@ public class CourseSubclassController {
 	public Results<String> sectionOrders(@RequestParam(name="id",required=true)String id,
 			@RequestParam(name="orders",required=true)int orders,
 			@RequestParam(name="operateType",required=true)String operateType,
-			@RequestParam(name="tables",required=true)String tables){
-		return courseSubclassService.sectionOrders(id, orders, operateType,tables);
+			@RequestParam(name="tables",required=true)String tables,
+			@RequestParam(name="comment",required=true)String comment){
+		return courseSubclassService.sectionOrders(id, orders, operateType,tables,comment);
 	}
 }

@@ -8,6 +8,21 @@ app.controller("operatingController", function($scope, $http) {
 	
 	$scope.selected=null;
 	$scope.userRoleCategory="";
+	
+	 var formatDate = function (date) { 
+			if(date){
+			  	var y = date.getFullYear();  
+			    var m = date.getMonth() + 1;  
+			    m = m < 10 ? '0' + m : m;  
+			    var d = date.getDate();  
+			    d = d < 10 ? ('0' + d) : d;  
+			    return y + '-' + m + '-' + d;
+			} else{
+				return '';
+			}
+		      
+		}; 
+	
 	$scope.operating=function(){
 		
 		$scope.pageNo = ($scope.page - 1) * $scope.pageSize;
@@ -19,6 +34,8 @@ app.controller("operatingController", function($scope, $http) {
 				"userRoleUsername" : $scope.userRoleUsername,
 				"operatingScope" : $scope.operatingScope,
 				"operatingStatus" : $scope.operatingStatus,
+				"todate":formatDate($scope.todate),
+				"fromdate":formatDate($scope.fromdate)
 			}
 		}, {
 			'Content-Type' : 'application/json;charset=UTF-8'

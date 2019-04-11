@@ -73,12 +73,14 @@ app.controller("superAdminController", function($scope, $http) {
 		document.getElementById('resource').style.display = "block";
 	}
 	// 点击事件 点击弹出修改窗口
+	var password = null;
 	$scope.update = function() {
 		if ($scope.userRoleId==null) {
 			alert("请先选择一行数据！");
 			return;
 		}
 		$scope.html = "修改";
+		password = $scope.userRole.password;
 		document.getElementById('addbutton').style.display = "none";
 		document.getElementById('updatebutton').style.display = "inline-block";
 		document.getElementById('resource').style.display = "block";
@@ -204,10 +206,32 @@ app.controller("superAdminController", function($scope, $http) {
 	// 点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
 	$scope.updatequestionbank = function() {
-		if ($scope.userRole.password != $scope.password) {
-			alert("两次密码输入不一致！");
+		if (password != $scope.userRole.password){
+			var a = document.getElementById('password').style.display;
+			document.getElementById('password').style.display = "block";
+			if ($scope.userRole.password != $scope.password && a == "block") {
+				alert("两次密码输入不一致！");
+				return;
+			}else if (a == "block") {
+				$scope.userRole.menus = $scope.adminMenus;
+				$http.post("/api/userRole/update", $scope.userRole, {
+					'Content-Type' : 'application/json;charset=UTF-8'
+				}).success(function(result) {
+					if (result.status == "0") {
+						$scope.operating.operatingStatus="修改";
+				    	$scope.operating.operatingUser=$scope.userRole.username;
+				    	$scope.insertOperating();
+						document.getElementById('resource').style.display = "none";
+						document.getElementById('password').style.display = "none";
+						$scope.userRoleList();
+					} else {
+						alert(result.message);
+					}
+				})
+			}
 			return;
 		}
+		
 		$scope.userRole.menus = $scope.adminMenus;
 		$http.post("/api/userRole/update", $scope.userRole, {
 			'Content-Type' : 'application/json;charset=UTF-8'
@@ -217,6 +241,7 @@ app.controller("superAdminController", function($scope, $http) {
 		    	$scope.operating.operatingUser=$scope.userRole.username;
 		    	$scope.insertOperating();
 				document.getElementById('resource').style.display = "none";
+				document.getElementById('password').style.display = "none";
 				$scope.userRoleList();
 			} else {
 				alert(result.message);

@@ -118,11 +118,13 @@ app.controller("sectionController", function($scope, $http,$sce){
 	    	}
 		})
 	};
+	$scope.courseChapterId=null;
 	///////做选中的时候用
 	$scope.checkedSection=function(c){
 		$scope.selected=c;
 		$scope.section=c;
 		$scope.sectionId=c.id;
+		$scope.courseChapterId=c.courseChapterId;
 		$scope.videoId=c.videoId;
 		$scope.ccvideo=true;
 		$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+c.videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
@@ -193,7 +195,8 @@ app.controller("sectionController", function($scope, $http,$sce){
 	}
 	$scope.sectionMoveApi=function(operateType){
 		$http.get("/api/course/subclass/sectionOrders",{"params": {"id":$scope.sectionId,
-			"orders":$scope.section.orders,"operateType":operateType,"tables":"cs"}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"orders":$scope.section.orders,"operateType":operateType,"tables":"cs","comment":$scope.courseChapterId}},
+			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.section.orders = data.data;
@@ -211,7 +214,7 @@ app.controller("sectionController", function($scope, $http,$sce){
 				  var tmp=angular.copy($scope.sectionlist[index-1]);
 				  if(index==0){
 				  alert('已经是第一个了，不能再向上移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  $scope.sectionlist[index-1]=$scope.sectionlist[index];
 				  $scope.sectionlist[index]=tmp;
@@ -224,7 +227,7 @@ app.controller("sectionController", function($scope, $http,$sce){
 				 
 				  if(index==$scope.sectionlist.length-1){
 				  alert('已经是最后一个了，不能再向下移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  var tmp=angular.copy($scope.sectionlist[index+1]);
 				 

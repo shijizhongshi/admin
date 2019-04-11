@@ -175,12 +175,12 @@ public class CourseSubclassService implements ICourseSubclassService{
 
 	@Transactional
 	@Override
-	public Results<String> sectionOrders(String id, int orders, String operateType,String tables) {
+	public Results<String> sectionOrders(String id, int orders, String operateType,String tables,String comment) {
 		// TODO Auto-generated method stub
 		Results<String> result=new Results<String>();
 		if ("down".equals(operateType)) { //下移
             //获取下一条记录iorder
-            int nextOrder = courseSubclassDao.selectOrder("down", orders,tables);
+            int nextOrder = courseSubclassDao.selectOrder("down", orders,tables,comment);
             //修改下一条的为当前值
             courseSubclassDao.updateOrders(null, nextOrder, orders,tables);
             //修改自己的排序为下一条
@@ -189,7 +189,7 @@ public class CourseSubclassService implements ICourseSubclassService{
         }
         if ("up".equals(operateType)) { //上移
             //获取上一条记录iorder
-        	int previousOrder = courseSubclassDao.selectOrder("up", orders,tables);
+        	int previousOrder = courseSubclassDao.selectOrder("up", orders,tables,comment);
             //修改上一条的为当前值
         	 courseSubclassDao.updateOrders(null, previousOrder, orders,tables);
             //修改自己的排序为上一条

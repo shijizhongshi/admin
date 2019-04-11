@@ -2,7 +2,6 @@ package com.ola.qh.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 /**
@@ -60,7 +59,7 @@ public class Course {
 	
 	private String isbuy;///1:已经购买了  0;未购买
 
-	
+	private int orders;///////按照它排序
 	
 	public String getIsbuy() {
 		return isbuy;
@@ -230,6 +229,14 @@ public class Course {
 
 	public void setClassId(String classId) {
 		this.classId = classId;
+	}
+
+	public int getOrders() {
+		return orders;
+	}
+
+	public void setOrders(int orders) {
+		this.orders = orders;
 	}
 	
 	

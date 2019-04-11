@@ -33,12 +33,6 @@ app.controller("studentinfoController", function($scope, $http) {
 		}
 
 	}
-	//键盘事件 回车
-	$scope.todoSelect = function ($event) {
-		if ($event.keyCode == 13) {
-			alert("按了回车键");
-		}
-	};
 	// 选中更换样式 数据回显
 	$scope.checkUser = function(u) {
 		$scope.selected = u;

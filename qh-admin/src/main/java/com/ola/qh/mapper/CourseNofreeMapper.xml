@@ -20,12 +20,13 @@
 		<result column="img_url" property="imgUrl" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="orders" property="orders" />
 	</resultMap>
 	<sql id="sql_coursenofree">
 		id,course_type_name,course_type_subclass_name,course_resource_type,course_use_difference,course_name,teachers,paly_time,describes,aliyunId,video_id,video_url,isremmend,img_url,addtime
 	</sql>
 	<select id="selectCourseNofree" resultMap="CourseNofreeMap">
-		select <include refid="sql_coursenofree"></include> from course_nofree 
+		select <include refid="sql_coursenofree"></include>,orders from course_nofree 
 		where 1=1
 		<if test="courseTypeName!=null and courseTypeName!=''">
 		and course_type_name=#{courseTypeName}
@@ -39,7 +40,7 @@
 		<if test="courseName!=null and courseName!=''">
 		and course_name LIKE CONCAT(CONCAT('%',#{courseName},'%'))
 		</if>
-		order by addtime ASC limit #{pageNo},#{pageSize}
+		order by orders ASC limit #{pageNo},#{pageSize}
 	</select>
 	
 	<select id="selectCourseNofreeCount" resultType="int">
@@ -61,7 +62,8 @@
 	</select>
 	
 	<insert id="insertCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">
-		insert into course_nofree(<include refid="sql_coursenofree"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{courseResourceType},#{courseUseDifference},#{courseName},#{teachers},#{palyTime},#{describes},#{aliyunId},#{videoId},#{videoUrl},#{isremmend},#{imgUrl},#{addtime})
+		insert into course_nofree(<include refid="sql_coursenofree"></include>,orders)
+		 values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{courseResourceType},#{courseUseDifference},#{courseName},#{teachers},#{palyTime},#{describes},#{aliyunId},#{videoId},#{videoUrl},#{isremmend},#{imgUrl},#{addtime},#{orders})
 	</insert>
 	
 	<update id="updateCourseNofree" parameterType="com.ola.qh.entity.CourseNofree">

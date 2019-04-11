@@ -88,8 +88,8 @@
 		us
 		left join user as u
 		on u.id = us.user_id
-		group by us.user_id
-		having 1=1
+		
+		where 1=1
 		<if test="fromdate!='' and fromdate!=null ">
 			and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
@@ -104,6 +104,7 @@
 		<if test="status!='' and status!=null ">
 			and u.isdisabled=#{status}
 		</if>
+		group by us.user_id
 		)as a
 
 	</select>

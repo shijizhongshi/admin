@@ -26,13 +26,14 @@
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
 		<result column="maxdoudou" property="maxdoudou"/>
+		<result column="orders" property="orders"/>
 	</resultMap>
 	<sql id="sql_courseclass">
 		id,course_type_name,course_type_subclass_name,template_id,class_name,class_price,class_discount_price,class_year,course_lecturer,all_time,
 		grade,isremmend,isshow,img_url,proper_people,promises,features,introduce,detail,addtime,maxdoudou
 	</sql>
 	<select id="selectCourseClass" resultMap="CourseClassMap">
-		select <include refid="sql_courseclass"></include> from course_class 
+		select <include refid="sql_courseclass"></include>,orders from course_class 
 		where 1=1
 		<if test="id!=null">
 			and id=#{id}
@@ -46,7 +47,7 @@
 		<if test="className!=null and className!=''">
 		and class_name LIKE CONCAT(CONCAT('%',#{className},'%'))
 		</if>
-		order by addtime desc
+		order by orders asc
 		<if test="pageSize!=0">
 		 limit #{pageNo},#{pageSize}
 		</if>
@@ -68,9 +69,9 @@
 	
 	
 	<insert id="insertCourseClass" parameterType="com.ola.qh.entity.CourseClass">
-		insert into course_class(<include refid="sql_courseclass"></include>) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{templateId},
+		insert into course_class(<include refid="sql_courseclass"></include>,orders) values(#{id},#{courseTypeName},#{courseTypeSubclassName},#{templateId},
 		#{className},#{classPrice},#{classDiscountPrice},#{classYear},#{courseLecturer},#{allTime},#{grade},#{isremmend},#{isshow},#{imgUrl},#{properPeople},
-		#{promises},#{features},#{introduce},#{detail},#{addtime},#{maxdoudou})
+		#{promises},#{features},#{introduce},#{detail},#{addtime},#{maxdoudou},#{orders})
 	</insert>
 	
 	<update id="updateCourseClass" parameterType="com.ola.qh.entity.CourseClass">

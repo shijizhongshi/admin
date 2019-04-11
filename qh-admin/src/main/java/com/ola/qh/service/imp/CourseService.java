@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.CourseDao;
+import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
@@ -32,6 +33,8 @@ public class CourseService implements ICourseService {
 	private CourseDao courseDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private CourseSubclassDao courseSubclassDao;
 
 	@Override
 	public List<CourseType> courseTypeList() {
@@ -85,6 +88,8 @@ public class CourseService implements ICourseService {
 				return courseDao.updateCourese(course);
 
 			}
+			int ordersMax = courseSubclassDao.selectMaxOrder("c");
+			course.setOrders(ordersMax+1);
 			course.setId(KeyGen.uuid());
 			course.setAddtime(new Date());
 			course.setUserId("1");
