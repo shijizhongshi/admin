@@ -34,7 +34,7 @@
 					<span>操作区域</span> <input  type="text" placeholder="请输入操作区域" ng-model="operatingScope" class="ng-pristine ng-untouched ng-valid ng-empty">
 				</div>
 				<div class="select-3">
-					<span>负责人</span> <input style=" type=" text"="" placeholder="请输入操作人" ng-model="userRoleUsername" class="ng-pristine ng-untouched ng-valid ng-empty">
+					<span>负责人</span> <input type="text" placeholder="请输入操作人" ng-model="userRoleUsername" class="ng-pristine ng-untouched ng-valid ng-empty">
 				</div>
 				
 				

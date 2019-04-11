@@ -69,6 +69,7 @@ public class CourseClass {
 	
 	private String isbuy;///1:已经买过  0:没有买过
 
+	private int orders;///序号
 	
 	public String getIsbuy() {
 		return isbuy;
@@ -268,6 +269,14 @@ public class CourseClass {
 
 	public void setListCourse(List<Course> listCourse) {
 		this.listCourse = listCourse;
+	}
+
+	public int getOrders() {
+		return orders;
+	}
+
+	public void setOrders(int orders) {
+		this.orders = orders;
 	}
 
 	

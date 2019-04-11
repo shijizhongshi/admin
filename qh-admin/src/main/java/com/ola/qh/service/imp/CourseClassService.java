@@ -14,6 +14,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import com.ola.qh.dao.CourseClassDao;
 import com.ola.qh.dao.CourseClassTeacherDao;
 import com.ola.qh.dao.CourseDao;
+import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseClass;
 import com.ola.qh.entity.CourseClassTeacher;
@@ -31,7 +32,9 @@ public class CourseClassService implements ICourseClassService {
 	private CourseClassTeacherDao courseClassTeacherDao;
 	@Autowired
 	private CourseDao courseDao;
-
+	@Autowired
+	private CourseSubclassDao courseSubclassDao;
+	
 	@Override
 	public List<CourseClass> selectCourseClass(String id, int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName,String className) {
 
@@ -66,6 +69,8 @@ public class CourseClassService implements ICourseClassService {
 		try {
 
 			courseClass.setId(KeyGen.uuid());
+			int ordersMax = courseSubclassDao.selectMaxOrder("c");
+			courseClass.setOrders(ordersMax+1);
 			///////专业名称已经存在了班级给他提示
 			int count = courseClassDao.selectCourseClassCount(courseClass.getCourseTypeName(), courseClass.getCourseTypeSubclassName(),courseClass.getClassName());
 			

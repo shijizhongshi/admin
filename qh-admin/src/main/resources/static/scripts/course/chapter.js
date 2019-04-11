@@ -207,7 +207,8 @@ app.controller("ChapterController", function($scope, $http){
 	
 	$scope.chapterMoveApi=function(operateType){
 		$http.get("/api/course/subclass/sectionOrders",{"params": {"id":$scope.chapterId,
-			"orders":$scope.chapter.orders,"operateType":operateType,"tables":"cc"}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"orders":$scope.chapter.orders,"operateType":operateType,"tables":"cc","comment":$scope.courseTypeSubclassName}}, 
+			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.chapter.orders = data.data;
