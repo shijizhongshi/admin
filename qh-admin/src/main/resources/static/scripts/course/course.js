@@ -66,6 +66,7 @@ app.controller("CourseController", function($scope, $http){
 	
 	$scope.courseSub=function(typename,sub,$event){
 		////////查课程的集合
+		$scope.page = 1;
 		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;

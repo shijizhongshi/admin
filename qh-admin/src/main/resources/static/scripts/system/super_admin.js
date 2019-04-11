@@ -61,6 +61,7 @@ app.controller("superAdminController", function($scope, $http) {
 	// 点击事件,点击弹出添加窗口
 	$scope.addshow = function() {
 		$scope.userRole = null;
+		$scope.userRoleId = null;
 		$scope.password = null;
 		$scope.selected = null;
 		$scope.adminMenus = [];
@@ -254,6 +255,7 @@ app.controller("superAdminController", function($scope, $http) {
 			alert("请先选中一行数据");
 			return;
 		}
+		if(confirm("你确定要删除这条记录吗?")){
 		$http.get("/api/userRole/delete", {
 			"params" : {
 				"id" : $scope.userRole.id
@@ -271,7 +273,7 @@ app.controller("superAdminController", function($scope, $http) {
 				alert(result.message);
 			}
 		})
-
+		}
 	}
 	$scope.userRoleId=null;
 	// 点击事件 点击获取数据回显 

@@ -20,8 +20,9 @@
 <div class="details-frame" >
 <div class="details-frame-content">
 
-				<div class="select-3">
-					<span>选择时间</span> <input type="date" name="search" ng-model="fromdate" class="ng-pristine ng-untouched ng-valid ng-empty">
+				<div class="select-3" style="width: 11%;margin-right:15px">
+					<span>选择时间</span> 
+					<input type="date" name="search" ng-model="fromdate" class="ng-pristine ng-untouched ng-valid ng-empty">
 				</div>
 				<div class="select-3"
 					style="font-size: 1.6rem; width: 5px; text-align: center;">

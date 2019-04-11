@@ -141,7 +141,7 @@
 	<!--课程按照不同的条件进行查询-->
 	<select id="courseList" resultMap="CourseMap" parameterType="com.ola.qh.entity.Course">
 	
-	select <include refid="sql_base"></include>,class_id,orders from course where course_show=0
+	select <include refid="sql_base"></include>,class_id,orders from course where 1=1
 	<if test="courseExcellent!=0">
 	 and course_excellent=#{courseExcellent}
 	</if>

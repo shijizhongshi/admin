@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.IBuyCourseService;
-import com.ola.qh.service.ICourseClassService;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Results;
 
@@ -38,6 +38,8 @@ public class CourseController {
 	@Autowired
 	private IBuyCourseService buyCourseService;
 
+	@Autowired
+	private CourseSubclassDao courseSubclassDao;
 	/**
 	 * 大类别的集合
 	 * <p>

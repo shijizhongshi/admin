@@ -9,7 +9,8 @@ app.controller("sectionController", function($scope, $http,$sce){
     $scope.section=null;
     $scope.sectionlist=[];
 	$scope.sectionBases=function(){
-		$http.get("/api/course/subclass/courseSectionList",{"params": {"page":$scope.current,"courseChapterId":$("#chapterId").val()}}, 
+		$scope.pageNo=($scope.current-1)*$scope.pageSize;
+		$http.get("/api/course/subclass/courseSectionList",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"courseChapterId":$("#chapterId").val()}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

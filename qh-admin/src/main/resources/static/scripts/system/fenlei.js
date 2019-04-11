@@ -32,6 +32,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 		$http.get("/api/shopdrugcategory/select", {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				
 				$scope.shopDrugCategory=data.data;
 				$scope.id=$scope.shopDrugCategory.id;
 			}
@@ -42,7 +43,8 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	$scope.shopcateBases();
 	
 	$scope.shopsubBases=function(){
-		$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.id,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
+		$http.get("/api/shopdrugsubcategory/select",{"params": {"categoryId":$scope.id,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				
@@ -52,6 +54,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 			}else{
 					
 				$scope.shopDrugSubcategory=null;
+				$scope.total=0;
 			}
 			
 		})
@@ -61,7 +64,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 	
 	$scope.checkedShopcate=function(s){
 		
-	
+		$scope.page = 1;
 		if($scope.clicked!=s){
 			$scope.clicked=s;
 			$scope.id=s.id;
