@@ -7,5 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/web/marketing")
 public class marketing {
 
+	@RequestMapping("/questionbankH5")
+	public String courseOrders(){
+		return "marketing/questionbankH5";
+	}
 	
 	}
