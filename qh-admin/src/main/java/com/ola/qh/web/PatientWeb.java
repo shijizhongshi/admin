@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/web/patientmanage")
 public class PatientWeb {
 
+	@RequestMapping("/knowledgep")
+	public String courseOrders(){
+		return "patientmanage/knowledgep";
+	}
 	@RequestMapping(value="/patient",method=RequestMethod.GET)
 	public String patient(){
 		return "patientmanage/patient";

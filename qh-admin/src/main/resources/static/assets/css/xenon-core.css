@@ -2001,6 +2001,7 @@ body.chat-open .user-info-navbar a[data-toggle="chat"] {
   padding: 0;
   margin: -10px;
   margin-bottom:auto;
+  margin-right:0;
 }
 .user-info-navbar .user-info-menu {
   margin: 0;
