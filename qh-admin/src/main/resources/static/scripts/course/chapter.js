@@ -226,7 +226,7 @@ app.controller("ChapterController", function($scope, $http){
 				  var tmp=angular.copy($scope.chapterlist[index-1]);
 				  if(index==0){
 				  alert('已经是第一个了，不能再向上移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  $scope.chapterlist[index-1]=$scope.chapterlist[index];
 				  $scope.chapterlist[index]=tmp;
@@ -239,7 +239,7 @@ app.controller("ChapterController", function($scope, $http){
 				 
 				  if(index==$scope.chapterlist.length-1){
 				  alert('已经是最后一个了，不能再向下移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  var tmp=angular.copy($scope.chapterlist[index+1]);
 				 

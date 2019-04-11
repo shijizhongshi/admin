@@ -227,7 +227,7 @@ app.controller("CourseController", function($scope, $http){
 				  var tmp=angular.copy($scope.courselist[index-1]);
 				  if(index==0){
 				  alert('已经是第一个了，不能再向上移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  $scope.courselist[index-1]=$scope.courselist[index];
 				  $scope.courselist[index]=tmp;
@@ -240,7 +240,7 @@ app.controller("CourseController", function($scope, $http){
 				 
 				  if(index==$scope.courselist.length-1){
 				  alert('已经是最后一个了，不能再向下移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  var tmp=angular.copy($scope.courselist[index+1]);
 				 

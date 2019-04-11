@@ -214,7 +214,7 @@ app.controller("sectionController", function($scope, $http,$sce){
 				  var tmp=angular.copy($scope.sectionlist[index-1]);
 				  if(index==0){
 				  alert('已经是第一个了，不能再向上移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  $scope.sectionlist[index-1]=$scope.sectionlist[index];
 				  $scope.sectionlist[index]=tmp;
@@ -227,7 +227,7 @@ app.controller("sectionController", function($scope, $http,$sce){
 				 
 				  if(index==$scope.sectionlist.length-1){
 				  alert('已经是最后一个了，不能再向下移动了！');
-				  return ;
+				  location.reload() ;
 				  }
 				  var tmp=angular.copy($scope.sectionlist[index+1]);
 				 
