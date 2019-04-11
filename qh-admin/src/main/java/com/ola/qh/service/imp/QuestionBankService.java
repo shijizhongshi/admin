@@ -291,6 +291,17 @@ public class QuestionBankService implements IQuestionBankService {
 		}
 		
 	}
+	/**
+	 * H5题库管理
+	 */
+	@Override
+	public Results<List<QuestionBank>> selectQuestionBankList(String realname, String courseTypeSubclassName,
+			String status, int page) {
+		Results<List<QuestionBank>> results = new Results<>();
+		
+		
+		return null;
+	}
 
 	
 	

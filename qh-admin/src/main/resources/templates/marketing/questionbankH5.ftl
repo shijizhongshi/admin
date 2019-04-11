@@ -7,9 +7,10 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/indent/excle.js"></script>
+<script src="/scripts/marketing/questionbankH5.js"></script>
 <@b.body menu="sidebarmenu-marketing"
 submenu="sidebarmenu-marketing-questionbankH5">
-<div ng-controller="studentController">
+<div ng-controller="questionbankH5Controller">
 	<input type="hidden" value="${username}" id="username" /> <input
 		type="hidden" value="${surplusaccount}" id="surplusaccount">
 	<div class="details" style="width: 100%">
@@ -25,22 +26,19 @@ submenu="sidebarmenu-marketing-questionbankH5">
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>姓名</span> <input type="text">
+					<span>姓名</span> <input type="text" ng-model="realname">
 				</div>
 				<div class="select-3">
 					<span>属性</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="status">
 						<option value=""></option>
-						<option value="0"></option>
-						<option value="1"></option>
+						<option value="0">app注册用户</option>
+						<option value="1">游客用户</option>
 					</select>
 				</div>
 	<div class="select-3">
 					<span>专业</span> <img src="/images/sjk-xl.png"> <select
-						ng-model="status">
-						<option value=""></option>
-						<option value="0"></option>
-						<option value="1"></option>
+						ng-model="courseTypeSubclassName" ng-options="a for a in nameList">
 					</select>
 				</div>
 				<div style="float: left;">

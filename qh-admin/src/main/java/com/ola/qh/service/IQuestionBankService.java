@@ -16,6 +16,9 @@ public interface IQuestionBankService {
 	public Results<String> updateQuestionBank(QuestionBank questionBank);
 	
 	public Results<String> deleteQuestionBank(String id);
+
+	public Results<List<QuestionBank>> selectQuestionBankList(String realname, String courseTypeSubclassName,
+			String status, int page);
 	
 	
 }
