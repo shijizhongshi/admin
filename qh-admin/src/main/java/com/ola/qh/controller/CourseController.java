@@ -16,7 +16,6 @@ import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.IBuyCourseService;
-import com.ola.qh.service.ICourseClassService;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Results;
 

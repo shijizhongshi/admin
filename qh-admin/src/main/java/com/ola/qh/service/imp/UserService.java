@@ -340,7 +340,7 @@ public class UserService implements IUserService {
 			String userrole, String isdoctor, String birthday) {
 		Results<List<User>> results = new Results<>();
 		List<User> list = new ArrayList<>();
-		//计数器 i
+		// 计数器 i
 		Integer i = 0;
 		if (courseTypeSubclassName == null) {
 			list = userDao.send(sex, userrole, isdoctor, birthday);
@@ -360,7 +360,7 @@ public class UserService implements IUserService {
 			if (i == 0) {
 				results.setStatus("1");
 				results.setMessage("根据条件未查询到用户");
-				
+
 				return results;
 			}
 			results.setStatus("0");
@@ -375,24 +375,30 @@ public class UserService implements IUserService {
 				// 根据classid是否为空判断user_buy_course表与哪个表进行关联查询
 				if (course.getClassId().length() != 0) {
 					// 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
-					//birthday是string类型？
-					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(course.getClassId(),sex,userrole,isdoctor,birthday);
-					for (UserBuyCourse userBuyCourse : userBuyCourses) {
-						// 信息保存到user_message表中
-						Date addtimeDate = new Date();
-						String id = KeyGen.uuid();
-						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
-						// 调发送接口
-						try {
-							PushService.send(userBuyCourse.getUserId(), title, content);
-							++i;
-						} catch (Exception e) {
-							e.printStackTrace();
+					List<UserBuyCourse> userBuyCourses = new ArrayList<>();
+					//现在课程与班级是一对多关系 classid在表中以逗号分隔存放
+					String resu[] = course.getClassId().split(",");
+					for (String classId : resu) {
+						userBuyCourses = userBuyCourseDao.selectByClassId(classId, sex, userrole, isdoctor, birthday);
+						for (UserBuyCourse userBuyCourse : userBuyCourses) {
+							// 信息保存到user_message表中
+							Date addtimeDate = new Date();
+							String id = KeyGen.uuid();
+							usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
+							// 调发送接口
+							try {
+								PushService.send(userBuyCourse.getUserId(), title, content);
+								++i;
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
 					}
+
 				} else if (course.getClassId().length() == 0) {
 					// 使用course_id 查询course表左外链接user_buy_course表(course表为主表)
-					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(),sex,userrole,isdoctor,birthday);
+					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(), sex,
+							userrole, isdoctor, birthday);
 					for (UserBuyCourse userBuyCourse : userBuyCourses) {
 						// 信息保存到user_message表中
 						Date addtimeDate = new Date();
@@ -408,7 +414,7 @@ public class UserService implements IUserService {
 				}
 			}
 		}
-		//根据计数器判断返回数据
+		// 根据计数器判断返回数据
 		if (i == 0) {
 			results.setStatus("1");
 			results.setMessage("根据条件未查询到用户");
