@@ -369,36 +369,13 @@ public class UserService implements IUserService {
 
 			return results;
 		} else if (courseTypeSubclassName != null) {
-			// 根据course_type_subclass_name查询course表 返回集合
 			List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
 			for (Course course : courselist) {
-				// 根据classid是否为空判断user_buy_course表与哪个表进行关联查询
-				if (course.getClassId().length() != 0) {
-					// 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
-					List<UserBuyCourse> userBuyCourses = new ArrayList<>();
-					//现在课程与班级是一对多关系 classid在表中以逗号分隔存放
-					String resu[] = course.getClassId().split(",");
-					for (String classId : resu) {
-						userBuyCourses = userBuyCourseDao.selectByClassId(classId, sex, userrole, isdoctor, birthday);
-						for (UserBuyCourse userBuyCourse : userBuyCourses) {
-							// 信息保存到user_message表中
-							Date addtimeDate = new Date();
-							String id = KeyGen.uuid();
-							usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
-							// 调发送接口
-							try {
-								PushService.send(userBuyCourse.getUserId(), title, content);
-								++i;
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					}
-
-				} else if (course.getClassId().length() == 0) {
-					// 使用course_id 查询course表左外链接user_buy_course表(course表为主表)
+				if (course.getClassId() == null || course.getClassId().length() <= 0) {
+					// 根据id查询user_buy_course 获取到userID 推送消息
 					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(), sex,
 							userrole, isdoctor, birthday);
+					// 循环遍历 推送
 					for (UserBuyCourse userBuyCourse : userBuyCourses) {
 						// 信息保存到user_message表中
 						Date addtimeDate = new Date();
@@ -411,8 +388,59 @@ public class UserService implements IUserService {
 							e.printStackTrace();
 						}
 					}
+				} else {
+					// ===========================
+					// 拆分classID 根据classID查询
+					String resu[] = course.getClassId().split(",");
+					for (String k : resu) {
+						// 根据k查询userID
+						List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(k, sex, userrole,isdoctor, birthday);
+						// 循环遍历 推送
+						for (UserBuyCourse userBuyCourse : userBuyCourses) {
+							// 信息保存到user_message表中
+							Date addtimeDate = new Date();
+							String id = KeyGen.uuid();
+							usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
+							try {
+								PushService.send(userBuyCourse.getUserId(), title, content);
+								++i;
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					}
 				}
+
 			}
+
+			// -------------------------------------------以下是之前的---------------------------------------------------------------------------//
+			// 根据course_type_subclass_name查询course表 返回集合
+			// List<Course> courselist =
+			// courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
+			/*
+			 * for (Course course : courselist) { //
+			 * 根据classid是否为空判断user_buy_course表与哪个表进行关联查询 if (course.getClassId().length() !=
+			 * 0) { // 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
+			 * List<UserBuyCourse> userBuyCourses = new ArrayList<>(); // 现在课程与班级是一对多关系
+			 * classid在表中以逗号分隔存放 String resu[] = course.getClassId().split(","); for (String
+			 * classId : resu) { userBuyCourses = userBuyCourseDao.selectByClassId(classId,
+			 * sex, userrole, isdoctor, birthday); for (UserBuyCourse userBuyCourse :
+			 * userBuyCourses) { // 信息保存到user_message表中 Date addtimeDate = new Date();
+			 * String id = KeyGen.uuid(); usermessage.insertMessage(id, addtimeDate, title,
+			 * content, userBuyCourse.getUserId(), 5); // 调发送接口 try {
+			 * PushService.send(userBuyCourse.getUserId(), title, content); ++i; } catch
+			 * (Exception e) { e.printStackTrace(); } } }
+			 * 
+			 * } else if (course.getClassId().length() == 0) { // 使用course_id
+			 * 查询course表左外链接user_buy_course表(course表为主表) List<UserBuyCourse> userBuyCourses
+			 * = userBuyCourseDao.selectByCourseId(course.getId(), sex, userrole, isdoctor,
+			 * birthday); for (UserBuyCourse userBuyCourse : userBuyCourses) { //
+			 * 信息保存到user_message表中 Date addtimeDate = new Date(); String id = KeyGen.uuid();
+			 * usermessage.insertMessage(id, addtimeDate, title, content,
+			 * userBuyCourse.getUserId(), 5); try {
+			 * PushService.send(userBuyCourse.getUserId(), title, content); ++i; } catch
+			 * (Exception e) { e.printStackTrace(); } } } }
+			 */
 		}
 		// 根据计数器判断返回数据
 		if (i == 0) {
