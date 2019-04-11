@@ -51,7 +51,12 @@ public class CourseSubclassController {
 		
 		Results<List<CourseChapter>> result = new Results<List<CourseChapter>>();
 		
-		result.setData(courseSubclassService.courseChapterList(courseId,courseChapterName,pageNo,pageSize,courseTypeName,courseTypeSubclassName));
+		List<CourseChapter> list=courseSubclassService.courseChapterList(courseId,courseChapterName,pageNo,pageSize,courseTypeName,courseTypeSubclassName);
+		
+		for (CourseChapter courseChapter : list) {
+			courseChapter.setCourseSectionSize(courseSubclassService.courseSectionListCount(courseChapter.getId()));
+		}
+		result.setData(list);
 		result.setCount(courseSubclassService.courseChapterListCount(courseId,courseChapterName, courseTypeName, courseTypeSubclassName));
 		result.setStatus("0");
 		return result;
@@ -100,13 +105,11 @@ public class CourseSubclassController {
 	 * @return
 	 */
 	@RequestMapping("/courseSectionList")
-	public Results<List<CourseSection>> listCourseSection(@RequestParam(name="courseChapterId",required=true)String courseChapterId,@RequestParam(name="page",required=false)int page){
+	public Results<List<CourseSection>> listCourseSection(@RequestParam(name="courseChapterId",required=true)String courseChapterId,
+			@RequestParam(name="pageNo",required=true)int pageNo,
+			@RequestParam(name="pageSize",required=true)int pageSize){
 		
 		Results<List<CourseSection>> result = new Results<List<CourseSection>>();
-		int pageNo=(page-1)*Patterns.pageSize;
-		int pageSize;
-		
-			pageSize=Patterns.pageSize;
 		
 		result.setData(courseSubclassService.courseSectionList(courseChapterId,pageNo,pageSize));
 		result.setCount(courseSubclassService.courseSectionListCount(courseChapterId));
@@ -165,7 +168,8 @@ public class CourseSubclassController {
 	public Results<String> sectionOrders(@RequestParam(name="id",required=true)String id,
 			@RequestParam(name="orders",required=true)int orders,
 			@RequestParam(name="operateType",required=true)String operateType,
-			@RequestParam(name="tables",required=true)String tables){
-		return courseSubclassService.sectionOrders(id, orders, operateType,tables);
+			@RequestParam(name="tables",required=true)String tables,
+			@RequestParam(name="comment",required=true)String comment){
+		return courseSubclassService.sectionOrders(id, orders, operateType,tables,comment);
 	}
 }

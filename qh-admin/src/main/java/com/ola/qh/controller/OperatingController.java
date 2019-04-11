@@ -28,9 +28,11 @@ public class OperatingController {
 			@RequestParam(name="userRoleUsername",required=false)String userRoleUsername,
 			@RequestParam(name="operatingScope",required=false)String operatingScope,
 			@RequestParam(name="operatingStatus",required=false)String operatingStatus,
-			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize){
+			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize,
+			@RequestParam(name="todate",required=false)String todate,
+			@RequestParam(name="fromdate",required=false)String fromdate){
 		
-			return operatingService.operatingList(userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize);
+			return operatingService.operatingList(userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize,todate,fromdate);
 		}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)

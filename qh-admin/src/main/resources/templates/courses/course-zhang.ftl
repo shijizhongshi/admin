@@ -64,9 +64,9 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改章</li>
 					<li ng-click="deleteChapter()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除章</li>
-						<li><span class="glyphicon glyphicon-sort" class="move-up"></span>&nbsp;上移</li>
-					<li><span class="glyphicon glyphicon-sort-by-attributes"
-						class="move-down"></span>&nbsp;下移</li>
+					<li style="width: 90px;" ng-click="chaptermove(1)"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
+				<li style="width: 90px;" ng-click="chaptermove(2)"><span
+					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
 					<li ng-click="section()"><span
 						class="glyphicon glyphicon-sort-by-attributes" class="move-down"></span>&nbsp;节管理</li>
 					<li style="float: right; margin-right: 20px; background: none;"><img

@@ -77,12 +77,12 @@
 								ng-class="{'selected':selected==b}">
 								<td><img ng-src="{{b.imageurl}}"
 									style="width: 50px; height: 30px;" /></td>
-								<td ng-show="{{b.type==1}}">学院的banner</td>
-								<td ng-show="{{b.type==2}}">学院水印logo</td>
+								<td ng-show="b.type==1">学院的banner</td>
+								<td ng-show="b.type==2">学院水印logo</td>
 
 								<td>{{b.outLinks}}</td>
-								<td ng-show="{{b.isshow==1}}">是</td>
-								<td ng-show="{{b.isshow!=1}}">否</td>
+								<td ng-show="b.isshow==1">是</td>
+								<td ng-show="b.isshow!=1">否</td>
 							</tr>
 
 						</table>

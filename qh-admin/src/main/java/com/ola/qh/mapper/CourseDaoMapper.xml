@@ -78,6 +78,7 @@
 	<result column="updatetime" property="updatetime"/>
 	<result column="class_id" property="classId"/>
 	<result column="maxdoudou" property="maxdoudou"/>
+	<result column="orders" property="orders"/>
 	</resultMap>
 	
 	<sql id="sql_base">
@@ -87,10 +88,10 @@
 	</sql>
 	
 	<insert id="insertCourse" parameterType="com.ola.qh.entity.Course">
-	insert into course(<include refid="sql_base"></include>,user_id)
+	insert into course(<include refid="sql_base"></include>,user_id,orders)
 	values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},
 	#{coursePrice},#{courseDiscountPrice},#{courseYear},#{courseShow},#{courseExcellent},#{courseImg},
-	#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId}
+	#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId},#{orders}
 	)
 	</insert>
 	<update id="updateCourese" parameterType="com.ola.qh.entity.Course">
@@ -140,7 +141,7 @@
 	<!--课程按照不同的条件进行查询-->
 	<select id="courseList" resultMap="CourseMap" parameterType="com.ola.qh.entity.Course">
 	
-	select <include refid="sql_base"></include>,class_id from course where course_show=0
+	select <include refid="sql_base"></include>,class_id,orders from course where 1=1
 	<if test="courseExcellent!=0">
 	 and course_excellent=#{courseExcellent}
 	</if>
@@ -156,7 +157,7 @@
 	<if test="courseName!=null and courseName!='' ">
 	and course_name like concat(concat('%',#{courseName},'%'))
 	</if>
-	order by addtime asc 
+	order by orders asc 
 	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
 	</if>

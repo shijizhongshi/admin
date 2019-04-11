@@ -10,10 +10,12 @@ public interface OperatingDao {
 
 	public List<Operating> operatingList(@Param("userRoleUsername")String userRoleUsername,
 			@Param("operatingScope")String operatingScope,@Param("operatingStatus")String operatingStatus,
-			@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
+			@Param("pageNo")int pageNo,@Param("pageSize")int pageSize,@Param("todate")String todate,
+			@Param("fromdate")String fromdate);
 	
 	public int operatingCount(@Param("userRoleUsername")String userRoleUsername,
-			@Param("operatingScope")String operatingScope,@Param("operatingStatus")String operatingStatus);
+			@Param("operatingScope")String operatingScope,@Param("operatingStatus")String operatingStatus,@Param("todate")String todate,
+			@Param("fromdate")String fromdate);
 	
 	public int insertOperating(Operating operating);
 	

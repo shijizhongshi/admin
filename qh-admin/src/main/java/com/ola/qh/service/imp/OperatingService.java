@@ -24,14 +24,14 @@ public class OperatingService implements IOperatingService{
 	@Transactional
 	@Override
 	public Results<List<Operating>> operatingList(String userRoleUsername, String operatingScope, String operatingStatus,
-			int pageNo, int pageSize) {
+			int pageNo, int pageSize, String todate, String fromdate) {
 		
 		Results<List<Operating>> results=new Results<List<Operating>>();
 		
 		try {
 			
-			List<Operating> list=operatingDao.operatingList(userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize);
-			int count=operatingDao.operatingCount(userRoleUsername, operatingScope, operatingStatus);
+			List<Operating> list=operatingDao.operatingList(userRoleUsername, operatingScope, operatingStatus, pageNo, pageSize, todate, fromdate);
+			int count=operatingDao.operatingCount(userRoleUsername, operatingScope, operatingStatus, todate, fromdate);
 			
 			results.setData(list);
 			results.setCount(count);

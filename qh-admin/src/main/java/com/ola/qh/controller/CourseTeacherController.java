@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.CourseTeacher;
 import com.ola.qh.service.ICourseTeacherService;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -27,19 +26,13 @@ public class CourseTeacherController {
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseTeacher>> selectCourseSection(
-			@RequestParam(name="page",required=true)int page,
+			@RequestParam(name = "pageNo", required = true) int pageNo,
+			@RequestParam(name = "pageSize", required = true) int pageSize,
 			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
 			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
 			@RequestParam(name="teacherName",required=false)String teacherName){
 		
 		Results<List<CourseTeacher>> results=new Results<List<CourseTeacher>>();
-		int pageSize = 0;
-		int pageNo =0;
-		if(page!=0){
-			pageSize = Patterns.pageSize;
-		    pageNo = (page - 1) * pageSize;
-		}
-		
 		
 		List<CourseTeacher> list=courseTeacherService.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName,teacherName);
 		

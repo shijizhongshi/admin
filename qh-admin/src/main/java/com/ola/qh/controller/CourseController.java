@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
@@ -37,6 +38,8 @@ public class CourseController {
 	@Autowired
 	private IBuyCourseService buyCourseService;
 
+	@Autowired
+	private CourseSubclassDao courseSubclassDao;
 	/**
 	 * 大类别的集合
 	 * <p>

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ola.qh.entity.CourseLineShow;
 import com.ola.qh.service.ICourseNofreeService;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -58,13 +57,12 @@ public class CourseLiveShowController {
 	
 	@RequestMapping("/list")
 	public Results<List<CourseLineShow>> list(
-			@RequestParam(name="page",required=true)int page,
+			@RequestParam(name="pageNo",required=true)int pageNo,
+			@RequestParam(name="pageSize",required=true)int pageSize,
 			@RequestParam(name="courseTypeName",required=false)String courseTypeName,
 			@RequestParam(name="courseTypeSubclassName",required=false)String courseTypeSubclassName,
 			@RequestParam(name="liveName",required=false)String liveName){
 		Results<List<CourseLineShow>> result=new Results<List<CourseLineShow>>();
-		int pageSize=Patterns.pageSize;
-		int pageNo=(page-1)*pageSize;
 		List<CourseLineShow> list = courseNofreeService.selectLiveList(pageNo, pageSize,courseTypeName,courseTypeSubclassName,liveName);
 		int count = courseNofreeService.selectLiveListCount(courseTypeName, courseTypeSubclassName,liveName);
 		result.setCount(count);

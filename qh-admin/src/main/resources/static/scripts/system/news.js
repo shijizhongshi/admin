@@ -12,8 +12,8 @@ app.controller("newController", function($scope, $http){
     $scope.title=null;
     $scope.imgUrl=null;
 $scope.loaddata = function(){
-	
-	$http.get("/api/news/newLists",{"params": {"title":$scope.title,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	$scope.pageNo=( $scope.page-1)*$scope.pageSize;
+	$http.get("/api/news/newLists",{"params": {"title":$scope.title,"pageNo":$scope.pageNo,"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
     	if(result.status=="0"){
     		$scope.newlist=result.data;

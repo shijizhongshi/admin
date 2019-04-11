@@ -46,6 +46,8 @@ public class CourseNofree {
 	
 	private Date updatetime;
 	
+	private int orders;//排序
+	
 	public String getVideoId() {
 		return videoId;
 	}
@@ -172,6 +174,14 @@ public class CourseNofree {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public int getOrders() {
+		return orders;
+	}
+
+	public void setOrders(int orders) {
+		this.orders = orders;
 	}
 
 	

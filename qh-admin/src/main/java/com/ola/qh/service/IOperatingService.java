@@ -8,7 +8,7 @@ import com.ola.qh.util.Results;
 public interface IOperatingService {
 
 	public Results<List<Operating>> operatingList(String userRoleUsername,String operatingScope,
-			String operatingStatus,int pageNo,int pageSize);
+			String operatingStatus,int pageNo,int pageSize,String todate,String fromdate);
 	
 	public Results<String> insertOperating(Operating operating);
 	

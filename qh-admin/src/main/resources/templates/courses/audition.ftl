@@ -64,8 +64,10 @@
 						<li ng-click="update()" style="background: #F9CD33;"><span
 							class="glyphicon glyphicon-pencil"></span>&nbsp;修改试听课程</li>
 						<li ng-click="deleteAudition()" style="background: #F86846;"><span
-							class="glyphicon glyphicon-trash"></span>&nbsp;删除试听课程</li>
-
+								class="glyphicon glyphicon-trash"></span>&nbsp;删除试听课程</li>
+								<li style="width: 90px;" ng-click="auditionmove(1)"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
+				<li style="width: 90px;" ng-click="auditionmove(2)"><span
+					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
 						<li ng-click="refresh()"
 							style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" /></li>
