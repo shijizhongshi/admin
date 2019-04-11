@@ -16,6 +16,12 @@
 	<select id="operatingList"  resultMap="OperatingMap">
 		select id,user_role_username,operating_scope,operating_status,operating_user,addtime from operating
 		where 1=1
+		<if test="fromdate!=null and fromdate!='' ">
+ 		 	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+  		</if>
+  		<if test="todate!=null and todate!=''">
+  			and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+  		</if>
 		<if test="userRoleUsername!=null and userRoleUsername!=''">
 			and user_role_username like concat(concat('%',#{userRoleUsername},'%'))
 		</if>
@@ -31,6 +37,12 @@
 	<select id="operatingCount"  resultType="int">
 		select count(id) from operating
 		where 1=1
+		<if test="fromdate!=null and fromdate!='' ">
+ 		 	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+  		</if>
+  		<if test="todate!=null and todate!=''">
+  			and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+  		</if>
 		<if test="userRoleUsername!=null and userRoleUsername!=''">
 			and user_role_username like concat(concat('%',#{userRoleUsername},'%'))
 		</if>
