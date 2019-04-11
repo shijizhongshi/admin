@@ -36,7 +36,7 @@ submenu="sidebarmenu-student-studentinfo">
 						
 						<div>
 							<input type="button" class="btn-lg im-key"
-								ng-keydown="todoSelect($event)" ng-click="selectUser()" value="立即检索" />
+							 ng-click="selectUser()" value="立即检索" />
 						</div>
 					</ul>
 			</form>
@@ -342,7 +342,7 @@ submenu="sidebarmenu-student-studentinfo">
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入用户密码">
 						</div>
-						<div class="select-2">
+						<div class="select-2" id="confirmPassword" style="display: none;">
 							<span>确认密码<i class="bitian">*</i></span> <input type="text"
 								ng-model="confirmPassword"
 								class="ng-pristine ng-untouched ng-valid ng-empty"

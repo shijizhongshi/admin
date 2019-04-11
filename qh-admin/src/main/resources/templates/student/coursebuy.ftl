@@ -41,6 +41,11 @@
 		
 		<input type="text" placeholder="请输入姓名或电话" ng-model="nicknameORmobile" class="ng-pristine ng-untouched ng-valid ng-empty">
 	</div>
+	<!--新加查询条件 根据课程名称查询  -->		
+	<div class="select-3">
+		<span>学员所选课程</span>
+		<input type="text" placeholder="请输入学员所选课程" ng-model="courseName" class="ng-pristine ng-untouched ng-valid ng-empty">
+	</div>
 			<!--<div class="select-3">
 		<span>子账户</span>
 		

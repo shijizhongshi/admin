@@ -146,5 +146,12 @@ app.controller("calendarController", function($scope, $http){
 			alert("请选中信息~");
 		}
 	}
+	//分页展示
+	/*$scope.total = 0;
+	$scope.page = 1;
+	$scope.pageSize = 20;
+	$scope.questioncate = function () {
+		
+	};*/
 	
 })

@@ -94,10 +94,6 @@ app.controller("gradeController", function($scope, $http){
 	.success(function(data){
 		if(data.status=="0"){
 			$scope.courselist=data.data;
-			
-			console.log($scope.courselist);
-			
-			
 		}
 	})
 	}
@@ -192,7 +188,8 @@ app.controller("gradeController", function($scope, $http){
 		$scope.classes.listCourse=$scope.courseselected;
 		$scope.classes.courseTypeName=$scope.courseTypeName;
 		$scope.classes.courseTypeSubclassName=$scope.courseTypeSubclassName;
-		if ($scope.classes.classPrice < $scope.classes.classDiscountPrice) {
+		var difference = $scope.classes.classPrice - $scope.classes.classDiscountPrice;
+		if (difference < 0) {
 			alert("折扣价不能高于原价！");
 			return;
 		}

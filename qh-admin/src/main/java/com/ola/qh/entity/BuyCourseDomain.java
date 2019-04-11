@@ -22,8 +22,17 @@ public class BuyCourseDomain {
 	
 	private String courseId;//////课程对应所有的学员
 	
+	private String courseName;
 	
 	
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
 	public String getClassId() {
 		return classId;
 	}
