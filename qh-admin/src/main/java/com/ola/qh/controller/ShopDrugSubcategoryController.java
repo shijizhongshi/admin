@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ola.qh.entity.ShopDrugSubcategory;
 import com.ola.qh.service.IShopDrugSubcategoryService;
 import com.ola.qh.util.KeyGen;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -24,7 +23,8 @@ public class ShopDrugSubcategoryController {
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<ShopDrugSubcategory>> selectShopDrugSubcategory(@RequestParam(name="categoryId",required=false)String categoryId,
-			@RequestParam(name="page",required=false)int page){
+			@RequestParam(name = "pageNo", required = false) int pageNo,
+			@RequestParam(name = "pageSize", required = false) int pageSize){
 		
 		Results<List<ShopDrugSubcategory>> results=new Results<List<ShopDrugSubcategory>>();
 		
@@ -32,33 +32,9 @@ public class ShopDrugSubcategoryController {
 			results.setStatus("1");
 			return results;
 		}
-		if(page==0){
-			
-			List<ShopDrugSubcategory> list=shopDrugSubcategoryService.selectShopDrugSubcategory(categoryId,0,0);
 		
-		if(list==null || list.size()==0){
-			
-			results.setMessage("未添加子分类");
-			results.setStatus("1");
-			return results;
-		}
-		results.setData(list);
-		results.setStatus("0");
-		return results;
-			
-		}
-			int pageSize=Patterns.pageSize;
-			int pageNo=(page-1)*pageSize;
-			List<ShopDrugSubcategory> list=shopDrugSubcategoryService.selectShopDrugSubcategory(categoryId,pageNo,pageSize);
+		List<ShopDrugSubcategory> list=shopDrugSubcategoryService.selectShopDrugSubcategory(categoryId,pageNo,pageSize);
 		
-		
-		
-		if(list==null || list.size()==0){
-			
-			results.setMessage("未添加子分类");
-			results.setStatus("1");
-			return results;
-		}
 		int count = shopDrugSubcategoryService.selectShopDrugSubcount(categoryId);
 		results.setData(list);
 		results.setStatus("0");

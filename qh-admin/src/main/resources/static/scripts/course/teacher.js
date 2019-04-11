@@ -98,7 +98,8 @@ app.controller("teacherController", function($scope, $http){
     $scope.teacher=null;
     $scope.imgUrl=null;
 	$scope.teacherBases=function(){
-		$http.get("/api/courseteacher/select",{"params": {"page":$scope.page,"teacherName":$scope.teacherName}}, 
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
+		$http.get("/api/courseteacher/select",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"teacherName":$scope.teacherName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

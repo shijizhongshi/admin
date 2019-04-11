@@ -51,9 +51,11 @@ app.controller("liveShowController", function($scope, $http) {
 	$scope.pageSize = 20;
 
 	$scope.liveBases = function() {
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 		$http.get("/api/courselive/list", {
 			"params" : {
-				"page" : $scope.page,
+				"pageNo":$scope.pageNo,
+				"pageSize":$scope.pageSize,
 				"courseTypeName" : $scope.courseTypeName,
 				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
 				"liveName":$scope.liveName
@@ -73,6 +75,7 @@ app.controller("liveShowController", function($scope, $http) {
 	// ///点击专业的事件
 	$scope.typeSub = function(typename, sub,$event) {
 		// //////
+		$scope.page = 1;
 		$event.stopPropagation();
 		$scope.courseTypeName = typename;
 		$scope.courseTypeSubclassName = sub.courseTypeSubclassName;

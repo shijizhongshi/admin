@@ -28,7 +28,7 @@ public class CourseChapter {
 	@NotEmpty(message="主讲人不能为空")
 	private String courseLecturer;////课程的主讲人
 	
-	private String courseSectionSize;////小节数量
+	private int courseSectionSize;////小节数量
 	
 	private String courseChapterCategory;////课程的章类别
 	
@@ -60,11 +60,11 @@ public class CourseChapter {
 		this.chapterOrders = chapterOrders;
 	}
 
-	public String getCourseSectionSize() {
+	public int getCourseSectionSize() {
 		return courseSectionSize;
 	}
 
-	public void setCourseSectionSize(String courseSectionSize) {
+	public void setCourseSectionSize(int courseSectionSize) {
 		this.courseSectionSize = courseSectionSize;
 	}
 

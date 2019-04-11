@@ -96,6 +96,7 @@ app.controller("ChapterController", function($scope, $http){
 	/////点击专业的事件
 	$scope.typeSub=function(typename,sub,$event){
 		////////查章节的集合
+		$scope.page = 1;
 		$event.stopPropagation();
 		$scope.courseId=null;
 		$scope.courseTypeName=typename;

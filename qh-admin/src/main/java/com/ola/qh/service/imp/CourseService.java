@@ -88,7 +88,7 @@ public class CourseService implements ICourseService {
 				return courseDao.updateCourese(course);
 
 			}
-			int ordersMax = courseSubclassDao.selectMaxOrder("c");
+			int ordersMax = courseSubclassDao.selectMaxOrder("course");
 			course.setOrders(ordersMax+1);
 			course.setId(KeyGen.uuid());
 			course.setAddtime(new Date());

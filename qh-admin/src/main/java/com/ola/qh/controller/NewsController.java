@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ola.qh.entity.News;
 import com.ola.qh.service.INewsService;
 import com.ola.qh.util.KeyGen;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 /**
@@ -41,13 +40,13 @@ public class NewsController {
 	 */
 	@RequestMapping(value="/newLists")
 	public Results<List<News>> newsList(
-			@RequestParam(name="page", required=false) int page,
+			@RequestParam(name = "pageNo", required = false) int pageNo,
+			@RequestParam(name = "pageSize", required = false) int pageSize,
 			@RequestParam(name="title",required=false)String title){
 		
 		Results<List<News>> result = new Results<List<News>>();
-		int pageNo = (page - 1) * Patterns.pageSize;
 		
-		List<News> lists = newsService.selectNewList(pageNo,Patterns.pageSize,title);
+		List<News> lists = newsService.selectNewList(pageNo,pageSize,title);
 		result.setCount(newsService.selectNewListCount(title));
 		result.setData(lists);
 		result.setStatus("0");
