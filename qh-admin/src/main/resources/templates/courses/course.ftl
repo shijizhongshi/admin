@@ -2,9 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <@h.header title="课程管理页面"/>
+<script src="/scripts/admin.js"></script>
 <link rel="stylesheet" href="/styles/admin.css" />
 <script src="/scripts/course/course.js"></script>
-<script src="/scripts/admin.js"></script>
+<link rel="stylesheet" href="/styles/management.css" />
 <@b.body menu="sidebarmenu-course" submenu="sidebarmenu-course-course">
 <div ng-controller="CourseController">
 
@@ -109,39 +110,53 @@
 				<div class="poop" id="add">
 					<form id="myform">
 						<h3>添加课程</h3>
-
-						<div class=" select" style="width: 100%; height: 48px;">
+						<div class="flex">
+                         <div style="width:20%;">
+						<div class=" select-2">
+						<span>课程名称</span>
 							<input type="text" ng-model="course.courseName"
-								placeholder="请输入课程名称" style="margin-right: 5%;" /> <input
-								type="text" placeholder="输入课程年份" ng-model="course.courseYear" />
+								placeholder="请输入课程名称" /> 
 						</div>
-						<div>
-							<div class="select" style="width: 100%; height: 48px;">
-								<input type="text" ng-model="course.coursePrice"
-									placeholder="输入课程价格" style="margin-right: 5%;" /> <input
-									type="text" ng-model="course.courseDiscountPrice"
+						<div class=" select-2">
+						<span>课程年份</span>
+						 <input type="text" placeholder="输入课程年份" ng-model="course.courseYear" />
+						</div>
+						
+							<div class="select-2" >
+							<span>课程价格</span>
+								<input type="text" ng-model="course.coursePrice" placeholder="输入课程价格" /> 
+							</div>
+								<div class="select-2" >
+							<span>折扣价格</span>
+								 <input type="text" ng-model="course.courseDiscountPrice"
 									placeholder="输入折扣价格" />
 							</div>
 
-							<div class=" select-2"
-								style="float: left; margin-right: 5%; width: 35%;">
-								<img src="/images/sjk-xl.png" /> <span>是否展示</span> <select
+							<div class="select-radio">
+							<ul>
+								<li>是否展示</li> 
+								<li><input type="radio" ng-model="course.courseShow" value="0" />是</li>
+								<li><input type="radio" ng-model="course.courseShow" value="1" />否</li>
+								<!-- <select
 									ng-model="course.courseShow">
 									<option ng-selected="course.courseShow==0" value="0">是</option>
-									<option ng-selected="course.courseShow==1" value="1">否</option>
-								</select>
+									<option ng-selected="course.courseShow==1" value="1">否</option> </select> -->
+								</ul>
 							</div>
-							<div class="select-2" style="float: left; width: 35%;">
-								<img src="/images/sjk-xl.png" /> <span>是否精品</span> <select
+							<div class="select-radio">
+							<ul>
+								<li>是否精品</li> 
+								<li><input type="radio" ng-model="course.courseExcellent" value="1" />是</li>
+								<li><input type="radio" ng-model="course.courseExcellent" value="0" />否</li>
+								<!--<select
 									ng-model="course.courseExcellent">
 									<option ng-selected="course.courseExcellent==1" value="1">是</option>
 									<option ng-selected="course.courseExcellent==0" value="0">否</option>
-								</select>
-							</div>
-						</div>
+								</select>  -->
+							</ul></div>
+						
 
-						<div class="select-2"
-							style="float: left; margin-right: 5%; width: 35%;">
+						<div class="select-2">
 							<img src="/images/sjk-xl.png" /> <span>选择类别</span> <select
 								ng-model="course.courseResourceType">
 
@@ -160,7 +175,7 @@
 							</select>
 						</div>
 
-						<div class="select-2" style="float: left; width: 35%;">
+						<div class="select-2" >
 							<img src="/images/sjk-xl.png" /> <span>用途</span> <select
 								ng-model="course.courseUseDifference">
 
@@ -184,8 +199,50 @@
 								<img src="{{courseImg}}" />
 							</div>
 						</div>
+</div>
+<!-- 新加的属性 -->
+<div class="classify" style="width: 20%;">
+								<p class="xiaobiaoti">选择专业</p>
+								<ul class="menu" style="box-shadow: none;">
+
+									<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.id)">{{ctl.courseTypeName}}
+										<ul class="items" ng-class="{'active':active==ctl.id}">
+									<li ng-repeat="sub in courseTypeSubclass"
+										ng-click="typeSub(ctl.courseTypeName,sub)"
+											ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
+
+									</ul>
+									</li>
 
 
+								</ul>
+							</div>
+							<div style="width:30%;">
+								<p class="xiaobiaoti">选择章</p>
+								<div class="cltab" >
+									<table>
+
+										<tbody>
+											<tr>
+												<th>选择</th>
+												<th>章名称</th>
+                                                </tr>
+											<tr>
+												<th><input type="checkbox"></th>
+												<th>章名称</th>
+                                                </tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div style="width:25%;">
+							<p>已选章</p>
+							<div style="weight: 100; height: 455px; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden; padding: 20px 15px;">
+
+								</div>
+							</div>
+
+</div>
 						<div class="end">
 							<input name="git" type="submit" value="提交"
 								ng-show="courseId==null" ng-click="addCourse()"
@@ -203,6 +260,7 @@
 	</div>
 </div>
 <style type="text/css">
+.poop{width:1100px;}
 .details-frame-content .select-2 {
 	float: left;
 	margin-right: 15px;
@@ -214,6 +272,15 @@
 		width: 90%;
 	}
 }
+.flex{display: flex; justify-content: space-between;}
+.flex .select-2{width:100%;}
+.cltab{weight: 100; height:auto; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden;}
+.poop table{width:100%;}
+.poop table tr:nth-child(2n){background:#F3F4F6;}
+.poop table tr:nth-child(2n-1){background:#FFFFFF;}
+.poop table tr:nth-child(1){background:#A3AAB0;color:white;border-radius:5px;}
+.poop table th{text-align: center;}
+.poop table tr th:nth-child(1){border-right: 1px solid #EEEEEE;}
 </style>
 
 </@b.body>    

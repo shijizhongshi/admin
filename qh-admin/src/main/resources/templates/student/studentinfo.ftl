@@ -122,7 +122,7 @@ submenu="sidebarmenu-student-studentinfo">
 							<div style="width: 40%;">
 								<p class="xiaobiaoti">选择{{typesName}}</p>
 								<div
-									style="weight: 100; height: 455px; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden;">
+									style="weight: 100; height: auto; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden;">
 									<table>
 
 										<tbody>
@@ -163,7 +163,7 @@ submenu="sidebarmenu-student-studentinfo">
 							<div style="width: 28%;">
 								<p>已选{{typesName}}</p>
 								<div
-									style="weight: 100; height: 455px; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden; padding: 20px 15px;">
+									style="weight: 100; height:auto; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden; padding: 20px 15px;">
 
 
 
@@ -282,7 +282,7 @@ submenu="sidebarmenu-student-studentinfo">
 
 
 								<div
-									style="weight: 100; height: 455px; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden;">
+									style="weight: 100; height:auto; border: 1px solid #EEEEEE; border-radius: 10px; overflow: hidden;">
 									<table>
 
 										<tbody>
