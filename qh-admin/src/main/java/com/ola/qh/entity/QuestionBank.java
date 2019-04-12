@@ -6,29 +6,101 @@ import java.util.List;
 
 public class QuestionBank {
 
-	private String  id;
-	
-	private String subId;/////属于哪个下边的题库
-	
-	private int numberNo;///题号
-	
-	private String title;///题干
-	
-	private String types;////问题的类型(单选)
-	
-	private String analysis;///问题的解析
-	
-	private String correct;///正确的答案
-	
+	private String id;
+
+	private String subId;///// 属于哪个下边的题库
+
+	private int numberNo;/// 题号
+
+	private String title;/// 题干
+
+	private String types;//// 问题的类型(单选)
+
+	private String analysis;/// 问题的解析
+
+	private String correct;/// 正确的答案
+
 	private Date addtime;
-	
+
 	private Date updatetime;
+
+	private String bankId;///// 共用题干类型的题 小单元题
+
+	private List<QuestionAnswer> answer = new ArrayList<QuestionAnswer>();
+
+	private List<QuestionUnit> unit = new ArrayList<QuestionUnit>();
+
+	private String mobile;// 手机号
+
+	private String realname;// 姓名
+
+	private Integer status;// 用户属性 0：注册用户 | 1：游客
+
+	private String courseTypeSubclassName;// 专业名
+
+	private Integer banktotal;// 题目总数
+
+	private Integer banktrue;// 答对题目数
+
+	private Integer nobank;// 未答题数
+
 	
-	private String bankId;/////共用题干类型的题 小单元题
-	 
-	private List<QuestionAnswer> answer=new ArrayList<QuestionAnswer>();
 	
-	private List<QuestionUnit> unit=new ArrayList<QuestionUnit>();
+	public Integer getBanktotal() {
+		return banktotal;
+	}
+
+	public void setBanktotal(Integer banktotal) {
+		this.banktotal = banktotal;
+	}
+
+	public Integer getBanktrue() {
+		return banktrue;
+	}
+
+	public void setBanktrue(Integer banktrue) {
+		this.banktrue = banktrue;
+	}
+
+	public Integer getNobank() {
+		return nobank;
+	}
+
+	public void setNobank(Integer nobank) {
+		this.nobank = nobank;
+	}
+
+	public String getCourseTypeSubclassName() {
+		return courseTypeSubclassName;
+	}
+
+	public void setCourseTypeSubclassName(String courseTypeSubclassName) {
+		this.courseTypeSubclassName = courseTypeSubclassName;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public String getCorrect() {
 		return correct;
@@ -126,6 +198,4 @@ public class QuestionBank {
 		this.updatetime = updatetime;
 	}
 
-	
-	
 }

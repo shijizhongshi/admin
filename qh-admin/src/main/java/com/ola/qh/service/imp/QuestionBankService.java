@@ -22,6 +22,7 @@ import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.QuestionUnit;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.util.KeyGen;
+import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @Service
@@ -299,8 +300,16 @@ public class QuestionBankService implements IQuestionBankService {
 			String status, int page) {
 		Results<List<QuestionBank>> results = new Results<>();
 		
+		Integer pageSize = Patterns.pageSize;
+		Integer pageNo=(page-1)*pageSize;
+		//查询集合 展示 
+		List<QuestionBank> list = questionBankDao.questionBankList(realname,courseTypeSubclassName,status,pageNo,pageSize);
+		Integer count = questionBankDao.questionBankListCount(realname, courseTypeSubclassName, status);
+		results.setStatus("0");
+		results.setData(list);
+		results.setCount(count);
 		
-		return null;
+		return results;
 	}
 
 	

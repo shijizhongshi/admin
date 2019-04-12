@@ -13,6 +13,10 @@
 	<result column="correct" property="correct"/>
 	<result column="bankId" property="bankId"/>
 	<result column="updatetime" property="updatetime"/>
+	<result column="mobile" property="mobile"/>
+	<result column="realname" property="realname"/>
+	<result column="status" property="status"/>
+	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
 	</resultMap>
 	
 	<insert id="insertQuestionBank" parameterType="com.ola.qh.entity.QuestionBank">
@@ -129,4 +133,38 @@
 	</if>
 	updatetime=#{updatetime} where id=#{id}
 	</update>
+	
+	<!-- user_pc表与user_pc_questionbank表联合查询  -->
+	<select id="questionBankList" resultMap="QuestionBankMap">
+	select * from user_pc_questionbank as upq
+	inner join user_pc as up 
+	on up.id = upq.userpc_id
+	where 1=1
+	<if test="realname!=null and realname!=''">
+	and realname LIKE CONCAT(CONCAT('%',#{realname},'%')) 
+	</if>
+	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+	and course_type_subclass_name = #{courseTypeSubclassName}
+	</if>
+	<if test="status!=null and status!=''">
+	and status = #{status}
+	</if>
+	limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="questionBankListCount" resultType="int">
+	select count(*) from user_pc_questionbank as upq
+	inner join user_pc as up 
+	on up.id = upq.userpc_id
+	where 1=1
+	<if test="realname!=null and realname!=''">
+	and realname LIKE CONCAT(CONCAT('%',#{realname},'%')) 
+	</if>
+	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+	and course_type_subclass_name = #{courseTypeSubclassName}
+	</if>
+	<if test="status!=null and status!=''">
+	and status = #{status}
+	</if>
+	</select>
 	</mapper>

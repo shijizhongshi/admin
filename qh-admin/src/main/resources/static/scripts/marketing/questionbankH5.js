@@ -16,20 +16,22 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	// 当前的页数
 	$scope.page = 1;
 	// 一页显示多少条
-	$scope.pageSize = 20;
+	$scope.pageSize = 2;
 	
 	//页面展示
 	$scope.loaddata = function () {
 		console.log("realname = "+$scope.realname);
 		console.log("courseTypeSubclassName = "+$scope.courseTypeSubclassName);
 		console.log("status = "+$scope.status);
-		http.get("/api/questionbank/questionbankList",{"params":{"page":$scope.page,"realname":$scope.realname,"courseTypeSubclassName":$scope.courseTypeSubclassName,"status":$scope.status}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success.function (result) {
+		$http.get("/api/questionbank/questionbankList",{"params":{"page":$scope.page,"realname":$scope.realname,"courseTypeSubclassName":$scope.courseTypeSubclassName,"status":$scope.status}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function (result) {
 			if (result.status == 0) {
-				alert("成功");
+				$scope.questionbankList = result.data;
+				$scope.total = result.count;
 			}else {
 				alert(result.message);
 			}
-		}
+		})
 	};
+	$scope.loaddata();
 });

@@ -36,7 +36,7 @@ submenu="sidebarmenu-marketing-questionbankH5">
 						<option value="1">游客用户</option>
 					</select>
 				</div>
-	<div class="select-3">
+				<div class="select-3">
 					<span>专业</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="courseTypeSubclassName" ng-options="a for a in nameList">
 					</select>
@@ -60,21 +60,24 @@ submenu="sidebarmenu-marketing-questionbankH5">
 								<th>姓名</th>
 								<th>手机号</th>
 								<th>用户属性</th>
-								<th>注册时间</th>
 								<th>专业分类</th>
 								<th>答题数</th>
 								<th>准确率</th>
 								<th>视频数</th>
+								<th>最后一次操作时间</th>
 							</tr>
-							<tr>
-								<th>姓名</th>
-								<th>手机号</th>
-								<th>注册后答题用户</th>
-								<th>2019年1月8日19:20</th>
-								<th>执业中药师</th>
-								<th>33</th>
-								<th>5%</th>
+							<tr ng-repeat="questionbank in questionbankList">
+								<th>{{questionbank.realname}}</th>
+								<th>{{questionbank.mobile}}</th>
+								<th ng-show="{{questionbank.status=='0'}}">app注册用户</th>
+								<th ng-show="{{questionbank.status=='1'}}">游客用户</th>
+								<th>{{questionbank.courseTypeSubclassName}}</th>
+								<th>{{questionbank.banktotal - questionbank.nobank}}</th>
+								<th ng-show="{{questionbank.banktotal - questionbank.nobank != 0}}">{{questionbank.banktrue / (questionbank.banktotal - questionbank.nobank)}}%</th>
+								<th ng-show="{{questionbank.banktotal - questionbank.nobank == 0}}">用户未开始做题</th>
 								<th>4</th>
+								<th ng-show="{{questionbank.updatetime != null}}">{{questionbank.updatetime | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
+								<th ng-show="{{questionbank.updatetime == null}}">{{questionbank.addtime | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
 							</tr>
 
 

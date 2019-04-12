@@ -61,7 +61,14 @@ public class QuestionBankController {
 		return questionBankService.deleteQuestionBank(id);
 	}
 
-	// H5题库管理展示页面
+	/**
+	 * h5题库展示页面
+	 * @param page
+	 * @param realname
+	 * @param courseTypeSubclassName
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping(value = "/questionbankList", method = RequestMethod.GET)
 	public Results<List<QuestionBank>> questionbankList(@RequestParam(value = "page", required = true) int page,
 			@RequestParam(value = "realname", required = false) String realname,
