@@ -15,8 +15,6 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	$scope.total = 0;
 	// 当前的页数
 	$scope.page = 1;
-	// 一页显示多少条
-	$scope.pageSize = 2;
 	
 	//页面展示
 	$scope.loaddata = function () {
