@@ -69,7 +69,7 @@ table .selected{background-color:#c1ddec !important;}
 .fanye ul{width:405px;}
 .fanye  li{margin-left:18px;}
 /**/
-.poop{position: absolute;left:30%;top:15%;overflow:auto;border-radius:5px;}
+.poop{position: absolute;left:30%;top:15%;overflow:auto;border-radius:5px;height:auto;max-height:600px;}
 .poop::-webkit-scrollbar , .resource::-webkit-scrollbar {width:6px;}
 .poop::-webkit-scrollbar-thumb , .resource::-webkit-scrollbar-thumb {
             border-radius: 5px;
