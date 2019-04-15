@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -331,70 +332,54 @@ public class UserService implements IUserService {
 		}
 		return list;
 	}
-
 	/**
 	 * 推送页面
 	 */
 	@Override
-	public Results<List<User>> send(String title, String content, String sex, String courseTypeSubclassName,
-			String userrole, String isdoctor, String birthday) {
+	public Results<List<User>> send(String token, HttpSession session, String title, String content, String sex,
+			String courseTypeSubclassName, String userrole, String isdoctor, String birthday) {
 		Results<List<User>> results = new Results<>();
-		List<User> list = new ArrayList<>();
-		// 计数器 i
-		Integer i = 0;
-		if (courseTypeSubclassName == null) {
-			list = userDao.send(sex, userrole, isdoctor, birthday);
-			for (User user : list) {
-				// 把标题和内容存放到user_message表中
-				Date addtimeDate = new Date();
-				String id = KeyGen.uuid();
-				usermessage.insertMessage(id, addtimeDate, title, content, user.getId(), 5);
-				// 遍历发送功能 为每个用户发送
-				try {
-					PushService.send(user.getId(), title, content);
-					++i;
-				} catch (Exception e) {
-					e.printStackTrace();
+		// 判断表单里的token与session中的token是否一致
+		if (token.equals(session.getAttribute(token))) {
+			// =====--以下是推送逻辑--======//
+			List<User> list = new ArrayList<>();
+			// 计数器 i
+			Integer i = 0;
+			if (courseTypeSubclassName == null) {
+				list = userDao.send(sex, userrole, isdoctor, birthday);
+				for (User user : list) {
+					// 把标题和内容存放到user_message表中
+					Date addtimeDate = new Date();
+					String id = KeyGen.uuid();
+					usermessage.insertMessage(id, addtimeDate, title, content, user.getId(), 5);
+					// 遍历发送功能 为每个用户发送
+					try {
+						PushService.send(user.getId(), title, content);
+						++i;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-			if (i == 0) {
-				results.setStatus("1");
-				results.setMessage("根据条件未查询到用户");
+				if (i == 0) {
+					results.setStatus("1");
+					results.setMessage("根据条件未查询到用户");
+
+					return results;
+				}
+				session.removeAttribute(token);
+				System.out.println("走完全程赋值  = "+session.getAttribute(token));
+				results.setStatus("0");
+				results.setCount(i);
+				results.setMessage("发送成功");
 
 				return results;
-			}
-			results.setStatus("0");
-			results.setCount(i);
-			results.setMessage("发送成功");
-
-			return results;
-		} else if (courseTypeSubclassName != null) {
-			List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
-			for (Course course : courselist) {
-				if (course.getClassId() == null || course.getClassId().length() <= 0) {
-					// 根据id查询user_buy_course 获取到userID 推送消息
-					List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(), sex,
-							userrole, isdoctor, birthday);
-					// 循环遍历 推送
-					for (UserBuyCourse userBuyCourse : userBuyCourses) {
-						// 信息保存到user_message表中
-						Date addtimeDate = new Date();
-						String id = KeyGen.uuid();
-						usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(), 5);
-						try {
-							PushService.send(userBuyCourse.getUserId(), title, content);
-							++i;
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				} else {
-					// ===========================
-					// 拆分classID 根据classID查询
-					String resu[] = course.getClassId().split(",");
-					for (String k : resu) {
-						// 根据k查询userID
-						List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(k, sex, userrole,isdoctor, birthday);
+			} else if (courseTypeSubclassName != null) {
+				List<Course> courselist = courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
+				for (Course course : courselist) {
+					if (course.getClassId() == null || course.getClassId().length() <= 0) {
+						// 根据id查询user_buy_course 获取到userID 推送消息
+						List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByCourseId(course.getId(), sex,
+								userrole, isdoctor, birthday);
 						// 循环遍历 推送
 						for (UserBuyCourse userBuyCourse : userBuyCourses) {
 							// 信息保存到user_message表中
@@ -408,52 +393,80 @@ public class UserService implements IUserService {
 								e.printStackTrace();
 							}
 						}
+					} else {
+						// ===========================
+						// 拆分classID 根据classID查询
+						String resu[] = course.getClassId().split(",");
+						for (String k : resu) {
+							// 根据k查询userID
+							List<UserBuyCourse> userBuyCourses = userBuyCourseDao.selectByClassId(k, sex, userrole,
+									isdoctor, birthday);
+							// 循环遍历 推送
+							for (UserBuyCourse userBuyCourse : userBuyCourses) {
+								// 信息保存到user_message表中
+								Date addtimeDate = new Date();
+								String id = KeyGen.uuid();
+								usermessage.insertMessage(id, addtimeDate, title, content, userBuyCourse.getUserId(),
+										5);
+								try {
+									PushService.send(userBuyCourse.getUserId(), title, content);
+									++i;
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
 					}
+
 				}
 
+				// -------------------------------------------以下是之前的---------------------------------------------------------------------------//
+				// 根据course_type_subclass_name查询course表 返回集合
+				// List<Course> courselist =
+				// courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
+				/*
+				 * for (Course course : courselist) { //
+				 * 根据classid是否为空判断user_buy_course表与哪个表进行关联查询 if (course.getClassId().length() !=
+				 * 0) { // 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
+				 * List<UserBuyCourse> userBuyCourses = new ArrayList<>(); // 现在课程与班级是一对多关系
+				 * classid在表中以逗号分隔存放 String resu[] = course.getClassId().split(","); for (String
+				 * classId : resu) { userBuyCourses = userBuyCourseDao.selectByClassId(classId,
+				 * sex, userrole, isdoctor, birthday); for (UserBuyCourse userBuyCourse :
+				 * userBuyCourses) { // 信息保存到user_message表中 Date addtimeDate = new Date();
+				 * String id = KeyGen.uuid(); usermessage.insertMessage(id, addtimeDate, title,
+				 * content, userBuyCourse.getUserId(), 5); // 调发送接口 try {
+				 * PushService.send(userBuyCourse.getUserId(), title, content); ++i; } catch
+				 * (Exception e) { e.printStackTrace(); } } }
+				 * 
+				 * } else if (course.getClassId().length() == 0) { // 使用course_id
+				 * 查询course表左外链接user_buy_course表(course表为主表) List<UserBuyCourse> userBuyCourses
+				 * = userBuyCourseDao.selectByCourseId(course.getId(), sex, userrole, isdoctor,
+				 * birthday); for (UserBuyCourse userBuyCourse : userBuyCourses) { //
+				 * 信息保存到user_message表中 Date addtimeDate = new Date(); String id = KeyGen.uuid();
+				 * usermessage.insertMessage(id, addtimeDate, title, content,
+				 * userBuyCourse.getUserId(), 5); try {
+				 * PushService.send(userBuyCourse.getUserId(), title, content); ++i; } catch
+				 * (Exception e) { e.printStackTrace(); } } } }
+				 */
 			}
+			// 根据计数器判断返回数据
+			if (i == 0) {
+				results.setStatus("1");
+				results.setMessage("根据条件未查询到用户");
 
-			// -------------------------------------------以下是之前的---------------------------------------------------------------------------//
-			// 根据course_type_subclass_name查询course表 返回集合
-			// List<Course> courselist =
-			// courseDao.selectByCourseTypeSubclassName(courseTypeSubclassName);
-			/*
-			 * for (Course course : courselist) { //
-			 * 根据classid是否为空判断user_buy_course表与哪个表进行关联查询 if (course.getClassId().length() !=
-			 * 0) { // 使用classid查询user_buy_course表右外链接course_class表(course_class为主表)
-			 * List<UserBuyCourse> userBuyCourses = new ArrayList<>(); // 现在课程与班级是一对多关系
-			 * classid在表中以逗号分隔存放 String resu[] = course.getClassId().split(","); for (String
-			 * classId : resu) { userBuyCourses = userBuyCourseDao.selectByClassId(classId,
-			 * sex, userrole, isdoctor, birthday); for (UserBuyCourse userBuyCourse :
-			 * userBuyCourses) { // 信息保存到user_message表中 Date addtimeDate = new Date();
-			 * String id = KeyGen.uuid(); usermessage.insertMessage(id, addtimeDate, title,
-			 * content, userBuyCourse.getUserId(), 5); // 调发送接口 try {
-			 * PushService.send(userBuyCourse.getUserId(), title, content); ++i; } catch
-			 * (Exception e) { e.printStackTrace(); } } }
-			 * 
-			 * } else if (course.getClassId().length() == 0) { // 使用course_id
-			 * 查询course表左外链接user_buy_course表(course表为主表) List<UserBuyCourse> userBuyCourses
-			 * = userBuyCourseDao.selectByCourseId(course.getId(), sex, userrole, isdoctor,
-			 * birthday); for (UserBuyCourse userBuyCourse : userBuyCourses) { //
-			 * 信息保存到user_message表中 Date addtimeDate = new Date(); String id = KeyGen.uuid();
-			 * usermessage.insertMessage(id, addtimeDate, title, content,
-			 * userBuyCourse.getUserId(), 5); try {
-			 * PushService.send(userBuyCourse.getUserId(), title, content); ++i; } catch
-			 * (Exception e) { e.printStackTrace(); } } } }
-			 */
-		}
-		// 根据计数器判断返回数据
-		if (i == 0) {
-			results.setStatus("1");
-			results.setMessage("根据条件未查询到用户");
+				return results;
+			}
+			results.setStatus("0");
+			results.setCount(i);
+			results.setMessage("发送成功");
 
 			return results;
+		}else {
+			results.setStatus("1");
+			results.setMessage("不允许多次点击");
+			return results;
 		}
-		results.setStatus("0");
-		results.setCount(i);
-		results.setMessage("发送成功");
 
-		return results;
 	}
 
 }
