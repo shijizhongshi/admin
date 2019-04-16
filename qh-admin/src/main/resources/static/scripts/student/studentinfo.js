@@ -311,6 +311,7 @@ app.controller("studentinfoController", function($scope, $http) {
 	$scope.update = function() {
 		if ($scope.userId != null) {
 			document.getElementById('add').style.display = "block";
+			$scope.confirmPasswordshow=false;
 		} else {
 			alert("请选中信息~");
 		}
