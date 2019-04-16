@@ -132,10 +132,10 @@ submenu="sidebarmenu-system-superAdmin">
 										class="ng-pristine ng-untouched ng-valid ng-empty"
 										placeholder="请设置密码" ng-model="userRole.password">
 								</div>
-								<div class="select-2" id="password" style="display: none;">
+								<div class="select-2" ng-show="confirmPasswordshow">
 									<span>确认密码<i class="bitian">*</i></span> <input type="password"
 										class="ng-pristine ng-untouched ng-valid ng-empty"
-										placeholder="请确认密码" ng-model="password">
+										placeholder="请确认密码" ng-model="confirmPassword">
 								</div>
 							</div>
 							<div style="width: 49%; float: right;">
@@ -178,10 +178,10 @@ submenu="sidebarmenu-system-superAdmin">
 
 
 						<div class="end" style="margin-top: 10px;">
-							<input id="addbutton" name="git" type="submit"
+							<input  name="git" type="submit"
 								ng-show="userRoleId==null" value="添加"
 								ng-click="insertquestionbank()" style="background: #5ED8A9;">
-							<input id="updatebutton" name="git" type="submit"
+							<input name="git" type="submit"
 								ng-show="userRoleId!=null" value="修改"
 								ng-click="updatequestionbank()" style="background: #5ED8A9;">
 							<input id="esc" name="esc" type="reset" value="取消"
