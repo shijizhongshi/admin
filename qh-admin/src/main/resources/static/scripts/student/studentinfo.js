@@ -288,7 +288,7 @@ app.controller("studentinfoController", function($scope, $http) {
 	}
 	// 保存和修改学员的信息
 	$scope.saveORupdateUser = function() {
-		if ($scope.user.password != $scope.confirmPassword) {
+		if ($scope.user.password != $scope.confirmPassword && $scope.userId != null) {
 			alert("输入两次密码不一致~");
 			return;
 		}
