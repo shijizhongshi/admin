@@ -283,8 +283,8 @@ app.controller("superAdminController", function($scope, $http) {
 				$scope.operating.operatingStatus="删除";
 		    	$scope.operating.operatingUser=$scope.userRole.username;
 		    	$scope.insertOperating();
-				alert("删除成功");
 				$scope.userRoleList();
+				alert("删除成功");
 			} else {
 				alert(result.message);
 			}
