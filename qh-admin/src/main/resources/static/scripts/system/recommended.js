@@ -110,8 +110,7 @@ app.controller("recommendedController", function($scope, $http) {
 		$http.get("/api/user/markToken",{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (true) {
-				$scope.token = result.data;
-				console.log("加载获取的token = "+$scope.token);
+				$scope.token = result.data; 
 			}
 		})
 	}
@@ -127,17 +126,17 @@ app.controller("recommendedController", function($scope, $http) {
 			$scope.oldTitle = $scope.title;
 			$scope.oldContent = $scope.content;
 		}
-		console.log("旧标题 = "+$scope.oldTitle);
-		console.log("旧内容 = "+$scope.oldContent);
 		//判断标题或内容有没有被修改(是否和上次提交一致)
-		if ($scope.oldTitle != $scope.title) {
+		//应该也有判断条件是否更改的步骤
+		console.log("隐藏域传值 = " +$scope.token);
+		if ($scope.oldTitle != $scope.title || $scope.oldContent != $scope.content) {
 			//不一致 重新给一个token
+			console.log("调用方法以前 = " +$scope.token);
 			$scope.markToken();
-			console.log("第二次提交 刷新的token = "+$scope.token);
+			console.log("调用方法以后 = " +$scope.token);
 			$scope.oldTitle = null;
 		}
 		//标题、内容不为空判断 (应该能优化吧...)
-		console.log("前台隐藏域值 = "+$scope.token);
 		if ($scope.content == null || $scope.title == null || $scope.content == '' || $scope.title == '') {
 			alert("标题和内容为必填项，请填写！");
 			return;

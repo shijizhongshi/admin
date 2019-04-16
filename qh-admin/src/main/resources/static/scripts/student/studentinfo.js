@@ -1,7 +1,5 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
-	
-
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -31,7 +29,30 @@ app.controller("studentinfoController", function($scope, $http) {
 			alert("请先填写查询条件！");
 			return;
 		}
-
+	}
+	$scope.list = function() {
+		if ($scope.mobile != '' && $scope.mobile != null
+				&& $scope.mobile.length == 11) {
+			$http.get("/api/user/select", {
+				"params" : {
+					"nickname" : $scope.nickname,
+					"mobile" : $scope.mobile,
+					"page" : $scope.page = 1
+				}
+			}, {
+				'Content-Type' : 'application/json;charset=UTF-8'
+			}).success(function(result) {
+				if (result.status == "0") {
+					if (result.message != null) {
+						alert(result.message);
+					}
+					$scope.userList = result.data;
+					$scope.openCourse = $scope.userList[0];
+				} else {
+					alert(result.messgae);
+				}
+			})
+		}
 	}
 	// 选中更换样式 数据回显
 	$scope.checkUser = function(u) {
@@ -279,19 +300,55 @@ app.controller("studentinfoController", function($scope, $http) {
 		document.getElementById('add').style.display = "block";
 	}
 	// 点击事件 点击弹出修改弹窗
+	var password = null;
 	$scope.update = function() {
 		if ($scope.userId != null) {
+			password = $scope.user.password;
 			document.getElementById('add').style.display = "block";
+			console.log("password = "+password);
 		} else {
 			alert("请选中信息~");
 		}
 	}
 	// 保存和修改学员的信息
 	$scope.saveORupdateUser = function() {
-		if ($scope.user.password != $scope.confirmPassword && $scope.userId != null) {
-			alert("输入两次密码不一致~");
+		if (password != $scope.user.password && $scope.user.id != null) {
+			var a = document.getElementById('confirmPassword').style.display;
+			document.getElementById('confirmPassword').style.display = "block";
+			if ($scope.user.password != $scope.confirmPassword && $scope.userId != null) {
+				alert("请确认密码~");
+				return;
+			}else if (a == "block") {
+				$scope.user.address = $scope.address;
+				$http.post("/api/user/saveupdate", $scope.user, {
+					'Content-Type' : 'application/json;charset=UTF-8'
+				}).success(function(data) {
+					if (data.status == "0") {
+						if ($scope.userId != null) {
+							$scope.operating.operatingStatus="修改";
+					    	$scope.operating.operatingUser=$scope.user.mobile;
+					    	$scope.insertOperating();
+							
+					    	document.getElementById('confirmPassword').style.display = "none";
+					    	
+							alert("修改成功~");
+						} else {
+							$scope.operating.operatingStatus="添加";
+					    	$scope.operating.operatingUser=$scope.user.mobile;
+					    	$scope.insertOperating();
+							
+							alert("添加成功~");
+						}
+						document.getElementById('add').style.display = "none";
+						$scope.list();
+					} else {
+						alert(data.message);
+					}
+				})
+			}
 			return;
 		}
+		
 		$scope.user.address = $scope.address;
 		$http.post("/api/user/saveupdate", $scope.user, {
 			'Content-Type' : 'application/json;charset=UTF-8'
