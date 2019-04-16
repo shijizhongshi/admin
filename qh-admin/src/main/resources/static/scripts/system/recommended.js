@@ -111,6 +111,7 @@ app.controller("recommendedController", function($scope, $http) {
 		.success(function (result) {
 			if (true) {
 				$scope.token = result.data;
+				console.log("加载获取的token = "+$scope.token);
 			}
 		})
 	}
@@ -118,8 +119,23 @@ app.controller("recommendedController", function($scope, $http) {
 	
 	// ===========================================================================================//
 	// 点击事件 点击发送按钮
+	//记录之前发送的标题和内容
 	//暂时写成get请求 能封装到user对象里post传参最好
-	$scope.send = function() {
+	$scope.send = function() { 
+		//当标题和内容不为空时  先保存(备份)一份
+		if ($scope.oldTitle == null || $scope.oldContent == null) {
+			$scope.oldTitle = $scope.title;
+			$scope.oldContent = $scope.content;
+		}
+		console.log("旧标题 = "+$scope.oldTitle);
+		console.log("旧内容 = "+$scope.oldContent);
+		//判断标题或内容有没有被修改(是否和上次提交一致)
+		if ($scope.oldTitle != $scope.title) {
+			//不一致 重新给一个token
+			$scope.markToken();
+			console.log("第二次提交 刷新的token = "+$scope.token);
+			$scope.oldTitle = null;
+		}
 		//标题、内容不为空判断 (应该能优化吧...)
 		console.log("前台隐藏域值 = "+$scope.token);
 		if ($scope.content == null || $scope.title == null || $scope.content == '' || $scope.title == '') {

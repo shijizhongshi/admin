@@ -31,14 +31,17 @@ submenu="sidebarmenu-marketing-questionbankH5">
 				<div class="select-3">
 					<span>属性</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="status">
-						<option value=""></option>
+						<option value="">暂无属性</option>
 						<option value="0">app注册用户</option>
 						<option value="1">游客用户</option>
 					</select>
 				</div>
 				<div class="select-3">
+				<!-- ng-options="a for a in nameList"  -->
 					<span>专业</span> <img src="/images/sjk-xl.png"> <select
-						ng-model="courseTypeSubclassName" ng-options="a for a in nameList">
+						ng-model="courseTypeSubclassName" >
+						<option value="">无专业</option>
+						<option ng-repeat="name in nameList">{{name}}</option>
 					</select>
 				</div>
 				<div style="float: left;">
