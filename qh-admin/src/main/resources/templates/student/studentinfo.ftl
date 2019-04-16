@@ -339,7 +339,7 @@ submenu="sidebarmenu-student-studentinfo">
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入用户密码">
 						</div>
-						<div class="select-2" id="confirmPassword" style="display: none;">
+						<div class="select-2" ng-show="confirmPasswordshow">
 							<span>确认密码<i class="bitian">*</i></span> <input type="text"
 								ng-model="confirmPassword"
 								class="ng-pristine ng-untouched ng-valid ng-empty"

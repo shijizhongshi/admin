@@ -54,12 +54,7 @@ app.controller("studentinfoController", function($scope, $http) {
 			})
 		}
 	}
-	// 选中更换样式 数据回显
-	$scope.checkUser = function(u) {
-		$scope.selected = u;
-		$scope.user = u;
-		$scope.userId = u.id;
-	}
+
 	// CV工程师 测试/测试成功
 	$scope.active = 1;
 	$scope.typeId = 1;
@@ -295,36 +290,48 @@ app.controller("studentinfoController", function($scope, $http) {
 	}
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CV工程师上线 (以下代码剪切自 学员管理页面)
+	
+	// 选中更换样式 数据回显
+	$scope.checkUser = function(u) {
+		$scope.selected = u;
+		$scope.user = u;
+		$scope.userId = u.id;
+		$scope.password=u.password;
+		$scope.address=u.address;
+	}
+	
+	
+	
 	// 点击事件 点击弹出添加弹窗
 	$scope.add = function() {
 		document.getElementById('add').style.display = "block";
-		document.getElementById('confirmPassword').style.display = "block";
+		$scope.confirmPasswordshow=true;
 	}
 	// 点击事件 点击弹出修改弹窗
-	var password = null;
 	$scope.update = function() {
 		if ($scope.userId != null) {
-			password = $scope.user.password;
 			document.getElementById('add').style.display = "block";
-			console.log("password = "+password);
 		} else {
 			alert("请选中信息~");
 		}
 	}
 	//修改密码 显示确认密码文本框
 	$("#password").blur(function () {
-		if (password != $scope.user.password) {
-			document.getElementById('confirmPassword').style.display = "block";
+		if ($scope.password != $scope.user.password) {
+			$scope.confirmPasswordshow=true;
+		}else{
+			$scope.confirmPasswordshow=false;
 		}
 	})
 	// 保存和修改学员的信息
 	$scope.saveORupdateUser = function() {
-		if (password != $scope.user.password && $scope.user.id != null) {
-			var a = document.getElementById('confirmPassword').style.display;
-			if ($scope.password == null && $scope.user.password != $scope.confirmPassword && $scope.userId != null && a == "block") {
-				alert("请确认密码~");
-				return;
-			}else if (a == "block") {
+		
+			if($scope.confirmPasswordshow){
+				if ($scope.confirmPassword != $scope.user.password) {
+					alert("两次输入密码不符~");
+					return;
+				}
+			}
 				$scope.user.address = $scope.address;
 				$http.post("/api/user/saveupdate", $scope.user, {
 					'Content-Type' : 'application/json;charset=UTF-8'
@@ -334,16 +341,11 @@ app.controller("studentinfoController", function($scope, $http) {
 							$scope.operating.operatingStatus="修改";
 					    	$scope.operating.operatingUser=$scope.user.mobile;
 					    	$scope.insertOperating();
-							
-					    	document.getElementById('confirmPassword').style.display = "none";
-					    	
 							alert("修改成功~");
 						} else {
 							$scope.operating.operatingStatus="添加";
 					    	$scope.operating.operatingUser=$scope.user.mobile;
 					    	$scope.insertOperating();
-					    	document.getElementById('confirmPassword').style.display = "none";
-							
 							alert("添加成功~");
 						}
 						document.getElementById('add').style.display = "none";
@@ -352,34 +354,9 @@ app.controller("studentinfoController", function($scope, $http) {
 						alert(data.message);
 					}
 				})
-			}
-			return;
-		}
+			
 		
-		$scope.user.address = $scope.address;
-		$http.post("/api/user/saveupdate", $scope.user, {
-			'Content-Type' : 'application/json;charset=UTF-8'
-		}).success(function(data) {
-			if (data.status == "0") {
-				if ($scope.userId != null) {
-					$scope.operating.operatingStatus="修改";
-			    	$scope.operating.operatingUser=$scope.user.mobile;
-			    	$scope.insertOperating();
-					
-					alert("修改成功~");
-				} else {
-					$scope.operating.operatingStatus="添加";
-			    	$scope.operating.operatingUser=$scope.user.mobile;
-			    	$scope.insertOperating();
-					
-					alert("添加成功~");
-				}
-				document.getElementById('add').style.display = "none";
-				$scope.list();
-			} else {
-				alert(data.message);
-			}
-		})
+		
 	}
 	// 删除学员信息
 	$scope.deleteUser = function() {
