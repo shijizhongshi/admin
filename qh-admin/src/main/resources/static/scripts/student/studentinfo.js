@@ -319,7 +319,6 @@ app.controller("studentinfoController", function($scope, $http) {
 	})
 	// 保存和修改学员的信息
 	$scope.saveORupdateUser = function() {
-		console.log($scope.password);
 		if (password != $scope.user.password && $scope.user.id != null) {
 			var a = document.getElementById('confirmPassword').style.display;
 			if ($scope.password == null && $scope.user.password != $scope.confirmPassword && $scope.userId != null && a == "block") {

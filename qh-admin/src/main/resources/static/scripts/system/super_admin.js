@@ -212,6 +212,8 @@ app.controller("superAdminController", function($scope, $http) {
 		//判断 只有真正修改了密码  才会显示确认密码文本框
 		if (password != $scope.userRole.password) {
 			document.getElementById('password').style.display = "block";
+			//重置  否则会有缓存问题
+			$scope.password = null;
 		}
 	})
 	
