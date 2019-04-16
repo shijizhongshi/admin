@@ -334,7 +334,7 @@ submenu="sidebarmenu-student-studentinfo">
 								placeholder="请输入学员电话">
 						</div>
 						<div class="select-2">
-							<span>用户密码<i class="bitian">*</i></span> <input type="text"
+							<span>用户密码<i class="bitian">*</i></span> <input id="password" type="text"
 								ng-model="user.password"
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入用户密码">

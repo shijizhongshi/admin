@@ -207,15 +207,25 @@ app.controller("superAdminController", function($scope, $http) {
 
 		}
 	};
-
+	//修改弹窗中 设置密码文本框失去焦点 显示确认密码文本框
+	$("#userRolePassword").blur(function () {
+		//判断 只有真正修改了密码  才会显示确认密码文本框
+		if (password != $scope.userRole.password) {
+			document.getElementById('password').style.display = "block";
+		}
+	})
+	
 	// 点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
 	$scope.updatequestionbank = function() {
 		if (password != $scope.userRole.password){
 			var a = document.getElementById('password').style.display;
-			document.getElementById('password').style.display = "block";
-			if ($scope.userRole.id != null && $scope.userRole.password != $scope.password) {
-				alert("请确认密码！");
+			//document.getElementById('password').style.display = "block";
+			if ($scope.password == null ) {
+				return;
+			}
+			if ($scope.userRole.password != $scope.password  && a == "block") {
+				alert("密码两次输入不一致~");
 				return;
 			}else if (a == "block") {
 				$scope.userRole.menus = $scope.adminMenus;

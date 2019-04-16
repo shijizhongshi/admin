@@ -298,6 +298,7 @@ app.controller("studentinfoController", function($scope, $http) {
 	// 点击事件 点击弹出添加弹窗
 	$scope.add = function() {
 		document.getElementById('add').style.display = "block";
+		document.getElementById('confirmPassword').style.display = "block";
 	}
 	// 点击事件 点击弹出修改弹窗
 	var password = null;
@@ -310,12 +311,18 @@ app.controller("studentinfoController", function($scope, $http) {
 			alert("请选中信息~");
 		}
 	}
+	//修改密码 显示确认密码文本框
+	$("#password").blur(function () {
+		if (password != $scope.user.password) {
+			document.getElementById('confirmPassword').style.display = "block";
+		}
+	})
 	// 保存和修改学员的信息
 	$scope.saveORupdateUser = function() {
+		console.log($scope.password);
 		if (password != $scope.user.password && $scope.user.id != null) {
 			var a = document.getElementById('confirmPassword').style.display;
-			document.getElementById('confirmPassword').style.display = "block";
-			if ($scope.user.password != $scope.confirmPassword && $scope.userId != null) {
+			if ($scope.password == null && $scope.user.password != $scope.confirmPassword && $scope.userId != null && a == "block") {
 				alert("请确认密码~");
 				return;
 			}else if (a == "block") {
@@ -336,6 +343,7 @@ app.controller("studentinfoController", function($scope, $http) {
 							$scope.operating.operatingStatus="添加";
 					    	$scope.operating.operatingUser=$scope.user.mobile;
 					    	$scope.insertOperating();
+					    	document.getElementById('confirmPassword').style.display = "none";
 							
 							alert("添加成功~");
 						}
