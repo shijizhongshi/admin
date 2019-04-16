@@ -72,6 +72,8 @@ app.controller("superAdminController", function($scope, $http) {
 		// style="background:#5ED8A9;"
 		document.getElementById('updatebutton').style.display = "none";
 		document.getElementById('resource').style.display = "block";
+		//确认密码栏 展示
+		document.getElementById('password').style.display = "block";
 	}
 	// 点击事件 点击弹出修改窗口
 	var password = null;
@@ -85,6 +87,8 @@ app.controller("superAdminController", function($scope, $http) {
 		document.getElementById('addbutton').style.display = "none";
 		document.getElementById('updatebutton').style.display = "inline-block";
 		document.getElementById('resource').style.display = "block";
+		//确认密码栏 隐藏
+		document.getElementById('password').style.display = "none";
 	}
 	// 点击事件 点击添加按钮实现添加功能
 	$scope.userRole = null;
@@ -210,8 +214,8 @@ app.controller("superAdminController", function($scope, $http) {
 		if (password != $scope.userRole.password){
 			var a = document.getElementById('password').style.display;
 			document.getElementById('password').style.display = "block";
-			if ($scope.userRole.password != $scope.password && a == "block") {
-				alert("两次密码输入不一致！");
+			if ($scope.userRole.id != null && $scope.userRole.password != $scope.password) {
+				alert("请确认密码！");
 				return;
 			}else if (a == "block") {
 				$scope.userRole.menus = $scope.adminMenus;

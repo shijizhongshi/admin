@@ -132,7 +132,7 @@
 	</div>
 		<div class="select-2" id="password" style="display: none;">
 		<span>确认密码<i class="bitian">*</i></span>
-<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请确认密码" ng-model="password">
+<input type="password" class="ng-pristine ng-untouched ng-valid ng-empty" placeholder="请确认密码" ng-model="password" >
 	</div>
 	</div>
 	<div style="width:49%;float:right;">

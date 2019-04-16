@@ -112,11 +112,8 @@ submenu="sidebarmenu-student-studentinfo">
 									<li ng-repeat="sub in courseTypeSubclass"
 										ng-click="typeSub(ctl.courseTypeName,sub)"
 											ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-
 									</ul>
 									</li>
-
-
 								</ul>
 							</div>
 							<div style="width: 40%;">
