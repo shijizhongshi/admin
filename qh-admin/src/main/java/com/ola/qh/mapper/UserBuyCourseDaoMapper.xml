@@ -116,9 +116,6 @@
 	<if test="courseId!=null and courseId!='' ">
 	and course_id=#{courseId}
 	</if>
-	<if test="courseName!=null and courseName!=''">
-	and course_name like concat(concat('%',#{courseName},'%'))
-	</if>
 	and status=0
 	</select>
 	
