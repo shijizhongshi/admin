@@ -122,6 +122,9 @@ app.controller("knowledgepController", function($scope, $http){
 					document.getElementById('resource').style.display="none"; 
 					$scope.KnowledgepList();
 				}
+				else {
+					alert("修改失败");
+				}
 			})
 		}
 	  
