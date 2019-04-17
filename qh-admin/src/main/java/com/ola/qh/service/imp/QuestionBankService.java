@@ -319,7 +319,7 @@ public class QuestionBankService implements IQuestionBankService {
 	@Override
 	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int page, String mobile, String roomId,
 			String courseTypeSubclassName) {
-		Results<List<CourseLiveCheck>> results = new Results<>();
+		Results<List<CourseLiveCheck>> results = new Results<List<CourseLiveCheck>>();
 
 		Integer pageSize = Patterns.pageSize;
 		Integer pageNo = (page - 1) * pageSize;
