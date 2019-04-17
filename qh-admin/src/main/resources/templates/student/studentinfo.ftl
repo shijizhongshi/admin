@@ -112,11 +112,8 @@ submenu="sidebarmenu-student-studentinfo">
 									<li ng-repeat="sub in courseTypeSubclass"
 										ng-click="typeSub(ctl.courseTypeName,sub)"
 											ng-class="{'selected':selected==sub}">{{sub.courseTypeSubclassName}}</li>
-
 									</ul>
 									</li>
-
-
 								</ul>
 							</div>
 							<div style="width: 40%;">
@@ -337,12 +334,12 @@ submenu="sidebarmenu-student-studentinfo">
 								placeholder="请输入学员电话">
 						</div>
 						<div class="select-2">
-							<span>用户密码<i class="bitian">*</i></span> <input type="text"
+							<span>用户密码<i class="bitian">*</i></span> <input id="password" type="text"
 								ng-model="user.password"
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入用户密码">
 						</div>
-						<div class="select-2" id="confirmPassword" style="display: none;">
+						<div class="select-2" ng-show="confirmPasswordshow">
 							<span>确认密码<i class="bitian">*</i></span> <input type="text"
 								ng-model="confirmPassword"
 								class="ng-pristine ng-untouched ng-valid ng-empty"

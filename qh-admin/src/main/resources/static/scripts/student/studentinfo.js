@@ -1,7 +1,5 @@
 app.controller("studentinfoController", function($scope, $http) {
 	// 根据昵称或者手机号查询
-	
-
 	$scope.selectUser = function() {
 		if ($scope.mobile != '' && $scope.mobile != null
 				&& $scope.mobile.length == 11) {
@@ -31,14 +29,32 @@ app.controller("studentinfoController", function($scope, $http) {
 			alert("请先填写查询条件！");
 			return;
 		}
+	}
+	$scope.list = function() {
+		if ($scope.mobile != '' && $scope.mobile != null
+				&& $scope.mobile.length == 11) {
+			$http.get("/api/user/select", {
+				"params" : {
+					"nickname" : $scope.nickname,
+					"mobile" : $scope.mobile,
+					"page" : $scope.page = 1
+				}
+			}, {
+				'Content-Type' : 'application/json;charset=UTF-8'
+			}).success(function(result) {
+				if (result.status == "0") {
+					if (result.message != null) {
+						alert(result.message);
+					}
+					$scope.userList = result.data;
+					$scope.openCourse = $scope.userList[0];
+				} else {
+					alert(result.messgae);
+				}
+			})
+		}
+	}
 
-	}
-	// 选中更换样式 数据回显
-	$scope.checkUser = function(u) {
-		$scope.selected = u;
-		$scope.user = u;
-		$scope.userId = u.id;
-	}
 	// CV工程师 测试/测试成功
 	$scope.active = 1;
 	$scope.typeId = 1;
@@ -274,48 +290,74 @@ app.controller("studentinfoController", function($scope, $http) {
 	}
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// CV工程师上线 (以下代码剪切自 学员管理页面)
+	
+	// 选中更换样式 数据回显
+	$scope.checkUser = function(u) {
+		$scope.selected = u;
+		$scope.user = u;
+		$scope.userId = u.id;
+		$scope.password=u.password;
+		$scope.address=u.address;
+	}
+	
+	
+	
 	// 点击事件 点击弹出添加弹窗
 	$scope.add = function() {
 		document.getElementById('add').style.display = "block";
+		$scope.confirmPasswordshow=true;
 	}
 	// 点击事件 点击弹出修改弹窗
 	$scope.update = function() {
 		if ($scope.userId != null) {
+			$scope.confirmPasswordshow=false;
 			document.getElementById('add').style.display = "block";
 		} else {
 			alert("请选中信息~");
 		}
 	}
+	//修改密码 显示确认密码文本框
+	$("#password").blur(function () {
+		if ($scope.password != $scope.user.password) {
+			$scope.confirmPasswordshow=true;
+		}else{
+			$scope.confirmPasswordshow=false;
+		}
+	})
 	// 保存和修改学员的信息
 	$scope.saveORupdateUser = function() {
-		if ($scope.user.password != $scope.confirmPassword) {
-			alert("输入两次密码不一致~");
-			return;
-		}
-		$scope.user.address = $scope.address;
-		$http.post("/api/user/saveupdate", $scope.user, {
-			'Content-Type' : 'application/json;charset=UTF-8'
-		}).success(function(data) {
-			if (data.status == "0") {
-				if ($scope.userId != null) {
-					$scope.operating.operatingStatus="修改";
-			    	$scope.operating.operatingUser=$scope.user.mobile;
-			    	$scope.insertOperating();
-					
-					alert("修改成功~");
-				} else {
-					$scope.operating.operatingStatus="添加";
-			    	$scope.operating.operatingUser=$scope.user.mobile;
-			    	$scope.insertOperating();
-					
-					alert("添加成功~");
+		
+			if($scope.confirmPasswordshow){
+				if ($scope.confirmPassword != $scope.user.password) {
+					alert("两次输入密码不符~");
+					return;
 				}
-				document.getElementById('add').style.display = "none";
-				$scope.list();
-			} else {
-				alert(data.message);
 			}
-		})
+				$scope.user.address = $scope.address;
+				$http.post("/api/user/saveupdate", $scope.user, {
+					'Content-Type' : 'application/json;charset=UTF-8'
+				}).success(function(data) {
+					if (data.status == "0") {
+						if ($scope.userId != null) {
+							$scope.operating.operatingStatus="修改";
+					    	$scope.operating.operatingUser=$scope.user.mobile;
+					    	$scope.insertOperating();
+							alert("修改成功~");
+						} else {
+							$scope.operating.operatingStatus="添加";
+					    	$scope.operating.operatingUser=$scope.user.mobile;
+					    	$scope.insertOperating();
+							alert("添加成功~");
+						}
+						document.getElementById('add').style.display = "none";
+						$scope.list();
+					} else {
+						alert(data.message);
+					}
+				})
+			
+		
+		
 	}
 	// 删除学员信息
 	$scope.deleteUser = function() {

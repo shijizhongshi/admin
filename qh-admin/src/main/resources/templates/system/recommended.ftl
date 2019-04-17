@@ -23,6 +23,7 @@
 </style>
 <@b.body menu="sidebarmenu-system"
 submenu="sidebarmenu-system-recommended">
+  
 <div class="class=" details" style="width: 100%;" ng-app="app" ng-controller="recommendedController">
 	<div class="details-nav">
 		<ul>
@@ -45,6 +46,7 @@ submenu="sidebarmenu-system-recommended">
 			<!--左侧单播推送  -->
 			<div class="tsgs" style="float: left; padding-bottom: 80px;">
 				<p class="tstitle">单播推送</p>
+				<input type="hidden" name="token" value="token" ng-model="token">
 				<div class="select-2">
 					<span>标题<i class="bitian">*</i></span> <input type="text"
 						placeholder="请输入标题" ng-model="title"/>

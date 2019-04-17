@@ -3,6 +3,7 @@ package com.ola.qh.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.ola.qh.entity.AdminMenus;
 
@@ -32,6 +33,6 @@ public interface IUserService {
 	
 	public List<AdminMenus> listmenu();
 
-	public Results<List<User>> send(String title, String content, String sex, String courseTypeSubclassName, String userrole,
+	public Results<List<User>> send(String token,HttpSession session,String title, String content, String sex, String courseTypeSubclassName, String userrole,
 			String isdoctor, String birthday);
 }

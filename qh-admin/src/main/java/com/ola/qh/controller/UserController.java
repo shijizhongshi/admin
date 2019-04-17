@@ -1,7 +1,12 @@
 package com.ola.qh.controller;
 
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +24,12 @@ import com.ola.qh.util.Results;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private IUserService userService;
@@ -29,7 +39,7 @@ public class UserController {
 			@RequestParam(name = "id", required = true) String id) {
 
 		Results<String> results = new Results<String>();
-		
+
 		int user = userService.updateUser(isdisabled, id);
 		if (user <= 0) {
 			results.setMessage("更改异常");
@@ -40,70 +50,81 @@ public class UserController {
 		return results;
 	}
 
-	
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public Results<List<User>> selectUser(@RequestParam(name = "page", required = true) int page,@RequestParam(name = "mobile", required = false) String mobile,
-			@RequestParam(name = "nickname", required = false) String nickname,@RequestParam(name = "userrole", required = false) String userrole) {
+	public Results<List<User>> selectUser(@RequestParam(name = "page", required = true) int page,
+			@RequestParam(name = "mobile", required = false) String mobile,
+			@RequestParam(name = "nickname", required = false) String nickname,
+			@RequestParam(name = "userrole", required = false) String userrole) {
 
 		Results<List<User>> results = new Results<List<User>>();
 
-		int pageSize=Patterns.pageSize;
-		int pageNo=(page-1)*pageSize;
+		int pageSize = Patterns.pageSize;
+		int pageNo = (page - 1) * pageSize;
 		results = userService.selectUser(pageNo, pageSize, mobile, nickname, userrole);
-		
+
 		return results;
 	}
-	
-	
-	
-	
-	@RequestMapping(value="/saveupdate",method=RequestMethod.POST)
-	public Results<String> saveUser(@RequestBody @Valid User user,BindingResult valid){
- 		Results<String> result=new Results<String>();
-		if(user.getId()==null || "".equals(user.getId())){
-			if(valid.hasErrors()){
+
+	@RequestMapping(value = "/saveupdate", method = RequestMethod.POST)
+	public Results<String> saveUser(@RequestBody @Valid User user, BindingResult valid) {
+		Results<String> result = new Results<String>();
+		if (user.getId() == null || "".equals(user.getId())) {
+			if (valid.hasErrors()) {
 				result.setStatus("1");
 				result.setMessage("学员信息不完整~");
 				return result;
 			}
 		}
-		
-		
+
 		return userService.saveUsers(user);
 	}
-	
-	@RequestMapping(value="/delete",method=RequestMethod.GET)
-	public Results<String> deleteUser(@RequestParam(name="id",required=true)String id){
-		Results<String> result=new Results<String>();
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public Results<String> deleteUser(@RequestParam(name = "id", required = true) String id) {
+		Results<String> result = new Results<String>();
 		userService.deleteUser(id);
 		result.setStatus("0");
 		return result;
 	}
-	
+
 	@RequestMapping("/select/student")
-	public Results<List<User>> selectStudent(
-			@RequestParam(name="fromdate",required=false)String fromdate,
-			@RequestParam(name="todate",required=false)String todate,
-			@RequestParam(name="realnameORmobile",required=false)String realnameORmobile,
-			@RequestParam(name="status",required=false)String status,
-			@RequestParam(name="page",required=true)int page
-			){
-		
-		Results<List<User>> result=new Results<List<User>>();
-		int pageSize=Patterns.pageSize;
-		int pageNo=(page-1)*pageSize;
+	public Results<List<User>> selectStudent(@RequestParam(name = "fromdate", required = false) String fromdate,
+			@RequestParam(name = "todate", required = false) String todate,
+			@RequestParam(name = "realnameORmobile", required = false) String realnameORmobile,
+			@RequestParam(name = "status", required = false) String status,
+			@RequestParam(name = "page", required = true) int page) {
+
+		Results<List<User>> result = new Results<List<User>>();
+		int pageSize = Patterns.pageSize;
+		int pageNo = (page - 1) * pageSize;
 		List<User> list = userService.selectStudent(fromdate, todate, realnameORmobile, status, pageNo, pageSize);
-		//sql语句暂时无法处理检索时查询数量  后续想到实现方法再改
+		// sql语句暂时无法处理检索时查询数量 后续想到实现方法再改
 		if (realnameORmobile == null) {
 			result.setCount(userService.selectStudentCount(fromdate, todate, realnameORmobile, status));
 		}
 		result.setStatus("0");
 		result.setData(list);
 		return result;
-		
+
 	}
+
+	// token生成器
+	@RequestMapping(value = "/markToken", method = RequestMethod.GET)
+	public Results<String> markToken(HttpServletRequest request) {
+		Results<String> results = new Results<>();
+		String token = UUID.randomUUID().toString().replace("-", "");
+
+		request.getSession().setAttribute(token, token);
+		
+		results.setStatus("0");
+		results.setData(token);
+
+		return results;
+	}
+
 	/**
 	 * 单播推送页面
+	 * 
 	 * @param title
 	 * @param content
 	 * @param sex
@@ -113,18 +134,22 @@ public class UserController {
 	 * @param birthday
 	 * @return
 	 */
-	@RequestMapping(value = "/send",method = RequestMethod.GET)
-	public Results<List<User>> send (@RequestParam(name = "title",required=false)String title,
-			@RequestParam(name = "content",required=false) String content,
-			@RequestParam(name = "sex",required=false) String sex,
-			@RequestParam(name = "courseTypeSubclassName",required=false) String courseTypeSubclassName,
-			@RequestParam(name = "userrole",required=false) String userrole,
-			@RequestParam(name = "isdoctor",required=false) String isdoctor,
-			@RequestParam(name = "birthday",required=false) String birthday
-			) {
+	@RequestMapping(value = "/send", method = RequestMethod.GET)
+	public Results<List<User>> send(@RequestParam(name = "token", required = true) String token,
+			@RequestParam(name = "title", required = false) String title,
+			@RequestParam(name = "content", required = false) String content,
+			@RequestParam(name = "sex", required = false) String sex,
+			@RequestParam(name = "courseTypeSubclassName", required = false) String courseTypeSubclassName,
+			@RequestParam(name = "userrole", required = false) String userrole,
+			@RequestParam(name = "isdoctor", required = false) String isdoctor,
+			@RequestParam(name = "birthday", required = false) String birthday, HttpSession session) {
 		Results<List<User>> results = new Results<>();
-		results = userService.send(title,content,sex,courseTypeSubclassName,userrole,isdoctor,birthday);
-		
+
+		System.out.println("session中的token = " + session.getAttribute(token));
+		System.out.println("表 单 传 过 来 的  ====== " + token);
+		results = userService.send(token, session, title, content, sex, courseTypeSubclassName, userrole, isdoctor,
+				birthday);
+
 		return results;
 	}
 }

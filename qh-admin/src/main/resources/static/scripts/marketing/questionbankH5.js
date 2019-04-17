@@ -18,9 +18,6 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	
 	//页面展示
 	$scope.loaddata = function () {
-		console.log("realname = "+$scope.realname);
-		console.log("courseTypeSubclassName = "+$scope.courseTypeSubclassName);
-		console.log("status = "+$scope.status);
 		$http.get("/api/questionbank/questionbankList",{"params":{"page":$scope.page,"realname":$scope.realname,"courseTypeSubclassName":$scope.courseTypeSubclassName,"status":$scope.status}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == 0) {
