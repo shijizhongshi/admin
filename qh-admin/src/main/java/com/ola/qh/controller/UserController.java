@@ -1,12 +1,8 @@
 package com.ola.qh.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,21 +103,6 @@ public class UserController extends HttpServlet {
 		return result;
 
 	}
-
-	// token生成器
-	@RequestMapping(value = "/markToken", method = RequestMethod.GET)
-	public Results<String> markToken(HttpServletRequest request) {
-		Results<String> results = new Results<>();
-		String token = UUID.randomUUID().toString().replace("-", "");
-
-		request.getSession().setAttribute(token, token);
-		
-		results.setStatus("0");
-		results.setData(token);
-
-		return results;
-	}
-
 	/**
 	 * 单播推送页面
 	 * 
@@ -135,19 +116,16 @@ public class UserController extends HttpServlet {
 	 * @return
 	 */
 	@RequestMapping(value = "/send", method = RequestMethod.GET)
-	public Results<List<User>> send(@RequestParam(name = "token", required = true) String token,
-			@RequestParam(name = "title", required = false) String title,
+	public Results<List<User>> send(@RequestParam(name = "title", required = false) String title,
 			@RequestParam(name = "content", required = false) String content,
 			@RequestParam(name = "sex", required = false) String sex,
 			@RequestParam(name = "courseTypeSubclassName", required = false) String courseTypeSubclassName,
 			@RequestParam(name = "userrole", required = false) String userrole,
 			@RequestParam(name = "isdoctor", required = false) String isdoctor,
-			@RequestParam(name = "birthday", required = false) String birthday, HttpSession session) {
+			@RequestParam(name = "birthday", required = false) String birthday) {
 		Results<List<User>> results = new Results<>();
 
-		System.out.println("session中的token = " + session.getAttribute(token));
-		System.out.println("表 单 传 过 来 的  ====== " + token);
-		results = userService.send(token, session, title, content, sex, courseTypeSubclassName, userrole, isdoctor,
+		results = userService.send(title, content, sex, courseTypeSubclassName, userrole, isdoctor,
 				birthday);
 
 		return results;

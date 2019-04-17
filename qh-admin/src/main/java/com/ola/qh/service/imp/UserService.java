@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -336,12 +335,9 @@ public class UserService implements IUserService {
 	 * 推送页面
 	 */
 	@Override
-	public Results<List<User>> send(String token, HttpSession session, String title, String content, String sex,
+	public Results<List<User>> send(String title, String content, String sex,
 			String courseTypeSubclassName, String userrole, String isdoctor, String birthday) {
 		Results<List<User>> results = new Results<>();
-		System.out.println("当前session中的token值 = "+session.getAttribute(token));
-		// 判断表单里的token与session中的token是否一致
-		if (token.equals(session.getAttribute(token))) {
 			// =====--以下是推送逻辑--======//
 			List<User> list = new ArrayList<>();
 			// 计数器 i
@@ -367,7 +363,6 @@ public class UserService implements IUserService {
 
 					return results;
 				}
-				session.removeAttribute(token);
 				results.setStatus("0");
 				results.setCount(i);
 				results.setMessage("发送成功");
@@ -432,13 +427,6 @@ public class UserService implements IUserService {
 			results.setMessage("发送成功");
 
 			return results;
-		}else {
-			results.setStatus("1");
-			results.setMessage("不允许多次点击");
-			System.out.println("不允许多次点击 = "+session.getAttribute(token));
-			return results;
-		}
-
 	}
 
 }

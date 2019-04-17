@@ -105,50 +105,30 @@ app.controller("recommendedController", function($scope, $http) {
 	/*
 	 * $scope.clicksex = function() { alert($(this).attr('value')); };
 	 */
-	//加载页面时获取token
-	$scope.markToken = function () {
-		$http.get("/api/user/markToken",{'Content-Type' : 'application/json;charset=UTF-8'})
-		.success(function (result) {
-			if (true) {
-				$scope.token = result.data; 
-			}
-		})
-	}
-	$scope.markToken();
-	
 	// ===========================================================================================//
 	// 点击事件 点击发送按钮
-	//记录之前发送的标题和内容
-	//暂时写成get请求 能封装到user对象里post传参最好
+	// 暂时写成get请求 能封装到user对象里post传参最好
 	$scope.send = function() { 
-		//当标题和内容不为空时  先保存(备份)一份
-		if ($scope.oldTitle == null || $scope.oldContent == null) {
-			$scope.oldTitle = $scope.title;
-			$scope.oldContent = $scope.content;
-		}
-		//判断标题或内容有没有被修改(是否和上次提交一致)
-		//应该也有判断条件是否更改的步骤
-		console.log("隐藏域传值 = " +$scope.token);
-		if ($scope.oldTitle != $scope.title || $scope.oldContent != $scope.content) {
-			//不一致 重新给一个token
-			console.log("调用方法以前 = " +$scope.token);
-			$scope.markToken();
-			console.log("调用方法以后 = " +$scope.token);
-			$scope.oldTitle = null;
-		}
 		//标题、内容不为空判断 (应该能优化吧...)
 		if ($scope.content == null || $scope.title == null || $scope.content == '' || $scope.title == '') {
 			alert("标题和内容为必填项，请填写！");
 			return;
 		}
-		$http.get("/api/user/send",{"params":{"token":$scope.token,"title":$scope.title,"content":$scope.content,"sex":$scope.sex,"courseTypeSubclassName":$scope.courseTypeSubclassName,"userrole":$scope.userrole,"isdoctor":$scope.isdoctor,"birthday":$scope.birthday}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		//禁用按钮
+		$("#button").attr("disabled",true);
+		//被修改
+		if ($("#button").prop("disabled") == true) {
+			console.log("请等待发送完成再进行操作！");
+		}
+		$http.get("/api/user/send",{"params":{"title":$scope.title,"content":$scope.content,"sex":$scope.sex,"courseTypeSubclassName":$scope.courseTypeSubclassName,"userrole":$scope.userrole,"isdoctor":$scope.isdoctor,"birthday":$scope.birthday}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
+				$("#button").attr("disabled",false);
 				alert("发送成功，共发送了"+result.count+"条信息");
 			}else {
 				alert(result.message);
 			}
-			//$scope.markToken();
 		})
+		
 	};
 });

@@ -46,7 +46,6 @@ submenu="sidebarmenu-system-recommended">
 			<!--左侧单播推送  -->
 			<div class="tsgs" style="float: left; padding-bottom: 80px;">
 				<p class="tstitle">单播推送</p>
-				<input type="hidden" name="token" value="token" ng-model="token">
 				<div class="select-2">
 					<span>标题<i class="bitian">*</i></span> <input type="text"
 						placeholder="请输入标题" ng-model="title"/>
@@ -100,7 +99,7 @@ submenu="sidebarmenu-system-recommended">
 					</ul>
 				</div>
 				<div class="end">
-					<input ng-click="send()" name="git" type="submit" value="发送"
+					<input id="button" ng-click="send()" name="git" type="submit" value="发送"
 						style="background: #5ED8A9;">
 				</div>
 			</div>
