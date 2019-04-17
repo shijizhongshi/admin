@@ -1,4 +1,4 @@
-app.controller("questionbankH5Controller", function($scope, $http) {
+app.controller("liveVerifyController", function($scope, $http) {
 
 	// 给专业下拉列表提供数据
 	$scope.typeBases = function() {
@@ -20,10 +20,10 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	
 	//页面展示
 	$scope.loaddata = function () {
-		$http.get("/api/questionbank/questionbankList",{"params":{"page":$scope.page,"realname":$scope.realname,"courseTypeSubclassName":$scope.courseTypeSubclassName,"status":$scope.status}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/questionbank/liveVerifyList",{"params":{"page":$scope.page,"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == 0) {
-				$scope.questionbankList = result.data;
+				$scope.liveVerifyList = result.data;
 				$scope.total = result.count;
 			}else {
 				alert(result.message);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.util.Results;
 
@@ -19,6 +20,9 @@ public interface IQuestionBankService {
 
 	public Results<List<QuestionBank>> selectQuestionBankList(String realname, String courseTypeSubclassName,
 			String status, int page);
+
+	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int page, String mobile, String roomId,
+			String courseTypeSubclassName);
 	
 	
 }
