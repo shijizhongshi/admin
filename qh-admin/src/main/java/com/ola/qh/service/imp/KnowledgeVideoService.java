@@ -115,10 +115,14 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 						subTypeName=subTypeName+","+courseTypeSubclassName;
 					}
 		}
-		
-		Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
-		if(VideoMax!=null){
+		List<KnowledgeVideo> KnowledgeVideolist=knowledgeVideoDao.KnowledgeVideoList(0, 1, null, null);
+		if(KnowledgeVideolist.size()!=0){
+			Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
 			knowledgeVideo.setOrders(VideoMax+1);
+			
+		}
+		
+			knowledgeVideo.setOrders(1);
 			knowledgeVideo.setCourseTypeSubclassName(subTypeName);
 			knowledgeVideo.setId(KeyGen.uuid());
 			knowledgeVideo.setAddtime(new Date());
@@ -126,7 +130,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 			if(insert>0){
 				results.setStatus("0");
 				return results;
-			}
+			
 			
 		}
 		results.setStatus("1");
