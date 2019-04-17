@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.util.Results;
@@ -63,10 +64,11 @@ public class QuestionBankController {
 
 	/**
 	 * h5题库展示页面
-	 * @param page
-	 * @param realname
-	 * @param courseTypeSubclassName
-	 * @param status
+	 * 
+	 * @param page 分页
+	 * @param realname 姓名
+	 * @param courseTypeSubclassName 专业名
+	 * @param status 用户属性
 	 * @return
 	 */
 	@RequestMapping(value = "/questionbankList", method = RequestMethod.GET)
@@ -75,9 +77,29 @@ public class QuestionBankController {
 			@RequestParam(value = "courseTypeSubclassName", required = false) String courseTypeSubclassName,
 			@RequestParam(value = "status", required = false) String status) {
 		Results<List<QuestionBank>> results = new Results<>();
+
+		results = questionBankService.selectQuestionBankList(realname, courseTypeSubclassName, status, page);
+
+		return results;
+	}
+
+	/**
+	 * 直播验证数据
+	 * @param page 分页
+	 * @param mobile 手机号
+	 * @param roomId 房间号
+	 * @param courseTypeSubclassName 专业名
+	 * @return
+	 */
+	@RequestMapping(value = "/liveVerifyList", method = RequestMethod.GET)
+	public Results<List<CourseLiveCheck>> liveVerifyList(@RequestParam(value = "page", required = true) int page,
+			@RequestParam(value = "mobile", required = false) String mobile,
+			@RequestParam(value = "roomId", required = false) String roomId,
+			@RequestParam(value = "courseTypeSubclassName", required = false) String courseTypeSubclassName) {
+		Results<List<CourseLiveCheck>> results = new Results<>();
 		
-		results = questionBankService.selectQuestionBankList(realname,courseTypeSubclassName,status,page);
-		
+		results = questionBankService.selectLiveVerifyList(page,mobile,roomId,courseTypeSubclassName); 
+				
 		return results;
 	}
 }

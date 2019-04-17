@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class marketing {
 
 	@RequestMapping("/questionbankH5")
-	public String courseOrders(){
+	public String courseOrders() {
 		return "marketing/questionbankH5";
 	}
 	
+	@RequestMapping("/liveVerify")
+	public String courseOrderss() {
+		return "marketing/liveVerify";
 	}
+
+}
