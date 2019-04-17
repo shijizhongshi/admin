@@ -306,7 +306,7 @@ app.controller("superAdminController", function($scope, $http) {
 		$scope.fuhao=menuId;
 		
 	}
-	$scope.operating={operatingScope:"考试日历",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
+	$scope.operating={operatingScope:"账号管理",userRoleUsername:$("#username").val(),operatingStatus:"",operatingUser:""}
 	$scope.insertOperating = function(){
 		
 		$http.post("/api/operating/insert",$scope.operating, {'Content-Type': 'application/json;charset=UTF-8'})

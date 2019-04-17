@@ -15,9 +15,11 @@ public interface CourseDao {
 	
 	public int updateCourseType(@Param("courseTypeName")String courseTypeName,@Param("id")String id);
 	
-	
+	public CourseType singleCourseType(@Param("id")String id);
 	
 	public List<CourseTypeSubclass> courseTypeSubclassList(@Param("courseTypeId") String courseTypeId);
+	
+	public CourseTypeSubclass singleCourseTypeSubclass(@Param("courseTypeSubclassName") String courseTypeSubclassName);
 	
 	public int insertCourseTypeSubclass(@Param("courseTypeSubclassName")String courseTypeName,
 			@Param("id")String id,@Param("courseTypeId") String courseTypeId);

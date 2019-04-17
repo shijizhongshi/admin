@@ -55,6 +55,9 @@ public class CourseController {
 	public Results<List<CourseType>> listCourseType() {
 		Results<List<CourseType>> result = new Results<List<CourseType>>();
 		List<CourseType> list = courseService.courseTypeList();
+		for (CourseType courseType : list) {
+			courseType.setList(courseService.courseTypeSubclassList(courseType.getId()));
+		}
 		result.setData(list);
 		result.setStatus("0");
 		return result;
