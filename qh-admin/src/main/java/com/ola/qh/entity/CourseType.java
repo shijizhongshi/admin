@@ -1,4 +1,8 @@
 package com.ola.qh.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
 * @ClassName: CourseType  
@@ -12,6 +16,8 @@ public class CourseType {
 	private String id;
 	
 	private String courseTypeName;////名称
+	
+	private List<CourseTypeSubclass> list=new ArrayList<CourseTypeSubclass>();
 
 	public String getId() {
 		return id;
@@ -27,6 +33,14 @@ public class CourseType {
 
 	public void setCourseTypeName(String courseTypeName) {
 		this.courseTypeName = courseTypeName;
+	}
+
+	public List<CourseTypeSubclass> getList() {
+		return list;
+	}
+
+	public void setList(List<CourseTypeSubclass> list) {
+		this.list = list;
 	}
 	
 	

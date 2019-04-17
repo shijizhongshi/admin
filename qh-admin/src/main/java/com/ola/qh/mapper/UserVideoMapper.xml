@@ -44,6 +44,11 @@
 		
 	</select>
 	
+	<insert id="insert" parameterType="com.ola.qh.entity.UserVideo">
+	insert into user_video(id,user_id,video_id,title,nickname,addtime,first_image)
+	values(#{id},#{userId},#{videoId},#{title},#{nickname},#{addtime},#{firstImage})
+	</insert>
+	
 	<delete id="deleteVideo">
 		delete from user_video where id=#{id}
 	</delete>

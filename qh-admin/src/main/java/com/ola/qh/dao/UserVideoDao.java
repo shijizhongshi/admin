@@ -12,5 +12,7 @@ public interface UserVideoDao {
 	
 	public int videoCount(@Param("videoName")String videoName);
 	
+	public int insert(UserVideo uv);
+	
 	public int deleteVideo(@Param("id")String id);
 }

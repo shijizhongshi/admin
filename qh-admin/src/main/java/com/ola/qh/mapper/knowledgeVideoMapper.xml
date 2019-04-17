@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.KnowledgeVideoDao">
+	<resultMap type="com.ola.qh.entity.KnowledgeVideo" id="KnowledgeVideoMap">
+		<result column="id" property="id" />
+		<result column="first_image" property="firstImage" />
+		<result column="title" property="title" />
+		<result column="video_id" property="videoId" />
+		<result column="course_type_subclass_name" property="courseTypeSubclassName" />
+		<result column="orders" property="orders" />
+		<result column="times" property="times" />
+		<result column="status" property="status" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	
+	<select id="KnowledgeVideoList" resultMap="KnowledgeVideoMap">
+		select id,first_image,title,video_id,course_type_subclass_name,orders,addtime,times,status
+		from knowledge_video 
+		where 1=1
+		<if test="title!=null and title!=''">
+		and title like concat(concat('%',#{title},'%'))
+		</if>
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+		and course_type_subclass_name like concat(concat('%',#{courseTypeSubclassName},'%'))
+		</if>
+		order by orders
+		limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="KnowledgeVideoCount" resultType="java.lang.Integer">
+		select count(id)
+		from knowledge_video 
+		where 1=1
+		<if test="title!=null and title!=''">
+		and title like concat(concat('%',#{title},'%'))
+		</if>
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+		and course_type_subclass_name like concat(concat('%',#{courseTypeSubclassName},'%'))
+		</if>
+		
+	</select>
+	
+	<insert id="insertKnowledgeVideo" parameterType="com.ola.qh.entity.KnowledgeVideo">
+		insert into knowledge_video(id,first_image,title,video_id,times,status,course_type_subclass_name,orders,addtime)
+		values(#{id},#{firstImage},#{title},#{videoId},#{times},#{status},#{courseTypeSubclassName},#{orders},#{addtime})
+	</insert>
+	
+	<update id="updateKnowledgeVideo" parameterType="com.ola.qh.entity.KnowledgeVideo">
+		update knowledge_video set 
+			<if test="firstImage!=null and firstImage!=''">
+			first_image=#{firstImage},
+			</if>
+			<if test="title!=null and title!=''">
+			title=#{title},
+			</if>
+			<if test="videoId!=null and videoId!=''">
+			video_id=#{videoId},
+			</if>
+			<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+			course_type_subclass_name=#{courseTypeSubclassName},
+			</if>
+			<if test="times!=null and times!=''">
+			times=#{times},
+			</if>
+			<if test="status!=0">
+			status=#{status},
+			</if>
+			updatetime=#{updatetime}
+			where id=#{id}
+			
+	</update>
+	
+	<delete id="deleteKnowledgeVideo">
+		delete from knowledge_video where id=#{id}
+	</delete>
+	
+	<select id="selectMaxOrder" resultType="java.lang.Integer">
+	select orders from knowledge_video    
+	order by orders desc
+    limit 0,1
+	</select>
+	
+	<select id="selectOrder" resultType="java.lang.Integer">
+	SELECT ifnull(orders, 1) previousOrder FROM knowledge_video    
+	
+	where 1=1
+    <if test="type=='up'">
+    <!-- 读取上一条记录 -->
+    and orders <![CDATA[ < ]]> #{orders}
+    order by orders desc
+    </if>
+    <if test="type=='down'">
+    <!-- 读取下一条记录 -->
+    and orders <![CDATA[ > ]]> #{orders}
+    order by orders asc
+    </if>
+    limit 0,1
+	</select>
+	
+	
+	
+	<update id="updateOrders">
+	update knowledge_video    
+	
+	set orders=#{orders} where 1=1
+	<if test="id!=null and id!='' ">
+	and id=#{id}
+	</if>
+	<if test="originalOrder!=0">
+	and orders=#{originalOrder}
+	</if>
+	</update>
+</mapper>
