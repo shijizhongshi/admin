@@ -62,18 +62,16 @@ app.controller("superAdminController", function($scope, $http) {
 	$scope.addshow = function() {
 		$scope.userRole = null;
 		$scope.userRoleId = null;
-		$scope.password = null;
+		$scope.confirmPassword = null;
 		$scope.selected = null;
 		$scope.adminMenus = [];
 		$scope.adminSubMenusName = [];
 		$scope.adminMenusNames = [];
 		$scope.html = "添加";
-		document.getElementById('addbutton').style.display = "inline-block";
-		// style="background:#5ED8A9;"
-		document.getElementById('updatebutton').style.display = "none";
+		
 		document.getElementById('resource').style.display = "block";
 		//确认密码栏 展示
-		document.getElementById('password').style.display = "block";
+		$scope.confirmPasswordshow=true;
 	}
 	// 点击事件 点击弹出修改窗口
 	var password = null;
@@ -84,18 +82,19 @@ app.controller("superAdminController", function($scope, $http) {
 		}
 		$scope.html = "修改";
 		password = $scope.userRole.password;
-		document.getElementById('addbutton').style.display = "none";
-		document.getElementById('updatebutton').style.display = "inline-block";
 		document.getElementById('resource').style.display = "block";
 		//确认密码栏 隐藏
-		document.getElementById('password').style.display = "none";
+		$scope.confirmPasswordshow=false;
+		//document.getElementById('password').style.display = "none";
 	}
 	// 点击事件 点击添加按钮实现添加功能
 	$scope.userRole = null;
 	$scope.insertquestionbank = function() {
-		if ($scope.userRole.password != $scope.password) {
-			alert("两次密码输入不一致！");
-			return;
+		if($scope.confirmPasswordshow){
+			if ($scope.confirmPassword != $scope.userRole.password){
+				alert("两次密码输入不一致~");
+				return;
+			}
 		}
 		$scope.userRole.menus = $scope.adminMenus;
 		$http.post("/api/userRole/insert", $scope.userRole, {
@@ -207,29 +206,26 @@ app.controller("superAdminController", function($scope, $http) {
 
 		}
 	};
+	
 	//修改弹窗中 设置密码文本框失去焦点 显示确认密码文本框
 	$("#userRolePassword").blur(function () {
 		//判断 只有真正修改了密码  才会显示确认密码文本框
 		if (password != $scope.userRole.password) {
-			document.getElementById('password').style.display = "block";
-			//重置  否则会有缓存问题
-			$scope.password = null;
+			$scope.confirmPasswordshow=true;
+		}else{
+			$scope.confirmPasswordshow=false;
 		}
 	})
 	
 	// 点击事件 点击修改按钮实现修改功能
 	$scope.userRole = null;
 	$scope.updatequestionbank = function() {
-		if (password != $scope.userRole.password){
-			var a = document.getElementById('password').style.display;
-			//document.getElementById('password').style.display = "block";
-			if ($scope.password == null ) {
+		if($scope.confirmPasswordshow){
+			if ($scope.confirmPassword != $scope.userRole.password){
+				alert("两次密码输入不一致~");
 				return;
 			}
-			if ($scope.userRole.password != $scope.password  && a == "block") {
-				alert("密码两次输入不一致~");
-				return;
-			}else if (a == "block") {
+		}
 				$scope.userRole.menus = $scope.adminMenus;
 				$http.post("/api/userRole/update", $scope.userRole, {
 					'Content-Type' : 'application/json;charset=UTF-8'
@@ -239,31 +235,11 @@ app.controller("superAdminController", function($scope, $http) {
 				    	$scope.operating.operatingUser=$scope.userRole.username;
 				    	$scope.insertOperating();
 						document.getElementById('resource').style.display = "none";
-						document.getElementById('password').style.display = "none";
 						$scope.userRoleList();
 					} else {
 						alert(result.message);
 					}
 				})
-			}
-			return;
-		}
-		
-		$scope.userRole.menus = $scope.adminMenus;
-		$http.post("/api/userRole/update", $scope.userRole, {
-			'Content-Type' : 'application/json;charset=UTF-8'
-		}).success(function(result) {
-			if (result.status == "0") {
-				$scope.operating.operatingStatus="修改";
-		    	$scope.operating.operatingUser=$scope.userRole.username;
-		    	$scope.insertOperating();
-				document.getElementById('resource').style.display = "none";
-				document.getElementById('password').style.display = "none";
-				$scope.userRoleList();
-			} else {
-				alert(result.message);
-			}
-		})
 	}
 	// 点击事件 点击删除
 	$scope.deletefeedback = function() {
@@ -305,8 +281,7 @@ app.controller("superAdminController", function($scope, $http) {
 				
 			}); 
 		});
-		console.log($scope.adminMenus);
-		console.log($scope.adminSubMenusName);
+		
 
 	}
 	//点击事件 点击弹出弹窗 展示 limits

@@ -310,8 +310,8 @@ app.controller("studentinfoController", function($scope, $http) {
 	// 点击事件 点击弹出修改弹窗
 	$scope.update = function() {
 		if ($scope.userId != null) {
-			document.getElementById('add').style.display = "block";
 			$scope.confirmPasswordshow=false;
+			document.getElementById('add').style.display = "block";
 		} else {
 			alert("请选中信息~");
 		}
