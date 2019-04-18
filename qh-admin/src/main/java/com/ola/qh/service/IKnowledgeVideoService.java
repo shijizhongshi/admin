@@ -6,7 +6,7 @@ import com.ola.qh.entity.KnowledgeVideo;
 import com.ola.qh.util.Results;
 
 public interface IKnowledgeVideoService {
-
+	
 	public Results<List<KnowledgeVideo>> KnowledgeVideoList(int pageNo,int pageSize,String title,String courseTypeSubclassName);
 	
 	public Results<String> insertKnowledgeVideo(KnowledgeVideo knowledgeVideo);
