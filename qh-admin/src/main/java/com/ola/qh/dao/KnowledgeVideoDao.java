@@ -25,5 +25,5 @@ public interface KnowledgeVideoDao {
 			@Param("orders")int orders);
 	
 	///////得到记录中最大的orders
-	public int selectMaxOrder();
+	public Integer selectMaxOrder();
 }
