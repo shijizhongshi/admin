@@ -184,10 +184,15 @@ public class CourseClassService implements ICourseClassService {
 				if (j == courseset.size()) {
 					
 					String idlist=course.get(i).getClassId();
+					String str=null;
 					if(idlist.contains(courseClass.getId())){
-						List<String> ids=Arrays.asList(idlist.split(","));
-						ids.remove(courseClass.getId());
-						String str = StringUtils.join(ids, ",");
+						if(idlist.contains(",")){
+							List<String> ids=Arrays.asList(idlist.split(","));
+							List<String> arrList = new ArrayList<String>(ids);
+							arrList.remove(courseClass.getId());
+							str = StringUtils.join(arrList, ",");
+						}
+						
 						////////修改课程的classId为多个的
 						courseDao.updateClass(course.get(i).getId(),str);
 					}
