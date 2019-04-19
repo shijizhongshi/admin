@@ -192,7 +192,10 @@
 	and course_type_subclass_name LIKE CONCAT(CONCAT('%',#{courseTypeSubclassName},'%')) 
 	</if>
 	order by updatetime desc,addtime desc
+	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
+	</if>
+	
 	</select>
 	
 	<!--根据条件查询数量  -->

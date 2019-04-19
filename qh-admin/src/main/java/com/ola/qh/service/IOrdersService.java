@@ -22,5 +22,6 @@ public interface IOrdersService {
 	
 	public Results<String> updateServeRefund(String ordersId,String statusCode);
 	
-	
+	public Results<String> exportExcel(String ordersType,String mobile,
+			String todate,String fromdate,String orderno,String ordersStatus,String recommendTeacher,String receiver);
 }

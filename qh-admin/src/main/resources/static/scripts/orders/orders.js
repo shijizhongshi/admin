@@ -44,7 +44,8 @@ app.controller("ordersController", function($scope, $http,$filter){
 	};  
  
 $scope.loaddata = function(){
-	$http.get("/api/orders/list",{"params": {"page":$scope.page,"ordersType":$scope.ordersType,
+	$scope.pageNo=( $scope.page-1)*$scope.pageSize;
+	$http.get("/api/orders/list",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"ordersType":$scope.ordersType,
 		"mobile":$scope.mobile,"todate":formatDate($scope.todate),"fromdate":formatDate($scope.fromdate),
 		"ordersStatus":$scope.ordersStatus,"receiver":$scope.receiver,"orderno":$scope.orderno}}, {'Content-Type': 'application/json;charset=UTF-8'})
     .success(function(result){
@@ -89,6 +90,59 @@ $scope.loaddata = function(){
     		    
     		});
     		$scope.list=result.data;
+    		$scope.total=result.count;
+    		
+    	}else{
+    		alert(result.message);
+    	}
+    	
+	})
+	
+	$http.get("/api/orders/list",{"params": {"pageNo":$scope.pageNo,"pageSize":0,"ordersType":$scope.ordersType,
+		"mobile":$scope.mobile,"todate":formatDate($scope.todate),"fromdate":formatDate($scope.fromdate),
+		"ordersStatus":$scope.ordersStatus,"receiver":$scope.receiver,"orderno":$scope.orderno}}, {'Content-Type': 'application/json;charset=UTF-8'})
+    .success(function(result){
+    	if(result.status=="0"){
+    		
+    		angular.forEach(result.data, function(orders){  
+    		    // item等价于array[index];
+    			if(orders.ordersType=="0"){
+    				orders.refund="无";
+    				if(orders.ordersStatus=="NEW"){
+        		    	orders.statusName="待付款的订单";
+        		    }else if(orders.ordersStatus=="PAID"){
+        		    	orders.statusName="待发货的订单";
+        		    }else if(orders.ordersStatus=="DELIVERED"){
+        		    	orders.statusName="待收货的订单";
+        		    }else if(orders.ordersStatus=="RECEIVED"){
+        		    	orders.statusName="已完成订单";
+        		    }else{
+        		    	orders.refund="有";
+        		    	orders.statusName="退款订单";
+        		    } 
+    			}
+    			if(orders.ordersType=="2"){
+    				orders.refund="无";
+    				if(orders.ordersStatus=="NEW"){
+        		    	orders.statusName="待付款的订单";
+        		    }else if(orders.ordersStatus=="PAID"){
+        		    	orders.statusName="待使用的订单";
+        		    }else if(orders.ordersStatus=="RECEIVED"){
+        		    	orders.statusName="已使用的订单";
+        		    }else if(orders.ordersStatus=="CANCELSERVE"){
+        		    	orders.statusName="取消预订等待商家处理";
+        		    	orders.refund="有";
+        		    }else if(orders.ordersStatus=="CANCELSERVEED"){
+        		    	orders.statusName="已取消订单";
+        		    	orders.refund="有";
+        		    }else if(orders.ordersStatus=="REJECTCANCELSERVEED"){
+        		    	orders.statusName="商家拒绝了您的取消预约申请";
+        		    	orders.refund="有";
+        		    } 
+    			}
+    		    
+    		});
+    		$scope.lists=result.data;
     		$scope.total=result.count;
     		
     	}else{

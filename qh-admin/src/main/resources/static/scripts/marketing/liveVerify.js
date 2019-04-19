@@ -20,13 +20,38 @@ app.controller("liveVerifyController", function($scope, $http) {
 	
 	//页面展示
 	$scope.loaddata = function () {
-		$http.get("/api/questionbank/liveVerifyList",{"params":{"page":$scope.page,"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
+		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == 0) {
 				$scope.liveVerifyList = result.data;
 				$scope.total = result.count;
 			}else {
 				alert(result.message);
+			}
+		})
+		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":0,"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function (result) {
+			if (result.status == 0) {
+				$scope.liveVerifyLists = result.data;
+				
+					angular.forEach($scope.liveVerifyLists, function(live){  
+					
+					if(live.isRegister==0){
+						
+						live.isRegisters="游客用户";
+					}
+					else if(live.isRegister==1){
+						live.isRegisters="注册用户";
+					}
+					if(live.updatetime==null){
+						
+						live.time=live.addtime;
+					}
+					else{
+						live.time=live.updatetime;
+					}
+				})
 			}
 		})
 	};

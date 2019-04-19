@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ola.qh.entity.Orders;
 import com.ola.qh.entity.OrdersProduct;
 import com.ola.qh.service.IOrdersService;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -22,7 +21,8 @@ public class OrdersController {
 	
 	@RequestMapping("/list")
 	public Results<List<Orders>> list(
-			@RequestParam(name="page",required=true)int page,
+			@RequestParam(name="pageSize",required=true)int pageSize,
+			@RequestParam(name="pageNo",required=true)int pageNo,
 			@RequestParam(name="ordersType",required=false)String ordersType,
 			@RequestParam(name="mobile",required=false)String mobile,
 			@RequestParam(name="recommendTeacher",required=false)String recommendTeacher,
@@ -33,9 +33,6 @@ public class OrdersController {
 			@RequestParam(name="fromdate",required=false)String fromdate){
 		
 		Results<List<Orders>> result=new Results<List<Orders>>();
-		int pageNo=(page-1)*Patterns.pageSize;
-		int pageSize=Patterns.pageSize;
-		
 		List<Orders> list = ordersService.list(pageNo, pageSize, ordersType, mobile, todate, fromdate,orderno,ordersStatus,recommendTeacher,receiver);
 		int count = ordersService.listCount(ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher,receiver);
 		result.setCount(count);
@@ -84,7 +81,20 @@ public class OrdersController {
 		return ordersService.updateServeRefund(ordersId, statusCode);
 	}
 	
-	
+	@RequestMapping("/exportExcel")
+	public Results<String> exportExcel(
+			@RequestParam(name="ordersType",required=false)String ordersType,
+			@RequestParam(name="mobile",required=false)String mobile,
+			@RequestParam(name="recommendTeacher",required=false)String recommendTeacher,
+			@RequestParam(name="orderno",required=false)String orderno,
+			@RequestParam(name="ordersStatus",required=false)String ordersStatus,
+			@RequestParam(name="receiver",required=false)String receiver,
+			@RequestParam(name="todate",required=false)String todate,
+			@RequestParam(name="fromdate",required=false)String fromdate){
+		
+		
+		return ordersService.exportExcel(ordersType, mobile, todate, fromdate, orderno, ordersStatus, recommendTeacher, receiver);
+	}
 	
 	
 }

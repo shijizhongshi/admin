@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ola.qh.entity.Orders;
 import com.ola.qh.entity.OrdersPayment;
-import com.ola.qh.entity.OrdersProduct;
 
 public interface OrdersDao {
 
@@ -50,5 +49,6 @@ public interface OrdersDao {
 	
 	public OrdersPayment singlePayment(@Param("orderId")String orderId);
 	public List<OrdersPayment> listByExtransno(@Param("extransno")String extransno);
+	
 	
 }

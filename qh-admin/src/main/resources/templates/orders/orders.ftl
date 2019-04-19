@@ -73,7 +73,7 @@
 						</div>
 						<div style="float:left;">
 							<input type="button" class="btn-lg im-key" value="导出excle"
-								onclick="method5('tableExcel')" />
+								onclick="method5('tableExcel1')" />
 						</div>
 					</ul>
 
@@ -100,6 +100,28 @@
 								<th>{{o.refund}}</th>
 								<th>{{o.showtime}}</th>
 								<th><span class="xiangqing" ng-click="detail(o)">查看详情</span></th>
+							</tr>
+
+						</table>
+						<table id="tableExcel1" style="display: none">
+							<tr>
+								<th>手机号</th>
+								<th>姓名</th>
+								<th>订单号</th>
+								<th>支付金额</th>
+								<th>订单状态</th>
+								<th>售后服务</th>
+								<th>时间</th>
+							</tr>
+
+							<tr ng-repeat="o in lists">
+								<th>{{o.userMobile}}</th>
+								<th>{{o.receiver}}</th>
+								<th>{{o.orderno}}</th>
+								<th>{{o.payaccount}}</th>
+								<th>{{o.statusName}}</th>
+								<th>{{o.refund}}</th>
+								<th>{{o.showtime}}</th>
 							</tr>
 
 						</table>

@@ -317,12 +317,10 @@ public class QuestionBankService implements IQuestionBankService {
 	 * 直播验证数据
 	 */
 	@Override
-	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int page, String mobile, String roomId,
+	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int pageNo,int pageSize, String mobile, String roomId,
 			String courseTypeSubclassName) {
 		Results<List<CourseLiveCheck>> results = new Results<List<CourseLiveCheck>>();
 
-		Integer pageSize = Patterns.pageSize;
-		Integer pageNo = (page - 1) * pageSize;
 		// 条件查询
 		List<CourseLiveCheck> list = questionBankDao.liveVerifyList(pageNo, pageSize, mobile, roomId,
 				courseTypeSubclassName);

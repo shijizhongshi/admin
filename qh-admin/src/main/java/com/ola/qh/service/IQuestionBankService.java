@@ -21,7 +21,7 @@ public interface IQuestionBankService {
 	public Results<List<QuestionBank>> selectQuestionBankList(String realname, String courseTypeSubclassName,
 			String status, int page);
 
-	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int page, String mobile, String roomId,
+	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int pageNo,int pageSize, String mobile, String roomId,
 			String courseTypeSubclassName);
 	
 	
