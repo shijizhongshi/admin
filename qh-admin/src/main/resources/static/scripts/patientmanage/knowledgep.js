@@ -54,7 +54,7 @@ app.controller("knowledgepController", function($scope, $http){
 	   $scope.knowledgep=null;
 	   $scope.checkknowledgep=function(k){
 			
-		   $scope.adminMenus = [];
+		   //$scope.adminMenus = [];
 	 		$scope.adminSubMenusName = [];
 			$scope.adminMenusNames = [];
 			 if($scope.selected!=k){
@@ -68,7 +68,7 @@ app.controller("knowledgepController", function($scope, $http){
 			 		angular.forEach(k.courseTypeSubclassNames,function(courseTypeSubclassNames){
 			 			$scope.adminSubMenusName.push(courseTypeSubclassNames);
 					})
-					for (var n = 0; n < $scope.adminMenusNames.length; n++) {
+					/*for (var n = 0; n < $scope.adminMenusNames.length; n++) {
 						for (var t = 0; t < $scope.menus.length; t++) {
 			 				if ($scope.menus[t].courseTypeName==$scope.adminMenusNames[n]) {
 								$scope.adminMenus.push($scope.menus[t]);
@@ -85,7 +85,7 @@ app.controller("knowledgepController", function($scope, $http){
 						 	}
 						}
 			 			
-			 		}
+			 		}*/
 			 }else{
 						$scope.selected=null;
 						$scope.knowledgep=null;
@@ -102,7 +102,6 @@ app.controller("knowledgepController", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					alert("保存成功~");
-					$scope.adminMenus = [];
 					$scope.adminSubMenusName = [];
 					$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
@@ -118,11 +117,13 @@ app.controller("knowledgepController", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					alert("修改成功~");
-					$scope.adminMenus = [];
 					$scope.adminSubMenusName = [];
 					$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
 					$scope.KnowledgepList();
+				}
+				else {
+					alert("修改失败");
 				}
 			})
 		}
@@ -148,28 +149,28 @@ app.controller("knowledgepController", function($scope, $http){
 		   document.getElementById('resource').style.display="block"; 
 		}
 	   
-	   $scope.adminMenus = [];
+	   //$scope.adminMenus = [];
 
 		$scope.adminSubMenusName = [];
 		$scope.adminMenusNames = [];
 		var updateSelected = function(action, menus) {
-			if (action == 'add' && $scope.adminMenus.indexOf(menus) == -1) {
-				$scope.adminMenus.push(menus);
+			if ($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1) {
+				//$scope.adminMenus.push(menus);
 				$scope.adminMenusNames.push(menus.courseTypeName);
 				/////他选中的时候默认子菜单全选中
-				angular.forEach(menus.adminSubMenus, function(singlesub) {
-					menus.list.push(singlesub);
-					$scope.adminSubMenusName.push(singlesub.courseTypeSubclassName);
-				});
-			}
-
-			if (action == 'remove' && $scope.adminMenus.indexOf(menus) != -1) {
-				$scope.adminMenus.splice($scope.adminMenus.indexOf(menus), 1);
+				/*angular.forEach(, function(singlesub) {
+					
+				});*/
+				for(var i=0;i<menus.adminSubMenus.length;i++){
+					$scope.adminSubMenusName.push(menus.adminSubMenus[i].courseTypeSubclassName);
+				}
+			}else{
+				//$scope.adminMenus.splice($scope.adminMenus.indexOf(menus), 1);
 				$scope.adminMenusNames.splice($scope.adminMenusNames
 						.indexOf(menus.courseTypeName), 1);
 
 				angular.forEach(menus.adminSubMenus, function(singlesub) {
-					menus.list.splice(menus.list.indexOf(singlesub), 1);
+					//menus.list.splice(menus.list.indexOf(singlesub), 1);
 					$scope.adminSubMenusName.splice($scope.adminSubMenusName
 							.indexOf(singlesub.courseTypeSubclassName), 1);
 				});
@@ -199,28 +200,51 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 
 		var updateSubSelected = function(action, sub, menus) {
-			if (action == 'add' && $scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName) == -1) {
+			if ($scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName) == -1) {
 				if ($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1) {
-					$scope.adminMenus.push(menus);
+					//$scope.adminMenus.push(menus);
 					$scope.adminMenusNames.push(menus.courseTypeName);
 					
-					$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.push(sub);
+					//$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.push(sub);
 					$scope.adminSubMenusName.push(sub.courseTypeSubclassName);
 				}else{
-					$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.push(sub);
+					//$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.push(sub);
 					$scope.adminSubMenusName.push(sub.courseTypeSubclassName);
 				}
 
-			}
-
-			if (action == 'remove' && $scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName) != -1) {
+			}else{
 				/*////////如果大菜单不存在的话
+				 * 
 				if($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1){
 					$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName), 1);
 					
 				}else{/////如果大菜单存在的话
 */					
-					if($scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.length==1){
+				
+				
+				if($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1){
+					//////没有大菜单的话
+					$scope.adminSubMenusName.splice($scope.adminSubMenusName
+							.indexOf(sub.courseTypeSubclassName), 1);
+				}else{
+					
+					if($scope.adminSubMenusName.length==1){
+						/////都移除
+						$scope.adminMenusNames.splice($scope.adminMenusNames
+								.indexOf(menus.courseTypeName), 1);
+						$scope.adminSubMenusName.splice($scope.adminSubMenusName
+								.indexOf(sub.courseTypeSubclassName), 1);
+						
+					}else{
+						/////只移除子菜单
+						$scope.adminSubMenusName.splice($scope.adminSubMenusName
+								.indexOf(sub.courseTypeSubclassName), 1);
+					}
+					
+					
+					
+				}
+				/*if($scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.length==1){
 						//////表示只有一个子菜单 并且要移除   所以大类别也要进行移除
 						$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.splice(
 								$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.indexOf(sub), 1);
@@ -233,13 +257,14 @@ app.controller("knowledgepController", function($scope, $http){
 					}else{
 					//////在集合中移除
 						
-						$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.splice(
-								$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.indexOf(sub), 1);
-						/*$scope.adminMenus.splice($scope.adminSubMenusName.indexOf(sub.names), 1);*/
+						/*$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.splice(
+								$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.indexOf(sub), 1);*/
+						/*$scope.adminMenus.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
 						/////在subname中移除
+						
 						$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName), 1);
-						console.log($scope.adminMenus);
-					}
+						
+					}*/
 					
 					
 				//}
@@ -332,7 +357,7 @@ app.controller("knowledgepController", function($scope, $http){
 		   $scope.selected=null;
 			$scope.knowledgep=null;
 			$scope.id=null;
-			$scope.adminMenus = [];
+			//$scope.adminMenus = [];
 			$scope.adminSubMenusName = [];
 			$scope.adminMenusNames = [];
 		  document.getElementById('resource').style.display="none"; 

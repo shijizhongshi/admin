@@ -7,12 +7,12 @@ app.controller("ElementController", function($scope, $http){
 	//总条数
     $scope.total = 0;
     //当前的页数
-    $scope.current = 1;
+    $scope.page = 1;
     //一页显示多少条
     $scope.pageSize = 20;
 	
     $scope.questionsubcate=function(){
-		$scope.pageNo=( $scope.current-1)*$scope.pageSize;
+		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 		$http.get("/api/questionsubcategory/select",{"params": {"pageNo":$scope.pageNo,
 			"pageSize":$scope.pageSize,
 			"categoryId":$scope.cateid}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -47,8 +47,9 @@ app.controller("ElementController", function($scope, $http){
 		$http.post("/api/questionsubcategory/insert",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				alert("添加成功")
-			location.reload();
+				alert("添加成功");
+				document.getElementById('add').style.display="none"; 
+			$scope.questionsubcate();
 			}
 			else{
 				alert(data.message);
@@ -60,8 +61,9 @@ app.controller("ElementController", function($scope, $http){
 		$http.post("/api/questionsubcategory/update",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				alert("修改成功")
-			location.reload();
+				alert("修改成功");
+				document.getElementById('add').style.display="none"; 
+			$scope.questionsubcate();
 			}
 			else{
 				alert(data.message);
@@ -138,7 +140,8 @@ app.controller("ElementController", function($scope, $http){
 					if(data.status=='0'){
 						alert("删除成功~");
 						$scope.id=null;
-						location.reload();
+						$scope.page=1;
+						$scope.questionsubcate();
 					}else{
 						alert("删除失败~");
 					}
@@ -159,14 +162,14 @@ app.controller("ElementController", function($scope, $http){
 	//总条数
     $scope.total1 = 0;
     //当前的页数
-    $scope.current1 = 1;
+    $scope.page1 = 1;
     //一页显示多少条
     $scope.pageSize1 = 20;
     
     $scope.subId=null;
     
 	$scope.questionbank=function(){
-		$scope.pageNo1=( $scope.current1-1)*$scope.pageSize1;
+		$scope.pageNo1=( $scope.page1-1)*$scope.pageSize1;
 		$http.get("/api/questionbank/select",{"params": {"pageNo":$scope.pageNo1,
 			"pageSize":$scope.pageSize1,
 			"subId":$scope.subId}}, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -175,7 +178,7 @@ app.controller("ElementController", function($scope, $http){
 				$scope.questionbanklist=data.data;
 				$scope.total1=data.count;
 				angular.forEach($scope.questionbanklist, function(questionbank){  
-					if(questionbank.types=="单选题"){
+					if(questionbank.types=="单选题" || questionbank.types=="多选题"){
 						
 						$scope.questionanswerlist=questionbank.answer;
 						
@@ -191,7 +194,7 @@ app.controller("ElementController", function($scope, $http){
 						})
 					}
 					
-					else if(questionbank.types=="共用题干")	{
+					else if(questionbank.types=="共用题干" || questionbank.types=="共用选项")	{
 						
 						$scope.questionunitlist=questionbank.unit;
 						
@@ -239,8 +242,10 @@ app.controller("ElementController", function($scope, $http){
 		$http.post("/api/questionbank/update",$scope.questionBank, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
-				alert("修改成功")
-			location.reload();
+				alert("修改成功");
+				document.getElementById('resource').style.display="none"; 
+				document.getElementById('resources').style.display="none"; 
+			$scope.questionbank();
 			}
 			
 		})
@@ -248,12 +253,12 @@ app.controller("ElementController", function($scope, $http){
 	
 	$scope.updatebank=function(){
 		if($scope.bankid!=null){
-			if($scope.types=="单选题"){
+			if($scope.types=="单选题" || $scope.types=="多选题"){
 				
 				document.getElementById('resources').style.display="none"; 
 				document.getElementById('resource').style.display="block"; 
 			}
-			else if($scope.types=="共用题干"){
+			else if($scope.types=="共用题干" || $scope.types=="共用选项"){
 				
 				document.getElementById('resources').style.display="block"; 
 				document.getElementById('resource').style.display="none"; 
@@ -291,6 +296,7 @@ app.controller("ElementController", function($scope, $http){
 		$scope.questionbanks=qb;
 		$scope.bankid=qb.id;
 		$scope.types=qb.types;
+		$scope.questionunitlist=qb.unit;
 		$scope.questionanswers=qb.answer;
 		}else{
 			$scope.selected=null;
@@ -309,8 +315,9 @@ app.controller("ElementController", function($scope, $http){
 				.success(function(data){
 					if(data.status=='0'){
 						alert("删除成功~");
+						$scope.page1=1;
 						$scope.bankid=null;
-						location.reload();
+						$scope.questionbank();
 					}else{
 						alert("删除失败~");
 					}
@@ -361,11 +368,11 @@ app.controller("ElementController", function($scope, $http){
 	
 	$scope.resetbank=function(){
 		
-		if($scope.types=="单选题"){
+		if($scope.types=="单选题"||$scope.types=="多选题"){
 			
 			document.getElementById('resource').style.display="none"; 
 		}
-		else if($scope.types=="共用题干"){
+		else if($scope.types=="共用题干"||$scope.types=="共用选项"){
 			
 			document.getElementById('resources').style.display="none"; 
 		}

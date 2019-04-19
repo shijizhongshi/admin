@@ -75,7 +75,9 @@ app.controller("feedbackController", function($scope, $http){
 				$scope.operating.operatingStatus="标记已读";
 		    	$scope.operating.operatingUser=$scope.feedback.content;
 		    	$scope.insertOperating();
-			location.reload();
+		    	
+		    	$scope.feedbackList();
+		    	document.getElementById('add').style.display="none"; 
 			}
 			else{
 				alert(data.message);
@@ -158,7 +160,9 @@ app.controller("feedbackController", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				alert("修改成功")
-			
+				$scope.feedbackList();
+				document.getElementById('resource').style.display="none"; 
+				document.getElementById('resources').style.display="none"; 
 			}
 			
 		})
@@ -173,7 +177,8 @@ app.controller("feedbackController", function($scope, $http){
 					if(data.status=='0'){
 						alert("删除成功~");
 						$scope.id=null;
-						location.reload();
+						$scope.page=1;
+						$scope.feedbackList();
 					}else{
 						alert("删除失败~");
 					}

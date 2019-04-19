@@ -48,6 +48,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	$scope.typesList();
 	$scope.typeBases();
 	$scope.typeList=function(typename,typeId){
+			$scope.page = 1;
 			$scope.active=typeId;
 			$scope.typeId=typeId;
 			$scope.typeBases();
@@ -56,9 +57,10 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
    
    /////查询
    $scope.auditionBases=function(){
+	   $scope.pageNo=( $scope.page-1)*$scope.pageSize;
 		$http.get("/api/coursenofree/select",{"params": {"courseTypeName":$scope.courseTypeName,
 			"courseTypeSubclassName":$scope.courseTypeSubclassName,
-			"page":$scope.page,"teachers":$scope.teachers,"courseName":$scope.courseName}}, 
+			"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"teachers":$scope.teachers,"courseName":$scope.courseName}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -88,6 +90,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 
 	$scope.auditionSub=function(typename,sub,$event){
 		////////查课程的集合
+		$scope.page = 1;
 		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
@@ -310,6 +313,7 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 					if(data.status=='0'){
 						alert("删除成功~");
 						$scope.id=null;
+						$scope.page = 1;
 						$scope.auditionBases();
 					}else{
 						alert("删除失败~");
@@ -324,8 +328,9 @@ app.controller("CourseNofreeController",function($scope,$http,$sce){
 	
 	//////教师的集合
 	$scope.teacherList=function(){
+		$scope.pageNo1=( $scope.page1-1)*$scope.pageSize1;
 		$http.get("/api/courseteacher/select",{"params": {"courseTypeName":$scope.courseTypeName,"teacherName":$scope.teacherName,
-			"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page1}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,"pageNo":$scope.pageNo1,"pageSize":$scope.pageSize1}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=='0'){
 				$scope.teacherlist=data.data;

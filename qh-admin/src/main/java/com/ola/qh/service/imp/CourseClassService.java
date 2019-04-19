@@ -69,7 +69,7 @@ public class CourseClassService implements ICourseClassService {
 		try {
 
 			courseClass.setId(KeyGen.uuid());
-			int ordersMax = courseSubclassDao.selectMaxOrder("c");
+			int ordersMax = courseSubclassDao.selectMaxOrder("cclass");
 			courseClass.setOrders(ordersMax+1);
 			///////专业名称已经存在了班级给他提示
 			int count = courseClassDao.selectCourseClassCount(courseClass.getCourseTypeName(), courseClass.getCourseTypeSubclassName(),courseClass.getClassName());
@@ -184,10 +184,15 @@ public class CourseClassService implements ICourseClassService {
 				if (j == courseset.size()) {
 					
 					String idlist=course.get(i).getClassId();
+					String str=null;
 					if(idlist.contains(courseClass.getId())){
-						List<String> ids=Arrays.asList(idlist.split(","));
-						ids.remove(courseClass.getId());
-						String str = StringUtils.join(ids, ",");
+						if(idlist.contains(",")){
+							List<String> ids=Arrays.asList(idlist.split(","));
+							List<String> arrList = new ArrayList<String>(ids);
+							arrList.remove(courseClass.getId());
+							str = StringUtils.join(arrList, ",");
+						}
+						
 						////////修改课程的classId为多个的
 						courseDao.updateClass(course.get(i).getId(),str);
 					}

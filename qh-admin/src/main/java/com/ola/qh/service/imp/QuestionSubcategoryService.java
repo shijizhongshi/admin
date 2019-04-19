@@ -39,11 +39,6 @@ public class QuestionSubcategoryService implements IQuestionSubcategoryService{
 			questionSubCategory.setCount(subcount);
 			
 		}
-		if(list==null || list.size()==0){
-			
-			results.setStatus("1");
-			return results;
-		}
 		
 		results.setData(list);
 		results.setCount(count);
