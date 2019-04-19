@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ola.qh.entity.CourseClassTemplate;
 import com.ola.qh.service.ICourseClassTemplateService;
 import com.ola.qh.util.KeyGen;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -29,17 +28,9 @@ public class CourseClassTemplateController {
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseClassTemplate>> selectCourseClassTemplate(@RequestParam(name="id",required=false)String id,
 			@RequestParam(name="templateName",required=false)String templateName,
-			@RequestParam(name="page",required=true)int page){
+			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize){
 		
 		Results<List<CourseClassTemplate>> results=new Results<List<CourseClassTemplate>>();
-		int pageSize=0;
-		int pageNo=0;
-		if(page!=0){
-			pageSize=Patterns.pageSize;
-			pageNo=(page-1)*pageSize;
-		}
-		
-		
 		List<CourseClassTemplate> list=courseClassTemplateService.selectCourseClassTemplate(id,templateName, pageNo, pageSize);
 		int count=courseClassTemplateService.selectTemplateCount(templateName);
 		

@@ -205,7 +205,7 @@
 								<p class="xiaobiaoti">选择专业</p>
 								<ul class="menu" style="box-shadow: none;">
 
-									<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.id)">{{ctl.courseTypeName}}
+									<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
 										<ul class="items" ng-class="{'active':active==ctl.id}">
 									<li ng-repeat="sub in courseTypeSubclass"
 										ng-click="typeSub(ctl.courseTypeName,sub)"

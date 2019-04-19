@@ -187,6 +187,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				.success(function(data){
 					if(data.status=='0'){
 						alert("删除成功~");
+						$scope.page = 1;
 						location.reload();
 					}else{
 						alert("删除失败~");
@@ -207,6 +208,7 @@ app.controller("ShopDrugCategoryController", function($scope, $http){
 				.success(function(data){
 					if(data.status=='0'){
 						alert("删除成功~");
+						$scope.page = 1;
 						location.reload();
 					}else{
 						alert("删除失败~");

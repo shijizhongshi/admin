@@ -22,7 +22,6 @@
 		<if test="type!=0">
 		and type=#{type} 
 		</if>
-		and isshow=1
 	</select>
 	<insert id="saveBanner" parameterType="com.ola.qh.entity.Banner">
 		insert into banner(id,imageurl,type,out_links,isshow) values(#{id},#{imageurl},#{type},#{outLinks},#{isshow})

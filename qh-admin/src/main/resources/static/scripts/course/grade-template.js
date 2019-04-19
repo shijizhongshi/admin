@@ -12,8 +12,9 @@ app.controller("CourseClassTemplateController",function($scope,$http){
    $scope.classUrl=null;
    /////查询
    $scope.templateBases=function(){
-	   
-		$http.get("/api/classtemplate/select",{"params": {"id":null,"templateName":$scope.templateName,"page":$scope.page}}, {'Content-Type': 'application/json;charset=UTF-8'})
+	   $scope.pageNo=($scope.page-1)*$scope.pageSize;
+		$http.get("/api/classtemplate/select",{"params": {"id":null,"templateName":$scope.templateName,"pageNo":$scope.pageNo,
+			"pageSize":$scope.pageSize}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.templatelist=data.data;
@@ -113,7 +114,10 @@ app.controller("CourseClassTemplateController",function($scope,$http){
 					if(data.status=='0'){
 						alert("删除成功~");
 						$scope.id=null;
+						$scope.page = 1;
 						$scope.templateBases();
+						
+						
 					}else{
 						alert("删除失败~");
 					}

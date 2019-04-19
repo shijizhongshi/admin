@@ -115,14 +115,12 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 						subTypeName=subTypeName+","+courseTypeSubclassName;
 					}
 		}
-		List<KnowledgeVideo> KnowledgeVideolist=knowledgeVideoDao.KnowledgeVideoList(0, 1, null, null);
-		if(KnowledgeVideolist.size()!=0){
-			Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
+		Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
+		if(VideoMax!=null){
 			knowledgeVideo.setOrders(VideoMax+1);
-			
 		}
-		
 			knowledgeVideo.setOrders(1);
+			
 			knowledgeVideo.setCourseTypeSubclassName(subTypeName);
 			knowledgeVideo.setId(KeyGen.uuid());
 			knowledgeVideo.setAddtime(new Date());

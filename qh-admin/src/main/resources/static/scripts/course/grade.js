@@ -26,6 +26,7 @@ app.controller("gradeController", function($scope, $http){
 /////点击专业的事件
 	$scope.typeSub=function(typename,sub,$event){
 		////////查班级的集合
+		$scope.page = 1;
 		$event.stopPropagation();
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
@@ -55,8 +56,8 @@ app.controller("gradeController", function($scope, $http){
     $scope.classes=null;
     
 	$scope.classBases=function(){
-		
-		$http.get("/api/courseclass/select",{"params": {"page":$scope.page,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"className":$scope.className}}, 
+		$scope.pageNo=($scope.page-1)*$scope.pageSize;
+		$http.get("/api/courseclass/select",{"params": {"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName,"className":$scope.className}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -71,7 +72,7 @@ app.controller("gradeController", function($scope, $http){
 	}
 	
 	$scope.templateBases=function(){
-		$http.get("/api/classtemplate/select",{"params": {"page":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/classtemplate/select",{"params": {"pageNo":0,"pageSize":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.templatelist=data.data;
@@ -81,7 +82,7 @@ app.controller("gradeController", function($scope, $http){
 	
 	$scope.teacherBases=function(){
 		   
-		$http.get("/api/courseteacher/select",{"params": {"page":0,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/courseteacher/select",{"params": {"pageNo":0,"pageSize":0,"courseTypeName":$scope.courseTypeName,"courseTypeSubclassName":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.teacherlist=data.data;
@@ -281,6 +282,7 @@ app.controller("gradeController", function($scope, $http){
 				.success(function(data){
 					if(data.status=='0'){
 						alert("删除成功~");
+						$scope.page = 1;
 						$scope.classBases();
 					}else{
 						alert("删除失败~");

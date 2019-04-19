@@ -7,7 +7,7 @@ app.controller("bannerController", function($scope, $http){
     //当前的页数
     $scope.page = 1;
     //一页显示多少条
-    $scope.pageSize = 20;
+    $scope.pageSize = 1;
 //上传主展示图片
     $scope.types=0;
     $scope.banner=null;
@@ -112,6 +112,7 @@ $scope.uploadmainimage = function(file){
 				    .success(function(result){
 				    	if(result.status=="0"){
 				    	alert("删除成功");
+				    	$scope.page = 1;
 				    	$scope.loaddata();
 				    	
 				    	}else{

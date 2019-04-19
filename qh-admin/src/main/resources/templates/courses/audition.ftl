@@ -277,7 +277,7 @@
 								ng-model="page1" items-per-page="pageSize1" max-size="5"
 								class="pagination-sm" previous-text="&lsaquo;"
 								next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-								ng-change="courseBases()">
+								ng-click="teacherList()">
 							</ul>
 						</div>
 

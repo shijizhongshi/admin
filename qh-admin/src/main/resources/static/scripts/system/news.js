@@ -126,6 +126,7 @@ $scope.uploadmainimage = function(file){
 				    .success(function(result){
 				    	if(result.status=="0"){
 				    	alert("删除成功");
+				    	$scope.page = 1;
 				    	$scope.loaddata();
 				    		
 				    	}else{

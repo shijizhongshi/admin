@@ -10,7 +10,7 @@
 <script src="/scripts/student/management.js"></script>
 <script src="/scripts/questionBank/examination.js"></script>
 <@b.body menu="sidebarmenu-questionBank" submenu="sidebarmenu-questionBank-examination">
-<div ng-controller="questionChapter">
+<div ng-controller="examinationChapter">
 
 	<div class="classify">
 		<ul class="menu">

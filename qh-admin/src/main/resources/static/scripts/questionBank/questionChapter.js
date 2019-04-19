@@ -16,7 +16,6 @@ app.controller("questionChapter", function($scope, $http){
 	$scope.cateId=null;
 	
 	$scope.typeList=function(typename,typeId){
-		
 		$scope.active=typeId;
 		$scope.typeId=typeId;
 		$scope.typeBases();
@@ -84,7 +83,8 @@ app.controller("questionChapter", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				alert("添加成功")
-			location.reload();
+			$scope.questioncate();
+				document.getElementById('add').style.display="none"; 
 			}
 			else{
 				alert(data.message);
@@ -97,7 +97,8 @@ app.controller("questionChapter", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				alert("修改成功")
-			location.reload();
+			$scope.questioncate();
+				document.getElementById('add').style.display="none"; 
 			}
 			else{
 				alert(data.message);
@@ -125,6 +126,7 @@ app.controller("questionChapter", function($scope, $http){
 	
 	$scope.questionSub=function(typename,sub,$event){
 		$event.stopPropagation();
+		$scope.page = 1;
 		$scope.courseTypeName=typename;
 		$scope.courseTypeSubclassName=sub.courseTypeSubclassName;
 		$scope.questioncate();
@@ -167,7 +169,8 @@ app.controller("questionChapter", function($scope, $http){
 					if(data.status=='0'){
 						alert("删除成功~");
 						$scope.id=null;
-						location.reload();
+						$scope.page=1;
+						$scope.questioncate();
 					}else{
 						alert("删除失败~");
 					}

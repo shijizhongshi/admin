@@ -6,7 +6,7 @@ app.controller("calendarController", function($scope, $http){
 	$scope.html="添加";
 	
 	$scope.typeList=function(typename,typeId){
-		
+		$scope.page=1;
 		$scope.active=typeId;
 		$scope.typeId=typeId;
 		$scope.typeBases();
@@ -107,7 +107,8 @@ app.controller("calendarController", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				alert("添加成功")
-			location.reload();
+				document.getElementById('add').style.display="none"; 
+			$scope.calendarList();
 			}
 			
 		})
@@ -119,7 +120,8 @@ app.controller("calendarController", function($scope, $http){
 		.success(function(data){
 			if(data.status=="0"){
 				alert("修改成功")
-			location.reload();
+				document.getElementById('add').style.display="none"; 
+			$scope.calendarList();
 			}
 			
 		})
@@ -134,8 +136,9 @@ app.controller("calendarController", function($scope, $http){
 				.success(function(data){
 					if(data.status=='0'){
 						alert("删除成功~");
+						$scope.page=1;
 						$scope.id=null;
-						location.reload();
+						$scope.calendarList();
 					}else{
 						alert("删除失败~");
 					}
