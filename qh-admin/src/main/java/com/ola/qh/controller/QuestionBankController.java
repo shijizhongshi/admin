@@ -111,32 +111,31 @@ public class QuestionBankController {
 
 	/**
 	 * 测试
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public Results<String> test(@RequestParam(value = "userId", required = true) String userId,
-			@RequestParam(value = "videoId", required = false) String videoId,
+			@RequestParam(value = "videoId", required = true) String videoId,
 			@RequestParam(value = "date", required = true) String date,
-			@RequestParam(value = "page", required = false) Integer page) throws IOException {
-		Results<String> results = new Results<>();
+			@RequestParam(value = "numPerPage", required = false) String numPerPage,
+			@RequestParam(value = "page", required = false) String page) {
+ 		Results<String> results = new Results<>();
 		// 数据 传参
 		Map<String, String> mapss = new HashMap<>();
 		mapss.put("userid", userId);
-		mapss.put("videoId", videoId);
+		mapss.put("videoid", videoId);
 		mapss.put("date", date);
-
+		mapss.put("num_per_page", numPerPage);
+		mapss.put("page", page);
+		
 		Results<byte[]> rbody = Requests.get(Patterns.test, null, mapss);
 		System.out.println("rbody = " + rbody);
-		// 类型转换 出问题？
 		byte[] bytess = rbody.getData();
-		//测试转换类型 
-		//byte[]转换成char[]
-		String aString = bytess.toString();
-		String bString = new String(bytess);
-		
-		
-		
-		results.setData(bString);
+		// 类型转换 
+		String test = new String(bytess);
+
+		results.setData(test);
 		return results;
 	}
 }
