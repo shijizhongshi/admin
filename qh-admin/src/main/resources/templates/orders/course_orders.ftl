@@ -59,7 +59,7 @@
 
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')"  />
+						onclick="method5('tableExcel1')"  />
 
 				</div>
 			</div>
@@ -67,6 +67,41 @@
 
 				<div class="admin-table">
 
+				<table id="tableExcel1" style="display: none">
+						<tr>
+							<th>用户手机号</th>
+							<th>学员姓名</th>
+							<th>学员电话</th>
+							<th>支付订单号</th>
+							<th>支付方式</th>
+							<th>支付途径</th>
+
+							<th>订单状态</th>
+							<th>实际费用</th>
+
+							<th>订单创建时间</th>
+							<th>订单支付时间</th>
+							<th>推荐老师</th>
+
+							</tr>
+
+						<tr ng-repeat="os in lists">
+							<th>{{os.userMobile}}</th>
+							<th>{{os.receiver}}</th>
+							<th>{{os.mobile}}</th>
+							<th>{{os.orderno}}</th>
+							<th>{{os.payname}}</th>
+							<th>APP</th>
+							<th>{{os.statusName}}</th>
+							<th>{{os.payaccount}}</th>
+							<th>{{os.showtime}}</th>
+							<th>{{os.paidtimes}}</th>
+							<th>{{os.recommendTeacher}}</th>
+
+
+							</tr>
+					</table>
+					
 					<table id="tableExcel">
 						<tr>
 							<th>用户手机号</th>

@@ -56,7 +56,7 @@ submenu="sidebarmenu-marketing-liveVerify">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')">
+						onclick="method5('tableExcel1')">
 				</div>
 			</div>
 			<div class="manage">
@@ -83,6 +83,32 @@ submenu="sidebarmenu-marketing-liveVerify">
 									| date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								<th ng-show="{{liveVerify.updatetime != null}}">{{liveVerify.updatetime
 									| date:'yyyy.MM.dd HH:mm:ss'}}</th>
+							</tr>
+
+
+
+						</tbody>
+					</table>
+					
+					<table id="tableExcel1" style="display: none">
+
+						<tbody>
+							<tr>
+								<th>手机号</th>
+								<th>用户属性</th>
+								<th>校验码</th>
+								<th>专业名称</th>
+								<th>房间号</th>
+								<th>最后一次操作时间</th>
+							</tr>
+							<tr ng-repeat="live in liveVerifyLists">
+								<th>{{live.mobile}}</th>
+								<th>{{live.isRegisters}}</th>
+								<th>{{live.token}}</th>
+								<th>{{live.courseTypeSubclassName}}</th>
+								<th>{{live.roomId}}</th>
+								<th>{{live.time | date:'yyyy.MM.dd HH:mm:ss'}}</th>
+								
 							</tr>
 
 
