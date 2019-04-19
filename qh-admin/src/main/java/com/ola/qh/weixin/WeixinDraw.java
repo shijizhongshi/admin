@@ -45,7 +45,6 @@ import com.alipay.api.response.AlipayFundTransToaccountTransferResponse;
 import com.ola.qh.util.Json;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
-import com.ola.qh.util.Results;
 
 
 public class WeixinDraw

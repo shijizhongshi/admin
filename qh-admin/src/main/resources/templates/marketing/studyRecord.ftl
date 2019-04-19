@@ -2,25 +2,16 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="直播验证数据"/>
+<@h.header title="学习记录"/>
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/indent/excle.js"></script>
 <script src="/scripts/marketing/liveVerify.js"></script>
 
-<!--测试  -->
-<style type="text/css">
-.dd {
-	border: solid 1px gray;
-	width: 180px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
 </style>
 <@b.body menu="sidebarmenu-marketing"
-submenu="sidebarmenu-marketing-liveVerify">
+submenu="sidebarmenu-marketing-studyRecord">
 <div ng-controller="liveVerifyController">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
@@ -29,7 +20,7 @@ submenu="sidebarmenu-marketing-liveVerify">
 				<li>/</li>
 				<li>营销管理</li>
 				<li>/</li>
-				<li>直播验证数据</li>
+				<li>学习记录</li>
 			</ul>
 		</div>
 		<div class="details-frame">
@@ -72,17 +63,13 @@ submenu="sidebarmenu-marketing-liveVerify">
 								<th>房间号</th>
 								<th>最后一次操作时间</th>
 							</tr>
-							<tr ng-repeat="liveVerify in liveVerifyList">
-								<th>{{liveVerify.mobile}}</th>
-								<th ng-show="{{liveVerify.isRegister==1}}">注册用户</th>
-								<th ng-show="{{liveVerify.isRegister==0}}">游客用户</th>
-								<th>{{liveVerify.token}}</th>
-								<th style="max-width:20% ">{{liveVerify.courseTypeSubclassName}}</th>
-								<th>{{liveVerify.roomId}}</th>
-								<th ng-show="{{liveVerify.updatetime == null}}">{{liveVerify.addtime
-									| date:'yyyy.MM.dd HH:mm:ss'}}</th>
-								<th ng-show="{{liveVerify.updatetime != null}}">{{liveVerify.updatetime
-									| date:'yyyy.MM.dd HH:mm:ss'}}</th>
+							<tr>
+								<th>手机号</th>
+								<th>用户属性</th>
+								<th>校验码</th>
+								<th>专业名称</th>
+								<th>房间号</th>
+								<th>最后一次操作时间</th>
 							</tr>
 
 
