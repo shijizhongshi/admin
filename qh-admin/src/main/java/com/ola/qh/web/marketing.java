@@ -13,8 +13,13 @@ public class marketing {
 	}
 	
 	@RequestMapping("/liveVerify")
-	public String courseOrderss() {
+	public String liveVerify() {
 		return "marketing/liveVerify";
+	}
+	
+	@RequestMapping("/studyRecord")
+	public String studyRecord() {
+		return "marketing/studyRecord";
 	}
 
 }

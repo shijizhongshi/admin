@@ -109,7 +109,7 @@
 									ng-model="live.liveName"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
-							<div class="select-2">
+							<div class="select-2" ng-show="liveId!=null">
 								<span>直播id<i class="bitian">*</i></span> <input type="text"
 									ng-model="live.liveId"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
@@ -119,7 +119,7 @@
 									ng-model="live.liveRoomId"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
-							<div class="select-2">
+							<div class="select-2" ng-show="liveId!=null">
 								<span>回放id<i class="bitian">*</i></span> <input type="text"
 									ng-model="live.liveBackId"
 									class="ng-pristine ng-untouched ng-valid ng-empty">

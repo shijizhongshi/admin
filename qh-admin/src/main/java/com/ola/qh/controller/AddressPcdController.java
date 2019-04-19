@@ -69,7 +69,7 @@ public class AddressPcdController {
 	public Results<List<AddressPcd>> selectDistrict(@RequestParam(name = "cityId",required=true) int cityId) {
 
 		Results<List<AddressPcd>> results = new Results<List<AddressPcd>>();
-
+		
 		List<AddressPcd> district = addresspcdservice.selectDistrict(cityId);
 		if (district != null && district.size() != 0) {
 			results.setData(district);
@@ -81,5 +81,7 @@ public class AddressPcdController {
 		results.setStatus("1");
 		return results;
 	}
+	
+	
 
 }

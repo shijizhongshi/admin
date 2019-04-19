@@ -1,6 +1,9 @@
 package com.ola.qh.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.service.IQuestionBankService;
+import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
+import com.ola.qh.weixin.handler.Requests;
 
 @RestController
 @RequestMapping("/api/questionbank")
@@ -65,10 +70,10 @@ public class QuestionBankController {
 	/**
 	 * h5题库展示页面
 	 * 
-	 * @param page 分页
-	 * @param realname 姓名
+	 * @param page                   分页
+	 * @param realname               姓名
 	 * @param courseTypeSubclassName 专业名
-	 * @param status 用户属性
+	 * @param status                 用户属性
 	 * @return
 	 */
 	@RequestMapping(value = "/questionbankList", method = RequestMethod.GET)
@@ -85,9 +90,10 @@ public class QuestionBankController {
 
 	/**
 	 * 直播验证数据
-	 * @param page 分页
-	 * @param mobile 手机号
-	 * @param roomId 房间号
+	 * 
+	 * @param page                   分页
+	 * @param mobile                 手机号
+	 * @param roomId                 房间号
 	 * @param courseTypeSubclassName 专业名
 	 * @return
 	 */
@@ -100,9 +106,41 @@ public class QuestionBankController {
 			@RequestParam(value = "roomId", required = false) String roomId,
 			@RequestParam(value = "courseTypeSubclassName", required = false) String courseTypeSubclassName) {
 		Results<List<CourseLiveCheck>> results = new Results<>();
-		
+
 		results = questionBankService.selectLiveVerifyList(fromdate,todate,pageNo,pageSize,mobile,roomId,courseTypeSubclassName); 
 				
+		return results;
+	}
+
+	/**
+	 * 测试
+	 * 
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public Results<String> test(@RequestParam(value = "userId", required = true) String userId,
+			@RequestParam(value = "videoId", required = true) String videoId,
+			@RequestParam(value = "date", required = true) String date,
+			@RequestParam(value = "numPerPage", required = false) String numPerPage,
+			@RequestParam(value = "page", required = false) String page) {
+		Results<String> results = new Results<>();
+		// 数据 传参
+		Map<String, String> mapss = new HashMap<>();
+		mapss.put("userid", userId);
+		mapss.put("videoid", videoId);
+		mapss.put("date", date);
+		mapss.put("num_per_page", numPerPage);
+		mapss.put("page", page);
+
+		Results<byte[]> rbody = Requests.get(Patterns.test, null, mapss);
+		System.out.println("rbody = " + rbody);
+		byte[] bytess = rbody.getData();
+		// 类型转换
+		String test = new String(bytess);
+
+		results.setData(test);
+
+
 		return results;
 	}
 }
