@@ -23,6 +23,21 @@ submenu="sidebarmenu-marketing-liveVerify">
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
+			<div class="select-3">
+					<span>学员注册时间</span> <input type="date" name="search"
+						ng-model="fromdate"
+						class="ng-pristine ng-untouched ng-valid ng-empty">
+				</div>
+				<div class="select-3"
+					style="font-size: 1.6rem; width: 1%; text-align: center;">
+
+					&nbsp;<span class="glyphicon glyphicon-hand-right"></span>
+				</div>
+				<div class="select-3">
+					<span>&nbsp;</span> <input type="date" name="search"
+						ng-model="todate"
+						class="ng-pristine ng-untouched ng-valid ng-empty">
+				</div>
 				<div class="select-3">
 					<span>手机号</span> <input type="text" ng-model="mobile" placeholder="请输入手机号">
 				</div>
