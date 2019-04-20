@@ -68,8 +68,13 @@ public class CourseNofreeController {
 		}
 		courseNofree.setAddtime(new Date());
 		courseNofree.setId(KeyGen.uuid());
-		int ordersMax = courseSubclassDao.selectMaxOrder("audition");
-		courseNofree.setOrders(ordersMax+1);
+		Integer ordersMax = courseSubclassDao.selectMaxOrder("audition");
+		if(ordersMax!=null){
+			courseNofree.setOrders(ordersMax.intValue()+1);
+		}else{
+			courseNofree.setOrders(1);
+		}
+		
 		int insert=courseNofreeService.insertCourseNofree(courseNofree);
 		
 		if(insert==0){
