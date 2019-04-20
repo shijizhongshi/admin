@@ -12,7 +12,7 @@
 </style>
 <@b.body menu="sidebarmenu-marketing"
 submenu="sidebarmenu-marketing-studyRecord">
-<div ng-controller="liveVerifyController">
+<div ng-controller="studyRecordController">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -26,8 +26,9 @@ submenu="sidebarmenu-marketing-studyRecord">
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>日期</span> <input type="text" ng-model="date"
-						placeholder="请输入手机号">
+					<span>&nbsp;</span> <input type="date" name="search"
+						ng-model="date"
+						class="ng-pristine ng-untouched ng-valid ng-empty">
 				</div>
 				<div class="select-3">
 					<span>用户手机号</span> <input type="text" ng-model="mobile"
@@ -59,7 +60,7 @@ submenu="sidebarmenu-marketing-studyRecord">
 								<th>房间号</th>
 								<th>最后一次操作时间</th>
 							</tr>
-							<tr>
+							<tr ng-show ="{{isshow == '2'}}">
 								<th>手机号</th>
 								<th>用户属性</th>
 								<th>校验码</th>

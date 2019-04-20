@@ -36,4 +36,6 @@ public interface UserDao {
 
 	public List<User> send(@Param("sex")String sex,@Param("userrole") String userrole,@Param("isdoctor") String isdoctor,@Param("birthday") String birthday);
 
+	public String selectIdByMobile(@Param("mobile") String mobile);
+
 }

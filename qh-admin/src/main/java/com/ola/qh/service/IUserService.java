@@ -33,4 +33,6 @@ public interface IUserService {
 
 	public Results<List<User>> send(String title, String content, String sex, String courseTypeSubclassName, String userrole,
 			String isdoctor, String birthday);
+
+	public String selectIdByMobile(String mobile);
 }

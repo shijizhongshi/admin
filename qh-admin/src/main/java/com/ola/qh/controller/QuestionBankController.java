@@ -14,7 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.IQuestionBankService;
+import com.ola.qh.service.IUserService;
+import com.ola.qh.util.Json;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 import com.ola.qh.util.Thqs;
@@ -26,6 +29,8 @@ public class QuestionBankController {
 
 	@Autowired
 	private IQuestionBankService questionBankService;
+	@Autowired
+	private IUserService userService;
 
 	/**
 	 * 题库的上传
@@ -98,7 +103,8 @@ public class QuestionBankController {
 	 * @return
 	 */
 	@RequestMapping(value = "/liveVerifyList", method = RequestMethod.GET)
-	public Results<List<CourseLiveCheck>> liveVerifyList(@RequestParam(name = "fromdate", required = false) String fromdate,
+	public Results<List<CourseLiveCheck>> liveVerifyList(
+			@RequestParam(name = "fromdate", required = false) String fromdate,
 			@RequestParam(name = "todate", required = false) String todate,
 			@RequestParam(value = "pageNo", required = true) int pageNo,
 			@RequestParam(value = "pageSize", required = true) int pageSize,
@@ -107,19 +113,24 @@ public class QuestionBankController {
 			@RequestParam(value = "courseTypeSubclassName", required = false) String courseTypeSubclassName) {
 		Results<List<CourseLiveCheck>> results = new Results<>();
 
-		results = questionBankService.selectLiveVerifyList(fromdate,todate,pageNo,pageSize,mobile,roomId,courseTypeSubclassName); 
-				
+		results = questionBankService.selectLiveVerifyList(fromdate, todate, pageNo, pageSize, mobile, roomId,
+				courseTypeSubclassName);
+
 		return results;
 	}
 
 	/**
-	 * 测试
+	 * 获取视频播放记录
 	 * 
-	 * @throws IOException
+	 * @param userId     账号id 必填
+	 * @param videoId    视频id 必填
+	 * @param date       日期 必填
+	 * @param numPerPage 一页展示条数
+	 * @param page       第几页
+	 * @return
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public Results<String> test(@RequestParam(value = "userId", required = true) String userId,
-			@RequestParam(value = "videoId", required = true) String videoId,
+	@RequestMapping(value = "/video/v2", method = RequestMethod.GET)
+	public Results<String> test(@RequestParam(value = "videoId", required = true) String videoId,
 			@RequestParam(value = "date", required = true) String date,
 			@RequestParam(value = "numPerPage", required = false) String numPerPage,
 			@RequestParam(value = "page", required = false) String page) {
@@ -127,22 +138,27 @@ public class QuestionBankController {
 
 		// 必须为 treemap传参 ,参数顺序按首字母升序排序
 		TreeMap<String, String> treeMap = new TreeMap<>();
-		treeMap.put("userid", userId);
+		treeMap.put("userid", "91DD94C27B488135");
 		treeMap.put("videoid", videoId);
 		treeMap.put("date", date);
 		treeMap.put("num_per_page", numPerPage);
 		treeMap.put("page", page);
 
-		// 拼接地址 
-		//t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key 
+		// 拼接地址
+		// t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key
 		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
 		try {
-			Results<byte[]> testByte = Requests.testGet(Patterns.test, null, address);
+			Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
 			byte[] bytess = testByte.getData();
-			String test = new String(bytess);
+			String byteString = new String(bytess);
+
+			//json字符串转换
+			//VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
 			
+			
+			String data = new String(bytess);
 			results.setStatus("0");
-			results.setData(test);
+			results.setData(data);
 
 			return results;
 		} catch (IOException e) {
@@ -151,6 +167,97 @@ public class QuestionBankController {
 		results.setStatus("0");
 		results.setMessage("错误！");
 
+		return results;
+	}
+
+	/**
+	 * 获取用户自定义参数播放记录
+	 * 
+	 * @param mobile     手机号
+	 * @param date       日期
+	 * @param numPerPage 一页展示几条
+	 * @param page       第几页
+	 * @return
+	 */
+	@RequestMapping(value = "/custom/user/v2", method = RequestMethod.GET)
+	public Results<String> customUserV2(@RequestParam(value = "mobile", required = true) String mobile,
+			@RequestParam(value = "date", required = true) String date,
+			@RequestParam(value = "numPerPage", required = false) String numPerPage,
+			@RequestParam(value = "page", required = false) String page) {
+		Results<String> results = new Results<>();
+		// 根据手机号查询id
+		String id = userService.selectIdByMobile(mobile);
+
+		TreeMap<String, String> treeMap = new TreeMap<>();
+		treeMap.put("userid", "91DD94C27B488135");
+		treeMap.put("customid", id);
+		treeMap.put("date", date);
+		treeMap.put("num_per_page", numPerPage);
+		treeMap.put("page", page);
+
+		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+		try {
+			Results<byte[]> testByte = Requests.testGet(Patterns.customUserV2, null, address);
+			byte[] bytess = testByte.getData();
+			String data = new String(bytess);
+
+			results.setStatus("0");
+			results.setData(data);
+
+			return results;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		results.setStatus("0");
+		results.setMessage("错误！");
+
+		return results;
+	}
+
+	/**
+	 * 获取视频自定义参数播放记录
+	 * 
+	 * @param videoId    视频id
+	 * @param mobile     手机号
+	 * @param date       日期
+	 * @param numPerPage 一页展示几条
+	 * @param page       第几页
+	 * @return
+	 */
+	@RequestMapping(value = "/custom/video/v2", method = RequestMethod.GET)
+	public Results<String> customVideoV2(@RequestParam(value = "videoId", required = true) String videoId,
+			@RequestParam(value = "mobile", required = true) String mobile,
+			@RequestParam(value = "date", required = true) String date,
+			@RequestParam(value = "numPerPage", required = false) String numPerPage,
+			@RequestParam(value = "page", required = false) String page) {
+		Results<String> results = new Results<>();
+
+		// 根据手机号查询id
+		String id = userService.selectIdByMobile(mobile);
+
+		TreeMap<String, String> treeMap = new TreeMap<>();
+		treeMap.put("userid", "91DD94C27B488135");
+		treeMap.put("videoid", videoId);
+		treeMap.put("customid", id);
+		treeMap.put("date", date);
+		treeMap.put("num_per_page", numPerPage);
+		treeMap.put("page", page);
+
+		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+		try {
+			Results<byte[]> testByte = Requests.testGet(Patterns.customVideoV2, null, address);
+			byte[] bytess = testByte.getData();
+			String data = new String(bytess);
+
+			results.setStatus("0");
+			results.setData(data);
+
+			return results;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		results.setStatus("0");
+		results.setMessage("错误！");
 
 		return results;
 	}
