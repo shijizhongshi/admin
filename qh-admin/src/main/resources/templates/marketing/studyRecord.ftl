@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/indent/excle.js"></script>
-<script src="/scripts/marketing/liveVerify.js"></script>
+<script src="/scripts/marketing/studyRecord.js"></script>
 
 </style>
 <@b.body menu="sidebarmenu-marketing"
@@ -26,20 +26,16 @@ submenu="sidebarmenu-marketing-studyRecord">
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>手机号</span> <input type="text" ng-model="mobile"
+					<span>日期</span> <input type="text" ng-model="date"
 						placeholder="请输入手机号">
 				</div>
 				<div class="select-3">
-					<span>直播房间号</span> <input type="text" ng-model="roomId"
-						placeholder="请输入房间号">
+					<span>用户手机号</span> <input type="text" ng-model="mobile"
+						placeholder="请输入手机号">
 				</div>
 				<div class="select-3">
-					<!-- ng-options="a for a in nameList"  -->
-					<span>专业</span> <img src="/images/sjk-xl.png"> <select
-						ng-model="courseTypeSubclassName">
-						<option value="">无专业</option>
-						<option ng-repeat="name in nameList">{{name}}</option>
-					</select>
+					<span>视频id</span> <input type="text" ng-model="videoId"
+						placeholder="请输入视频id">
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"

@@ -1,9 +1,8 @@
 package com.ola.qh.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +17,7 @@ import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
+import com.ola.qh.util.Thqs;
 import com.ola.qh.weixin.handler.Requests;
 
 @RestController
@@ -122,21 +122,32 @@ public class QuestionBankController {
 			@RequestParam(value = "numPerPage", required = false) String numPerPage,
 			@RequestParam(value = "page", required = false) String page) {
 		Results<String> results = new Results<>();
-		// 数据 传参
-		Map<String, String> mapss = new HashMap<>();
-		mapss.put("userid", userId);
-		mapss.put("videoid", videoId);
-		mapss.put("date", date);
-		mapss.put("num_per_page", numPerPage);
-		mapss.put("page", page);
 
-		Results<byte[]> rbody = Requests.get(Patterns.test, null, mapss);
-		System.out.println("rbody = " + rbody);
-		byte[] bytess = rbody.getData();
-		// 类型转换
-		String test = new String(bytess);
+		// 必须为 treemap传参 ,参数顺序按首字母升序排序
+		TreeMap<String, String> treeMap = new TreeMap<>();
+		treeMap.put("userid", userId);
+		treeMap.put("videoid", videoId);
+		treeMap.put("date", date);
+		treeMap.put("num_per_page", numPerPage);
+		treeMap.put("page", page);
 
-		results.setData(test);
+		// 拼接地址 
+		//t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key 
+		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+		try {
+			Results<byte[]> testByte = Requests.testGet(Patterns.test, null, address);
+			byte[] bytess = testByte.getData();
+			String test = new String(bytess);
+			
+			results.setStatus("0");
+			results.setData(test);
+
+			return results;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		results.setStatus("0");
+		results.setMessage("错误！");
 
 		return results;
 	}
