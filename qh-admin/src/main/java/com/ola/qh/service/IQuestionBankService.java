@@ -2,6 +2,7 @@ package com.ola.qh.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseLiveCheck;
@@ -21,8 +22,8 @@ public interface IQuestionBankService {
 	public Results<List<QuestionBank>> selectQuestionBankList(String realname, String courseTypeSubclassName,
 			String status, int page);
 
-	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int pageNo,int pageSize, String mobile, String roomId,
-			String courseTypeSubclassName);
+	public Results<List<CourseLiveCheck>> selectLiveVerifyList( String fromdate,String todate,
+			int pageNo,int pageSize, String mobile, String roomId,String courseTypeSubclassName);
 	
 	
 }

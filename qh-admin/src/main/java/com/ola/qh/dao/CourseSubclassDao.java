@@ -54,5 +54,5 @@ public interface CourseSubclassDao {
 			@Param("orders")int orders,@Param("tables")String tables);
 	
 	///////得到记录中最大的orders
-	public int selectMaxOrder(@Param("tables")String tables);
+	public Integer selectMaxOrder(@Param("tables")String tables);
 }
