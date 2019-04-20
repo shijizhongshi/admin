@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseLiveCheck;
+import com.ola.qh.entity.CourseSection;
+import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.VideoPlaybackRecord;
+import com.ola.qh.service.ICourseService;
+import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IUserService;
 import com.ola.qh.util.Json;
@@ -31,6 +36,8 @@ public class QuestionBankController {
 	private IQuestionBankService questionBankService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private ICourseSubclassService courseSubclassService;
 
 	/**
 	 * 题库的上传
@@ -130,11 +137,11 @@ public class QuestionBankController {
 	 * @return
 	 */
 	@RequestMapping(value = "/video/v2", method = RequestMethod.GET)
-	public Results<String> test(@RequestParam(value = "videoId", required = true) String videoId,
+	public Results<List<PlayLog>> test(@RequestParam(value = "videoId", required = true) String videoId,
 			@RequestParam(value = "date", required = true) String date,
 			@RequestParam(value = "numPerPage", required = false) String numPerPage,
 			@RequestParam(value = "page", required = false) String page) {
-		Results<String> results = new Results<>();
+		Results<List<PlayLog>> results = new Results<List<PlayLog>>();
 
 		// 必须为 treemap传参 ,参数顺序按首字母升序排序
 		TreeMap<String, String> treeMap = new TreeMap<>();
@@ -153,12 +160,21 @@ public class QuestionBankController {
 			String byteString = new String(bytess);
 
 			//json字符串转换
-			//VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
-			
-			
-			String data = new String(bytess);
+			VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
+			//String data = new String(bytess);
+			List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
+			for (PlayLog playLog : list) {
+				//查name
+				String userName = userService.selectNameById(playLog.getUserid());
+				//查视频名和所属专业
+				CourseChapter courseChapter =  courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+				playLog.setUserName(userName);
+				playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeName());
+				playLog.setSectionName(courseChapter.getSectionName());
+			}
 			results.setStatus("0");
-			results.setData(data);
+			results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
+			results.setData(videoPlaybackRecord.getPlay_logs().getPlay_log());
 
 			return results;
 		} catch (IOException e) {

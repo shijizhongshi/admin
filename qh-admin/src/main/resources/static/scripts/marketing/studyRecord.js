@@ -39,7 +39,7 @@ app.controller("studyRecordController", function($scope, $http) {
 			.success(function (result) {
 				if (result.status == "0") {
 					$scope.isshow = 1;
-					console.log($scope.isshow);
+					$scope.list = result.data;
 					console.log(result.data);
 					return;
 				}

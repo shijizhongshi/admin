@@ -38,4 +38,6 @@ public interface UserDao {
 
 	public String selectIdByMobile(@Param("mobile") String mobile);
 
+	public String selectNameById(@Param("userId")String userid);
+
 }

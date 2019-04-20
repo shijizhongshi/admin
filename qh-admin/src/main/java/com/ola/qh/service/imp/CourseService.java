@@ -12,6 +12,7 @@ import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Course;
+import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;

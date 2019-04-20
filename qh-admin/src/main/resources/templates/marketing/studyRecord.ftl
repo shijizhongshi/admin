@@ -53,24 +53,18 @@ submenu="sidebarmenu-marketing-studyRecord">
 					<table id="tableExcel">
 						<tbody>
 							<tr>
-								<th>手机号</th>
-								<th>用户属性</th>
-								<th>校验码</th>
-								<th>专业名称</th>
-								<th>房间号</th>
-								<th>最后一次操作时间</th>
+								
+								<th>用户名</th>
+								<th>视频名称</th>
+								<th>专业</th>
+								<th>观看时长</th>
+								<th>视频总长</th>
 							</tr>
-							<tr ng-show ="{{isshow == '2'}}">
-								<th>手机号</th>
-								<th>用户属性</th>
-								<th>校验码</th>
-								<th>专业名称</th>
-								<th>房间号</th>
-								<th>最后一次操作时间</th>
+							<tr ng-repeat="list in list">
+								<th>{{list.videoid}}</th>
+								<th>{{list.play_duration}}</th>
+								<th>{{list.video_duration}}</th>
 							</tr>
-
-
-
 						</tbody>
 					</table>
 				</div>

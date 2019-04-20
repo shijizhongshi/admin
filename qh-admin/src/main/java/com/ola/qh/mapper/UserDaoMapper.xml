@@ -206,5 +206,12 @@
 			and mobile = #{mobile}
 		</if>
 	</select>
+	
+	<select id="selectNameById" resultType="java.lang.String">
+	select realname from user where 1=1 
+	<if test="userId!=null and userId!=''">
+	and id = #{userId}
+	</if>
+	</select>
 
 </mapper>

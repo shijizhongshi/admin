@@ -213,6 +213,12 @@ public class CourseSubclassService implements ICourseSubclassService{
         result.setStatus("0");
 		return result;
 	}
+
+	@Override
+	public CourseChapter selectNameAndCTSN(String videoid) {
+		
+		return courseSubclassDao.selectNameAndCTSN(videoid);
+	}
 	
 	
 	
