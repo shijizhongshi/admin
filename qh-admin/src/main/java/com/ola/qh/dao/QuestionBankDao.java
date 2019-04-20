@@ -47,9 +47,10 @@ public interface QuestionBankDao {
 	public Integer questionBankListCount(@Param("realname") String realname,
 			@Param("courseTypeSubclassName") String courseTypeSubclassName, @Param("status") String status);
 
-	public List<CourseLiveCheck> liveVerifyList(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,
-			@Param("mobile") String mobile, @Param("roomId") String roomId,
-			@Param("courseTypeSubclassName") String courseTypeSubclassName);
+	public List<CourseLiveCheck> liveVerifyList(@Param("fromdate") String fromdate,@Param("todate") String todate,
+			@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize,@Param("mobile") String mobile, 
+			@Param("roomId") String roomId,@Param("courseTypeSubclassName") String courseTypeSubclassName);
 
-	public Integer selectLiveVerifyCount(@Param("mobile") String mobile,@Param("roomId") String roomId,@Param("courseTypeSubclassName") String courseTypeSubclassName);
+	public Integer selectLiveVerifyCount(@Param("fromdate") String fromdate,@Param("todate") String todate,@Param("mobile") String mobile,
+			@Param("roomId") String roomId,@Param("courseTypeSubclassName") String courseTypeSubclassName);
 }

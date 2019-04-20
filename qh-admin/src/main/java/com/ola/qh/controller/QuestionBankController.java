@@ -98,15 +98,17 @@ public class QuestionBankController {
 	 * @return
 	 */
 	@RequestMapping(value = "/liveVerifyList", method = RequestMethod.GET)
-	public Results<List<CourseLiveCheck>> liveVerifyList(@RequestParam(value = "pageNo", required = true) int pageNo,
+	public Results<List<CourseLiveCheck>> liveVerifyList(@RequestParam(name = "fromdate", required = false) String fromdate,
+			@RequestParam(name = "todate", required = false) String todate,
+			@RequestParam(value = "pageNo", required = true) int pageNo,
 			@RequestParam(value = "pageSize", required = true) int pageSize,
 			@RequestParam(value = "mobile", required = false) String mobile,
 			@RequestParam(value = "roomId", required = false) String roomId,
 			@RequestParam(value = "courseTypeSubclassName", required = false) String courseTypeSubclassName) {
 		Results<List<CourseLiveCheck>> results = new Results<>();
 
-		results = questionBankService.selectLiveVerifyList(pageNo, pageSize, mobile, roomId, courseTypeSubclassName);
-
+		results = questionBankService.selectLiveVerifyList(fromdate,todate,pageNo,pageSize,mobile,roomId,courseTypeSubclassName); 
+				
 		return results;
 	}
 
@@ -137,6 +139,7 @@ public class QuestionBankController {
 		String test = new String(bytess);
 
 		results.setData(test);
+
 
 		return results;
 	}

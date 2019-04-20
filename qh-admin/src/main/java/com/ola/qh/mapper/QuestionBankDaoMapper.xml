@@ -182,6 +182,12 @@
 	<!--分页展示  -->
 	<select id="liveVerifyList" resultMap="CourseLiveCheckMap">
 	select * from course_line_check where 1=1 
+	<if test="fromdate!='' and fromdate!=null ">
+	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	</if>
+	<if test="todate!='' and todate!=null ">
+	and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+	</if>
 	<if test="mobile!=null and mobile!=''">
 	and mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))  
 	</if>
@@ -201,6 +207,12 @@
 	<!--根据条件查询数量  -->
 	<select id="selectLiveVerifyCount" resultType="Integer">
 	select count(*) from course_line_check where 1=1 
+	<if test="fromdate!='' and fromdate!=null ">
+	and UNIX_TIMESTAMP(addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+	</if>
+	<if test="todate!='' and todate!=null ">
+	and UNIX_TIMESTAMP(addtime)&lt;UNIX_TIMESTAMP(#{todate})
+	</if>
 	<if test="mobile!=null and mobile!=''">
 	and mobile LIKE CONCAT(CONCAT('%',#{mobile},'%'))  
 	</if>

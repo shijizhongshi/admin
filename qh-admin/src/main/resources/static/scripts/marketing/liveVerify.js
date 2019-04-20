@@ -10,6 +10,19 @@ app.controller("liveVerifyController", function($scope, $http) {
 			}
 		})
 	};
+	var changeDate = function (date) { 
+		if(date){
+		  	var y = date.getFullYear();  
+		    var m = date.getMonth() + 1;  
+		    m = m < 10 ? '0' + m : m;  
+		    var d = date.getDate();  
+		    d = d < 10 ? ('0' + d) : d;  
+		    return y + '-' + m + '-' + d;
+		} else{
+			return '';
+		}
+	      
+	};
 	$scope.typeBases(); // 加载页面时调用
 	// 总条数
 	$scope.total = 0;
@@ -21,7 +34,9 @@ app.controller("liveVerifyController", function($scope, $http) {
 	//页面展示
 	$scope.loaddata = function () {
 		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
-		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,
+			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"mobile":$scope.mobile,
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == 0) {
 				$scope.liveVerifyList = result.data;
@@ -30,7 +45,9 @@ app.controller("liveVerifyController", function($scope, $http) {
 				alert(result.message);
 			}
 		})
-		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":0,"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":0,
+			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"mobile":$scope.mobile,
+			"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == 0) {
 				$scope.liveVerifyLists = result.data;

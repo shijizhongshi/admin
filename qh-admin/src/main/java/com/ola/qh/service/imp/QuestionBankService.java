@@ -317,12 +317,12 @@ public class QuestionBankService implements IQuestionBankService {
 	 * 直播验证数据
 	 */
 	@Override
-	public Results<List<CourseLiveCheck>> selectLiveVerifyList(int pageNo,int pageSize, String mobile, String roomId,
+	public Results<List<CourseLiveCheck>> selectLiveVerifyList(String fromdate,String todate,int pageNo,int pageSize, String mobile, String roomId,
 			String courseTypeSubclassName) {
 		Results<List<CourseLiveCheck>> results = new Results<List<CourseLiveCheck>>();
 
 		// 条件查询
-		List<CourseLiveCheck> list = questionBankDao.liveVerifyList(pageNo, pageSize, mobile, roomId,
+		List<CourseLiveCheck> list = questionBankDao.liveVerifyList(fromdate,todate,pageNo, pageSize, mobile, roomId,
 				courseTypeSubclassName);
 		for (CourseLiveCheck courseLiveCheck : list) {
 			// 根据mobile查询user 有数据说明是注册用户 赋值展示
@@ -334,7 +334,7 @@ public class QuestionBankService implements IQuestionBankService {
 			}
 		}
 		//查询数量  
-		Integer countInteger = questionBankDao.selectLiveVerifyCount(mobile,roomId,courseTypeSubclassName);
+		Integer countInteger = questionBankDao.selectLiveVerifyCount(fromdate,todate,mobile,roomId,courseTypeSubclassName);
 		
 		results.setStatus("0");
 		results.setCount(countInteger);
