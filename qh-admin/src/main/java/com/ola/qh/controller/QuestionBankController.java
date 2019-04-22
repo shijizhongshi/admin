@@ -267,4 +267,34 @@ public class QuestionBankController {
 
 		return results;
 	}
+
+	// 获取观看视频接口 http://api.csslcloud.net/api/statis/live/useraction
+	@RequestMapping(value = "liveAccess", method = RequestMethod.GET)
+	public Results<String> liveAccess(@RequestParam(value = "liveId", required = true) String liveId,
+			@RequestParam(value = "pageindex") Integer pageindex, @RequestParam(value = "pagenum") Integer pagenum) {
+		Results<String> results = new Results<String>();
+		//treemap
+		TreeMap<Object, Object> treeMap = new TreeMap<>();
+		treeMap.put("userid", "91DD94C27B488135");
+		treeMap.put("liveid", liveId);
+		treeMap.put("pagenum", pagenum);
+		treeMap.put("pageindex", pageindex);
+		
+		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+		
+		try {
+			Results<byte[]> testByte = Requests.testGet(Patterns.useraction, null, address);
+			byte[] bytes = testByte.getData();
+			String byteString = new String(bytes);
+			//json转实体类
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		results.setStatus("0");
+		return results;
+	}
+
 }

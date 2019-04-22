@@ -34,7 +34,6 @@ app.controller("studyRecordController", function($scope, $http) {
 				{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				console.log("获取接口 成功");
 				$scope.list = result.data;
 				console.log(result.data);
 				return;

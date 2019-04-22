@@ -21,5 +21,10 @@ public class marketing {
 	public String studyRecord() {
 		return "marketing/studyRecord";
 	}
+	
+	@RequestMapping("/liveAccess")
+	public String liveAccess() {
+		return "marketing/liveAccess";
+	}
 
 }
