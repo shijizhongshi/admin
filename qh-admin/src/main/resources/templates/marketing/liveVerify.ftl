@@ -71,7 +71,7 @@ submenu="sidebarmenu-marketing-liveVerify">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel1')">
+						ng-click="exportExcel()">
 				</div>
 			</div>
 			<div class="manage">

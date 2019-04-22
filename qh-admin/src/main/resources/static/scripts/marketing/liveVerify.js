@@ -31,6 +31,7 @@ app.controller("liveVerifyController", function($scope, $http) {
 	//一页展示多少行
 	$scope.pageSize = 20;
 	
+	$scope.liveVerifyLists=[];
 	//页面展示
 	$scope.loaddata = function () {
 		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
@@ -73,4 +74,10 @@ app.controller("liveVerifyController", function($scope, $http) {
 		})
 	};
 	$scope.loaddata();
+	$scope.exportExcel = function () {
+		$scope.courseLiveList=$scope.liveVerifyLists;
+		$http.post("api/excel/exportTest",$scope.courseLiveList, {'Content-Type': 'application/json;charset=UTF-8'})
+		
+	};
+	
 });
