@@ -14,11 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseLiveCheck;
-import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.VideoPlaybackRecord;
-import com.ola.qh.service.ICourseService;
 import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IUserService;
@@ -127,150 +125,142 @@ public class QuestionBankController {
 	}
 
 	/**
-	 * 获取视频播放记录
+	 * cc视频接口 三合一
 	 * 
-	 * @param userId     账号id 必填
-	 * @param videoId    视频id 必填
-	 * @param date       日期 必填
-	 * @param numPerPage 一页展示条数
-	 * @param page       第几页
+	 * @param videoId
+	 * @param mobile
+	 * @param date
+	 * @param numPerPage
+	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value = "/video/v2", method = RequestMethod.GET)
-	public Results<List<PlayLog>> test(@RequestParam(value = "videoId", required = true) String videoId,
+	@RequestMapping(value = "/video", method = RequestMethod.GET)
+	public Results<List<PlayLog>> test(@RequestParam(value = "videoId", required = false) String videoId,
+			@RequestParam(value = "mobile", required = false) String mobile,
 			@RequestParam(value = "date", required = true) String date,
 			@RequestParam(value = "numPerPage", required = false) String numPerPage,
 			@RequestParam(value = "page", required = false) String page) {
 		Results<List<PlayLog>> results = new Results<List<PlayLog>>();
+		// 获取视频播放记录接口
+		if (videoId != null && mobile == null) {
+			// 必须为 treemap传参
+			TreeMap<String, String> treeMap = new TreeMap<>();
+			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("videoid", videoId);
+			treeMap.put("date", date);
+			treeMap.put("num_per_page", numPerPage);
+			treeMap.put("page", page);
 
-		// 必须为 treemap传参 ,参数顺序按首字母升序排序
-		TreeMap<String, String> treeMap = new TreeMap<>();
-		treeMap.put("userid", "91DD94C27B488135");
-		treeMap.put("videoid", videoId);
-		treeMap.put("date", date);
-		treeMap.put("num_per_page", numPerPage);
-		treeMap.put("page", page);
+			// 拼接地址
+			// t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key
+			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			try {
+				Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
+				byte[] bytess = testByte.getData();
+				String byteString = new String(bytess);
 
-		// 拼接地址
-		// t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key
-		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
-		try {
-			Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
-			byte[] bytess = testByte.getData();
-			String byteString = new String(bytess);
+				// json字符串转换
+				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
+				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
+				for (PlayLog playLog : list) {
+					// 查name
+					String userName = userService.selectNameById(playLog.getUserid());
+					// 查视频名和所属专业
+					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					playLog.setUserName(userName);
+					playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeName());
+					playLog.setSectionName(courseChapter.getSectionName());
+				}
+				results.setStatus("0");
+				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
+				// List<PlayLog> data = videoPlaybackRecord.getPlay_logs().getPlay_log();
+				results.setData(list);
 
-			//json字符串转换
-			VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
-			//String data = new String(bytess);
-			List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
-			for (PlayLog playLog : list) {
-				//查name
-				String userName = userService.selectNameById(playLog.getUserid());
-				//查视频名和所属专业
-				CourseChapter courseChapter =  courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
-				playLog.setUserName(userName);
-				playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeName());
-				playLog.setSectionName(courseChapter.getSectionName());
+				return results;
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			results.setStatus("0");
-			results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
-			results.setData(videoPlaybackRecord.getPlay_logs().getPlay_log());
-
-			return results;
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		results.setStatus("0");
-		results.setMessage("错误！");
+		// 获取用户自定义参数播放记录
+		if (mobile != null && videoId == null) {
+			// 根据手机号查询id
+			String id = userService.selectIdByMobile(mobile);
 
-		return results;
-	}
+			TreeMap<String, String> treeMap = new TreeMap<>();
+			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("customid", id);
+			treeMap.put("date", date);
+			treeMap.put("num_per_page", numPerPage);
+			treeMap.put("page", page);
 
-	/**
-	 * 获取用户自定义参数播放记录
-	 * 
-	 * @param mobile     手机号
-	 * @param date       日期
-	 * @param numPerPage 一页展示几条
-	 * @param page       第几页
-	 * @return
-	 */
-	@RequestMapping(value = "/custom/user/v2", method = RequestMethod.GET)
-	public Results<String> customUserV2(@RequestParam(value = "mobile", required = true) String mobile,
-			@RequestParam(value = "date", required = true) String date,
-			@RequestParam(value = "numPerPage", required = false) String numPerPage,
-			@RequestParam(value = "page", required = false) String page) {
-		Results<String> results = new Results<>();
-		// 根据手机号查询id
-		String id = userService.selectIdByMobile(mobile);
+			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			try {
+				Results<byte[]> testByte = Requests.testGet(Patterns.customUserV2, null, address);
+				byte[] bytess = testByte.getData();
+				String byteString = new String(bytess);
 
-		TreeMap<String, String> treeMap = new TreeMap<>();
-		treeMap.put("userid", "91DD94C27B488135");
-		treeMap.put("customid", id);
-		treeMap.put("date", date);
-		treeMap.put("num_per_page", numPerPage);
-		treeMap.put("page", page);
+				// json字符串转换
+				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
+				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
+				// 展示具体的foreach循环添加
+				for (PlayLog playLog : list) {
+					// name
+					String userName = userService.selectNameById(playLog.getUserid());
+					// 视频名 和 专业名
+					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					playLog.setUserName(userName);
+					playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
+					playLog.setSectionName(playLog.getSectionName());
+				}
+				results.setStatus("0");
+				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
+				results.setData(list);
 
-		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
-		try {
-			Results<byte[]> testByte = Requests.testGet(Patterns.customUserV2, null, address);
-			byte[] bytess = testByte.getData();
-			String data = new String(bytess);
-
-			results.setStatus("0");
-			results.setData(data);
-
-			return results;
-		} catch (IOException e) {
-			e.printStackTrace();
+				return results;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		results.setStatus("0");
-		results.setMessage("错误！");
+		// 获取视频自定义参数播放记录
+		if (mobile != null && videoId != null) {
+			// 根据手机号查询id
+			String id = userService.selectIdByMobile(mobile);
 
-		return results;
-	}
+			TreeMap<String, String> treeMap = new TreeMap<>();
+			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("videoid", videoId);
+			treeMap.put("customid", id);
+			treeMap.put("date", date);
+			treeMap.put("num_per_page", numPerPage);
+			treeMap.put("page", page);
 
-	/**
-	 * 获取视频自定义参数播放记录
-	 * 
-	 * @param videoId    视频id
-	 * @param mobile     手机号
-	 * @param date       日期
-	 * @param numPerPage 一页展示几条
-	 * @param page       第几页
-	 * @return
-	 */
-	@RequestMapping(value = "/custom/video/v2", method = RequestMethod.GET)
-	public Results<String> customVideoV2(@RequestParam(value = "videoId", required = true) String videoId,
-			@RequestParam(value = "mobile", required = true) String mobile,
-			@RequestParam(value = "date", required = true) String date,
-			@RequestParam(value = "numPerPage", required = false) String numPerPage,
-			@RequestParam(value = "page", required = false) String page) {
-		Results<String> results = new Results<>();
+			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			try {
+				Results<byte[]> testByte = Requests.testGet(Patterns.customVideoV2, null, address);
+				byte[] bytess = testByte.getData();
+				String byteString = new String(bytess);
 
-		// 根据手机号查询id
-		String id = userService.selectIdByMobile(mobile);
+				// json字符串转换
+				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
+				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
+				// 展示具体的foreach循环添加
+				for (PlayLog playLog : list) {
+					// name
+					String userName = userService.selectNameById(playLog.getUserid());
+					// 视频名 和 专业名
+					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					playLog.setUserName(userName);
+					playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
+					playLog.setSectionName(playLog.getSectionName());
+				}
 
-		TreeMap<String, String> treeMap = new TreeMap<>();
-		treeMap.put("userid", "91DD94C27B488135");
-		treeMap.put("videoid", videoId);
-		treeMap.put("customid", id);
-		treeMap.put("date", date);
-		treeMap.put("num_per_page", numPerPage);
-		treeMap.put("page", page);
+				results.setStatus("0");
+				results.setData(list);
 
-		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
-		try {
-			Results<byte[]> testByte = Requests.testGet(Patterns.customVideoV2, null, address);
-			byte[] bytess = testByte.getData();
-			String data = new String(bytess);
-
-			results.setStatus("0");
-			results.setData(data);
-
-			return results;
-		} catch (IOException e) {
-			e.printStackTrace();
+				return results;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		results.setStatus("0");
 		results.setMessage("错误！");

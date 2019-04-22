@@ -26,7 +26,7 @@ submenu="sidebarmenu-marketing-studyRecord">
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>&nbsp;</span> <input type="date" name="search"
+					<span>请选择日期</span> <input type="date" name="search"
 						ng-model="date"
 						class="ng-pristine ng-untouched ng-valid ng-empty">
 				</div>
@@ -50,10 +50,9 @@ submenu="sidebarmenu-marketing-studyRecord">
 			<div class="manage">
 				<div class="admin-table">
 
-					<table id="tableExcel">
+					<table id="tableExcel" >
 						<tbody>
 							<tr>
-								
 								<th>用户名</th>
 								<th>视频名称</th>
 								<th>专业</th>
@@ -61,7 +60,9 @@ submenu="sidebarmenu-marketing-studyRecord">
 								<th>视频总长</th>
 							</tr>
 							<tr ng-repeat="list in list">
-								<th>{{list.videoid}}</th>
+								<th>{{list.userName}}</th>
+								<th>{{list.sectionName}}</th>
+								<th>{{list.courseTypeSubclassName}}</th>
 								<th>{{list.play_duration}}</th>
 								<th>{{list.video_duration}}</th>
 							</tr>

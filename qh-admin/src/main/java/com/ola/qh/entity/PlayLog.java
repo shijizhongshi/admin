@@ -2,23 +2,23 @@ package com.ola.qh.entity;
 
 public class PlayLog {
 
-	private String custom_id;
-	private String videoid;
-	private String userid;
-	private Integer upid;
-	private String ip;
-	private Integer video_duration;
-	private Integer play_position;
-	private Integer play_duration;
-	private String device;
-	private String referer;
-	private String city;
-	private String province;
-	private String end_time;
-	private String start_time;
-	private String terminal;
-	private String browser;
-	private String operating_system;
+	private Integer upid;//每次播放产生的随机数字
+	private String userid;//用户id
+	private String videoid;//视频id
+	private String custom_id;//自定义id
+	private Integer play_duration;//播放时长
+	private Integer play_position;//最后播放位置
+	private Integer video_duration;//视频时长
+	private String ip;//ip地址
+	private String province;//省份名称
+	private String city;//城市名称
+	private String referer;//来源域名
+	private String device;//设备类型
+	private String operating_system;//操作系统
+	private String browser;//浏览器类型
+	private String terminal;//终端类型
+	private String start_time;//开始播放时间
+	private String end_time;//结束播放时间
 	
 	//
 	private String userName;
@@ -26,8 +26,18 @@ public class PlayLog {
 	private String sectionName;
 	
 	private String courseTypeSubclassName;
+	//
+	private Integer isShow;
 	
+
 	
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
+	}
 
 	public String getUserName() {
 		return userName;

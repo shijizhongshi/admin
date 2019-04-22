@@ -21,33 +21,17 @@ app.controller("studyRecordController", function($scope, $http) {
 		}
 	};
 	// 页面展示
-	$scope.isshow = 2;
-	console.log($scope.isshow);
-	console.log();
 	$scope.loaddata = function() {
-		// BUG:无法判断 空字符串
-		// cc接口名称：获取用户自定义参数播放记录
-		if ($scope.mobile != null && $scope.videoId == null) {
-			
-		}
-		//{"params":{"pageNo":$scope.pageNo,"pageSize":$scope.pageSize,"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"mobile":$scope.mobile,"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}
-		// cc接口名称：获取视频播放记录
-		if ($scope.mobile == null && $scope.videoId != null) {
-			$http.get("/api/questionbank/video/v2",
-					{"params":{"page":$scope.page,"numPerPage":$scope.numPerPage,"videoId":$scope.videoId,"date":changeDate($scope.date)}},
-					{'Content-Type' : 'application/json;charset=UTF-8'})
-			.success(function (result) {
-				if (result.status == "0") {
-					$scope.isshow = 1;
-					$scope.list = result.data;
-					console.log(result.data);
-					return;
-				}
-			})
-		};
-		// cc接口名称：获取视频自定义参数播放记录
-		if ($scope.mobile != null && $scope.videoId != null) {
-			
-		}
+		$http.get("/api/questionbank/video",
+				{"params":{"page":$scope.page,"numPerPage":$scope.numPerPage,"mobile":$scope.mobile,"videoId":$scope.videoId,"date":changeDate($scope.date)}},
+				{'Content-Type' : 'application/json;charset=UTF-8'})
+		.success(function (result) {
+			if (result.status == "0") {
+				console.log("获取接口 成功");
+				$scope.list = result.data;
+				console.log(result.data);
+				return;
+			}
+		})
 	}
 });
