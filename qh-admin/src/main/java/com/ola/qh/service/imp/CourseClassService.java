@@ -69,8 +69,13 @@ public class CourseClassService implements ICourseClassService {
 		try {
 
 			courseClass.setId(KeyGen.uuid());
-			int ordersMax = courseSubclassDao.selectMaxOrder("cclass");
-			courseClass.setOrders(ordersMax+1);
+			Integer ordersMax = courseSubclassDao.selectMaxOrder("cclass");
+			if(ordersMax!=null){
+				courseClass.setOrders(ordersMax.intValue()+1);
+			}else{
+				courseClass.setOrders(1);
+			}
+			//courseClass.setOrders(ordersMax+1);
 			///////专业名称已经存在了班级给他提示
 			int count = courseClassDao.selectCourseClassCount(courseClass.getCourseTypeName(), courseClass.getCourseTypeSubclassName(),courseClass.getClassName());
 			

@@ -25,5 +25,9 @@ public class Patterns {
     
     public static final String plovywritetoken="a1df864b-405e-4782-9494-733e9b51c5d5";
 
-    public static final String test="http://spark.bokecc.com/api/playlog/video/v2";
+    public static final String videoV2="http://spark.bokecc.com/api/playlog/video/v2";
+    
+    public static final String customUserV2="http://spark.bokecc.com/api/playlog/custom/user/v2";
+    
+    public static final String customVideoV2="http://spark.bokecc.com/api/playlog/custom/video/v2";
 }

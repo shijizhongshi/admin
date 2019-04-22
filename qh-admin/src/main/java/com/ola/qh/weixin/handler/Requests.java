@@ -124,6 +124,100 @@ public class Requests {
 		return result;
 	}
 
+	// test
+	public static Results<byte[]> testGet(String url, Map<String, String> headers, String address) throws IOException {
+		Results<byte[]> result = new Results<byte[]>();
+		try {
+			url += "?" + address;
+		} catch (ParseException e) {
+			logger.log(Level.SEVERE, e.toString());
+			result.setStatus("1");
+			result.setMessage(e.getMessage());
+			return result;
+		}
+
+		logger.info("request url : " + url);
+		HttpGet httpGet = new HttpGet(url);
+		if (Objects.nonNull(headers) && !headers.isEmpty()) {
+			for (Map.Entry<String, String> entry : headers.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				if (!Strings.empty(value) && !Strings.empty(key)) {
+					logger.info("find header : " + key + " : " + value);
+					httpGet.setHeader(key, value);
+				}
+			}
+		}
+		CloseableHttpResponse response = null;
+
+		try {
+			response = client.execute(httpGet);
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, e.toString());
+			result.setStatus("1");
+			result.setMessage(e.getMessage());
+			return result;
+		}
+		int statusCode = response.getStatusLine().getStatusCode();
+		HttpEntity entity = response.getEntity();
+		if (statusCode != 200) {
+			httpGet.abort();
+			if (Objects.nonNull(entity)) {
+				try {
+					String message = EntityUtils.toString(entity, charset);
+					result.setStatus("1");
+					result.setMessage(message);
+					return result;
+				} catch (ParseException | IOException e) {
+					logger.log(Level.SEVERE, e.toString());
+
+					result.setStatus("1");
+					result.setMessage(e.getMessage());
+					return result;
+				}
+			}
+			result.setStatus("1");
+			result.setMessage("request error, status code : " + statusCode);
+			return result;
+		}
+		byte[] results = null;
+		if (Objects.nonNull(entity)) {
+			try {
+				results = EntityUtils.toByteArray(entity);
+			} catch (ParseException | IOException e) {
+				logger.log(Level.SEVERE, e.toString());
+
+				result.setStatus("1");
+				result.setMessage(e.getMessage());
+				return result;
+			}
+		}
+		try {
+			EntityUtils.consume(entity);
+			response.close();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, e.toString());
+			result.setStatus("1");
+			result.setMessage(e.getMessage());
+			return result;
+		}
+		result.setStatus("0");
+		result.setData(results);
+		return result;
+	}
+
+	/***
+	 * post请求
+	 * 
+	 * @param url
+	 * @param headers
+	 * @param params
+	 * @param json
+	 * @param forms
+	 * @param files
+	 * @param data
+	 * @return
+	 */
 	public static Results<byte[]> post(String url, Map<String, String> headers, Map<String, String> params, String json,
 			Map<String, String> forms, File[] files, byte[] data) {
 		Results<byte[]> result = new Results<byte[]>();

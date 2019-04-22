@@ -47,8 +47,12 @@ public class CourseSubclassService implements ICourseSubclassService{
 			//////保存用户的信息
 			ccp.setId(KeyGen.uuid());
 			ccp.setAddtime(new Date());
-			int ordersMax = courseSubclassDao.selectMaxOrder("cc");
-			ccp.setOrders(ordersMax+1);
+			Integer ordersMax = courseSubclassDao.selectMaxOrder("cc");
+			if(ordersMax!=null){
+				ccp.setOrders(ordersMax.intValue()+1);
+			}else{
+				ccp.setOrders(1);
+			}
 			int num = courseSubclassDao.insertCourseChapter(ccp);
 			if(num>0){
 				result.setStatus("0");
@@ -90,8 +94,13 @@ public class CourseSubclassService implements ICourseSubclassService{
 		//////保存用户的信息
 		cs.setId(KeyGen.uuid());
 		cs.setAddtime(new Date());
-		int ordersMax = courseSubclassDao.selectMaxOrder("cs");
-		cs.setOrders(ordersMax+1);
+		Integer ordersMax = courseSubclassDao.selectMaxOrder("cs");
+		if(ordersMax!=null){
+			cs.setOrders(ordersMax.intValue()+1);
+		}else{
+			cs.setOrders(1);
+		}
+		//cs.setOrders(ordersMax+1);
 		int num = courseSubclassDao.insertCourseSection(cs);
 		if(num>0){
 			result.setStatus("0");
@@ -151,8 +160,13 @@ public class CourseSubclassService implements ICourseSubclassService{
 						sc.setSectionName(checkNull(0,row));
 						sc.setVideoId(checkNull(1,row));
 						///////这个章下的这一节是否已经存在了
-						int ordersMax = courseSubclassDao.selectMaxOrder("cs");
-						sc.setOrders(ordersMax+1);
+						Integer ordersMax = courseSubclassDao.selectMaxOrder("cs");
+						if(ordersMax!=null){
+							sc.setOrders(ordersMax.intValue()+1);
+						}else{
+							sc.setOrders(1);
+						}
+						//sc.setOrders(ordersMax+1);
 						courseSubclassDao.insertCourseSection(sc);
 					}
 					
@@ -198,6 +212,12 @@ public class CourseSubclassService implements ICourseSubclassService{
         }
         result.setStatus("0");
 		return result;
+	}
+
+	@Override
+	public CourseChapter selectNameAndCTSN(String videoid) {
+		
+		return courseSubclassDao.selectNameAndCTSN(videoid);
 	}
 	
 	

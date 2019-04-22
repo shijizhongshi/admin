@@ -428,5 +428,19 @@ public class UserService implements IUserService {
 
 			return results;
 	}
+	/**
+	 * 根据mobile查询id
+	 */
+	@Override
+	public String selectIdByMobile(String mobile) {
+		return userDao.selectIdByMobile(mobile);
+	}
+
+	@Override
+	public String selectNameById(String userid) {
+		
+		return userDao.selectNameById(userid);
+	}
+	
 
 }

@@ -7,259 +7,287 @@
 
 	<!-- 课程章的开始############################################## -->
 	<!-- 课程章的映射 -->
-	<resultMap type="com.ola.qh.entity.CourseChapter" id="CourseChapterMap">
-	<result column="id" property="id"/>
-	<result column="course_id" property="courseId"/>
-	<result column="course_chapter_name" property="courseChapterName"/>
-	<result column="course_lecturer" property="courseLecturer"/>
-	<!-- 是否付费 -->
-	<result column="course_type_name" property="courseTypeName"/>
-	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
-	<result column="orders" property="orders"/>
-	<result column="addtime" property="addtime"/>
+	<resultMap type="com.ola.qh.entity.CourseChapter"
+		id="CourseChapterMap">
+		<result column="id" property="id" />
+		<result column="course_id" property="courseId" />
+		<result column="course_chapter_name"
+			property="courseChapterName" />
+		<result column="course_lecturer" property="courseLecturer" />
+		<!-- 是否付费 -->
+		<result column="course_type_name" property="courseTypeName" />
+		<result column="course_type_subclass_name"
+			property="courseTypeSubclassName" />
+		<result column="orders" property="orders" />
+		<result column="addtime" property="addtime" />
 	</resultMap>
-	
-	<insert id="insertCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
-	insert into course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime,orders)
-	 values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime},#{orders})
+
+	<insert id="insertCourseChapter"
+		parameterType="com.ola.qh.entity.CourseChapter">
+		insert into
+		course_chapter(id,course_id,course_chapter_name,course_lecturer,course_type_name,course_type_subclass_name,addtime,orders)
+		values(#{id},#{courseId},#{courseChapterName},#{courseLecturer},#{courseTypeName},#{courseTypeSubclassName},#{addtime},#{orders})
 	</insert>
-	<update id="updateCourseChapter" parameterType="com.ola.qh.entity.CourseChapter">
-	update course_chapter set 
-	<if test="courseId!=null">
-		course_id=#{courseId},
-	</if>
-	<if test="courseChapterName!=null">
-	course_chapter_name=#{courseChapterName},
-	</if>
-	<if test="courseLecturer!=null">
-		course_lecturer=#{courseLecturer},
-	</if>
-	
-	updatetime=#{updatetime} where id=#{id}
+	<update id="updateCourseChapter"
+		parameterType="com.ola.qh.entity.CourseChapter">
+		update course_chapter set
+		<if test="courseId!=null">
+			course_id=#{courseId},
+		</if>
+		<if test="courseChapterName!=null">
+			course_chapter_name=#{courseChapterName},
+		</if>
+		<if test="courseLecturer!=null">
+			course_lecturer=#{courseLecturer},
+		</if>
+
+		updatetime=#{updatetime} where id=#{id}
 	</update>
-	
+
+	<!-- 测试 -->
+	<select id="selectNameAndCTSN" resultMap="CourseChapterMap">
+		select section_name,course_type_subclass_name from course_section as cs
+		left join course_chapter as cc
+		on cs.course_chapter_id = cc.id where 1=1 
+		<if test="videoId!=null and videoId!=''">
+		and video_id = #{videoId}
+		</if>
+	</select>
 	<!-- 课程章的查询 -->
 	<select id="courseChapterList" resultMap="CourseChapterMap">
-	select id,course_id,course_lecturer,course_chapter_name,ispay,addtime,orders from course_chapter
-	where  1=1
-	<if test="courseId!=null and courseId!='' ">
-	and course_id=#{courseId}
-	</if>
-	<if test="courseChapterName!=null and courseChapterName!='' ">
-	and course_chapter_name like concat(concat('%',#{courseChapterName},'%'))
-	</if>
-	<if test="courseTypeName!=null and courseTypeName!='' ">
-	and course_type_name=#{courseTypeName}
-	</if>
-	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
-	and course_type_subclass_name=#{courseTypeSubclassName}
-	</if>
-	order by orders asc
-	<if test="pageSize!=0">
-	limit #{pageNo},#{pageSize}
-	</if>
+		select
+		id,course_id,course_lecturer,course_chapter_name,ispay,addtime,orders
+		from course_chapter
+		where 1=1
+		<if test="courseId!=null and courseId!='' ">
+			and course_id=#{courseId}
+		</if>
+		<if test="courseChapterName!=null and courseChapterName!='' ">
+			and course_chapter_name like
+			concat(concat('%',#{courseChapterName},'%'))
+		</if>
+		<if test="courseTypeName!=null and courseTypeName!='' ">
+			and course_type_name=#{courseTypeName}
+		</if>
+		<if
+			test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
+			and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		order by orders asc
+		<if test="pageSize!=0">
+			limit #{pageNo},#{pageSize}
+		</if>
 	</select>
-	
-	
+
+
 	<!-- 课程章的查询 -->
 	<select id="courseChapterListCount" resultType="int">
-	select count(id) from course_chapter
-	where  1=1
-	<if test="courseId!=null and courseId!='' ">
-	and course_id=#{courseId}
-	</if>
-	<if test="courseTypeName!=null and courseTypeName!='' ">
-	and course_type_name=#{courseTypeName}
-	</if>
-	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
-	and course_type_subclass_name=#{courseTypeSubclassName}
-	</if>
-	<if test="courseChapterName!=null and courseChapterName!='' ">
-	and course_chapter_name like concat(concat('%',#{courseChapterName},'%'))
-	</if>
+		select count(id) from course_chapter
+		where 1=1
+		<if test="courseId!=null and courseId!='' ">
+			and course_id=#{courseId}
+		</if>
+		<if test="courseTypeName!=null and courseTypeName!='' ">
+			and course_type_name=#{courseTypeName}
+		</if>
+		<if
+			test="courseTypeSubclassName!=null and courseTypeSubclassName!='' ">
+			and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		<if test="courseChapterName!=null and courseChapterName!='' ">
+			and course_chapter_name like
+			concat(concat('%',#{courseChapterName},'%'))
+		</if>
 	</select>
-	
+
 	<delete id="deleteChapter">
-	delete from course_chapter where id=#{id}
+		delete from course_chapter where id=#{id}
 	</delete>
-	
+
 
 	<!-- 课程章的结束############################################## -->
-	
-	
-	
+
+
+
 	<!-- 课程节的开始############################################## -->
-	
-	<resultMap type="com.ola.qh.entity.CourseSection" id="CourseSectionMap">
-	<result column="id" property="id"/>
-	<result column="course_chapter_id" property="courseChapterId"/>
-	<result column="section_name" property="sectionName"/>
-	<result column="aliyunId" property="aliyunId"/>
-	<result column="video_id" property="videoId"/>
-	<result column="video_url" property="videoUrl"/>
-	<result column="isshow" property="isshow"/>
-	<result column="addtime" property="addtime"/>
-	<result column="orders" property="orders"/>
+
+	<resultMap type="com.ola.qh.entity.CourseSection"
+		id="CourseSectionMap">
+		<result column="id" property="id" />
+		<result column="course_chapter_id" property="courseChapterId" />
+		<result column="section_name" property="sectionName" />
+		<result column="aliyunId" property="aliyunId" />
+		<result column="video_id" property="videoId" />
+		<result column="video_url" property="videoUrl" />
+		<result column="isshow" property="isshow" />
+		<result column="addtime" property="addtime" />
+		<result column="orders" property="orders" />
 	</resultMap>
-	
-	<insert id="insertCourseSection" parameterType="com.ola.qh.entity.CourseSection">
-	insert into course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url,orders)
-	values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl},#{orders})
+
+	<insert id="insertCourseSection"
+		parameterType="com.ola.qh.entity.CourseSection">
+		insert into
+		course_section(id,course_chapter_id,section_name,aliyunId,isshow,addtime,video_id,video_url,orders)
+		values(#{id},#{courseChapterId},#{sectionName},#{aliyunId},#{isshow},#{addtime},#{videoId},#{videoUrl},#{orders})
 	</insert>
-	
-	<update id="updateCourseSection" parameterType="com.ola.qh.entity.CourseSection">
-	update course_section set
-	<if test="courseChapterId!=null">
-	course_chapter_id=#{courseChapterId},
-	</if>
-	<if test="sectionName!=null">
-	section_name=#{sectionName},
-	</if>
-	<if test="aliyunId!=null">
-	aliyunId=#{aliyunId},
-	</if>
-	<if test="isshow!=null">
-	isshow=#{isshow},
-	</if>
-	<if test="videoId!=null">
-	video_id=#{videoId},
-	</if>
-	<if test="videoUrl!=null">
-	video_url=#{videoUrl},
-	</if>
-	
-	updatetime=#{updatetime} where id=#{id}
+
+	<update id="updateCourseSection"
+		parameterType="com.ola.qh.entity.CourseSection">
+		update course_section set
+		<if test="courseChapterId!=null">
+			course_chapter_id=#{courseChapterId},
+		</if>
+		<if test="sectionName!=null">
+			section_name=#{sectionName},
+		</if>
+		<if test="aliyunId!=null">
+			aliyunId=#{aliyunId},
+		</if>
+		<if test="isshow!=null">
+			isshow=#{isshow},
+		</if>
+		<if test="videoId!=null">
+			video_id=#{videoId},
+		</if>
+		<if test="videoUrl!=null">
+			video_url=#{videoUrl},
+		</if>
+
+		updatetime=#{updatetime} where id=#{id}
 	</update>
-	
+
 	<!-- 课程节的查询 -->
 	<select id="courseSectionList" resultMap="CourseSectionMap">
-	select * from course_section
-	where 1=1
-	<if test="courseChapterId!=null">
-	and  course_chapter_id=#{courseChapterId}
-	</if>
-	order by orders asc
-	<if test="pageSize!=0">
-	limit #{pageNo},#{pageSize}
-	</if>
+		select * from course_section
+		where 1=1
+		<if test="courseChapterId!=null">
+			and course_chapter_id=#{courseChapterId}
+		</if>
+		order by orders asc
+		<if test="pageSize!=0">
+			limit #{pageNo},#{pageSize}
+		</if>
 	</select>
-	
+
 	<select id="courseSectionListCount" resultType="int">
-	select count(id) from course_section where 1=1
-	<if test="courseChapterId!=null">
-	 and course_chapter_id=#{courseChapterId}
-	</if>
+		select count(id) from course_section where 1=1
+		<if test="courseChapterId!=null">
+			and course_chapter_id=#{courseChapterId}
+		</if>
 	</select>
 	<delete id="deleteSerction">
-	delete from course_section where id=#{id}
+		delete from course_section where id=#{id}
 	</delete>
-	
+
 	<select id="existSection" resultType="int">
-	select count(id) from course_section where section_name=#{sectionName} and course_chapter_id=#{courseChapterId} 
-	
+		select count(id) from course_section where section_name=#{sectionName} and
+		course_chapter_id=#{courseChapterId}
+
 	</select>
-	
+
 	<!-- 节排序 -->
 	<select id="selectMaxOrder" resultType="java.lang.Integer">
-	select orders from 
-	<if test="tables=='cs'">
-	course_section    
-	</if>
-    <if test="tables=='cc'">
-    course_chapter
-    </if>
-    <if test="tables=='cclass'">
-   	course_class
-    </if>
-    <if test="tables=='course'">
-    course
-    </if>
-    <if test="tables=='audition'">
-    course_nofree
-    </if>
-    order by orders desc
-    limit 0,1
+		select orders from
+		<if test="tables=='cs'">
+			course_section
+		</if>
+		<if test="tables=='cc'">
+			course_chapter
+		</if>
+		<if test="tables=='cclass'">
+			course_class
+		</if>
+		<if test="tables=='course'">
+			course
+		</if>
+		<if test="tables=='audition'">
+			course_nofree
+		</if>
+		order by orders desc
+		limit 0,1
 	</select>
-	
+
 	<select id="selectOrder" resultType="java.lang.Integer">
-	SELECT ifnull(orders, 1) previousOrder
-	<if test="tables=='cs'">
-	FROM course_section    
-	</if>
-    <if test="tables=='cc'">
-    from course_chapter
-    </if>
-    <if test="tables=='cclass'">
-	FROM course_class
-	</if>
-    <if test="tables=='course'">
-    from course
-    </if>
-    <if test="tables=='audition'">
-    from course_nofree
-    </if>
-    WHERE 1=1
-    <if test="tables=='cs'">
-	and course_chapter_id=#{comment}
-	</if>
-    <if test="tables=='cc'">
-    and course_type_subclass_name=#{comment}
-    </if>
-    <if test="tables=='cclass'">
-    and course_type_subclass_name=#{comment}
-    </if>
-    <if test="tables=='course'">
-    and course_type_subclass_name=#{comment}
-    </if>
-    <if test="tables=='audition'">
-    and course_type_subclass_name=#{comment}
-    </if>
-    <if test="type=='up'">
-    <!-- 读取上一条记录 -->
-    and orders <![CDATA[ < ]]> #{orders}
-    order by orders desc
-    </if>
-    <if test="type=='down'">
-    <!-- 读取下一条记录 -->
-    and orders <![CDATA[ > ]]> #{orders}
-    order by orders asc
-    </if>
-    limit 0,1
+		SELECT ifnull(orders, 1) previousOrder
+		<if test="tables=='cs'">
+			FROM course_section
+		</if>
+		<if test="tables=='cc'">
+			from course_chapter
+		</if>
+		<if test="tables=='cclass'">
+			FROM course_class
+		</if>
+		<if test="tables=='course'">
+			from course
+		</if>
+		<if test="tables=='audition'">
+			from course_nofree
+		</if>
+		WHERE 1=1
+		<if test="tables=='cs'">
+			and course_chapter_id=#{comment}
+		</if>
+		<if test="tables=='cc'">
+			and course_type_subclass_name=#{comment}
+		</if>
+		<if test="tables=='cclass'">
+			and course_type_subclass_name=#{comment}
+		</if>
+		<if test="tables=='course'">
+			and course_type_subclass_name=#{comment}
+		</if>
+		<if test="tables=='audition'">
+			and course_type_subclass_name=#{comment}
+		</if>
+		<if test="type=='up'">
+			<!-- 读取上一条记录 -->
+			and orders <![CDATA[ < ]]>
+			#{orders}
+			order by orders desc
+		</if>
+		<if test="type=='down'">
+			<!-- 读取下一条记录 -->
+			and orders <![CDATA[ > ]]>
+			#{orders}
+			order by orders asc
+		</if>
+		limit 0,1
 	</select>
-	
-	
-	
+
+
+
 	<update id="updateOrders">
-	update 
-	<if test="tables=='cs'">
-	course_section    
-	</if>
-    <if test="tables=='cc'">
-    course_chapter
-    </if> 
-    <if test="tables=='cclass'">
-	course_class
-	</if>
-    <if test="tables=='course'">
-    course
-    </if>
-    <if test="tables=='audition'">
-    course_nofree
-    </if>
-    set orders=#{orders} where 1=1
-	<if test="id!=null and id!='' ">
-	and id=#{id}
-	</if>
-	<if test="originalOrder!=0">
-	and orders=#{originalOrder}
-	</if>
+		update
+		<if test="tables=='cs'">
+			course_section
+		</if>
+		<if test="tables=='cc'">
+			course_chapter
+		</if>
+		<if test="tables=='cclass'">
+			course_class
+		</if>
+		<if test="tables=='course'">
+			course
+		</if>
+		<if test="tables=='audition'">
+			course_nofree
+		</if>
+		set orders=#{orders} where 1=1
+		<if test="id!=null and id!='' ">
+			and id=#{id}
+		</if>
+		<if test="originalOrder!=0">
+			and orders=#{originalOrder}
+		</if>
 	</update>
-	
+
 	<!-- 课程节的结束############################################## -->
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 </mapper>

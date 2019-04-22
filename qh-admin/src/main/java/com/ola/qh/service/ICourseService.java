@@ -3,6 +3,7 @@ package com.ola.qh.service;
 import java.util.List;
 
 import com.ola.qh.entity.Course;
+import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.util.Results;

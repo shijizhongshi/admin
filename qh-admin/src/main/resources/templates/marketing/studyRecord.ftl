@@ -7,12 +7,12 @@
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/indent/excle.js"></script>
-<script src="/scripts/marketing/liveVerify.js"></script>
+<script src="/scripts/marketing/studyRecord.js"></script>
 
 </style>
 <@b.body menu="sidebarmenu-marketing"
 submenu="sidebarmenu-marketing-studyRecord">
-<div ng-controller="liveVerifyController">
+<div ng-controller="studyRecordController">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -26,20 +26,17 @@ submenu="sidebarmenu-marketing-studyRecord">
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>手机号</span> <input type="text" ng-model="mobile"
+					<span>请选择日期</span> <input type="date" name="search"
+						ng-model="date"
+						class="ng-pristine ng-untouched ng-valid ng-empty">
+				</div>
+				<div class="select-3">
+					<span>用户手机号</span> <input type="text" ng-model="mobile"
 						placeholder="请输入手机号">
 				</div>
 				<div class="select-3">
-					<span>直播房间号</span> <input type="text" ng-model="roomId"
-						placeholder="请输入房间号">
-				</div>
-				<div class="select-3">
-					<!-- ng-options="a for a in nameList"  -->
-					<span>专业</span> <img src="/images/sjk-xl.png"> <select
-						ng-model="courseTypeSubclassName">
-						<option value="">无专业</option>
-						<option ng-repeat="name in nameList">{{name}}</option>
-					</select>
+					<span>视频id</span> <input type="text" ng-model="videoId"
+						placeholder="请输入视频id">
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
@@ -53,27 +50,22 @@ submenu="sidebarmenu-marketing-studyRecord">
 			<div class="manage">
 				<div class="admin-table">
 
-					<table id="tableExcel">
+					<table id="tableExcel" >
 						<tbody>
 							<tr>
-								<th>手机号</th>
-								<th>用户属性</th>
-								<th>校验码</th>
-								<th>专业名称</th>
-								<th>房间号</th>
-								<th>最后一次操作时间</th>
+								<th>用户名</th>
+								<th>视频名称</th>
+								<th>专业</th>
+								<th>观看时长</th>
+								<th>视频总长</th>
 							</tr>
-							<tr>
-								<th>手机号</th>
-								<th>用户属性</th>
-								<th>校验码</th>
-								<th>专业名称</th>
-								<th>房间号</th>
-								<th>最后一次操作时间</th>
+							<tr ng-repeat="list in list">
+								<th>{{list.userName}}</th>
+								<th>{{list.sectionName}}</th>
+								<th>{{list.courseTypeSubclassName}}</th>
+								<th>{{list.play_duration}}</th>
+								<th>{{list.video_duration}}</th>
 							</tr>
-
-
-
 						</tbody>
 					</table>
 				</div>

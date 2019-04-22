@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ola.qh.entity.Course;
+import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 public interface CourseDao {

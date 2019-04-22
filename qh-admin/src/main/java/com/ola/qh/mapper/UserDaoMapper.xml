@@ -21,7 +21,8 @@
 	</resultMap>
 
 	<insert id="insertUser" parameterType="com.ola.qh.entity.User">
-		insert into user(id,password,nickname,mobile,address,realname,addtime)
+		insert into
+		user(id,password,nickname,mobile,address,realname,addtime)
 		values(#{id},#{password},#{nickname},#{mobile},#{address},#{realname},#{addtime})
 	</insert>
 
@@ -60,19 +61,24 @@
 	<select id="selectStudent" resultMap="UserMap">
 		select * from user_buy_course as us
 		left join user as u
-		on u.id = us.user_id
+		on u.id =
+		us.user_id
 		group by us.user_id
 		having 1=1
 		<if test="fromdate!='' and fromdate!=null ">
-			and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+			and
+			UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
 		<if test="todate!='' and todate!=null ">
-			and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+			and
+			UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 		</if>
 
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-			and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or
-			u.mobile like concat(concat('%',#{realnameORmobile},'%')))
+			and (u.realname like
+			concat(concat('%',#{realnameORmobile},'%')) or
+			u.mobile like
+			concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
 			and u.isdisabled=#{status}
@@ -88,18 +94,22 @@
 		us
 		left join user as u
 		on u.id = us.user_id
-		
+
 		where 1=1
 		<if test="fromdate!='' and fromdate!=null ">
-			and UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
+			and
+			UNIX_TIMESTAMP(us.addtime)&gt;=UNIX_TIMESTAMP(#{fromdate})
 		</if>
 		<if test="todate!='' and todate!=null ">
-			and UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
+			and
+			UNIX_TIMESTAMP(us.addtime)&lt;UNIX_TIMESTAMP(#{todate})
 		</if>
 
 		<if test="realnameORmobile!='' and realnameORmobile!=null ">
-			and (u.realname like concat(concat('%',#{realnameORmobile},'%')) or
-			u.mobile like concat(concat('%',#{realnameORmobile},'%')))
+			and (u.realname like
+			concat(concat('%',#{realnameORmobile},'%')) or
+			u.mobile like
+			concat(concat('%',#{realnameORmobile},'%')))
 		</if>
 		<if test="status!='' and status!=null ">
 			and u.isdisabled=#{status}
@@ -158,7 +168,8 @@
 	</update>
 
 	<select id="adminLogin" resultType="java.lang.String">
-		select nickname from user where nickname=#{username} and
+		select nickname from user
+		where nickname=#{username} and
 		password=#{password}
 	</select>
 
@@ -188,5 +199,19 @@
 		</if>
 	</select>
 	<!--专业名不为空时 进行联合查询 -->
+
+	<select id="selectIdByMobile" resultType="java.lang.String">
+		select id from user where 1=1
+		<if test="mobile != null and mobile != ''">
+			and mobile = #{mobile}
+		</if>
+	</select>
 	
+	<select id="selectNameById" resultType="java.lang.String">
+	select realname from user where 1=1 
+	<if test="userId!=null and userId!=''">
+	and id = #{userId}
+	</if>
+	</select>
+
 </mapper>

@@ -42,8 +42,20 @@ public class CourseChapter {
 	
 	private int orders;///按照他排序
 	
+	private String sectionName;
 	
 	
+	
+	
+	
+	public String getSectionName() {
+		return sectionName;
+	}
+
+	public void setSectionName(String sectionName) {
+		this.sectionName = sectionName;
+	}
+
 	public int getOrders() {
 		return orders;
 	}
