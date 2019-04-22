@@ -22,6 +22,13 @@ app.controller("studyRecordController", function($scope, $http) {
 	};
 	// 页面展示
 	$scope.loaddata = function() {
+		//重置字符串 能优化吧...
+		if ($scope.mobile == null || $scope.mobile.length == 0) {
+			$scope.mobile = null;
+		}
+		if ($scope.videoId  == null || $scope.videoId.length == 0) {
+			$scope.videoId = null;
+		}
 		$http.get("/api/questionbank/video",
 				{"params":{"page":$scope.page,"numPerPage":$scope.numPerPage,"mobile":$scope.mobile,"videoId":$scope.videoId,"date":changeDate($scope.date)}},
 				{'Content-Type' : 'application/json;charset=UTF-8'})
