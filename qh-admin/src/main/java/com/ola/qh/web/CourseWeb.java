@@ -60,4 +60,12 @@ public class CourseWeb{
 	public String Live(){
 		return "courses/live";
 	}
+	@RequestMapping("/toWhite")
+	public String toWhite(@RequestParam(name="liveId")String liveId,
+			@RequestParam(name="liveName")String liveName,
+			HttpServletRequest request){
+		request.getSession().setAttribute("liveId", liveId);
+		request.getSession().setAttribute("liveName", liveName);
+		return "courses/line-white";
+	}
 }

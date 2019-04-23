@@ -189,4 +189,8 @@ app.controller("liveShowController", function($scope, $http) {
 		document.getElementById('add').style.display="none"; 
 	}
 	
+	$scope.toWhite=function(liveId,liveName){
+		
+		location.href="/web/course/toWhite?liveId="+liveId+"&liveName="+liveName;
+	}
 });

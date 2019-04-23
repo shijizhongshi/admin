@@ -71,7 +71,7 @@
 							<th>直播图片</th>
 							<th>是否可见</th>
 							<th>创建时间</th>
-
+							<th>白名单</th>
 						</tr>
 
 						<tr ng-repeat="l in livelist" ng-click="checkedlive(l)"
@@ -81,7 +81,7 @@
 							<th ng-show="l.isshow==1">是</th>
 							<th ng-show="l.isshow==0">否</th>
 							<th>{{l.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
-
+							<th><span class="xiangqing" ng-click="toWhite(l.id,l.liveName)">查看白名单</span></th>
 						</tr>
 					</table>
 					<div class="col-sm-6"></div>
