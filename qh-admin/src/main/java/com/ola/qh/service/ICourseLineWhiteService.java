@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseLineWhite;
+import com.ola.qh.entity.User;
 import com.ola.qh.util.Results;
 
 public interface ICourseLineWhiteService {
@@ -18,4 +19,6 @@ public interface ICourseLineWhiteService {
 	public Results<String> updateLineWhite(CourseLineWhite courseLineWhite);
 	
 	public int deleteLineWhite(String id,String liveId);
+
+	public User selectCountById(String viewerId);
 }

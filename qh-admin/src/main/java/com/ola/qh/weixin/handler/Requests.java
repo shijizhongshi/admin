@@ -123,8 +123,14 @@ public class Requests {
 		result.setData(results);
 		return result;
 	}
-
-	// test
+	/**
+	 * testGet
+	 * @param url
+	 * @param headers
+	 * @param address
+	 * @return
+	 * @throws IOException
+	 */
 	public static Results<byte[]> testGet(String url, Map<String, String> headers, String address) throws IOException {
 		Results<byte[]> result = new Results<byte[]>();
 		try {

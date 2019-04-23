@@ -9,13 +9,17 @@ app.controller("liveAccessController", function($scope, $http) {
 
 	// 页面展示
 	$scope.loaddata = function() {
-		$http.get("/api/questionbank/liveAccess",{"params":{"liveId":$scope.liveId,"pageindex":$scope.pageindex,"pagenum":$scope.pagenum}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		if ($scope.liveId == null) {
+			alert("请填写直播id~");
+			return;
+		}
+		$http.get("/api/questionbank/liveAccess",{"params":{"notToEnter":$scope.notToEnter,"liveId":$scope.liveId,"pageindex":$scope.pageindex,"pagenum":$scope.pagenum}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success(function (result) {
 			if (result.status == "0") {
-				console.log("成功");
 				$scope.total = result.count;
 				$scope.list = result.data;
-				console.log($scope.list);
+			}else {
+				alert(result.message);
 			}
 		})
 	}

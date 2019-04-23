@@ -33,4 +33,6 @@ public class Patterns {
 	public static final String useraction = "http://api.csslcloud.net/api/statis/live/useraction";
 	
 	public static final String token = "t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8";
+	
+	public static final String liveToken = "edWIdmhneO2zWRAOJMYeI1tlXiq3LMCt";
 }

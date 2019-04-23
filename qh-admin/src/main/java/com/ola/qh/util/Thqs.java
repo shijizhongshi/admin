@@ -11,11 +11,18 @@ import java.util.TreeMap;
 public class Thqs {
 
 	/**
-	 * @param args
+	 * 云点播加密
+	 * 
+	 * @param key
+	 * @param treeMap
+	 * @return
 	 */
 	public static String getThqstreeMap(String key, Map treeMap) {
-		
+
 		String qs = createQueryString(treeMap);
+		if (qs == null) {
+			return null;
+		}
 		// 生成时间片
 		long time = new Date().getTime() / 1000;
 		// 生成HASH码值
@@ -28,7 +35,6 @@ public class Thqs {
 		return address;
 
 	}
-
 	/** 以下为THQS算法的相关函数 */
 
 	/**

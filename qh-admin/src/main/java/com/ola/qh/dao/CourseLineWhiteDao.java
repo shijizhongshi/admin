@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ola.qh.entity.CourseLineWhite;
+import com.ola.qh.entity.User;
 
 public interface CourseLineWhiteDao {
 
@@ -17,4 +18,6 @@ public interface CourseLineWhiteDao {
 	public int updateLineWhite(CourseLineWhite courseLineWhite);
 	
 	public int deleteLineWhite(@Param("id")String id,@Param("liveId")String liveId);
+
+	public User selectCountById(@Param("viewerId")String viewerId);
 }

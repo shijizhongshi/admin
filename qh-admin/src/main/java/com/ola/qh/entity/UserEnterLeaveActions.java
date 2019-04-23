@@ -18,6 +18,16 @@ public class UserEnterLeaveActions {
 
 	private Integer terminal;// 终端类型，0表示pc端，1表示移动端
 
+	private String customInfo;// json格式字符串，自定义用户信息
+
+	public String getCustomInfo() {
+		return customInfo;
+	}
+
+	public void setCustomInfo(String customInfo) {
+		this.customInfo = customInfo;
+	}
+
 	public String getViewerId() {
 		return viewerId;
 	}

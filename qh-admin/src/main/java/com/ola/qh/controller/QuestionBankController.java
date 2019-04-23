@@ -1,6 +1,7 @@
 package com.ola.qh.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -17,8 +18,10 @@ import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.LiveAccess;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.entity.VideoPlaybackRecord;
+import com.ola.qh.service.ICourseLineWhiteService;
 import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IUserService;
@@ -38,6 +41,8 @@ public class QuestionBankController {
 	private IUserService userService;
 	@Autowired
 	private ICourseSubclassService courseSubclassService;
+	@Autowired
+	private ICourseLineWhiteService courseLineWhiteService;
 
 	/**
 	 * 题库的上传
@@ -269,8 +274,10 @@ public class QuestionBankController {
 
 		return results;
 	}
+
 	/**
 	 * 获取观看视频接口
+	 * 
 	 * @param liveId
 	 * @param pageindex
 	 * @param pagenum
@@ -278,6 +285,7 @@ public class QuestionBankController {
 	 */
 	@RequestMapping(value = "liveAccess", method = RequestMethod.GET)
 	public Results<List<UserEnterLeaveActions>> liveAccess(
+			@RequestParam(value = "notToEnter", required = false) String notToEnter,
 			@RequestParam(value = "liveId", required = true) String liveId,
 			@RequestParam(value = "pageindex") String pageindex, @RequestParam(value = "pagenum") String pagenum) {
 		Results<List<UserEnterLeaveActions>> results = new Results<List<UserEnterLeaveActions>>();
@@ -288,7 +296,7 @@ public class QuestionBankController {
 		treeMap.put("pagenum", pagenum);
 		treeMap.put("pageindex", pageindex);
 
-		String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
+		String address = Thqs.getThqstreeMap(Patterns.liveToken, treeMap);
 
 		try {
 			Results<byte[]> testByte = Requests.testGet(Patterns.useraction, null, address);
@@ -297,10 +305,30 @@ public class QuestionBankController {
 			// json转实体类
 			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
 			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
+			// 循环遍历  写的有点奇怪
+			if ("1".equals(notToEnter)) {
+				List<UserEnterLeaveActions> userList = new ArrayList<>();
+				for (UserEnterLeaveActions userEnterLeaveActions : list) {
+					User user = courseLineWhiteService.selectCountById(userEnterLeaveActions.getViewerId());
+					if (user != null) {
+						for (UserEnterLeaveActions userEnterLeaveActions2 : userList) {
+							//观看时长为null
+							userEnterLeaveActions2.setWatchTime(null);
+							//昵称赋值
+							userEnterLeaveActions2.setViewerName(user.getNickname());
+						}
+					}
+				}
+				results.setStatus("0");
+				results.setData(userList);
+				results.setCount(userList.size());
+				
+				return results;
+			}
 
 			results.setStatus("0");
+			results.setCount(liveAccess.getCount());
 			results.setData(list);
-			//results.setCount(liveAccess.getCount());
 
 			return results;
 

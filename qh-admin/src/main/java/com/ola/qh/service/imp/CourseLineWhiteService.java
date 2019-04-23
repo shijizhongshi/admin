@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.dao.CourseLineWhiteDao;
 import com.ola.qh.entity.CourseLineWhite;
+import com.ola.qh.entity.User;
 import com.ola.qh.service.ICourseLineWhiteService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
@@ -157,5 +158,11 @@ public class CourseLineWhiteService implements ICourseLineWhiteService{
 		}
 
 		return null;
+	}
+
+	@Override
+	public User selectCountById(String viewerId) {
+		
+		return courseLineWhiteDao.selectCountById(viewerId);
 	}
 }
