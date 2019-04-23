@@ -2,7 +2,6 @@ package com.ola.qh.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseLiveCheck;
