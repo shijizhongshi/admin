@@ -13,6 +13,9 @@ app.controller("liveAccessController", function($scope, $http) {
 		.success(function (result) {
 			if (result.status == "0") {
 				console.log("成功");
+				$scope.total = result.count;
+				$scope.list = result.data;
+				console.log($scope.list);
 			}
 		})
 	}

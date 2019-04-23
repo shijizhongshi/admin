@@ -31,4 +31,6 @@ public class Patterns {
 	public static final String customVideoV2 = "http://spark.bokecc.com/api/playlog/custom/video/v2";
 
 	public static final String useraction = "http://api.csslcloud.net/api/statis/live/useraction";
+	
+	public static final String token = "t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8";
 }

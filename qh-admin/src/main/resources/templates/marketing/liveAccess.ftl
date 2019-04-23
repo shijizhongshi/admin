@@ -44,18 +44,21 @@ submenu="sidebarmenu-marketing-liveAccess">
 					<table id="tableExcel" >
 						<tbody>
 							<tr>
-								<th>用户名</th>
-								<th>视频名称</th>
-								<th>专业</th>
-								<th>观看时长</th>
-								<th>视频总长</th>
+								<th>用户昵称</th>
+								<th>用户地域</th>
+								<th>进入时间</th>
+								<th>离开时间</th>
+								<th>直播观看时长</th>
+								<th>终端类型</th>
 							</tr>
-							<tr>
-								<th>用户名</th>
-								<th>视频名称</th>
-								<th>专业</th>
-								<th>观看时长</th>
-								<th>视频总长</th>
+							<tr ng-repeat="list in list">
+								<th>{{list.viewerName}}</th>
+								<th>{{list.city}}</th>
+								<th>{{list.enterTime}}</th>
+								<th>{{list.leaveTime}}</th>
+								<th>{{list.watchTime}}</th>
+								<th ng-show="{{list.terminal == 0}}">电脑端</th>
+								<th ng-show="{{list.terminal == 1}}">移动端</th>
 							</tr>
 						</tbody>
 					</table>

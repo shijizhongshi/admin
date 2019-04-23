@@ -14,8 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseLiveCheck;
+import com.ola.qh.entity.LiveAccess;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
@@ -152,8 +154,8 @@ public class QuestionBankController {
 			treeMap.put("page", page);
 
 			// 拼接地址
-			// t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key
-			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			// token 是cc视频的API key
+			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
 				byte[] bytess = testByte.getData();
@@ -193,7 +195,7 @@ public class QuestionBankController {
 			treeMap.put("num_per_page", numPerPage);
 			treeMap.put("page", page);
 
-			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.customUserV2, null, address);
 				byte[] bytess = testByte.getData();
@@ -234,7 +236,7 @@ public class QuestionBankController {
 			treeMap.put("num_per_page", numPerPage);
 			treeMap.put("page", page);
 
-			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.customVideoV2, null, address);
 				byte[] bytess = testByte.getData();
@@ -267,33 +269,47 @@ public class QuestionBankController {
 
 		return results;
 	}
-
-	// 获取观看视频接口 http://api.csslcloud.net/api/statis/live/useraction
+	/**
+	 * 获取观看视频接口
+	 * @param liveId
+	 * @param pageindex
+	 * @param pagenum
+	 * @return
+	 */
 	@RequestMapping(value = "liveAccess", method = RequestMethod.GET)
-	public Results<String> liveAccess(@RequestParam(value = "liveId", required = true) String liveId,
-			@RequestParam(value = "pageindex") Integer pageindex, @RequestParam(value = "pagenum") Integer pagenum) {
-		Results<String> results = new Results<String>();
-		//treemap
-		TreeMap<Object, Object> treeMap = new TreeMap<>();
+	public Results<List<UserEnterLeaveActions>> liveAccess(
+			@RequestParam(value = "liveId", required = true) String liveId,
+			@RequestParam(value = "pageindex") String pageindex, @RequestParam(value = "pagenum") String pagenum) {
+		Results<List<UserEnterLeaveActions>> results = new Results<List<UserEnterLeaveActions>>();
+		// treemap
+		TreeMap<String, String> treeMap = new TreeMap<>();
 		treeMap.put("userid", "91DD94C27B488135");
 		treeMap.put("liveid", liveId);
 		treeMap.put("pagenum", pagenum);
 		treeMap.put("pageindex", pageindex);
-		
-		String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
-		
+
+		String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
+
 		try {
 			Results<byte[]> testByte = Requests.testGet(Patterns.useraction, null, address);
 			byte[] bytes = testByte.getData();
 			String byteString = new String(bytes);
-			//json转实体类
-			
-			
+			// json转实体类
+			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
+			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
+
+			results.setStatus("0");
+			results.setData(list);
+			//results.setCount(liveAccess.getCount());
+
+			return results;
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		results.setStatus("0");
+		results.setStatus("1");
+		results.setMessage("错误！");
 		return results;
 	}
 
