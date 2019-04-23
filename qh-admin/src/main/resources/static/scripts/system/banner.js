@@ -7,7 +7,7 @@ app.controller("bannerController", function($scope, $http){
     //当前的页数
     $scope.page = 1;
     //一页显示多少条
-    $scope.pageSize = 1;
+    $scope.pageSize = 20;
 //上传主展示图片
     $scope.types=0;
     $scope.banner=null;
