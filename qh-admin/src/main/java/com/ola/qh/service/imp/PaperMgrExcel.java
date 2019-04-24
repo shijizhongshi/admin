@@ -70,12 +70,12 @@ public class PaperMgrExcel extends ExportExcelBase{
  
 			// 设置列宽
 			ArrayList<Integer> sheetColWidth = new ArrayList<Integer>();
-			sheetColWidth.add(0, 2000);
-			sheetColWidth.add(1, 3000);
-			sheetColWidth.add(2, 4000);
-			sheetColWidth.add(3, 2000);
-			sheetColWidth.add(4, 3000);
-			sheetColWidth.add(5, 4000);
+			sheetColWidth.add(0, 5000);
+			sheetColWidth.add(1, 5000);
+			sheetColWidth.add(2, 5000);
+			sheetColWidth.add(3, 14000);
+			sheetColWidth.add(4, 5000);
+			sheetColWidth.add(5, 8000);
  
 			// title的高度
 			int sheetTitleHeight = 500;

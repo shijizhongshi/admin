@@ -48,7 +48,7 @@ public class ExportExcelBase {
 			Font ztFont = wb.createFont();
 			ztFont.setItalic(false); // 设置字体为斜体字
 			ztFont.setColor(Font.COLOR_NORMAL); // 设置字体颜色
-			ztFont.setFontHeightInPoints((short) 18); // 将字体大小设置为18px
+			ztFont.setFontHeightInPoints((short) 20); // 将字体大小设置为18px
 			ztFont.setFontName("宋体"); // 将“宋体”字体应用到当前单元格上
 			ztFont.setBold(true); // 加粗
 			styleTitle.setFont(ztFont);
@@ -69,7 +69,7 @@ public class ExportExcelBase {
 			Font ztFont2 = wb.createFont();
 			ztFont2.setItalic(false); // 设置字体为斜体字
 			ztFont2.setColor(Font.COLOR_NORMAL); // 设置字体颜色
-			ztFont2.setFontHeightInPoints((short) 12); // 将字体大小设置为12px
+			ztFont2.setFontHeightInPoints((short) 15); // 将字体大小设置为12px
 			ztFont2.setFontName("宋体"); // 字体应用到当前单元格上
 			ztFont2.setBold(true); // 加粗
 			styleTitle2.setFont(ztFont2);
@@ -87,14 +87,14 @@ public class ExportExcelBase {
 			HSSFCellStyle cellStyle = wb.createCellStyle(); // 表格样式
 			cellStyle.setAlignment(HorizontalAlignment.CENTER);
 			cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-			cellStyle.setBorderBottom(BorderStyle.THIN); // 下边框
-			cellStyle.setBorderLeft(BorderStyle.THIN);// 左边框
-			cellStyle.setBorderTop(BorderStyle.THIN);// 上边框
-			cellStyle.setBorderRight(BorderStyle.THIN);// 右边框
+			//cellStyle.setBorderBottom(BorderStyle.THIN); // 下边框若需要打开即可
+			//cellStyle.setBorderLeft(BorderStyle.THIN);// 左边框
+			//cellStyle.setBorderTop(BorderStyle.THIN);// 上边框
+			//cellStyle.setBorderRight(BorderStyle.THIN);// 右边框
 			Font cellFont = wb.createFont();
 			cellFont.setItalic(false); // 设置字体为斜体字
 			cellFont.setColor(Font.COLOR_NORMAL); // 设置字体颜色
-			cellFont.setFontHeightInPoints((short) 10); // 将字体大小设置为12px
+			cellFont.setFontHeightInPoints((short) 14); // 将字体大小设置为12px
 			cellFont.setFontName("宋体"); // 字体应用到当前单元格上
 			// cellFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 			cellStyle.setFont(cellFont);
