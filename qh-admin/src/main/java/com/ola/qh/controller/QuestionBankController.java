@@ -316,7 +316,7 @@ public class QuestionBankController {
 				// 匹配 相同就remove掉
 				for (UserEnterLeaveActions userEnterLeaveActions : list) {
 					for (int i = 0; i < whithList.size(); i++) {
-						if (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getNickName())) {
+						if (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile())) {
 							whithList.remove(i);
 						}
 					}
@@ -329,7 +329,7 @@ public class QuestionBankController {
 				}
 				results.setStatus("0");
 				results.setData(userList);
-
+				
 				return results;
 			}
 

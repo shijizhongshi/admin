@@ -28,8 +28,8 @@ submenu="sidebarmenu-marketing-liveAccess">
 				<div class="select-3">
 					<span>学员状态</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="notToEnter">
-						<option value="">已进入直播间</option>
-						<option value="1">未进入直播间</option>
+						<option value="">已进入直播</option>
+						<option value="1">未进入直播</option>
 					</select>
 				</div>
 				<div class="select-3">
@@ -67,6 +67,7 @@ submenu="sidebarmenu-marketing-liveAccess">
 								<th ng-show="{{list.watchTime == null}}">未观看直播</th>
 								<th ng-show="{{list.terminal == 0}}">电脑端</th>
 								<th ng-show="{{list.terminal == 1}}">移动端</th>
+								<th ng-show="{{list.terminal == null}}">无终端类型</th>
 							</tr>
 						</tbody>
 					</table>

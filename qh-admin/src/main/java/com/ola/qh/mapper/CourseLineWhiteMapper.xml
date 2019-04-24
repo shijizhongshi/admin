@@ -64,9 +64,7 @@
 
 	<!--获取全部信息 -->
 	<select id="selectAllByLiveId" resultMap="CourseLineWhiteMap">
-		select * from course_line_white as clw
-		left join user as u
-		on clw.mobile = u.mobile where 1=1
+		select * from course_line_white where 1=1
 		<if test="liveId!=null and liveId!=''">
 		and live_id = #{liveId}
 		</if>

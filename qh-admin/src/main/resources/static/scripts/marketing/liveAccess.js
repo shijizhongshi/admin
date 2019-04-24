@@ -10,7 +10,7 @@ app.controller("liveAccessController", function($scope, $http) {
 	// 页面展示
 	$scope.loaddata = function() {
 		if ($scope.liveId == null) {
-			alert("请填写直播id~");
+			alert("请填写直播Id~");
 			return;
 		}
 		$http.get("/api/questionbank/liveAccess",{"params":{"notToEnter":$scope.notToEnter,"liveId":$scope.liveId,"pageindex":$scope.pageindex,"pagenum":$scope.pagenum}},{'Content-Type' : 'application/json;charset=UTF-8'})
