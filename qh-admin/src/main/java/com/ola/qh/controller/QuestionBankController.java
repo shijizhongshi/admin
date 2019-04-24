@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseChapter;
+import com.ola.qh.entity.CourseLineWhite;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.LiveAccess;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
-import com.ola.qh.entity.User;
 import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.ICourseLineWhiteService;
@@ -305,24 +305,29 @@ public class QuestionBankController {
 			// json转实体类
 			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
 			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
-			// 循环遍历  写的有点奇怪
+
+			// 如果选定查询未进入直播间用户 返回的是白名单中的用户 逻辑有点乱
 			if ("1".equals(notToEnter)) {
 				List<UserEnterLeaveActions> userList = new ArrayList<>();
+				// 获取本直播id的白名单全部数据
+				List<CourseLineWhite> whithList = courseLineWhiteService.selectAllByLiveId(liveId);
+				// 匹配 相同就remove掉
 				for (UserEnterLeaveActions userEnterLeaveActions : list) {
-					User user = courseLineWhiteService.selectCountById(userEnterLeaveActions.getViewerId());
-					if (user != null) {
-						for (UserEnterLeaveActions userEnterLeaveActions2 : userList) {
-							//观看时长为null
-							userEnterLeaveActions2.setWatchTime(null);
-							//昵称赋值
-							userEnterLeaveActions2.setViewerName(user.getNickname());
+					for (int i = 0; i < whithList.size(); i++) {
+						if (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getNickName())) {
+							whithList.remove(i);
 						}
 					}
 				}
+				// 赋值返回
+				for (CourseLineWhite courseLineWhite : whithList) {
+					int i=0;
+					userList.get(i).setViewerName(courseLineWhite.getNickName());
+					i++;
+				}
 				results.setStatus("0");
 				results.setData(userList);
-				results.setCount(userList.size());
-				
+
 				return results;
 			}
 

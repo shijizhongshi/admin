@@ -13,7 +13,7 @@ public class CourseLineShow {
 	private String courseTypeSubclassName;
 	@NotEmpty
 	private String liveName;
-	
+
 	private String outLinks;
 	@NotEmpty
 	private String imgUrl;
@@ -33,8 +33,6 @@ public class CourseLineShow {
 
 	private String liveBackId;
 
-	
-	
 	public String getLiveRoomId() {
 		return liveRoomId;
 	}

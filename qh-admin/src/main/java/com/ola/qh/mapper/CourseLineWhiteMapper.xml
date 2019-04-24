@@ -11,12 +11,14 @@
 		<result column="mobile" property="mobile" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="nickName" property="nickName" />
 
 	</resultMap>
 
 	<insert id="insertLineWhite"
 		parameterType="com.ola.qh.entity.CourseLineWhite">
-		insert into course_line_white(id,live_id,mobile,addtime)values
+		insert into
+		course_line_white(id,live_id,mobile,addtime)values
 		(#{id},#{liveId},#{mobile},#{addtime})
 	</insert>
 
@@ -59,15 +61,15 @@
 			and id=#{id}
 		</if>
 	</delete>
-	<!--联合user表查询 -->
-	<select id="selectCountById" resultMap="CourseLineWhiteMap">
+
+	<!--获取全部信息 -->
+	<select id="selectAllByLiveId" resultMap="CourseLineWhiteMap">
 		select * from course_line_white as clw
 		left join user as u
-		on clw.mobile = u.mobile where 1=1 
-		<if test="viewerId!=null and viewerId!=''"> 
-		and u.id = #{viewerId}
+		on clw.mobile = u.mobile where 1=1
+		<if test="liveId!=null and liveId!=''">
+		and live_id = #{liveId}
 		</if>
 	</select>
-
 
 </mapper>
