@@ -63,7 +63,7 @@ submenu="sidebarmenu-marketing-liveAccess">
 								<th>{{list.city}}</th>
 								<th>{{list.enterTime}}</th>
 								<th>{{list.leaveTime}}</th>
-								<th ng-show="{{list.watchTime != null}}">{{list.watchTime/60}}</th>
+								<th ng-show="{{list.watchTime != null}}">{{list.watchTime/60 | number:0}}分钟</th>
 								<th ng-show="{{list.watchTime == null}}">未观看直播</th>
 								<th ng-show="{{list.terminal == 0}}">电脑端</th>
 								<th ng-show="{{list.terminal == 1}}">移动端</th>
