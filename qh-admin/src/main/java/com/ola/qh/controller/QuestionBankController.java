@@ -132,6 +132,7 @@ public class QuestionBankController {
 	}
 
 	/**
+	 * cc点播
 	 * cc视频接口 三合一
 	 * 
 	 * @param videoId
@@ -269,13 +270,14 @@ public class QuestionBankController {
 				e.printStackTrace();
 			}
 		}
-		results.setStatus("0");
-		results.setMessage("错误！");
+		results.setStatus("1");
+		results.setMessage("错误！手机号与视频Id不能同时为空");
 
 		return results;
 	}
 
 	/**
+	 * cc直播
 	 * 获取观看视频接口
 	 * 
 	 * @param liveId
@@ -320,10 +322,10 @@ public class QuestionBankController {
 					}
 				}
 				// 赋值返回
-				for (CourseLineWhite courseLineWhite : whithList) {
-					int i=0;
-					userList.get(i).setViewerName(courseLineWhite.getNickName());
-					i++;
+				UserEnterLeaveActions userEnterLeaveActions = new UserEnterLeaveActions();
+				for (int i = 0; i < whithList.size(); i++) {
+					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());
+					userList.add(userEnterLeaveActions);
 				}
 				results.setStatus("0");
 				results.setData(userList);

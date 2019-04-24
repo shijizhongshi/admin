@@ -18,6 +18,7 @@ app.controller("liveAccessController", function($scope, $http) {
 			if (result.status == "0") {
 				$scope.total = result.count;
 				$scope.list = result.data;
+				console.log("打印观看时长 = "+$scope.list.watchTime);
 			}else {
 				alert(result.message);
 			}

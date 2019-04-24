@@ -26,15 +26,15 @@ submenu="sidebarmenu-marketing-liveAccess">
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>查询未进入直播间学员</span> <img src="/images/sjk-xl.png"> <select
+					<span>学员状态</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="notToEnter">
-						<option value="">无</option>
+						<option value="">已进入直播间</option>
 						<option value="1">未进入直播间</option>
 					</select>
 				</div>
 				<div class="select-3">
-					<span>直播间Id</span> <input type="text" ng-model="liveId"
-						placeholder="请输入直播间Id">
+					<span>直播Id</span> <input type="text" ng-model="liveId"
+						placeholder="请输入直播Id">
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
@@ -63,7 +63,7 @@ submenu="sidebarmenu-marketing-liveAccess">
 								<th>{{list.city}}</th>
 								<th>{{list.enterTime}}</th>
 								<th>{{list.leaveTime}}</th>
-								<th ng-show="{{list.watchTime != null}}">{{list.watchTime}}</th>
+								<th ng-show="{{list.watchTime != null}}">{{list.watchTime/60}}</th>
 								<th ng-show="{{list.watchTime == null}}">未观看直播</th>
 								<th ng-show="{{list.terminal == 0}}">电脑端</th>
 								<th ng-show="{{list.terminal == 1}}">移动端</th>
