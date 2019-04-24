@@ -45,39 +45,22 @@ app.controller("liveVerifyController", function($scope, $http) {
 			}else {
 				alert(result.message);
 			}
-		})
-		$http.get("/api/questionbank/liveVerifyList",{"params":{"pageNo":$scope.pageNo,"pageSize":0,
-			"fromdate":changeDate($scope.fromdate),"todate":changeDate($scope.todate),"mobile":$scope.mobile,
-			"courseTypeSubclassName":$scope.courseTypeSubclassName,"roomId":$scope.roomId}}, {'Content-Type': 'application/json;charset=UTF-8'})
-		.success(function (result) {
-			if (result.status == 0) {
-				$scope.liveVerifyLists = result.data;
-				
-					angular.forEach($scope.liveVerifyLists, function(live){  
-					
-					if(live.isRegister==0){
-						
-						live.isRegisters="游客用户";
-					}
-					else if(live.isRegister==1){
-						live.isRegisters="注册用户";
-					}
-					if(live.updatetime==null){
-						
-						live.time=live.addtime;
-					}
-					else{
-						live.time=live.updatetime;
-					}
-				})
-			}
+		
+		
 		})
 	};
 	$scope.loaddata();
-	$scope.exportExcel = function () {
-		$scope.courseLiveList=$scope.liveVerifyLists;
-		$http.post("api/excel/exportTest",$scope.courseLiveList, {'Content-Type': 'application/json;charset=UTF-8'})
-		
-	};
-	
+	$scope.fromdate="";
+	$scope.todate="";
+	$scope.mobile="";
+	$scope.roomId="";
+	$scope.courseTypeSubclassName="";
+	var finStatementExcelExport=function(){
+	    window.location.href = "/api/excel/exportTest?pageNo="+$scope.pageNo+"&pageSize="+0+
+	    "&fromdate="+changeDate($scope.fromdate)+"&todate="+changeDate($scope.todate)+"&mobile="+
+	    $scope.mobile+"&courseTypeSubclassName="+$scope.courseTypeSubclassName+"&roomId="+$scope.roomId;
+	  }
+	$scope.ExcelExport=function(){
+		finStatementExcelExport();
+	}
 });

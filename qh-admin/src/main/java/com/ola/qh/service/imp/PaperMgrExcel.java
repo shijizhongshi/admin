@@ -73,6 +73,9 @@ public class PaperMgrExcel extends ExportExcelBase{
 			sheetColWidth.add(0, 2000);
 			sheetColWidth.add(1, 3000);
 			sheetColWidth.add(2, 4000);
+			sheetColWidth.add(3, 2000);
+			sheetColWidth.add(4, 3000);
+			sheetColWidth.add(5, 4000);
  
 			// title的高度
 			int sheetTitleHeight = 500;

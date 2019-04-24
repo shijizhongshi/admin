@@ -71,7 +71,7 @@ submenu="sidebarmenu-marketing-liveVerify">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						ng-click="exportExcel()">
+						ng-click="ExcelExport()">
 				</div>
 			</div>
 			<div class="manage">
@@ -105,31 +105,7 @@ submenu="sidebarmenu-marketing-liveVerify">
 						</tbody>
 					</table>
 					
-					<table id="tableExcel1" style="display: none">
-
-						<tbody>
-							<tr>
-								<th>手机号</th>
-								<th>用户属性</th>
-								<th>校验码</th>
-								<th>专业名称</th>
-								<th>房间号</th>
-								<th>最后一次操作时间</th>
-							</tr>
-							<tr ng-repeat="live in liveVerifyLists">
-								<th>{{live.mobile}}</th>
-								<th>{{live.isRegisters}}</th>
-								<th>{{live.token}}</th>
-								<th>{{live.courseTypeSubclassName}}</th>
-								<th>{{live.roomId}}</th>
-								<th>{{live.time | date:'yyyy.MM.dd HH:mm:ss'}}</th>
-								
-							</tr>
-
-
-
-						</tbody>
-					</table>
+					
 				</div>
 				<div class="col-sm-6"></div>
 				<div class="col-sm-6">
