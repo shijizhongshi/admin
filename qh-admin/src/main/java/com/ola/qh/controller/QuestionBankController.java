@@ -2,6 +2,7 @@ package com.ola.qh.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -132,8 +133,7 @@ public class QuestionBankController {
 	}
 
 	/**
-	 * cc点播
-	 * cc视频接口 三合一
+	 * cc点播 cc视频接口 三合一
 	 * 
 	 * @param videoId
 	 * @param mobile
@@ -153,7 +153,7 @@ public class QuestionBankController {
 		if (videoId != null && mobile == null) {
 			// 必须为 treemap传参
 			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("userid", Patterns.accountId);
 			treeMap.put("videoid", videoId);
 			treeMap.put("date", date);
 			treeMap.put("num_per_page", numPerPage);
@@ -170,6 +170,7 @@ public class QuestionBankController {
 				// json字符串转换
 				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
 				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
+				// for循环内部没有测试过——2019-04-25
 				for (PlayLog playLog : list) {
 					// 查name
 					String userName = userService.selectNameById(playLog.getUserid());
@@ -195,7 +196,7 @@ public class QuestionBankController {
 			String id = userService.selectIdByMobile(mobile);
 
 			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("userid", Patterns.accountId);
 			treeMap.put("customid", id);
 			treeMap.put("date", date);
 			treeMap.put("num_per_page", numPerPage);
@@ -235,7 +236,7 @@ public class QuestionBankController {
 			String id = userService.selectIdByMobile(mobile);
 
 			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("userid", Patterns.accountId);
 			treeMap.put("videoid", videoId);
 			treeMap.put("customid", id);
 			treeMap.put("date", date);
@@ -277,8 +278,7 @@ public class QuestionBankController {
 	}
 
 	/**
-	 * cc直播
-	 * 获取观看视频接口
+	 * cc直播 获取观看视频接口
 	 * 
 	 * @param liveId
 	 * @param pageindex
@@ -293,7 +293,7 @@ public class QuestionBankController {
 		Results<List<UserEnterLeaveActions>> results = new Results<List<UserEnterLeaveActions>>();
 		// treemap
 		TreeMap<String, String> treeMap = new TreeMap<>();
-		treeMap.put("userid", "91DD94C27B488135");
+		treeMap.put("userid", Patterns.accountId);
 		treeMap.put("liveid", liveId);
 		treeMap.put("pagenum", pagenum);
 		treeMap.put("pageindex", pageindex);
@@ -308,28 +308,34 @@ public class QuestionBankController {
 			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
 			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
 
-			// 如果选定查询未进入直播间用户 返回的是白名单中的用户 逻辑有点乱
+			// 如果选定查询未进入直播间用户 返回的是白名单中的用户
 			if ("1".equals(notToEnter)) {
 				List<UserEnterLeaveActions> userList = new ArrayList<>();
 				// 获取本直播id的白名单全部数据
 				List<CourseLineWhite> whithList = courseLineWhiteService.selectAllByLiveId(liveId);
-				// 匹配 相同就remove掉
+				// 迭代器 匹配两个集合中的内容 相同就remove掉
 				for (UserEnterLeaveActions userEnterLeaveActions : list) {
-					for (int i = 0; i < whithList.size(); i++) {
-						if (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile())) {
-							whithList.remove(i);
+					for (Iterator<CourseLineWhite> iterator = whithList.iterator(); iterator.hasNext();) {
+						if (userEnterLeaveActions.getViewerName().equals(iterator.next().getMobile())) {
+							iterator.remove();
 						}
 					}
 				}
-				// 赋值返回
-				UserEnterLeaveActions userEnterLeaveActions = new UserEnterLeaveActions();
+				/*
+				 * for (UserEnterLeaveActions userEnterLeaveActions : list) { for (int i = 0; i
+				 * < whithList.size(); i++) { if
+				 * (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile()))
+				 * { whithList.remove(i); } } }
+				 */
+				// 赋值返回 ,new对象必须写在里面 否则会覆盖value值出错
 				for (int i = 0; i < whithList.size(); i++) {
+					UserEnterLeaveActions userEnterLeaveActions = new UserEnterLeaveActions();
 					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());
 					userList.add(userEnterLeaveActions);
 				}
 				results.setStatus("0");
 				results.setData(userList);
-				
+
 				return results;
 			}
 
