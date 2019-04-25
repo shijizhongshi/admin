@@ -63,8 +63,8 @@ submenu="sidebarmenu-marketing-studyRecord">
 								<th>{{list.userName}}</th>
 								<th>{{list.sectionName}}</th>
 								<th>{{list.courseTypeSubclassName}}</th>
-								<th>{{list.play_duration}}</th>
-								<th>{{list.video_duration}}</th>
+								<th>{{list.play_duration/60 | number:1}}分钟</th>
+								<th>{{list.video_duration/60 | number:1}}分钟</th>
 							</tr>
 						</tbody>
 					</table>
