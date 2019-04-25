@@ -26,7 +26,7 @@
 		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
 		and course_type_subclass_name like concat(concat('%',#{courseTypeSubclassName},'%'))
 		</if>
-		order by orders
+		order by orders desc
 		limit #{pageNo},#{pageSize}
 	</select>
 	
@@ -89,13 +89,13 @@
 	where 1=1
     <if test="type=='up'">
     <!-- 读取上一条记录 -->
-    and orders <![CDATA[ < ]]> #{orders}
-    order by orders desc
+    and orders <![CDATA[ > ]]> #{orders}
+    order by orders asc
     </if>
     <if test="type=='down'">
     <!-- 读取下一条记录 -->
-    and orders <![CDATA[ > ]]> #{orders}
-    order by orders asc
+    and orders <![CDATA[ < ]]> #{orders}
+    order by orders desc
     </if>
     limit 0,1
 	</select>
