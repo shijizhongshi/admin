@@ -306,8 +306,13 @@ app.controller("knowledgepController", function($scope, $http){
 			.success(function(data){
 				if(data.status=='0'){
 					$scope.knowledgep.orders = data.data;
+					$scope.KnowledgepList();
 				}else{
+					if(data.message!=null){
+						alert(data.message);
+					}else{
 					alert("移动失败~");
+					}
 				}
 			})
 		}
@@ -340,6 +345,11 @@ app.controller("knowledgepController", function($scope, $http){
 					  $scope.knowledgeplist[index+1]=$scope.knowledgeplist[index];
 					  $scope.knowledgeplist[index]=tmp;
 					  $scope.KnowledgepMoveApi("down");
+				}
+				if(types==3){
+					/////置顶
+					$scope.KnowledgepMoveApi("title");
+					
 				}
 				
 			}else{

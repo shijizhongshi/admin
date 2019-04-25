@@ -138,6 +138,7 @@ app.controller("businessController", function($scope, $http){
 	    			alert("添加成功~");
 	    		}
 	    			document.getElementById('add').style.display="none"; 
+	    			$scope.address=null;
 	    			$scope.loaddata();
 	    	}else{
 	    		alert(data.message);

@@ -53,6 +53,8 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 						<li style="width: 90px;" ng-click="Knowledgepmove(1)"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
 				<li style="width: 90px;" ng-click="Knowledgepmove(2)"><span
 					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
+					<li style="width: 90px;" ng-click="Knowledgepmove(3)"><span
+					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;置顶</li>
 
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>

@@ -38,7 +38,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 	public Results<List<KnowledgeVideo>> KnowledgeVideoList(int pageNo,int pageSize,String title,String courseTypeSubclassName) {
 		
 		Results<List<KnowledgeVideo>> results=new Results<List<KnowledgeVideo>>();
-		try {
+		//try {
 			
 		List<KnowledgeVideo> list=knowledgeVideoDao.KnowledgeVideoList(pageNo, pageSize, title, courseTypeSubclassName);
 		
@@ -82,11 +82,11 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 		results.setStatus("0");
 		return results;
 		
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
 			return results;
-		}
+		}*/
 	}
 
 	@Override
@@ -211,6 +211,18 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
             //修改自己的排序为上一条
         	knowledgeVideoDao.updateOrders(id, 0, previousOrder);
         	 result.setData(String.valueOf(previousOrder));
+        }
+        if ("title".equals(operateType)) { //置顶
+            //获取最大值
+        	Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
+        	if(orders==VideoMax){
+        		result.setStatus("1");
+        		result.setMessage("已置顶");
+        		return result;
+        	}
+    		 //修改自己的排序最大值+1
+        	knowledgeVideoDao.updateOrders(id, 0, VideoMax+1);
+        	 result.setData(String.valueOf(VideoMax+1));
         }
         result.setStatus("0");
 		return result;
