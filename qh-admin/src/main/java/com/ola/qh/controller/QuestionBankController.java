@@ -1,6 +1,8 @@
 package com.ola.qh.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -13,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseChapter;
+import com.ola.qh.entity.CourseLineWhite;
 import com.ola.qh.entity.CourseLiveCheck;
+import com.ola.qh.entity.LiveAccess;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.entity.VideoPlaybackRecord;
+import com.ola.qh.service.ICourseLineWhiteService;
 import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IUserService;
@@ -36,6 +42,8 @@ public class QuestionBankController {
 	private IUserService userService;
 	@Autowired
 	private ICourseSubclassService courseSubclassService;
+	@Autowired
+	private ICourseLineWhiteService courseLineWhiteService;
 
 	/**
 	 * 题库的上传
@@ -125,7 +133,7 @@ public class QuestionBankController {
 	}
 
 	/**
-	 * cc视频接口 三合一
+	 * cc点播 cc视频接口 三合一
 	 * 
 	 * @param videoId
 	 * @param mobile
@@ -145,15 +153,15 @@ public class QuestionBankController {
 		if (videoId != null && mobile == null) {
 			// 必须为 treemap传参
 			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("userid", Patterns.accountId);
 			treeMap.put("videoid", videoId);
 			treeMap.put("date", date);
 			treeMap.put("num_per_page", numPerPage);
 			treeMap.put("page", page);
 
 			// 拼接地址
-			// t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8 是cc视频的API key
-			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			// token 是cc视频的API key
+			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
 				byte[] bytess = testByte.getData();
@@ -162,6 +170,7 @@ public class QuestionBankController {
 				// json字符串转换
 				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
 				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
+				// for循环内部没有测试过——2019-04-25
 				for (PlayLog playLog : list) {
 					// 查name
 					String userName = userService.selectNameById(playLog.getUserid());
@@ -187,13 +196,13 @@ public class QuestionBankController {
 			String id = userService.selectIdByMobile(mobile);
 
 			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("userid", Patterns.accountId);
 			treeMap.put("customid", id);
 			treeMap.put("date", date);
 			treeMap.put("num_per_page", numPerPage);
 			treeMap.put("page", page);
 
-			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.customUserV2, null, address);
 				byte[] bytess = testByte.getData();
@@ -227,14 +236,14 @@ public class QuestionBankController {
 			String id = userService.selectIdByMobile(mobile);
 
 			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", "91DD94C27B488135");
+			treeMap.put("userid", Patterns.accountId);
 			treeMap.put("videoid", videoId);
 			treeMap.put("customid", id);
 			treeMap.put("date", date);
 			treeMap.put("num_per_page", numPerPage);
 			treeMap.put("page", page);
 
-			String address = Thqs.getThqstreeMap("t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8", treeMap);
+			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.customVideoV2, null, address);
 				byte[] bytess = testByte.getData();
@@ -262,9 +271,87 @@ public class QuestionBankController {
 				e.printStackTrace();
 			}
 		}
-		results.setStatus("0");
-		results.setMessage("错误！");
+		results.setStatus("1");
+		results.setMessage("错误！手机号与视频Id不能同时为空");
 
 		return results;
 	}
+
+	/**
+	 * cc直播 获取观看视频接口
+	 * 
+	 * @param liveId
+	 * @param pageindex
+	 * @param pagenum
+	 * @return
+	 */
+	@RequestMapping(value = "liveAccess", method = RequestMethod.GET)
+	public Results<List<UserEnterLeaveActions>> liveAccess(
+			@RequestParam(value = "notToEnter", required = false) String notToEnter,
+			@RequestParam(value = "liveId", required = true) String liveId,
+			@RequestParam(value = "pageindex") String pageindex, @RequestParam(value = "pagenum") String pagenum) {
+		Results<List<UserEnterLeaveActions>> results = new Results<List<UserEnterLeaveActions>>();
+		// treemap
+		TreeMap<String, String> treeMap = new TreeMap<>();
+		treeMap.put("userid", Patterns.accountId);
+		treeMap.put("liveid", liveId);
+		treeMap.put("pagenum", pagenum);
+		treeMap.put("pageindex", pageindex);
+
+		String address = Thqs.getThqstreeMap(Patterns.liveToken, treeMap);
+
+		try {
+			Results<byte[]> testByte = Requests.testGet(Patterns.useraction, null, address);
+			byte[] bytes = testByte.getData();
+			String byteString = new String(bytes);
+			// json转实体类
+			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
+			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
+
+			// 如果选定查询未进入直播间用户 返回的是白名单中的用户
+			if ("1".equals(notToEnter)) {
+				List<UserEnterLeaveActions> userList = new ArrayList<>();
+				// 获取本直播id的白名单全部数据
+				List<CourseLineWhite> whithList = courseLineWhiteService.selectAllByLiveId(liveId);
+				// 迭代器 匹配两个集合中的内容 相同就remove掉
+				for (UserEnterLeaveActions userEnterLeaveActions : list) {
+					for (Iterator<CourseLineWhite> iterator = whithList.iterator(); iterator.hasNext();) {
+						if (userEnterLeaveActions.getViewerName().equals(iterator.next().getMobile())) {
+							iterator.remove();
+						}
+					}
+				}
+				/*
+				 * for (UserEnterLeaveActions userEnterLeaveActions : list) { for (int i = 0; i
+				 * < whithList.size(); i++) { if
+				 * (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile()))
+				 * { whithList.remove(i); } } }
+				 */
+				// 赋值返回 ,new对象必须写在里面 否则会覆盖value值出错
+				for (int i = 0; i < whithList.size(); i++) {
+					UserEnterLeaveActions userEnterLeaveActions = new UserEnterLeaveActions();
+					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());
+					userList.add(userEnterLeaveActions);
+				}
+				results.setStatus("0");
+				results.setData(userList);
+
+				return results;
+			}
+
+			results.setStatus("0");
+			results.setCount(liveAccess.getCount());
+			results.setData(list);
+
+			return results;
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		results.setStatus("1");
+		results.setMessage("错误！");
+		return results;
+	}
+
 }

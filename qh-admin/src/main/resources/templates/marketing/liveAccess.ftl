@@ -2,17 +2,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<@h.header title="学习记录"/>
+<@h.header title="直播访问记录"/>
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/indent/excle.js"></script>
-<script src="/scripts/marketing/studyRecord.js"></script>
+<script src="/scripts/marketing/liveAccess.js"></script>
 
 </style>
 <@b.body menu="sidebarmenu-marketing"
-submenu="sidebarmenu-marketing-studyRecord">
-<div ng-controller="studyRecordController">
+submenu="sidebarmenu-marketing-liveAccess">
+<div ng-controller="liveAccessController">
 	<div class="details" style="width: 100%">
 		<div class="details-nav">
 			<ul>
@@ -20,23 +20,21 @@ submenu="sidebarmenu-marketing-studyRecord">
 				<li>/</li>
 				<li>营销管理</li>
 				<li>/</li>
-				<li>学习记录</li>
+				<li>直播访问记录</li>
 			</ul>
 		</div>
 		<div class="details-frame">
 			<div class="details-frame-content">
 				<div class="select-3">
-					<span>请选择日期</span> <input type="date" name="search"
-						ng-model="date"
-						class="ng-pristine ng-untouched ng-valid ng-empty">
+					<span>学员状态</span> <img src="/images/sjk-xl.png"> <select
+						ng-model="notToEnter">
+						<option value="">已进入直播</option>
+						<option value="1">未进入直播</option>
+					</select>
 				</div>
 				<div class="select-3">
-					<span>用户手机号</span> <input type="text" ng-model="mobile"
-						placeholder="请输入手机号">
-				</div>
-				<div class="select-3">
-					<span>视频id</span> <input type="text" ng-model="videoId"
-						placeholder="请输入视频id">
+					<span>直播Id</span> <input type="text" ng-model="liveId"
+						placeholder="请输入直播Id">
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
@@ -53,18 +51,23 @@ submenu="sidebarmenu-marketing-studyRecord">
 					<table id="tableExcel" >
 						<tbody>
 							<tr>
-								<th>用户名</th>
-								<th>视频名称</th>
-								<th>专业</th>
-								<th>观看时长</th>
-								<th>视频总长</th>
+								<th>用户昵称</th>
+								<th>用户地域</th>
+								<th>进入时间</th>
+								<th>离开时间</th>
+								<th>直播观看时长</th>
+								<th>终端类型</th>
 							</tr>
 							<tr ng-repeat="list in list">
-								<th>{{list.userName}}</th>
-								<th>{{list.sectionName}}</th>
-								<th>{{list.courseTypeSubclassName}}</th>
-								<th>{{list.play_duration}}</th>
-								<th>{{list.video_duration}}</th>
+								<th>{{list.viewerName}}</th>
+								<th>{{list.city}}</th>
+								<th>{{list.enterTime}}</th>
+								<th>{{list.leaveTime}}</th>
+								<th ng-show="{{list.watchTime != null}}">{{list.watchTime/60 | number:0}}分钟</th>
+								<th ng-show="{{list.watchTime == null}}">未观看直播</th>
+								<th ng-show="{{list.terminal == 0}}">电脑端</th>
+								<th ng-show="{{list.terminal == 1}}">移动端</th>
+								<th ng-show="{{list.terminal == null}}">无终端类型</th>
 							</tr>
 						</tbody>
 					</table>
@@ -72,7 +75,7 @@ submenu="sidebarmenu-marketing-studyRecord">
 				<div class="col-sm-6"></div>
 				<div class="col-sm-6">
 					<ul uib-pagination boundary-links="true" total-items="total"
-						ng-model="page" items-per-page="numPerPage" max-size="5"
+						ng-model="pageindex" items-per-page="pagenum" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 						ng-click="loaddata()">

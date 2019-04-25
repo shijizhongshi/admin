@@ -11,10 +11,11 @@ public class CourseLineWhite {
 	private String liveId;
 	@NotEmpty
 	private String mobile;
-	
+
 	private Date addtime;
-	
+
 	private Date updatetime;
+
 
 	public String getId() {
 		return id;
@@ -55,6 +56,5 @@ public class CourseLineWhite {
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
 	}
-	
-	
+
 }
