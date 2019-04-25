@@ -72,7 +72,9 @@ app.controller("fuwushopController", function($scope, $http){
 			 		
 			 }else{
 						$scope.selected=null;
+						$scope.shop=null;
 						$scope.id=null;
+						$scope.shopId=null;
 					}
 		}
 		
@@ -99,12 +101,18 @@ app.controller("fuwushopController", function($scope, $http){
 			.success(function(data){
 				if(data.status=="0"){
 					$scope.operating.operatingStatus="审核";
-			    	$scope.operating.operatingUser=$scope.shop.shopName;
+					$scope.operating.operatingUser=$scope.shop.shopName;
 			    	$scope.insertOperating();
 					alert("修改成功")
 					document.getElementById('revise').style.display="none"; 
+					$scope.selected=null;
+					$scope.shop=null;
+					$scope.id=null;
+					$scope.shopId=null;
+					$scope.fuwucount();
+					$scope.shopList();
 					$scope.islimitList();
-					location.reload();
+					
 				}
 				else if(data.status=="1"){
 					

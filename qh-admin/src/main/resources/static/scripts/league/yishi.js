@@ -148,7 +148,7 @@ app.controller("doctorsController", function($scope, $http){
 					document.getElementById('revise').style.display="none"; 
 					$scope.islimitList();
 					$scope.yishicount();
-					location.reload();
+					$scope.doctorsList();
 				}
 			})
 	}
@@ -171,7 +171,9 @@ app.controller("doctorsController", function($scope, $http){
 					    	$scope.operating.operatingUser=$scope.doctors.name;
 					    	$scope.insertOperating();
 							alert("删除成功~");
-							location.reload();
+							$scope.islimitList();
+							$scope.yishicount();
+							$scope.doctorsList();
 						}else{
 							alert("删除失败~");
 						}
@@ -189,7 +191,7 @@ app.controller("doctorsController", function($scope, $http){
 			document.getElementById('add').style.display="none"; 
 			
 	}
-	 $scope.adddoctor=function(){
+	 /*$scope.adddoctor=function(){
 		 
 		 $scope.doctors=null;
 		 $scope.id = null;
@@ -201,10 +203,10 @@ app.controller("doctorsController", function($scope, $http){
 		   $scope.headImg = null;
 		 document.getElementById('add').style.display="block"; 
 		 
-	 }
+	 }*/
 	 
 	 
-	 $scope.insertdoctor=function(){
+	/* $scope.insertdoctor=function(){
 		 $scope.doctors.frontIdcardImg = $scope.frontIdcardImg;
 		 $scope.doctors.reverseIdcardImg = $scope.reverseIdcardImg ;
 		 $scope.doctors.professionalImg = $scope.professionalImg;
@@ -226,7 +228,7 @@ app.controller("doctorsController", function($scope, $http){
 					
 				}
 			})
-	 }
+	 }*/
 	 
 	 $scope.yishicount=function(){
 

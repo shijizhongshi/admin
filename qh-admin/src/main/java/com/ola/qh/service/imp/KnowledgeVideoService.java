@@ -38,7 +38,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 	public Results<List<KnowledgeVideo>> KnowledgeVideoList(int pageNo,int pageSize,String title,String courseTypeSubclassName) {
 		
 		Results<List<KnowledgeVideo>> results=new Results<List<KnowledgeVideo>>();
-		try {
+		//try {
 			
 		List<KnowledgeVideo> list=knowledgeVideoDao.KnowledgeVideoList(pageNo, pageSize, title, courseTypeSubclassName);
 		
@@ -82,11 +82,11 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 		results.setStatus("0");
 		return results;
 		
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
 			return results;
-		}
+		}*/
 	}
 
 	@Override

@@ -73,6 +73,7 @@ app.controller("shangpinshopController", function($scope, $http){
 			 }else{
 						$scope.selected=null;
 						$scope.id=null;
+						$scope.shop=null;
 						$scope.shopId=null;
 					}
 		}
@@ -104,8 +105,12 @@ app.controller("shangpinshopController", function($scope, $http){
 			    	$scope.insertOperating();
 					alert("修改成功")
 					document.getElementById('revise').style.display="none"; 
+					$scope.selected=null;
+					$scope.id=null;
+					$scope.shop=null;
+					$scope.shopId=null;
+					$scope.shopList();
 					$scope.islimitList();
-					location.reload();
 					$scope.shangpincount();
 				}
 				else if(data.status=="1"){
