@@ -170,15 +170,15 @@ public class QuestionBankController {
 				// json字符串转换
 				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
 				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
-				// for循环内部没有测试过——2019-04-25
+				// for循环内部测试完成
 				for (PlayLog playLog : list) {
-					// 查name
+					// 根据用户id 查name
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
-					// 查视频名和所属专业
+					// 根据视频id 查视频名和所属专业
 					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeName());
+						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
 						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
@@ -219,13 +219,13 @@ public class QuestionBankController {
 				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
 				// 展示具体的foreach循环添加
 				for (PlayLog playLog : list) {
-					// 查name
-					String userName = userService.selectNameById(playLog.getUserid());
+					// 根据用户id 查name
+					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
-					// 查视频名和所属专业
+					// 根据视频id 查视频名和所属专业
 					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeName());
+						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
 						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
@@ -267,13 +267,13 @@ public class QuestionBankController {
 				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
 				// 展示具体的foreach循环添加
 				for (PlayLog playLog : list) {
-					// 查name
-					String userName = userService.selectNameById(playLog.getUserid());
+					// 根据用户id 查name
+					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
-					// 查视频名和所属专业
+					// 根据视频id 查视频名和所属专业
 					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeName());
+						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
 						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
