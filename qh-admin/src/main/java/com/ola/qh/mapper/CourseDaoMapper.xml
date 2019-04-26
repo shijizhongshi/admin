@@ -98,10 +98,10 @@
 	</sql>
 	
 	<insert id="insertCourse" parameterType="com.ola.qh.entity.Course">
-	insert into course(<include refid="sql_base"></include>,user_id,orders)
+	insert into course(<include refid="sql_base"></include>,user_id,orders,class_id)
 	values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},
 	#{coursePrice},#{courseDiscountPrice},#{courseYear},#{courseShow},#{courseExcellent},#{courseImg},
-	#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId},#{orders}
+	#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId},#{orders},""
 	)
 	</insert>
 	<update id="updateCourese" parameterType="com.ola.qh.entity.Course">
