@@ -118,9 +118,9 @@ public class KnowledgeVideoService implements IKnowledgeVideoService{
 		Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
 		if(VideoMax!=null){
 			knowledgeVideo.setOrders(VideoMax+1);
-		}
+		}else{
 			knowledgeVideo.setOrders(1);
-			
+		}
 			knowledgeVideo.setCourseTypeSubclassName(subTypeName);
 			knowledgeVideo.setId(KeyGen.uuid());
 			knowledgeVideo.setAddtime(new Date());
