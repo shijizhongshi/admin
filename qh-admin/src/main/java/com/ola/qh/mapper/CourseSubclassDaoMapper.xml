@@ -20,6 +20,7 @@
 			property="courseTypeSubclassName" />
 		<result column="orders" property="orders" />
 		<result column="addtime" property="addtime" />
+		<result column="section_name" property="sectionName" />
 	</resultMap>
 
 	<insert id="insertCourseChapter"

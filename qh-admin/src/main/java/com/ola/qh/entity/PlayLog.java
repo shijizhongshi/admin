@@ -2,7 +2,7 @@ package com.ola.qh.entity;
 
 public class PlayLog {
 
-	private Integer upid;//每次播放产生的随机数字
+	private String upid;//每次播放产生的随机数字
 	private String userid;//用户id
 	private String videoid;//视频id
 	private String custom_id;//自定义id
@@ -87,11 +87,11 @@ public class PlayLog {
 		this.userid = userid;
 	}
 
-	public Integer getUpid() {
+	public String getUpid() {
 		return upid;
 	}
 
-	public void setUpid(Integer upid) {
+	public void setUpid(String upid) {
 		this.upid = upid;
 	}
 
