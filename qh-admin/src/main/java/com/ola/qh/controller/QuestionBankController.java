@@ -342,9 +342,10 @@ public class QuestionBankController {
 				 * (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile()))
 				 * { whithList.remove(i); } } }
 				 */
-				// 赋值返回 ,new对象必须写在里面 否则会覆盖value值出错
+				// 赋值返回
+				UserEnterLeaveActions userEnterLeaveActions = null; 
 				for (int i = 0; i < whithList.size(); i++) {
-					UserEnterLeaveActions userEnterLeaveActions = new UserEnterLeaveActions();
+					userEnterLeaveActions = new UserEnterLeaveActions();
 					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());
 					userList.add(userEnterLeaveActions);
 				}
