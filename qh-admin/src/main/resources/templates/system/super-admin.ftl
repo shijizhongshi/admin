@@ -185,7 +185,7 @@ submenu="sidebarmenu-system-superAdmin">
 								ng-show="userRoleId!=null" value="修改"
 								ng-click="updatequestionbank()" style="background: #5ED8A9;">
 							<input id="esc" name="esc" type="reset" value="取消"
-								onclick="CloseDiv3()" class="esc">
+								ng-click="reset()" class="esc">
 
 						</div>
 				</div>
@@ -194,8 +194,8 @@ submenu="sidebarmenu-system-superAdmin">
 				<div class="poop" style="display: none;" id="selectLimits">
 					<span class="close" ng-click="escLimits()">X</span>
 					<p>账号权限</p>
-					<ul ng-repeat="u in menus">
-						<li>{{u}}</li>
+					<ul ng-repeat="u in menu">
+						<li>{{u.names}}</li>
 					</ul>
 				</div>
 
