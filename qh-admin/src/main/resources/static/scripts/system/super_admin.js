@@ -60,6 +60,7 @@ app.controller("superAdminController", function($scope, $http) {
 	$scope.userRoleList();
 	// 点击事件,点击弹出添加窗口
 	$scope.addshow = function() {
+		if($scope.menu == null){
 		$scope.userRole = null;
 		$scope.userRoleId = null;
 		$scope.confirmPassword = null;
@@ -72,20 +73,23 @@ app.controller("superAdminController", function($scope, $http) {
 		document.getElementById('resource').style.display = "block";
 		//确认密码栏 展示
 		$scope.confirmPasswordshow=true;
+		}
 	}
 	// 点击事件 点击弹出修改窗口
 	var password = null;
 	$scope.update = function() {
-		if ($scope.userRoleId==null) {
+		if ($scope.userRoleId==null ) {
 			alert("请先选择一行数据！");
 			return;
 		}
+		if($scope.menu == null){
 		$scope.html = "修改";
 		password = $scope.userRole.password;
 		document.getElementById('resource').style.display = "block";
 		//确认密码栏 隐藏
 		$scope.confirmPasswordshow=false;
 		//document.getElementById('password').style.display = "none";
+		}
 	}
 	// 点击事件 点击添加按钮实现添加功能
 	$scope.userRole = null;
@@ -101,6 +105,9 @@ app.controller("superAdminController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
 			if (result.status == "0") {
+				$scope.adminMenus = [];
+				$scope.adminSubMenusName = [];
+				$scope.adminMenusNames = [];
 				$scope.operating.operatingStatus="添加";
 		    	$scope.operating.operatingUser=$scope.userRole.username;
 		    	$scope.insertOperating();
@@ -163,7 +170,7 @@ app.controller("superAdminController", function($scope, $http) {
 	}
 
 	var updateSubSelected = function(action, sub, menus) {
-		if ($scope.adminSubMenusName.indexOf(sub.names) == -1) {
+		if (action == 'add' && $scope.adminSubMenusName.indexOf(sub.names) == -1) {
 			if ($scope.adminMenusNames.indexOf(menus.names) == -1) {
 				$scope.adminMenus.push(menus);
 				$scope.adminMenusNames.push(menus.names);
@@ -177,7 +184,7 @@ app.controller("superAdminController", function($scope, $http) {
 
 		}
 
-		if ($scope.adminSubMenusName.indexOf(sub.names) != -1) {
+		if (action == 'remove' && $scope.adminSubMenusName.indexOf(sub.names) != -1) {
 			////////如果大菜单不存在的话
 			if($scope.adminMenusNames.indexOf(menus.names) == -1){
 				$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
@@ -231,6 +238,9 @@ app.controller("superAdminController", function($scope, $http) {
 					'Content-Type' : 'application/json;charset=UTF-8'
 				}).success(function(result) {
 					if (result.status == "0") {
+						$scope.adminMenus = [];
+						$scope.adminSubMenusName = [];
+						$scope.adminMenusNames = [];
 						$scope.operating.operatingStatus="修改";
 				    	$scope.operating.operatingUser=$scope.userRole.username;
 				    	$scope.insertOperating();
@@ -270,6 +280,9 @@ app.controller("superAdminController", function($scope, $http) {
 	$scope.userRoleId=null;
 	// 点击事件 点击获取数据回显 
 	$scope.checkedUserRole = function(u) {
+		 $scope.adminMenus = [];
+	 		$scope.adminSubMenusName = [];
+			$scope.adminMenusNames = [];
 		$scope.userRole = u;
 		$scope.userRoleId=u.id;
 		$scope.selected = u;
@@ -287,16 +300,29 @@ app.controller("superAdminController", function($scope, $http) {
 	//点击事件 点击弹出弹窗 展示 limits
 	$scope.userRole = null;
 	$scope.selectLimits = function(menus) {
-		/*$scope.menus = menus;
-		document.getElementById('selectLimits').style.display = "block";*/
-		alert("敬请期待~");
+		$scope.menu = menus;
+		document.getElementById('selectLimits').style.display = "block";
 	}
 	//点击事件 点击关闭弹窗
 	$scope.escLimits = function() {
-		$scope.menus = null;
+		$scope.menu = null;
+		$scope.adminMenus = [];
+		$scope.adminSubMenusName = [];
+		$scope.adminMenusNames = [];
+		$scope.selected = null;
+		$scope.userRoleId=null;
 		document.getElementById('selectLimits').style.display = "none";
 	}
 
+	$scope.reset = function() {
+		$scope.adminMenus = [];
+		$scope.adminSubMenusName = [];
+		$scope.adminMenusNames = [];
+		$scope.selected = null;
+		$scope.userRoleId=null;
+		document.getElementById('resource').style.display = "none";
+	}
+	
 	$scope.refresh = function() {
 		location.reload();
 	}
