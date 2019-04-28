@@ -34,9 +34,10 @@ submenu="sidebarmenu-marketing-studyRecord">
 					<span>用户手机号</span> <input type="text" ng-model="mobile"
 						placeholder="请输入手机号">
 				</div>
+				<!-- onkeyup="value=value.replace(/[^\w\.\/]/ig,'') ： 约束 不能输入特殊字符和空格？  -->
 				<div class="select-3">
 					<span>视频id</span> <input type="text" ng-model="videoId"
-						placeholder="请输入视频id">
+						placeholder="请输入视频id" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
 				</div>
 				<div style="float: left;">
 					<input type="button" class="btn-lg im-key" ng-click="loaddata()"
