@@ -82,7 +82,7 @@
 			<li style="background:#9DE879;" ng-click="add()"><span class="glyphicon glyphicon-plus" ></span>&nbsp;添加加盟商</li>
 		<li style="background:#F9CD33;" ng-click="update()"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改加盟商</li>
 		<li style="background:#F86846;" ng-click="deleteBusiness()"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除加盟商</li>
-		<li  ng-click="tocharge()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;加盟商充值</li>
+		<li style="background:#40bbea;" ng-click="tocharge()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;加盟商充值</li>
 		<li ng-click="closeBusiness()"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;停用</li>
  
 	</ul>
