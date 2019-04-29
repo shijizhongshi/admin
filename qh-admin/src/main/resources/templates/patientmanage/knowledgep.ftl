@@ -113,7 +113,8 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 										placeholder="请输入标题">
 								</div>
 								
-								<div class="costs-uploadfile-div">
+							<!--=====上传封面部分 暂时注释掉 =====-->
+								<!-- <div class="costs-uploadfile-div">
 									<input type="file" name="file" id="fileField"
 										onchange="angular.element(this).scope().uploadmainimage(this)"
 										accept="image/*">
@@ -122,7 +123,7 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 										<img src="{{imgUrl}}">
 									</div>
 									<p style="color: red">(图片尺寸：750*422&nbsp;图片大小1500kb以下)</p>
-								</div>
+								</div> -->
 								<div class="add-jie-radio">
 									<span>是否同步短视频</span> <span> 
 									<input type="radio" ng-model="knowledgep.status"

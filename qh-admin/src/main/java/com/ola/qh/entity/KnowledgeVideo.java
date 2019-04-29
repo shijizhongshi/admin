@@ -12,8 +12,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class KnowledgeVideo {
 
 	private String id;
-	@NotEmpty
-	private String firstImage;
+	
+	private String firstImage;//第一帧图片
 	@NotEmpty
 	private String title;
 	@NotEmpty
