@@ -346,6 +346,7 @@ app.controller("ElementController", function($scope, $http){
 				alert("导入成功~");
 					$scope.file=null;
 					location.reload();
+					document.getElementById('revise').style.display="none"; 
 				}else{
 					alert("导入失败~");
 				}

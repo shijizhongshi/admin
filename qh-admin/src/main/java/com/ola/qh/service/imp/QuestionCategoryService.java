@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.ola.qh.dao.QuestionBankDao;
 import com.ola.qh.dao.QuestionCategoryDao;
 import com.ola.qh.dao.QuestionSubcategoryDao;
+import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.QuestionCategory;
+import com.ola.qh.entity.QuestionSubCategory;
+import com.ola.qh.entity.QuestionUnit;
 import com.ola.qh.service.IQuestionCategoryService;
 import com.ola.qh.util.Results;
 
@@ -21,6 +25,9 @@ public class QuestionCategoryService implements IQuestionCategoryService{
 
 	@Autowired
 	private QuestionSubcategoryDao questionSubcategoryDao;
+	
+	@Autowired
+	private QuestionBankDao questionBankDao;
 	
 	@Transactional
 	@Override
@@ -74,7 +81,25 @@ public class QuestionCategoryService implements IQuestionCategoryService{
 		Results<String> results=new Results<String>();
 		
 		try {
+			List<QuestionSubCategory> list=questionSubcategoryDao.selectQuestionSubCategory(0, 0, id);
 			
+			for (QuestionSubCategory questionSubCategory : list) {
+			
+		
+			List<QuestionBank> listbank = questionBankDao.selectQuestionBank(questionSubCategory.getId(), 0, 0);
+		
+			for (QuestionBank questionBank : listbank) {
+				questionBankDao.deleteQuestionBank(questionBank.getId());
+				questionBankDao.deleteQuestionAnswer(questionBank.getId());
+				List<QuestionUnit> listunit = questionBankDao.selectQuestionUnit(questionBank.getId());
+
+				for (QuestionUnit questionUnit : listunit) {
+
+					questionBankDao.deleteQuestionUnit(questionUnit.getId());
+					questionBankDao.deleteQuestionAnswer(questionUnit.getId());
+				}
+			}
+			}
 		questionCategoryDao.deleteCategory(id);
 		
 		questionSubcategoryDao.deleteQuestionSubCategory(null, id);

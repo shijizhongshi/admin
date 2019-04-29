@@ -86,19 +86,6 @@ public class QuestionSubcategoryController {
 	public Results<String> deleteQuestionSubCategory(@RequestParam(name="id",required=false)String id,
 			@RequestParam(name="categoryId",required=false)String categoryId){
 		
-		Results<String> results=new Results<String>();
-		
-		
-		int delete=questionSubCategoryService.deleteQuestionSubCategory(id,categoryId);
-		
-		if(delete==0){
-			
-			results.setStatus("1");
-			return results;
-		}
-		
-		results.setStatus("0");
-		return results;
-		
+		return questionSubCategoryService.deleteQuestionSubCategory(id, categoryId);
 	}
 }
