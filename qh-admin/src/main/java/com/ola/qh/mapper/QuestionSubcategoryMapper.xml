@@ -16,7 +16,11 @@
 	
 	<select id="selectQuestionSubCategory" resultMap="QuestionSubCategoryMap">
 	select id,name,times,purposes,isshow,addtime from question_bank_subcategory where category_id=#{categoryId}
-	order by addtime limit #{pageNo},#{pageSize}
+	order by addtime 
+	<if test="pageSize!=0">
+	limit #{pageNo},#{pageSize}
+	</if>
+	
 	</select>
 	
 	<select id="countSubCategory" resultType="int">

@@ -13,5 +13,5 @@ public interface IQuestionSubcategoryService {
 	
 	public int updateQuestionSubCategory(QuestionSubCategory questionSubCategory);
 	
-	public int deleteQuestionSubCategory(String id,String categoryId);
+	public Results<String> deleteQuestionSubCategory(String id,String categoryId);
 }

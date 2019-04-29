@@ -1,22 +1,56 @@
-app.controller("questionJieController", function($scope, $http){
-	
-	
-	$scope.cateid=$("#cateid").val();
-	$scope.name=null;
+app.controller("dailyPractice", function($scope, $http){
 	
 	//总条数
     $scope.total = 0;
     //当前的页数
     $scope.page = 1;
     //一页显示多少条
-    $scope.pageSize = 20;
+    $scope.pageSize = 20 ;
 	
+	$scope.active=1;
+	$scope.typeId=1;
+	$scope.typeSelected=null;
+	$scope.selected=null;
+	$scope.questionCategory=null;
+	
+	$scope.typeList=function(typename,typeId){
+		$scope.active=typeId;
+		$scope.typeId=typeId;
+		$scope.typeBases();
+		$scope.courseTypeName=typename;
+		
+	};
+	$scope.typeBases=function(){
+		
+		$http.get("/api/course/courseTypeSubclassList",{"params": {"courseTypeId":$scope.typeId}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeSubclass=data.data;
+				$scope.typeSelected=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.courseTypeSubclassName=$scope.courseTypeSubclass[0].courseTypeSubclassName;
+				$scope.questionsubcate();
+			}
+		})
+	};
+	$scope.typesList=function(){
+		
+		$http.get("/api/course/courseTypeList", {'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=="0"){
+				$scope.courseTypeList=data.data;
+				
+			}
+		})
+		
+	}
+	$scope.typesList();
+	$scope.typeBases();
 	
 	$scope.questionsubcate=function(){
 		$scope.pageNo=( $scope.page-1)*$scope.pageSize;
 		$http.get("/api/questionsubcategory/select",{"params": {"pageNo":$scope.pageNo,
 			"pageSize":$scope.pageSize,
-			"categoryId":$scope.cateid}}, {'Content-Type': 'application/json;charset=UTF-8'})
+			"categoryId":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
 				$scope.questionsubcatelist=data.data;
@@ -34,17 +68,14 @@ app.controller("questionJieController", function($scope, $http){
 						questionSubCategory.show="展示";
 					}
 					
-					
 				})
 			}
 		})
 	};
 	
 	$scope.questioncateadd=function(){
-		$scope.questionSubCategory.courseTypeName=$scope.courseTypeName;
-		$scope.questionSubCategory.categoryId=$scope.cateid;
-		$scope.questionSubCategory.courseTypeSubclassName=$scope.courseTypeSubclassName;
-		$scope.questionSubCategory.types="章节";
+		$scope.questionSubCategory.purposes="每日一练"
+		$scope.questionSubCategory.categoryId=$scope.courseTypeSubclassName;
 		$http.post("/api/questionsubcategory/insert",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
@@ -71,10 +102,6 @@ app.controller("questionJieController", function($scope, $http){
 			}
 		})
 	};
-	
-	$scope.courseTypeName="医师资格";
-	$scope.courseTypeSubclassName="临床(执业)助理医师";
-	$scope.questionsubcate();
 	
 	$scope.checkquestionsubcate=function(qbc){
 		
@@ -211,22 +238,7 @@ app.controller("questionJieController", function($scope, $http){
 								
 							}
 							
-							
-							
-							
-							/*angular.forEach($scope.questionunitanswerlist, function(questionunitanswer){  
-								
-								if(questionunitanswer.correct==true){
-									
-									questionunitanswer.corrects="正确";
-								}else{
-									
-									questionunitanswer.corrects="错误";
-								}
-							})*/
-							
-						
-						
+					
 					}
 				})
 			}
@@ -407,5 +419,7 @@ app.controller("questionJieController", function($scope, $http){
 		})
 		}
 	}
+	
+	
 	
 })

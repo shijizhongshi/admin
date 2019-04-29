@@ -42,4 +42,9 @@ public class QuestionBankWeb {
 	public String  calendar(){
 		return "questionBank/calendar";
 	}
+	
+	@RequestMapping("/dailyPractice")
+	public String  dailyPractice(){
+		return "questionBank/dailyPractice";
+	}
 	}
