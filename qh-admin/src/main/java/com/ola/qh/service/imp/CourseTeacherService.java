@@ -19,86 +19,86 @@ import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
 @Service
-public class CourseTeacherService implements ICourseTeacherService{
+public class CourseTeacherService implements ICourseTeacherService {
 
 	@Autowired
 	private CourseTeacherDao courseTeacherDao;
 	@Autowired
 	private CourseClassTeacherDao courseClassTeacherDao;
-	
 
 	@Override
-	public List<CourseTeacher> selectCourseTeacher(int pageNo, int pageSize,String courseTypeName,String courseTypeSubclassName,String teacherName) {
-		List<CourseTeacher> list = courseTeacherDao.selectCourseTeacher(pageNo, pageSize,courseTypeName,courseTypeSubclassName,teacherName);
+	public List<CourseTeacher> selectCourseTeacher(int pageNo, int pageSize, String courseTypeName,
+			String courseTypeSubclassName, String teacherName) {
+		List<CourseTeacher> list = courseTeacherDao.selectCourseTeacher(pageNo, pageSize, courseTypeName,
+				courseTypeSubclassName, teacherName);
 		for (CourseTeacher courseTeacher : list) {
-			List<String> typename=new ArrayList<String>();
-			if(courseTeacher.getCourseTypeSubclassNames().indexOf(",")>0){
-				String[] typenames=courseTeacher.getCourseTypeSubclassNames().split(",");
+			List<String> typename = new ArrayList<String>();
+			if (courseTeacher.getCourseTypeSubclassNames().indexOf(",") > 0) {
+				String[] typenames = courseTeacher.getCourseTypeSubclassNames().split(",");
 				typename = Arrays.asList(typenames);
-			}else{
+			} else {
 				typename.add(courseTeacher.getCourseTypeSubclassNames());
 			}
 			courseTeacher.setTypename(typename);
-			
-			List<String> names=new ArrayList<String>();
-			if(courseTeacher.getCourseTypeNames().indexOf(",")>0){
-				String[] tnames=courseTeacher.getCourseTypeNames().split(",");
+
+			List<String> names = new ArrayList<String>();
+			if (courseTeacher.getCourseTypeNames().indexOf(",") > 0) {
+				String[] tnames = courseTeacher.getCourseTypeNames().split(",");
 				names = Arrays.asList(tnames);
-			}else{
+			} else {
 				names.add(courseTeacher.getCourseTypeNames());
 			}
 			courseTeacher.setNames(names);
 		}
 		return list;
 	}
-	
-	
+
 	@Override
 	public CourseTeacher selectCourseTeacherDetails(String id) {
-		
+
 		return courseTeacherDao.selectCourseTeacherDetails(id);
 	}
-	
+
 	@Override
 	public List<CourseTeacher> selectName(String id) {
-		
+
 		return courseTeacherDao.selectName(id);
 	}
 
 	@Transactional
 	@Override
 	public Results<String> insertCourseTeacher(CourseTeacher courseTeacher) {
-		
-		Results<String> results=new Results<String>();
-		
+
+		Results<String> results = new Results<String>();
+
 		try {
 			courseTeacher.setId(KeyGen.uuid());
 			courseTeacher.setAddtime(new Date());
 			List<String> list = courseTeacher.getTypename();
-			String typename="";
-			for(String string : list) {
-				if("".equals(typename)){
-					typename=string;
-				}else{
-					typename=typename+","+string;
+			String typename = "";
+			for (String string : list) {
+				if ("".equals(typename)) {
+					typename = string;
+				} else {
+					typename = typename + "," + string;
 				}
 			}
-			
-			String names="";
-			for(String string : courseTeacher.getNames()) {
-				if("".equals(names)){
-					names=string;
-				}else{
-					names=names+","+string;
+
+			String names = "";
+			for (String string : courseTeacher.getNames()) {
+				if ("".equals(names)) {
+					names = string;
+				} else {
+					names = names + "," + string;
 				}
 			}
 			courseTeacher.setCourseTypeNames(names);
 			courseTeacher.setCourseTypeSubclassNames(typename);
 			courseTeacherDao.insertCourseTeacher(courseTeacher);
-		
+
 			results.setStatus("0");
 			return results;
-		
+
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
@@ -109,39 +109,38 @@ public class CourseTeacherService implements ICourseTeacherService{
 	@Override
 	public int updateCourseTeacher(CourseTeacher courseTeacher) {
 		List<String> list = courseTeacher.getTypename();
-		if(list!=null && list.size()!=0){
-			String typename="";
-			for(String string : list) {
-				if("".equals(typename)){
-					typename=string;
-				}else{
-					typename=typename+","+string;
+		if (list != null && list.size() != 0) {
+			String typename = "";
+			for (String string : list) {
+				if ("".equals(typename)) {
+					typename = string;
+				} else {
+					typename = typename + "," + string;
 				}
 			}
 			courseTeacher.setCourseTypeSubclassNames(typename);
 		}
-		
-		if(courseTeacher.getNames()!=null && courseTeacher.getNames().size()!=0){
-			String names="";
-			for(String string : courseTeacher.getNames()) {
-				if("".equals(names)){
-					names=string;
-				}else{
-					names=names+","+string;
+
+		if (courseTeacher.getNames() != null && courseTeacher.getNames().size() != 0) {
+			String names = "";
+			for (String string : courseTeacher.getNames()) {
+				if ("".equals(names)) {
+					names = string;
+				} else {
+					names = names + "," + string;
 				}
 			}
 			courseTeacher.setCourseTypeNames(names);
 		}
-		
-		
+
 		return courseTeacherDao.updateCourseTeacher(courseTeacher);
 	}
 
 	@Transactional
 	public int deleteCourseTeacher(String id) {
 		int num = courseTeacherDao.deleteCourseTeacher(id);
-		
-		courseClassTeacherDao.deleteCourseClassTeacher(null,id);
+
+		courseClassTeacherDao.deleteCourseClassTeacher(null, id);
 		return num;
 	}
 
@@ -151,5 +150,30 @@ public class CourseTeacherService implements ICourseTeacherService{
 		return courseTeacherDao.selectCourseTeacherCount(courseTypeName, courseTypeSubclassName, teacherName);
 	}
 
-	
+	@Override
+	public Results<String> courseTeacherOrders(String id, int orders, String operateType) {
+		Results<String> results = new Results<String>();
+		if ("down".equals(operateType)) { // 下移
+			// 获取下一条记录iorder
+			int nextOrder = courseTeacherDao.selectOrder(operateType, orders);
+			// 修改下一条的为当前值
+			courseTeacherDao.updateOrders(null, nextOrder, orders);
+			// 修改自己的排序为下一条
+			courseTeacherDao.updateOrders(id, 0, nextOrder);
+			results.setData(String.valueOf(nextOrder));
+		}
+		if ("up".equals(operateType)) { // 上移
+			// 获取上一条记录iorder
+			int previousOrder = courseTeacherDao.selectOrder(operateType, orders);
+			// 修改上一条的为当前值
+			courseTeacherDao.updateOrders(null, previousOrder, orders);
+			// 修改自己的排序为上一条
+			courseTeacherDao.updateOrders(id, 0, previousOrder);
+			results.setData(String.valueOf(previousOrder));
+		}
+		results.setStatus("0");
+
+		return results;
+	}
+
 }

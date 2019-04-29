@@ -8,43 +8,51 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CourseTeacher {
 
 	private String id;
-	
-	@NotEmpty(message="讲师姓名不能为空")
-	private String name;//教师姓名
-	
-	@NotEmpty(message="不能为空")
-	private String isshow;//1:展示   2:不展示
-	
-	@NotEmpty(message="是否推荐不能为空")
-	private String isremmend;//0不推荐1推荐
-	
-	@NotEmpty(message="图片不能为空")
-	private String imgUrl;//老师的图片
-	
-	private String prizes;//获奖情况
-	
-	@NotEmpty(message="特色不能为空")
-	private String features;//特色
-	
-	@NotEmpty(message="老师描述不能为空")
-	private String describes;//老师描述
-	
-	@NotEmpty(message="详细介绍不能为空")
-	private String details;//详细介绍
-	
-	private String courseTypeNames;//专业
-	
-	private String courseTypeSubclassNames;//子专业
-	
-	private List<String> typename;///子类别的集合 
-	
-	private List<String> names;///大类别的集合 
-	
+
+	@NotEmpty(message = "讲师姓名不能为空")
+	private String name;// 教师姓名
+
+	@NotEmpty(message = "不能为空")
+	private String isshow;// 1:展示 2:不展示
+
+	@NotEmpty(message = "是否推荐不能为空")
+	private String isremmend;// 0不推荐1推荐
+
+	@NotEmpty(message = "图片不能为空")
+	private String imgUrl;// 老师的图片
+
+	private String prizes;// 获奖情况
+
+	@NotEmpty(message = "特色不能为空")
+	private String features;// 特色
+
+	@NotEmpty(message = "老师描述不能为空")
+	private String describes;// 老师描述
+
+	@NotEmpty(message = "详细介绍不能为空")
+	private String details;// 详细介绍
+
+	private String courseTypeNames;// 专业
+
+	private String courseTypeSubclassNames;// 子专业
+
+	private List<String> typename;/// 子类别的集合
+
+	private List<String> names;/// 大类别的集合
+
+	private Integer orders;//上移下移所需参
+
 	private Date addtime;
-	
+
 	private Date updatetime;
-	
-	
+
+	public Integer getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Integer orders) {
+		this.orders = orders;
+	}
 
 	public List<String> getNames() {
 		return names;
@@ -166,6 +174,4 @@ public class CourseTeacher {
 		this.courseTypeSubclassNames = courseTypeSubclassNames;
 	}
 
-	
-	
 }

@@ -2,8 +2,6 @@ package com.ola.qh.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ola.qh.entity.CourseTeacher;
 import com.ola.qh.util.Results;
 
@@ -25,4 +23,6 @@ public interface ICourseTeacherService {
 	public int updateCourseTeacher(CourseTeacher courseTeacher);
 	
 	public int deleteCourseTeacher(String id);
+
+	public Results<String> courseTeacherOrders(String id, int orders, String operateType);
 }

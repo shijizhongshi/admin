@@ -174,6 +174,7 @@ app.controller("teacherController", function($scope, $http){
 		$scope.imgUrl=t.imgUrl;
 		$scope.subtypeselected=t.typename;
 		$scope.typeselected=t.names;
+		$scope.orders = t.orders;
 	}
 	$scope.add=function(){
 		$scope.imgUrl=null;
@@ -199,7 +200,7 @@ app.controller("teacherController", function($scope, $http){
 	$scope.deleteTeacher=function(){
 		if($scope.teacherId!=null){
 			////删除课程/
-			if(confirm("您确定要删出这个教师信息吗")){
+			if(confirm("您确定要删除这个教师信息吗")){
 				$http.get("/api/courseteacher/delete",{"params": {"id":$scope.teacherId}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=='0'){
@@ -227,6 +228,59 @@ app.controller("teacherController", function($scope, $http){
 		$scope.teacher=null;
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
+	}
+	//测试  上移下移
+	$scope.Knowledgepmove=function(types){
+
+			if(types==1){
+				/////上移
+				 var index=$scope.teacherlist.indexOf($scope.teacher);
+				  var tmp=angular.copy($scope.teacherlist[index-1]);
+				  if(index==0){
+				  alert('已经是第一个了，不能再向上移动了！');
+				  location.reload() ;
+				  }
+				  $scope.teacherlist[index-1]=$scope.teacherlist[index];
+				  $scope.teacherlist[index]=tmp;
+				  
+				$scope.teacherApi("up");
+				return;
+			}else if(types==2){
+				/////下移
+				var index=$scope.teacherlist.indexOf($scope.teacher);
+				 
+				  if(index==$scope.teacherlist.length-1){
+				  alert('已经是最后一个了，不能再向下移动了！');
+				  location.reload() ;
+				  }
+				  var tmp=angular.copy($scope.teacherlist[index+1]);
+				 
+				  $scope.teacherlist[index+1]=$scope.teacherlist[index];
+				  $scope.teacherlist[index]=tmp;
+				  $scope.teacherApi("down");
+				  return;
+			}else {
+				alert("请选中信息~");
+			}
+		
+	}
+	//上移下移
+	$scope.teacherApi=function(operateType){
+		$http.get("/api/courseteacher/teacherApi",{"params": {"id":$scope.teacherId,
+			"orders":$scope.orders,"operateType":operateType}}, 
+			{'Content-Type': 'application/json;charset=UTF-8'})
+		.success(function(data){
+			if(data.status=='0'){
+				$scope.orders = data.data;
+				$scope.teacherBases();
+			}else{
+				if(data.message!=null){
+					alert(data.message);
+				}else{
+				alert("移动失败~");
+				}
+			}
+		})
 	}
 	
 });

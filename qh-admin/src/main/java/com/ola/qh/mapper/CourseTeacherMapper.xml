@@ -15,6 +15,7 @@
 		<result column="details" property="details" />
 		<result column="course_type_names" property="courseTypeNames" />
 		<result column="course_type_subclass_names" property="courseTypeSubclassNames" />
+		<result column="orders" property="orders" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
 	</resultMap>
@@ -32,7 +33,7 @@
 		<if test="teacherName!=null and teacherName!='' ">
 		and name like concat(concat('%',#{teacherName},'%'))
 		</if>
-		order by addtime ASC
+		order by orders,addtime ASC
 		<if test="pageSize!=0">
 		limit #{pageNo},#{pageSize}
 		</if>
@@ -116,4 +117,32 @@
 		delete from course_teacher where id=#{id}
 	</delete>
 	
+	<!--上移下移  -->
+	<select id="selectOrder" resultType="java.lang.Integer">
+	SELECT ifnull(orders, 1) previousOrder FROM course_teacher    
+	where 1=1
+    <if test="type=='up'">
+    <!-- 读取上一条记录 -->
+    and orders <![CDATA[ < ]]> #{orders}
+    order by orders asc
+    </if>
+    <if test="type=='down'">
+    <!-- 读取下一条记录 -->
+    and orders <![CDATA[ > ]]> #{orders}
+    order by orders 
+    </if>
+    limit 0,1
+	</select>
+	
+	<update id="updateOrders">
+	update course_teacher    
+	
+	set orders=#{orders} where 1=1
+	<if test="id!=null and id!='' ">
+	and id=#{id}
+	</if>
+	<if test="originalOrder!=0">
+	and orders=#{originalOrder}
+	</if>
+	</update>
 </mapper>
