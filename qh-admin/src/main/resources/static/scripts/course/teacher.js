@@ -229,7 +229,7 @@ app.controller("teacherController", function($scope, $http){
 		$scope.selected = null;
 		document.getElementById('add').style.display="none"; 
 	}
-	//测试  上移下移
+	//测试  上移下移调用的方法
 	$scope.Knowledgepmove=function(types){
 
 			if(types==1){

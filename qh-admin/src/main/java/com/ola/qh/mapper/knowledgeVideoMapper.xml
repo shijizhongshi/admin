@@ -30,6 +30,10 @@
 		limit #{pageNo},#{pageSize}
 	</select>
 	
+	<select id="selectVideoIdAll" resultMap="KnowledgeVideoMap">
+		SELECT * from knowledge_video;
+	</select>
+	
 	<select id="KnowledgeVideoCount" resultType="java.lang.Integer">
 		select count(id)
 		from knowledge_video 
@@ -112,5 +116,14 @@
 	<if test="originalOrder!=0">
 	and orders=#{originalOrder}
 	</if>
+	</update>
+	
+	<update id="updateImage">
+	 update knowledge_video
+	 set first_image = #{image} 
+	 where 1=1
+	 <if test="id!=null and id!=''">
+	 and id = #{id}
+	 </if>
 	</update>
 </mapper>

@@ -26,4 +26,9 @@ public interface KnowledgeVideoDao {
 	
 	///////得到记录中最大的orders
 	public Integer selectMaxOrder();
+
+	public List<KnowledgeVideo> selectVideoIdAll();
+
+	public void updateImage(@Param("image")String image,@Param("id") String id);
+
 }

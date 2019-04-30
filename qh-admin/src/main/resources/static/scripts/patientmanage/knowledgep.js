@@ -372,4 +372,15 @@ app.controller("knowledgepController", function($scope, $http){
 			$scope.adminMenusNames = [];
 		  document.getElementById('resource').style.display="none"; 
 	   }
+	   $scope.updateAll = function () {
+		   $http.get("/api/KnowledgeVideo/updateAll",{'Content-Type': 'application/json;charset=UTF-8'})
+		   .success(function (result) {
+			   if (result.status == "0") {
+				   alert("成功更新全部短视频封面");
+				   $scope.KnowledgepList();
+			   }else {
+				   alert(result.message);
+			   }
+		   })
+	   }
 })

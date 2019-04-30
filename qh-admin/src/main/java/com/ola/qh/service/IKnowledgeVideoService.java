@@ -16,4 +16,6 @@ public interface IKnowledgeVideoService {
 	public int deleteKnowledgeVideo(String id);
 	
 	public Results<String> sectionOrders(String id,int orders,String operateType);
+
+	public Results<String> updateAll();
 }

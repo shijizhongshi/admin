@@ -31,10 +31,16 @@ public class Patterns {
 	public static final String customVideoV2 = "http://spark.bokecc.com/api/playlog/custom/video/v2";
 
 	public static final String useraction = "http://api.csslcloud.net/api/statis/live/useraction";
-	
+
 	public static final String token = "t2iFuY3hnjXsSZ1PKnewAtHOtRhM1WL8";
 	
+	public static final String token186 = "Cu3Thufrfv5MZPSgWyvrKExet3bAifnO";
+
 	public static final String liveToken = "edWIdmhneO2zWRAOJMYeI1tlXiq3LMCt";
-	
+
 	public static final String accountId = "91DD94C27B488135";
+
+	public static final String accountId186 = "3806B9D2D94E137C";
+	
+	public static final String videoV5 = "http://spark.bokecc.com/api/video/v5";
 }

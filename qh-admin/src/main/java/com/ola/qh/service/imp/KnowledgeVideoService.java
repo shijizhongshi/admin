@@ -137,12 +137,15 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 			JSONObject jsonObject = JSONObject.parseObject(byteString);
 			String videoString = jsonObject.getString("video");
 			JSONObject jsonObjects = JSONObject.parseObject(videoString);
+			//封面
 			String image = jsonObjects.getString("image");
+			//高清图
+			String newImage = image.replace("-0.jpg","-1.jpg");
 			//添加
 			knowledgeVideo.setCourseTypeSubclassName(subTypeName);
 			knowledgeVideo.setId(KeyGen.uuid());
 			knowledgeVideo.setAddtime(new Date());
-			knowledgeVideo.setFirstImage(image);
+			knowledgeVideo.setFirstImage(newImage);
 			int insert = knowledgeVideoDao.insertKnowledgeVideo(knowledgeVideo);
 			if (knowledgeVideo.getStatus() == 1) {
 				UserVideo userVideo = new UserVideo();
@@ -150,7 +153,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 				userVideo.setNickname("admin");
 				userVideo.setAddtime(new Date());
 				// 封面添加
-				userVideo.setFirstImage(image);
+				userVideo.setFirstImage(newImage);
 				userVideo.setVideoId(knowledgeVideo.getVideoId());
 				userVideo.setTitle(knowledgeVideo.getTitle());
 				userVideo.setUserId("1");
@@ -195,12 +198,14 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 			String videoString = jsonObject.getString("video");
 			JSONObject jsonObjects = JSONObject.parseObject(videoString);
 			String image = jsonObjects.getString("image");
+			//高清图
+			String newImage = image.replace("-0.jpg","-1.jpg");
 
 			if (knowledgeVideo.getStatus() == 1) {
 				UserVideo userVideo = new UserVideo();
 				userVideo.setId(KeyGen.uuid());
 				userVideo.setAddtime(new Date());
-				userVideo.setFirstImage(image);
+				userVideo.setFirstImage(newImage);
 				userVideo.setVideoId(knowledgeVideo.getVideoId());
 				userVideo.setTitle(knowledgeVideo.getTitle());
 				userVideo.setUserId("1");
@@ -222,7 +227,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 			}
 			knowledgeVideo.setUpdatetime(new Date());
 			// 封面
-			knowledgeVideo.setFirstImage(image);
+			knowledgeVideo.setFirstImage(newImage);
 			int update = knowledgeVideoDao.updateKnowledgeVideo(knowledgeVideo);
 
 			if (update <= 0) {
@@ -311,7 +316,9 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 				if (videoString != null) {
 					JSONObject jsonObjects = JSONObject.parseObject(videoString);
 					String image = jsonObjects.getString("image");
-					knowledgeVideoDao.updateImage(image,knowledgeVideo.getId());
+					//高清图
+					String newImage = image.replace("-0.jpg","-1.jpg");
+					knowledgeVideoDao.updateImage(newImage,knowledgeVideo.getId());
 				}
 				
 			} catch (IOException e) {

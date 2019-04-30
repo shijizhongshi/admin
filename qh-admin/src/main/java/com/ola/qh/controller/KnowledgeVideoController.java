@@ -69,5 +69,12 @@ public class KnowledgeVideoController {
 			@RequestParam(name="operateType",required=true)String operateType){
 		return knowledgeVideoService.sectionOrders(id, orders, operateType);
 	}
+	@RequestMapping(value = "/updateAll",method = RequestMethod.GET)
+	public Results<String> updateAll () {
+		Results<String> results = new Results<String>();
+		results = knowledgeVideoService.updateAll();
+		
+		return results;
+	}
 	
 }
