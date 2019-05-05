@@ -33,4 +33,6 @@ public interface CourseTeacherDao {
 
 	public int updateOrders(@Param("id") String id, @Param("originalOrder") int originalOrder,
 			@Param("orders") int orders);
+
+	public Integer selectMaxOrders();
 }

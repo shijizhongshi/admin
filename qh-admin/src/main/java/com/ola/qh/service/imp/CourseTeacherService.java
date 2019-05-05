@@ -92,6 +92,15 @@ public class CourseTeacherService implements ICourseTeacherService {
 					names = names + "," + string;
 				}
 			}
+			// 添加教师信息的同时 赋值给
+			Integer maxOrders = courseTeacherDao.selectMaxOrders();
+			Integer orders = null;
+			if (maxOrders != null) {
+				orders = maxOrders + 1;
+			} else {
+				orders = 1;
+			}
+			courseTeacher.setOrders(orders);
 			courseTeacher.setCourseTypeNames(names);
 			courseTeacher.setCourseTypeSubclassNames(typename);
 			courseTeacherDao.insertCourseTeacher(courseTeacher);

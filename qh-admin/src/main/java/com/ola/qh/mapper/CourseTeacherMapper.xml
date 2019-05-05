@@ -117,6 +117,10 @@
 		delete from course_teacher where id=#{id}
 	</delete>
 	
+	<!--查询最大orders  -->
+	<select id="selectMaxOrders" resultType="java.lang.Integer">
+		select max(orders) from course_teacher
+	</select>
 	<!--上移下移  -->
 	<select id="selectOrder" resultType="java.lang.Integer">
 	SELECT ifnull(orders, 1) previousOrder FROM course_teacher    

@@ -24,7 +24,7 @@ app.controller("studyRecordController", function($scope, $http) {
 	$scope.loaddata = function() {
 		//正则  输入长度必须为32位  只能由数字和大小写字母组成
 		var re = new RegExp(/^[0-9A-Za-z]{32}$/);
-		if (!re.test($scope.videoId.trim()) || "7461" != $scope.videoId.slice(-4)) {
+		if ($scope.videoId != null && !re.test($scope.videoId) && "7461" != $scope.videoId.slice(-4)) {
 			alert("视频Id格式不正确");
 			return;
 		}
