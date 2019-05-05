@@ -124,7 +124,7 @@
     <if test="type=='up'">
     <!-- 读取上一条记录 -->
     and orders <![CDATA[ < ]]> #{orders}
-    order by orders asc
+    order by orders desc
     </if>
     <if test="type=='down'">
     <!-- 读取下一条记录 -->
