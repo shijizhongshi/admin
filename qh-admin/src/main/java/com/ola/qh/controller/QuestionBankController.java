@@ -176,12 +176,10 @@ public class QuestionBankController {
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
 					// 根据视频id 查视频名和所属专业
-					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						for (CourseChapter courseChapter1 : courseChapter) {
-							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
-							playLog.setSectionName(courseChapter1.getSectionName());
-						}
+						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
+						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
 				results.setStatus("0");
@@ -225,12 +223,10 @@ public class QuestionBankController {
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
 					// 根据视频id 查视频名和所属专业
-					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						for (CourseChapter courseChapter1 : courseChapter) {
-							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
-							playLog.setSectionName(courseChapter1.getSectionName());
-						}
+						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
+						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
 				results.setStatus("0");
@@ -275,12 +271,10 @@ public class QuestionBankController {
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
 					// 根据视频id 查视频名和所属专业
-					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						for (CourseChapter courseChapter1 : courseChapter) {
-							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
-							playLog.setSectionName(courseChapter1.getSectionName());
-						}
+						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
+						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
 

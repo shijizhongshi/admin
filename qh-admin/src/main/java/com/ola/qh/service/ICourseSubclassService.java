@@ -35,6 +35,6 @@ public interface ICourseSubclassService {
 	
 	public Results<String> sectionOrders(String id,int orders,String operateType,String tables,String comment);
 
-	public List<CourseChapter> selectNameAndCTSN(String videoid);
+	public CourseChapter selectNameAndCTSN(String videoid);
 	
 }
