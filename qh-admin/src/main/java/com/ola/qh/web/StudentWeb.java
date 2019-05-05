@@ -32,4 +32,8 @@ public class StudentWeb {
 		return "student/studentinfo";
 	}
 
+	@RequestMapping("/videorecord")
+	public String videoRecord () {
+		return "student/videorecord";
+	}
 }
