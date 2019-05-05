@@ -148,7 +148,9 @@
 		<span>所在城市<i class="bitian">*</i></span>
 		<img src="/images/sjk-xl.png">
 		<select ng-model="p" ng-options="p.provinceName for p in provincelist" ng-change="getCity(p)">
-		
+		<!-- <select ng-model="provinceName">
+			<option ng-repeat="province in provincelist" value = "{{province.provinceName}}">{{province.provinceName}}</option>
+		</select> -->
 		</select>
 	</div>
 		<div class="select-3">

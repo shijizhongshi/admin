@@ -165,7 +165,7 @@ public class QuestionBankController {
 			try {
 				Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
 				byte[] bytess = testByte.getData();
- 				String byteString = new String(bytess);
+				String byteString = new String(bytess);
 
 				// json字符串转换
 				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
@@ -176,10 +176,12 @@ public class QuestionBankController {
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
 					// 根据视频id 查视频名和所属专业
-					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
-						playLog.setSectionName(courseChapter.getSectionName());
+						for (CourseChapter courseChapter1 : courseChapter) {
+							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
+							playLog.setSectionName(courseChapter1.getSectionName());
+						}
 					}
 				}
 				results.setStatus("0");
@@ -198,7 +200,7 @@ public class QuestionBankController {
 			if (id == null) {
 				results.setStatus("1");
 				results.setMessage("根据此手机号未查询到用户，请核对~");
-				
+
 				return results;
 			}
 			TreeMap<String, String> treeMap = new TreeMap<>();
@@ -223,10 +225,12 @@ public class QuestionBankController {
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
 					// 根据视频id 查视频名和所属专业
-					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
-						playLog.setSectionName(courseChapter.getSectionName());
+						for (CourseChapter courseChapter1 : courseChapter) {
+							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
+							playLog.setSectionName(courseChapter1.getSectionName());
+						}
 					}
 				}
 				results.setStatus("0");
@@ -245,7 +249,7 @@ public class QuestionBankController {
 			if (id == null) {
 				results.setStatus("1");
 				results.setMessage("根据此手机号未查询到用户，请核对~");
-				
+
 				return results;
 			}
 			TreeMap<String, String> treeMap = new TreeMap<>();
@@ -271,10 +275,12 @@ public class QuestionBankController {
 					String userName = userService.selectNameById(playLog.getCustom_id());
 					playLog.setUserName(userName);
 					// 根据视频id 查视频名和所属专业
-					CourseChapter courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
+					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
 					if (courseChapter != null) {
-						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
-						playLog.setSectionName(courseChapter.getSectionName());
+						for (CourseChapter courseChapter1 : courseChapter) {
+							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
+							playLog.setSectionName(courseChapter1.getSectionName());
+						}
 					}
 				}
 
@@ -343,7 +349,7 @@ public class QuestionBankController {
 				 * { whithList.remove(i); } } }
 				 */
 				// 赋值返回
-				UserEnterLeaveActions userEnterLeaveActions = null; 
+				UserEnterLeaveActions userEnterLeaveActions = null;
 				for (int i = 0; i < whithList.size(); i++) {
 					userEnterLeaveActions = new UserEnterLeaveActions();
 					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());

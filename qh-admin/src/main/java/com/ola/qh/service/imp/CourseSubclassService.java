@@ -215,7 +215,7 @@ public class CourseSubclassService implements ICourseSubclassService{
 	}
 
 	@Override
-	public CourseChapter selectNameAndCTSN(String videoid) {
+	public List<CourseChapter> selectNameAndCTSN(String videoid) {
 		
 		return courseSubclassDao.selectNameAndCTSN(videoid);
 	}

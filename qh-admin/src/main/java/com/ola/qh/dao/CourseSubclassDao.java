@@ -56,5 +56,5 @@ public interface CourseSubclassDao {
 	///////得到记录中最大的orders
 	public Integer selectMaxOrder(@Param("tables")String tables);
 
-	public CourseChapter selectNameAndCTSN(@Param("videoId") String videoid);
+	public List<CourseChapter> selectNameAndCTSN(@Param("videoId") String videoid);
 }
