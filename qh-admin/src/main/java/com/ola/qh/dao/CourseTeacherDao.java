@@ -28,11 +28,4 @@ public interface CourseTeacherDao {
 
 	public int deleteCourseTeacher(@Param("id") String id);
 
-	// 上移下移
-	public int selectOrder(@Param("type") String type, @Param("orders") int orders);
-
-	public int updateOrders(@Param("id") String id, @Param("originalOrder") int originalOrder,
-			@Param("orders") int orders);
-
-	public Integer selectMaxOrders();
 }

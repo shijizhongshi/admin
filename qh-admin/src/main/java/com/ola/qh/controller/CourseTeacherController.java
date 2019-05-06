@@ -137,16 +137,4 @@ public class CourseTeacherController {
 		return results;
 
 	}
-
-	/**
-	 * 上移下移功能
-	 */
-	@RequestMapping(value = "/teacherApi", method = RequestMethod.GET)
-	public Results<String> courseTeacherOrders(@RequestParam(name = "id", required = true) String id,
-			@RequestParam(name = "orders", required = true) int orders,
-			@RequestParam(name = "operateType", required = true) String operateType) {
-		
-		return courseTeacherService.courseTeacherOrders(id,orders,operateType);
-	}
-
 }

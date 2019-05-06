@@ -116,37 +116,4 @@
 	<delete id="deleteCourseTeacher" >
 		delete from course_teacher where id=#{id}
 	</delete>
-	
-	<!--查询最大orders  -->
-	<select id="selectMaxOrders" resultType="java.lang.Integer">
-		select max(orders) from course_teacher
-	</select>
-	<!--上移下移  -->
-	<select id="selectOrder" resultType="java.lang.Integer">
-	SELECT ifnull(orders, 1) previousOrder FROM course_teacher    
-	where 1=1
-    <if test="type=='up'">
-    <!-- 读取上一条记录 -->
-    and orders <![CDATA[ < ]]> #{orders}
-    order by orders desc
-    </if>
-    <if test="type=='down'">
-    <!-- 读取下一条记录 -->
-    and orders <![CDATA[ > ]]> #{orders}
-    order by orders 
-    </if>
-    limit 0,1
-	</select>
-	
-	<update id="updateOrders">
-	update course_teacher    
-	
-	set orders=#{orders} where 1=1
-	<if test="id!=null and id!='' ">
-	and id=#{id}
-	</if>
-	<if test="originalOrder!=0">
-	and orders=#{originalOrder}
-	</if>
-	</update>
 </mapper>
