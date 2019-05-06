@@ -182,6 +182,11 @@ public class QuestionBankController {
 						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
+				if (list.isEmpty() || list == null) {
+					results.setStatus("1");
+					results.setMessage("根据条件未查询到记录~");
+					return results;
+				}
 				results.setStatus("0");
 				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
 				results.setData(list);
@@ -228,6 +233,11 @@ public class QuestionBankController {
 						playLog.setCourseTypeSubclassName(courseChapter.getCourseTypeSubclassName());
 						playLog.setSectionName(courseChapter.getSectionName());
 					}
+				}
+				if (list.isEmpty() || list == null) {
+					results.setStatus("1");
+					results.setMessage("根据条件未查询到记录~");
+					return results;
 				}
 				results.setStatus("0");
 				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
@@ -277,8 +287,13 @@ public class QuestionBankController {
 						playLog.setSectionName(courseChapter.getSectionName());
 					}
 				}
-
+				if (list.isEmpty() || list == null) {
+					results.setStatus("1");
+					results.setMessage("根据条件未查询到记录~");
+					return results;
+				}
 				results.setStatus("0");
+				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
 				results.setData(list);
 
 				return results;

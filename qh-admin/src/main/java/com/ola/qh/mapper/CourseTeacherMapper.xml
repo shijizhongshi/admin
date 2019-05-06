@@ -33,7 +33,7 @@
 		<if test="teacherName!=null and teacherName!='' ">
 		and name like concat(concat('%',#{teacherName},'%'))
 		</if>
-		order by orders,addtime ASC
+		order by addtime ASC
 		<if test="pageSize!=0">
 		limit #{pageNo},#{pageSize}
 		</if>
