@@ -5,7 +5,6 @@ app.controller("liveShowController", function($scope, $http) {
 	$scope.active = 1;
 	$scope.typeId = 1;
 	$scope.imgUrl=null;
-	
 	$scope.typeList = function(typename,typeId) {
 		$scope.active = typeId;
 		$scope.typeId = typeId;
@@ -41,6 +40,16 @@ app.controller("liveShowController", function($scope, $http) {
 	}
 	$scope.typesList();
 	$scope.typeBases();// ////保证已经来有默认的参数
+	
+	//查询全部老师姓名  下拉框数据
+	$scope.teacherName = function () {
+		$http.get("/api/courselive/teacherList",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		.success(function (result) {
+			if (result.status == "0") {
+				$scope.teacherList = result.data;
+			}
+		})
+	}
 	
 	
 	// 总条数
@@ -100,6 +109,7 @@ app.controller("liveShowController", function($scope, $http) {
 		})
 	};
 	$scope.addLive = function() {
+		$scope.live.teacherId = $scope.list.id;
 		$scope.live.imgUrl = $scope.imgUrl;
 		$scope.live.courseTypeName = $scope.courseTypeName;
 		$scope.live.courseTypeSubclassName = $scope.courseTypeSubclassName;
@@ -144,7 +154,7 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.imgUrl=null;
 		$scope.live =null;
 		$scope.liveId = null;
-		
+		$scope.teacherName();
 		document.getElementById('add').style.display="block"; 
 	}
 	$scope.update=function(){

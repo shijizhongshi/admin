@@ -31,4 +31,9 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 		})
 	};
 	$scope.loaddata();
+	
+	//选中单行
+	$scope.checkQuestionbank = function(questionbank) {
+		$scope.selected = questionbank;
+	}
 });

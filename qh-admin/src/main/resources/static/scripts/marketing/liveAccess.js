@@ -23,4 +23,12 @@ app.controller("liveAccessController", function($scope, $http) {
 			}
 		})
 	}
+	//选中单行
+	$scope.checkList = function (list) {
+		if ($scope.selected == null) {
+			$scope.selected = list;
+		}else {
+			$scope.selected = null;
+		}
+	}
 });

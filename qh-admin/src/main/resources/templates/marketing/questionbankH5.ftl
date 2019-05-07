@@ -69,7 +69,8 @@ submenu="sidebarmenu-marketing-questionbankH5">
 								<th>视频数</th>
 								<th>最后一次操作时间</th>
 							</tr>
-							<tr ng-repeat="questionbank in questionbankList">
+							<tr ng-repeat="questionbank in questionbankList" ng-click="checkQuestionbank(questionbank)"
+								ng-class="{'selected':selected == questionbank}">
 								<th>{{questionbank.realname}}</th>
 								<th>{{questionbank.mobile}}</th>
 								<th ng-show="{{questionbank.status=='0'}}">app注册用户</th>

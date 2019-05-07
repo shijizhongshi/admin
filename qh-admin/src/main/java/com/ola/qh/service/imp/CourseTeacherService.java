@@ -149,4 +149,15 @@ public class CourseTeacherService implements ICourseTeacherService {
 		// TODO Auto-generated method stub
 		return courseTeacherDao.selectCourseTeacherCount(courseTypeName, courseTypeSubclassName, teacherName);
 	}
+
+	@Override
+	public Results<List<CourseTeacher>> selectNameList(String courseTypeSubclassName) {
+		Results<List<CourseTeacher>> results = new Results<List<CourseTeacher>>();
+		List<CourseTeacher> list = courseTeacherDao.selectNameList(courseTypeSubclassName);
+		
+		results.setStatus("0");
+		results.setData(list);
+		
+		return results;
+	}
 }

@@ -63,4 +63,8 @@ app.controller("liveVerifyController", function($scope, $http) {
 	$scope.ExcelExport=function(){
 		finStatementExcelExport();
 	}
+	//点击选中单行
+	$scope.checkLiveVerify = function (liveVerify) {
+		$scope.selected = liveVerify;
+	}
 });

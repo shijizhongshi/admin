@@ -24,4 +24,6 @@ public interface ICourseTeacherService {
 	
 	public int deleteCourseTeacher(String id);
 
+	public Results<List<CourseTeacher>> selectNameList(String courseTypeSubclassName);
+
 }

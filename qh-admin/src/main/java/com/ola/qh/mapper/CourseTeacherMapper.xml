@@ -59,7 +59,16 @@
 	</select>
 	
 	<select id="selectName" resultMap="CourseTeacherMap">
-		select name from course_teacher where id=#{id}
+		select name from course_teacher where 1=1 
+		<if test="id!=null and id !=''">
+		and id=#{id}
+		</if>
+	</select>
+	<select id="selectNameList" resultMap="CourseTeacherMap">
+	select id,name from course_teacher where 1=1
+	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+	and course_type_subclass_names = #{courseTypeSubclassName}
+	</if>
 	</select>
 	
 	<select id="selectNameFromType" resultMap="CourseTeacherMap">

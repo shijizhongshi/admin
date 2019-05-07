@@ -28,4 +28,6 @@ public interface CourseTeacherDao {
 
 	public int deleteCourseTeacher(@Param("id") String id);
 
+	public List<CourseTeacher> selectNameList(@Param("courseTypeSubclassName")String courseTypeSubclassName);
+
 }
