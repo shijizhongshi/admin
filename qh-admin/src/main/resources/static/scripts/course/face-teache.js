@@ -234,7 +234,7 @@ app.controller("faceTeacheController", function($scope, $http) {
 	$scope.checkteacher=function(t){
 		if($scope.selected1!=t){
 		$scope.teacherName=t.name;
-		$scope.firstImg=t.firstImg;
+		$scope.firstImg=t.imgUrl;
 		$scope.selected1=t
 		}else{
 			$scope.teacherName=null;
