@@ -142,6 +142,9 @@
 	<result column="live_room_id" property="liveRoomId"/>
 	<result column="live_id" property="liveId"/>
 	<result column="live_back_id" property="liveBackId"/>
+	<result column="teacher_id" property="teacherId"/>
+	<result column="lecturer" property="lecturer"/>
+	<result column="starttime" property="starttime"/>
 
 	
 	</resultMap>
@@ -200,6 +203,15 @@
 	</if>
 	<if test="liveBackId!=null and liveBackId!='' ">
 	live_back_id=#{liveBackId},
+	</if>
+	<if test="teacherId!=null and teacherId!=''">
+	teacher_id=#{teacherId},
+	</if>
+	<if test="lecturer!=null and lecturer!=''">
+	lecturer = #{lecturer},
+	</if>
+	<if test="starttime!=null">
+	starttime = #{starttime},
 	</if>
 	updatetime=#{updatetime}
 	where id=#{id}

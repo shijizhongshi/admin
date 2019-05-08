@@ -161,6 +161,7 @@ app.controller("liveShowController", function($scope, $http) {
 		if($scope.liveId==null){
 			alert("请先选中信息~");
 		}else{
+			$scope.teacherName();
 			document.getElementById('add').style.display="block"; 
 		}
 	}

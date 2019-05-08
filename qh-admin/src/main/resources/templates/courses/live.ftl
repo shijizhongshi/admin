@@ -120,17 +120,11 @@
 									ng-model="live.liveRoomId"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
-							<!-- <div class="select-2">
-								<span>主讲老师<i class="bitian">*</i></span> <input type="text"
-									ng-model="live.teacher"
-									class="ng-pristine ng-untouched ng-valid ng-empty">
-							</div> -->
-							<div class="select-3">
-								<!-- ng-options="a for a in nameList"  -->
+							<div class="select-2">
 								<span>主讲老师</span> <img src="/images/sjk-xl.png"> <select
 									ng-model="list" ng-options="list.name for list in teacherList"></select>
 							</div>
-							<div class="select-3">
+							<div class="select-2">
 								<span>请选择日期</span> <input type="date" name="search"
 									ng-model="live.starttime"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
