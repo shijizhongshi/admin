@@ -109,7 +109,9 @@ app.controller("liveShowController", function($scope, $http) {
 		})
 	};
 	$scope.addLive = function() {
-		$scope.live.teacherId = $scope.list.id;
+		if ($scope.list != null) {
+			$scope.live.teacherId = $scope.list.id;
+		}
 		$scope.live.imgUrl = $scope.imgUrl;
 		$scope.live.courseTypeName = $scope.courseTypeName;
 		$scope.live.courseTypeSubclassName = $scope.courseTypeSubclassName;
@@ -149,6 +151,8 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.live = l;
 		$scope.liveId = l.id;
 		$scope.imgUrl=l.imgUrl;
+		$scope.starttime = l.starttime;
+		
 	}
 	$scope.add=function(){
 		$scope.imgUrl=null;

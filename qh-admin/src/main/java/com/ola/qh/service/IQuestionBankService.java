@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseLiveCheck;
+import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.util.Results;
 
 public interface IQuestionBankService {
@@ -23,6 +25,11 @@ public interface IQuestionBankService {
 
 	public Results<List<CourseLiveCheck>> selectLiveVerifyList( String fromdate,String todate,
 			int pageNo,int pageSize, String mobile, String roomId,String courseTypeSubclassName);
+
+	public Results<List<UserEnterLeaveActions>> liveAccess(String notToEnter, String liveId, String pagenum,
+			String pageindex);
+
+	public Results<List<PlayLog>> ccVideo(String videoId, String mobile, String date, String numPerPage, String page);
 	
 	
 }
