@@ -24,6 +24,9 @@ public class FaceTeache {
 	private String detailAddress;///////详细地址
 	
 	@NotEmpty
+	private String startTime;///////具体时间（排序用）
+	
+	@NotEmpty
 	private String probablyAddress;/////省市
 	
 	@NotEmpty
@@ -111,6 +114,14 @@ public class FaceTeache {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 	
 	

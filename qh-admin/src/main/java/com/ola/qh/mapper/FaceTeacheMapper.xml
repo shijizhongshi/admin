@@ -12,13 +12,14 @@
 		<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
 		<result column="detail_address" property="detailAddress"/>
 		<result column="probably_address" property="probablyAddress"/>
+		<result column="startTime" property="startTime"/>
 		<result column="times" property="times"/>
 		<result column="addtime" property="addtime"/>
 		<result column="updatetime" property="updatetime"/>
 	</resultMap>
 	
 	<select id="faceTeacheList" resultMap="FaceTeacheMap">
-		select id,first_img,teacher_name,course_name,course_type_subclass_name,detail_address,probably_address,times,addtime
+		select id,first_img,teacher_name,course_name,course_type_subclass_name,detail_address,probably_address,startTime,times,addtime
 		from face_teache 
 		where 1=1
 		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
@@ -30,7 +31,7 @@
 		<if test="courseName!=null and courseName!=''">
 			and course_name=#{courseName}
 		</if>
-		order by addtime desc
+		order by startTime ASC
 		limit #{pageNo},#{pageSize}
 	</select>
 	
@@ -51,8 +52,8 @@
 	</select>
 	
 	<insert id="insertFaceTeache" parameterType="com.ola.qh.entity.FaceTeache">
-		insert into face_teache(id,first_img,teacher_name,course_name,course_type_subclass_name,detail_address,probably_address,times,addtime)
-		values(#{id},#{firstImg},#{teacherName},#{courseName},#{courseTypeSubclassName},#{detailAddress},#{probablyAddress},#{times},#{addtime})
+		insert into face_teache(id,first_img,teacher_name,course_name,course_type_subclass_name,detail_address,probably_address,startTime,times,addtime)
+		values(#{id},#{firstImg},#{teacherName},#{courseName},#{courseTypeSubclassName},#{detailAddress},#{probablyAddress},#{startTime},#{times},#{addtime})
 	</insert>
 	
 	<update id="updateFaceTeache" parameterType="com.ola.qh.entity.FaceTeache">
@@ -74,6 +75,9 @@
 		</if>
 		<if test="probablyAddress!=null and probablyAddress!=''">
 			probably_address=#{probablyAddress},
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			startTime=#{startTime},
 		</if>
 		<if test="times!=null and times!=''">
 			times=#{times},

@@ -74,6 +74,7 @@
 							<th>主讲老师图片</th>
 							<th>详细地址</th>
 							<th>省市</th>
+							<th>具体开始时间</th>
 							<th>面授时间</th>
 							
 						</tr>
@@ -85,6 +86,7 @@
 							<th><img ng-src="{{ft.firstImg}}" /></th>
 							<th>{{ft.detailAddress}}</th>
 							<th>{{ft.probablyAddress}}</th>
+							<th>{{ft.startTime}}</th>
 							<th>{{ft.times}}</th>
 						</tr>
 					</table>
@@ -137,6 +139,10 @@
 								<span>面授时间<i class="bitian">*</i></span> <input type="text" placeholder="输入面授时间"
 									ng-model="faceTeache.times"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="select-2">
+								<span>具体开始时间<i class="bitian">*</i></span> 
+								<input type="date" ng-model="startTime" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							
 							

@@ -6,6 +6,20 @@ app.controller("faceTeacheController", function($scope, $http) {
 	$scope.typeId = 1;
 	$scope.imgUrl=null;
 	
+	
+	var changeDate = function (date) { 
+		if(date){
+		  	var y = date.getFullYear();  
+		    var m = date.getMonth() + 1;  
+		    m = m < 10 ? '0' + m : m;  
+		    var d = date.getDate();  
+		    d = d < 10 ? ('0' + d) : d;  
+		    return y + '-' + m + '-' + d;
+		} else{
+			return '';
+		}
+	      
+	};
 	$scope.typeList = function(typename,typeId) {
 		$scope.active = typeId;
 		$scope.typeId = typeId;
@@ -94,6 +108,7 @@ app.controller("faceTeacheController", function($scope, $http) {
 
 	$scope.addFaceTeache = function() {
 		$scope.faceTeache.firstImg = $scope.firstImg;
+		$scope.faceTeache.startTime = changeDate($scope.startTime);
 		$scope.faceTeache.teacherName = $scope.teacherName;
 		$scope.faceTeache.courseTypeSubclassName = $scope.courseTypeSubclassName;
 		$http.post("/api/faceTeache/insert",
@@ -114,6 +129,7 @@ app.controller("faceTeacheController", function($scope, $http) {
 	
 	$scope.updateFaceTeache = function() {
 		$scope.faceTeache.firstImg = $scope.firstImg;
+		$scope.faceTeache.startTime = changeDate($scope.startTime);
 		$scope.faceTeache.teacherName = $scope.teacherName;
 		$scope.faceTeache.courseTypeSubclassName = $scope.courseTypeSubclassName;
 		
@@ -144,6 +160,7 @@ app.controller("faceTeacheController", function($scope, $http) {
 		$scope.firstImg=null;
 		$scope.faceTeache =null;
 		$scope.id = null;
+		$scope.startTime = null;
 		
 		document.getElementById('add').style.display="block"; 
 	}
