@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ola.qh.dao.FaceTeacheDao">
+	<resultMap type="com.ola.qh.entity.FaceTeache" id="FaceTeacheMap">
+		<result column="id" property="id"/>
+		<result column="first_img" property="firstImg"/>
+		<result column="teacher_name" property="teacherName"/>
+		<result column="course_name" property="courseName"/>
+		<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
+		<result column="detail_address" property="detailAddress"/>
+		<result column="probably_address" property="probablyAddress"/>
+		<result column="startTime" property="startTime"/>
+		<result column="times" property="times"/>
+		<result column="addtime" property="addtime"/>
+		<result column="updatetime" property="updatetime"/>
+	</resultMap>
+	
+	<select id="faceTeacheList" resultMap="FaceTeacheMap">
+		select id,first_img,teacher_name,course_name,course_type_subclass_name,detail_address,probably_address,startTime,times,addtime
+		from face_teache 
+		where 1=1
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+			and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		<if test="teacherName!=null and teacherName!=''">
+			and teacher_name=#{teacherName}
+		</if>
+		<if test="courseName!=null and courseName!=''">
+			and course_name=#{courseName}
+		</if>
+		order by startTime ASC
+		limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="faceTeacheCount" resultType="int">
+		select count(id)
+		from face_teache 
+		where 1=1
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+			and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		<if test="teacherName!=null and teacherName!=''">
+			and teacher_name=#{teacherName}
+		</if>
+		<if test="courseName!=null and courseName!=''">
+			and course_name=#{courseName}
+		</if>
+		
+	</select>
+	
+	<insert id="insertFaceTeache" parameterType="com.ola.qh.entity.FaceTeache">
+		insert into face_teache(id,first_img,teacher_name,course_name,course_type_subclass_name,detail_address,probably_address,startTime,times,addtime)
+		values(#{id},#{firstImg},#{teacherName},#{courseName},#{courseTypeSubclassName},#{detailAddress},#{probablyAddress},#{startTime},#{times},#{addtime})
+	</insert>
+	
+	<update id="updateFaceTeache" parameterType="com.ola.qh.entity.FaceTeache">
+		update face_teache set
+		<if test="firstImg!=null and firstImg!=''">
+			first_img=#{firstImg},
+		</if>
+		<if test="teacherName!=null and teacherName!=''">
+			teacher_name=#{teacherName},
+		</if>
+		<if test="courseName!=null and courseName!=''">
+			course_name=#{courseName},
+		</if>
+		<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+			course_type_subclass_name=#{courseTypeSubclassName},
+		</if>
+		<if test="detailAddress!=null and detailAddress!=''">
+			detail_address=#{detailAddress},
+		</if>
+		<if test="probablyAddress!=null and probablyAddress!=''">
+			probably_address=#{probablyAddress},
+		</if>
+		<if test="startTime!=null and startTime!=''">
+			startTime=#{startTime},
+		</if>
+		<if test="times!=null and times!=''">
+			times=#{times},
+		</if>
+			updatetime=#{updatetime} where id=#{id}
+	</update>
+	
+	<delete id="deleteFaceTeache">
+		delete from face_teache where id=#{id}
+	</delete>
+</mapper>

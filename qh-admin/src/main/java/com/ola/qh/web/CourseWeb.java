@@ -68,4 +68,8 @@ public class CourseWeb{
 		request.getSession().setAttribute("liveName", liveName);
 		return "courses/line-white";
 	}
+	@RequestMapping(value="/faceteache",method=RequestMethod.GET)
+	public String faceteache(){
+		return "courses/face-teache";
+	}
 }
