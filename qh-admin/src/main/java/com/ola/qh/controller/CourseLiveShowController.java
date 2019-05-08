@@ -32,7 +32,6 @@ public class CourseLiveShowController {
 		Results<String> result = new Results<String>();
 		//根据teacherId查询老师姓名
 		List<CourseTeacher> list = courseTeacherService.selectName(cl.getTeacherId());
-		System.out.println(list.get(0).getName());
 		cl.setLecturer(list.get(0).getName());
 		int num = courseNofreeService.insertLive(cl);
 		if (num < 0) {
