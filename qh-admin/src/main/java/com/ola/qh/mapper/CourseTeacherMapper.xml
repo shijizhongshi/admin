@@ -67,7 +67,8 @@
 	<select id="selectNameList" resultMap="CourseTeacherMap">
 	select id,name from course_teacher where 1=1
 	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
-	and course_type_subclass_names = #{courseTypeSubclassName}
+		and course_type_subclass_names like
+		concat(concat('%',#{courseTypeSubclassName},'%'))
 	</if>
 	</select>
 	
