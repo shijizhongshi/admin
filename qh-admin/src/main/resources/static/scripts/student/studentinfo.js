@@ -279,6 +279,7 @@ app.controller("studentinfoController", function($scope, $http) {
 		    	$scope.insertOperating();
 				alert("开课成功~");
 				document.getElementById('revise').style.display = "none";
+				location.reload();
 				$scope.selectUser();
 				$scope.typesName=null;
 			} else {
