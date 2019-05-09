@@ -11,7 +11,7 @@ public interface ICourseLineWhiteService {
 
 	public Results<String> importExcel(MultipartFile file, String liveId) throws Exception;
 
-	public Results<List<CourseLineWhite>> lineWhiteList(String liveId, String mobile, int pageNo, int pageSize);
+	public Results<List<CourseLineWhite>> lineWhiteList(String liveId, String username,  int pageNo, int pageSize);
 
 	public Results<String> insertLineWhite(CourseLineWhite courseLineWhite);
 

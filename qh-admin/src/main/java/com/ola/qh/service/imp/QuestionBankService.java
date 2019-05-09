@@ -45,7 +45,7 @@ public class QuestionBankService implements IQuestionBankService {
 		int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		Row titleRow = rowIterator.next();
-		int columnNumber = titleRow.getLastCellNum();
+		titleRow.getLastCellNum();
 		/* String[][] table = new String[rowNumber][columnNumber]; */
 		String bankId = null;
 		int n = 0;

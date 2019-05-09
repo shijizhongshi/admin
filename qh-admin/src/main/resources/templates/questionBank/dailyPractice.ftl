@@ -117,6 +117,11 @@ submenu="sidebarmenu-questionBank-dailyPractice">
 								placeholder="">
 						</div>
 						
+						<div class="select-2">
+								<span>具体开始时间<i class="bitian">*</i></span> 
+								<input type="date" ng-model="addtime" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+						
 						<div class="select-radio ">
 							<ul>
 								<li>是否可见</li>

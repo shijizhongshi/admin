@@ -5,7 +5,7 @@ app.controller("liveAccessController", function($scope, $http) {
 	// 当前的页数
 	$scope.pageindex = 1;
 	// 一页展示多少行
-	$scope.pagenum = 20;
+	$scope.pagenum = 1000;
 
 	// 页面展示
 	$scope.loaddata = function() {
@@ -18,6 +18,22 @@ app.controller("liveAccessController", function($scope, $http) {
 			if (result.status == "0") {
 				$scope.total = result.count;
 				$scope.list = result.data;
+				
+				angular.forEach($scope.list,function(list){
+				    if(list.watchTime==null){
+				    	list.watchTimes="未观看直播"
+				    }else{
+				    	list.watchTimes=parseInt(list.watchTime/60)+"分钟";
+				    	
+				    }
+				    if(list.terminal==0){
+				    	list.terminals="电脑端"
+				    }else if(list.terminal==1){
+				    	list.terminals="移动端"
+				    }else if(list.terminal==null){
+				    	list.terminals="无终端类型"
+				    }
+				})
 			}else {
 				alert(result.message);
 			}

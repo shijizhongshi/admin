@@ -13,6 +13,20 @@ app.controller("dailyPractice", function($scope, $http){
 	$scope.selected=null;
 	$scope.questionCategory=null;
 	
+	var changeDate = function (date) { 
+		if(date){
+		  	var y = date.getFullYear();  
+		    var m = date.getMonth() + 1;  
+		    m = m < 10 ? '0' + m : m;  
+		    var d = date.getDate();  
+		    d = d < 10 ? ('0' + d) : d;  
+		    return y + '-' + m + '-' + d;
+		} else{
+			return '';
+		}
+	      
+	};
+	
 	$scope.typeList=function(typename,typeId){
 		$scope.active=typeId;
 		$scope.typeId=typeId;
@@ -74,7 +88,8 @@ app.controller("dailyPractice", function($scope, $http){
 	};
 	
 	$scope.questioncateadd=function(){
-		$scope.questionSubCategory.purposes="每日一练"
+		$scope.questionSubCategory.purposes="每日一练";
+		$scope.questionSubCategory.addtime=changeDate($scope.addtime);
 		$scope.questionSubCategory.categoryId=$scope.courseTypeSubclassName;
 		$http.post("/api/questionsubcategory/insert",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
@@ -90,6 +105,7 @@ app.controller("dailyPractice", function($scope, $http){
 	};
 	
 	$scope.updatesubCategory=function(){
+		$scope.questionSubCategory.addtime=changeDate($scope.addtime);
 		$http.post("/api/questionsubcategory/update",$scope.questionSubCategory, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

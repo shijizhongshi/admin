@@ -11,7 +11,7 @@ app.controller("LineWhiteController", function($scope, $http,$sce){
     $scope.lineWhitelist=[];
     $scope.lineWhiteBases=function(){
 		$scope.pageNo=($scope.page-1)*$scope.pageSize;
-		$http.get("/api/LineWhite/list",{"params": {"pageNo":$scope.pageNo,"mobile":$scope.mobile,"pageSize":$scope.pageSize,"liveId":$("#liveId").val()}}, 
+		$http.get("/api/LineWhite/list",{"params": {"pageNo":$scope.pageNo,"username":$scope.username,"pageSize":$scope.pageSize,"liveId":$("#liveId").val()}}, 
 			{'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){

@@ -1,5 +1,7 @@
 package com.ola.qh.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +46,10 @@ public class QuestionSubcategoryController {
 		}
 		
 		questionSubCategory.setId(KeyGen.uuid());
-		questionSubCategory.setAddtime(new Date());
+		if(questionSubCategory.getAddtime()==null){
+			questionSubCategory.setAddtime(new Date());
+		}
+		
 		int insert=questionSubCategoryService.insertQuestionSubCategory(questionSubCategory);
 		
 		

@@ -27,7 +27,7 @@
 		<div class="details-frame-content">
 
 			<div class="select-3" style="width: 15%; margin-right: 0%">
-				<span>手机号查询</span> <input ng-model="mobile" placeholder="请输入手机号码"
+				<span>用户名查询</span> <input ng-model="username" placeholder="请输入用户名"
 					type="text" style="text-indent: 2em;" />
 
 			</div>
@@ -64,11 +64,13 @@
 
 				<table>
 					<tr>
-						<th>手机号</th>
+						<th>用户名</th>
+						<th>密码</th>
 					</tr>
 					<tr ng-repeat="l in lineWhitelist" ng-click="checkedlineWhite(l)"
 						ng-class="{'selected':selected==l}">
-						<th>{{l.mobile}}</th>
+						<th>{{l.username}}</th>
+						<th>{{l.password}}</th>
 					</tr>
 				</table>
 				<div class="col-sm-6"></div>
@@ -95,10 +97,14 @@
 
 
 						<div class=" select-2" style="clear: both">
-							<span>手机号码:</span> <input type="text" ng-model="lineWhite.mobile"
-								placeholder="手机号码" style="width: 230px; text-indent: 2em;" />
+							<span>用户名:</span> <input type="text" ng-model="lineWhite.username"
+								placeholder="用户名" style="width: 230px; text-indent: 2em;" />
 						</div>
 
+						<div class=" select-2" style="clear: both">
+							<span>密码:</span> <input type="text" ng-model="lineWhite.password"
+								placeholder="密码" style="width: 230px; text-indent: 2em;" />
+						</div>
 					</div>
 					<div class="end">
 						<input name="git" type="submit" ng-show="id==null" value="提交"

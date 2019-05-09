@@ -337,7 +337,7 @@ public class QuestionBankController {
 				// 迭代器 匹配两个集合中的内容 相同就remove掉
 				for (UserEnterLeaveActions userEnterLeaveActions : list) {
 					for (Iterator<CourseLineWhite> iterator = whithList.iterator(); iterator.hasNext();) {
-						if (userEnterLeaveActions.getViewerName().equals(iterator.next().getMobile())) {
+						if (userEnterLeaveActions.getViewerName().equals(iterator.next().getUsername())) {
 							iterator.remove();
 						}
 					}
@@ -352,7 +352,7 @@ public class QuestionBankController {
 				UserEnterLeaveActions userEnterLeaveActions = null;
 				for (int i = 0; i < whithList.size(); i++) {
 					userEnterLeaveActions = new UserEnterLeaveActions();
-					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());
+					userEnterLeaveActions.setViewerName(whithList.get(i).getUsername());
 					userList.add(userEnterLeaveActions);
 				}
 				results.setStatus("0");
