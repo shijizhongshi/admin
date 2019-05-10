@@ -22,12 +22,6 @@ app.controller("studyRecordController", function($scope, $http) {
 	};
 	// 页面展示
 	$scope.loaddata = function() {
-		//正则  输入长度必须为32位  只能由数字和大小写字母组成
-		var re = new RegExp(/^[0-9A-Za-z]{32}$/);
-		if ($scope.videoId != null && !re.test($scope.videoId) && "7461" != $scope.videoId.slice(-4)) {
-			alert("视频Id格式不正确");
-			return;
-		}
 		var time = Date.parse(new Date());
 		if ($scope.date == null || $scope.date > time) {
 			alert("日期错误~");
@@ -39,6 +33,12 @@ app.controller("studyRecordController", function($scope, $http) {
 		}
 		if ($scope.videoId == null || $scope.videoId.length == 0) {
 			$scope.videoId = null;
+		}
+		//正则  输入长度必须为32位  只能由数字和大小写字母组成
+		var re = new RegExp(/^[0-9A-Za-z]{32}$/);
+		if ($scope.videoId != null && !re.test($scope.videoId) && "7461" != $scope.videoId.slice(-4)) {
+			alert("视频Id格式不正确");
+			return;
 		}
 		$http.get("/api/questionbank/video", {
 			"params" : {
@@ -59,5 +59,13 @@ app.controller("studyRecordController", function($scope, $http) {
 				alert(result.message);
 			}
 		})
+	}
+	//选中单行
+	$scope.checkList = function (list) {
+		if ($scope.selected == null) {
+			$scope.selected = list;
+		}else {
+			$scope.selected = null;
+		}
 	}
 });

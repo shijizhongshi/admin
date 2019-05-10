@@ -1,5 +1,4 @@
-<#import "/layout/header.ftl" as h/>
-<#import "/layout/body.ftl" as b/>
+<#import "/layout/header.ftl" as h/> <#import "/layout/body.ftl" as b/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +12,8 @@
 	<div class="classify">
 		<ul class="menu">
 
-			<li ng-repeat="ctl in courseTypeList" class="list" ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
+			<li ng-repeat="ctl in courseTypeList" class="list"
+				ng-click="typeList(ctl.courseTypeName,ctl.id)">{{ctl.courseTypeName}}
 				<ul class="items" ng-class="{'active':active==ctl.id}">
 					<li ng-repeat="sub in courseTypeSubclass"
 						ng-click="typeSub(ctl.courseTypeName,sub,$event)"
@@ -21,7 +21,7 @@
 
 				</ul>
 			</li>
-			
+
 
 		</ul>
 	</div>
@@ -39,7 +39,7 @@
 			<div class="details-frame-content"
 				style="height: 110px; padding-bottom: 0;">
 
-				<div class="select-3" style="width: 15%;margin-right:0%">
+				<div class="select-3" style="width: 15%; margin-right: 0%">
 					<span>直播名称</span>
 					<form id="">
 						<input type="text" placeholder="请输入直播名称" ng-model="liveName" />
@@ -81,7 +81,8 @@
 							<th ng-show="l.isshow==1">是</th>
 							<th ng-show="l.isshow==0">否</th>
 							<th>{{l.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
-							<th><span class="xiangqing" ng-click="toWhite(l.id,l.liveName)">查看白名单</span></th>
+							<th><span class="xiangqing"
+								ng-click="toWhite(l.id,l.liveName)">查看白名单</span></th>
 						</tr>
 					</table>
 					<div class="col-sm-6"></div>
@@ -117,6 +118,15 @@
 							<div class="select-2">
 								<span>直播间id<i class="bitian">*</i></span> <input type="text"
 									ng-model="live.liveRoomId"
+									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="select-2">
+								<span>主讲老师</span> <img src="/images/sjk-xl.png"> <select
+									ng-model="list" ng-options="list.name for list in teacherList"></select>
+							</div>
+							<div class="select-2">
+								<span>请选择日期</span> <input type="date" name="search"
+									ng-model="live.starttime"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							<div class="select-2" ng-show="liveId!=null">

@@ -165,10 +165,4 @@ public class CourseLineWhiteService implements ICourseLineWhiteService {
 		return null;
 	}
 
-	@Override
-	public List<CourseLineWhite> selectAllByLiveId(String liveId) {
-
-		return courseLineWhiteDao.selectAllByLiveId(liveId);
-	}
-
 }

@@ -58,7 +58,8 @@ submenu="sidebarmenu-marketing-liveAccess">
 								<th>直播观看时长</th>
 								<th>终端类型</th>
 							</tr>
-							<tr ng-repeat="list in list">
+							<tr ng-repeat="list in list" ng-click="checkList(list)"
+								ng-class="{'selected':selected == list}">
 								<th>{{list.viewerName}}</th>
 								<th>{{list.city}}</th>
 								<th>{{list.enterTime}}</th>

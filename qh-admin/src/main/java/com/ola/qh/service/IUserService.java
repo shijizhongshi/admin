@@ -38,5 +38,4 @@ public interface IUserService {
 
 	public String selectIdByMobile(String mobile);
 
-	public String selectNameById(String userid);
 }

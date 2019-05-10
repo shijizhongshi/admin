@@ -117,6 +117,9 @@ public class BuyCourseService implements IBuyCourseService {
 
 			for (String classId : productIds) {
 				CourseClass cc = courseClassDao.single(classId);
+				if (cc == null) {
+					continue;
+				}
 				account = account.add(cc.getClassDiscountPrice());
 				/////保证用户没有开这个班级
 				/*int count = userBuyCourseDao.selectUserBuyCourseCount(oc.getUserId(), classId, null);

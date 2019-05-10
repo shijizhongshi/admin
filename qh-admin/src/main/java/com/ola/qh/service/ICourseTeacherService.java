@@ -24,5 +24,6 @@ public interface ICourseTeacherService {
 	
 	public int deleteCourseTeacher(String id);
 
-	public Results<String> courseTeacherOrders(String id, int orders, String operateType);
+	public Results<List<CourseTeacher>> selectNameList(String courseTypeSubclassName);
+
 }

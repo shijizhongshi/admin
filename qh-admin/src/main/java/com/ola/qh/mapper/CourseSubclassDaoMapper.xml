@@ -53,6 +53,8 @@
 		<if test="videoId!=null and videoId!=''">
 		and video_id = #{videoId}
 		</if>
+		order by cs.addtime desc
+		limit 0,1
 	</select>
 	<!-- 课程章的查询 -->
 	<select id="courseChapterList" resultMap="CourseChapterMap">

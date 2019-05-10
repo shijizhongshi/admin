@@ -435,12 +435,4 @@ public class UserService implements IUserService {
 	public String selectIdByMobile(String mobile) {
 		return userDao.selectIdByMobile(mobile);
 	}
-
-	@Override
-	public String selectNameById(String userid) {
-		
-		return userDao.selectNameById(userid);
-	}
-	
-
 }

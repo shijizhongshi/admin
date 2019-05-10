@@ -19,6 +19,4 @@ public interface ICourseLineWhiteService {
 
 	public int deleteLineWhite(String id, String liveId);
 
-	public List<CourseLineWhite> selectAllByLiveId(String liveId);
-
 }

@@ -60,7 +60,8 @@ submenu="sidebarmenu-marketing-studyRecord">
 								<th>观看时长</th>
 								<th>视频总长</th>
 							</tr>
-							<tr ng-repeat="list in list">
+							<tr ng-repeat="list in list" ng-click="checkList(list)"
+								ng-class="{'selected':selected == list}">
 								<th>{{list.userName}}</th>
 								<th>{{list.sectionName}}</th>
 								<th>{{list.courseTypeSubclassName}}</th>
