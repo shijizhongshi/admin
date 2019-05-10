@@ -14,12 +14,8 @@ import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.UserEnterLeaveActions;
-import com.ola.qh.service.ICourseLineWhiteService;
-import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
-import com.ola.qh.service.IUserService;
 import com.ola.qh.util.Results;
-
 
 @RestController
 @RequestMapping("/api/questionbank")
@@ -27,13 +23,6 @@ public class QuestionBankController {
 
 	@Autowired
 	private IQuestionBankService questionBankService;
-	@Autowired
-	private IUserService userService;
-	@Autowired
-	private ICourseSubclassService courseSubclassService;
-	@Autowired
-	private ICourseLineWhiteService courseLineWhiteService;
-
 	/**
 	 * 题库的上传
 	 * <p>
@@ -138,8 +127,8 @@ public class QuestionBankController {
 			@RequestParam(value = "numPerPage", required = false) String numPerPage,
 			@RequestParam(value = "page", required = false) String page) {
 		Results<List<PlayLog>> results = new Results<List<PlayLog>>();
-		results = questionBankService.ccVideo(videoId,mobile,date,numPerPage,page);
-		
+		results = questionBankService.ccVideo(videoId, mobile, date, numPerPage, page);
+
 		return results;
 	}
 
@@ -151,16 +140,15 @@ public class QuestionBankController {
 	 * @param pagenum
 	 * @return
 	 */
-	@RequestMapping(value = "liveAccess", method = RequestMethod.GET)
+	@RequestMapping(value = "/liveAccess", method = RequestMethod.GET)
 	public Results<List<UserEnterLeaveActions>> liveAccess(
 			@RequestParam(value = "notToEnter", required = false) String notToEnter,
 			@RequestParam(value = "liveId", required = true) String liveId,
 			@RequestParam(value = "pageindex") String pageindex, @RequestParam(value = "pagenum") String pagenum) {
 		Results<List<UserEnterLeaveActions>> results = new Results<List<UserEnterLeaveActions>>();
-		
-		results = questionBankService.liveAccess(notToEnter,liveId,pagenum,pageindex);
-		
+
+		results = questionBankService.liveAccess(notToEnter, liveId, pagenum, pageindex);
+
 		return results;
 	}
-
 }

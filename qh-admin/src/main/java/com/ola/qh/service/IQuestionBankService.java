@@ -31,5 +31,4 @@ public interface IQuestionBankService {
 
 	public Results<List<PlayLog>> ccVideo(String videoId, String mobile, String date, String numPerPage, String page);
 	
-	
 }

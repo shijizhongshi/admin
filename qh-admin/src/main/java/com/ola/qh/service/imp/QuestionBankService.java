@@ -52,7 +52,7 @@ public class QuestionBankService implements IQuestionBankService {
 	private CourseLineWhiteDao courseLineWhiteDao;
 	@Autowired
 	private CourseSubclassDao courseSubclassDao;
-	
+
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public Results<String> importExcel(MultipartFile file, String subId) throws Exception {
@@ -363,7 +363,7 @@ public class QuestionBankService implements IQuestionBankService {
 	}
 
 	/**
-	 * cc直播 获取观看视频接口  直播访问记录页面
+	 * cc直播 获取观看视频接口 直播访问记录页面
 	 */
 	@Override
 	public Results<List<UserEnterLeaveActions>> liveAccess(String notToEnter, String liveId, String pagenum,
@@ -432,12 +432,13 @@ public class QuestionBankService implements IQuestionBankService {
 		results.setMessage("错误！");
 		return results;
 	}
+
 	/**
 	 * cc点播 学习记录页面
 	 */
 	@Override
 	public Results<List<PlayLog>> ccVideo(String videoId, String mobile, String date, String numPerPage, String page) {
- 
+
 		Results<List<PlayLog>> results = new Results<List<PlayLog>>();
 		// 获取视频播放记录接口
 		if (videoId != null && mobile == null) {
@@ -596,5 +597,4 @@ public class QuestionBankService implements IQuestionBankService {
 
 		return results;
 	}
-
 }
