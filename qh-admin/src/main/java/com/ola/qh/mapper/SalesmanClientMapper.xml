@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.SalesmanClientDao">
+	<resultMap type="com.ola.qh.entity.SalesmanClient" id="SalesmanClientMap">
+		<result column="id" property="id" />
+		<result column="mobile" property="mobile" />
+		<result column="salesman_id" property="salesmanId" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	
+	<select id="ClientList" resultMap="SalesmanClientMap">
+		select id,mobile,salesman_id,addtime
+		from salesmanclient 
+		where 1=1
+		<if test="salesmanId!=null and salesmanId!=''">
+		and salesman_id=#{salesmanId}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+		and mobile=#{mobile}
+		</if>
+		limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="ClientCount" resultType="int">
+		select count(id)
+		from salesmanclient 
+		where 1=1
+		<if test="salesmanId!=null and salesmanId!=''">
+		and salesman_id=#{salesmanId}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+		and mobile=#{mobile}
+		</if>
+	</select>
+	
+	<select id="existClient" resultType="com.ola.qh.entity.SalesmanClient">
+		select *
+		from salesmanclient 
+		where mobile=#{mobile}
+	</select>
+	
+	<insert id="insertClient" parameterType="com.ola.qh.entity.SalesmanClient">
+		insert into salesmanclient(id,mobile,salesman_id,addtime) values(#{id},#{mobile},#{salesmanId},#{addtime})
+	</insert>
+	
+	<update id="updateClient" parameterType="com.ola.qh.entity.SalesmanClient">
+		update salesmanclient set 
+		<if test="mobile!=null and mobile!=''">
+			mobile=#{mobile],
+		</if>
+		<if test="salesmanId!=null and salesmanId!=''">
+			salesman_id=#{salesmanId},
+		</if>
+		updatetime=#{updatetime}
+	</update>
+	
+	<delete id="deleteClient">
+		delete from salesmanclient where 1=1
+		
+		<if test="id!=null and id!=''">
+			and id=#{id}
+		</if>
+		<if test="salesmanId!=null and salesmanId!=''">
+			and salesman_id=#{salesmanId}
+		</if>
+		
+	</delete>
+</mapper>
