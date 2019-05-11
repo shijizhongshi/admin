@@ -1,7 +1,10 @@
 package com.ola.qh.service.imp;
 
+import static org.mockito.Mockito.reset;
+
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +15,6 @@ import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Course;
-import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.service.ICourseService;
@@ -90,9 +92,9 @@ public class CourseService implements ICourseService {
 
 			}
 			Integer ordersMax = courseSubclassDao.selectMaxOrder("course");
-			if(ordersMax!=null){
-				course.setOrders(ordersMax.intValue()+1);
-			}else{
+			if (ordersMax != null) {
+				course.setOrders(ordersMax.intValue() + 1);
+			} else {
 				course.setOrders(1);
 			}
 			course.setId(KeyGen.uuid());
@@ -133,6 +135,98 @@ public class CourseService implements ICourseService {
 		}
 		results.setStatus("0");
 		results.setData(list);
+
+		return results;
+	}
+
+	@Override
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclass(String courseTypeId) {
+		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
+		List<CourseTypeSubclass> list = courseDao.courseTypeSubclassList(courseTypeId);
+
+		results.setStatus("0");
+		results.setData(list);
+
+		return results;
+	}
+
+	@Override
+	public Results<String> insertCourseTypeName(String courseTypeName) {
+		Results<String> results = new Results<String>();
+		// 查ID最大值 再 +1
+		Integer count = Integer.valueOf(courseDao.maxId());
+		System.out.println(String.valueOf(count + 1));
+		Integer countInteger = courseDao.insertCourseType(courseTypeName, String.valueOf(count + 1));
+		if (countInteger == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("添加分类失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> deleteCourseType(String id) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.deleteCourseType(id);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("删除失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> insertCourseTypeSubclassName(String courseTypeId,String courseTypeSubclassName) {
+
+		Results<String> results = new Results<String>();
+		// 生成一个ID
+		String id = KeyGen.uuid();
+		Integer countInteger = courseDao.insertCourseTypeSubclass(courseTypeSubclassName,id,courseTypeId);
+		if (countInteger == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("添加分类失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.updateCourseTypeSubclass(courseTypeSubclassName, courseTypeSubclassId,null);
+		if (count == 1) {
+			results.setStatus("0");
+			
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("修改失败");
+		
+		return results;
+	}
+
+	@Override
+	public Results<String> deleteCourseTypeSubclass(String courseTypeSubclassId) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.deleteCourseTypeSubclass(courseTypeSubclassId);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("删除失败");
 
 		return results;
 	}

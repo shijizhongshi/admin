@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ola.qh.entity.Course;
-import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
 public interface CourseDao {
@@ -47,5 +46,15 @@ public interface CourseDao {
 	public List<CourseTypeSubclass> selectCourseTypeSubclassNameAll();
 
 	public List<Course> selectByCourseTypeSubclassName(@Param("courseTypeSubclassName")String courseTypeSubclassName);
+
+	public String maxId();
+
+	public Integer deleteCourseType(@Param("id")String id);
+
+	public String maxCourseTypeSubclassId();
+
+	public Integer updateCourseTypeSubclassName(@Param("courseTypeSubclassId")String courseTypeSubclassId,@Param("courseTypeSubclassName") String courseTypeSubclassName);
+
+	public Integer deleteCourseTypeSubclass(@Param("courseTypeSubclassId")String courseTypeSubclassId);
 
 }

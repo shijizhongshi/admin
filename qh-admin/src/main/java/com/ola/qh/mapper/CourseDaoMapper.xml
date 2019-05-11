@@ -26,7 +26,17 @@
 	<update id="updateCourseType" parameterType="String">
 	    update course_type set course_type_name=#{courseTypeName} where id=#{id}
 	</update>
-	
+	<!-- 查询课程大类别中最大ID  -->
+	<select id="maxId" resultType="java.lang.String">
+	select max(id) from course_type
+	</select>
+	<!-- 根据ID删除大类别  -->
+	<delete id="deleteCourseType">
+	delete from course_type where 1=1
+	<if test="id != null and id != ''">
+	and id = #{id}
+	</if>
+	</delete>
 	<!--课程大类别的结束######################################## -->
 	
 	
@@ -65,6 +75,17 @@
 		id=#{id}
 		where id=#{id}
 	</update>
+	<!--查询小类别中最大ID  -->
+	<select id="maxCourseTypeSubclassId" resultType="java.lang.String">
+	select max(id) from course_type_subclass
+	</select>
+	<!-- 根据ID删除小类别  -->
+	<delete id="deleteCourseTypeSubclass">
+	delete from course_type_subclass where 1=1
+	<if test="courseTypeSubclassId != null and courseTypeSubclassId!=''">
+	and id = #{courseTypeSubclassId}
+	</if>
+	</delete>
 	<!--课程小类别的结束######################################## -->
 	
 	

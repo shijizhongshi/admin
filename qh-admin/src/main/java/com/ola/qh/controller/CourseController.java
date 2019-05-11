@@ -1,5 +1,7 @@
 package com.ola.qh.controller;
 
+import static org.mockito.Mockito.reset;
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -40,6 +42,7 @@ public class CourseController {
 
 	@Autowired
 	private CourseSubclassDao courseSubclassDao;
+
 	/**
 	 * 大类别的集合
 	 * <p>
@@ -177,7 +180,7 @@ public class CourseController {
 		course.setPageSize(pageSize);
 		course.setCourseName(courseName);
 		List<Course> list = courseService.courseList(course);
-		if(userId!=null && !"".equals(userId)){
+		if (userId != null && !"".equals(userId)) {
 			for (Course course2 : list) {
 				int count = buyCourseService.existOpenCourse(course2.getId(), userId, null);
 				if (count == 0) {
@@ -187,7 +190,7 @@ public class CourseController {
 				}
 			}
 		}
-		
+
 		result.setStatus("0");
 		result.setData(list);
 		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName, courseName));
@@ -243,14 +246,90 @@ public class CourseController {
 		return result;
 
 	}
+
 	/**
-	 * 推送页面  专业下拉列表
+	 * 推送页面 专业下拉列表
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "selectCourseTypeSubclassNameAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/selectCourseTypeSubclassNameAll", method = RequestMethod.GET)
 	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclassNameAll() {
 		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
-		results = courseService.selectCourseTypeSubclassNameAll();	
+		results = courseService.selectCourseTypeSubclassNameAll();
+
+		return results;
+	}
+
+	/**
+	 * 根据大类别ID查询子类别ID
+	 * 
+	 * @param courseTypeId
+	 * @return
+	 */
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclass(
+			@RequestParam(name = "courseTypeId", required = true) String courseTypeId) {
+		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
+		results = courseService.selectCourseTypeSubclass(courseTypeId);
+
+		return results;
+	}
+	/**
+	 * 添加一级分类(大分类)
+	 * @param courseTypeName
+	 * @return
+	 */
+	@RequestMapping(value = "/insertCourseTypeName", method = RequestMethod.GET)
+	public Results<String> insertCourseTypeName(@RequestParam(name = "courseTypeName") String courseTypeName) {
+		Results<String> results = new Results<String>();
+		results = courseService.insertCourseTypeName(courseTypeName);
+
+		return results;
+	}
+	/**
+	 * 删除一级分类(大分类)
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteCourseType",method = RequestMethod.GET)
+	public Results<String> deleteCourseType (@RequestParam(name = "id")String id) {
+		Results<String> results = new Results<String>();
+		results = courseService.deleteCourseType(id);
+		
+		return results;
+	}
+	/**
+	 * 添加二级类别(小分类)
+	 * @param courseTypeSubclassName
+	 * @param courseTypeId
+	 * @return
+	 */
+	@RequestMapping(value = "/insertCourseTypeSubclassName",method = RequestMethod.GET)
+	public Results<String> insertCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
+			@RequestParam(name = "courseTypeId")String courseTypeId) {
+		Results<String> results = new Results<String>();
+		results = courseService.insertCourseTypeSubclassName(courseTypeId,courseTypeSubclassName);
+		
+		return results;
+	}
+	/**
+	 * 修改二级类别(小分类)
+	 * @param courseTypeSubclassName
+	 * @param courseTypeSubclassId
+	 * @return
+	 */
+	@RequestMapping(value = "/updateCourseTypeSubclassName",method = RequestMethod.GET)
+	public Results<String> updateCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
+			@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+		Results<String> results = new Results<String>();
+		results = courseService.updateCourseTypeSubclassName(courseTypeSubclassId,courseTypeSubclassName);
+		
+		return results;
+	}
+	@RequestMapping(value = "/deleteTwo",method = RequestMethod.GET)
+	public Results<String> deleteTwo (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+		Results<String> results = new Results<String>();
+		results = courseService.deleteCourseTypeSubclass(courseTypeSubclassId);
 		
 		return results;
 	}
