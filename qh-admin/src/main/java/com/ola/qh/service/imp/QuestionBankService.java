@@ -318,7 +318,7 @@ public class QuestionBankService implements IQuestionBankService {
 			String status, int page) {
 		Results<List<QuestionBank>> results = new Results<>();
 
-		Integer pageSize = Patterns.pageSize;
+		Integer pageSize = 1000;
 		Integer pageNo = (page - 1) * pageSize;
 		// 查询集合 展示
 		List<QuestionBank> list = questionBankDao.questionBankList(realname, courseTypeSubclassName, status, pageNo,

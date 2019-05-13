@@ -73,15 +73,13 @@ submenu="sidebarmenu-marketing-questionbankH5">
 								ng-class="{'selected':selected == questionbank}">
 								<th>{{questionbank.realname}}</th>
 								<th>{{questionbank.mobile}}</th>
-								<th ng-show="{{questionbank.status=='0'}}">app注册用户</th>
-								<th ng-show="{{questionbank.status=='1'}}">游客用户</th>
+								<th>{{questionbank.statuss}}</th>
 								<th>{{questionbank.courseTypeSubclassName}}</th>
 								<th>{{questionbank.banktotal - questionbank.nobank}}</th>
-								<th ng-show="{{questionbank.banktotal - questionbank.nobank != 0}}">{{questionbank.banktrue / (questionbank.banktotal - questionbank.nobank) *100 | number:0}}%</th>
-								<th ng-show="{{questionbank.banktotal - questionbank.nobank == 0}}">用户未开始做题</th>
+								<th>{{questionbank.probability}}</th>
 								<th>4</th>
-								<th ng-show="{{questionbank.updatetime != null}}">{{questionbank.updatetime | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
-								<th ng-show="{{questionbank.updatetime == null}}">{{questionbank.addtime | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
+								<th>{{questionbank.time | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
+								
 							</tr>
 
 
