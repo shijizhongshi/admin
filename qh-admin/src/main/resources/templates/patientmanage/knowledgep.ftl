@@ -141,7 +141,7 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 										所属专业<i class="bitian">*</i>
 									</p>
 
-									<div class="qxul">
+									<!-- <div class="qxul">
 										<ul ng-repeat="menu in menus">
 											<p class="qxtit" ng-click="unfolf(menu.id)"
 												ng-class="{'fuhao':fuhao==menu.id}">
@@ -159,7 +159,7 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 													style="width: 60%; height: 3px; border: 1px solid #e6e2e2;"></p>
 											</div>
 										</ul>
-									</div>
+									</div> -->
 								</div>
 							</div>
 

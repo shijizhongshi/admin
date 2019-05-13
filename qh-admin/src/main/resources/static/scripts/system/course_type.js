@@ -29,7 +29,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 			$scope.imgUrl = data.data;
 		})
 	};
-	//查询全部一级类别
+	// 查询全部一级类别
 	$scope.shopcateBases = function() {
 		$http.get("/api/course/courseTypeList", {
 			'Content-Type' : 'application/json;charset=UTF-8'
@@ -54,8 +54,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 	 * $scope.shopDrugSubcategory.categoryId = $scope.id; $scope.total =
 	 * data.count; } else {
 	 * 
-	 * $scope.shopDrugSubcategory = null; $scope.total = 0; }
-	 *  }) };
+	 * $scope.shopDrugSubcategory = null; $scope.total = 0; } }) };
 	 */
 	// 点击选中一级类别
 	$scope.isshow = 1;
@@ -82,7 +81,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 		}
 		$scope.subid = null;
 
-		//$scope.shopsubBases();
+		// $scope.shopsubBases();
 	}
 	// 根据大类别ID查询子类别集合
 	$scope.selectCourseTypeSubclass = function() {
@@ -99,25 +98,16 @@ app.controller("CourseTypeController", function($scope, $http) {
 		})
 	}
 
-	/*$scope.checkedShopsub = function(ss) {
-
-		if ($scope.selected != ss) {
-			$scope.selected = ss;
-			$scope.subid = ss.id;
-			$scope.imgUrl = ss.imgUrl;
-			$scope.name = ss.subName;
-
-		} else {
-			$scope.selected = null;
-			$scope.subid = null;
-			$scope.imgUrl = null;
-			$scope.name = null;
-		}
-
-	}*/
+	/*
+	 * $scope.checkedShopsub = function(ss) {
+	 * 
+	 * if ($scope.selected != ss) { $scope.selected = ss; $scope.subid = ss.id;
+	 * $scope.imgUrl = ss.imgUrl; $scope.name = ss.subName; } else {
+	 * $scope.selected = null; $scope.subid = null; $scope.imgUrl = null;
+	 * $scope.name = null; } }
+	 */
 	// 点击弹出一级弹窗
 	$scope.addcate = function() {
-		console.log("一级类别ID ="+$scope.id);
 		if ($scope.id != null) {
 			$scope.update = 1
 			$scope.insert = null;
@@ -125,12 +115,12 @@ app.controller("CourseTypeController", function($scope, $http) {
 			$scope.insert = 1;
 			$scope.update = null;
 		}
-		
-		//$scope.name = null;
-		//$scope.picture = null;
+
+		// $scope.name = null;
+		// $scope.picture = null;
 		document.getElementById('add').style.display = "block";
-		//$scope.selected = null;
-		//$scope.shopsubBases();
+		// $scope.selected = null;
+		// $scope.shopsubBases();
 
 	}
 	// 点击选中二级类别
@@ -141,29 +131,29 @@ app.controller("CourseTypeController", function($scope, $http) {
 			$scope.courseTypeSubclassName = clist.courseTypeSubclassName;
 			$scope.selectdeletes = clist;
 			// 根据二级类别ID查询三级类别
-			
+			$scope.selectThree();
 		} else {
 			$scope.click = null;
 			$scope.courseTypeSubclassId = null;
 			$scope.selectdeletes = null;
 		}
 	}
-	//点击弹出二级弹窗
-	$scope.addTwo = function () {
+	// 点击弹出二级弹窗
+	$scope.addTwo = function() {
 		if ($scope.courseTypeSubclassId == null) {
-			//弹出添加二级分类弹窗
+			// 弹出添加二级分类弹窗
 			$scope.isshow = 3;
 			$scope.insert = null;
 			$scope.update = null;
 			document.getElementById('add').style.display = "block";
-			
-		}else {
-			//弹出修改二级分类弹窗
+
+		} else {
+			// 弹出修改二级分类弹窗
 			$scope.update = null;
 			$scope.insert = null;
 			document.getElementById('add').style.display = "block";
 			$scope.isshow = 4;
-			
+
 		}
 	}
 	$scope.addsub = function() {
@@ -196,46 +186,57 @@ app.controller("CourseTypeController", function($scope, $http) {
 		}
 
 	}
-	//添加一级类别
-	$scope.insertOne= function() {
-		console.log("测试打印 = "+$scope.courseTypeName);
-		$http.get("/api/course/insertCourseTypeName",{"params":{"courseTypeName":$scope.courseTypeName}},{'Content-Type' : 'application/json;charset=UTF-8'})
-		.success (function (result) {
+	// 添加一级类别
+	$scope.insertOne = function() {
+		$http.get("/api/course/insertCourseTypeName", {
+			"params" : {
+				"courseTypeName" : $scope.courseTypeName
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
 			if (result.status == "0") {
 				document.getElementById('add').style.display = "none";
 				alert("添加成功");
 				$scope.shopcateBases();
-			}else {
+			} else {
 				alert(result.message);
 			}
-		}) 
+		})
 	};
-	//添加二级分类
-	$scope.insertTwo = function () {
-		console.log("获取一级类别ID = "+$scope.id);
-		console.log("获取二级类别名字 = "+$scope.courseTypeSubclassName);
-		$http.get("/api/course/insertCourseTypeSubclassName",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName,"courseTypeId":$scope.id}},{'Content-Type' : 'application/json;charset=UTF-8'})
-		.success (function (result) {
+	// 添加二级分类
+	$scope.insertTwo = function() {
+		$http.get("/api/course/insertCourseTypeSubclassName", {
+			"params" : {
+				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
+				"courseTypeId" : $scope.id
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
 			if (result.status == "0") {
 				document.getElementById('add').style.display = "none";
 				$scope.selectCourseTypeSubclass();
-			}else {
+			} else {
 				alert(result.message);
 			}
-		}) 
+		})
 	}
-	//修改二级分类
-	$scope.updateTwo = function () {
-		console.log($scope.courseTypeSubclassName);
-		console.log($scope.courseTypeSubclassId);
-		$http.get("/api/course/updateCourseTypeSubclassName",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName,"courseTypeSubclassId":$scope.courseTypeSubclassId}},{'Content-Type' : 'application/json;charset=UTF-8'})
-		.success (function (result) {
+	// 修改二级分类
+	$scope.updateTwo = function() {
+		$http.get("/api/course/updateCourseTypeSubclassName", {
+			"params" : {
+				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
+				"courseTypeSubclassId" : $scope.courseTypeSubclassId
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
 			if (result.status == "0") {
-				console.log("修改成功");
 				document.getElementById('add').style.display = "none";
 				$scope.selectCourseTypeSubclass();
 			}
-		}) 
+		})
 	}
 	$scope.deletesub = function() {
 		if ($scope.subid != null) {
@@ -262,7 +263,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 			alert("请选中一个子类别~");
 		}
 	}
-	//删除一级类别
+	// 删除一级类别
 	$scope.deletecate = function(list) {
 		if ($scope.id != null) {
 			if (confirm("您确定删除这个一级类别吗")) {
@@ -277,7 +278,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 						$scope.shopcateBases();
 						alert("删除成功~");
 						$scope.page = 1;
-						//location.reload();
+						// location.reload();
 					} else {
 						alert("删除失败~");
 					}
@@ -288,7 +289,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 		}
 
 	}
-	//删除二级类别
+	// 删除二级类别
 	$scope.deletes = function(clist) {
 		if ($scope.courseTypeSubclassId != null) {
 			if (confirm("您确定删除这个二级类别吗")) {
@@ -304,7 +305,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 						alert("删除成功~");
 						$scope.page = 1;
 						$scope.selectCourseTypeSubclass();
-						//location.reload();
+						// location.reload();
 					} else {
 						alert("删除失败~");
 					}
@@ -315,37 +316,131 @@ app.controller("CourseTypeController", function($scope, $http) {
 		}
 
 	}
-
-
-	$scope.updatesub = function() {
-		$http.get("/api/shopdrugsubcategory/update", {
+	// 弹三级类别弹窗
+	$scope.addThree = function() {
+		if ($scope.id == null) {
+			alert("青先选中第一类别");
+			return;
+		}
+		if ($scope.courseTypeSubclassId == null) {
+			alert("请选中第二类别");
+			return;
+		}
+		document.getElementById('three').style.display = "block";
+	}
+	// 选中三级列表
+	$scope.threeId = null;
+	$scope.checkedThree = function(tl) {
+		if ($scope.threeId == null) {
+			$scope.selectsThree = tl;
+			$scope.miniSubclassName = tl.miniSubclassName;
+			$scope.threeId = tl.id;
+		}else {
+			$scope.threeId = null;
+			$scope.miniSubclassName = null;
+			$scope.selectsThree = null;
+		}
+	}
+	// 查询三级类别列表 根据course_type_subclass_id
+	$scope.selectThree = function() {
+		$http.get("/api/course/selectThree", {
 			"params" : {
-				"id" : $scope.subid,
-				"subName" : $scope.name,
-				"imgUrl" : $scope.imgUrl
+				"courseTypeSubclassId" : $scope.courseTypeSubclassId
 			}
 		}, {
 			'Content-Type' : 'application/json;charset=UTF-8'
-		}).success(function(data) {
-			if (data.status == '0') {
-				alert("修改成功~");
-				document.getElementById('add').style.display = "none";
-				location.reload();
+		}).success(function(result) {
+			if (result.status == "0") {
+				$scope.threeList = result.data;
 			} else {
-				alert("修改失败~");
+				alert(result.message);
 			}
 		})
-		$scope.subid = null;
-
 	}
-	$scope.resert = function() {
-
-		document.getElementById('add').style.display = "none";
+	// 添加三级类别
+	$scope.insertThree = function() {
+		$http.get("/api/course/insertThree", {
+			"params" : {
+				"courseTypeSubclassId" : $scope.courseTypeSubclassId,
+				"miniSubclassName" : $scope.miniSubclassName
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
+			if (result.status == "0") {
+				document.getElementById('three').style.display = "none";
+				$scope.selectThree();
+			}
+		})
 	}
-
+	// 修改三级类别
+	$scope.updateThree = function() {
+		if ($scope.threeId == null) {
+			alert("请先选中一个类别~");
+			return;
+		}
+		$http.get("/api/course/updateThree", {
+			"params" : {
+				"miniId" : $scope.threeId,
+				"miniSubclassName" : $scope.miniSubclassName
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
+			if (result.status == "0") {
+				document.getElementById('three').style.display = "none";
+				$scope.selectThree();
+			}
+		})
+	}
+	// 删除三级类别
+	$scope.deleteThree = function() {
+		if ($scope.threeId == null) {
+			alert("请先选中一个类别~");
+			return;
+		}
+		$http.get("/api/course/deleteThree", {
+			"params" : {
+				"miniId" : $scope.threeId
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
+			if (result.status == "0") {
+				$scope.selectThree();
+			}
+		})
+	}
+	//修改一级类别
+	$scope.updateOne = function () {
+		$http.get("/api/course/updateOne",{"params":{"id":$scope.id,"courseTypeName":$scope.courseTypeName}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		.success (function (result) {
+			if (result.status == "0") {
+				document.getElementById('add').style.display = "none";
+				$scope.shopcateBases();
+			}else {
+				alert(result.message);
+			}
+		})
+	}
+	/*
+	 * $scope.updatesub = function() {
+	 * $http.get("/api/shopdrugsubcategory/update", { "params" : { "id" :
+	 * $scope.subid, "subName" : $scope.name, "imgUrl" : $scope.imgUrl } }, {
+	 * 'Content-Type' : 'application/json;charset=UTF-8'
+	 * }).success(function(data) { if (data.status == '0') { alert("修改成功~");
+	 * document.getElementById('add').style.display = "none"; location.reload(); }
+	 * else { alert("修改失败~"); } }) $scope.subid = null; }
+	 * 
+	 */
 	$scope.refresh = function() {
 
 		location.reload();
+	}
+	$scope.resert = function() {
+		document.getElementById('three').style.display = "none";
+		document.getElementById('add').style.display = "none";
+
 	}
 
 });

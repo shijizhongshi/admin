@@ -89,6 +89,41 @@
 	<!--课程小类别的结束######################################## -->
 	
 	
+	<!--课程三级类别的开始######################################## -->
+	<resultMap type="com.ola.qh.entity.CourseTypeSubclassNames" id="CourseTypeSubclassNamesMap">
+	<result column="id" property="id"/>
+	<result column="mini_subclass_name" property="miniSubclassName"/>
+	<result column="course_type_subclass_id" property="courseTypeSubclassId"/>
+	<result column="comments" property="comments"/>
+	</resultMap>
+	<!-- 根据courseTypeSubclassId查询全部  -->
+	<select id = "select" resultMap="CourseTypeSubclassNamesMap">
+	select * from course_type_subclass_names where 1=1
+	<if test="courseTypeSubclassId != null and courseTypeSubclassId !=''"> 
+	and course_type_subclass_id = #{courseTypeSubclassId}
+	</if>
+	</select>
+	<!-- 根据ID删除  -->
+	<delete id ="delete">
+	delete from course_type_subclass_names where 1=1
+	<if test = "id != null and id !=''"> 
+	and id =#{id}
+	</if>
+	</delete>
+	<!--添加  -->
+	<insert id="insert" parameterType="String">
+		insert into course_type_subclass_names(id,mini_subclass_name,course_type_subclass_id)values(#{id},#{miniSubclassName},#{courseTypeSubclassId})
+	</insert>
+	<!-- 修改   -->
+	<update id="update" parameterType="String">
+	update course_type_subclass_names set
+	<if test="miniSubclassName!=null and miniSubclassName!=''">
+	mini_subclass_name = #{miniSubclassName}
+	</if>
+	where id = #{miniId}
+	</update>
+	<!--课程三级类别的结束######################################## -->
+	
 	
 	<!-- 课程的处理开始*************************************************** -->
 	<!--课程的映射-->

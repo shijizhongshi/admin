@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
+import com.ola.qh.entity.CourseTypeSubclassNames;
 public interface CourseDao {
 
 	public List<CourseType> courseTypeList();
@@ -56,5 +57,13 @@ public interface CourseDao {
 	public Integer updateCourseTypeSubclassName(@Param("courseTypeSubclassId")String courseTypeSubclassId,@Param("courseTypeSubclassName") String courseTypeSubclassName);
 
 	public Integer deleteCourseTypeSubclass(@Param("courseTypeSubclassId")String courseTypeSubclassId);
+
+	public Integer insert(@Param("id")String id, @Param("courseTypeSubclassId")String courseTypeSubclassId,@Param("miniSubclassName") String miniSubclassName);
+
+	public List<CourseTypeSubclassNames> select(@Param("courseTypeSubclassId")String courseTypeSubclassId);
+
+	public Integer update(@Param("miniId")String miniId,@Param("miniSubclassName") String miniSubclassName);
+
+	public Integer delete(@Param("id")String miniId);
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
+import com.ola.qh.entity.CourseTypeSubclassNames;
 import com.ola.qh.util.Results;
 
 public interface ICourseService {
@@ -38,5 +39,15 @@ public interface ICourseService {
 	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName);
 
 	public Results<String> deleteCourseTypeSubclass(String courseTypeSubclassId);
+
+	public Results<String> insertThree(String courseTypeSubclassId, String miniSubclassName);
+
+	public Results<List<CourseTypeSubclassNames>> selectThree(String courseTypeSubclassId);
+
+	public Results<String> updateThree(String miniId, String miniSubclassName);
+
+	public Results<String> deleteThree(String miniId);
+
+	public Results<String> updateOne(String id,String courseTypeName);
 
 }

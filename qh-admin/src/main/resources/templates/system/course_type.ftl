@@ -61,7 +61,7 @@
 						<li style="background: none; color: black;"><b>子类的操作</b></li>
 						<li ng-click="addThree()" style="background: #9DE879;"><span
 							class="glyphicon glyphicon-plus"></span>&nbsp;添加子类</li>
-						<li ng-click="updateThree()" style="background: #F9CD33;"><span
+						<li ng-click="addThree()" style="background: #F9CD33;"><span
 							class="glyphicon glyphicon-pencil"></span>&nbsp;修改子类</li>
 						<li ng-click="deleteThree()" style="background: #F86846;"><span
 							class="glyphicon glyphicon-trash"></span>&nbsp;删除子类</li>
@@ -75,15 +75,12 @@
 						<table>
 							<tr>
 								<th>子类名称</th>
-								<th>图片</th>
 
 							</tr>
-							<tr ng-repeat="ss in shopDrugSubcategory"
-								ng-click="checkedShopsub(ss)"
-								ng-class="{'selected':selected==ss}">
+							<tr ng-repeat="tl in threeList"
+								ng-click="checkedThree(tl)" ng-class="{'selected':selectsThree == tl}">
 
-								<th>{{ss.subName}}</th>
-								<th><img src="{{ss.imgUrl}}"></th>
+								<th>{{tl.miniSubclassName}}</th>
 							</tr>
 
 
@@ -131,8 +128,34 @@
 						<div class="end">
 							<input name="git" type="submit" value="添加" ng-show="insert==1" ng-click="insertOne()" style="background: #5ED8A9;" /> 
 							<input name="git" type="submit" value="添加" ng-show="isshow == 3" ng-click="insertTwo()" style="background: #5ED8A9;" /> 
-							<input name="git" type="submit" value="修改" ng-show="update==1" ng-click="updatesub()" style="background: #5ED8A9;" /> 
+							<input name="git" type="submit" value="修改" ng-show="update==1" ng-click="updateOne()" style="background: #5ED8A9;" /> 
 							<input name="git" type="submit" value="修改" ng-show="isshow == 4" ng-click="updateTwo()" style="background: #5ED8A9;" /> 
+							<input name="esc" type="reset" value="取消" ng-click="resert()" class="esc" />
+						</div>
+					</div>
+					<!-- 三级类别弹窗  -->
+					<div class="poop" id="three">
+						<form id="myform">
+							<h3 ng-show ="threeId == null">添加分类</h3>
+							<h3 ng-show ="threeId != null">修改分类</h3>
+							<div class="template-add">
+								<div class="select-2">
+									<span>分类名称</span> <input type="text" ng-model="miniSubclassName"/>
+								</div>
+								<div class="costs-uploadfile-div">
+									<input type="file" name="file" ng-show="picture==1"
+										onchange="angular.element(this).scope().uploadmainimage(this)"
+										accept="image/*" /> <input type="hidden" ng-model="imgUrl" />
+									<div ng-show="picture==1"
+										style="height: 130px; width: 40%; margin-top: 3px;">
+										<img src="{{imgUrl}}" style="height: 130px;" />
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="end">
+							<input name="git" type="submit" value="添加" ng-show="threeId == null" ng-click="insertThree()" style="background: #5ED8A9;" /> 
+							<input name="git" type="submit" value="修改" ng-show="threeId != null" ng-click="updateThree()" style="background: #5ED8A9;" /> 
 							<input name="esc" type="reset" value="取消" ng-click="resert()" class="esc" />
 						</div>
 					</div>
