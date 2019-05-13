@@ -16,7 +16,7 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	// 当前的页数
 	$scope.page = 1;
 	//一页展示多少行
-	$scope.pageSize = 20;
+	$scope.pageSize = 1000;
 	
 	//页面展示
 	$scope.loaddata = function () {
@@ -24,6 +24,24 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 		.success(function (result) {
 			if (result.status == 0) {
 				$scope.questionbankList = result.data;
+				angular.forEach($scope.questionbankList,function(questionbank){
+					
+					if(questionbank.status=="0"){
+						questionbank.statuss="app注册用户";
+					}else if(questionbank.status=="1"){
+						questionbank.statuss="游客用户";
+					}
+					if(questionbank.updatetime==null){
+						questionbank.time=questionbank.addtime;
+					}else {
+						questionbank.time=questionbank.updatetime;
+					}
+					if(questionbank.banktotal - questionbank.nobank != 0){
+						questionbank.probability=parseInt(questionbank.banktrue / (questionbank.banktotal - questionbank.nobank) *100)+"%";
+					}else {
+						questionbank.probability="用户未开始做题";
+					}
+				})
 				$scope.total = result.count;
 			}else {
 				alert(result.message);
