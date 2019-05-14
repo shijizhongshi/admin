@@ -1,16 +1,34 @@
 app.controller("knowledgepController", function($scope, $http){
 	
 	$scope.menus =[];
-	$http.get("/api/course/courseTypeList", {'Content-Type' : 'application/json;charset=UTF-8'}).success(function(result) {
-			$scope.menus = result.data;
-			angular.forEach($scope.menus,function(menu){
-				menu.adminSubMenus=menu.list;
-				menu.list=[];
-			})
+	$http.get("/api/course/courseTypeList", {'Content-Type' : 'application/json;charset=UTF-8'})
+	.success(function(result) {
+		$scope.list = result.data;
 	})
+	//根据一级类别ID查询二级类别
+	$scope.getSuclassName = function (list) {
+		$scope.id = list.id;
+		$http.get("/api/course/courseTypeSubclassList",{"params":{"courseTypeId":$scope.id}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		.success (function (result) {
+			if (result.status == "0") {
+				$scope.subclassList = result.data;
+			}
+		})
+	}
+	//根据二级类别ID查询三级类别
+	$scope.getMiniName = function (subclass) {
+		$scope.courseTypeSubclassId = subclass.id;
+		console.log("测试打印二级类别ID = "+$scope.courseTypeSubclassId);
+		$http.get("/api/course/selectThree",{"params":{"courseTypeSubclassId":$scope.courseTypeSubclassId}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		.success (function (result) {
+			if (result.status == "0") {
+				console.log("获取三级类别集合 成功")
+				$scope.miniList = result.data;
+			}
+		})
+	}
 	
 	$scope.uploadmainimage = function(file){
-		
 		
 		if(!file.files || file.files.length < 1) return;
 

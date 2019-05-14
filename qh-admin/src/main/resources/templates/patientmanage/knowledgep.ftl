@@ -31,13 +31,14 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 
 				</div>
 
-			<div class="select-3" style="width: 15%;">
-					<span>专业</span> <input type="text" ng-model="courseTypeSubclassName"
-						placeholder="输入专业" />
+				<div class="select-3" style="width: 15%;">
+					<span>专业</span> <input type="text"
+						ng-model="courseTypeSubclassName" placeholder="输入专业" />
 
 				</div>
 				<div>
-					<input ng-click="KnowledgepList()" type="button" class="btn-lg im-key" value="立即检索" />
+					<input ng-click="KnowledgepList()" type="button"
+						class="btn-lg im-key" value="立即检索" />
 				</div>
 				<!--批量更新封面按钮 过于OP停止使用  -->
 				<!-- <div>
@@ -53,11 +54,12 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 
 					<li ng-click="deleteKnowledgep()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
-						<li style="width: 90px;" ng-click="Knowledgepmove(1)"><span class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
-				<li style="width: 90px;" ng-click="Knowledgepmove(2)"><span
-					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
+					<li style="width: 90px;" ng-click="Knowledgepmove(1)"><span
+						class="glyphicon glyphicon-sort"></span>&nbsp;上移</li>
+					<li style="width: 90px;" ng-click="Knowledgepmove(2)"><span
+						class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;下移</li>
 					<li style="width: 90px;" ng-click="Knowledgepmove(3)"><span
-					class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;置顶</li>
+						class="glyphicon glyphicon-sort-by-attributes"></span>&nbsp;置顶</li>
 
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="refresh()" /></li>
@@ -104,19 +106,19 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 						<div>
 							<div style="float: left; width: 49%;">
 								<div class="select-2">
-									<span>视频链接<i class="bitian">*</i></span> <input type="text" ng-model="knowledgep.videoId"
-										placeholder="请输入链接">
+									<span>视频链接<i class="bitian">*</i></span> <input type="text"
+										ng-model="knowledgep.videoId" placeholder="请输入链接">
 								</div>
 								<div class="select-2">
-									<span>视频时长<i class="bitian">*</i></span> <input type="text" ng-model="knowledgep.times"
-										placeholder="请输入视频时长">
+									<span>视频时长<i class="bitian">*</i></span> <input type="text"
+										ng-model="knowledgep.times" placeholder="请输入视频时长">
 								</div>
 								<div class="select-2">
-									<span>视频标题<i class="bitian">*</i></span> <input type="text" ng-model="knowledgep.title"
-										placeholder="请输入标题">
+									<span>视频标题<i class="bitian">*</i></span> <input type="text"
+										ng-model="knowledgep.title" placeholder="请输入标题">
 								</div>
-								
-							<!--=====上传封面部分 暂时注释掉 =====-->
+
+								<!--=====上传封面部分 暂时注释掉 =====-->
 								<!-- <div class="costs-uploadfile-div">
 									<input type="file" name="file" id="fileField"
 										onchange="angular.element(this).scope().uploadmainimage(this)"
@@ -128,19 +130,36 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 									<p style="color: red">(图片尺寸：750*422&nbsp;图片大小1500kb以下)</p>
 								</div> -->
 								<div class="add-jie-radio">
-									<span>是否同步短视频</span> <span> 
-									<input type="radio" ng-model="knowledgep.status"
-										value="1">是 &nbsp;
-										<input type="radio" ng-model="knowledgep.status"  value="0">否
+									<span>是否同步短视频</span> <span> <input type="radio"
+										ng-model="knowledgep.status" value="1">是 &nbsp; <input
+										type="radio" ng-model="knowledgep.status" value="0">否
 									</span>
 								</div>
 							</div>
 							<div style="width: 49%; float: right;">
 								<div class="qx">
-									<p>
-										所属专业<i class="bitian">*</i>
-									</p>
-
+								<!-- 一级类别集合  -->
+									<div class="select-3">
+										<span>所属专业<i class="bitian">*</i></span> <img
+											src="/images/sjk-xl.png"> <select ng-model="l"
+											ng-options="l.courseTypeName for l in list"
+											ng-change="getSuclassName(l)">
+										</select>
+									</div>
+								<!-- 二级类别集合  -->
+									<div class="select-3">
+										<span>&nbsp;</span> <img src="/images/sjk-xl.png"> <select
+											ng-options="subclass.courseTypeSubclassName for subclass in subclassList"
+											ng-model="subclass" ng-change="getMiniName(subclass)">
+										</select>
+									</div>
+								<!-- 三级类别集合  -->
+									<div class="select-3">
+										<span>&nbsp;</span> <img src="/images/sjk-xl.png"> <select
+											ng-options="m.miniSubclassName for m in miniList"
+											ng-model="miniSubclassName">
+										</select>
+									</div>
 									<!-- <div class="qxul">
 										<ul ng-repeat="menu in menus">
 											<p class="qxtit" ng-click="unfolf(menu.id)"
@@ -167,11 +186,10 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 
 
 						<div class="end" style="margin-top: 10px;">
-							<input id="addbutton" name="git" type="submit"
-								ng-show="id==null" value="添加"
-								ng-click="saveKnowledgep()" style="background: #5ED8A9;">
-							<input id="updatebutton" name="git" type="submit"
-								ng-show="id!=null" value="修改"
+							<input id="addbutton" name="git" type="submit" ng-show="id==null"
+								value="添加" ng-click="saveKnowledgep()"
+								style="background: #5ED8A9;"> <input id="updatebutton"
+								name="git" type="submit" ng-show="id!=null" value="修改"
 								ng-click="updateKnowledgep()" style="background: #5ED8A9;">
 							<input id="esc" name="esc" type="reset" value="取消"
 								ng-click="reset()" class="esc">
