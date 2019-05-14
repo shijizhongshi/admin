@@ -7,8 +7,8 @@ app.controller("knowledgepController", function($scope, $http){
 	})
 	//根据一级类别ID查询二级类别
 	$scope.getSuclassName = function (list) {
-		$scope.id = list.id;
-		$http.get("/api/course/courseTypeSubclassList",{"params":{"courseTypeId":$scope.id}},{'Content-Type' : 'application/json;charset=UTF-8'})
+		$scope.courseTypeId = list.id;
+		$http.get("/api/course/courseTypeSubclassList",{"params":{"courseTypeId":$scope.courseTypeId}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success (function (result) {
 			if (result.status == "0") {
 				$scope.subclassList = result.data;
@@ -18,6 +18,7 @@ app.controller("knowledgepController", function($scope, $http){
 	//根据二级类别ID查询三级类别
 	$scope.getMiniName = function (subclass) {
 		$scope.courseTypeSubclassId = subclass.id;
+		$scope.courseTypeSubclassName = subclass.courseTypeSubclassName;
 		console.log("测试打印二级类别ID = "+$scope.courseTypeSubclassId);
 		$http.get("/api/course/selectThree",{"params":{"courseTypeSubclassId":$scope.courseTypeSubclassId}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success (function (result) {
@@ -26,6 +27,12 @@ app.controller("knowledgepController", function($scope, $http){
 				$scope.miniList = result.data;
 			}
 		})
+	}
+	//赋值三级类别名称
+	$scope.getCourseTypeSubclassName = function (m) {
+		if (m != null) {
+			$scope.miniSubclassName = m.miniSubclassName;
+		}
 	}
 	
 	$scope.uploadmainimage = function(file){
@@ -114,14 +121,18 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 		
 	   $scope.saveKnowledgep=function(){
-		   $scope.knowledgep.firstImage=$scope.imgUrl;
-		   $scope.knowledgep.courseTypeSubclassNames=$scope.adminSubMenusName;
-			$http.post("/api/KnowledgeVideo/insert",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
+		   console.log("测试打印三级类别名称 = "+$scope.miniSubclassName);
+		   console.log("测试打印二级类别名称 = "+$scope.courseTypeSubclassName);
+		   
+		   $scope.knowledgep.courseTypeSubclassName = $scope.courseTypeSubclassName;
+		   $scope.knowledgep.miniSubclassName = $scope.miniSubclassName;
+		   
+		   $http.post("/api/KnowledgeVideo/insert",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
 					alert("保存成功~");
-					$scope.adminSubMenusName = [];
-					$scope.adminMenusNames = [];
+					//$scope.adminSubMenusName = [];
+					//$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
 					$scope.KnowledgepList();
 				}
@@ -129,8 +140,8 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 	   
 	   $scope.updateKnowledgep=function(){
-		   $scope.knowledgep.firstImage=$scope.imgUrl;
-		   $scope.knowledgep.courseTypeSubclassNames=$scope.adminSubMenusName;
+		   //$scope.knowledgep.firstImage=$scope.imgUrl;
+		   //$scope.knowledgep.courseTypeSubclassNames=$scope.adminSubMenusName;
 			$http.post("/api/KnowledgeVideo/update",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
@@ -293,7 +304,7 @@ app.controller("knowledgepController", function($scope, $http){
 		$scope.deleteKnowledgep=function(){
 			if($scope.id!=null){
 				////删除课程/
-				if(confirm("您确定要删出这个视频吗")){
+				if(confirm("您确定要删除这个视频吗")){
 					$http.get("/api/KnowledgeVideo/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
 					.success(function(data){
 						if(data.status=='0'){

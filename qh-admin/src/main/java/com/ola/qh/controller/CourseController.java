@@ -350,7 +350,11 @@ public class CourseController {
 		
 		return results;
 	}
-	
+	/**
+	 * 根据二级类别ID查询三级类别集合
+	 * @param courseTypeSubclassId
+	 * @return
+	 */
 	@RequestMapping(value = "/selectThree",method = RequestMethod.GET)
 	public Results<List<CourseTypeSubclassNames>> insertThree (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
 		Results<List<CourseTypeSubclassNames>> results = new Results<List<CourseTypeSubclassNames>>();

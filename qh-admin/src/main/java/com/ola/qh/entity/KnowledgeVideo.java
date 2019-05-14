@@ -12,31 +12,41 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class KnowledgeVideo {
 
 	private String id;
-	
-	private String firstImage;//第一帧图片
+
+	private String firstImage;// 第一帧图片
 	@NotEmpty
 	private String title;
 	@NotEmpty
 	private String videoId;
-	
+
 	private String times;
-	
+
 	private String courseTypeSubclassName;
-	
+
+	private String miniSubclassName;// 三级类别名称
+
 	private int orders;
-	
-	private int status;//////1同步到短视频0不同步
-	
+
+	private int status;////// 1同步到短视频0不同步
+
 	private Date addtime;
-	
+
 	private Date updatetime;
-	
-	@Valid
-	@Size(min=1)
-	private List<String> courseTypeSubclassNames=new ArrayList<String>();
-	
-	private List<String> CourseTypeNames=new ArrayList<String>();
-	
+
+	//@Valid
+	//@Size(min = 1)
+	private List<String> courseTypeSubclassNames = new ArrayList<String>();
+
+	private List<String> CourseTypeNames = new ArrayList<String>();
+
+	public String getMiniSubclassName() {
+		return miniSubclassName;
+	}
+
+	public void setMiniSubclassName(String miniSubclassName) {
+		this.miniSubclassName = miniSubclassName;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -133,6 +143,4 @@ public class KnowledgeVideo {
 		CourseTypeNames = courseTypeNames;
 	}
 
-	
-	
 }

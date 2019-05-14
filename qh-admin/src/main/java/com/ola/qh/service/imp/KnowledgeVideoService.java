@@ -52,42 +52,43 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 
 		int count = knowledgeVideoDao.KnowledgeVideoCount(title, courseTypeSubclassName);
 
-		for (KnowledgeVideo knowledgeVideo : list) {
-
-			List<String> CourseTypeNames = new ArrayList<String>();
-
-			List<String> listCourseTypeSubclass = new ArrayList<String>();
-
-			if (knowledgeVideo.getCourseTypeSubclassName().indexOf(",") >= 0) {
-				listCourseTypeSubclass = Arrays.asList(knowledgeVideo.getCourseTypeSubclassName().split(","));
-
-				knowledgeVideo.setCourseTypeSubclassNames(listCourseTypeSubclass);
-
-				for (String string : listCourseTypeSubclass) {
-
-					CourseTypeSubclass courseTypeSubclass = courseDao.singleCourseTypeSubclass(string);
-
-					String CourseType = courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
-							.getCourseTypeName();
-					CourseTypeNames.add(CourseType);
-
-				}
-			} else {
-				knowledgeVideo.getCourseTypeSubclassNames().add(knowledgeVideo.getCourseTypeSubclassName());
-				CourseTypeSubclass courseTypeSubclass = courseDao
-						.singleCourseTypeSubclass(knowledgeVideo.getCourseTypeSubclassName());
-
-				String CourseType = courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
-						.getCourseTypeName();
-				CourseTypeNames.add(CourseType);
-
-			}
-			HashSet<String> b = new HashSet<String>(CourseTypeNames);
-			CourseTypeNames.clear();
-			CourseTypeNames.addAll(b);
-			knowledgeVideo.setCourseTypeNames(CourseTypeNames);
-
-		}
+		/*
+		 * for (KnowledgeVideo knowledgeVideo : list) {
+		 * 
+		 * List<String> CourseTypeNames = new ArrayList<String>();
+		 * 
+		 * List<String> listCourseTypeSubclass = new ArrayList<String>();
+		 * 
+		 * if (knowledgeVideo.getCourseTypeSubclassName().indexOf(",") >= 0) {
+		 * listCourseTypeSubclass =
+		 * Arrays.asList(knowledgeVideo.getCourseTypeSubclassName().split(","));
+		 * 
+		 * knowledgeVideo.setCourseTypeSubclassNames(listCourseTypeSubclass);
+		 * 
+		 * for (String string : listCourseTypeSubclass) {
+		 * 
+		 * CourseTypeSubclass courseTypeSubclass =
+		 * courseDao.singleCourseTypeSubclass(string);
+		 * 
+		 * String CourseType =
+		 * courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
+		 * .getCourseTypeName(); CourseTypeNames.add(CourseType);
+		 * 
+		 * } } else { knowledgeVideo.getCourseTypeSubclassNames().add(knowledgeVideo.
+		 * getCourseTypeSubclassName()); CourseTypeSubclass courseTypeSubclass =
+		 * courseDao
+		 * .singleCourseTypeSubclass(knowledgeVideo.getCourseTypeSubclassName());
+		 * 
+		 * String CourseType =
+		 * courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
+		 * .getCourseTypeName(); CourseTypeNames.add(CourseType);
+		 * 
+		 * } HashSet<String> b = new HashSet<String>(CourseTypeNames);
+		 * CourseTypeNames.clear(); CourseTypeNames.addAll(b);
+		 * knowledgeVideo.setCourseTypeNames(CourseTypeNames);
+		 * 
+		 * }
+		 */
 		results.setCount(count);
 		results.setData(list);
 		results.setStatus("0");

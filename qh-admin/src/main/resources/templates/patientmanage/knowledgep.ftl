@@ -157,7 +157,7 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 									<div class="select-3">
 										<span>&nbsp;</span> <img src="/images/sjk-xl.png"> <select
 											ng-options="m.miniSubclassName for m in miniList"
-											ng-model="miniSubclassName">
+											ng-model="m" ng-change="getCourseTypeSubclassName(m)">
 										</select>
 									</div>
 									<!-- <div class="qxul">
