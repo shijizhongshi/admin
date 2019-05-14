@@ -12,10 +12,11 @@
 	<resultMap type="com.ola.qh.entity.CourseType" id="CourseTypeMap">
 	<result column="id" property="id"/>
 	<result column="course_type_name" property="courseTypeName"/>
+	<result column="imgUrl" property="imgUrl"/>
 	</resultMap>
 	
 	<insert id="insertCourseType">
-	insert into course_type(id,course_type_name) values(#{id},#{courseTypeName})
+	insert into course_type(id,course_type_name,imgUrl) values(#{id},#{courseTypeName},#{imgUrl})
 	</insert>
 	<select id="courseTypeList" resultMap="CourseTypeMap">
 	    select * from course_type
@@ -24,7 +25,12 @@
 	    select id id,course_type_name courseTypeName from course_type where id=#{id}
 	</select>
 	<update id="updateCourseType" parameterType="String">
-	    update course_type set course_type_name=#{courseTypeName} where id=#{id}
+	    update course_type set
+	    <if test="imgUrl != null and imgUrl !=''">
+	    imgUrl = #{imgUrl},
+	    </if>
+	    course_type_name = #{courseTypeName} 
+	    where id=#{id}
 	</update>
 	<!-- 查询课程大类别中最大ID  -->
 	<select id="maxId" resultType="java.lang.String">
@@ -46,9 +52,10 @@
 	<result column="id" property="id"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
 	<result column="course_type_id" property="courseTypeId"/>
+	<result column="imgUrl" property="imgUrl"/>
 	</resultMap>
 	<insert id="insertCourseTypeSubclass" parameterType="String">
-		insert into course_type_subclass(id,course_type_subclass_name,course_type_id)values(#{id},#{courseTypeSubclassName},#{courseTypeId})
+		insert into course_type_subclass(id,course_type_subclass_name,course_type_id,imgUrl)values(#{id},#{courseTypeSubclassName},#{courseTypeId},#{imgUrl})
 	</insert>
 	<!--通过大类别的id查小类别-->
 	<select id="courseTypeSubclassList" resultMap="CourseTypeSubclassMap">
@@ -71,6 +78,9 @@
 	</if>
 	<if test="courseTypeId!=null">
 		course_type_id=#{courseTypeId},
+	</if>
+	<if test="imgUrl != null">
+		imgUrl=#{imgUrl},
 	</if>
 		id=#{id}
 		where id=#{id}

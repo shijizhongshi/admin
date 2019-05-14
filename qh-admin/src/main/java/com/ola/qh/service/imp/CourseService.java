@@ -1,10 +1,7 @@
 package com.ola.qh.service.imp;
 
-import static org.mockito.Mockito.reset;
-
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,9 +48,9 @@ public class CourseService implements ICourseService {
 		// TODO Auto-generated method stub
 		String id = KeyGen.uuid();
 		if (courseTypeId != null && !"".equals(courseTypeId)) {
-			return courseDao.insertCourseTypeSubclass(courseTypeName, id, courseTypeId);
+			return courseDao.insertCourseTypeSubclass(courseTypeName, id, courseTypeId,null);
 		} else {
-			return courseDao.insertCourseType(courseTypeName, id);
+			return courseDao.insertCourseType(courseTypeName, id, null);
 		}
 
 	}
@@ -62,9 +59,9 @@ public class CourseService implements ICourseService {
 	public int updateCourseType(String courseTypeName, String id, String courseTypeId) {
 		// TODO Auto-generated method stub
 		if (courseTypeId != null && !"".equals(courseTypeId)) {
-			return courseDao.updateCourseTypeSubclass(courseTypeName, id, courseTypeId);
+			return courseDao.updateCourseTypeSubclass(courseTypeName, id, courseTypeId,null);
 		} else {
-			return courseDao.updateCourseType(courseTypeName, id);
+			return courseDao.updateCourseType(courseTypeName, id,null);
 		}
 	}
 
@@ -152,12 +149,10 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public Results<String> insertCourseTypeName(String courseTypeName) {
+	public Results<String> insertCourseTypeName(String courseTypeName, String imgUrl) {
 		Results<String> results = new Results<String>();
-		// 查ID最大值 再 +1
-		Integer count = Integer.valueOf(courseDao.maxId());
-		System.out.println(String.valueOf(count + 1));
-		Integer countInteger = courseDao.insertCourseType(courseTypeName, String.valueOf(count + 1));
+		String id = KeyGen.uuid();
+		Integer countInteger = courseDao.insertCourseType(courseTypeName, id, imgUrl);
 		if (countInteger == 1) {
 			results.setStatus("0");
 
@@ -185,12 +180,12 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public Results<String> insertCourseTypeSubclassName(String courseTypeId, String courseTypeSubclassName) {
+	public Results<String> insertCourseTypeSubclassName(String courseTypeId, String courseTypeSubclassName,String imgUrl) {
 
 		Results<String> results = new Results<String>();
 		// 生成一个ID
 		String id = KeyGen.uuid();
-		Integer countInteger = courseDao.insertCourseTypeSubclass(courseTypeSubclassName, id, courseTypeId);
+		Integer countInteger = courseDao.insertCourseTypeSubclass(courseTypeSubclassName, id, courseTypeId,imgUrl);
 		if (countInteger == 1) {
 			results.setStatus("0");
 
@@ -203,9 +198,9 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName) {
+	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName,String imgUrl) {
 		Results<String> results = new Results<String>();
-		Integer count = courseDao.updateCourseTypeSubclass(courseTypeSubclassName, courseTypeSubclassId, null);
+		Integer count = courseDao.updateCourseTypeSubclass(courseTypeSubclassName, courseTypeSubclassId, null,imgUrl);
 		if (count == 1) {
 			results.setStatus("0");
 
@@ -289,17 +284,17 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public Results<String> updateOne(String id, String courseTypeName) {
+	public Results<String> updateOne(String id, String courseTypeName,String imgUrl) {
 		Results<String> results = new Results<String>();
-		Integer count = courseDao.updateCourseType(courseTypeName, id);
+		Integer count = courseDao.updateCourseType(courseTypeName, id,imgUrl);
 		if (count == 1) {
 			results.setStatus("0");
-			
+
 			return results;
 		}
 		results.setStatus("1");
 		results.setMessage("修改一级类别失败");
-		
+
 		return results;
 	}
 }

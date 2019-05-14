@@ -49,6 +49,7 @@ $scope.uploadmainimage = function(file){
 	
 	
 	$scope.banneradd=function(){
+		console.log("打印URL = "+$scope.imageurl);
 		$scope.banner.imageurl=$scope.imageurl;
 		$http.post("/api/banner/saveBanner",$scope.banner,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){

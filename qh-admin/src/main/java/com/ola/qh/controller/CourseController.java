@@ -1,7 +1,5 @@
 package com.ola.qh.controller;
 
-import static org.mockito.Mockito.reset;
-
 import java.util.List;
 
 import javax.validation.Valid;
@@ -281,9 +279,10 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/insertCourseTypeName", method = RequestMethod.GET)
-	public Results<String> insertCourseTypeName(@RequestParam(name = "courseTypeName") String courseTypeName) {
+	public Results<String> insertCourseTypeName(@RequestParam(name = "courseTypeName") String courseTypeName,
+			@RequestParam(name = "imgUrl") String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.insertCourseTypeName(courseTypeName);
+		results = courseService.insertCourseTypeName(courseTypeName,imgUrl);
 
 		return results;
 	}
@@ -301,9 +300,11 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value = "/updateOne",method = RequestMethod.GET)
-	public Results<String> updateOne (@RequestParam(name = "id")String id,@RequestParam(name = "courseTypeName")String courseTypeName) {
+	public Results<String> updateOne (@RequestParam(name = "id")String id,
+			@RequestParam(name = "courseTypeName")String courseTypeName,
+			@RequestParam(name = "imgUrl")String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.updateOne(id,courseTypeName);
+		results = courseService.updateOne(id,courseTypeName,imgUrl);
 		
 		return results;
 	}
@@ -315,9 +316,10 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/insertCourseTypeSubclassName",method = RequestMethod.GET)
 	public Results<String> insertCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
-			@RequestParam(name = "courseTypeId")String courseTypeId) {
+			@RequestParam(name = "courseTypeId")String courseTypeId,
+			@RequestParam(name = "imgUrl")String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.insertCourseTypeSubclassName(courseTypeId,courseTypeSubclassName);
+		results = courseService.insertCourseTypeSubclassName(courseTypeId,courseTypeSubclassName,imgUrl);
 		
 		return results;
 	}
@@ -329,9 +331,10 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/updateCourseTypeSubclassName",method = RequestMethod.GET)
 	public Results<String> updateCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
-			@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+			@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId,
+			@RequestParam(name = "imgUrl")String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.updateCourseTypeSubclassName(courseTypeSubclassId,courseTypeSubclassName);
+		results = courseService.updateCourseTypeSubclassName(courseTypeSubclassId,courseTypeSubclassName,imgUrl);
 		
 		return results;
 	}

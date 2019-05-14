@@ -135,6 +135,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 		} else {
 			$scope.click = null;
 			$scope.courseTypeSubclassId = null;
+			$scope.courseTypeSubclassName = null;
 			$scope.selectdeletes = null;
 		}
 	}
@@ -185,12 +186,31 @@ app.controller("CourseTypeController", function($scope, $http) {
 			alert("请先选中一个小类别~")
 		}
 
-	}
+	};
+	// 上传图片
+	$scope.uploadmainimage = function(file) {
+
+		if (!file.files || file.files.length < 1)
+			return;
+
+		var fd = new FormData();
+		fd.append("file", file.files[0]);
+		$http.post("/api/upload/single", fd, {
+			withCredentials : true,
+			headers : {
+				'Content-Type' : undefined
+			},
+			transformRequest : angular.identity
+		}).success(function(data) {
+			$scope.imageurl = data.data;
+		})
+	};
 	// 添加一级类别
 	$scope.insertOne = function() {
 		$http.get("/api/course/insertCourseTypeName", {
 			"params" : {
-				"courseTypeName" : $scope.courseTypeName
+				"courseTypeName" : $scope.courseTypeName,
+				"imgUrl":$scope.imageurl
 			}
 		}, {
 			'Content-Type' : 'application/json;charset=UTF-8'
@@ -204,12 +224,34 @@ app.controller("CourseTypeController", function($scope, $http) {
 			}
 		})
 	};
+	// 修改一级类别
+	$scope.updateOne = function() {
+		console.log("修改时新的url = "+$scope.imageurl);
+		$http.get("/api/course/updateOne", {
+			"params" : {
+				"id" : $scope.id,
+				"courseTypeName" : $scope.courseTypeName,
+				"imgUrl":$scope.imageurl
+			}
+		}, {
+			'Content-Type' : 'application/json;charset=UTF-8'
+		}).success(function(result) {
+			if (result.status == "0") {
+				document.getElementById('add').style.display = "none";
+				$scope.shopcateBases();
+			} else {
+				alert(result.message);
+			}
+		})
+	}
 	// 添加二级分类
 	$scope.insertTwo = function() {
+		console.log("测试打印二级图片url = "+$scope.imageurl);
 		$http.get("/api/course/insertCourseTypeSubclassName", {
 			"params" : {
 				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
-				"courseTypeId" : $scope.id
+				"courseTypeId" : $scope.id,
+				"imgUrl":$scope.imageurl
 			}
 		}, {
 			'Content-Type' : 'application/json;charset=UTF-8'
@@ -227,7 +269,8 @@ app.controller("CourseTypeController", function($scope, $http) {
 		$http.get("/api/course/updateCourseTypeSubclassName", {
 			"params" : {
 				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
-				"courseTypeSubclassId" : $scope.courseTypeSubclassId
+				"courseTypeSubclassId" : $scope.courseTypeSubclassId,
+				"imgUrl":$scope.imageurl
 			}
 		}, {
 			'Content-Type' : 'application/json;charset=UTF-8'
@@ -335,7 +378,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 			$scope.selectsThree = tl;
 			$scope.miniSubclassName = tl.miniSubclassName;
 			$scope.threeId = tl.id;
-		}else {
+		} else {
 			$scope.threeId = null;
 			$scope.miniSubclassName = null;
 			$scope.selectsThree = null;
@@ -411,18 +454,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 			}
 		})
 	}
-	//修改一级类别
-	$scope.updateOne = function () {
-		$http.get("/api/course/updateOne",{"params":{"id":$scope.id,"courseTypeName":$scope.courseTypeName}},{'Content-Type' : 'application/json;charset=UTF-8'})
-		.success (function (result) {
-			if (result.status == "0") {
-				document.getElementById('add').style.display = "none";
-				$scope.shopcateBases();
-			}else {
-				alert(result.message);
-			}
-		})
-	}
+	
 	/*
 	 * $scope.updatesub = function() {
 	 * $http.get("/api/shopdrugsubcategory/update", { "params" : { "id" :

@@ -12,9 +12,9 @@ public interface CourseDao {
 
 	public List<CourseType> courseTypeList();
 	
-	public int insertCourseType(@Param("courseTypeName")String courseTypeName,@Param("id")String id);
+	public int insertCourseType(@Param("courseTypeName")String courseTypeName,@Param("id")String id,@Param("imgUrl")String imgUrl);
 	
-	public int updateCourseType(@Param("courseTypeName")String courseTypeName,@Param("id")String id);
+	public int updateCourseType(@Param("courseTypeName")String courseTypeName,@Param("id")String id,@Param("imgUrl")String imgUrl);
 	
 	public CourseType singleCourseType(@Param("id")String id);
 	
@@ -23,10 +23,10 @@ public interface CourseDao {
 	public CourseTypeSubclass singleCourseTypeSubclass(@Param("courseTypeSubclassName") String courseTypeSubclassName);
 	
 	public int insertCourseTypeSubclass(@Param("courseTypeSubclassName")String courseTypeName,
-			@Param("id")String id,@Param("courseTypeId") String courseTypeId);
+			@Param("id")String id,@Param("courseTypeId") String courseTypeId,@Param("imgUrl") String imgUrl);
 	
 	public int updateCourseTypeSubclass(@Param("courseTypeSubclassName")String courseTypeName,
-			@Param("id")String id,@Param("courseTypeId") String courseTypeId);
+			@Param("id")String id,@Param("courseTypeId") String courseTypeId,@Param("imgUrl") String imgUrl);
 	
 	public int deleteCourse(@Param("id")String id);
 	

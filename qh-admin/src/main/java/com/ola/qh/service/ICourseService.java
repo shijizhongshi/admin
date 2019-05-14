@@ -30,13 +30,13 @@ public interface ICourseService {
 
 	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclass(String courseTypeId);
 
-	public Results<String> insertCourseTypeName(String courseTypeName);
+	public Results<String> insertCourseTypeName(String courseTypeName,String imgUrl);
 
 	public Results<String> deleteCourseType(String id);
 
-	public Results<String> insertCourseTypeSubclassName(String courseTypeId,String courseTypeSubclassName);
+	public Results<String> insertCourseTypeSubclassName(String courseTypeId,String courseTypeSubclassName,String imgUrl);
 
-	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName);
+	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName,String imgUrl);
 
 	public Results<String> deleteCourseTypeSubclass(String courseTypeSubclassId);
 
@@ -48,6 +48,6 @@ public interface ICourseService {
 
 	public Results<String> deleteThree(String miniId);
 
-	public Results<String> updateOne(String id,String courseTypeName);
+	public Results<String> updateOne(String id,String courseTypeName,String imgUrl);
 
 }

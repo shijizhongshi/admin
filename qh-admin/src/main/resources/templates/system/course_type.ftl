@@ -7,7 +7,8 @@
 <script src="/scripts/system/course_type.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-courseType">
+<@b.body menu="sidebarmenu-system"
+submenu="sidebarmenu-system-courseType">
 <div ng-controller="CourseTypeController">
 
 	<div>
@@ -22,36 +23,39 @@
 				</ul>
 			</div>
 			<div class="details-frame">
-			<!-- 展示全部类别  -->
+				<!-- 展示全部类别  -->
 				<div class="details-frame-content" id="details-frame-content">
 					<ul>
-						<li ng-repeat="list in courseTypeList"
-							ng-click="checkedOne(list)" ng-class="{'clicked':clicked==list}">
+						<li ng-repeat="list in courseTypeList" ng-click="checkedOne(list)"
+							ng-class="{'clicked':clicked==list}">
 							{{list.courseTypeName}} <i ng-click="deletecate(list)"
 							ng-show="selectdelete==list" class="glyphicon glyphicon-remove"
 							style="float: right; color: #666; font-size: 1.1rem"></i>
 						</li>
-						<ul class="add-fenlei" ng-click="addcate(id)" ng-show ="id == null">
+						<ul class="add-fenlei" ng-click="addcate(id)" ng-show="id == null">
 							<span class="glyphicon glyphicon-plus"></span>&nbsp;添加分类
 						</ul>
-						<ul class="add-fenlei" ng-click="addcate()" ng-show ="id != null">
+						<ul class="add-fenlei" ng-click="addcate()" ng-show="id != null">
 							<span class="glyphicon glyphicon-plus"></span>&nbsp;修改分类
 						</ul>
 					</ul>
 				</div>
 				<!--选中大类别  展示下面所属的全部类别  -->
-				<div class="details-frame-content" id="two" style="display : none;">
+				<div class="details-frame-content" id="two" style="display: none;">
 					<ul>
 						<li ng-repeat="clist in courseTypeSubclassList"
 							ng-click="checkedTwo(clist)" ng-class="{'clicked':click==clist}">
 							{{clist.courseTypeSubclassName}} <i ng-click="deletes(clist)"
-							ng-show="selectdeletes == clist" class="glyphicon glyphicon-remove"
+							ng-show="selectdeletes == clist"
+							class="glyphicon glyphicon-remove"
 							style="float: right; color: #666; font-size: 1.1rem"></i>
 						</li>
-						<ul class="add-fenlei" ng-click="addTwo()" ng-show="courseTypeSubclassId == null">
+						<ul class="add-fenlei" ng-click="addTwo()"
+							ng-show="courseTypeSubclassId == null">
 							<span class="glyphicon glyphicon-plus"></span>&nbsp;添加分类
 						</ul>
-						<ul class="add-fenlei" ng-click="addTwo()" ng-show = "courseTypeSubclassId != null">
+						<ul class="add-fenlei" ng-click="addTwo()"
+							ng-show="courseTypeSubclassId != null">
 							<span class="glyphicon glyphicon-plus"></span>&nbsp;修改分类
 						</ul>
 					</ul>
@@ -65,7 +69,7 @@
 							class="glyphicon glyphicon-pencil"></span>&nbsp;修改子类</li>
 						<li ng-click="deleteThree()" style="background: #F86846;"><span
 							class="glyphicon glyphicon-trash"></span>&nbsp;删除子类</li>
-						
+
 						<li ng-click="refresh()"
 							style="float: right; margin-right: 20px; background: none;"><img
 							src="/images/sjk-f5.png" name="changyi" /></li>
@@ -77,8 +81,8 @@
 								<th>子类名称</th>
 
 							</tr>
-							<tr ng-repeat="tl in threeList"
-								ng-click="checkedThree(tl)" ng-class="{'selected':selectsThree == tl}">
+							<tr ng-repeat="tl in threeList" ng-click="checkedThree(tl)"
+								ng-class="{'selected':selectsThree == tl}">
 
 								<th>{{tl.miniSubclassName}}</th>
 							</tr>
@@ -102,19 +106,29 @@
 					<!--弹窗-->
 					<div class="poop" id="add">
 						<form id="myform">
-							<h3 ng-show ="isshow == 1">添加分类</h3>
-							<h3 ng-show ="isshow == 3">添加二级分类</h3>
-							<h3 ng-show ="isshow == 2">修改分类</h3>
-							<h3 ng-show ="isshow == 4">修改二级分类</h3>
+							<h3 ng-show="isshow == 1">添加分类</h3>
+							<h3 ng-show="isshow == 3">添加二级分类</h3>
+							<h3 ng-show="isshow == 2">修改分类</h3>
+							<h3 ng-show="isshow == 4">修改二级分类</h3>
 							<div class="template-add">
 
-								<div class="select-2" ng-show = "isshow == 1 || isshow ==2">
-									<span>一级分类名称</span> <input type="text" ng-model="courseTypeName"/>
+								<div class="select-2" ng-show="isshow == 1 || isshow ==2">
+									<span>一级分类名称</span> <input type="text"
+										ng-model="courseTypeName" />
 								</div>
-								<div class="select-2" ng-show = "isshow == 3 || isshow == 4">
-									<span>二级分类名称</span> <input type="text" ng-model="courseTypeSubclassName"/>
+								<div class="select-2" ng-show="isshow == 3 || isshow == 4">
+									<span>二级分类名称</span> <input type="text"
+										ng-model="courseTypeSubclassName" />
 								</div>
-								<div class="costs-uploadfile-div">
+								<!--上传图片 开始  -->
+								<div>
+									<div style="margin-bottom: 10px">图片:</div>
+									<input type="file"
+										onchange="angular.element(this).scope().uploadmainimage(this)" />
+									<img src="{{imageurl}}" style="width: 50px;" />
+								</div>
+								<!--上传图片 结束-->
+								<!-- <div class="costs-uploadfile-div">
 									<input type="file" name="file" ng-show="picture==1"
 										onchange="angular.element(this).scope().uploadmainimage(this)"
 										accept="image/*" /> <input type="hidden" ng-model="imgUrl" />
@@ -122,25 +136,31 @@
 										style="height: 130px; width: 40%; margin-top: 3px;">
 										<img src="{{imgUrl}}" style="height: 130px;" />
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</form>
 						<div class="end">
-							<input name="git" type="submit" value="添加" ng-show="insert==1" ng-click="insertOne()" style="background: #5ED8A9;" /> 
-							<input name="git" type="submit" value="添加" ng-show="isshow == 3" ng-click="insertTwo()" style="background: #5ED8A9;" /> 
-							<input name="git" type="submit" value="修改" ng-show="update==1" ng-click="updateOne()" style="background: #5ED8A9;" /> 
-							<input name="git" type="submit" value="修改" ng-show="isshow == 4" ng-click="updateTwo()" style="background: #5ED8A9;" /> 
-							<input name="esc" type="reset" value="取消" ng-click="resert()" class="esc" />
+							<input name="git" type="submit" value="添加" ng-show="insert==1"
+								ng-click="insertOne()" style="background: #5ED8A9;" /> <input
+								name="git" type="submit" value="添加" ng-show="isshow == 3"
+								ng-click="insertTwo()" style="background: #5ED8A9;" /> <input
+								name="git" type="submit" value="修改" ng-show="update==1"
+								ng-click="updateOne()" style="background: #5ED8A9;" /> <input
+								name="git" type="submit" value="修改" ng-show="isshow == 4"
+								ng-click="updateTwo()" style="background: #5ED8A9;" /> <input
+								name="esc" type="reset" value="取消" ng-click="resert()"
+								class="esc" />
 						</div>
 					</div>
 					<!-- 三级类别弹窗  -->
 					<div class="poop" id="three">
 						<form id="myform">
-							<h3 ng-show ="threeId == null">添加分类</h3>
-							<h3 ng-show ="threeId != null">修改分类</h3>
+							<h3 ng-show="threeId == null">添加分类</h3>
+							<h3 ng-show="threeId != null">修改分类</h3>
 							<div class="template-add">
 								<div class="select-2">
-									<span>分类名称</span> <input type="text" ng-model="miniSubclassName"/>
+									<span>分类名称</span> <input type="text"
+										ng-model="miniSubclassName" />
 								</div>
 								<div class="costs-uploadfile-div">
 									<input type="file" name="file" ng-show="picture==1"
@@ -154,9 +174,12 @@
 							</div>
 						</form>
 						<div class="end">
-							<input name="git" type="submit" value="添加" ng-show="threeId == null" ng-click="insertThree()" style="background: #5ED8A9;" /> 
-							<input name="git" type="submit" value="修改" ng-show="threeId != null" ng-click="updateThree()" style="background: #5ED8A9;" /> 
-							<input name="esc" type="reset" value="取消" ng-click="resert()" class="esc" />
+							<input name="git" type="submit" value="添加"
+								ng-show="threeId == null" ng-click="insertThree()"
+								style="background: #5ED8A9;" /> <input name="git" type="submit"
+								value="修改" ng-show="threeId != null" ng-click="updateThree()"
+								style="background: #5ED8A9;" /> <input name="esc" type="reset"
+								value="取消" ng-click="resert()" class="esc" />
 						</div>
 					</div>
 				</div>
