@@ -5,7 +5,7 @@ app.controller("studyRecordController", function($scope, $http) {
 	// 当前的页数
 	$scope.page = 1;
 	// 一页展示多少行
-	$scope.numPerPage = 20;
+	$scope.numPerPage = 1000;
 
 	// 格式化日期 yyyy-MM-dd
 	var changeDate = function(date) {
