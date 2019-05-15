@@ -67,6 +67,8 @@ app.controller("dailyPractice", function($scope, $http){
 			"categoryId":$scope.courseTypeSubclassName}}, {'Content-Type': 'application/json;charset=UTF-8'})
 		.success(function(data){
 			if(data.status=="0"){
+				if(data.data.length>0){
+					
 				$scope.questionsubcatelist=data.data;
 				$scope.total=data.count;
 				$scope.subId=$scope.questionsubcatelist[0].id;
@@ -83,6 +85,10 @@ app.controller("dailyPractice", function($scope, $http){
 					}
 					
 				})
+				}else{
+					$scope.questionsubcatelist=null;
+					$scope.questionbanklist=null;
+				}
 			}
 		})
 	};

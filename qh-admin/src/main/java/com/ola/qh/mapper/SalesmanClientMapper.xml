@@ -13,7 +13,7 @@
 	
 	<select id="ClientList" resultMap="SalesmanClientMap">
 		select id,mobile,salesman_id,addtime
-		from salesmanclient 
+		from salesman_second 
 		where 1=1
 		<if test="salesmanId!=null and salesmanId!=''">
 		and salesman_id=#{salesmanId}
@@ -26,7 +26,7 @@
 	
 	<select id="ClientCount" resultType="int">
 		select count(id)
-		from salesmanclient 
+		from salesman_second 
 		where 1=1
 		<if test="salesmanId!=null and salesmanId!=''">
 		and salesman_id=#{salesmanId}
@@ -38,16 +38,16 @@
 	
 	<select id="existClient" resultType="com.ola.qh.entity.SalesmanClient">
 		select *
-		from salesmanclient 
+		from salesman_second 
 		where mobile=#{mobile}
 	</select>
 	
 	<insert id="insertClient" parameterType="com.ola.qh.entity.SalesmanClient">
-		insert into salesmanclient(id,mobile,salesman_id,addtime) values(#{id},#{mobile},#{salesmanId},#{addtime})
+		insert into salesman_second(id,mobile,salesman_id,addtime) values(#{id},#{mobile},#{salesmanId},#{addtime})
 	</insert>
 	
 	<update id="updateClient" parameterType="com.ola.qh.entity.SalesmanClient">
-		update salesmanclient set 
+		update salesman_second set 
 		<if test="mobile!=null and mobile!=''">
 			mobile=#{mobile],
 		</if>
@@ -58,7 +58,7 @@
 	</update>
 	
 	<delete id="deleteClient">
-		delete from salesmanclient where 1=1
+		delete from salesman_second where 1=1
 		
 		<if test="id!=null and id!=''">
 			and id=#{id}
