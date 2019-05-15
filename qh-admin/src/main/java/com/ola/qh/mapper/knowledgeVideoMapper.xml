@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="selectVideoIdAll" resultMap="KnowledgeVideoMap">
-		SELECT * from knowledge_video;
+		select * from knowledge_video where first_image not like "%-1.jpg%"
 	</select>
 	
 	<select id="KnowledgeVideoCount" resultType="java.lang.Integer">

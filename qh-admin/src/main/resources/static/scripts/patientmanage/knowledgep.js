@@ -19,7 +19,6 @@ app.controller("knowledgepController", function($scope, $http){
 	$scope.getMiniName = function (subclass) {
 		$scope.courseTypeSubclassId = subclass.id;
 		$scope.courseTypeSubclassName = subclass.courseTypeSubclassName;
-		console.log("测试打印二级类别ID = "+$scope.courseTypeSubclassId);
 		$http.get("/api/course/selectThree",{"params":{"courseTypeSubclassId":$scope.courseTypeSubclassId}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success (function (result) {
 			if (result.status == "0") {
@@ -121,15 +120,13 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 		
 	   $scope.saveKnowledgep=function(){
-		   console.log("测试打印三级类别名称 = "+$scope.miniSubclassName);
-		   console.log("测试打印二级类别名称 = "+$scope.courseTypeSubclassName);
-		   
 		   $scope.knowledgep.courseTypeSubclassName = $scope.courseTypeSubclassName;
 		   $scope.knowledgep.miniSubclassName = $scope.miniSubclassName;
 		   
 		   $http.post("/api/KnowledgeVideo/insert",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
+					$scope.courseTypeSubclassName = null;
 					alert("保存成功~");
 					//$scope.adminSubMenusName = [];
 					//$scope.adminMenusNames = [];
@@ -140,11 +137,14 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 	   
 	   $scope.updateKnowledgep=function(){
+		   $scope.knowledgep.courseTypeSubclassName = $scope.courseTypeSubclassName;
+		   $scope.knowledgep.miniSubclassName = $scope.miniSubclassName;
 		   //$scope.knowledgep.firstImage=$scope.imgUrl;
 		   //$scope.knowledgep.courseTypeSubclassNames=$scope.adminSubMenusName;
 			$http.post("/api/KnowledgeVideo/update",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
+					$scope.courseTypeSubclassName = null;
 					alert("修改成功~");
 					$scope.adminSubMenusName = [];
 					$scope.adminMenusNames = [];
@@ -173,6 +173,7 @@ app.controller("knowledgepController", function($scope, $http){
 		   if($scope.id==null){
 			   
 			   alert("请选中一条数据");
+			   return;
 		   }
 		   $scope.html="修改";
 		   document.getElementById('resource').style.display="block"; 

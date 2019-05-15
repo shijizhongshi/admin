@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class KnowledgeVideo {
@@ -20,9 +17,9 @@ public class KnowledgeVideo {
 	private String videoId;
 
 	private String times;
-
+	@NotEmpty
 	private String courseTypeSubclassName;
-
+	
 	private String miniSubclassName;// 三级类别名称
 
 	private int orders;
