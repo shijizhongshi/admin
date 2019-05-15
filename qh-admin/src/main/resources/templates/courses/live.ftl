@@ -146,6 +146,13 @@
 									type="radio" ng-model="live.isremmend" ng-value="0" />否
 								</span>
 							</div>
+							<!-- 是否是公开课  -->
+							<div class="add-jie-radio">
+								<span>是否是公开课</span> <span> <input type="radio"
+									ng-model="live.isopen" ng-value="1" />是 &nbsp;<input
+									type="radio" ng-model="live.isopen" ng-value="0" />否
+								</span>
+							</div>
 
 							<div class="select-2">
 								<span>直播链接</span> <input type="text" ng-model="live.outLinks">

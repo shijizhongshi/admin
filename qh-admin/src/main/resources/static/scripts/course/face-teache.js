@@ -76,7 +76,7 @@ app.controller("faceTeacheController", function($scope, $http) {
 			"params" : {
 				"pageNo":$scope.pageNo,
 				"pageSize":$scope.pageSize,
-				"teacherName" : $scope.teacherName,
+				"teacherName" : $scope.teacherNames,
 				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
 				"courseName":$scope.courseName
 			}
@@ -107,6 +107,10 @@ app.controller("faceTeacheController", function($scope, $http) {
 	$scope.id = null;
 
 	$scope.addFaceTeache = function() {
+		if($scope.firstImg==null || $scope.teacherName==null){
+			alert("信息不足");
+			return
+		}
 		$scope.faceTeache.firstImg = $scope.firstImg;
 		$scope.faceTeache.startTime = changeDate($scope.startTime);
 		$scope.faceTeache.teacherName = $scope.teacherName;

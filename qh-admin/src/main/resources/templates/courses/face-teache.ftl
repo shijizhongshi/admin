@@ -45,7 +45,7 @@
 				</div>
 				<div class="select-3" style="width: 10%;margin-right:15px">
 					<span>教师名称</span>
-					<input type="text" placeholder="请输入教师名称" ng-model="teacherName" />
+					<input type="text" placeholder="请输入教师名称" ng-model="teacherNames" />
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="立即检索"
