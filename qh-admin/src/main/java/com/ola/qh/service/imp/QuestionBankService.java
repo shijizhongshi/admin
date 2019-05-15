@@ -83,10 +83,16 @@ public class QuestionBankService implements IQuestionBankService {
 		Sheet sheet = wb.getSheetAt(0);
 		
 	      //判断用07还是03的方法获取图片  
-		Map<String, PictureData>  maplist=getPictures1((HSSFSheet) sheet);  
-        
+		String filename=file.getOriginalFilename();
+		Map<String, PictureData>  maplist=new HashMap<>();  
+		if(filename.contains(".xls")){
+			maplist=getPictures1((HSSFSheet) sheet);
+		}else if(filename.contains(".xlsx")){
+			maplist=getPictures2((XSSFSheet) sheet);
+		}
+		List<String> urlss=new ArrayList<String>();
         try {
-			List<String> urlss=printImg(maplist);
+			urlss=printImg(maplist);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,6 +118,13 @@ public class QuestionBankService implements IQuestionBankService {
 				qb.setTitle(checkNull(1, row));
 				qb.setTypes(checkNull(0, row));
 				qb.setSubId(subId);
+				if(urlss!=null){
+					for(String imageurl : urlss){
+						if(imageurl.indexOf((i-1)+"-2")>0){
+							qb.setTitleimg(imageurl);
+						}
+					}
+				}
 				questionBankDao.insertQuestionBank(qb);
 				// n++;
 			}
@@ -127,8 +140,12 @@ public class QuestionBankService implements IQuestionBankService {
 				QuestionAnswer qa = new QuestionAnswer();
 				qa.setBankUnitId(unitId);
 				qa.setAddtime(new Date());
-				if(checkNull(2, row).trim()!=null){
-					
+				if(urlss!=null){
+					for(String imageurl : urlss){
+						if(imageurl.contains((i+1)+"-2")){
+							qb.setTitleimg(imageurl);
+						}
+					}
 				}
 				if (checkNull(3, row).trim() != null) {
 					qa.setAnswers(checkNull(3, row));
@@ -215,6 +232,7 @@ public class QuestionBankService implements IQuestionBankService {
 		return result;
 
 	}
+	
 
 	public static String checkNull(int i, Row row) {
 
