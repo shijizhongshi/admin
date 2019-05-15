@@ -1,5 +1,7 @@
 package com.ola.qh.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 
  * @ClassName: CourseTypeSubclass
@@ -16,6 +18,7 @@ public class CourseTypeSubclass {
 
 	private String courseTypeId;///// 大类别的名称
 
+	@NotEmpty(message="图片地址不能为空")
 	private String imgUrl;
 
 	public String getImgUrl() {
