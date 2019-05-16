@@ -19,7 +19,7 @@ submenu="sidebarmenu-system-courseType">
 					<li>/</li>
 					<li>公共资源管理</li>
 					<li>/</li>
-					<li>暂未定义</li>
+					<li>专业管理</li>
 				</ul>
 			</div>
 			<div class="details-frame">

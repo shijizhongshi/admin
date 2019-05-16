@@ -3,6 +3,8 @@ package com.ola.qh.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 
  * @ClassName: CourseType
@@ -17,6 +19,7 @@ public class CourseType {
 
 	private String courseTypeName;//// 名称
 
+	@NotEmpty(message="图片地址不能为空")
 	private String imgUrl;//图片地址
 
 	private List<CourseTypeSubclass> list = new ArrayList<CourseTypeSubclass>();
