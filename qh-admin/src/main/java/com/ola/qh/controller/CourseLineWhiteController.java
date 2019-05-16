@@ -1,8 +1,6 @@
 package com.ola.qh.controller;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.validation.Valid;
 
@@ -17,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.entity.CourseLineWhite;
 import com.ola.qh.service.ICourseLineWhiteService;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController

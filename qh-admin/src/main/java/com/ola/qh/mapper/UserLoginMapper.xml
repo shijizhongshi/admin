@@ -12,6 +12,7 @@
 		<result column="device_type" property="deviceType" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
+		<result column="token" property="token" />
 	</resultMap>
 
 	<select id="selectUserLogin" resultType="com.ola.qh.entity.UserLogin">

@@ -49,5 +49,5 @@ public interface ICourseService {
 	public Results<String> deleteThree(String miniId);
 
 	public Results<String> updateOne(String id,String courseTypeName,String imgUrl);
-
+	
 }
