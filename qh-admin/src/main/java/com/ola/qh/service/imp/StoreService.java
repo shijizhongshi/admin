@@ -28,7 +28,7 @@ public class StoreService implements IStoreService {
 	@Override
 	public String storeUrl(String fname, byte[] content) throws FileStorageException {
 		// TODO Auto-generated method stub
-		fname = FileStore.rename(fname);
+		//fname = FileStore.rename(fname);
 		String dpath = FileStore.buildpath();
 		/// static/upload/2015/11/16/random_sequence_code/random_sequece.name
 		String fpath = dpath + fname;

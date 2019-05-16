@@ -15,18 +15,19 @@
 	<result column="updatetime" property="updatetime"/>
 	<result column="mobile" property="mobile"/>
 	<result column="realname" property="realname"/>
+	<result column="titleimg" property="titleimg"/>
 	<result column="status" property="status"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
 	</resultMap>
 	
 	<insert id="insertQuestionBank" parameterType="com.ola.qh.entity.QuestionBank">
-	insert into question_bank(id,sub_id,number_no,title,types,analysis,correct,addtime)
-	values(#{id},#{subId},#{numberNo},#{title},#{types},#{analysis},#{correct},#{addtime})
+	insert into question_bank(id,sub_id,number_no,title,types,analysis,correct,addtime,titleimg)
+	values(#{id},#{subId},#{numberNo},#{title},#{types},#{analysis},#{correct},#{addtime},#{titleimg})
 	</insert>
 	
 	<insert id="insertQuestionUnit" parameterType="com.ola.qh.entity.QuestionBank">
-	insert into question_bank_unit(id,bank_id,number_no,title,types,analysis,correct,addtime,sub_id)
-	values(#{id},#{bankId},#{numberNo},#{title},#{types},#{analysis},#{correct},#{addtime},#{subId})
+	insert into question_bank_unit(id,bank_id,number_no,title,types,analysis,correct,addtime,sub_id,titleimg)
+	values(#{id},#{bankId},#{numberNo},#{title},#{types},#{analysis},#{correct},#{addtime},#{subId},#{titleimg})
 	</insert>
 	
 	<insert id="insertQuestionAnswer" parameterType="com.ola.qh.entity.QuestionAnswer">
