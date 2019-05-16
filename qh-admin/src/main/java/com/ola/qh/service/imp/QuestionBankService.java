@@ -120,7 +120,7 @@ public class QuestionBankService implements IQuestionBankService {
 				qb.setSubId(subId);
 				if(urlss!=null){
 					for(String imageurl : urlss){
-						if(imageurl.indexOf((i-1)+"-2")>0){
+						if(imageurl.indexOf("/"+(i-1)+"-2")>0){
 							qb.setTitleimg(imageurl);
 						}
 					}
@@ -142,7 +142,7 @@ public class QuestionBankService implements IQuestionBankService {
 				qa.setAddtime(new Date());
 				if(urlss!=null){
 					for(String imageurl : urlss){
-						if(imageurl.contains((i+1)+"-2")){
+						if(imageurl.indexOf("/"+(i-1)+"-2")>=0){
 							qb.setTitleimg(imageurl);
 						}
 					}
