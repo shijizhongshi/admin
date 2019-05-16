@@ -149,6 +149,8 @@ app.controller("knowledgepController", function($scope, $http){
 					$scope.adminSubMenusName = [];
 					$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
+					//重置清除缓存
+					$scope.knowledgep = null;
 					$scope.KnowledgepList();
 				}
 				else {
