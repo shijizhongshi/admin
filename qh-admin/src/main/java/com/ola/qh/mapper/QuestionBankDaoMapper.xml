@@ -15,6 +15,7 @@
 	<result column="updatetime" property="updatetime"/>
 	<result column="mobile" property="mobile"/>
 	<result column="realname" property="realname"/>
+	<result column="titleimg" property="titleimg"/>
 	<result column="status" property="status"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
 	</resultMap>
