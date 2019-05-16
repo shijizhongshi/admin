@@ -147,8 +147,8 @@ public class QuestionBankService implements IQuestionBankService {
 						}
 					}
 				}
-				if (checkNull(3, row).trim() != null) {
-					qa.setAnswers(checkNull(3, row));
+				if (checkNull(4, row).trim() != null) {
+					qa.setAnswers(checkNull(4, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("A");
 					if (checkNull(3, row).contains("A")) {
@@ -159,8 +159,8 @@ public class QuestionBankService implements IQuestionBankService {
 					qa.setOrders(0);
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(4, row) != null) {
-					qa.setAnswers(checkNull(4, row));
+				if (checkNull(5, row)!= null) {
+					qa.setAnswers(checkNull(5, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
 					if (checkNull(3, row).contains("B")) {
@@ -171,8 +171,8 @@ public class QuestionBankService implements IQuestionBankService {
 					qa.setOrders(1);
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(5, row) != null) {
-					qa.setAnswers(checkNull(5, row));
+				if (checkNull(6, row) != null) {
+					qa.setAnswers(checkNull(6, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("C");
 					if (checkNull(3, row).contains("C")) {
@@ -183,8 +183,8 @@ public class QuestionBankService implements IQuestionBankService {
 					qa.setOrders(2);
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(6, row) != null) {
-					qa.setAnswers(checkNull(6, row));
+				if (checkNull(7, row) != null) {
+					qa.setAnswers(checkNull(7, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("D");
 					if (checkNull(3, row).contains("D")) {
@@ -195,8 +195,8 @@ public class QuestionBankService implements IQuestionBankService {
 					qa.setOrders(3);
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(7, row) != null) {
-					qa.setAnswers(checkNull(7, row));
+				if (checkNull(8, row) != null) {
+					qa.setAnswers(checkNull(8, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("E");
 					if (checkNull(3, row).contains("E")) {
@@ -211,14 +211,14 @@ public class QuestionBankService implements IQuestionBankService {
 				if (bankId != null) {
 					///// 共同题干的问题
 					qb.setBankId(bankId);
-					qb.setAnalysis(checkNull(8, row));
+					qb.setAnalysis(checkNull(9, row));
 					qb.setNumberNo(n + 1);
 
 					questionBankDao.insertQuestionUnit(qb);
 					n++;
 				} else {
 					/////// 单纯的单选或者多选的问题
-					qb.setAnalysis(checkNull(8, row));
+					qb.setAnalysis(checkNull(9, row));
 					qb.setNumberNo(n + 1);
 					questionBankDao.insertQuestionBank(qb);
 					n++;
