@@ -36,7 +36,8 @@ public class SalesmanController {
 		
 		Results<String> results=new Results<String>();
 		if(valid.hasErrors()){
-			results.setStatus("0");
+			results.setStatus("1");
+			results.setMessage("信息不足");
 			return results;
 		}
 		return salesmanService.insertSalesman(salesman);

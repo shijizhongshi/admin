@@ -14,6 +14,8 @@ public class SalesmanClient {
 	
 	private String salesmanId;
 	
+	private String salesmanIdNew;
+	
 	private Date addtime;
 	
 	private Date updatetime;
@@ -56,6 +58,14 @@ public class SalesmanClient {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public String getSalesmanIdNew() {
+		return salesmanIdNew;
+	}
+
+	public void setSalesmanIdNew(String salesmanIdNew) {
+		this.salesmanIdNew = salesmanIdNew;
 	}
 	
 	

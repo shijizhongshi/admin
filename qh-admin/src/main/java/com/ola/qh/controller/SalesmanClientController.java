@@ -42,10 +42,11 @@ public class SalesmanClientController {
 		return SalesmanClientService.insertClient(salesmanClient);
 	}
 	
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public Results<String> updateClient(@RequestBody SalesmanClient salesmanClient){
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public Results<String> updateClient(@RequestParam(name="salesmanId",required=true)String salesmanId,
+			@RequestParam(name="mobile",required=false)String mobile,@RequestParam(name="salesmanIdNew",required=false)String salesmanIdNew){
 		
-		return SalesmanClientService.updateClient(salesmanClient);
+		return SalesmanClientService.updateClient(salesmanId, mobile, salesmanIdNew);
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.GET)

@@ -13,6 +13,8 @@ public interface SalesmanDao {
 	
 	public int SalesmanCount(@Param("name")String name,@Param("mobile")String mobile,@Param("address")String address);
 	
+	public Salesman exist(@Param("mobile")String mobile);
+	
 	public int insertSalesman(Salesman salesman);
 	
 	public int updateSalesman(Salesman salesman);
