@@ -313,13 +313,13 @@
 
 
 	<!-- 直播预约表 live_mark表映射开始 -->
-	<resultMap type="com.ola.qh.entity.LiveMark" id="LiveMarkMap">
+	<!-- <resultMap type="com.ola.qh.entity.LiveMark" id="LiveMarkMap">
 		<result column="userId" property="userId" />
 		<result column="live_name" property="liveName" />
 		<result column="live_id" property="liveId" />
 		<result column="status" property="status" />
 		<result column="starttime" property="starttime" />
-	</resultMap>
+	</resultMap> -->
 
 	<select id="selectLiveShow" resultType="java.util.Date">
 		select starttime from
@@ -329,10 +329,10 @@
 	</select>
 
 	<!--查询全部开始时间 -->
-	<select id="selectStartTime" resultMap="LiveMarkMap">
+	<select id="selectStartTime" resultType="com.ola.qh.entity.LiveMark">
 		select * from live_mark
-		where date_format(starttime,'%Y%m%d') = #{date}
-		and status = 0;
+		where starttime = #{date}
+		and status = 0
 	</select>
 
 	<!-- 更新状态值 -->

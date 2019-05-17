@@ -18,6 +18,7 @@ import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.entity.CourseTypeSubclassNames;
 import com.ola.qh.service.IBuyCourseService;
 import com.ola.qh.service.ICourseService;
+import com.ola.qh.service.ILiveMarkScheduleService;
 import com.ola.qh.util.Results;
 
 /**
@@ -37,6 +38,9 @@ public class CourseController {
 
 	@Autowired
 	private IBuyCourseService buyCourseService;
+	
+	@Autowired
+	private ILiveMarkScheduleService liveMarkScheduleService;
 
 	/**
 	 * 大类别的集合
@@ -269,8 +273,10 @@ public class CourseController {
 
 		return results;
 	}
+
 	/**
 	 * 添加一级分类(大分类)
+	 * 
 	 * @param courseTypeName
 	 * @return
 	 */
@@ -278,124 +284,152 @@ public class CourseController {
 	public Results<String> insertCourseTypeName(@RequestParam(name = "courseTypeName") String courseTypeName,
 			@RequestParam(name = "imgUrl") String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.insertCourseTypeName(courseTypeName,imgUrl);
+		results = courseService.insertCourseTypeName(courseTypeName, imgUrl);
 
 		return results;
 	}
+
 	/**
 	 * 删除一级分类(大分类)
+	 * 
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteCourseType",method = RequestMethod.GET)
-	public Results<String> deleteCourseType (@RequestParam(name = "id")String id) {
+	@RequestMapping(value = "/deleteCourseType", method = RequestMethod.GET)
+	public Results<String> deleteCourseType(@RequestParam(name = "id") String id) {
 		Results<String> results = new Results<String>();
 		results = courseService.deleteCourseType(id);
-		
+
 		return results;
 	}
-	
-	@RequestMapping(value = "/updateOne",method = RequestMethod.GET)
-	public Results<String> updateOne (@RequestParam(name = "id")String id,
-			@RequestParam(name = "courseTypeName")String courseTypeName,
-			@RequestParam(name = "imgUrl")String imgUrl) {
+
+	@RequestMapping(value = "/updateOne", method = RequestMethod.GET)
+	public Results<String> updateOne(@RequestParam(name = "id") String id,
+			@RequestParam(name = "courseTypeName") String courseTypeName,
+			@RequestParam(name = "imgUrl") String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.updateOne(id,courseTypeName,imgUrl);
-		
+		results = courseService.updateOne(id, courseTypeName, imgUrl);
+
 		return results;
 	}
+
 	/**
 	 * 添加二级类别(小分类)
+	 * 
 	 * @param courseTypeSubclassName
 	 * @param courseTypeId
 	 * @return
 	 */
-	@RequestMapping(value = "/insertCourseTypeSubclassName",method = RequestMethod.GET)
-	public Results<String> insertCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
-			@RequestParam(name = "courseTypeId")String courseTypeId,
-			@RequestParam(name = "imgUrl")String imgUrl) {
+	@RequestMapping(value = "/insertCourseTypeSubclassName", method = RequestMethod.GET)
+	public Results<String> insertCourseTypeSubclassName(
+			@RequestParam(name = "courseTypeSubclassName") String courseTypeSubclassName,
+			@RequestParam(name = "courseTypeId") String courseTypeId, @RequestParam(name = "imgUrl") String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.insertCourseTypeSubclassName(courseTypeId,courseTypeSubclassName,imgUrl);
-		
+		results = courseService.insertCourseTypeSubclassName(courseTypeId, courseTypeSubclassName, imgUrl);
+
 		return results;
 	}
+
 	/**
 	 * 修改二级类别(小分类)
+	 * 
 	 * @param courseTypeSubclassName
 	 * @param courseTypeSubclassId
 	 * @return
 	 */
-	@RequestMapping(value = "/updateCourseTypeSubclassName",method = RequestMethod.GET)
-	public Results<String> updateCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
-			@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId,
-			@RequestParam(name = "imgUrl")String imgUrl) {
+	@RequestMapping(value = "/updateCourseTypeSubclassName", method = RequestMethod.GET)
+	public Results<String> updateCourseTypeSubclassName(
+			@RequestParam(name = "courseTypeSubclassName") String courseTypeSubclassName,
+			@RequestParam(name = "courseTypeSubclassId") String courseTypeSubclassId,
+			@RequestParam(name = "imgUrl") String imgUrl) {
 		Results<String> results = new Results<String>();
-		results = courseService.updateCourseTypeSubclassName(courseTypeSubclassId,courseTypeSubclassName,imgUrl);
-		
+		results = courseService.updateCourseTypeSubclassName(courseTypeSubclassId, courseTypeSubclassName, imgUrl);
+
 		return results;
 	}
+
 	/**
 	 * 删除二级类别(小分类)
+	 * 
 	 * @param courseTypeSubclassId
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteTwo",method = RequestMethod.GET)
-	public Results<String> deleteTwo (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+	@RequestMapping(value = "/deleteTwo", method = RequestMethod.GET)
+	public Results<String> deleteTwo(@RequestParam(name = "courseTypeSubclassId") String courseTypeSubclassId) {
 		Results<String> results = new Results<String>();
 		results = courseService.deleteCourseTypeSubclass(courseTypeSubclassId);
-		
+
 		return results;
 	}
+
 	/**
 	 * 根据二级类别ID查询三级类别集合
+	 * 
 	 * @param courseTypeSubclassId
 	 * @return
 	 */
-	@RequestMapping(value = "/selectThree",method = RequestMethod.GET)
-	public Results<List<CourseTypeSubclassNames>> insertThree (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+	@RequestMapping(value = "/selectThree", method = RequestMethod.GET)
+	public Results<List<CourseTypeSubclassNames>> insertThree(
+			@RequestParam(name = "courseTypeSubclassId") String courseTypeSubclassId) {
 		Results<List<CourseTypeSubclassNames>> results = new Results<List<CourseTypeSubclassNames>>();
 		results = courseService.selectThree(courseTypeSubclassId);
-		
+
 		return results;
 	}
+
 	/**
 	 * 添加三级类别
+	 * 
 	 * @param courseTypeSubclassId
 	 * @param miniSubclassName
 	 * @return
 	 */
-	@RequestMapping(value = "/insertThree",method = RequestMethod.GET)
-	public Results<String> insertThree (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId,
-			@RequestParam(name = "miniSubclassName")String miniSubclassName) {
+	@RequestMapping(value = "/insertThree", method = RequestMethod.GET)
+	public Results<String> insertThree(@RequestParam(name = "courseTypeSubclassId") String courseTypeSubclassId,
+			@RequestParam(name = "miniSubclassName") String miniSubclassName) {
 		Results<String> results = new Results<String>();
-		results = courseService.insertThree(courseTypeSubclassId,miniSubclassName);
-		
+		results = courseService.insertThree(courseTypeSubclassId, miniSubclassName);
+
 		return results;
 	}
+
 	/**
 	 * 修改三级类别
+	 * 
 	 * @param miniId
 	 * @param miniSubclassName
 	 * @return
 	 */
-	@RequestMapping(value = "/updateThree",method = RequestMethod.GET)
-	public Results<String> updateThree (@RequestParam(name = "miniId")String miniId,
-			@RequestParam(name = "miniSubclassName")String miniSubclassName) {
+	@RequestMapping(value = "/updateThree", method = RequestMethod.GET)
+	public Results<String> updateThree(@RequestParam(name = "miniId") String miniId,
+			@RequestParam(name = "miniSubclassName") String miniSubclassName) {
 		Results<String> results = new Results<String>();
-		results = courseService.updateThree(miniId,miniSubclassName);
-		
+		results = courseService.updateThree(miniId, miniSubclassName);
+
 		return results;
 	}
+
 	/**
 	 * 删除三级类别
+	 * 
 	 * @param miniId
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteThree",method = RequestMethod.GET)
-	public Results<String> deleteThree (@RequestParam(name = "miniId")String miniId) {
+	@RequestMapping(value = "/deleteThree", method = RequestMethod.GET)
+	public Results<String> deleteThree(@RequestParam(name = "miniId") String miniId) {
 		Results<String> results = new Results<String>();
 		results = courseService.deleteThree(miniId);
-		
+
 		return results;
 	}
+
+	/**
+	 * 测试定时任务
+	 */
+	@RequestMapping("/aaa")
+	public void test() {
+
+		liveMarkScheduleService.timedPushOneHour();
+	}
+
 }
