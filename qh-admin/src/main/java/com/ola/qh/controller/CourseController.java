@@ -431,5 +431,11 @@ public class CourseController {
 
 		liveMarkScheduleService.timedPushOneHour();
 	}
+	
+	@RequestMapping("/bbb")
+	public void testb () {
+		
+		liveMarkScheduleService.timedPushFiveMin();
+	}
 
 }

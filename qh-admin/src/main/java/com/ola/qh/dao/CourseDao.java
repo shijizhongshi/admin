@@ -76,8 +76,10 @@ public interface CourseDao {
 
 	public List<Date> selectLiveShow(@Param("date") String date);
 
-	public List<LiveMark> selectStartTime(@Param("date") String date);
-
 	public Integer updateStatus(@Param("userId") String userId);
+
+	public List<LiveMark> selectStartTimeByHour(@Param("date") String date);
+	
+	public List<LiveMark> selectStartTimeByMin(@Param("format")String format);
 	
 }

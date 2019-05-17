@@ -324,15 +324,21 @@
 	<select id="selectLiveShow" resultType="java.util.Date">
 		select starttime from
 		course_line_show
-		where date_format(starttime,'%Y%m%d') = #{date}
+		where date_format(starttime,'%Y%m%d%H') = #{date}
 		and isopen = 1;
 	</select>
 
-	<!--查询全部开始时间 -->
-	<select id="selectStartTime" resultType="com.ola.qh.entity.LiveMark">
+	<!--查询 精确到小时 -->
+	<select id="selectStartTimeByHour" resultType="com.ola.qh.entity.LiveMark">
 		select * from live_mark
-		where starttime = #{date}
+		where date_format(starttime,'%Y%m%d%H') = #{date}
 		and status = 0
+	</select>
+	
+	<!--查询 精确到分钟 -->
+	<select id="selectStartTimeByMin" resultType="com.ola.qh.entity.LiveMark">
+		select * from live_mark
+		where date_format(starttime,'%Y%m%d%H%i') = #{format}
 	</select>
 
 	<!-- 更新状态值 -->

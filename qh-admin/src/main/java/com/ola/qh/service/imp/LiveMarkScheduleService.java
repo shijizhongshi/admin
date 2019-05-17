@@ -24,28 +24,53 @@ public class LiveMarkScheduleService implements ILiveMarkScheduleService {
 	public void timedPushOneHour() {
 		Date now = new Date();
 		// 格式化
-		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
-		System.out.println(sf.format(now));
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHH");
 		// 获取直播集合
 		List<Date> dateList = courseDao.selectLiveShow(sf.format(now));
 		// 获取当前时间的时间戳格式
-		long currentTime = System.currentTimeMillis();
+		for (int i = 0; i < dateList.size(); i++) {
+			// 获取要推送的直播集合
+			List<LiveMark> list = courseDao.selectStartTimeByHour(sf.format(now));
+			for (LiveMark liveMark : list) {
+				String userId = liveMark.getUserId();
+				// 标题
+				String title = "直播即将开始";
+				SimpleDateFormat sFormat = new SimpleDateFormat("HH:mm");
+				// 推送
+				String content = "您预约的直播课将于" + sFormat.format(liveMark.getStarttime()) + "开始，记得准时观看哦~";
+				try {
+					pushService.send(userId, title, content);
+					// 根据userId更新状态值
+					courseDao.updateStatus(userId);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void timedPushFiveMin() {
+		Date now = new Date();
+		// 格式化
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHH");
+		// 获取直播集合
+		List<Date> dateList = courseDao.selectLiveShow(sf.format(now));
 		for (Date date : dateList) {
-			System.out.println(date);
-			// 转换成13位时间戳
-			long timesTamp = date.getTime();
-			// 判断时间差是否小于1个小时
-			if (timesTamp - currentTime <= (60 * 60 * 1000)) {
-				//获取要推送的直播集合
-				System.out.println("打印数据 = "+sf.format(date));
-				List<LiveMark> list = courseDao.selectStartTime(sf.format(date));
+			// 当前时间转时间戳
+			long currentTime = now.getTime();
+			// 直播时间转时间戳
+			long liveTime = date.getTime();
+			if (liveTime - currentTime <= (5 * 60 * 1000) && liveTime - currentTime >= 0) {
+				SimpleDateFormat sFormat = new SimpleDateFormat("yyyyMMddHHmm");
+				List<LiveMark> list = courseDao.selectStartTimeByMin(sFormat.format(date));
+				// 查询符合时间的直播集合
 				for (LiveMark liveMark : list) {
 					String userId = liveMark.getUserId();
 					// 标题
 					String title = "直播即将开始";
-					SimpleDateFormat sFormat = new SimpleDateFormat("HH:mm");
 					// 推送
-					String content = "您预约的直播课将于" + sFormat.format(liveMark.getStarttime()) + "开始，记得准时观看哦~";
+					String content = "您预约的直播即将开始，赶紧进入直播间和大家打声招呼吧~";
 					try {
 						pushService.send(userId, title, content);
 						// 根据userId更新状态值
@@ -53,8 +78,8 @@ public class LiveMarkScheduleService implements ILiveMarkScheduleService {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-
 				}
+
 			}
 		}
 	}
