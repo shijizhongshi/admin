@@ -40,7 +40,7 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 					<input ng-click="KnowledgepList()" type="button"
 						class="btn-lg im-key" value="立即检索" />
 				</div>
-				<!--批量更新封面按钮 过于OP停止使用  -->
+				<!--批量更新封面按钮 过于OP谨慎使用  -->
 				<!-- <div>
 					<input ng-click="updateAll()" type="button" class="btn-lg im-key" value="批量更新封面" />
 				</div> -->

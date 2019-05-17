@@ -3,16 +3,30 @@ package com.ola.qh.service.imp;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.poi.POIXMLDocumentPart;
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+import org.apache.poi.hssf.usermodel.HSSFPicture;
+import org.apache.poi.hssf.usermodel.HSSFShape;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.PictureData;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFPicture;
+import org.apache.poi.xssf.usermodel.XSSFShape;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +48,8 @@ import com.ola.qh.entity.QuestionUnit;
 import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.IQuestionBankService;
+import com.ola.qh.service.IStoreService;
+import com.ola.qh.util.FileStorageException;
 import com.ola.qh.util.Json;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
@@ -52,6 +68,10 @@ public class QuestionBankService implements IQuestionBankService {
 	private CourseLineWhiteDao courseLineWhiteDao;
 	@Autowired
 	private CourseSubclassDao courseSubclassDao;
+	@Autowired
+	private IStoreService storeService;
+	
+	
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -60,6 +80,23 @@ public class QuestionBankService implements IQuestionBankService {
 		Workbook wb = WorkbookFactory.create(file.getInputStream());
 
 		Sheet sheet = wb.getSheetAt(0);
+		
+	      //判断用07还是03的方法获取图片  
+		String filename=file.getOriginalFilename();
+		Map<String, PictureData>  maplist=new HashMap<>();  
+		if(filename.contains(".xls")){
+			maplist=getPictures1((HSSFSheet) sheet);
+		}else if(filename.contains(".xlsx")){
+			maplist=getPictures2((XSSFSheet) sheet);
+		}
+		List<String> urlss=new ArrayList<String>();
+        try {
+			urlss=printImg(maplist);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+
 		int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		Row titleRow = rowIterator.next();
@@ -80,6 +117,14 @@ public class QuestionBankService implements IQuestionBankService {
 				qb.setTitle(checkNull(1, row));
 				qb.setTypes(checkNull(0, row));
 				qb.setSubId(subId);
+				if(urlss!=null){
+					for(String imageurl : urlss){
+						if(imageurl.indexOf("/"+(i+1)+"-2")>0){
+							qb.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+						}
+					}
+				}
 				questionBankDao.insertQuestionBank(qb);
 				// n++;
 			}
@@ -91,82 +136,136 @@ public class QuestionBankService implements IQuestionBankService {
 				qb.setTitle(checkNull(1, row));
 				qb.setTypes(checkNull(0, row));
 				qb.setSubId(subId);
-				qb.setCorrect(checkNull(2, row));
+				qb.setCorrect(checkNull(3, row));
 				QuestionAnswer qa = new QuestionAnswer();
 				qa.setBankUnitId(unitId);
 				qa.setAddtime(new Date());
-				if (checkNull(3, row) != null) {
-					qa.setAnswers(checkNull(3, row));
+				if(urlss!=null){
+					for(String imageurl : urlss){
+						if(imageurl.indexOf("/"+(i+1)+"-2")>=0){
+							qb.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
+				}
+				if (checkNull(4, row).trim() != null) {
+					qa.setAnswers(checkNull(4, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("A");
-					if (checkNull(2, row).contains("A")) {
+					if (checkNull(3, row).contains("A")) {
 						qa.setCorrect(true);
 					} else {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(0);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////A对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-5")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(4, row) != null) {
-					qa.setAnswers(checkNull(4, row));
+				if (checkNull(6, row)!= null) {
+					qa.setAnswers(checkNull(6, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
-					if (checkNull(2, row).contains("B")) {
+					if (checkNull(3, row).contains("B")) {
 						qa.setCorrect(true);
 					} else {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(1);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////B对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-7")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(5, row) != null) {
-					qa.setAnswers(checkNull(5, row));
+				if (checkNull(8, row) != null) {
+					qa.setAnswers(checkNull(8, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("C");
-					if (checkNull(2, row).contains("C")) {
+					if (checkNull(3, row).contains("C")) {
 						qa.setCorrect(true);
 					} else {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(2);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////C对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-9")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(6, row) != null) {
-					qa.setAnswers(checkNull(6, row));
+				if (checkNull(10, row) != null) {
+					qa.setAnswers(checkNull(10, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("D");
-					if (checkNull(2, row).contains("D")) {
+					if (checkNull(3, row).contains("D")) {
 						qa.setCorrect(true);
 					} else {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(3);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////D对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-11")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(7, row) != null) {
-					qa.setAnswers(checkNull(7, row));
+				if (checkNull(12, row) != null) {
+					qa.setAnswers(checkNull(12, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("E");
-					if (checkNull(2, row).contains("E")) {
+					if (checkNull(3, row).contains("E")) {
 						qa.setCorrect(true);
 					} else {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(4);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////E对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-13")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
 
 				if (bankId != null) {
 					///// 共同题干的问题
 					qb.setBankId(bankId);
-					qb.setAnalysis(checkNull(8, row));
+					qb.setAnalysis(checkNull(14, row));
 					qb.setNumberNo(n + 1);
 
 					questionBankDao.insertQuestionUnit(qb);
 					n++;
 				} else {
 					/////// 单纯的单选或者多选的问题
-					qb.setAnalysis(checkNull(8, row));
+					qb.setAnalysis(checkNull(14, row));
 					qb.setNumberNo(n + 1);
 					questionBankDao.insertQuestionBank(qb);
 					n++;
@@ -180,6 +279,7 @@ public class QuestionBankService implements IQuestionBankService {
 		return result;
 
 	}
+	
 
 	public static String checkNull(int i, Row row) {
 
@@ -193,6 +293,80 @@ public class QuestionBankService implements IQuestionBankService {
 
 		return null;
 	}
+
+	 /**
+	   * 获取图片和位置 (xls)
+	   * @param sheet
+	   * @return
+	   * @throws IOException
+	   */
+	  public static Map<String, PictureData> getPictures1 (HSSFSheet sheet) throws IOException {
+		    Map<String, PictureData> map = new HashMap<String, PictureData>();
+		    List<HSSFShape> list = sheet.getDrawingPatriarch().getChildren();
+		    for (HSSFShape shape : list) {
+		        if (shape instanceof HSSFPicture) {
+		            HSSFPicture picture = (HSSFPicture) shape;
+		            HSSFClientAnchor cAnchor = (HSSFClientAnchor) picture.getAnchor();
+		            PictureData pdata = picture.getPictureData();
+		            String key = cAnchor.getRow1() + "-" + cAnchor.getCol1(); // 行号-列号
+		            map.put(key, pdata);
+		        }
+		    }
+		    return map;
+		}
+	   
+	  /**
+	   * 获取图片和位置 (xlsx)
+	   * @param sheet
+	   * @return
+	   * @throws IOException
+	   */
+	  public static Map<String, PictureData> getPictures2 (XSSFSheet sheet) throws IOException {
+	      Map<String, PictureData> map = new HashMap<String, PictureData>();
+	      List<POIXMLDocumentPart> list = sheet.getRelations();
+	      for (POIXMLDocumentPart part : list) {
+	          if (part instanceof XSSFDrawing) {
+	              XSSFDrawing drawing = (XSSFDrawing) part;
+	              List<XSSFShape> shapes = drawing.getShapes();
+	              for (XSSFShape shape : shapes) {
+	                  XSSFPicture picture = (XSSFPicture) shape;
+	                  XSSFClientAnchor anchor = picture.getPreferredSize();
+	                  CTMarker marker = anchor.getFrom();
+	                  String key = marker.getRow() + "-" + marker.getCol();
+	                  map.put(key, picture.getPictureData());
+	              }
+	          }
+	      }
+	      return map;
+	  }
+	  //图片写出
+	  public List<String> printImg(Map<String, PictureData> sheetList) throws Exception{  
+        
+	        //for (Map<String, PictureData> map : sheetList) {  
+	            Object key[] = sheetList.keySet().toArray();  
+	            List<String> list=new ArrayList<String>();
+	            for (int i = 0; i < sheetList.size(); i++) {  
+	                // 获取图片流  
+	                PictureData pic = sheetList.get(key[i]);  
+	                // 获取图片索引  
+	                String picName = key[i].toString();  
+	                // 获取图片格式  
+	                String ext = pic.suggestFileExtension();  
+	                  
+	                byte[] data = pic.getData();  
+	                 
+	                //图片保存路径 
+	                String tupianurl=storeService.storeUrl(picName + "." + ext, data);
+	                list.add(tupianurl);
+//	                FileOutputStream out = new FileOutputStream("D:\\img\\pic" + );  
+//	                out.write(data);  
+//	                out.close();  
+
+	            } 
+	            return list;
+	       // }  
+	          
+	    }  
 
 	@Transactional
 	@Override
