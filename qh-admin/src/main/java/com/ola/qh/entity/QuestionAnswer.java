@@ -20,6 +20,18 @@ public class QuestionAnswer {
 	
 	private int orders;
 	
+	private String titleimg;/////答案的图片
+	
+	
+	
+	public String getTitleimg() {
+		return titleimg;
+	}
+
+	public void setTitleimg(String titleimg) {
+		this.titleimg = titleimg;
+	}
+
 	public int getOrders() {
 		return orders;
 	}

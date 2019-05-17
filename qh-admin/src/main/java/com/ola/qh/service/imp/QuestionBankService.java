@@ -122,6 +122,7 @@ public class QuestionBankService implements IQuestionBankService {
 					for(String imageurl : urlss){
 						if(imageurl.indexOf("/"+(i+1)+"-2")>0){
 							qb.setTitleimg(imageurl);
+							urlss.remove(imageurl);
 						}
 					}
 				}
@@ -144,6 +145,8 @@ public class QuestionBankService implements IQuestionBankService {
 					for(String imageurl : urlss){
 						if(imageurl.indexOf("/"+(i+1)+"-2")>=0){
 							qb.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
 						}
 					}
 				}
@@ -157,10 +160,19 @@ public class QuestionBankService implements IQuestionBankService {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(0);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////A对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-5")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(5, row)!= null) {
-					qa.setAnswers(checkNull(5, row));
+				if (checkNull(6, row)!= null) {
+					qa.setAnswers(checkNull(6, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
 					if (checkNull(3, row).contains("B")) {
@@ -169,10 +181,19 @@ public class QuestionBankService implements IQuestionBankService {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(1);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////B对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-7")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(6, row) != null) {
-					qa.setAnswers(checkNull(6, row));
+				if (checkNull(8, row) != null) {
+					qa.setAnswers(checkNull(8, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("C");
 					if (checkNull(3, row).contains("C")) {
@@ -181,10 +202,19 @@ public class QuestionBankService implements IQuestionBankService {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(2);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////C对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-9")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(7, row) != null) {
-					qa.setAnswers(checkNull(7, row));
+				if (checkNull(10, row) != null) {
+					qa.setAnswers(checkNull(10, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("D");
 					if (checkNull(3, row).contains("D")) {
@@ -193,10 +223,19 @@ public class QuestionBankService implements IQuestionBankService {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(3);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////D对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-11")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(8, row) != null) {
-					qa.setAnswers(checkNull(8, row));
+				if (checkNull(12, row) != null) {
+					qa.setAnswers(checkNull(12, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("E");
 					if (checkNull(3, row).contains("E")) {
@@ -205,20 +244,29 @@ public class QuestionBankService implements IQuestionBankService {
 						qa.setCorrect(false);
 					}
 					qa.setOrders(4);
+					qa.setTitleimg(null);
+					for(String imageurl : urlss){
+						///////E对应的图片
+						if(imageurl.indexOf("/"+(i+1)+"-13")>=0){
+							qa.setTitleimg(imageurl);
+							urlss.remove(imageurl);
+							break;
+						}
+					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
 
 				if (bankId != null) {
 					///// 共同题干的问题
 					qb.setBankId(bankId);
-					qb.setAnalysis(checkNull(9, row));
+					qb.setAnalysis(checkNull(14, row));
 					qb.setNumberNo(n + 1);
 
 					questionBankDao.insertQuestionUnit(qb);
 					n++;
 				} else {
 					/////// 单纯的单选或者多选的问题
-					qb.setAnalysis(checkNull(9, row));
+					qb.setAnalysis(checkNull(14, row));
 					qb.setNumberNo(n + 1);
 					questionBankDao.insertQuestionBank(qb);
 					n++;
