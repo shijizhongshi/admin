@@ -1,17 +1,16 @@
 package com.ola.qh.service.imp;
 
-import com.ola.qh.entity.CourseLiveCheck;
+import com.ola.qh.entity.ExportExcel;
+import com.ola.qh.entity.InputExportExcel;
 import com.ola.qh.service.ExportExcelBase;
 import com.ola.qh.util.ExportExcelEntity;
 
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
 
 public class PaperMgrExcel extends ExportExcelBase{
@@ -20,62 +19,28 @@ public class PaperMgrExcel extends ExportExcelBase{
 	 * @Title: exportExcel @Description: 导出Excel @param param @return 参数 @return
 	 * void @throws
 	 */
-	public void exportExcel(List<CourseLiveCheck> courseLiveList,HttpServletRequest request, HttpServletResponse response, JSONArray jarr) throws Exception {
+	public void exportExcel(InputExportExcel inputExportExcel,int types,
+			HttpServletRequest request, HttpServletResponse response, JSONArray jarr) throws Exception {
 		OutputStream os = null;
 		try {
  
-			// 构建sheet名
-			String sheetName = "直播验证数据";
+			ExportExcel export=new ExportExcel();
+			
+			// 构建sheet表名
+			String sheetName = export.sheetName(types);
  
 			// 构建标题
-			String sheetTitle = "直播验证数据";
+			String sheetTitle = export.sheetTitle(types);
  
 			// 构建列名
-			ArrayList<String> sheetFieldsName = new ArrayList<String>();
-			sheetFieldsName.add("手机号");
-			sheetFieldsName.add("用户属性");
-			sheetFieldsName.add("校验码");
-			sheetFieldsName.add("专业名称");
-			sheetFieldsName.add("房间号");
-			sheetFieldsName.add("最后一次操作的时间");
- 
+			ArrayList<String> sheetFieldsName = export.sheetFieldsName(types);
+			
 			// 构建数据
-			JSONArray jaDatas = new JSONArray();
-			for (CourseLiveCheck courseLiveCheck : courseLiveList) {
-				
-				ArrayList<Object> arr = new ArrayList<Object>();
-				JSONObject jo = new JSONObject();
-				arr.add(courseLiveCheck.getMobile());
-				if(courseLiveCheck.getIsRegister()==1){
-					arr.add("注册用户");
-				}else if(courseLiveCheck.getIsRegister()==0){
-					arr.add("游客用户");
-				}
-				arr.add(courseLiveCheck.getToken());
-				arr.add(courseLiveCheck.getCourseTypeSubclassName());
-				arr.add(courseLiveCheck.getRoomId());
-				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				
-				if(courseLiveCheck.getUpdatetime()!=null){
-					arr.add(sf.format(courseLiveCheck.getUpdatetime()));
-				}else{
-					arr.add(sf.format(courseLiveCheck.getAddtime()));
-				}
-				jo.put("data", arr);
-				jaDatas.add(jo);
-			}
+			JSONArray jaDatas = export.jaDatas(types, inputExportExcel);
 			
-				
-			
- 
 			// 设置列宽
-			ArrayList<Integer> sheetColWidth = new ArrayList<Integer>();
-			sheetColWidth.add(0, 5000);
-			sheetColWidth.add(1, 5000);
-			sheetColWidth.add(2, 5000);
-			sheetColWidth.add(3, 14000);
-			sheetColWidth.add(4, 5000);
-			sheetColWidth.add(5, 8000);
+			ArrayList<Integer> sheetColWidth = export.sheetColWidth(types);
+			
  
 			// title的高度
 			int sheetTitleHeight = 500;

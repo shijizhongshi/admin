@@ -154,7 +154,9 @@
 	<if test="status!=null and status!=''">
 	and status = #{status}
 	</if>
+	<if test="pageSize!=0">
 	limit #{pageNo},#{pageSize}
+	</if>
 	</select>
 	
 	<select id="questionBankListCount" resultType="int">

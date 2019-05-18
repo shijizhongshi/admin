@@ -49,7 +49,6 @@ import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IStoreService;
-import com.ola.qh.util.FileStorageException;
 import com.ola.qh.util.Json;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
@@ -492,7 +491,7 @@ public class QuestionBankService implements IQuestionBankService {
 			String status, int page) {
 		Results<List<QuestionBank>> results = new Results<>();
 
-		Integer pageSize = 1000;
+		Integer pageSize = Patterns.pageSize;
 		Integer pageNo = (page - 1) * pageSize;
 		// 查询集合 展示
 		List<QuestionBank> list = questionBankDao.questionBankList(realname, courseTypeSubclassName, status, pageNo,

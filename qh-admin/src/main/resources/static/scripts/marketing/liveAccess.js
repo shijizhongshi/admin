@@ -47,4 +47,11 @@ app.controller("liveAccessController", function($scope, $http) {
 			$scope.selected = null;
 		}
 	}
+	var finStatementExcelExport=function(){
+		window.location.href = "/api/liveAccess?notToEnter="+$scope.notToEnter+"&liveId="+$scope.liveId+
+		"&pageindex="+$scope.pageindex+"&pagenum="+$scope.pagenum+"&types="+4;
+	  }
+	$scope.ExcelExport=function(){
+		finStatementExcelExport();
+	}
 });

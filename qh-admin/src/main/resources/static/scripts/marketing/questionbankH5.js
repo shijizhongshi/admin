@@ -16,7 +16,7 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	// 当前的页数
 	$scope.page = 1;
 	//一页展示多少行
-	$scope.pageSize = 1000;
+	$scope.pageSize = 20;
 	
 	//页面展示
 	$scope.loaddata = function () {
@@ -50,6 +50,16 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 	};
 	$scope.loaddata();
 	
+	$scope.realname="";
+	$scope.status="";
+	$scope.courseTypeSubclassName="";
+	var finStatementExcelExport=function(){
+		window.location.href = "/api/questionbankList?realname="+$scope.realname+"&status="+$scope.status+
+		"&courseTypeSubclassName="+$scope.courseTypeSubclassName+"&types="+2;
+	  }
+	$scope.ExcelExport=function(){
+		finStatementExcelExport();
+	}
 	//选中单行
 	$scope.checkQuestionbank = function(questionbank) {
 		$scope.selected = questionbank;

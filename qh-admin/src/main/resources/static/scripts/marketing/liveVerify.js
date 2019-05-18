@@ -56,9 +56,8 @@ app.controller("liveVerifyController", function($scope, $http) {
 	$scope.roomId="";
 	$scope.courseTypeSubclassName="";
 	var finStatementExcelExport=function(){
-	    window.location.href = "/api/excel/exportTest?pageNo="+$scope.pageNo+"&pageSize="+0+
-	    "&fromdate="+changeDate($scope.fromdate)+"&todate="+changeDate($scope.todate)+"&mobile="+
-	    $scope.mobile+"&courseTypeSubclassName="+$scope.courseTypeSubclassName+"&roomId="+$scope.roomId;
+		window.location.href = "/api/listLiveCheck?fromdate="+$scope.fromdate+"&todate="+$scope.todate+"&mobile="+$scope.mobile
+	    +"&roomId="+$scope.roomId+"&courseTypeSubclassName="+$scope.courseTypeSubclassName+"&types="+1;
 	  }
 	$scope.ExcelExport=function(){
 		finStatementExcelExport();
