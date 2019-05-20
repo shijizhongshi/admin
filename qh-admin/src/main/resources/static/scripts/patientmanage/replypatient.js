@@ -14,22 +14,9 @@ app.controller("replyPatientController", function($scope, $http){
 		}
 	   $scope.replypatient();
 	   
-	   $scope.checkpatient=function(rp){
-			
-			 if($scope.selected!=rp){
-					$scope.selected=rp;
-			 		$scope.id=p.id;
-			 		
-			 		
-			 }else{
-						$scope.selected=null;
-						$scope.id=null;
-					}
-		}
-		
-	   $scope.patientdelete=function(rp){
+	   $scope.patientdelete=function(){
 			if(confirm("您确定要删除这个信息吗")){
-				$http.get("/api/patient/delete",{"params": {"id":rp.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				$http.get("/api/patient/delete",{"params": {"id":$("#id").val()}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				.success(function(data){
 					if(data.status=="0"){
 						$scope.returnpatient();
