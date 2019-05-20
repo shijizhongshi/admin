@@ -5,7 +5,7 @@ app.controller("liveAccessController", function($scope, $http) {
 	// 当前的页数
 	$scope.pageindex = 1;
 	// 一页展示多少行
-	$scope.pagenum = 1000;
+	$scope.pagenum = 20;
 
 	// 页面展示
 	$scope.loaddata = function() {
@@ -49,7 +49,7 @@ app.controller("liveAccessController", function($scope, $http) {
 	}
 	var finStatementExcelExport=function(){
 		window.location.href = "/api/liveAccess?notToEnter="+$scope.notToEnter+"&liveId="+$scope.liveId+
-		"&pageindex="+$scope.pageindex+"&pagenum="+$scope.pagenum+"&types="+4;
+		"&pagenum="+$scope.pagenum+"&types="+4+"&total="+$scope.total;
 	  }
 	$scope.ExcelExport=function(){
 		finStatementExcelExport();
