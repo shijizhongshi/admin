@@ -147,9 +147,8 @@
 	<result column="starttime" property="starttime"/>
 	
 	<result column="isopen" property="isopen"/>
-
-	
 	</resultMap>
+	
 	<select id="selectLiveList" resultMap="liveMap">
 	select * from course_line_show where 1=1
 	<if test="courseTypeName!=null and courseTypeName!='' ">

@@ -34,10 +34,12 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ola.qh.dao.CourseLineWhiteDao;
+import com.ola.qh.dao.CourseNofreeDao;
 import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.dao.QuestionBankDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.CourseChapter;
+import com.ola.qh.entity.CourseLineShow;
 import com.ola.qh.entity.CourseLineWhite;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.LiveAccess;
@@ -69,8 +71,8 @@ public class QuestionBankService implements IQuestionBankService {
 	private CourseSubclassDao courseSubclassDao;
 	@Autowired
 	private IStoreService storeService;
-	
-	
+	@Autowired
+	private CourseNofreeDao courseNofreeDao;
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -79,22 +81,22 @@ public class QuestionBankService implements IQuestionBankService {
 		Workbook wb = WorkbookFactory.create(file.getInputStream());
 
 		Sheet sheet = wb.getSheetAt(0);
-		
-	      //判断用07还是03的方法获取图片  
-		String filename=file.getOriginalFilename();
-		Map<String, PictureData>  maplist=new HashMap<>();  
-		if(filename.contains(".xls")){
-			maplist=getPictures1((HSSFSheet) sheet);
-		}else if(filename.contains(".xlsx")){
-			maplist=getPictures2((XSSFSheet) sheet);
+
+		// 判断用07还是03的方法获取图片
+		String filename = file.getOriginalFilename();
+		Map<String, PictureData> maplist = new HashMap<>();
+		if (filename.contains(".xls")) {
+			maplist = getPictures1((HSSFSheet) sheet);
+		} else if (filename.contains(".xlsx")) {
+			maplist = getPictures2((XSSFSheet) sheet);
 		}
-		List<String> urlss=new ArrayList<String>();
-        try {
-			urlss=printImg(maplist);
+		List<String> urlss = new ArrayList<String>();
+		try {
+			urlss = printImg(maplist);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
+		}
 
 		int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 		Iterator<Row> rowIterator = sheet.rowIterator();
@@ -116,9 +118,9 @@ public class QuestionBankService implements IQuestionBankService {
 				qb.setTitle(checkNull(1, row));
 				qb.setTypes(checkNull(0, row));
 				qb.setSubId(subId);
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>0){
+				if (urlss != null) {
+					for (String imageurl : urlss) {
+						if (imageurl.indexOf("/" + (i + 1) + "-2") > 0) {
 							qb.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 						}
@@ -139,9 +141,9 @@ public class QuestionBankService implements IQuestionBankService {
 				QuestionAnswer qa = new QuestionAnswer();
 				qa.setBankUnitId(unitId);
 				qa.setAddtime(new Date());
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>=0){
+				if (urlss != null) {
+					for (String imageurl : urlss) {
+						if (imageurl.indexOf("/" + (i + 1) + "-2") >= 0) {
 							qb.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -159,9 +161,9 @@ public class QuestionBankService implements IQuestionBankService {
 					}
 					qa.setOrders(0);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////A对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-5")>=0){
+					for (String imageurl : urlss) {
+						/////// A对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-5") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -169,7 +171,7 @@ public class QuestionBankService implements IQuestionBankService {
 					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(6, row)!= null) {
+				if (checkNull(6, row) != null) {
 					qa.setAnswers(checkNull(6, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
@@ -180,9 +182,9 @@ public class QuestionBankService implements IQuestionBankService {
 					}
 					qa.setOrders(1);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////B对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-7")>=0){
+					for (String imageurl : urlss) {
+						/////// B对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-7") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -201,9 +203,9 @@ public class QuestionBankService implements IQuestionBankService {
 					}
 					qa.setOrders(2);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////C对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-9")>=0){
+					for (String imageurl : urlss) {
+						/////// C对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-9") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -222,9 +224,9 @@ public class QuestionBankService implements IQuestionBankService {
 					}
 					qa.setOrders(3);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////D对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-11")>=0){
+					for (String imageurl : urlss) {
+						/////// D对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-11") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -243,9 +245,9 @@ public class QuestionBankService implements IQuestionBankService {
 					}
 					qa.setOrders(4);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////E对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-13")>=0){
+					for (String imageurl : urlss) {
+						/////// E对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-13") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -278,7 +280,6 @@ public class QuestionBankService implements IQuestionBankService {
 		return result;
 
 	}
-	
 
 	public static String checkNull(int i, Row row) {
 
@@ -293,79 +294,82 @@ public class QuestionBankService implements IQuestionBankService {
 		return null;
 	}
 
-	 /**
-	   * 获取图片和位置 (xls)
-	   * @param sheet
-	   * @return
-	   * @throws IOException
-	   */
-	  public static Map<String, PictureData> getPictures1 (HSSFSheet sheet) throws IOException {
-		    Map<String, PictureData> map = new HashMap<String, PictureData>();
-		    List<HSSFShape> list = sheet.getDrawingPatriarch().getChildren();
-		    for (HSSFShape shape : list) {
-		        if (shape instanceof HSSFPicture) {
-		            HSSFPicture picture = (HSSFPicture) shape;
-		            HSSFClientAnchor cAnchor = (HSSFClientAnchor) picture.getAnchor();
-		            PictureData pdata = picture.getPictureData();
-		            String key = cAnchor.getRow1() + "-" + cAnchor.getCol1(); // 行号-列号
-		            map.put(key, pdata);
-		        }
-		    }
-		    return map;
+	/**
+	 * 获取图片和位置 (xls)
+	 * 
+	 * @param sheet
+	 * @return
+	 * @throws IOException
+	 */
+	public static Map<String, PictureData> getPictures1(HSSFSheet sheet) throws IOException {
+		Map<String, PictureData> map = new HashMap<String, PictureData>();
+		List<HSSFShape> list = sheet.getDrawingPatriarch().getChildren();
+		for (HSSFShape shape : list) {
+			if (shape instanceof HSSFPicture) {
+				HSSFPicture picture = (HSSFPicture) shape;
+				HSSFClientAnchor cAnchor = (HSSFClientAnchor) picture.getAnchor();
+				PictureData pdata = picture.getPictureData();
+				String key = cAnchor.getRow1() + "-" + cAnchor.getCol1(); // 行号-列号
+				map.put(key, pdata);
+			}
 		}
-	   
-	  /**
-	   * 获取图片和位置 (xlsx)
-	   * @param sheet
-	   * @return
-	   * @throws IOException
-	   */
-	  public static Map<String, PictureData> getPictures2 (XSSFSheet sheet) throws IOException {
-	      Map<String, PictureData> map = new HashMap<String, PictureData>();
-	      List<POIXMLDocumentPart> list = sheet.getRelations();
-	      for (POIXMLDocumentPart part : list) {
-	          if (part instanceof XSSFDrawing) {
-	              XSSFDrawing drawing = (XSSFDrawing) part;
-	              List<XSSFShape> shapes = drawing.getShapes();
-	              for (XSSFShape shape : shapes) {
-	                  XSSFPicture picture = (XSSFPicture) shape;
-	                  XSSFClientAnchor anchor = picture.getPreferredSize();
-	                  CTMarker marker = anchor.getFrom();
-	                  String key = marker.getRow() + "-" + marker.getCol();
-	                  map.put(key, picture.getPictureData());
-	              }
-	          }
-	      }
-	      return map;
-	  }
-	  //图片写出
-	  public List<String> printImg(Map<String, PictureData> sheetList) throws Exception{  
-        
-	        //for (Map<String, PictureData> map : sheetList) {  
-	            Object key[] = sheetList.keySet().toArray();  
-	            List<String> list=new ArrayList<String>();
-	            for (int i = 0; i < sheetList.size(); i++) {  
-	                // 获取图片流  
-	                PictureData pic = sheetList.get(key[i]);  
-	                // 获取图片索引  
-	                String picName = key[i].toString();  
-	                // 获取图片格式  
-	                String ext = pic.suggestFileExtension();  
-	                  
-	                byte[] data = pic.getData();  
-	                 
-	                //图片保存路径 
-	                String tupianurl=storeService.storeUrl(picName + "." + ext, data);
-	                list.add(tupianurl);
+		return map;
+	}
+
+	/**
+	 * 获取图片和位置 (xlsx)
+	 * 
+	 * @param sheet
+	 * @return
+	 * @throws IOException
+	 */
+	public static Map<String, PictureData> getPictures2(XSSFSheet sheet) throws IOException {
+		Map<String, PictureData> map = new HashMap<String, PictureData>();
+		List<POIXMLDocumentPart> list = sheet.getRelations();
+		for (POIXMLDocumentPart part : list) {
+			if (part instanceof XSSFDrawing) {
+				XSSFDrawing drawing = (XSSFDrawing) part;
+				List<XSSFShape> shapes = drawing.getShapes();
+				for (XSSFShape shape : shapes) {
+					XSSFPicture picture = (XSSFPicture) shape;
+					XSSFClientAnchor anchor = picture.getPreferredSize();
+					CTMarker marker = anchor.getFrom();
+					String key = marker.getRow() + "-" + marker.getCol();
+					map.put(key, picture.getPictureData());
+				}
+			}
+		}
+		return map;
+	}
+
+	// 图片写出
+	public List<String> printImg(Map<String, PictureData> sheetList) throws Exception {
+
+		// for (Map<String, PictureData> map : sheetList) {
+		Object key[] = sheetList.keySet().toArray();
+		List<String> list = new ArrayList<String>();
+		for (int i = 0; i < sheetList.size(); i++) {
+			// 获取图片流
+			PictureData pic = sheetList.get(key[i]);
+			// 获取图片索引
+			String picName = key[i].toString();
+			// 获取图片格式
+			String ext = pic.suggestFileExtension();
+
+			byte[] data = pic.getData();
+
+			// 图片保存路径
+			String tupianurl = storeService.storeUrl(picName + "." + ext, data);
+			list.add(tupianurl);
 //	                FileOutputStream out = new FileOutputStream("D:\\img\\pic" + );  
 //	                out.write(data);  
 //	                out.close();  
 
-	            } 
-	            return list;
-	       // }  
-	          
-	    }  
+		}
+		return list;
+		// }
+
+	}
 
 	@Transactional
 	@Override
@@ -558,12 +562,14 @@ public class QuestionBankService implements IQuestionBankService {
 			// json转实体类
 			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
 			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
-
 			// 如果选定查询未进入直播间用户 返回的是白名单中的用户
 			if ("1".equals(notToEnter)) {
 				List<UserEnterLeaveActions> userList = new ArrayList<>();
 				// 获取本直播id的白名单全部数据
-				List<CourseLineWhite> whithList = courseLineWhiteDao.selectAllByLiveId(liveId);
+				// 先根据live_id查询course_line_show表
+				CourseLineShow courseLineShow = courseNofreeDao.singleLive(liveId);
+				// 根据course_line_show表的ID查询白名单集合
+				List<CourseLineWhite> whithList = courseLineWhiteDao.selectAllByLiveId(courseLineShow.getId());
 				// 迭代器 匹配两个集合中的内容 相同就remove掉
 				for (UserEnterLeaveActions userEnterLeaveActions : list) {
 					for (Iterator<CourseLineWhite> iterator = whithList.iterator(); iterator.hasNext();) {
@@ -572,12 +578,6 @@ public class QuestionBankService implements IQuestionBankService {
 						}
 					}
 				}
-				/*
-				 * for (UserEnterLeaveActions userEnterLeaveActions : list) { for (int i = 0; i
-				 * < whithList.size(); i++) { if
-				 * (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile()))
-				 * { whithList.remove(i); } } }
-				 */
 				// 赋值返回
 				UserEnterLeaveActions userEnterLeaveActions = null;
 				for (int i = 0; i < whithList.size(); i++) {
