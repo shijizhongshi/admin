@@ -215,8 +215,8 @@ public class ExportExcel {
 			sheetColWidth.add(0, 5000);
 			sheetColWidth.add(1, 5000);
 			sheetColWidth.add(2, 5000);
-			sheetColWidth.add(3, 14000);
-			sheetColWidth.add(4, 5000);
+			sheetColWidth.add(3, 10000);
+			sheetColWidth.add(4, 14000);
 			sheetColWidth.add(5, 9000);
 		}else if(types==2){
 			sheetColWidth.add(0, 5000);
