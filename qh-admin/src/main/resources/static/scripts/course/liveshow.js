@@ -41,17 +41,6 @@ app.controller("liveShowController", function($scope, $http) {
 	$scope.typesList();
 	$scope.typeBases();// ////保证已经来有默认的参数
 	
-	//查询全部老师姓名  下拉框数据
-	$scope.teacherName = function () {
-		$http.get("/api/courselive/teacherList",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName}},{'Content-Type' : 'application/json;charset=UTF-8'})
-		.success(function (result) {
-			if (result.status == "0") {
-				$scope.teacherList = result.data;
-			}
-		})
-	}
-	
-	
 	// 总条数
 	$scope.total = 0;
 	// 当前的页数
@@ -94,7 +83,8 @@ app.controller("liveShowController", function($scope, $http) {
 
 	$scope.live = null;
 	$scope.liveId = null;
-
+	
+	//上传课程图片
 	$scope.uploadmainimage = function(file){
 		if(!file.files || file.files.length < 1) return;
 	    var fd = new FormData();
@@ -108,11 +98,30 @@ app.controller("liveShowController", function($scope, $http) {
 	    	$scope.imgUrl=data.data;
 		})
 	};
+	//上传老师头像
+	$scope.uploadmainheadimage = function(file){
+		if(!file.files || file.files.length < 1) return;
+	    var fd = new FormData();
+	    fd.append("file", file.files[0]);
+		$http.post("/api/upload/single",fd,{
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    })
+	    .success(function(data){
+	    	$scope.headImgUrl=data.data;
+		})
+	};
 	$scope.addLive = function() {
+		if ($scope.live.starttime == null) {
+			alert("时间格式不正确~");
+			return;
+		}
 		if ($scope.list != null) {
 			$scope.live.teacherId = $scope.list.id;
 		}
 		$scope.live.imgUrl = $scope.imgUrl;
+		$scope.live.headImgUrl = $scope.headImgUrl;
 		$scope.live.courseTypeName = $scope.courseTypeName;
 		$scope.live.courseTypeSubclassName = $scope.courseTypeSubclassName;
 		if($scope.liveId==null){
@@ -158,14 +167,12 @@ app.controller("liveShowController", function($scope, $http) {
 		$scope.imgUrl=null;
 		$scope.live =null;
 		$scope.liveId = null;
-		$scope.teacherName();
 		document.getElementById('add').style.display="block"; 
 	}
 	$scope.update=function(){
 		if($scope.liveId==null){
 			alert("请先选中信息~");
 		}else{
-			$scope.teacherName();
 			document.getElementById('add').style.display="block"; 
 		}
 	}

@@ -2,6 +2,8 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class CourseLineShow {
@@ -16,7 +18,9 @@ public class CourseLineShow {
 
 	private String outLinks;
 	@NotEmpty
-	private String imgUrl;
+	private String imgUrl;//课程图片
+
+	private String headImgUrl;//主讲老师头像
 
 	private String isremmend;//// 1是推荐
 
@@ -33,13 +37,22 @@ public class CourseLineShow {
 
 	private String liveBackId;
 
-	private String teacherId;// 老师id 2019-5-7新加以下三个字段
+	private String teacherId;// 老师id 2019.5.7 新加以下三个字段
 
 	private String lecturer;// 主讲老师
 
+	@NotNull 
 	private Date starttime;// 直播开始时间
 
 	private Integer isopen;// 是否是公开课 ，0 不公开，1 公开
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
+	}
 
 	public Integer getIsopen() {
 		return isopen;
