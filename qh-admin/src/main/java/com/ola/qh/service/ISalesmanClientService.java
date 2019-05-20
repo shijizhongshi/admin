@@ -11,7 +11,7 @@ public interface ISalesmanClientService {
 	
 	public Results<String> insertClient(SalesmanClient salesmanClient);
 	
-	public Results<String> updateClient(SalesmanClient salesmanClient);
+	public Results<String> updateClient(String salesmanId,String mobile,String salesmanIdNew);
 	
 	public Results<String> deleteClient(String salesmanId,String id);
 }

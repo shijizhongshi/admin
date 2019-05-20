@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/indent/excle.js"></script>
 <script src="/scripts/marketing/liveAccess.js"></script>
 
 </style>
@@ -42,7 +41,7 @@ submenu="sidebarmenu-marketing-liveAccess">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')">
+						ng-click="ExcelExport()">
 				</div>
 			</div>
 			<div class="manage">

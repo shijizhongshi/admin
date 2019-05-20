@@ -1,6 +1,8 @@
 package com.ola.qh.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 ///////销售人员
@@ -19,6 +21,10 @@ public class Salesman {
 	
 	@NotEmpty
 	private String address;///////销售人员地址
+	
+	private String qrCode;///////二维码
+	
+	private List<SalesmanClient> client=new ArrayList<SalesmanClient>();///////二维码
 	
 	private Date addtime;
 	
@@ -78,6 +84,22 @@ public class Salesman {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+
+	public List<SalesmanClient> getClient() {
+		return client;
+	}
+
+	public void setClient(List<SalesmanClient> client) {
+		this.client = client;
 	}
 	
 	

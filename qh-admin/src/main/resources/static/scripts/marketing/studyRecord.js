@@ -68,4 +68,32 @@ app.controller("studyRecordController", function($scope, $http) {
 			$scope.selected = null;
 		}
 	}
+	
+	$scope.mobile=null;
+	$scope.videoId=null;
+	var finStatementExcelExport=function(){
+		var time = Date.parse(new Date());
+		if ($scope.date == null || $scope.date > time) {
+			alert("日期错误~");
+			return;
+		}
+		// 重置字符串 能优化吧...
+		if ($scope.mobile == null || $scope.mobile.length == 0) {
+			$scope.mobile = null;
+		}
+		if ($scope.videoId == null || $scope.videoId.length == 0) {
+			$scope.videoId = null;
+		}
+		//正则  输入长度必须为32位  只能由数字和大小写字母组成
+		var re = new RegExp(/^[0-9A-Za-z]{32}$/);
+		if ($scope.videoId != null && !re.test($scope.videoId) && "7461" != $scope.videoId.slice(-4)) {
+			alert("视频Id格式不正确");
+			return;
+		}
+		window.location.href = "/api/video?page="+$scope.page+"&numPerPage="+$scope.numPerPage+
+		"&mobile="+$scope.mobile+"&videoId="+$scope.videoId+"&date="+changeDate($scope.date)+"&types="+3;
+	  }
+	$scope.ExcelExport=function(){
+		finStatementExcelExport();
+	}
 });

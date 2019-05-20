@@ -50,6 +50,8 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改销售人员</li>
 					<li ng-click="deletesalesman()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除销售人员</li>
+					<li ng-click="showQrcode()" style="background: #F9CD33;"><span
+						class="xiangqing"></span>&nbsp;查看二维码</li>
 					<li style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" ng-click="reset()" /></li>
 				</ul>
@@ -113,11 +115,27 @@
 									ng-model="salesman.address"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
+							<span>上传销售人员照片<i class="bitian">*</i></span>
 							<div class="costs-uploadfile-div">
 									<input type="file" value="上传销售人员照片"
 										onchange="angular.element(this).scope().uploadmainimage(this)">
 									<div style="height: 130px; margin-top: 3px;">
 										<img src="{{imgUrl}}" style="height: 130px;" />
+									</div>
+								</div>
+								 <!--<div class="costs-uploadfile-div">
+									<span class="xiangqing" ng-click="ShowQrcode()">生成二维码</span>
+									<div style="height: 130px; margin-top: 3px;">
+										<img src="{{qrcode}}" style="height: 130px;" />
+									</div>
+								</div> -->
+								
+								<div class="costs-uploadfile-div" ng-show="id!=null">
+								<span>生成二维码</span>
+									<input type="file" value="shengchenger"
+										onchange="angular.element(this).scope().uploadmainimage2(this)">
+									<div style="height: 130px; margin-top: 3px;">
+										<img src="{{qrcode}}" style="height: 130px;" />
 									</div>
 								</div>
 							
@@ -129,11 +147,71 @@
 							<input name="git" type="submit"
 							value="修改" style="background: #5ED8A9;" ng-show="id!=null"
 							ng-click="salesmanupdate()"><input name="esc" type="reset"
-							value="取消" ng-click="reset()" class="esc" />
+							value="取消" ng-click="cancel()" class="esc" />
 					</div>
 					
-				</div>
+			
+				
 		</div>
+				<!--二维码-->
+			<div class="poop" id="addQrCode" style="width: auto; height: auto;left:30%;">
+			<p class="close" ng-click="cancel()" style="font-size:2.0rem;">X</p>
+				
+					<div>
+						
+						<div class="template-add">
+
+								<div class="costs-uploadfile-div">
+									<div style="height: 130px; margin-top: 3px;">
+										<img src="{{qrcode}}" style="height: 130px;" />
+									</div>
+								</div>
+						</div>
+						
+				</div>
+
+				
+			</div>
+			
+			
+			<div id="revise" class="resource" style="width: 720px;">
+			
+					<div class="select-2" style="width: 100%;">
+							<span>输入转入手机号</span> <input type="text" ng-model="mobile" />
+							<p ng-click="SalesmanList()"
+								style="position: absolute; right: 10px; top: 40px; cursor: pointer;">
+								<i class="glyphicon glyphicon-search"></i>搜索
+							</p>
+						</div>
+
+						<div class="admin-table">
+							<table>
+						<tr>
+							<th>姓名</th>
+							<th>销售人员照片</th>
+							<th>手机号码</th>
+							<th>所在地区</th>
+						</tr>
+
+						<tr ng-repeat="sln in salesmanlist" ng-click="checkedsalesmanNew(sln)"
+							ng-class="{'selected':selected1==sln}">
+							<th>{{sln.name}}</th>
+							<th><img src="{{sln.imgUrl}}"
+								style="width: 50px; height: 30px;" /></th>
+							<th>{{sln.mobile}}</th>
+							<th>{{sln.address}}</th>
+							</tr>
+					</table>
+						</div>
+						
+
+					<div class="end" style="clear: both;">
+						<input name="git" type="submit" value="转入" ng-click="inputNewSalesman()"
+							style="background: #5ED8A9;" /> <input name="esc" type="reset"
+							value="取消" ng-click="resets()" class="esc" />
+					</div>
+
+				</div>
 	</div>
 	 
 </div>

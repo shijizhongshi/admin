@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/indent/excle.js"></script>
 <script src="/scripts/marketing/questionbankH5.js"></script>
 <@b.body menu="sidebarmenu-marketing"
 submenu="sidebarmenu-marketing-questionbankH5">
@@ -50,7 +49,7 @@ submenu="sidebarmenu-marketing-questionbankH5">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')">
+						ng-click="ExcelExport()">
 				</div>
 			</div>
 			<div class="manage">

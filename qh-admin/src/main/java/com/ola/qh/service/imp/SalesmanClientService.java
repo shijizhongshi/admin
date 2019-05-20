@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.ola.qh.dao.SalesmanClientDao;
+import com.ola.qh.dao.SalesmanDao;
 import com.ola.qh.entity.SalesmanClient;
 import com.ola.qh.service.ISalesmanClientService;
 import com.ola.qh.util.KeyGen;
@@ -19,6 +20,8 @@ public class SalesmanClientService implements ISalesmanClientService{
 
 	@Autowired
 	private SalesmanClientDao salesmanClientDao;
+	@Autowired
+	private SalesmanDao salesmanDao;
 	
 	@Transactional
 	@Override
@@ -72,14 +75,22 @@ public class SalesmanClientService implements ISalesmanClientService{
 
 	@Transactional
 	@Override
-	public Results<String> updateClient(SalesmanClient salesmanClient) {
+	public Results<String> updateClient(String salesmanId,String mobile,String salesmanIdNew) {
 		
 		Results<String> results=new Results<String>();
 		try {
 			
-			
+			if(salesmanId.equals(salesmanIdNew)){
+				results.setStatus("1");
+				results.setMessage("不可对自己转入");
+				return results;
+			}
+			SalesmanClient salesmanClient=new SalesmanClient();
+			salesmanClient.setSalesmanId(salesmanId);
+			salesmanClient.setSalesmanIdNew(salesmanIdNew);
 			salesmanClient.setUpdatetime(new Date());
 			salesmanClientDao.updateClient(salesmanClient);
+			salesmanDao.deleteSalesman(salesmanClient.getSalesmanId());
 			
 			results.setStatus("0");
 			return results;

@@ -21,7 +21,10 @@
 		<if test="mobile!=null and mobile!=''">
 		and mobile=#{mobile}
 		</if>
+		<if test="pageSize!=0">
 		limit #{pageNo},#{pageSize}
+		</if>
+		
 	</select>
 	
 	<select id="ClientCount" resultType="int">
@@ -51,10 +54,10 @@
 		<if test="mobile!=null and mobile!=''">
 			mobile=#{mobile],
 		</if>
-		<if test="salesmanId!=null and salesmanId!=''">
-			salesman_id=#{salesmanId},
+		<if test="salesmanIdNew!=null and salesmanIdNew!=''">
+			salesman_id=#{salesmanIdNew},
 		</if>
-		updatetime=#{updatetime}
+		updatetime=#{updatetime} where salesman_id=#{salesmanId}
 	</update>
 	
 	<delete id="deleteClient">
