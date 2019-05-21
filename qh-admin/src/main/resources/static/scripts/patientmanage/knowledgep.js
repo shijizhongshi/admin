@@ -131,6 +131,7 @@ app.controller("knowledgepController", function($scope, $http){
 					//$scope.adminSubMenusName = [];
 					//$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
+					location.reload();
 					$scope.KnowledgepList();
 				}
 			})
