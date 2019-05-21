@@ -167,15 +167,13 @@ public class ExportExcel {
 			
 			for (PlayLog playLog : inputExportExcel.getPlayLog()) {
 				
-				NumberFormat nf = NumberFormat.getPercentInstance();
-				nf.setMinimumFractionDigits(0); //保留到小数点后几位
 				ArrayList<Object> arr = new ArrayList<Object>();
 				JSONObject jo = new JSONObject();
 				arr.add(playLog.getUserName());
 				arr.add(playLog.getSectionName());
 				arr.add(playLog.getCourseTypeSubclassName());
-				arr.add(nf.format(playLog.getPlay_duration()/60)+"分钟");
-				arr.add(nf.format(playLog.getVideo_duration()/60)+"分钟");
+				arr.add(playLog.getPlay_duration()/60+"分钟");
+				arr.add(playLog.getVideo_duration()/60+"分钟");
 				jo.put("data", arr);
 				jaDatas.add(jo);
 			}
@@ -183,8 +181,6 @@ public class ExportExcel {
 			
 			for (UserEnterLeaveActions userEnterLeaveActions : inputExportExcel.getUserEnterLeaveActions()) {
 				
-				NumberFormat nf = NumberFormat.getPercentInstance();
-				nf.setMinimumFractionDigits(0); //保留到小数点后几位
 				ArrayList<Object> arr = new ArrayList<Object>();
 				JSONObject jo = new JSONObject();
 				arr.add(userEnterLeaveActions.getViewerName());
@@ -192,7 +188,7 @@ public class ExportExcel {
 				arr.add(userEnterLeaveActions.getEnterTime());
 				arr.add(userEnterLeaveActions.getLeaveTime());
 				if(userEnterLeaveActions.getWatchTime()!=null){
-					arr.add(nf.format(userEnterLeaveActions.getWatchTime()/60)+"分钟");
+					arr.add(userEnterLeaveActions.getWatchTime()/60+"分钟");
 				}else{
 					arr.add("未观看直播");
 				}
@@ -219,8 +215,8 @@ public class ExportExcel {
 			sheetColWidth.add(0, 5000);
 			sheetColWidth.add(1, 5000);
 			sheetColWidth.add(2, 5000);
-			sheetColWidth.add(3, 14000);
-			sheetColWidth.add(4, 5000);
+			sheetColWidth.add(3, 10000);
+			sheetColWidth.add(4, 14000);
 			sheetColWidth.add(5, 9000);
 		}else if(types==2){
 			sheetColWidth.add(0, 5000);
@@ -232,17 +228,17 @@ public class ExportExcel {
 			sheetColWidth.add(6, 5000);
 			sheetColWidth.add(7, 9000);
 		}else if(types==3){
-			sheetColWidth.add(0, 5000);
-			sheetColWidth.add(1, 5000);
+			sheetColWidth.add(0, 10000);
+			sheetColWidth.add(1, 15000);
 			sheetColWidth.add(2, 5000);
 			sheetColWidth.add(3, 5000);
 			sheetColWidth.add(4, 5000);
 			
 		}else if(types==4){
-			sheetColWidth.add(0, 5000);
+			sheetColWidth.add(0, 7000);
 			sheetColWidth.add(1, 5000);
-			sheetColWidth.add(2, 5000);
-			sheetColWidth.add(3, 5000);
+			sheetColWidth.add(2, 10000);
+			sheetColWidth.add(3, 10000);
 			sheetColWidth.add(4, 5000);
 			sheetColWidth.add(5, 5000);
 		}

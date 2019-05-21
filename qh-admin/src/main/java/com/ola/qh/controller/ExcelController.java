@@ -1,5 +1,6 @@
 package com.ola.qh.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,18 +79,33 @@ public class ExcelController {
 	public void test(@RequestParam(value = "videoId", required = false) String videoId,
 			@RequestParam(value = "mobile", required = false) String mobile,
 			@RequestParam(value = "date", required = true) String date,
-			@RequestParam(value = "numPerPage", required = false) String numPerPage,
-			@RequestParam(value = "page", required = false) String page,
+			@RequestParam(value = "numPerPage", required = false) int numPerPage,
+			@RequestParam(value = "total", required = true) int total,
 			@RequestParam(value = "types", required = true) int types,HttpServletRequest  request,HttpServletResponse response) {
-		
+		if(videoId.equals("null")){
+			videoId=null;
+		}
+		if(mobile.equals("null")){
+			mobile=null;
+		}
 		ExportTest exportTest=new ExportTest();
 		InputExportExcel inputExportExcel=new InputExportExcel();
-		Results<List<PlayLog>> results=questionBankService.ccVideo(videoId, mobile, date, numPerPage, page);
-		List<PlayLog> playLog=results.getData();
-		
-		inputExportExcel.setPlayLog(playLog);
-		inputExportExcel.setTypes(types);
-
+		if(total>0){
+			int pageindex=total/numPerPage;
+			Results<List<PlayLog>> results =new Results<List<PlayLog>>();
+			List<PlayLog> playLog=new ArrayList<PlayLog>();
+			for (int i = 0; i < pageindex+1; i++) {
+				
+				List<PlayLog> PlayLogAdd=new ArrayList<PlayLog>();
+				String pageindexs=String.valueOf(i+1);
+				String numPerPages=String.valueOf(numPerPage);
+				results =questionBankService.ccVideo(videoId, mobile, date, numPerPages, pageindexs);
+				PlayLogAdd=results.getData();
+				playLog.addAll(PlayLogAdd);
+			}
+			inputExportExcel.setPlayLog(playLog);
+			inputExportExcel.setTypes(types);
+		}
 		exportTest.exportTest(inputExportExcel, request, response);
 	}
 /////////////////////////直播访问记录
@@ -97,18 +113,30 @@ public class ExcelController {
 	public void liveAccess(
 			@RequestParam(value = "notToEnter", required = false) String notToEnter,
 			@RequestParam(value = "liveId", required = true) String liveId,
-			@RequestParam(value = "pageindex") String pageindex, @RequestParam(value = "pagenum") String pagenum,
-			@RequestParam(value = "types", required = true) int types,HttpServletRequest  request,HttpServletResponse response) {
+			@RequestParam(value = "pagenum") int pagenum,
+			@RequestParam(value = "types", required = true) int types,
+			@RequestParam(value = "total", required = true) int total,HttpServletRequest  request,HttpServletResponse response) {
 		
 		ExportTest exportTest=new ExportTest();
 		InputExportExcel inputExportExcel=new InputExportExcel();
-		Results<List<UserEnterLeaveActions>> results =questionBankService.liveAccess(notToEnter, liveId, pagenum, pageindex);
-
-		List<UserEnterLeaveActions> userEnterLeaveActions=results.getData();
 		
-		inputExportExcel.setUserEnterLeaveActions(userEnterLeaveActions);
-		inputExportExcel.setTypes(types);
-
+		if(total>0){
+			int pageindex=total/pagenum;
+			Results<List<UserEnterLeaveActions>> results =new Results<List<UserEnterLeaveActions>>();
+			List<UserEnterLeaveActions> userEnterLeaveActions=new ArrayList<UserEnterLeaveActions>();
+			for (int i = 0; i < pageindex+1; i++) {
+				
+				List<UserEnterLeaveActions> userEnterLeaveActionsAdd=new ArrayList<UserEnterLeaveActions>();
+				String pageindexs=String.valueOf(i+1);
+				String pagenums=String.valueOf(pagenum);
+				results =questionBankService.liveAccess(notToEnter, liveId, pagenums, pageindexs);
+				userEnterLeaveActionsAdd=results.getData();
+				userEnterLeaveActions.addAll(userEnterLeaveActionsAdd);
+			}
+			inputExportExcel.setUserEnterLeaveActions(userEnterLeaveActions);
+			inputExportExcel.setTypes(types);
+		}
+		
 		exportTest.exportTest(inputExportExcel, request, response);
 	}
 }
