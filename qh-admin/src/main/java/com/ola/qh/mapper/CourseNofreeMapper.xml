@@ -210,7 +210,7 @@
 	<if test="liveBackId!=null and liveBackId!='' ">
 	live_back_id=#{liveBackId},
 	</if>
-	<if test="teacherId!=null and teacherId!=''">
+	<if test="teacherId!=null and teacherId !=''">
 	teacher_id=#{teacherId},
 	</if>
 	<if test="lecturer!=null and lecturer!=''">

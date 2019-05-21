@@ -45,7 +45,7 @@ public class CourseLiveShowController {
 	public Results<String> updateLive(@RequestBody CourseLineShow cl) {
 		Results<String> result = new Results<String>();
 		if (cl.getId() != null && !"".equals(cl.getId())) {
-			//根据teacherId查询老师姓名
+			//修改
 			int num = courseNofreeService.updateLive(cl);
 			if (num < 0) {
 				result.setStatus("1");
