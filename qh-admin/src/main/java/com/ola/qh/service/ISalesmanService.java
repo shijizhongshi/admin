@@ -13,5 +13,5 @@ public interface ISalesmanService {
 	
 	public Results<String> updateSalesman(Salesman salesman);
 	
-	public Results<String> deleteSalesman(String id);
+	public Results<String> deleteSalesman(String id,int types);
 }

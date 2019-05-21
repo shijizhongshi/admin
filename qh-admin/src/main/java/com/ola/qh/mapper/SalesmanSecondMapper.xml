@@ -2,8 +2,8 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ola.qh.dao.SalesmanClientDao">
-	<resultMap type="com.ola.qh.entity.SalesmanClient" id="SalesmanClientMap">
+<mapper namespace="com.ola.qh.dao.SalesmanSecondDao">
+	<resultMap type="com.ola.qh.entity.SalesmanSecond" id="SalesmanSecondMap">
 		<result column="id" property="id" />
 		<result column="mobile" property="mobile" />
 		<result column="salesman_id" property="salesmanId" />
@@ -11,7 +11,7 @@
 		<result column="updatetime" property="updatetime" />
 	</resultMap>
 	
-	<select id="ClientList" resultMap="SalesmanClientMap">
+	<select id="SecondList" resultMap="SalesmanSecondMap">
 		select id,mobile,salesman_id,addtime
 		from salesman_second 
 		where 1=1
@@ -27,7 +27,7 @@
 		
 	</select>
 	
-	<select id="ClientCount" resultType="int">
+	<select id="SecondCount" resultType="int">
 		select count(id)
 		from salesman_second 
 		where 1=1
@@ -39,17 +39,17 @@
 		</if>
 	</select>
 	
-	<select id="existClient" resultType="com.ola.qh.entity.SalesmanClient">
+	<select id="existSecond" resultType="com.ola.qh.entity.SalesmanSecond">
 		select *
 		from salesman_second 
 		where mobile=#{mobile}
 	</select>
 	
-	<insert id="insertClient" parameterType="com.ola.qh.entity.SalesmanClient">
+	<insert id="insertSecond" parameterType="com.ola.qh.entity.SalesmanSecond">
 		insert into salesman_second(id,mobile,salesman_id,addtime) values(#{id},#{mobile},#{salesmanId},#{addtime})
 	</insert>
 	
-	<update id="updateClient" parameterType="com.ola.qh.entity.SalesmanClient">
+	<update id="updateSecond" parameterType="com.ola.qh.entity.SalesmanSecond">
 		update salesman_second set 
 		<if test="mobile!=null and mobile!=''">
 			mobile=#{mobile],
@@ -60,7 +60,7 @@
 		updatetime=#{updatetime} where salesman_id=#{salesmanId}
 	</update>
 	
-	<delete id="deleteClient">
+	<delete id="deleteSecond">
 		delete from salesman_second where 1=1
 		
 		<if test="id!=null and id!=''">

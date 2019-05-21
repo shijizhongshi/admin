@@ -8,30 +8,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.ola.qh.dao.SalesmanClientDao;
 import com.ola.qh.dao.SalesmanDao;
-import com.ola.qh.entity.SalesmanClient;
-import com.ola.qh.service.ISalesmanClientService;
+import com.ola.qh.dao.SalesmanSecondDao;
+import com.ola.qh.entity.SalesmanSecond;
+import com.ola.qh.service.ISalesmanSecondService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
 @Service
-public class SalesmanClientService implements ISalesmanClientService{
+public class SalesmanSecondService implements ISalesmanSecondService{
 
 	@Autowired
-	private SalesmanClientDao salesmanClientDao;
+	private SalesmanSecondDao salesmanSecondDao;
 	@Autowired
 	private SalesmanDao salesmanDao;
 	
 	@Transactional
 	@Override
-	public Results<List<SalesmanClient>> ClientList(String salesmanId,String mobile,int pageNo,int pageSize) {
+	public Results<List<SalesmanSecond>> SecondList(String salesmanId,String mobile,int pageNo,int pageSize) {
 
-		Results<List<SalesmanClient>> results=new Results<List<SalesmanClient>>();
+		Results<List<SalesmanSecond>> results=new Results<List<SalesmanSecond>>();
 		try {
 			
-			List<SalesmanClient> list=salesmanClientDao.ClientList(salesmanId,mobile, pageNo, pageSize);
-			int count=salesmanClientDao.ClientCount(salesmanId,mobile);
+			List<SalesmanSecond> list=salesmanSecondDao.SecondList(salesmanId,mobile, pageNo, pageSize);
+			int count=salesmanSecondDao.SecondCount(salesmanId,mobile);
 			
 			results.setData(list);
 			results.setCount(count);
@@ -46,12 +46,12 @@ public class SalesmanClientService implements ISalesmanClientService{
 
 	@Transactional
 	@Override
-	public Results<String> insertClient(SalesmanClient salesmanClient) {
+	public Results<String> insertSecond(SalesmanSecond salesmanSecond) {
 		
 		Results<String> results=new Results<String>();
 		try {
 			
-			SalesmanClient exist=salesmanClientDao.existClient(salesmanClient.getMobile());
+			SalesmanSecond exist=salesmanSecondDao.existSecond(salesmanSecond.getMobile());
 			
 			if(exist!=null){
 				
@@ -60,9 +60,9 @@ public class SalesmanClientService implements ISalesmanClientService{
 				return results;
 			}
 			
-			salesmanClient.setAddtime(new Date());
-			salesmanClient.setId(KeyGen.uuid());
-			salesmanClientDao.insertClient(salesmanClient);
+			salesmanSecond.setAddtime(new Date());
+			salesmanSecond.setId(KeyGen.uuid());
+			salesmanSecondDao.insertSecond(salesmanSecond);
 			
 			results.setStatus("0");
 			return results;
@@ -75,7 +75,7 @@ public class SalesmanClientService implements ISalesmanClientService{
 
 	@Transactional
 	@Override
-	public Results<String> updateClient(String salesmanId,String mobile,String salesmanIdNew) {
+	public Results<String> updateSecond(String salesmanId,String mobile,String salesmanIdNew) {
 		
 		Results<String> results=new Results<String>();
 		try {
@@ -85,12 +85,12 @@ public class SalesmanClientService implements ISalesmanClientService{
 				results.setMessage("不可对自己转入");
 				return results;
 			}
-			SalesmanClient salesmanClient=new SalesmanClient();
-			salesmanClient.setSalesmanId(salesmanId);
-			salesmanClient.setSalesmanIdNew(salesmanIdNew);
-			salesmanClient.setUpdatetime(new Date());
-			salesmanClientDao.updateClient(salesmanClient);
-			salesmanDao.deleteSalesman(salesmanClient.getSalesmanId());
+			SalesmanSecond salesmanSecond=new SalesmanSecond();
+			salesmanSecond.setSalesmanId(salesmanId);
+			salesmanSecond.setSalesmanIdNew(salesmanIdNew);
+			salesmanSecond.setUpdatetime(new Date());
+			salesmanSecondDao.updateSecond(salesmanSecond);
+			salesmanDao.deleteSalesman(salesmanSecond.getSalesmanId());
 			
 			results.setStatus("0");
 			return results;
@@ -103,12 +103,12 @@ public class SalesmanClientService implements ISalesmanClientService{
 
 	@Transactional
 	@Override
-	public Results<String> deleteClient(String salesmanId, String id) {
+	public Results<String> deleteSecond(String salesmanId, String id) {
 		
 		Results<String> results=new Results<String>();
 		try {
 			
-			salesmanClientDao.deleteClient(salesmanId, id);
+			salesmanSecondDao.deleteSecond(salesmanId, id);
 			results.setStatus("0");
 			return results;
 		} catch (Exception e) {

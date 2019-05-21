@@ -24,7 +24,7 @@ public class Salesman {
 	
 	private String qrCode;///////二维码
 	
-	private List<SalesmanClient> client=new ArrayList<SalesmanClient>();///////二维码
+	private List<SalesmanSecond> second=new ArrayList<SalesmanSecond>();
 	
 	private Date addtime;
 	
@@ -94,12 +94,12 @@ public class Salesman {
 		this.qrCode = qrCode;
 	}
 
-	public List<SalesmanClient> getClient() {
-		return client;
+	public List<SalesmanSecond> getSecond() {
+		return second;
 	}
 
-	public void setClient(List<SalesmanClient> client) {
-		this.client = client;
+	public void setSecond(List<SalesmanSecond> second) {
+		this.second = second;
 	}
 	
 	

@@ -5,7 +5,7 @@ import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
 
 ///////销售人员的客户
-public class SalesmanClient {
+public class SalesmanSecond {
 
 	private String id;
 	
