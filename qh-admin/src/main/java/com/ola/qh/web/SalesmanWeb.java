@@ -16,9 +16,9 @@ public class SalesmanWeb {
 		return "salesman/salesmans";
 	}
 	
-	@RequestMapping(value="/salesmanClient",method=RequestMethod.GET)
+	@RequestMapping(value="/salesmanSecond",method=RequestMethod.GET)
 	public String salesmanClient(@RequestParam(name="salesmanId",required=true)String salesmanId,HttpServletRequest request){
 		request.getSession().setAttribute("salesmanId", salesmanId);
-		return "salesman/salesmanClient";
+		return "salesman/salesmanSecond";
 	}
 }

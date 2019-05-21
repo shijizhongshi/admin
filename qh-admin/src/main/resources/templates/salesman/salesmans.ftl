@@ -63,6 +63,7 @@
 							<th>销售人员照片</th>
 							<th>手机号码</th>
 							<th>所在地区</th>
+							<th>客户数量</th>
 							<th>操作</th>
 						</tr>
 
@@ -73,7 +74,8 @@
 								style="width: 50px; height: 30px;" /></th>
 							<th>{{sl.mobile}}</th>
 							<th>{{sl.address}}</th>
-							<th ><span class="xiangqing" ng-click="toClient(sl.id)">查看客户</span></th>
+							<th>{{sl.secondCount}}</th>
+							<th ><span class="xiangqing" ng-click="toSecond(sl.id)">查看客户</span></th>
 							
 
 						</tr>
