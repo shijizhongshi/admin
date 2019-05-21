@@ -127,8 +127,13 @@
 	<!-- 热门直播的开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<insert id="insertLive" parameterType="com.ola.qh.entity.CourseLineShow">
 	insert into course_line_show(id,course_type_name,course_type_subclass_name,live_name,
-	img_url,isremmend,isshow,addtime,out_links,live_room_id,live_id,live_back_id,starttime,lecturer,teacher_id,isopen,headImgUrl)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
-	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},#{outLinks},#{liveRoomId},#{liveId},#{liveBackId},#{starttime},#{lecturer},#{teacherId},#{isopen},#{headImgUrl})
+	img_url,isremmend,isshow,addtime,out_links,live_room_id,live_id,
+	live_back_id,starttime,lecturer,teacher_id,isopen,headImgUrl,stoptime)
+	values
+	(#{id},#{courseTypeName},#{courseTypeSubclassName},
+	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},
+	#{outLinks},#{liveRoomId},#{liveId},#{liveBackId},#{starttime},
+	#{lecturer},#{teacherId},#{isopen},#{headImgUrl},#{stoptime})
 	</insert>
 	<resultMap type="com.ola.qh.entity.CourseLineShow" id="liveMap">
 	

@@ -112,9 +112,10 @@ app.controller("liveShowController", function($scope, $http) {
 	    	$scope.headImgUrl=data.data;
 		})
 	};
+	//保存功能和修改功能
 	$scope.addLive = function() {
-		if ($scope.live.starttime == null) {
-			alert("时间格式不正确~");
+		if ($scope.live.starttime == null || $scope.live.stoptime == null) {
+			alert("开始时间或结束时间格式不正确~");
 			return;
 		}
 		if ($scope.list != null) {
