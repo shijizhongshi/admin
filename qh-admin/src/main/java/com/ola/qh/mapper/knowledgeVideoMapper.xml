@@ -9,6 +9,7 @@
 		<result column="title" property="title" />
 		<result column="video_id" property="videoId" />
 		<result column="course_type_subclass_name" property="courseTypeSubclassName" />
+		<result column="mini_subclass_name" property="miniSubclassName" />
 		<result column="orders" property="orders" />
 		<result column="times" property="times" />
 		<result column="status" property="status" />
@@ -31,7 +32,7 @@
 	</select>
 	
 	<select id="selectVideoIdAll" resultMap="KnowledgeVideoMap">
-		SELECT * from knowledge_video;
+		select * from knowledge_video where first_image not like "%-1.jpg%"
 	</select>
 	
 	<select id="KnowledgeVideoCount" resultType="java.lang.Integer">
@@ -48,8 +49,8 @@
 	</select>
 	
 	<insert id="insertKnowledgeVideo" parameterType="com.ola.qh.entity.KnowledgeVideo">
-		insert into knowledge_video(id,first_image,title,video_id,times,status,course_type_subclass_name,orders,addtime)
-		values(#{id},#{firstImage},#{title},#{videoId},#{times},#{status},#{courseTypeSubclassName},#{orders},#{addtime})
+		insert into knowledge_video(id,first_image,title,video_id,times,status,course_type_subclass_name,orders,addtime,mini_subclass_name)
+		values(#{id},#{firstImage},#{title},#{videoId},#{times},#{status},#{courseTypeSubclassName},#{orders},#{addtime},#{miniSubclassName})
 	</insert>
 	
 	<update id="updateKnowledgeVideo" parameterType="com.ola.qh.entity.KnowledgeVideo">
@@ -65,6 +66,9 @@
 			</if>
 			<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
 			course_type_subclass_name=#{courseTypeSubclassName},
+			</if>
+			<if test="miniSubclassName!=null and miniSubclassName!=''">
+			mini_subclass_name=#{miniSubclassName},
 			</if>
 			<if test="times!=null and times!=''">
 			times=#{times},

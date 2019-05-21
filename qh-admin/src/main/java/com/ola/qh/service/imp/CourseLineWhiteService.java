@@ -30,14 +30,14 @@ public class CourseLineWhiteService implements ICourseLineWhiteService {
 
 	@Transactional
 	@Override
-	public Results<List<CourseLineWhite>> lineWhiteList(String liveId, String mobile, int pageNo, int pageSize) {
+	public Results<List<CourseLineWhite>> lineWhiteList(String liveId, String username, int pageNo, int pageSize) {
 
 		Results<List<CourseLineWhite>> results = new Results<List<CourseLineWhite>>();
 		try {
 
-			List<CourseLineWhite> list = courseLineWhiteDao.lineWhiteList(liveId, mobile, pageNo, pageSize);
+			List<CourseLineWhite> list = courseLineWhiteDao.lineWhiteList(liveId, username, pageNo, pageSize);
 
-			Integer count = courseLineWhiteDao.lineWhiteListCount(liveId, mobile);
+			Integer count = courseLineWhiteDao.lineWhiteListCount(liveId, username);
 
 			results.setCount(count);
 			results.setData(list);
@@ -57,9 +57,9 @@ public class CourseLineWhiteService implements ICourseLineWhiteService {
 		try {
 
 			List<CourseLineWhite> list = courseLineWhiteDao.lineWhiteList(courseLineWhite.getLiveId(),
-					courseLineWhite.getMobile(), 0, 0);
+					courseLineWhite.getUsername(), 0, 0);
 			if (list.size() > 0) {
-				results.setMessage("手机号已存在");
+				results.setMessage("用户已存在");
 				results.setStatus("1");
 				return results;
 			}
@@ -88,9 +88,9 @@ public class CourseLineWhiteService implements ICourseLineWhiteService {
 		try {
 
 			List<CourseLineWhite> list = courseLineWhiteDao.lineWhiteList(courseLineWhite.getLiveId(),
-					courseLineWhite.getMobile(), 0, 0);
+					courseLineWhite.getUsername(), 0, 0);
 			if (list.size() > 0) {
-				results.setMessage("手机号已存在");
+				results.setMessage("用户已存在");
 				results.setStatus("1");
 				return results;
 			}
@@ -126,19 +126,25 @@ public class CourseLineWhiteService implements ICourseLineWhiteService {
 		Sheet sheet = wb.getSheetAt(0);
 		int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 		Iterator<Row> rowIterator = sheet.rowIterator();
+		for (int i = 0; i < 2; i++) {
+			Row titleRow = rowIterator.next();
+			titleRow.getLastCellNum();
+		}
 		/* String[][] table = new String[rowNumber][columnNumber]; */
 		for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 			Row row = rowIterator.next();
 			////// 保存题库的信息
 
 			/// 保存他下边的集合
+			if(checkNull(0, row) !=null && checkNull(1, row)!=null){
 			CourseLineWhite courseLineWhite = new CourseLineWhite();
 			courseLineWhite.setAddtime(new Date());
 			courseLineWhite.setId(KeyGen.uuid());
-			courseLineWhite.setMobile(checkNull(0, row));
+			courseLineWhite.setUsername(checkNull(0, row));
+			courseLineWhite.setPassword(checkNull(1, row));
 			courseLineWhite.setLiveId(liveId);
 			courseLineWhiteDao.insertLineWhite(courseLineWhite);
-
+			}
 		}
 
 		result.setStatus("0");
@@ -157,12 +163,6 @@ public class CourseLineWhiteService implements ICourseLineWhiteService {
 		}
 
 		return null;
-	}
-
-	@Override
-	public List<CourseLineWhite> selectAllByLiveId(String liveId) {
-
-		return courseLineWhiteDao.selectAllByLiveId(liveId);
 	}
 
 }

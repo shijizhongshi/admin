@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.SalesmanDao">
+	<resultMap type="com.ola.qh.entity.Salesman" id="SalesmanMap">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="img_url" property="imgUrl" />
+		<result column="mobile" property="mobile" />
+		<result column="qr_code" property="qrCode" />
+		<result column="address" property="address" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+	</resultMap>
+	
+	<select id="SalesmanList" resultMap="SalesmanMap">
+		select id,name,img_url,mobile,qr_code,address,addtime 
+		from salesman 
+		where 1=1
+		<if test="name!=null and name!=''">
+			and name=#{name}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+			and mobile=#{mobile}
+		</if>
+		<if test="address!=null and address!=''">
+			and address like concat(concat("%",#{address},"%"))
+		</if>
+		limit #{pageNo},#{pageSize}
+	</select>
+	
+	<select id="exist" resultType="com.ola.qh.entity.Salesman">
+		select * 
+		from salesman 
+		where mobile=#{mobile}
+	</select>
+	
+	<select id="SalesmanCount" resultType="int">
+		select count(id)
+		from salesman 
+		where 1=1
+		<if test="name!=null and name!=''">
+			and name=#{name}
+		</if>
+		<if test="mobile!=null and mobile!=''">
+			and mobile=#{mobile}
+		</if>
+		<if test="address!=null and address!=''">
+			and address=#{address}
+		</if>
+		
+	</select>
+	
+	<insert id="insertSalesman" parameterType="com.ola.qh.entity.Salesman">
+		insert into salesman(id,name,img_url,mobile,address,addtime)
+		values(#{id},#{name},#{imgUrl},#{mobile},#{address},#{addtime})
+	</insert>
+	
+	<update id="updateSalesman" parameterType="com.ola.qh.entity.Salesman">
+		update salesman set 
+		<if test="name!=null and name!=''">
+			name=#{name},
+		</if>
+		<if test="qrCode!=null and qrCode!=''">
+			qr_code=#{qrCode},
+		</if>
+		<if test="mobile!=null and mobile!=''">
+			mobile=#{mobile},
+		</if>
+		<if test="address!=null and address!=''">
+			address=#{address},
+		</if>
+		updatetime=#{updatetime}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteSalesman">
+		delete from salesman where id=#{id}
+	</delete>
+</mapper>

@@ -16,6 +16,7 @@ import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.entity.Course;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
+import com.ola.qh.entity.CourseTypeSubclassNames;
 import com.ola.qh.service.IBuyCourseService;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Results;
@@ -40,6 +41,7 @@ public class CourseController {
 
 	@Autowired
 	private CourseSubclassDao courseSubclassDao;
+
 	/**
 	 * 大类别的集合
 	 * <p>
@@ -177,7 +179,7 @@ public class CourseController {
 		course.setPageSize(pageSize);
 		course.setCourseName(courseName);
 		List<Course> list = courseService.courseList(course);
-		if(userId!=null && !"".equals(userId)){
+		if (userId != null && !"".equals(userId)) {
 			for (Course course2 : list) {
 				int count = buyCourseService.existOpenCourse(course2.getId(), userId, null);
 				if (count == 0) {
@@ -187,7 +189,7 @@ public class CourseController {
 				}
 			}
 		}
-		
+
 		result.setStatus("0");
 		result.setData(list);
 		result.setCount(courseService.courseCount(courseTypeName, courseTypeSubclassName, courseName));
@@ -243,16 +245,161 @@ public class CourseController {
 		return result;
 
 	}
+
 	/**
-	 * 推送页面  专业下拉列表
+	 * 推送页面 专业下拉列表
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "selectCourseTypeSubclassNameAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/selectCourseTypeSubclassNameAll", method = RequestMethod.GET)
 	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclassNameAll() {
 		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
-		results = courseService.selectCourseTypeSubclassNameAll();	
+		results = courseService.selectCourseTypeSubclassNameAll();
+
+		return results;
+	}
+
+	/**
+	 * 根据大类别ID查询子类别ID
+	 * 
+	 * @param courseTypeId
+	 * @return
+	 */
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclass(
+			@RequestParam(name = "courseTypeId", required = true) String courseTypeId) {
+		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
+		results = courseService.selectCourseTypeSubclass(courseTypeId);
+
+		return results;
+	}
+	/**
+	 * 添加一级分类(大分类)
+	 * @param courseTypeName
+	 * @return
+	 */
+	@RequestMapping(value = "/insertCourseTypeName", method = RequestMethod.GET)
+	public Results<String> insertCourseTypeName(@RequestParam(name = "courseTypeName") String courseTypeName,
+			@RequestParam(name = "imgUrl") String imgUrl) {
+		Results<String> results = new Results<String>();
+		results = courseService.insertCourseTypeName(courseTypeName,imgUrl);
+
+		return results;
+	}
+	/**
+	 * 删除一级分类(大分类)
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteCourseType",method = RequestMethod.GET)
+	public Results<String> deleteCourseType (@RequestParam(name = "id")String id) {
+		Results<String> results = new Results<String>();
+		results = courseService.deleteCourseType(id);
 		
 		return results;
 	}
 	
+	@RequestMapping(value = "/updateOne",method = RequestMethod.GET)
+	public Results<String> updateOne (@RequestParam(name = "id")String id,
+			@RequestParam(name = "courseTypeName")String courseTypeName,
+			@RequestParam(name = "imgUrl")String imgUrl) {
+		Results<String> results = new Results<String>();
+		results = courseService.updateOne(id,courseTypeName,imgUrl);
+		
+		return results;
+	}
+	/**
+	 * 添加二级类别(小分类)
+	 * @param courseTypeSubclassName
+	 * @param courseTypeId
+	 * @return
+	 */
+	@RequestMapping(value = "/insertCourseTypeSubclassName",method = RequestMethod.GET)
+	public Results<String> insertCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
+			@RequestParam(name = "courseTypeId")String courseTypeId,
+			@RequestParam(name = "imgUrl")String imgUrl) {
+		Results<String> results = new Results<String>();
+		results = courseService.insertCourseTypeSubclassName(courseTypeId,courseTypeSubclassName,imgUrl);
+		
+		return results;
+	}
+	/**
+	 * 修改二级类别(小分类)
+	 * @param courseTypeSubclassName
+	 * @param courseTypeSubclassId
+	 * @return
+	 */
+	@RequestMapping(value = "/updateCourseTypeSubclassName",method = RequestMethod.GET)
+	public Results<String> updateCourseTypeSubclassName (@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName,
+			@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId,
+			@RequestParam(name = "imgUrl")String imgUrl) {
+		Results<String> results = new Results<String>();
+		results = courseService.updateCourseTypeSubclassName(courseTypeSubclassId,courseTypeSubclassName,imgUrl);
+		
+		return results;
+	}
+	/**
+	 * 删除二级类别(小分类)
+	 * @param courseTypeSubclassId
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteTwo",method = RequestMethod.GET)
+	public Results<String> deleteTwo (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+		Results<String> results = new Results<String>();
+		results = courseService.deleteCourseTypeSubclass(courseTypeSubclassId);
+		
+		return results;
+	}
+	/**
+	 * 根据二级类别ID查询三级类别集合
+	 * @param courseTypeSubclassId
+	 * @return
+	 */
+	@RequestMapping(value = "/selectThree",method = RequestMethod.GET)
+	public Results<List<CourseTypeSubclassNames>> insertThree (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId) {
+		Results<List<CourseTypeSubclassNames>> results = new Results<List<CourseTypeSubclassNames>>();
+		results = courseService.selectThree(courseTypeSubclassId);
+		
+		return results;
+	}
+	/**
+	 * 添加三级类别
+	 * @param courseTypeSubclassId
+	 * @param miniSubclassName
+	 * @return
+	 */
+	@RequestMapping(value = "/insertThree",method = RequestMethod.GET)
+	public Results<String> insertThree (@RequestParam(name = "courseTypeSubclassId")String courseTypeSubclassId,
+			@RequestParam(name = "miniSubclassName")String miniSubclassName) {
+		Results<String> results = new Results<String>();
+		results = courseService.insertThree(courseTypeSubclassId,miniSubclassName);
+		
+		return results;
+	}
+	/**
+	 * 修改三级类别
+	 * @param miniId
+	 * @param miniSubclassName
+	 * @return
+	 */
+	@RequestMapping(value = "/updateThree",method = RequestMethod.GET)
+	public Results<String> updateThree (@RequestParam(name = "miniId")String miniId,
+			@RequestParam(name = "miniSubclassName")String miniSubclassName) {
+		Results<String> results = new Results<String>();
+		results = courseService.updateThree(miniId,miniSubclassName);
+		
+		return results;
+	}
+	/**
+	 * 删除三级类别
+	 * @param miniId
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteThree",method = RequestMethod.GET)
+	public Results<String> deleteThree (@RequestParam(name = "miniId")String miniId) {
+		Results<String> results = new Results<String>();
+		results = courseService.deleteThree(miniId);
+		
+		return results;
+	}
 }

@@ -1,10 +1,7 @@
 package com.ola.qh.service.imp;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -14,10 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.KnowledgeVideoDao;
 import com.ola.qh.dao.UserVideoDao;
-import com.ola.qh.entity.CourseTypeSubclass;
 import com.ola.qh.entity.KnowledgeVideo;
 import com.ola.qh.entity.UserVideo;
 import com.ola.qh.service.IKnowledgeVideoService;
@@ -32,9 +27,6 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 
 	@Autowired
 	private KnowledgeVideoDao knowledgeVideoDao;
-
-	@Autowired
-	private CourseDao courseDao;
 
 	@Autowired
 	private UserVideoDao userVideoDao;
@@ -52,42 +44,43 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 
 		int count = knowledgeVideoDao.KnowledgeVideoCount(title, courseTypeSubclassName);
 
-		for (KnowledgeVideo knowledgeVideo : list) {
-
-			List<String> CourseTypeNames = new ArrayList<String>();
-
-			List<String> listCourseTypeSubclass = new ArrayList<String>();
-
-			if (knowledgeVideo.getCourseTypeSubclassName().indexOf(",") >= 0) {
-				listCourseTypeSubclass = Arrays.asList(knowledgeVideo.getCourseTypeSubclassName().split(","));
-
-				knowledgeVideo.setCourseTypeSubclassNames(listCourseTypeSubclass);
-
-				for (String string : listCourseTypeSubclass) {
-
-					CourseTypeSubclass courseTypeSubclass = courseDao.singleCourseTypeSubclass(string);
-
-					String CourseType = courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
-							.getCourseTypeName();
-					CourseTypeNames.add(CourseType);
-
-				}
-			} else {
-				knowledgeVideo.getCourseTypeSubclassNames().add(knowledgeVideo.getCourseTypeSubclassName());
-				CourseTypeSubclass courseTypeSubclass = courseDao
-						.singleCourseTypeSubclass(knowledgeVideo.getCourseTypeSubclassName());
-
-				String CourseType = courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
-						.getCourseTypeName();
-				CourseTypeNames.add(CourseType);
-
-			}
-			HashSet<String> b = new HashSet<String>(CourseTypeNames);
-			CourseTypeNames.clear();
-			CourseTypeNames.addAll(b);
-			knowledgeVideo.setCourseTypeNames(CourseTypeNames);
-
-		}
+		/*
+		 * for (KnowledgeVideo knowledgeVideo : list) {
+		 * 
+		 * List<String> CourseTypeNames = new ArrayList<String>();
+		 * 
+		 * List<String> listCourseTypeSubclass = new ArrayList<String>();
+		 * 
+		 * if (knowledgeVideo.getCourseTypeSubclassName().indexOf(",") >= 0) {
+		 * listCourseTypeSubclass =
+		 * Arrays.asList(knowledgeVideo.getCourseTypeSubclassName().split(","));
+		 * 
+		 * knowledgeVideo.setCourseTypeSubclassNames(listCourseTypeSubclass);
+		 * 
+		 * for (String string : listCourseTypeSubclass) {
+		 * 
+		 * CourseTypeSubclass courseTypeSubclass =
+		 * courseDao.singleCourseTypeSubclass(string);
+		 * 
+		 * String CourseType =
+		 * courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
+		 * .getCourseTypeName(); CourseTypeNames.add(CourseType);
+		 * 
+		 * } } else { knowledgeVideo.getCourseTypeSubclassNames().add(knowledgeVideo.
+		 * getCourseTypeSubclassName()); CourseTypeSubclass courseTypeSubclass =
+		 * courseDao
+		 * .singleCourseTypeSubclass(knowledgeVideo.getCourseTypeSubclassName());
+		 * 
+		 * String CourseType =
+		 * courseDao.singleCourseType(courseTypeSubclass.getCourseTypeId())
+		 * .getCourseTypeName(); CourseTypeNames.add(CourseType);
+		 * 
+		 * } HashSet<String> b = new HashSet<String>(CourseTypeNames);
+		 * CourseTypeNames.clear(); CourseTypeNames.addAll(b);
+		 * knowledgeVideo.setCourseTypeNames(CourseTypeNames);
+		 * 
+		 * }
+		 */
 		results.setCount(count);
 		results.setData(list);
 		results.setStatus("0");
@@ -114,15 +107,13 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 		treeMap.put("format", "json");
 
 		String address = Thqs.getThqstreeMap(Patterns.token186, treeMap);
-		String subTypeName = "";
-		for (int j = 0; j < knowledgeVideo.getCourseTypeSubclassNames().size(); j++) {
-			String courseTypeSubclassName = knowledgeVideo.getCourseTypeSubclassNames().get(j);
-			if (j == 0) {
-				subTypeName = subTypeName + courseTypeSubclassName;
-			} else {
-				subTypeName = subTypeName + "," + courseTypeSubclassName;
-			}
-		}
+		/*
+		 * String subTypeName = ""; for (int j = 0; j <
+		 * knowledgeVideo.getCourseTypeSubclassNames().size(); j++) { String
+		 * courseTypeSubclassName = knowledgeVideo.getCourseTypeSubclassNames().get(j);
+		 * if (j == 0) { subTypeName = subTypeName + courseTypeSubclassName; } else {
+		 * subTypeName = subTypeName + "," + courseTypeSubclassName; } }
+		 */
 		Integer VideoMax = knowledgeVideoDao.selectMaxOrder();
 		if (VideoMax != null) {
 			knowledgeVideo.setOrders(VideoMax + 1);
@@ -142,7 +133,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 			//高清图
 			String newImage = image.replace("-0.jpg","-1.jpg");
 			//添加
-			knowledgeVideo.setCourseTypeSubclassName(subTypeName);
+			//knowledgeVideo.setCourseTypeSubclassName(knowledgeVideo.getCourseTypeSubclassName());
 			knowledgeVideo.setId(KeyGen.uuid());
 			knowledgeVideo.setAddtime(new Date());
 			knowledgeVideo.setFirstImage(newImage);
@@ -211,7 +202,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 				userVideo.setUserId("1");
 				userVideoDao.insert(userVideo);
 			}
-			if (knowledgeVideo.getCourseTypeSubclassNames() != null) {
+			/*if (knowledgeVideo.getCourseTypeSubclassNames() != null) {
 
 				String subTypeName = "";
 				for (int j = 0; j < knowledgeVideo.getCourseTypeSubclassNames().size(); j++) {
@@ -224,7 +215,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 				}
 
 				knowledgeVideo.setCourseTypeSubclassName(subTypeName);
-			}
+			}*/
 			knowledgeVideo.setUpdatetime(new Date());
 			// 封面
 			knowledgeVideo.setFirstImage(newImage);

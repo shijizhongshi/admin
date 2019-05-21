@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/indent/excle.js"></script>
 <script src="/scripts/marketing/questionbankH5.js"></script>
 <@b.body menu="sidebarmenu-marketing"
 submenu="sidebarmenu-marketing-questionbankH5">
@@ -31,7 +30,7 @@ submenu="sidebarmenu-marketing-questionbankH5">
 				<div class="select-3">
 					<span>属性</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="status">
-						<option value="">暂无属性</option>
+						<option value="">全部属性</option>
 						<option value="0">app注册用户</option>
 						<option value="1">游客用户</option>
 					</select>
@@ -40,7 +39,7 @@ submenu="sidebarmenu-marketing-questionbankH5">
 				<!-- ng-options="a for a in nameList"  -->
 					<span>专业</span> <img src="/images/sjk-xl.png"> <select
 						ng-model="courseTypeSubclassName" >
-						<option value="">无专业</option>
+						<option value="">全部专业</option>
 						<option ng-repeat="name in nameList">{{name}}</option>
 					</select>
 				</div>
@@ -50,7 +49,7 @@ submenu="sidebarmenu-marketing-questionbankH5">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')">
+						ng-click="ExcelExport()">
 				</div>
 			</div>
 			<div class="manage">
@@ -69,18 +68,17 @@ submenu="sidebarmenu-marketing-questionbankH5">
 								<th>视频数</th>
 								<th>最后一次操作时间</th>
 							</tr>
-							<tr ng-repeat="questionbank in questionbankList">
+							<tr ng-repeat="questionbank in questionbankList" ng-click="checkQuestionbank(questionbank)"
+								ng-class="{'selected':selected == questionbank}">
 								<th>{{questionbank.realname}}</th>
 								<th>{{questionbank.mobile}}</th>
-								<th ng-show="{{questionbank.status=='0'}}">app注册用户</th>
-								<th ng-show="{{questionbank.status=='1'}}">游客用户</th>
+								<th>{{questionbank.statuss}}</th>
 								<th>{{questionbank.courseTypeSubclassName}}</th>
 								<th>{{questionbank.banktotal - questionbank.nobank}}</th>
-								<th ng-show="{{questionbank.banktotal - questionbank.nobank != 0}}">{{questionbank.banktrue / (questionbank.banktotal - questionbank.nobank)}}%</th>
-								<th ng-show="{{questionbank.banktotal - questionbank.nobank == 0}}">用户未开始做题</th>
+								<th>{{questionbank.probability}}</th>
 								<th>4</th>
-								<th ng-show="{{questionbank.updatetime != null}}">{{questionbank.updatetime | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
-								<th ng-show="{{questionbank.updatetime == null}}">{{questionbank.addtime | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
+								<th>{{questionbank.time | date:'yyyy.MM.dd  HH:mm:ss'}}</th>
+								
 							</tr>
 
 

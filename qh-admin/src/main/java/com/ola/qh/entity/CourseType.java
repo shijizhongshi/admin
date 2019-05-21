@@ -3,21 +3,34 @@ package com.ola.qh.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 
-* @ClassName: CourseType  
-* @Description: 课程所有类别的实体类  
-* @author guoyuxue  
-* @date 2018年11月19日  
-*
+ * @ClassName: CourseType
+ * @Description: 课程所有类别的实体类
+ * @author guoyuxue
+ * @date 2018年11月19日
+ *
  */
 public class CourseType {
-	
+
 	private String id;
-	
-	private String courseTypeName;////名称
-	
-	private List<CourseTypeSubclass> list=new ArrayList<CourseTypeSubclass>();
+
+	private String courseTypeName;//// 名称
+
+	@NotEmpty(message="图片地址不能为空")
+	private String imgUrl;//图片地址
+
+	private List<CourseTypeSubclass> list = new ArrayList<CourseTypeSubclass>();
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
 	public String getId() {
 		return id;
@@ -42,7 +55,5 @@ public class CourseType {
 	public void setList(List<CourseTypeSubclass> list) {
 		this.list = list;
 	}
-	
-	
 
 }

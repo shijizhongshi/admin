@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/indent/excle.js"></script>
 <script src="/scripts/marketing/liveAccess.js"></script>
 
 </style>
@@ -42,7 +41,7 @@ submenu="sidebarmenu-marketing-liveAccess">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')">
+						ng-click="ExcelExport()">
 				</div>
 			</div>
 			<div class="manage">
@@ -58,16 +57,15 @@ submenu="sidebarmenu-marketing-liveAccess">
 								<th>直播观看时长</th>
 								<th>终端类型</th>
 							</tr>
-							<tr ng-repeat="list in list">
+							<tr ng-repeat="list in list" ng-click="checkList(list)"
+								ng-class="{'selected':selected == list}">
 								<th>{{list.viewerName}}</th>
 								<th>{{list.city}}</th>
 								<th>{{list.enterTime}}</th>
 								<th>{{list.leaveTime}}</th>
-								<th ng-show="{{list.watchTime != null}}">{{list.watchTime/60 | number:0}}分钟</th>
-								<th ng-show="{{list.watchTime == null}}">未观看直播</th>
-								<th ng-show="{{list.terminal == 0}}">电脑端</th>
-								<th ng-show="{{list.terminal == 1}}">移动端</th>
-								<th ng-show="{{list.terminal == null}}">无终端类型</th>
+								<th>{{list.watchTimes}}</th>
+								<th>{{list.terminals}}</th>
+								
 							</tr>
 						</tbody>
 					</table>

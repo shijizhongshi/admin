@@ -40,5 +40,9 @@ public class SystemWeb {
 	public String operating(){
 		return "system/operating";
 	}
+	@RequestMapping("/courseType")
+	public String courseType(){
+		return "system/course_type";
+	}
 	
 }

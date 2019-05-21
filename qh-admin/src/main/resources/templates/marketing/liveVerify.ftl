@@ -87,7 +87,8 @@ submenu="sidebarmenu-marketing-liveVerify">
 								<th>房间号</th>
 								<th>最后一次操作时间</th>
 							</tr>
-							<tr ng-repeat="liveVerify in liveVerifyList">
+							<tr ng-repeat="liveVerify in liveVerifyList" ng-click="checkLiveVerify(liveVerify)"
+								ng-class="{'selected':selected == liveVerify}">
 								<th>{{liveVerify.mobile}}</th>
 								<th ng-show="{{liveVerify.isRegister==1}}">注册用户</th>
 								<th ng-show="{{liveVerify.isRegister==0}}">游客用户</th>

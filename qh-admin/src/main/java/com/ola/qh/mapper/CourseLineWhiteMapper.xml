@@ -8,18 +8,18 @@
 		id="CourseLineWhiteMap">
 		<result column="id" property="id" />
 		<result column="live_id" property="liveId" />
-		<result column="mobile" property="mobile" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
 		<result column="addtime" property="addtime" />
 		<result column="updatetime" property="updatetime" />
-		<result column="nickName" property="nickName" />
-
+		
 	</resultMap>
 
 	<insert id="insertLineWhite"
 		parameterType="com.ola.qh.entity.CourseLineWhite">
 		insert into
-		course_line_white(id,live_id,mobile,addtime)values
-		(#{id},#{liveId},#{mobile},#{addtime})
+		course_line_white(id,live_id,username,password,addtime)values
+		(#{id},#{liveId},#{username},#{password},#{addtime})
 	</insert>
 
 	<update id="updateLineWhite"
@@ -28,8 +28,11 @@
 		<if test="liveId!=null and liveId!=''">
 			live_id=#{liveId},
 		</if>
-		<if test="mobile!=null and mobile!=''">
-			mobile=#{mobile},
+		<if test="username!=null and username!=''">
+			username=#{username},
+		</if>
+		<if test="password!=null and password!=''">
+			password=#{password},
 		</if>
 		updatetime=#{updatetime}
 		where id=#{id}
@@ -37,8 +40,8 @@
 
 	<select id="lineWhiteList" resultMap="CourseLineWhiteMap">
 		select * from course_line_white where live_id=#{liveId}
-		<if test="mobile!=null and mobile!=''">
-			and mobile=#{mobile}
+		<if test="username!=null and username!=''">
+			and username=#{username}
 		</if>
 		<if test="pageSize!=0">
 			limit #{pageNo},#{pageSize}
@@ -47,8 +50,8 @@
 
 	<select id="lineWhiteListCount" resultType="java.lang.Integer">
 		select count(id) from course_line_white where live_id=#{liveId}
-		<if test="mobile!=null and mobile!=''">
-			and mobile=#{mobile}
+		<if test="username!=null and username!=''">
+			and username=#{username}
 		</if>
 	</select>
 

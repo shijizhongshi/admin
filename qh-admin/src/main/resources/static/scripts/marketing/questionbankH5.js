@@ -24,6 +24,24 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 		.success(function (result) {
 			if (result.status == 0) {
 				$scope.questionbankList = result.data;
+				angular.forEach($scope.questionbankList,function(questionbank){
+					
+					if(questionbank.status=="0"){
+						questionbank.statuss="app注册用户";
+					}else if(questionbank.status=="1"){
+						questionbank.statuss="游客用户";
+					}
+					if(questionbank.updatetime==null){
+						questionbank.time=questionbank.addtime;
+					}else {
+						questionbank.time=questionbank.updatetime;
+					}
+					if(questionbank.banktotal - questionbank.nobank != 0){
+						questionbank.probability=parseInt(questionbank.banktrue / (questionbank.banktotal - questionbank.nobank) *100)+"%";
+					}else {
+						questionbank.probability="用户未开始做题";
+					}
+				})
 				$scope.total = result.count;
 			}else {
 				alert(result.message);
@@ -31,4 +49,19 @@ app.controller("questionbankH5Controller", function($scope, $http) {
 		})
 	};
 	$scope.loaddata();
+	
+	$scope.realname="";
+	$scope.status="";
+	$scope.courseTypeSubclassName="";
+	var finStatementExcelExport=function(){
+		window.location.href = "/api/questionbankList?realname="+$scope.realname+"&status="+$scope.status+
+		"&courseTypeSubclassName="+$scope.courseTypeSubclassName+"&types="+2;
+	  }
+	$scope.ExcelExport=function(){
+		finStatementExcelExport();
+	}
+	//选中单行
+	$scope.checkQuestionbank = function(questionbank) {
+		$scope.selected = questionbank;
+	}
 });

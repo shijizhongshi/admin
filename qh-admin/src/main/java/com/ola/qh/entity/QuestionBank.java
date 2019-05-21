@@ -43,9 +43,18 @@ public class QuestionBank {
 	private Integer banktrue;// 答对题目数
 
 	private Integer nobank;// 未答题数
+	
+	private String titleimg;///标题的图片
+	
+	
+	public String getTitleimg() {
+		return titleimg;
+	}
 
-	
-	
+	public void setTitleimg(String titleimg) {
+		this.titleimg = titleimg;
+	}
+
 	public Integer getBanktotal() {
 		return banktotal;
 	}

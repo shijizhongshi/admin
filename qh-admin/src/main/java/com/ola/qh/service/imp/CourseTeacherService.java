@@ -92,15 +92,6 @@ public class CourseTeacherService implements ICourseTeacherService {
 					names = names + "," + string;
 				}
 			}
-			// 添加教师信息的同时 赋值给
-			Integer maxOrders = courseTeacherDao.selectMaxOrders();
-			Integer orders = null;
-			if (maxOrders != null) {
-				orders = maxOrders + 1;
-			} else {
-				orders = 1;
-			}
-			courseTeacher.setOrders(orders);
 			courseTeacher.setCourseTypeNames(names);
 			courseTeacher.setCourseTypeSubclassNames(typename);
 			courseTeacherDao.insertCourseTeacher(courseTeacher);
@@ -160,29 +151,13 @@ public class CourseTeacherService implements ICourseTeacherService {
 	}
 
 	@Override
-	public Results<String> courseTeacherOrders(String id, int orders, String operateType) {
-		Results<String> results = new Results<String>();
-		if ("down".equals(operateType)) { // 下移
-			// 获取下一条记录iorder
-			int nextOrder = courseTeacherDao.selectOrder(operateType, orders);
-			// 修改下一条的为当前值
-			courseTeacherDao.updateOrders(null, nextOrder, orders);
-			// 修改自己的排序为下一条
-			courseTeacherDao.updateOrders(id, 0, nextOrder);
-			results.setData(String.valueOf(nextOrder));
-		}
-		if ("up".equals(operateType)) { // 上移
-			// 获取上一条记录iorder
-			int previousOrder = courseTeacherDao.selectOrder(operateType, orders);
-			// 修改上一条的为当前值
-			courseTeacherDao.updateOrders(null, previousOrder, orders);
-			// 修改自己的排序为上一条
-			courseTeacherDao.updateOrders(id, 0, previousOrder);
-			results.setData(String.valueOf(previousOrder));
-		}
+	public Results<List<CourseTeacher>> selectNameList(String courseTypeSubclassName) {
+		Results<List<CourseTeacher>> results = new Results<List<CourseTeacher>>();
+		List<CourseTeacher> list = courseTeacherDao.selectNameList(courseTypeSubclassName);
+		
 		results.setStatus("0");
-
+		results.setData(list);
+		
 		return results;
 	}
-
 }

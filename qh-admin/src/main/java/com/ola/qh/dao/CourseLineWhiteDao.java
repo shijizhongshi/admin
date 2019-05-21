@@ -8,10 +8,10 @@ import com.ola.qh.entity.CourseLineWhite;
 
 public interface CourseLineWhiteDao {
 
-	public List<CourseLineWhite> lineWhiteList(@Param("liveId") String liveId, @Param("mobile") String mobile,
+	public List<CourseLineWhite> lineWhiteList(@Param("liveId") String liveId, @Param("username") String username,
 			@Param("pageNo") int pageNo, @Param("pageSize") int pageSize);
 
-	public Integer lineWhiteListCount(@Param("liveId") String liveId, @Param("mobile") String mobile);
+	public Integer lineWhiteListCount(@Param("liveId") String liveId, @Param("username") String username);
 
 	public int insertLineWhite(CourseLineWhite courseLineWhite);
 	

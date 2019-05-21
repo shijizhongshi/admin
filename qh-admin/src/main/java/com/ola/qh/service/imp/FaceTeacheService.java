@@ -55,6 +55,7 @@ public class FaceTeacheService implements IFaceTeacheService{
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
+			results.setMessage("保存失败~");
 			return results;
 		}
 	}
@@ -72,6 +73,7 @@ public class FaceTeacheService implements IFaceTeacheService{
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			results.setStatus("1");
+			results.setMessage("修改失败~");
 			return results;
 		}
 	}

@@ -9,8 +9,12 @@ public class CourseLineWhite {
 	private String id;
 	@NotEmpty
 	private String liveId;
+	
 	@NotEmpty
-	private String mobile;
+	private String username;
+	
+	@NotEmpty
+	private String password;
 
 	private Date addtime;
 
@@ -33,12 +37,12 @@ public class CourseLineWhite {
 		this.liveId = liveId;
 	}
 
-	public String getMobile() {
-		return mobile;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Date getAddtime() {
@@ -55,6 +59,14 @@ public class CourseLineWhite {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

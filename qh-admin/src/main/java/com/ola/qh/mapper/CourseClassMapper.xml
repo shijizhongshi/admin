@@ -33,7 +33,7 @@
 		grade,isremmend,isshow,img_url,proper_people,promises,features,introduce,detail,addtime,maxdoudou
 	</sql>
 	<select id="selectCourseClass" resultMap="CourseClassMap">
-		select <include refid="sql_courseclass"></include>,orders from course_class 
+		select <include refid="sql_courseclass"></include> from course_class 
 		where 1=1
 		<if test="id!=null">
 			and id=#{id}
@@ -47,7 +47,7 @@
 		<if test="className!=null and className!=''">
 		and class_name LIKE CONCAT(CONCAT('%',#{className},'%'))
 		</if>
-		order by orders asc
+		
 		<if test="pageSize!=0">
 		 limit #{pageNo},#{pageSize}
 		</if>

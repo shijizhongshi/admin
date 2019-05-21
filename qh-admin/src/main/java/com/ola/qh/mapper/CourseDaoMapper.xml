@@ -12,10 +12,11 @@
 	<resultMap type="com.ola.qh.entity.CourseType" id="CourseTypeMap">
 	<result column="id" property="id"/>
 	<result column="course_type_name" property="courseTypeName"/>
+	<result column="imgUrl" property="imgUrl"/>
 	</resultMap>
 	
 	<insert id="insertCourseType">
-	insert into course_type(id,course_type_name) values(#{id},#{courseTypeName})
+	insert into course_type(id,course_type_name,imgUrl) values(#{id},#{courseTypeName},#{imgUrl})
 	</insert>
 	<select id="courseTypeList" resultMap="CourseTypeMap">
 	    select * from course_type
@@ -24,9 +25,24 @@
 	    select id id,course_type_name courseTypeName from course_type where id=#{id}
 	</select>
 	<update id="updateCourseType" parameterType="String">
-	    update course_type set course_type_name=#{courseTypeName} where id=#{id}
+	    update course_type set
+	    <if test="imgUrl != null and imgUrl !=''">
+	    imgUrl = #{imgUrl},
+	    </if>
+	    course_type_name = #{courseTypeName} 
+	    where id=#{id}
 	</update>
-	
+	<!-- 查询课程大类别中最大ID  -->
+	<select id="maxId" resultType="java.lang.String">
+	select max(id) from course_type
+	</select>
+	<!-- 根据ID删除大类别  -->
+	<delete id="deleteCourseType">
+	delete from course_type where 1=1
+	<if test="id != null and id != ''">
+	and id = #{id}
+	</if>
+	</delete>
 	<!--课程大类别的结束######################################## -->
 	
 	
@@ -36,9 +52,10 @@
 	<result column="id" property="id"/>
 	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
 	<result column="course_type_id" property="courseTypeId"/>
+	<result column="imgUrl" property="imgUrl"/>
 	</resultMap>
 	<insert id="insertCourseTypeSubclass" parameterType="String">
-		insert into course_type_subclass(id,course_type_subclass_name,course_type_id)values(#{id},#{courseTypeSubclassName},#{courseTypeId})
+		insert into course_type_subclass(id,course_type_subclass_name,course_type_id,imgUrl)values(#{id},#{courseTypeSubclassName},#{courseTypeId},#{imgUrl})
 	</insert>
 	<!--通过大类别的id查小类别-->
 	<select id="courseTypeSubclassList" resultMap="CourseTypeSubclassMap">
@@ -62,11 +79,60 @@
 	<if test="courseTypeId!=null">
 		course_type_id=#{courseTypeId},
 	</if>
+	<if test="imgUrl != null">
+		imgUrl=#{imgUrl},
+	</if>
 		id=#{id}
 		where id=#{id}
 	</update>
+	<!--查询小类别中最大ID  -->
+	<select id="maxCourseTypeSubclassId" resultType="java.lang.String">
+	select max(id) from course_type_subclass
+	</select>
+	<!-- 根据ID删除小类别  -->
+	<delete id="deleteCourseTypeSubclass">
+	delete from course_type_subclass where 1=1
+	<if test="courseTypeSubclassId != null and courseTypeSubclassId!=''">
+	and id = #{courseTypeSubclassId}
+	</if>
+	</delete>
 	<!--课程小类别的结束######################################## -->
 	
+	
+	<!--课程三级类别的开始######################################## -->
+	<resultMap type="com.ola.qh.entity.CourseTypeSubclassNames" id="CourseTypeSubclassNamesMap">
+	<result column="id" property="id"/>
+	<result column="mini_subclass_name" property="miniSubclassName"/>
+	<result column="course_type_subclass_id" property="courseTypeSubclassId"/>
+	<result column="comments" property="comments"/>
+	</resultMap>
+	<!-- 根据courseTypeSubclassId查询全部  -->
+	<select id = "select" resultMap="CourseTypeSubclassNamesMap">
+	select * from course_type_subclass_names where 1=1
+	<if test="courseTypeSubclassId != null and courseTypeSubclassId !=''"> 
+	and course_type_subclass_id = #{courseTypeSubclassId}
+	</if>
+	</select>
+	<!-- 根据ID删除  -->
+	<delete id ="delete">
+	delete from course_type_subclass_names where 1=1
+	<if test = "id != null and id !=''"> 
+	and id =#{id}
+	</if>
+	</delete>
+	<!--添加  -->
+	<insert id="insert" parameterType="String">
+		insert into course_type_subclass_names(id,mini_subclass_name,course_type_subclass_id)values(#{id},#{miniSubclassName},#{courseTypeSubclassId})
+	</insert>
+	<!-- 修改   -->
+	<update id="update" parameterType="String">
+	update course_type_subclass_names set
+	<if test="miniSubclassName!=null and miniSubclassName!=''">
+	mini_subclass_name = #{miniSubclassName}
+	</if>
+	where id = #{miniId}
+	</update>
+	<!--课程三级类别的结束######################################## -->
 	
 	
 	<!-- 课程的处理开始*************************************************** -->

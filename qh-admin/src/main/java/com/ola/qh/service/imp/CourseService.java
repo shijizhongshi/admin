@@ -12,9 +12,9 @@ import com.ola.qh.dao.CourseDao;
 import com.ola.qh.dao.CourseSubclassDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.Course;
-import com.ola.qh.entity.CourseSection;
 import com.ola.qh.entity.CourseType;
 import com.ola.qh.entity.CourseTypeSubclass;
+import com.ola.qh.entity.CourseTypeSubclassNames;
 import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
@@ -48,9 +48,9 @@ public class CourseService implements ICourseService {
 		// TODO Auto-generated method stub
 		String id = KeyGen.uuid();
 		if (courseTypeId != null && !"".equals(courseTypeId)) {
-			return courseDao.insertCourseTypeSubclass(courseTypeName, id, courseTypeId);
+			return courseDao.insertCourseTypeSubclass(courseTypeName, id, courseTypeId,null);
 		} else {
-			return courseDao.insertCourseType(courseTypeName, id);
+			return courseDao.insertCourseType(courseTypeName, id, null);
 		}
 
 	}
@@ -59,9 +59,9 @@ public class CourseService implements ICourseService {
 	public int updateCourseType(String courseTypeName, String id, String courseTypeId) {
 		// TODO Auto-generated method stub
 		if (courseTypeId != null && !"".equals(courseTypeId)) {
-			return courseDao.updateCourseTypeSubclass(courseTypeName, id, courseTypeId);
+			return courseDao.updateCourseTypeSubclass(courseTypeName, id, courseTypeId,null);
 		} else {
-			return courseDao.updateCourseType(courseTypeName, id);
+			return courseDao.updateCourseType(courseTypeName, id,null);
 		}
 	}
 
@@ -90,9 +90,9 @@ public class CourseService implements ICourseService {
 
 			}
 			Integer ordersMax = courseSubclassDao.selectMaxOrder("course");
-			if(ordersMax!=null){
-				course.setOrders(ordersMax.intValue()+1);
-			}else{
+			if (ordersMax != null) {
+				course.setOrders(ordersMax.intValue() + 1);
+			} else {
 				course.setOrders(1);
 			}
 			course.setId(KeyGen.uuid());
@@ -133,6 +133,167 @@ public class CourseService implements ICourseService {
 		}
 		results.setStatus("0");
 		results.setData(list);
+
+		return results;
+	}
+
+	@Override
+	public Results<List<CourseTypeSubclass>> selectCourseTypeSubclass(String courseTypeId) {
+		Results<List<CourseTypeSubclass>> results = new Results<List<CourseTypeSubclass>>();
+		List<CourseTypeSubclass> list = courseDao.courseTypeSubclassList(courseTypeId);
+
+		results.setStatus("0");
+		results.setData(list);
+
+		return results;
+	}
+
+	@Override
+	public Results<String> insertCourseTypeName(String courseTypeName, String imgUrl) {
+		Results<String> results = new Results<String>();
+		String id = KeyGen.uuid();
+		Integer countInteger = courseDao.insertCourseType(courseTypeName, id, imgUrl);
+		if (countInteger == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("添加分类失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> deleteCourseType(String id) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.deleteCourseType(id);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("删除失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> insertCourseTypeSubclassName(String courseTypeId, String courseTypeSubclassName,String imgUrl) {
+
+		Results<String> results = new Results<String>();
+		// 生成一个ID
+		String id = KeyGen.uuid();
+		Integer countInteger = courseDao.insertCourseTypeSubclass(courseTypeSubclassName, id, courseTypeId,imgUrl);
+		if (countInteger == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("添加分类失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> updateCourseTypeSubclassName(String courseTypeSubclassId, String courseTypeSubclassName,String imgUrl) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.updateCourseTypeSubclass(courseTypeSubclassName, courseTypeSubclassId, null,imgUrl);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("修改失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> deleteCourseTypeSubclass(String courseTypeSubclassId) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.deleteCourseTypeSubclass(courseTypeSubclassId);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("删除失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> insertThree(String courseTypeSubclassId, String miniSubclassName) {
+		Results<String> results = new Results<String>();
+		String id = KeyGen.uuid();
+		Integer count = courseDao.insert(id, courseTypeSubclassId, miniSubclassName);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("添加失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<List<CourseTypeSubclassNames>> selectThree(String courseTypeSubclassId) {
+		Results<List<CourseTypeSubclassNames>> results = new Results<List<CourseTypeSubclassNames>>();
+		List<CourseTypeSubclassNames> list = courseDao.select(courseTypeSubclassId);
+		results.setStatus("0");
+		results.setData(list);
+
+		return results;
+	}
+
+	@Override
+	public Results<String> updateThree(String miniId, String miniSubclassName) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.update(miniId, miniSubclassName);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("修改失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> deleteThree(String miniId) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.delete(miniId);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("删除失败");
+
+		return results;
+	}
+
+	@Override
+	public Results<String> updateOne(String id, String courseTypeName,String imgUrl) {
+		Results<String> results = new Results<String>();
+		Integer count = courseDao.updateCourseType(courseTypeName, id,imgUrl);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("修改一级类别失败");
 
 		return results;
 	}

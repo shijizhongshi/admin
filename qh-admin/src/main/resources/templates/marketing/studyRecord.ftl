@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/styles/admin.css" />
 <link rel="stylesheet" href="/styles/management.css" />
 <script src="/scripts/admin.js"></script>
-<script src="/scripts/indent/excle.js"></script>
 <script src="/scripts/marketing/studyRecord.js"></script>
 
 </style>
@@ -45,7 +44,7 @@ submenu="sidebarmenu-marketing-studyRecord">
 				</div>
 				<div>
 					<input type="button" class="btn-lg im-key" value="导出excle"
-						onclick="method5('tableExcel')">
+						ng-click="ExcelExport()">
 				</div>
 			</div>
 			<div class="manage">
@@ -60,7 +59,8 @@ submenu="sidebarmenu-marketing-studyRecord">
 								<th>观看时长</th>
 								<th>视频总长</th>
 							</tr>
-							<tr ng-repeat="list in list">
+							<tr ng-repeat="list in list" ng-click="checkList(list)"
+								ng-class="{'selected':selected == list}">
 								<th>{{list.userName}}</th>
 								<th>{{list.sectionName}}</th>
 								<th>{{list.courseTypeSubclassName}}</th>

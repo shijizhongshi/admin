@@ -1,10 +1,6 @@
 package com.ola.qh.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,23 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ola.qh.entity.CourseChapter;
-import com.ola.qh.entity.CourseLineWhite;
 import com.ola.qh.entity.CourseLiveCheck;
-import com.ola.qh.entity.LiveAccess;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.UserEnterLeaveActions;
-import com.ola.qh.entity.VideoPlaybackRecord;
-import com.ola.qh.service.ICourseLineWhiteService;
-import com.ola.qh.service.ICourseSubclassService;
 import com.ola.qh.service.IQuestionBankService;
-import com.ola.qh.service.IUserService;
-import com.ola.qh.util.Json;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
-import com.ola.qh.util.Thqs;
-import com.ola.qh.weixin.handler.Requests;
 
 @RestController
 @RequestMapping("/api/questionbank")
@@ -38,13 +23,6 @@ public class QuestionBankController {
 
 	@Autowired
 	private IQuestionBankService questionBankService;
-	@Autowired
-	private IUserService userService;
-	@Autowired
-	private ICourseSubclassService courseSubclassService;
-	@Autowired
-	private ICourseLineWhiteService courseLineWhiteService;
-
 	/**
 	 * 题库的上传
 	 * <p>
@@ -149,151 +127,7 @@ public class QuestionBankController {
 			@RequestParam(value = "numPerPage", required = false) String numPerPage,
 			@RequestParam(value = "page", required = false) String page) {
 		Results<List<PlayLog>> results = new Results<List<PlayLog>>();
-		// 获取视频播放记录接口
-		if (videoId != null && mobile == null) {
-			// 必须为 treemap传参
-			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", Patterns.accountId);
-			treeMap.put("videoid", videoId);
-			treeMap.put("date", date);
-			treeMap.put("num_per_page", numPerPage);
-			treeMap.put("page", page);
-
-			// 拼接地址
-			// token 是cc视频的API key
-			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
-			try {
-				Results<byte[]> testByte = Requests.testGet(Patterns.videoV2, null, address);
-				byte[] bytess = testByte.getData();
-				String byteString = new String(bytess);
-
-				// json字符串转换
-				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
-				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
-				// for循环内部测试完成
-				for (PlayLog playLog : list) {
-					// 根据用户id 查name
-					String userName = userService.selectNameById(playLog.getCustom_id());
-					playLog.setUserName(userName);
-					// 根据视频id 查视频名和所属专业
-					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
-					if (courseChapter != null) {
-						for (CourseChapter courseChapter1 : courseChapter) {
-							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
-							playLog.setSectionName(courseChapter1.getSectionName());
-						}
-					}
-				}
-				results.setStatus("0");
-				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
-				results.setData(list);
-
-				return results;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		// 获取用户自定义参数播放记录
-		if (mobile != null && videoId == null) {
-			// 根据手机号查询id
-			String id = userService.selectIdByMobile(mobile);
-			if (id == null) {
-				results.setStatus("1");
-				results.setMessage("根据此手机号未查询到用户，请核对~");
-
-				return results;
-			}
-			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", Patterns.accountId);
-			treeMap.put("customid", id);
-			treeMap.put("date", date);
-			treeMap.put("num_per_page", numPerPage);
-			treeMap.put("page", page);
-
-			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
-			try {
-				Results<byte[]> testByte = Requests.testGet(Patterns.customUserV2, null, address);
-				byte[] bytess = testByte.getData();
-				String byteString = new String(bytess);
-
-				// json字符串转换
-				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
-				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
-				// 展示具体的foreach循环添加
-				for (PlayLog playLog : list) {
-					// 根据用户id 查name
-					String userName = userService.selectNameById(playLog.getCustom_id());
-					playLog.setUserName(userName);
-					// 根据视频id 查视频名和所属专业
-					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
-					if (courseChapter != null) {
-						for (CourseChapter courseChapter1 : courseChapter) {
-							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
-							playLog.setSectionName(courseChapter1.getSectionName());
-						}
-					}
-				}
-				results.setStatus("0");
-				results.setCount(videoPlaybackRecord.getPlay_logs().getTotal());
-				results.setData(list);
-
-				return results;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		// 获取视频自定义参数播放记录
-		if (mobile != null && videoId != null) {
-			// 根据手机号查询id
-			String id = userService.selectIdByMobile(mobile);
-			if (id == null) {
-				results.setStatus("1");
-				results.setMessage("根据此手机号未查询到用户，请核对~");
-
-				return results;
-			}
-			TreeMap<String, String> treeMap = new TreeMap<>();
-			treeMap.put("userid", Patterns.accountId);
-			treeMap.put("videoid", videoId);
-			treeMap.put("customid", id);
-			treeMap.put("date", date);
-			treeMap.put("num_per_page", numPerPage);
-			treeMap.put("page", page);
-
-			String address = Thqs.getThqstreeMap(Patterns.token, treeMap);
-			try {
-				Results<byte[]> testByte = Requests.testGet(Patterns.customVideoV2, null, address);
-				byte[] bytess = testByte.getData();
-				String byteString = new String(bytess);
-
-				// json字符串转换
-				VideoPlaybackRecord videoPlaybackRecord = Json.from(byteString, VideoPlaybackRecord.class);
-				List<PlayLog> list = videoPlaybackRecord.getPlay_logs().getPlay_log();
-				// 展示具体的foreach循环添加
-				for (PlayLog playLog : list) {
-					// 根据用户id 查name
-					String userName = userService.selectNameById(playLog.getCustom_id());
-					playLog.setUserName(userName);
-					// 根据视频id 查视频名和所属专业
-					List<CourseChapter> courseChapter = courseSubclassService.selectNameAndCTSN(playLog.getVideoid());
-					if (courseChapter != null) {
-						for (CourseChapter courseChapter1 : courseChapter) {
-							playLog.setCourseTypeSubclassName(courseChapter1.getCourseTypeSubclassName());
-							playLog.setSectionName(courseChapter1.getSectionName());
-						}
-					}
-				}
-
-				results.setStatus("0");
-				results.setData(list);
-
-				return results;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		results.setStatus("1");
-		results.setMessage("错误！手机号与视频Id不能同时为空");
+		results = questionBankService.ccVideo(videoId, mobile, date, numPerPage, page);
 
 		return results;
 	}
@@ -306,74 +140,14 @@ public class QuestionBankController {
 	 * @param pagenum
 	 * @return
 	 */
-	@RequestMapping(value = "liveAccess", method = RequestMethod.GET)
+	@RequestMapping(value = "/liveAccess", method = RequestMethod.GET)
 	public Results<List<UserEnterLeaveActions>> liveAccess(
 			@RequestParam(value = "notToEnter", required = false) String notToEnter,
 			@RequestParam(value = "liveId", required = true) String liveId,
 			@RequestParam(value = "pageindex") String pageindex, @RequestParam(value = "pagenum") String pagenum) {
 		Results<List<UserEnterLeaveActions>> results = new Results<List<UserEnterLeaveActions>>();
-		// treemap
-		TreeMap<String, String> treeMap = new TreeMap<>();
-		treeMap.put("userid", Patterns.accountId);
-		treeMap.put("liveid", liveId);
-		treeMap.put("pagenum", pagenum);
-		treeMap.put("pageindex", pageindex);
 
-		String address = Thqs.getThqstreeMap(Patterns.liveToken, treeMap);
-
-		try {
-			Results<byte[]> testByte = Requests.testGet(Patterns.useraction, null, address);
-			byte[] bytes = testByte.getData();
-			String byteString = new String(bytes);
-			// json转实体类
-			LiveAccess liveAccess = Json.from(byteString, LiveAccess.class);
-			List<UserEnterLeaveActions> list = liveAccess.getUserEnterLeaveActions();
-
-			// 如果选定查询未进入直播间用户 返回的是白名单中的用户
-			if ("1".equals(notToEnter)) {
-				List<UserEnterLeaveActions> userList = new ArrayList<>();
-				// 获取本直播id的白名单全部数据
-				List<CourseLineWhite> whithList = courseLineWhiteService.selectAllByLiveId(liveId);
-				// 迭代器 匹配两个集合中的内容 相同就remove掉
-				for (UserEnterLeaveActions userEnterLeaveActions : list) {
-					for (Iterator<CourseLineWhite> iterator = whithList.iterator(); iterator.hasNext();) {
-						if (userEnterLeaveActions.getViewerName().equals(iterator.next().getMobile())) {
-							iterator.remove();
-						}
-					}
-				}
-				/*
-				 * for (UserEnterLeaveActions userEnterLeaveActions : list) { for (int i = 0; i
-				 * < whithList.size(); i++) { if
-				 * (userEnterLeaveActions.getViewerName().equals(whithList.get(i).getMobile()))
-				 * { whithList.remove(i); } } }
-				 */
-				// 赋值返回
-				UserEnterLeaveActions userEnterLeaveActions = null;
-				for (int i = 0; i < whithList.size(); i++) {
-					userEnterLeaveActions = new UserEnterLeaveActions();
-					userEnterLeaveActions.setViewerName(whithList.get(i).getMobile());
-					userList.add(userEnterLeaveActions);
-				}
-				results.setStatus("0");
-				results.setData(userList);
-
-				return results;
-			}
-
-			results.setStatus("0");
-			results.setCount(liveAccess.getCount());
-			results.setData(list);
-
-			return results;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		results.setStatus("1");
-		results.setMessage("错误！");
+		results = questionBankService.liveAccess(notToEnter, liveId, pagenum, pageindex);
 		return results;
 	}
-
 }

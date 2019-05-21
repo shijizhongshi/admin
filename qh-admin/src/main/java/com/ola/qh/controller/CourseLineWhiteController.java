@@ -36,10 +36,10 @@ public class CourseLineWhiteController {
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public Results<List<CourseLineWhite>> lineWhiteList(@RequestParam(name="liveId",required=false)String liveId,
-			@RequestParam(name="mobile",required=false)String mobile,
+			@RequestParam(name="username",required=false)String username,
 			@RequestParam(name="pageNo",required=true)int pageNo,@RequestParam(name="pageSize",required=true)int pageSize){
 		
-		return courseLineWhiteService.lineWhiteList(liveId,mobile, pageNo, pageSize);
+		return courseLineWhiteService.lineWhiteList(liveId,username, pageNo, pageSize);
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
@@ -51,27 +51,12 @@ public class CourseLineWhiteController {
 			results.setStatus("1");
 			return results;
 		}
-		Pattern p = Pattern.compile(Patterns.INTERNAL_MOBILE_PATTERN);
-		Matcher m = p.matcher(courseLineWhite.getMobile());
-		if (!m.matches()) {
-			results.setStatus("1");
-			results.setMessage("手机号格式不对");
-			return results;
-		}
 		return courseLineWhiteService.insertLineWhite(courseLineWhite);
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public Results<String> updateLineWhite(@RequestBody CourseLineWhite courseLineWhite){
 		
-		Results<String> results=new Results<String>();
-		Pattern p = Pattern.compile(Patterns.INTERNAL_MOBILE_PATTERN);
-		Matcher m = p.matcher(courseLineWhite.getMobile());
-		if (!m.matches()) {
-			results.setStatus("1");
-			results.setMessage("手机号格式不对");
-			return results;
-		}
 		return courseLineWhiteService.updateLineWhite(courseLineWhite);
 	}
 	
