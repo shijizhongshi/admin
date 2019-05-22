@@ -12,6 +12,9 @@ public class SalesmanSecond {
 	@NotEmpty
 	private String mobile;
 	
+	@NotEmpty
+	private String userId;
+	
 	private String salesmanId;
 	
 	private String salesmanIdNew;
@@ -66,6 +69,14 @@ public class SalesmanSecond {
 
 	public void setSalesmanIdNew(String salesmanIdNew) {
 		this.salesmanIdNew = salesmanIdNew;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

@@ -9,9 +9,9 @@ public interface ISalesmanSecondService {
 
 	public Results<List<SalesmanSecond>> SecondList(String salesmanId,String mobile,int pageNo,int pageSize);
 	
-	public Results<String> insertSecond(SalesmanSecond salesmanSecond);
+	////public Results<String> insertSecond(SalesmanSecond salesmanSecond);
 	
 	public Results<String> updateSecond(String salesmanId,String mobile,String salesmanIdNew);
 	
-	public Results<String> deleteSecond(String salesmanId,String id);
+	////public Results<String> deleteSecond(String salesmanId,String id);
 }

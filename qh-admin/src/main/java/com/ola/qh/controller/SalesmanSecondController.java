@@ -2,11 +2,7 @@ package com.ola.qh.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +27,7 @@ public class SalesmanSecondController {
 		return SalesmanSecondService.SecondList(salesmanId,mobile, pageNo, pageSize);
 	}
 	
-	@RequestMapping(value="/insert",method=RequestMethod.POST)
+	/*@RequestMapping(value="/insert",method=RequestMethod.POST)
 	public Results<String> insertSecond(@RequestBody @Valid SalesmanSecond salesmanSecond,BindingResult valid){
 		
 		Results<String> results=new Results<String>();
@@ -40,7 +36,7 @@ public class SalesmanSecondController {
 			return results;
 		}
 		return SalesmanSecondService.insertSecond(salesmanSecond);
-	}
+	}*/
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
 	public Results<String> updateClient(@RequestParam(name="salesmanId",required=true)String salesmanId,
@@ -49,10 +45,10 @@ public class SalesmanSecondController {
 		return SalesmanSecondService.updateSecond(salesmanId, mobile, salesmanIdNew);
 	}
 	
-	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	/*@RequestMapping(value="/delete",method=RequestMethod.GET)
 	public Results<String> deleteSecond(@RequestParam(name="salesmanId",required=false)String salesmanId,
 			@RequestParam(name="id",required=false)String id){
 		
 		return SalesmanSecondService.deleteSecond(salesmanId, id);
-	}
+	}*/
 }
