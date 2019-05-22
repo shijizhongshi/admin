@@ -10,6 +10,8 @@
 <script src="/assets/js/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="/scripts/admin.js"></script>
 
+<script src="/scripts/wangEditor.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/styles/wangEditor.min.css" />
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-zixun">
 <div>
 	<div class="details" style="width: 100%" ng-controller="newController">
@@ -157,16 +159,19 @@
 								</div>
 							</div>
 
+							<!-- 富文本编辑器  -->
 							<div class="template-right">
 								<!--<p style="height: 40px; font-size: 1.3rem;">文本内容</p>-->
 								<div class="grade-text">
 									<span>文本内容</span>
+								    <!-- <div id="div1" style="border:1px solid gray;">
+									</div> -->
 									<textarea ng-model="news.content"></textarea>
 								</div>
-								<!--<textarea id="editor" ></textarea>
+								<!-- <textarea id="editor" ></textarea>
 								<script type="text/javascript">var ue = UE.getEditor('editor');</script>
 								<script id="editor" type="text/plain"
-									style="width: 90%; height: auto;"></script>-->
+									style="width: 90%; height: auto;"></script> -->
 							</div>
 					</form>
 					<div class="end">

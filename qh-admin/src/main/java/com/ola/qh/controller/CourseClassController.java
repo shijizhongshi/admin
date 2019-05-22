@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ola.qh.entity.CourseClass;
 import com.ola.qh.service.IBuyCourseService;
 import com.ola.qh.service.ICourseClassService;
-import com.ola.qh.service.ICourseService;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -28,8 +27,6 @@ public class CourseClassController {
 	@Autowired
 	private IBuyCourseService buyCourseService;
 	
-	@Autowired
-	private ICourseService courseService;
 	
 	@RequestMapping(value="/select",method=RequestMethod.GET)
 	public Results<List<CourseClass>> selectCourseClass(@RequestParam(name="id",required=false)String id,

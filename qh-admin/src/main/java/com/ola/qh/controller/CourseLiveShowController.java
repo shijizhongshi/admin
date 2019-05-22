@@ -30,9 +30,7 @@ public class CourseLiveShowController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Results<String> saveLive(@RequestBody @Valid CourseLineShow cl, BindingResult valid) {
 		Results<String> result = new Results<String>();
-		//根据teacherId查询老师姓名
-		List<CourseTeacher> list = courseTeacherService.selectName(cl.getTeacherId());
-		cl.setLecturer(list.get(0).getName());
+		//添加直播
 		int num = courseNofreeService.insertLive(cl);
 		if (num < 0) {
 			result.setStatus("1");
@@ -47,9 +45,7 @@ public class CourseLiveShowController {
 	public Results<String> updateLive(@RequestBody CourseLineShow cl) {
 		Results<String> result = new Results<String>();
 		if (cl.getId() != null && !"".equals(cl.getId())) {
-			//根据teacherId查询老师姓名
-			List<CourseTeacher> list = courseTeacherService.selectName(cl.getTeacherId());
-			cl.setLecturer(list.get(0).getName());
+			//修改
 			int num = courseNofreeService.updateLive(cl);
 			if (num < 0) {
 				result.setStatus("1");

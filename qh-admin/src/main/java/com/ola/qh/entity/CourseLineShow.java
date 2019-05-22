@@ -2,6 +2,8 @@ package com.ola.qh.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class CourseLineShow {
@@ -12,34 +14,55 @@ public class CourseLineShow {
 	@NotEmpty
 	private String courseTypeSubclassName;
 	@NotEmpty
-	private String liveName;
+	private String liveName;//直播name
 
 	private String outLinks;
 	@NotEmpty
-	private String imgUrl;
+	private String imgUrl;// 课程图片
+
+	private String headImgUrl;// 主讲老师头像
 
 	private String isremmend;//// 1是推荐
 
 	private String isshow;/// 1:可见
 
-	private Date addtime;
+	private Date addtime;//精确的开始时间
 
 	private Date updatetime;
 
 	@NotEmpty
-	private String liveRoomId;
+	private String liveRoomId;//房间ID
 
-	private String liveId;
+	private String liveId;//直播ID
 
-	private String liveBackId;
+	private String liveBackId;//回放ID
 
-	private String teacherId;// 老师id 2019-5-7新加以下三个字段
+	private String teacherId;// 老师id  
 
 	private String lecturer;// 主讲老师
 
-	private Date starttime;// 直播开始时间
+	@NotNull
+	private Date starttime;// 手动输入的直播开始时间
+	@NotNull
+	private Date stoptime;// 手动输入的直播结束时间
 
 	private Integer isopen;// 是否是公开课 ，0 不公开，1 公开
+
+	public Date getStoptime() {
+		return stoptime;
+	}
+
+	public void setStoptime(Date stoptime) {
+		this.stoptime = stoptime;
+	}
+
+	public String getHeadImgUrl() {
+		return headImgUrl;
+	}
+
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
+	}
 
 	public Integer getIsopen() {
 		return isopen;

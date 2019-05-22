@@ -121,12 +121,26 @@
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							<div class="select-2">
-								<span>主讲老师</span> <img src="/images/sjk-xl.png"> <select
-									ng-model="list" ng-options="list.name for list in teacherList"></select>
+								<span>主讲老师</span> <input type="text"
+									ng-model="live.lecturer"
+									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="costs-uploadfile-div">
+								上传老师头像<input type="file" name="file" value="上传老师头像"
+									onchange="angular.element(this).scope().uploadmainheadimage(this)">
+								<div class="costs-img">
+									<img src="{{headImgUrl}}">
+								</div>
 							</div>
 							<div class="select-2">
-								<span>请选择日期</span> <input type="date" name="search"
+								<span>直播开始时间 <span id="sp1" style="display: inline;"></span></span>
+								<input type="datetime-local" name="search"
 									ng-model="live.starttime"
+									class="ng-pristine ng-untouched ng-valid ng-empty">
+							</div>
+							<div class="select-2">
+								<span>直播结束时间 <span id="sp2" style="display: inline;"></span></span> <input type="datetime-local" name="search"
+									ng-model="live.stoptime"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							<div class="select-2" ng-show="liveId!=null">

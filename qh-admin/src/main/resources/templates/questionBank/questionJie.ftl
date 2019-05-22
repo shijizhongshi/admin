@@ -189,9 +189,9 @@ submenu="sidebarmenu-questionBank-questionChapter">
 	<h3>从文件导入试题</h3>
 	<div class="costs-uploadfile-div">
 							<span>请选择试题模板</span><select ng-model="status">
-							<option value="0">试题答案中有图片</option>
-							<option value="1">试题题干中有图片,答案无图片</option>
-							<option value="2">试题答案与选项均无图片</option>
+							<option value="0">答案中有图片</option>
+							<option value="1">单题干中有图片</option>
+							<option value="2">均无图片</option>
 							</select>
 
 				
