@@ -52,7 +52,6 @@ import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IStoreService;
 import com.ola.qh.util.Json;
-import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 import com.ola.qh.util.Thqs;
@@ -73,17 +72,20 @@ public class QuestionBankService implements IQuestionBankService {
 	private IStoreService storeService;
 	@Autowired
 	private CourseNofreeDao courseNofreeDao;
+	@Autowired
+	private InportBankTemplateService inportBankTemplateService;
+	
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Results<String> importExcel(MultipartFile file, String subId) throws Exception {
-		Results<String> result = new Results<String>();
+	public Results<String> importExcel(MultipartFile file, String subId,int status) throws Exception {
+		Results<String> results=new Results<String>();
 		Workbook wb = WorkbookFactory.create(file.getInputStream());
 
 		Sheet sheet = wb.getSheetAt(0);
 
 		// 判断用07还是03的方法获取图片
-		String filename = file.getOriginalFilename();
+		/*String filename = file.getOriginalFilename();
 		Map<String, PictureData> maplist = new HashMap<>();
 		if (filename.contains(".xls")) {
 			maplist = getPictures1((HSSFSheet) sheet);
@@ -96,6 +98,26 @@ public class QuestionBankService implements IQuestionBankService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}*/
+
+		
+	      //判断用07还是03的方法获取图片  
+		String filename=file.getOriginalFilename();
+		List<String> urlss=new ArrayList<String>();
+		
+		if(status==0 || status==1){
+			Map<String, PictureData>  maplist=new HashMap<>();  
+			if(filename.contains(".xls")){
+				maplist=getPictures1((HSSFSheet) sheet);
+			}else if(filename.contains(".xlsx")){
+				maplist=getPictures2((XSSFSheet) sheet);
+			}
+			try {
+				urlss=printImg(maplist);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
 		}
 
 		int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
@@ -103,7 +125,7 @@ public class QuestionBankService implements IQuestionBankService {
 		Row titleRow = rowIterator.next();
 		titleRow.getLastCellNum();
 		/* String[][] table = new String[rowNumber][columnNumber]; */
-		String bankId = null;
+		/*String bankId = null;
 		int n = 0;
 		for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 			Row row = rowIterator.next();
@@ -273,11 +295,17 @@ public class QuestionBankService implements IQuestionBankService {
 				}
 
 			}
+*/
 
+		if(status==0){
+			return inportBankTemplateService.BankTemplateAnswerImg(rowNumber, rowIterator, subId, urlss);
+		}else if(status==1){
+			return inportBankTemplateService.BankTemplateTitleImg(rowNumber, rowIterator, subId, urlss);
+		}else if(status==2){
+			return inportBankTemplateService.BankTemplateNoImg(rowNumber, rowIterator, subId);
 		}
-
-		result.setStatus("0");
-		return result;
+		results.setStatus("1");
+		return results;
 
 	}
 

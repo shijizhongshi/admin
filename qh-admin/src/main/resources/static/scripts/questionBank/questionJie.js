@@ -332,6 +332,7 @@ app.controller("questionJieController", function($scope, $http){
 		var fd = new FormData();
 	    fd.append("file", $("#file")[0].files[0]);
 	    fd.append("subId", $scope.subId);
+	    fd.append("status", $scope.status);
 	    
 	   $http.post("/api/questionbank/improtExcel",fd, {
 	        withCredentials: true,

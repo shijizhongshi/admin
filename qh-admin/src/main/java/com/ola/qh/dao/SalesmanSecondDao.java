@@ -10,11 +10,11 @@ public interface SalesmanSecondDao {
 
 	public List<SalesmanSecond> SecondList(@Param("salesmanId")String salesmanId,@Param("mobile")String mobile,@Param("pageNo")int pageNo,@Param("pageSize")int pageSize);
 	
-	public SalesmanSecond existSecond(@Param("mobile")String mobile);
+	/////public SalesmanSecond existSecond(@Param("mobile")String mobile);
 	
 	public int SecondCount(@Param("salesmanId")String salesmanId,@Param("mobile")String mobile);
 	
-	public int insertSecond(SalesmanSecond salesmanSecond);
+	/////public int insertSecond(SalesmanSecond salesmanSecond);
 	
 	public int updateSecond(SalesmanSecond salesmanSecond);
 	

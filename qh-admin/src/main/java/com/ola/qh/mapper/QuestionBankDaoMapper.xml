@@ -122,7 +122,7 @@
 	</select>
 	
 	<delete id="deleteQuestionUnit">
-	delete from question_bank_unit where bank_id=#{bankId}
+	delete from question_bank_unit where id=#{id}
 	</delete>
 	
 	<update id="updateQuestionUnit" parameterType="com.ola.qh.entity.QuestionUnit">
