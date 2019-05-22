@@ -50,7 +50,6 @@ import com.ola.qh.entity.VideoPlaybackRecord;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.service.IStoreService;
 import com.ola.qh.util.Json;
-import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 import com.ola.qh.util.Thqs;
@@ -69,213 +68,49 @@ public class QuestionBankService implements IQuestionBankService {
 	private CourseSubclassDao courseSubclassDao;
 	@Autowired
 	private IStoreService storeService;
+	@Autowired
+	private InportBankTemplateService inportBankTemplateService;
 	
-	
-
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Results<String> importExcel(MultipartFile file, String subId) throws Exception {
-		Results<String> result = new Results<String>();
+	public Results<String> importExcel(MultipartFile file, String subId,int status) throws Exception {
+		Results<String> results=new Results<String>();
 		Workbook wb = WorkbookFactory.create(file.getInputStream());
 
 		Sheet sheet = wb.getSheetAt(0);
 		
 	      //判断用07还是03的方法获取图片  
 		String filename=file.getOriginalFilename();
-		Map<String, PictureData>  maplist=new HashMap<>();  
-		if(filename.contains(".xls")){
-			maplist=getPictures1((HSSFSheet) sheet);
-		}else if(filename.contains(".xlsx")){
-			maplist=getPictures2((XSSFSheet) sheet);
-		}
 		List<String> urlss=new ArrayList<String>();
-        try {
-			urlss=printImg(maplist);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-
+		
+		if(status==0 || status==1){
+			Map<String, PictureData>  maplist=new HashMap<>();  
+			if(filename.contains(".xls")){
+				maplist=getPictures1((HSSFSheet) sheet);
+			}else if(filename.contains(".xlsx")){
+				maplist=getPictures2((XSSFSheet) sheet);
+			}
+			try {
+				urlss=printImg(maplist);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		}
 		int rowNumber = sheet.getPhysicalNumberOfRows() - 1;
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		Row titleRow = rowIterator.next();
 		titleRow.getLastCellNum();
 		/* String[][] table = new String[rowNumber][columnNumber]; */
-		String bankId = null;
-		int n = 0;
-		for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
-			Row row = rowIterator.next();
-			////// 保存题库的信息
-			if ("共用题干".equals(checkNull(0, row)) || "共用选项".equals(checkNull(0, row))) {
-				/// 保存他下边的集合
-				QuestionBank qb = new QuestionBank();
-				qb.setAddtime(new Date());
-				bankId = KeyGen.uuid();
-				qb.setId(bankId);
-				// qb.setNumberNo(n+1);
-				qb.setTitle(checkNull(1, row));
-				qb.setTypes(checkNull(0, row));
-				qb.setSubId(subId);
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>0){
-							qb.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-						}
-					}
-				}
-				questionBankDao.insertQuestionBank(qb);
-				// n++;
-			}
-			if ("单选题".equals(checkNull(0, row)) || "多选题".equals(checkNull(0, row))) {
-				QuestionBank qb = new QuestionBank();
-				qb.setAddtime(new Date());
-				String unitId = KeyGen.uuid();
-				qb.setId(unitId);
-				qb.setTitle(checkNull(1, row));
-				qb.setTypes(checkNull(0, row));
-				qb.setSubId(subId);
-				qb.setCorrect(checkNull(3, row));
-				QuestionAnswer qa = new QuestionAnswer();
-				qa.setBankUnitId(unitId);
-				qa.setAddtime(new Date());
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>=0){
-							qb.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-							break;
-						}
-					}
-				}
-				if (checkNull(4, row).trim() != null) {
-					qa.setAnswers(checkNull(4, row));
-					qa.setId(KeyGen.uuid());
-					qa.setOptions("A");
-					if (checkNull(3, row).contains("A")) {
-						qa.setCorrect(true);
-					} else {
-						qa.setCorrect(false);
-					}
-					qa.setOrders(0);
-					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////A对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-5")>=0){
-							qa.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-							break;
-						}
-					}
-					questionBankDao.insertQuestionAnswer(qa);
-				}
-				if (checkNull(6, row)!= null) {
-					qa.setAnswers(checkNull(6, row));
-					qa.setId(KeyGen.uuid());
-					qa.setOptions("B");
-					if (checkNull(3, row).contains("B")) {
-						qa.setCorrect(true);
-					} else {
-						qa.setCorrect(false);
-					}
-					qa.setOrders(1);
-					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////B对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-7")>=0){
-							qa.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-							break;
-						}
-					}
-					questionBankDao.insertQuestionAnswer(qa);
-				}
-				if (checkNull(8, row) != null) {
-					qa.setAnswers(checkNull(8, row));
-					qa.setId(KeyGen.uuid());
-					qa.setOptions("C");
-					if (checkNull(3, row).contains("C")) {
-						qa.setCorrect(true);
-					} else {
-						qa.setCorrect(false);
-					}
-					qa.setOrders(2);
-					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////C对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-9")>=0){
-							qa.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-							break;
-						}
-					}
-					questionBankDao.insertQuestionAnswer(qa);
-				}
-				if (checkNull(10, row) != null) {
-					qa.setAnswers(checkNull(10, row));
-					qa.setId(KeyGen.uuid());
-					qa.setOptions("D");
-					if (checkNull(3, row).contains("D")) {
-						qa.setCorrect(true);
-					} else {
-						qa.setCorrect(false);
-					}
-					qa.setOrders(3);
-					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////D对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-11")>=0){
-							qa.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-							break;
-						}
-					}
-					questionBankDao.insertQuestionAnswer(qa);
-				}
-				if (checkNull(12, row) != null) {
-					qa.setAnswers(checkNull(12, row));
-					qa.setId(KeyGen.uuid());
-					qa.setOptions("E");
-					if (checkNull(3, row).contains("E")) {
-						qa.setCorrect(true);
-					} else {
-						qa.setCorrect(false);
-					}
-					qa.setOrders(4);
-					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////E对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-13")>=0){
-							qa.setTitleimg(imageurl);
-							urlss.remove(imageurl);
-							break;
-						}
-					}
-					questionBankDao.insertQuestionAnswer(qa);
-				}
-
-				if (bankId != null) {
-					///// 共同题干的问题
-					qb.setBankId(bankId);
-					qb.setAnalysis(checkNull(14, row));
-					qb.setNumberNo(n + 1);
-
-					questionBankDao.insertQuestionUnit(qb);
-					n++;
-				} else {
-					/////// 单纯的单选或者多选的问题
-					qb.setAnalysis(checkNull(14, row));
-					qb.setNumberNo(n + 1);
-					questionBankDao.insertQuestionBank(qb);
-					n++;
-				}
-
-			}
-
+		if(status==0){
+			return inportBankTemplateService.BankTemplateAnswerImg(rowNumber, rowIterator, subId, urlss);
+		}else if(status==1){
+			return inportBankTemplateService.BankTemplateTitleImg(rowNumber, rowIterator, subId, urlss);
+		}else if(status==2){
+			return inportBankTemplateService.BankTemplateNoImg(rowNumber, rowIterator, subId);
 		}
-
-		result.setStatus("0");
-		return result;
+		results.setStatus("1");
+		return results;
 
 	}
 	
