@@ -12,7 +12,6 @@ import com.ola.qh.dao.SalesmanDao;
 import com.ola.qh.dao.SalesmanSecondDao;
 import com.ola.qh.entity.SalesmanSecond;
 import com.ola.qh.service.ISalesmanSecondService;
-import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
 
 @Service
@@ -44,7 +43,7 @@ public class SalesmanSecondService implements ISalesmanSecondService{
 		}
 	}
 
-	@Transactional
+	/*@Transactional
 	@Override
 	public Results<String> insertSecond(SalesmanSecond salesmanSecond) {
 		
@@ -71,7 +70,7 @@ public class SalesmanSecondService implements ISalesmanSecondService{
 			results.setStatus("1");
 			return results;
 		}
-	}
+	}*/
 
 	@Transactional
 	@Override
@@ -101,7 +100,7 @@ public class SalesmanSecondService implements ISalesmanSecondService{
 		}
 	}
 
-	@Transactional
+	/*@Transactional
 	@Override
 	public Results<String> deleteSecond(String salesmanId, String id) {
 		
@@ -116,7 +115,7 @@ public class SalesmanSecondService implements ISalesmanSecondService{
 			results.setStatus("1");
 			return results;
 		}
-	}
+	}*/
 
 	
 }
