@@ -219,6 +219,9 @@
 	<if test="starttime!=null">
 	starttime = #{starttime},
 	</if>
+	<if test="stoptime!=null">
+	stoptime = #{stoptime},
+	</if>
 	<if test="isopen != null">
 	isopen = #{isopen},
 	</if>

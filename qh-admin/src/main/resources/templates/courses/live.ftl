@@ -133,12 +133,13 @@
 								</div>
 							</div>
 							<div class="select-2">
-								<span>直播开始时间</span> <input type="datetime-local" name="search"
+								<span>直播开始时间 <span id="sp1" style="display: inline;"></span></span>
+								<input type="datetime-local" name="search"
 									ng-model="live.starttime"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							<div class="select-2">
-								<span>直播结束时间</span> <input type="datetime-local" name="search"
+								<span>直播结束时间 <span id="sp2" style="display: inline;"></span></span> <input type="datetime-local" name="search"
 									ng-model="live.stoptime"
 									class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
