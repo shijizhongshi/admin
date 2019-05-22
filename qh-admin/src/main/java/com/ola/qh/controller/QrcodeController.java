@@ -1,35 +1,24 @@
 package com.ola.qh.controller;
 
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.ola.qh.entity.Salesman;
-import com.ola.qh.service.ISalesmanService;
 import com.ola.qh.service.IStoreService;
 import com.ola.qh.util.Bytes;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
-import com.sun.org.apache.xml.internal.utils.URI;
 @RestController
 public class QrcodeController {
 	
 	@Autowired
 	private IStoreService storeService;
-	
-	@Autowired
-	private ISalesmanService salesmanService;
 	
 	@RequestMapping(value="/api/qrcode/geturl")
 	 public Results<String> seeUrl(@RequestParam(value = "imgUrl", required = true) String imgUrl,
@@ -62,7 +51,7 @@ public class QrcodeController {
 	        inStream.close();    
 	        byte[] data =  outStream.toByteArray(); 
 		 
-        byte[] bytes = Bytes.qrcode("https://www.baidu.com/", 300, 300,data);
+        byte[] bytes = Bytes.qrcode("http://localhost:9999/web/salesmanQRcode/register", 300, 300,data);
 		String fname = KeyGen.gen() + ".jpg";
 		String url  = storeService.storeUrl(fname, bytes);
 		

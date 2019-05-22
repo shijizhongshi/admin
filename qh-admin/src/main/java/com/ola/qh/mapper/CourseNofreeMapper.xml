@@ -127,8 +127,13 @@
 	<!-- 热门直播的开始~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<insert id="insertLive" parameterType="com.ola.qh.entity.CourseLineShow">
 	insert into course_line_show(id,course_type_name,course_type_subclass_name,live_name,
-	img_url,isremmend,isshow,addtime,out_links,live_room_id,live_id,live_back_id,starttime,lecturer,teacher_id,isopen)values(#{id},#{courseTypeName},#{courseTypeSubclassName},
-	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},#{outLinks},#{liveRoomId},#{liveId},#{liveBackId},#{starttime},#{lecturer},#{teacherId},#{isopen})
+	img_url,isremmend,isshow,addtime,out_links,live_room_id,live_id,
+	live_back_id,starttime,lecturer,teacher_id,isopen,headImgUrl,stoptime)
+	values
+	(#{id},#{courseTypeName},#{courseTypeSubclassName},
+	#{liveName},#{imgUrl},#{isremmend},#{isshow},#{addtime},
+	#{outLinks},#{liveRoomId},#{liveId},#{liveBackId},#{starttime},
+	#{lecturer},#{teacherId},#{isopen},#{headImgUrl},#{stoptime})
 	</insert>
 	<resultMap type="com.ola.qh.entity.CourseLineShow" id="liveMap">
 	
@@ -147,9 +152,8 @@
 	<result column="starttime" property="starttime"/>
 	
 	<result column="isopen" property="isopen"/>
-
-	
 	</resultMap>
+	
 	<select id="selectLiveList" resultMap="liveMap">
 	select * from course_line_show where 1=1
 	<if test="courseTypeName!=null and courseTypeName!='' ">
@@ -206,7 +210,7 @@
 	<if test="liveBackId!=null and liveBackId!='' ">
 	live_back_id=#{liveBackId},
 	</if>
-	<if test="teacherId!=null and teacherId!=''">
+	<if test="teacherId!=null and teacherId !=''">
 	teacher_id=#{teacherId},
 	</if>
 	<if test="lecturer!=null and lecturer!=''">
@@ -214,6 +218,9 @@
 	</if>
 	<if test="starttime!=null">
 	starttime = #{starttime},
+	</if>
+	<if test="stoptime!=null">
+	stoptime = #{stoptime},
 	</if>
 	<if test="isopen != null">
 	isopen = #{isopen},

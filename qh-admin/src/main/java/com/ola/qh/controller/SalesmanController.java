@@ -50,8 +50,9 @@ public class SalesmanController {
 	}
 	
 	@RequestMapping(value="/delete",method=RequestMethod.GET)
-	public Results<String> deleteSalesman(@RequestParam(name="id",required=true)String id){
+	public Results<String> deleteSalesman(@RequestParam(name="id",required=true)String id,
+			@RequestParam(name="types",required=true)int types){
 		
-		return salesmanService.deleteSalesman(id);
+		return salesmanService.deleteSalesman(id,types);
 	}
 }

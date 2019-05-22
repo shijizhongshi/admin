@@ -2,277 +2,351 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
-	
-	<mapper namespace="com.ola.qh.dao.CourseDao">
-	
-	
-	<!--课程大类别的开始####################################-->
-	<!--大类别的映射-->
-	<resultMap type="com.ola.qh.entity.CourseType" id="CourseTypeMap">
-	<result column="id" property="id"/>
-	<result column="course_type_name" property="courseTypeName"/>
-	<result column="imgUrl" property="imgUrl"/>
+
+
+<mapper namespace="com.ola.qh.dao.CourseDao">
+
+
+	<!--课程大类别的开始#################################### -->
+	<!--大类别的映射 -->
+	<resultMap type="com.ola.qh.entity.CourseType"
+		id="CourseTypeMap">
+		<result column="id" property="id" />
+		<result column="course_type_name" property="courseTypeName" />
+		<result column="imgUrl" property="imgUrl" />
 	</resultMap>
-	
+
 	<insert id="insertCourseType">
-	insert into course_type(id,course_type_name,imgUrl) values(#{id},#{courseTypeName},#{imgUrl})
+		insert into course_type(id,course_type_name,imgUrl)
+		values(#{id},#{courseTypeName},#{imgUrl})
 	</insert>
 	<select id="courseTypeList" resultMap="CourseTypeMap">
-	    select * from course_type
+		select * from course_type
 	</select>
-	<select id="singleCourseType" resultType="com.ola.qh.entity.CourseType">
-	    select id id,course_type_name courseTypeName from course_type where id=#{id}
+	<select id="singleCourseType"
+		resultType="com.ola.qh.entity.CourseType">
+		select id id,course_type_name courseTypeName from course_type where id=#{id}
 	</select>
 	<update id="updateCourseType" parameterType="String">
-	    update course_type set
-	    <if test="imgUrl != null and imgUrl !=''">
-	    imgUrl = #{imgUrl},
-	    </if>
-	    course_type_name = #{courseTypeName} 
-	    where id=#{id}
+		update course_type set
+		<if test="imgUrl != null and imgUrl !=''">
+			imgUrl = #{imgUrl},
+		</if>
+		course_type_name = #{courseTypeName}
+		where id=#{id}
 	</update>
-	<!-- 查询课程大类别中最大ID  -->
+	<!-- 查询课程大类别中最大ID -->
 	<select id="maxId" resultType="java.lang.String">
-	select max(id) from course_type
+		select max(id) from course_type
 	</select>
-	<!-- 根据ID删除大类别  -->
+	<!-- 根据ID删除大类别 -->
 	<delete id="deleteCourseType">
-	delete from course_type where 1=1
-	<if test="id != null and id != ''">
-	and id = #{id}
-	</if>
+		delete from course_type where 1=1
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
 	</delete>
 	<!--课程大类别的结束######################################## -->
-	
-	
-	<!--课程小类别的开始####################################-->
-	<!--子类别的映射-->
-	<resultMap type="com.ola.qh.entity.CourseTypeSubclass" id="CourseTypeSubclassMap">
-	<result column="id" property="id"/>
-	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
-	<result column="course_type_id" property="courseTypeId"/>
-	<result column="imgUrl" property="imgUrl"/>
+
+
+	<!--课程小类别的开始#################################### -->
+	<!--子类别的映射 -->
+	<resultMap type="com.ola.qh.entity.CourseTypeSubclass"
+		id="CourseTypeSubclassMap">
+		<result column="id" property="id" />
+		<result column="course_type_subclass_name"
+			property="courseTypeSubclassName" />
+		<result column="course_type_id" property="courseTypeId" />
+		<result column="imgUrl" property="imgUrl" />
 	</resultMap>
 	<insert id="insertCourseTypeSubclass" parameterType="String">
-		insert into course_type_subclass(id,course_type_subclass_name,course_type_id,imgUrl)values(#{id},#{courseTypeSubclassName},#{courseTypeId},#{imgUrl})
+		insert into
+		course_type_subclass(id,course_type_subclass_name,course_type_id,imgUrl)values(#{id},#{courseTypeSubclassName},#{courseTypeId},#{imgUrl})
 	</insert>
-	<!--通过大类别的id查小类别-->
-	<select id="courseTypeSubclassList" resultMap="CourseTypeSubclassMap">
-	select * from course_type_subclass 
-	<if test="courseTypeId!=null">
-		where course_type_id=#{courseTypeId}
-	</if> 
+	<!--通过大类别的id查小类别 -->
+	<select id="courseTypeSubclassList"
+		resultMap="CourseTypeSubclassMap">
+		select * from course_type_subclass
+		<if test="courseTypeId!=null">
+			where course_type_id=#{courseTypeId}
+		</if>
 	</select>
-	<!--通过小类别的名称查小类别-->
-	<select id="singleCourseTypeSubclass" resultType="com.ola.qh.entity.CourseTypeSubclass">
-	
-	select course_type_subclass_name courseTypeSubclassName, course_type_id courseTypeId,id id
-	from course_type_subclass where course_type_subclass_name=#{courseTypeSubclassName}
-	
+	<!--通过小类别的名称查小类别 -->
+	<select id="singleCourseTypeSubclass"
+		resultType="com.ola.qh.entity.CourseTypeSubclass">
+
+		select course_type_subclass_name courseTypeSubclassName, course_type_id
+		courseTypeId,id id
+		from course_type_subclass where
+		course_type_subclass_name=#{courseTypeSubclassName}
+
 	</select>
 	<update id="updateCourseTypeSubclass" parameterType="String">
-	update course_type_subclass set
-	<if test="courseTypeSubclassName!=null">
-		course_type_subclass_name=#{courseTypeSubclassName},
-	</if>
-	<if test="courseTypeId!=null">
-		course_type_id=#{courseTypeId},
-	</if>
-	<if test="imgUrl != null">
-		imgUrl=#{imgUrl},
-	</if>
+		update course_type_subclass set
+		<if test="courseTypeSubclassName!=null">
+			course_type_subclass_name=#{courseTypeSubclassName},
+		</if>
+		<if test="courseTypeId!=null">
+			course_type_id=#{courseTypeId},
+		</if>
+		<if test="imgUrl != null">
+			imgUrl=#{imgUrl},
+		</if>
 		id=#{id}
 		where id=#{id}
 	</update>
-	<!--查询小类别中最大ID  -->
-	<select id="maxCourseTypeSubclassId" resultType="java.lang.String">
-	select max(id) from course_type_subclass
+	<!--查询小类别中最大ID -->
+	<select id="maxCourseTypeSubclassId"
+		resultType="java.lang.String">
+		select max(id) from course_type_subclass
 	</select>
-	<!-- 根据ID删除小类别  -->
+	<!-- 根据ID删除小类别 -->
 	<delete id="deleteCourseTypeSubclass">
-	delete from course_type_subclass where 1=1
-	<if test="courseTypeSubclassId != null and courseTypeSubclassId!=''">
-	and id = #{courseTypeSubclassId}
-	</if>
+		delete from course_type_subclass where 1=1
+		<if
+			test="courseTypeSubclassId != null and courseTypeSubclassId!=''">
+			and id = #{courseTypeSubclassId}
+		</if>
 	</delete>
 	<!--课程小类别的结束######################################## -->
-	
-	
+
+
 	<!--课程三级类别的开始######################################## -->
-	<resultMap type="com.ola.qh.entity.CourseTypeSubclassNames" id="CourseTypeSubclassNamesMap">
-	<result column="id" property="id"/>
-	<result column="mini_subclass_name" property="miniSubclassName"/>
-	<result column="course_type_subclass_id" property="courseTypeSubclassId"/>
-	<result column="comments" property="comments"/>
+	<resultMap type="com.ola.qh.entity.CourseTypeSubclassNames"
+		id="CourseTypeSubclassNamesMap">
+		<result column="id" property="id" />
+		<result column="mini_subclass_name" property="miniSubclassName" />
+		<result column="course_type_subclass_id"
+			property="courseTypeSubclassId" />
+		<result column="comments" property="comments" />
 	</resultMap>
-	<!-- 根据courseTypeSubclassId查询全部  -->
-	<select id = "select" resultMap="CourseTypeSubclassNamesMap">
-	select * from course_type_subclass_names where 1=1
-	<if test="courseTypeSubclassId != null and courseTypeSubclassId !=''"> 
-	and course_type_subclass_id = #{courseTypeSubclassId}
-	</if>
+	<!-- 根据courseTypeSubclassId查询全部 -->
+	<select id="select" resultMap="CourseTypeSubclassNamesMap">
+		select * from course_type_subclass_names where 1=1
+		<if
+			test="courseTypeSubclassId != null and courseTypeSubclassId !=''">
+			and course_type_subclass_id = #{courseTypeSubclassId}
+		</if>
 	</select>
-	<!-- 根据ID删除  -->
-	<delete id ="delete">
-	delete from course_type_subclass_names where 1=1
-	<if test = "id != null and id !=''"> 
-	and id =#{id}
-	</if>
+	<!-- 根据ID删除 -->
+	<delete id="delete">
+		delete from course_type_subclass_names where 1=1
+		<if test="id != null and id !=''">
+			and id =#{id}
+		</if>
 	</delete>
-	<!--添加  -->
+	<!--添加 -->
 	<insert id="insert" parameterType="String">
-		insert into course_type_subclass_names(id,mini_subclass_name,course_type_subclass_id)values(#{id},#{miniSubclassName},#{courseTypeSubclassId})
+		insert into
+		course_type_subclass_names(id,mini_subclass_name,course_type_subclass_id)values(#{id},#{miniSubclassName},#{courseTypeSubclassId})
 	</insert>
-	<!-- 修改   -->
+	<!-- 修改 -->
 	<update id="update" parameterType="String">
-	update course_type_subclass_names set
-	<if test="miniSubclassName!=null and miniSubclassName!=''">
-	mini_subclass_name = #{miniSubclassName}
-	</if>
-	where id = #{miniId}
+		update course_type_subclass_names set
+		<if test="miniSubclassName!=null and miniSubclassName!=''">
+			mini_subclass_name = #{miniSubclassName}
+		</if>
+		where id = #{miniId}
 	</update>
 	<!--课程三级类别的结束######################################## -->
-	
-	
+
+
 	<!-- 课程的处理开始*************************************************** -->
-	<!--课程的映射-->
+	<!--课程的映射 -->
 	<resultMap type="com.ola.qh.entity.Course" id="CourseMap">
-	<result column="id" property="id"/>
-	<result column="course_name" property="courseName"/>
-	<result column="course_type_name" property="courseTypeName"/>
-	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
-	<result column="course_price" property="coursePrice"/>
-	<result column="course_discount_price" property="courseDiscountPrice"/>
-	<result column="course_year" property="courseYear"/>
-	<result column="course_show" property="courseShow"/>
-	<result column="course_excellent" property="courseExcellent"/>
-	<result column="course_img" property="courseImg"/>
-	<result column="course_resource_type" property="courseResourceType"/>
-	<result column="course_use_difference" property="courseUseDifference"/>
-	<result column="addtime" property="addtime" />
-	<result column="updatetime" property="updatetime"/>
-	<result column="class_id" property="classId"/>
-	<result column="maxdoudou" property="maxdoudou"/>
-	<result column="orders" property="orders"/>
+		<result column="id" property="id" />
+		<result column="course_name" property="courseName" />
+		<result column="course_type_name" property="courseTypeName" />
+		<result column="course_type_subclass_name"
+			property="courseTypeSubclassName" />
+		<result column="course_price" property="coursePrice" />
+		<result column="course_discount_price"
+			property="courseDiscountPrice" />
+		<result column="course_year" property="courseYear" />
+		<result column="course_show" property="courseShow" />
+		<result column="course_excellent" property="courseExcellent" />
+		<result column="course_img" property="courseImg" />
+		<result column="course_resource_type"
+			property="courseResourceType" />
+		<result column="course_use_difference"
+			property="courseUseDifference" />
+		<result column="addtime" property="addtime" />
+		<result column="updatetime" property="updatetime" />
+		<result column="class_id" property="classId" />
+		<result column="maxdoudou" property="maxdoudou" />
+		<result column="orders" property="orders" />
 	</resultMap>
-	
+
 	<sql id="sql_base">
-	id,course_name,course_type_name,course_type_subclass_name,
-	course_price,course_discount_price,course_year,course_show,course_excellent,course_img
-	,course_resource_type,course_use_difference,addtime,maxdoudou
+		id,course_name,course_type_name,course_type_subclass_name,
+		course_price,course_discount_price,course_year,course_show,course_excellent,course_img
+		,course_resource_type,course_use_difference,addtime,maxdoudou
 	</sql>
-	
-	<insert id="insertCourse" parameterType="com.ola.qh.entity.Course">
-	insert into course(<include refid="sql_base"></include>,user_id,orders,class_id)
-	values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},
-	#{coursePrice},#{courseDiscountPrice},#{courseYear},#{courseShow},#{courseExcellent},#{courseImg},
-	#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId},#{orders},""
-	)
+
+	<insert id="insertCourse"
+		parameterType="com.ola.qh.entity.Course">
+		insert into course(
+		<include refid="sql_base"></include>
+		,user_id,orders,class_id)
+		values(#{id},#{courseName},#{courseTypeName},#{courseTypeSubclassName},
+		#{coursePrice},#{courseDiscountPrice},#{courseYear},#{courseShow},#{courseExcellent},#{courseImg},
+		#{courseResourceType},#{courseUseDifference},#{addtime},#{maxdoudou},#{userId},#{orders},""
+		)
 	</insert>
-	<update id="updateCourese" parameterType="com.ola.qh.entity.Course">
-	update course set 
-	<if test="courseName!=null">
-	course_name=#{courseName},
-	</if>
-	<if test="courseTypeName!=null">
-	course_type_name=#{courseTypeName},
-	</if>
-	<if test="courseTypeSubclassName!=null">
-	course_type_subclass_name=#{courseTypeSubclassName},
-	</if>
-	<if test="coursePrice>0">
-	course_price=#{coursePrice},
-	</if>
-	<if test="courseDiscountPrice>0">
-	course_discount_price=#{courseDiscountPrice},
-	</if>
-	<if test="courseYear!=null">
-	course_year=#{courseYear},
-	</if>
-	
-	course_show=#{courseShow},
-	
-	<if test="courseExcellent!=0">
-	course_excellent=#{courseExcellent},
-	</if>
-	<if test="courseResourceType!=null">
-	course_resource_type=#{courseResourceType},
-	</if>
-	<if test="courseUseDifference!=null">
-	course_use_difference=#{courseUseDifference},
-	</if>
-	<if test="courseImg!=null">
-	course_img=#{courseImg},
-	</if>
-	<if test="classId!=null and classId!='' ">
-	class_id=#{classId},
-	</if>
-	<if test="maxdoudou!=null and maxdoudou!=''">
-	maxdoudou=#{maxdoudou},
-	</if>
-	updatetime=#{updatetime} where id=#{id}
-	</update>
-	
-	<!--课程按照不同的条件进行查询-->
-	<select id="courseList" resultMap="CourseMap" parameterType="com.ola.qh.entity.Course">
-	
-	select <include refid="sql_base"></include>,class_id,orders from course where 1=1
-	<if test="courseExcellent!=0">
-	 and course_excellent=#{courseExcellent}
-	</if>
-	<if test="courseTypeName!=null">
-	 and course_type_name=#{courseTypeName}
-	</if>
-	<if test="courseTypeSubclassName!=null">
-	 and course_type_subclass_name=#{courseTypeSubclassName}
-	</if>
-	<if test="classId!=null and classId!='' ">
-	and class_id like concat(concat("%",#{classId},"%"))
-	</if>
-	<if test="courseName!=null and courseName!='' ">
-	and course_name like concat(concat('%',#{courseName},'%'))
-	</if>
-	order by orders asc 
-	<if test="pageSize!=0">
-	limit #{pageNo},#{pageSize}
-	</if>
-	
-	</select>
-	
-	<select id="courseCount" resultType="int">
-		select count(id) from course where  course_type_name=#{courseTypeName} and course_type_subclass_name=#{courseTypeSubclassName}
-		<if test="courseName!=null and courseName!=''">
-		and course_name like concat(concat('%',#{courseName},'%'))
+	<update id="updateCourese"
+		parameterType="com.ola.qh.entity.Course">
+		update course set
+		<if test="courseName!=null">
+			course_name=#{courseName},
 		</if>
-		
+		<if test="courseTypeName!=null">
+			course_type_name=#{courseTypeName},
+		</if>
+		<if test="courseTypeSubclassName!=null">
+			course_type_subclass_name=#{courseTypeSubclassName},
+		</if>
+		<if test="coursePrice>0">
+			course_price=#{coursePrice},
+		</if>
+		<if test="courseDiscountPrice>0">
+			course_discount_price=#{courseDiscountPrice},
+		</if>
+		<if test="courseYear!=null">
+			course_year=#{courseYear},
+		</if>
+
+		course_show=#{courseShow},
+
+		<if test="courseExcellent!=0">
+			course_excellent=#{courseExcellent},
+		</if>
+		<if test="courseResourceType!=null">
+			course_resource_type=#{courseResourceType},
+		</if>
+		<if test="courseUseDifference!=null">
+			course_use_difference=#{courseUseDifference},
+		</if>
+		<if test="courseImg!=null">
+			course_img=#{courseImg},
+		</if>
+		<if test="classId!=null and classId!='' ">
+			class_id=#{classId},
+		</if>
+		<if test="maxdoudou!=null and maxdoudou!=''">
+			maxdoudou=#{maxdoudou},
+		</if>
+		updatetime=#{updatetime} where id=#{id}
+	</update>
+
+	<!--课程按照不同的条件进行查询 -->
+	<select id="courseList" resultMap="CourseMap"
+		parameterType="com.ola.qh.entity.Course">
+
+		select
+		<include refid="sql_base"></include>
+		,class_id,orders from course where 1=1
+		<if test="courseExcellent!=0">
+			and course_excellent=#{courseExcellent}
+		</if>
+		<if test="courseTypeName!=null">
+			and course_type_name=#{courseTypeName}
+		</if>
+		<if test="courseTypeSubclassName!=null">
+			and course_type_subclass_name=#{courseTypeSubclassName}
+		</if>
+		<if test="classId!=null and classId!='' ">
+			and class_id like concat(concat("%",#{classId},"%"))
+		</if>
+		<if test="courseName!=null and courseName!='' ">
+			and course_name like concat(concat('%',#{courseName},'%'))
+		</if>
+		order by orders asc
+		<if test="pageSize!=0">
+			limit #{pageNo},#{pageSize}
+		</if>
+
 	</select>
-	
+
+	<select id="courseCount" resultType="int">
+		select count(id) from course where course_type_name=#{courseTypeName}
+		and course_type_subclass_name=#{courseTypeSubclassName}
+		<if test="courseName!=null and courseName!=''">
+			and course_name like concat(concat('%',#{courseName},'%'))
+		</if>
+
+	</select>
+
 	<select id="existCourse" resultMap="CourseMap">
-		select <include refid="sql_base"></include>,class_id from course where id=#{id}
+		select
+		<include refid="sql_base"></include>
+		,class_id from course where id=#{id}
 	</select>
 	<select id="existCourseList" resultMap="CourseMap">
-		select id,class_id from course where class_id like concat(concat("%",#{classId},"%"))
+		select id,class_id from
+		course where class_id like concat(concat("%",#{classId},"%"))
 	</select>
 	<update id="updateClass">
-		update course set class_id=#{classIds} where id=#{courseId}
-		
+		update course set class_id=#{classIds} where
+		id=#{courseId}
+
 	</update>
-	
+
 	<delete id="deleteCourse">
-	delete from course where id=#{id}
+		delete from course where id=#{id}
 	</delete>
 	<!-- 课程的处理结束*************************************************** -->
+
+	<!--推送页面 专业下拉列表 -->
+	<select id="selectCourseTypeSubclassNameAll"
+		resultType="java.lang.String">
+		select course_type_subclass_name from course_type_subclass
+	</select>
+	<!--根据CourseTypeSubclassName 和上面重复 后续优化 -->
+	<select id="selectByCourseTypeSubclassName"
+		resultMap="CourseMap">
+		select id,class_id from course where 1=1
+		<if
+			test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
+			and course_type_subclass_name = #{courseTypeSubclassName}
+		</if>
+	</select>
+
+
+	<!-- 直播预约表 live_mark表映射开始 -->
+	<!-- <resultMap type="com.ola.qh.entity.LiveMark" id="LiveMarkMap">
+		<result column="userId" property="userId" />
+		<result column="live_name" property="liveName" />
+		<result column="live_id" property="liveId" />
+		<result column="status" property="status" />
+		<result column="starttime" property="starttime" />
+	</resultMap> -->
+
+	<select id="selectLiveShow" resultType="java.util.Date">
+		select starttime from
+		course_line_show
+		where date_format(starttime,'%Y%m%d%H') = #{date}
+		and isopen = 1;
+	</select>
+
+	<!--查询 精确到小时 -->
+	<select id="selectStartTimeByHour" resultType="com.ola.qh.entity.LiveMark">
+		select * from live_mark
+		where date_format(starttime,'%Y%m%d%H') = #{date}
+		and status = 0
+	</select>
 	
-	<!--推送页面  专业下拉列表  -->
-	<select id="selectCourseTypeSubclassNameAll" resultType="java.lang.String">
-	select course_type_subclass_name from course_type_subclass
+	<!--查询 精确到分钟 -->
+	<select id="selectStartTimeByMin" resultType="com.ola.qh.entity.LiveMark">
+		select * from live_mark
+		where date_format(starttime,'%Y%m%d%H%i') = #{format}
 	</select>
-	<!--根据CourseTypeSubclassName  和上面重复  后续优化  -->
-	<select id="selectByCourseTypeSubclassName" resultMap="CourseMap">
-	select id,class_id from course where 1=1 
-	<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
-	and course_type_subclass_name = #{courseTypeSubclassName}
-	</if>
-	</select>
-	</mapper>
+
+	<!-- 更新状态值 -->
+	<update id="updateStatus">
+		update live_mark set
+		status = 1
+		where
+		userId = #{userId}
+	</update>
+	<!-- 直播预约表 live_mark表映射结束 -->
+</mapper>

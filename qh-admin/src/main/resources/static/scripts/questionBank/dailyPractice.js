@@ -359,6 +359,7 @@ app.controller("dailyPractice", function($scope, $http){
 			alert("请选中信息~");
 		}
 	}
+	$scope.status==null;
 	
 	$scope.addfile=function(){
 		
@@ -366,7 +367,11 @@ app.controller("dailyPractice", function($scope, $http){
 		var fd = new FormData();
 	    fd.append("file", $("#file")[0].files[0]);
 	    fd.append("subId", $scope.subId);
-	    
+	    fd.append("status", $scope.status);
+	    if($scope.status==null || $scope.status==""){
+	    	alert("请先选择题库的模板");
+	    	return;
+	    }
 	   $http.post("/api/questionbank/improtExcel",fd, {
 	        withCredentials: true,
 	        headers: {'Content-Type': undefined },

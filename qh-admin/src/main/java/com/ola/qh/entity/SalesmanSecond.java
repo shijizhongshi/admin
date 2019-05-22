@@ -5,12 +5,15 @@ import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
 
 ///////销售人员的客户
-public class SalesmanClient {
+public class SalesmanSecond {
 
 	private String id;
 	
 	@NotEmpty
 	private String mobile;
+	
+	@NotEmpty
+	private String userId;
 	
 	private String salesmanId;
 	
@@ -66,6 +69,14 @@ public class SalesmanClient {
 
 	public void setSalesmanIdNew(String salesmanIdNew) {
 		this.salesmanIdNew = salesmanIdNew;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

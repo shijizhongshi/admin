@@ -40,7 +40,6 @@
 		 
 	</select>
 	
-	
 	<select id="selectCourseTeacherCount"  resultType="int">
 		select count(id) from course_teacher where 1=1
 		<if test="courseTypeName!=null and courseTypeName!='' ">

@@ -19,7 +19,9 @@ $scope.SalesmanList = function(){
     	if(date.status=="0"){
     		$scope.salesmanlist=date.data;
     		$scope.total=date.count;
-    		
+    		angular.forEach($scope.salesmanlist,function(salesman){
+    			salesman.secondCount=salesman.second.length;
+    		})
     	}
     	
 	})
@@ -133,7 +135,7 @@ $scope.uploadmainimage = function(file){
 	
 	$scope.inputNewSalesman=function(){
 
-		$http.get("/api/salesmanClient/update",{"params": {"salesmanId":$scope.id,"mobile":null,"salesmanIdNew":$scope.idnew}},{'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/salesmanSecond/update",{"params": {"salesmanId":$scope.id,"mobile":null,"salesmanIdNew":$scope.idnew}},{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
 	    	if(data.status=="0"){
 	    		alert("转入成功~");
@@ -159,8 +161,8 @@ $scope.uploadmainimage = function(file){
 		 }else{
 			
 			 if(confirm("你确定要删除这条记录吗?")){
-				 if($scope.salesman.client.length<=0){
-				 $http.get("/api/salesman/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+				 if($scope.salesman.second.length<=0){
+				 $http.get("/api/salesman/delete",{"params": {"id":$scope.id,"types":0}}, {'Content-Type': 'application/json;charset=UTF-8'})
 				    .success(function(result){
 				    	if(result.status=="0"){
 				    	alert("删除成功");
@@ -176,7 +178,7 @@ $scope.uploadmainimage = function(file){
 					 if(confirm("账号下有学员，是否转入到其他账号?")){
 						 document.getElementById('revise').style.display="block"; 
 					 }else{
-						 $http.get("/api/salesman/delete",{"params": {"id":$scope.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+						 $http.get("/api/salesman/delete",{"params": {"id":$scope.id,"types":1}}, {'Content-Type': 'application/json;charset=UTF-8'})
 						    .success(function(result){
 						    	if(result.status=="0"){
 						    	alert("删除成功");
@@ -219,9 +221,9 @@ $scope.uploadmainimage = function(file){
 		document.getElementById('addQrCode').style.display="none"; 
 	}
 	
-	$scope.toClient=function(salesmanId){
+	$scope.toSecond=function(salesmanId){
 		
-		location.href="/web/salesman/salesmanClient?salesmanId="+salesmanId;
+		location.href="/web/salesman/salesmanSecond?salesmanId="+salesmanId;
 	}
 	$scope.showQrcode=function(){
 		if($scope.id==null){

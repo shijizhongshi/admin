@@ -4,12 +4,12 @@
 <html lang="en">
 <@h.header title="课程管理页面"/>
 <link rel="stylesheet" href="/styles/admin.css" />
-<script src="/scripts/salesman/salesmanClient.js"></script>
+<script src="/scripts/salesman/salesmanSecond.js"></script>
 <script src="/scripts/admin.js"></script>
 
-<@b.body menu="sidebarmenu-salesman" submenu="sidebarmenu-salesman-salesmanClient">
+<@b.body menu="sidebarmenu-salesman" submenu="sidebarmenu-salesman-salesmanSecond">
 <div>
-	<div class="details" style="width: 100%" ng-controller="salesmanClientController">
+	<div class="details" style="width: 100%" ng-controller="salesmanSecondController">
 	<input type="hidden" value="${salesmanId}" id="salesmanId" />
 		<div class="details-nav">
 			<ul>
@@ -29,7 +29,7 @@
 					<input type="text" ng-model="mobile" placeholder="请输入手机号码" />
 				</div>
 				<div>
-					<input type="button" class="btn-lg im-key" ng-click="SalesmanClientList()"
+					<input type="button" class="btn-lg im-key" ng-click="SalesmanSecondList()"
 						value="立即检索" />
 				</div>
 
@@ -48,7 +48,7 @@
 							<th>手机号码</th>
 						</tr>
 
-						<tr ng-repeat="scl in salesmanClientlist" ng-click="checkedsalesmanClient(scl)"
+						<tr ng-repeat="scl in salesmanSecondlist" ng-click="checkedsalesmanSecond(scl)"
 							ng-class="{'selected':selected==scl}">
 							<th>{{scl.mobile}}</th>
 						</tr>
@@ -60,7 +60,7 @@
 							ng-model="page" items-per-page="pageSize" max-size="5"
 							class="pagination-sm" previous-text="&lsaquo;"
 							next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-							ng-click="SalesmanClientList()">
+							ng-click="SalesmanSecondList()">
 						</ul>
 					</div>
 

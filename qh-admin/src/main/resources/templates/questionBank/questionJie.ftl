@@ -187,6 +187,15 @@ submenu="sidebarmenu-questionBank-questionChapter">
 		<div class="poop" id="revise" >
 		<form id="myform2" class="ng-pristine ng-valid">
 	<h3>从文件导入试题</h3>
+	<div class="costs-uploadfile-div">
+							<span>请选择试题模板</span><select ng-model="status">
+							<option value="0">答案中有图片</option>
+							<option value="1">单题干中有图片</option>
+							<option value="2">均无图片</option>
+							</select>
+
+				
+						</div>
 <div class="costs-uploadfile-div">
 							请选择上传的附件<input type="file" name="file"  value="选择文件" id="file">
 
