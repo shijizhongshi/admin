@@ -164,8 +164,8 @@
 								<!--<p style="height: 40px; font-size: 1.3rem;">文本内容</p>-->
 								<div class="grade-text">
 									<span>文本内容</span>
-								    <div id="div1" style="border:1px solid gray;">
-									</div>
+								    <!-- <div id="div1" style="border:1px solid gray;">
+									</div> -->
 									<textarea ng-model="news.content"></textarea>
 								</div>
 								<!-- <textarea id="editor" ></textarea>

@@ -155,7 +155,7 @@ $scope.uploadmainimage = function(file){
 	
 	//测试 富文本编辑器
 	// 获取元素
-	var div = document.getElementById('div1');
+	/*var div = document.getElementById('div1');
 	
 	// 生成编辑器
 	var editor = new wangEditor(div);
@@ -184,7 +184,7 @@ $scope.uploadmainimage = function(file){
 	}*/
 	//隐藏上传网络图片功能
 	//editor.config.hideLinkImg = true;
-	editor.create();
+	//editor.create();
     
 	
 });
