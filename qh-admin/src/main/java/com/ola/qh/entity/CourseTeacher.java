@@ -23,13 +23,10 @@ public class CourseTeacher {
 
 	private String prizes;// 获奖情况
 
-	@NotEmpty(message = "特色不能为空")
 	private String features;// 特色
 
-	@NotEmpty(message = "老师描述不能为空")
 	private String describes;// 老师描述
 
-	@NotEmpty(message = "详细介绍不能为空")
 	private String details;// 详细介绍
 
 	private String courseTypeNames;// 专业
