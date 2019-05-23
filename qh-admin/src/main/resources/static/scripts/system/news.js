@@ -93,12 +93,14 @@ app
 										})
 					};
 					$scope.newsId = null;
+					var content = null;
 					$scope.checkednews = function(news) {
 						$scope.selected = news;
 						$scope.newsId = news.id;
 						$scope.news = news;
 						$scope.imgUrl = news.imgUrl;
-						$scope.news.content = news.content;
+						//var content = news.content;
+						$("p").append(news.content);
 					}
 
 					$scope.add = function() {
@@ -185,6 +187,7 @@ app
 						$scope.newsId = null;
 						$scope.news = null;
 						$scope.selected = null;
+						$("#div1").append('');
 						document.getElementById('add').style.display = "none";
 					}
 

@@ -161,10 +161,10 @@
 
 							<!-- 富文本编辑器  -->
 							<div class="template-right" style="width:60%">
-								<!--<p style="height: 40px; font-size: 1.3rem;">文本内容</p>-->
 								<div class="grade-text">
 									<span>文本内容</span>
-								    <div id="div1" ng-model="news.content">
+								    <div id="div1" style="height: 500px;" ng-model="news.content">
+								    	<p></p>
 									</div>
 									<!-- <textarea ng-model="news.content"></textarea> -->
 								</div>
