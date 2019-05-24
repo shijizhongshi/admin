@@ -19,6 +19,8 @@ public class InputExportExcel {
 	
 	private List<UserEnterLeaveActions> userEnterLeaveActions=new ArrayList<UserEnterLeaveActions>();///////////////直播访问记录
 	
+	private List<LivePay> livePay=new ArrayList<LivePay>();///////////////直播购买记录
+	
 	public int getTypes() {
 		return types;
 	}
@@ -57,6 +59,14 @@ public class InputExportExcel {
 
 	public void setUserEnterLeaveActions(List<UserEnterLeaveActions> userEnterLeaveActions) {
 		this.userEnterLeaveActions = userEnterLeaveActions;
+	}
+
+	public List<LivePay> getLivePay() {
+		return livePay;
+	}
+
+	public void setLivePay(List<LivePay> livePay) {
+		this.livePay = livePay;
 	}
 
 	
