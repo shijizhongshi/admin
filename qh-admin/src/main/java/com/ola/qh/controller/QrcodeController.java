@@ -52,7 +52,7 @@ public class QrcodeController {
 	        inStream.close();    
 	        byte[] data =  outStream.toByteArray(); 
 		String content=new String();
-		content="http://59dae85d.ngrok.io/web/salesmanQRcode/register?id="+id+"&imgUrl="+imgUrl+"&address="+address+"&name="+name;
+		content="http://sdym.zhongshicc.com/web/salesmanQRcode/register?id="+id+"&imgUrl="+imgUrl+"&address="+address+"&name="+name;
         byte[] bytes = Bytes.qrcode(content, 300, 300,data);
 		String fname = KeyGen.gen() + ".jpg";
 		String url  = storeService.storeUrl(fname, bytes);
