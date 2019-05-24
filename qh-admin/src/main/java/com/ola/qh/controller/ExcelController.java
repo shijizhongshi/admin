@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ola.qh.dao.LivePayDao;
 import com.ola.qh.dao.QuestionBankDao;
 import com.ola.qh.dao.UserDao;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.InputExportExcel;
+import com.ola.qh.entity.LivePay;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.UserEnterLeaveActions;
@@ -30,6 +32,9 @@ public class ExcelController {
 	private UserDao userDao;
 	@Autowired
 	private IQuestionBankService questionBankService;
+	@Autowired
+	private LivePayDao livePayDao;
+	
 /////////////////////////直播验证数据的集合
 	@RequestMapping("/api/listLiveCheck")
 	public  void listLiveCheck(@RequestParam(name="fromdate",required=false)String fromdate, @RequestParam(name="todate",required=false)String todate,
@@ -136,6 +141,26 @@ public class ExcelController {
 			inputExportExcel.setUserEnterLeaveActions(userEnterLeaveActions);
 			inputExportExcel.setTypes(types);
 		}
+		
+		exportTest.exportTest(inputExportExcel, request, response);
+	}
+	
+	/////////////////////直播购买记录
+	@RequestMapping("/api/livepay")
+	public void liveAccess(
+			@RequestParam(value = "status", required = true) String status,
+			@RequestParam(value = "startTime", required = false) String startTime,
+			@RequestParam(value = "livename", required = false) String livename,
+			@RequestParam(value = "types", required = true) int types,
+			HttpServletRequest  request,HttpServletResponse response) {
+		
+		ExportTest exportTest=new ExportTest();
+		InputExportExcel inputExportExcel=new InputExportExcel();
+		
+		List<LivePay> livePay=livePayDao.livePayList(status,livename,startTime, 0, 0);
+		
+		inputExportExcel.setLivePay(livePay);
+		inputExportExcel.setTypes(types);
 		
 		exportTest.exportTest(inputExportExcel, request, response);
 	}
