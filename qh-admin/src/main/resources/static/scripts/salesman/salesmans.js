@@ -115,7 +115,7 @@ $scope.uploadmainimage = function(file){
 	
 	$scope.salesmanupdate=function(){
 
-		$scope.salesman.imgUrl = $scope.id;
+		$scope.salesman.imgUrl = $scope.imgUrl;
 		$scope.salesman.qrCode = $scope.qrcode;
 		$http.post("/api/salesman/update",$scope.salesman,{'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(data){
@@ -255,7 +255,7 @@ $scope.uploadmainimage = function(file){
 		})
 	};*/
 	$scope.addQrcode = function(){
-		$http.get("/api/qrcode/geturl",{"params": {"imgUrl":$scope.imgUrl2,"id":$scope.salesman.id}}, {'Content-Type': 'application/json;charset=UTF-8'})
+		$http.get("/api/qrcode/geturl",{"params": {"imgUrl":$scope.imgUrl2,"id":$scope.salesman.id,"address":$scope.salesman.address,"name":$scope.salesman.name}}, {'Content-Type': 'application/json;charset=UTF-8'})
 	    .success(function(date){
 	    	if(date.status=="0"){
 	    		$scope.qrcode=date.data;

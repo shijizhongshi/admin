@@ -22,7 +22,8 @@ public class QrcodeController {
 	
 	@RequestMapping(value="/api/qrcode/geturl")
 	 public Results<String> seeUrl(@RequestParam(value = "imgUrl", required = true) String imgUrl,
-			 @RequestParam(value = "id", required = true) String id) throws Exception{
+			 @RequestParam(value = "id", required = true) String id,@RequestParam(value = "address", required = true) String address,
+			 @RequestParam(value = "name", required = true) String name) throws Exception{
 		Results<String> results=new Results<String>();
 		
 		//String[] temp = imgUrl.split("/"); 
@@ -50,8 +51,9 @@ public class QrcodeController {
 	        }    
 	        inStream.close();    
 	        byte[] data =  outStream.toByteArray(); 
-		 
-        byte[] bytes = Bytes.qrcode("http://localhost:9999/web/salesmanQRcode/register", 300, 300,data);
+		String content=new String();
+		content="http://59dae85d.ngrok.io/web/salesmanQRcode/register?id="+id+"&imgUrl="+imgUrl+"&address="+address+"&name="+name;
+        byte[] bytes = Bytes.qrcode(content, 300, 300,data);
 		String fname = KeyGen.gen() + ".jpg";
 		String url  = storeService.storeUrl(fname, bytes);
 		
