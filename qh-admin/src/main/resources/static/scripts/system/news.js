@@ -1,5 +1,4 @@
-app
-		.controller(
+app.controller(
 				"newController",
 				function($scope, $http) {
 					// var ue = UE.getEditor('editor');
@@ -99,24 +98,24 @@ app
 						$scope.newsId = news.id;
 						$scope.news = news;
 						$scope.imgUrl = news.imgUrl;
-						//var content = news.content;
-						$("p").append(news.content);
+						//先清空再赋值
+						$("p").empty();
 					}
-
+					//点击弹出添加窗口
 					$scope.add = function() {
 						$scope.newsId = null;
 						$scope.news = null;
 						$scope.imgUrl = null;
+						$("p").empty();
+						
 						document.getElementById('add').style.display = "block";
-
 					}
 					$scope.update = function() {
 						if ($scope.newsId == null) {
 							alert("请选择信息~")
 						} else {
 							if ($scope.news.content != null) {
-								// ue.setContent($scope.news.content);
-
+								$("p").after($scope.news.content);	
 							}
 							document.getElementById('add').style.display = "block";
 						}
@@ -137,6 +136,7 @@ app
 								.success(
 										function(data) {
 											if (data.status == "0") {
+												$("p").empty();
 												alert("更新成功~");
 												document.getElementById('add').style.display = "none";
 												$scope.loaddata();
@@ -183,11 +183,11 @@ app
 					}
 
 					$scope.cancel = function() {
+						$("p").empty();
 
 						$scope.newsId = null;
 						$scope.news = null;
 						$scope.selected = null;
-						$("#div1").append('');
 						document.getElementById('add').style.display = "none";
 					}
 
