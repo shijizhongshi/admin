@@ -49,8 +49,8 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改问题</li>
 					<li style="background: #F86846;" ng-click="deletequestion()"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除问题</li>
-					<li ng-click="tojie()"><span
-						class="glyphicon glyphicon-briefcase"></span>&nbsp;节内容管理</li>
+					<!-- <li ng-click="tojie()"><span
+						class="glyphicon glyphicon-briefcase"></span>&nbsp;节内容管理</li> -->
 
 				</ul>
 				<div class="admin-table">
@@ -66,10 +66,12 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 								<th>修改时间</th>
 							</tr>
 
-							<tr ng-repeat="qc in questionlist"
+							<tr ng-repeat="qc in list"
 								ng-click="checkquestioncate(qc)"
 								ng-class="{'selected':selected==qc}">
-
+									
+								<th>{{qc.questionAsk}}</th>
+								<th>{{qc.questionAnswer}}</th>
 								<th>{{qc.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								<th>{{qc.updatetime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
@@ -89,31 +91,30 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 					</ul>
 				</div>
 				
-				<!--添加修改章-->
+				<!--添加修改问题-->
 				<div class="poop" id="add">
 					<form id="myform" class="ng-pristine ng-valid">
-						<h3>{{}}章</h3>
+						<h3>{{}}问题内容</h3>
 						<p style="padding: 10px 0;">专业类型：&nbsp;{{courseTypeSubclassName}}</p>
 						<div class="select-2">
-							<span>章名称<i class="bitian">*</i></span> <input type="text" ng-model="questionCategory.name"
+							<span>问题内容<i class="bitian">*</i></span> <input type="text" ng-model="qc.questionAsk"
 								class="ng-pristine ng-untouched ng-valid ng-empty"
-								placeholder="请输入章名称">
+								placeholder="请输入问题内容">
 						</div>
-						
 						<div class="select-2">
-							<span>是否显示<i class="bitian">*</i></span> <img
-								src="/images/sjk-xl.png"> <select ng-model="questionCategory.isshow"
-								class="ng-pristine ng-untouched ng-valid ng-empty">
-								<option value="1">显示</option>
-								<option value="0">不显示</option>
-							</select>
+							<span>答案内容<i class="bitian">*</i></span> <input type="text" ng-model="qc.questionAnswer"
+								class="ng-pristine ng-untouched ng-valid ng-empty"
+								placeholder="请输入答案内容">
 						</div>
-
+						<div class="costs-uploadfile-div">
+							使用Excel批量上传<input type="file" name="file" value="选择文件" id="file">
+						</div>	
+					
 						<div class="end">
-							<input name="git" type="submit" value="提交" ng-show="cateId==null" ng-click="questioncateadd()"
+							<input name="git" type="submit" value="提交" ng-show="id==null" ng-click="addQuestion()"
 								style="background: #5ED8A9;"> 
-							<input name="git" type="submit" value="修改" ng-show="cateId!=null"
-								ng-click="updateCategory()" style="background: #5ED8A9;"
+							<input name="git" type="submit" value="修改" ng-show="id!=null"
+								ng-click="update()" style="background: #5ED8A9;"
 								class="ng-hide"> 
 							<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc">
 						</div>

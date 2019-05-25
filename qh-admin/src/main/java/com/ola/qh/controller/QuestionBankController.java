@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.QuestionBankAsk;
 import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.service.IQuestionBankService;
 import com.ola.qh.util.Results;
@@ -149,5 +150,56 @@ public class QuestionBankController {
 
 		results = questionBankService.liveAccess(notToEnter, liveId, pagenum, pageindex);
 		return results;
+	}
+	/**
+	 * 根据子专业名查询考官提问表
+	 * @param courseTypeSubclassName
+	 * @return
+	 */
+	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
+	public Results<List<QuestionBankAsk>> questionList(
+			@RequestParam(value = "courseTypeSubclassName", required = true) String courseTypeSubclassName) {
+		Results<List<QuestionBankAsk>> results = new Results<List<QuestionBankAsk>>();
+
+		results = questionBankService.questionList(courseTypeSubclassName);
+				
+		return results;
+	}
+	/**
+	 * 考官提问表添加内容
+	 * @param questionBankAsk
+	 * @return
+	 */
+	@RequestMapping(value = "/addQuestion", method = RequestMethod.POST)
+	public Results<String> addQuestion(@RequestBody QuestionBankAsk questionBankAsk) {
+		Results<String> results = new Results<String>();
+		results = questionBankService.addQuestion(questionBankAsk);
+				
+		return results;
+	}
+	/**
+	 * 根据ID删除考官提问表内容
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteQuestion",method = RequestMethod.GET)
+	public Results<String> deleteQuestion (@RequestParam(name = "id")String id) {
+		Results<String> results = new Results<String>();
+		results = questionBankService.deleteQuestion(id);
+		
+		return results;
+	}
+	/**
+	 * 使用excel表格批量上传
+	 * @param file
+	 * @param courseTypeSubclassName
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/uploadExcel", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public Results<Integer> uploadExcel(@RequestParam(value = "file") MultipartFile file,
+			@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName) throws Exception {
+		
+		return questionBankService.uploadExcel(file,courseTypeSubclassName);
 	}
 }

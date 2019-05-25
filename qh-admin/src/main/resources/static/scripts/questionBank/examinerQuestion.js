@@ -12,7 +12,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		$scope.typeSelected = null;
 		$scope.selected = null;
 		$scope.questionCategory = null;
-		$scope.cateId = null;
+		$scope.id = null;
 
 		$scope.typeList = function(typename, typeId) {
 			$scope.active = typeId;
@@ -61,21 +61,66 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		
 		
 		//查询集合
+		$scope.questionList = function () {
+			$http.get("/api/questionbank/questionList",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName}},{'Content-Type' : 'application/json;charset=UTF-8'})
+			.success (function (result) {
+				if (result.status == "0") {
+					$scope.list = result.data;
+				}
+			})
+		}
+		$scope.questionList();//加载页面时加载此方法
+		//添加功能
+		$scope.addQuestion = function () {
+			var file = $("#file")[0].files[0];
+			console.log("测试打印file = "+file);
+			if (file != null) {
+				console.log("进入了上传表格的方法");
+				var fd = new FormData();
+			    fd.append("file", $("#file")[0].files[0]);
+			    fd.append("courseTypeSubclassName", $scope.courseTypeSubclassName);
+			    $http.post("/api/questionbank/uploadExcel",fd,{withCredentials: true,headers: {'Content-Type': undefined },transformRequest: angular.identity})
+			    .success (function (result) {
+			    	if (result.status == "0") {
+			    		console.log("添加成功~");
+			    		alert("添加成功，共添加了"+result.data+"条数据");
+			    	}else {
+			    		alert(result.message);
+			    	}
+			    })
+			    return;
+			}
+			
+			//子专业名赋值
+			$scope.qc.courseTypeSubclassName = $scope.courseTypeSubclassName;
+			$http.post("/api/questionbank/addQuestion",$scope.qc,{'Content-Type' : 'application/json;charset=UTF-8'})
+			.success (function (results) {
+				if (results.status == "0") {
+					//赋空值
+					$scope.qc = null;
+					$scope.questionList();
+					document.getElementById('add').style.display = "none";
+				}else {
+					alert(results.message);
+				}
+			}) 
+		}
 		
-
+		
 		// 选中的操作
 		$scope.checkquestioncate = function(qc) {
 			//选中
 			if ($scope.selected != qc) {
 				$scope.selected = qc;
 				$scope.questionCategory = qc;
-				$scope.cateId = qc.id;
+				$scope.id = qc.id;
 				$scope.name = qc.name;
 			} else {
 				//取消选中
 				$scope.selected = null;
 				$scope.questionCategory = null;
-				$scope.cateId = null;
+				$scope.id = null;
+				console.log($scope.id);
 			}
 		}
 		//点击事件  点击切换子专业
@@ -84,7 +129,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			$scope.page = 1;
 			$scope.courseTypeName = typename;
 			$scope.courseTypeSubclassName = sub.courseTypeSubclassName;
-			// $scope.questioncate();
+			$scope.questionList();
 			$scope.typeSelected = sub.courseTypeSubclassName;
 
 		}
@@ -92,12 +137,29 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		$scope.add = function() {
 			document.getElementById('add').style.display = "block";
 		}
+		//点击删除按钮
+		$scope.deletequestion = function () {
+			if ($scope.id != null) {
+				$http.get("/api/questionbank/deleteQuestion",{"params":{"id":$scope.id}},{'Content-Type' : 'application/json;charset=UTF-8'})
+				.success (function (result) {
+					if (result.status == "0") {
+						alert("删除成功~");
+						$scope.questionList();
+					}else {
+						alert(result.message);
+					}
+				})
+			}else {
+				alert("请先选中一行数据~");
+			}
+			
+		}
 
 		// 点击取消按钮
 		$scope.reset = function() {
 			document.getElementById('add').style.display = "none";
 			$scope.selected = null;
-			$scope.cateId = null;
+			$scope.id = null;
 			$scope.questionCategory = null;
 		}
 

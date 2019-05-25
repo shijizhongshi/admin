@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.PlayLog;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.QuestionBankAsk;
 import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.util.Results;
 
@@ -30,5 +31,13 @@ public interface IQuestionBankService {
 			String pageindex);
 
 	public Results<List<PlayLog>> ccVideo(String videoId, String mobile, String date, String numPerPage, String page);
+
+	public Results<List<QuestionBankAsk>> questionList(String courseTypeSubclassName);
+
+	public Results<String> addQuestion(QuestionBankAsk questionBankAsk);
+
+	public Results<String> deleteQuestion(String id);
+
+	public Results<Integer> uploadExcel(MultipartFile file,String courseTypeSubclassName);
 	
 }

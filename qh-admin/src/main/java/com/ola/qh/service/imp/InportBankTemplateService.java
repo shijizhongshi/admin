@@ -15,16 +15,18 @@ import com.ola.qh.entity.QuestionAnswer;
 import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.util.KeyGen;
 import com.ola.qh.util.Results;
+
 @Service
 public class InportBankTemplateService {
-	
+
 	@Autowired
 	private QuestionBankDao questionBankDao;
 
-	public Results<String> BankTemplateAnswerImg(int rowNumber,Iterator<Row> rowIterator,String subId,List<String> urlss){
-		
+	public Results<String> BankTemplateAnswerImg(int rowNumber, Iterator<Row> rowIterator, String subId,
+			List<String> urlss) {
+
 		Results<String> results = new Results<String>();
-		
+
 		String bankId = null;
 		int n = 0;
 		for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
@@ -40,9 +42,9 @@ public class InportBankTemplateService {
 				qb.setTitle(checkNull(1, row));
 				qb.setTypes(checkNull(0, row));
 				qb.setSubId(subId);
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>0){
+				if (urlss != null) {
+					for (String imageurl : urlss) {
+						if (imageurl.indexOf("/" + (i + 1) + "-2") > 0) {
 							qb.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -64,9 +66,9 @@ public class InportBankTemplateService {
 				QuestionAnswer qa = new QuestionAnswer();
 				qa.setBankUnitId(unitId);
 				qa.setAddtime(new Date());
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>=0){
+				if (urlss != null) {
+					for (String imageurl : urlss) {
+						if (imageurl.indexOf("/" + (i + 1) + "-2") >= 0) {
 							qb.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -84,9 +86,9 @@ public class InportBankTemplateService {
 					}
 					qa.setOrders(0);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////A对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-5")>=0){
+					for (String imageurl : urlss) {
+						/////// A对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-5") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -94,7 +96,7 @@ public class InportBankTemplateService {
 					}
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(6, row)!= null) {
+				if (checkNull(6, row) != null) {
 					qa.setAnswers(checkNull(6, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
@@ -105,9 +107,9 @@ public class InportBankTemplateService {
 					}
 					qa.setOrders(1);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////B对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-7")>=0){
+					for (String imageurl : urlss) {
+						/////// B对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-7") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -126,9 +128,9 @@ public class InportBankTemplateService {
 					}
 					qa.setOrders(2);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////C对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-9")>=0){
+					for (String imageurl : urlss) {
+						/////// C对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-9") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -147,9 +149,9 @@ public class InportBankTemplateService {
 					}
 					qa.setOrders(3);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////D对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-11")>=0){
+					for (String imageurl : urlss) {
+						/////// D对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-11") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -168,9 +170,9 @@ public class InportBankTemplateService {
 					}
 					qa.setOrders(4);
 					qa.setTitleimg(null);
-					for(String imageurl : urlss){
-						///////E对应的图片
-						if(imageurl.indexOf("/"+(i+1)+"-13")>=0){
+					for (String imageurl : urlss) {
+						/////// E对应的图片
+						if (imageurl.indexOf("/" + (i + 1) + "-13") >= 0) {
 							qa.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -201,11 +203,12 @@ public class InportBankTemplateService {
 		results.setStatus("0");
 		return results;
 	}
-	
-	public Results<String> BankTemplateTitleImg(int rowNumber,Iterator<Row> rowIterator,String subId,List<String> urlss){
-		
+
+	public Results<String> BankTemplateTitleImg(int rowNumber, Iterator<Row> rowIterator, String subId,
+			List<String> urlss) {
+
 		Results<String> results = new Results<String>();
-		
+
 		String bankId = null;
 		int n = 0;
 		for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
@@ -221,9 +224,9 @@ public class InportBankTemplateService {
 				qb.setTitle(checkNull(1, row));
 				qb.setTypes(checkNull(0, row));
 				qb.setSubId(subId);
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>0){
+				if (urlss != null) {
+					for (String imageurl : urlss) {
+						if (imageurl.indexOf("/" + (i + 1) + "-2") > 0) {
 							qb.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -245,9 +248,9 @@ public class InportBankTemplateService {
 				QuestionAnswer qa = new QuestionAnswer();
 				qa.setBankUnitId(unitId);
 				qa.setAddtime(new Date());
-				if(urlss!=null){
-					for(String imageurl : urlss){
-						if(imageurl.indexOf("/"+(i+1)+"-2")>=0){
+				if (urlss != null) {
+					for (String imageurl : urlss) {
+						if (imageurl.indexOf("/" + (i + 1) + "-2") >= 0) {
 							qb.setTitleimg(imageurl);
 							urlss.remove(imageurl);
 							break;
@@ -267,7 +270,7 @@ public class InportBankTemplateService {
 					qa.setTitleimg(null);
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(5, row)!= null) {
+				if (checkNull(5, row) != null) {
 					qa.setAnswers(checkNull(5, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
@@ -342,10 +345,11 @@ public class InportBankTemplateService {
 		results.setStatus("0");
 		return results;
 	}
-public Results<String> BankTemplateNoImg(int rowNumber,Iterator<Row> rowIterator,String subId){
-		
+
+	public Results<String> BankTemplateNoImg(int rowNumber, Iterator<Row> rowIterator, String subId) {
+
 		Results<String> results = new Results<String>();
-		
+
 		String bankId = null;
 		int n = 0;
 		for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
@@ -389,7 +393,7 @@ public Results<String> BankTemplateNoImg(int rowNumber,Iterator<Row> rowIterator
 					qa.setTitleimg(null);
 					questionBankDao.insertQuestionAnswer(qa);
 				}
-				if (checkNull(4, row)!= null) {
+				if (checkNull(4, row) != null) {
 					qa.setAnswers(checkNull(4, row));
 					qa.setId(KeyGen.uuid());
 					qa.setOptions("B");
@@ -464,6 +468,7 @@ public Results<String> BankTemplateNoImg(int rowNumber,Iterator<Row> rowIterator
 		results.setStatus("0");
 		return results;
 	}
+
 	public static String checkNull(int i, Row row) {
 
 		Cell cell = row.getCell(i);

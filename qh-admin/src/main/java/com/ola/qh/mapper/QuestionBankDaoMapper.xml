@@ -231,4 +231,36 @@
 	</if>
 	</select>
 	
+	<!--   以下是考官提问表 开始   -->
+	<resultMap type="com.ola.qh.entity.QuestionBankAsk" id="QuestionBankAskMap">
+	<result column="id" property="id"/>
+	<result column="question_ask" property="questionAsk"/>
+	<result column="question_answer" property="questionAnswer"/>
+	<result column="course_type_subclass_name" property="courseTypeSubclassName"/>
+	<result column="addtime" property="addtime"/>
+	<result column="updatetime" property="updatetime"/>
+	</resultMap>
+	
+	<!--根据子专业名查询问题集合  -->
+	<select id="questionList" resultMap="QuestionBankAskMap">
+	select * from question_bank_ask where 1=1
+	<if test="courseTypeSubclassName != null and courseTypeSubclassName !=''">
+	and course_type_subclass_name = #{courseTypeSubclassName}
+	</if>
+	order by addtime desc
+	</select>
+	
+	<!--添加  -->
+	<insert id="addQuestion"  parameterType="com.ola.qh.entity.QuestionBankAsk" >
+	insert into question_bank_ask (id,question_ask,question_answer,course_type_subclass_name,addtime)
+	values
+	(#{id},#{questionAsk},#{questionAnswer},#{courseTypeSubclassName},#{addtime})
+	</insert>
+	
+	<!--根据ID删除  -->
+	<delete id="deleteQuestion">
+		delete from question_bank_ask where id = #{id};
+	</delete>
+	<!--   以下是考官提问表 结束   -->
+	
 	</mapper>
