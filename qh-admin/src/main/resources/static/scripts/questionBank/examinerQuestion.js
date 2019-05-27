@@ -90,7 +90,6 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		//批量上传
 		$scope.addBantch = function () {
 			var file = $("#file")[0].files[0];
-			console.log("测试打印file = "+file);
 			if (file != null) {
 				console.log("进入了上传表格的方法");
 				var fd = new FormData();
@@ -99,7 +98,6 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			    $http.post("/api/questionbank/uploadExcel",fd,{withCredentials: true,headers: {'Content-Type': undefined },transformRequest: angular.identity})
 			    .success (function (result) {
 			    	if (result.status == "0") {
-			    		console.log("添加成功~");
 			    		alert("添加成功，共添加了"+result.data+"条数据");
 			    		//重新加载list
 			    		$scope.questionList();
@@ -114,9 +112,6 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		}
 		//修改功能
 		$scope.updateQuestion = function () {
-			console.log("以下是点击提交按钮");
-			console.log($scope.qc.questionAsk);
-			console.log($scope.qc.questionAnswer);
 			$http.post("/api/questionbank/updateQuestion",$scope.qc,{'Content-Type' : 'application/json;charset=UTF-8'})
 			.success (function (result) {
 				if (result.status == "0") {
@@ -149,7 +144,6 @@ app.controller("examinerQuestionController",function($scope, $http) {
 				$scope.selected = null;
 				$scope.qc = null;
 				$scope.id = null;
-				console.log($scope.id);
 			}
 		}
 		//点击事件  点击切换子专业
@@ -166,7 +160,6 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		$scope.add = function() {
 			$scope.id = null;
 			$scope.qc = null;
-			console.log($scope.id);
 			document.getElementById('add').style.display = "block";
 		}
 		//点击批量上传按钮
@@ -175,7 +168,6 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		}
 		//点击修改按钮
 		$scope.update = function () {
-			console.log($scope.id);
 			if($scope.id!=null){
 				document.getElementById('add').style.display="block"; 
 			}else{
