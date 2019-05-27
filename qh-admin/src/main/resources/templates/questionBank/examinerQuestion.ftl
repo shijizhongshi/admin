@@ -71,7 +71,7 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 					<li style="background: #F86846;" ng-click="deletequestion()"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除问题</li>
 					<li style="background: #9DE879;" ng-click="batch()"><span
-						class="glyphicon glyphicon-plus"></span>&nbsp;批量上传</li>
+						class="glyphicon glyphicon-plus"></span>&nbsp;Excel 批量上传</li>
 					<!-- <li ng-click="tojie()"><span
 						class="glyphicon glyphicon-briefcase"></span>&nbsp;节内容管理</li> -->
 

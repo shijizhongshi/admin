@@ -164,6 +164,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		}
 		//点击批量上传按钮
 		$scope.batch = function () {
+			$scope.selected = null;
 			document.getElementById('batch').style.display = "block";
 		}
 		//点击修改按钮
