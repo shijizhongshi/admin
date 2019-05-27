@@ -1,12 +1,11 @@
 app.controller("knowledgepController", function($scope, $http){
 	
-	$scope.menus =[];
 	$http.get("/api/course/courseTypeList", {'Content-Type' : 'application/json;charset=UTF-8'})
 	.success(function(result) {
 		$scope.list = result.data;
 	})
 	//根据一级类别ID查询二级类别
-	$scope.getSuclassName = function (list) {
+	$scope.getSubclassName = function (list) {
 		$scope.courseTypeId = list.id;
 		$http.get("/api/course/courseTypeSubclassList",{"params":{"courseTypeId":$scope.courseTypeId}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success (function (result) {
@@ -18,7 +17,6 @@ app.controller("knowledgepController", function($scope, $http){
 	//根据二级类别ID查询三级类别
 	$scope.getMiniName = function (subclass) {
 		$scope.courseTypeSubclassId = subclass.id;
-		$scope.courseTypeSubclassName = subclass.courseTypeSubclassName;
 		$http.get("/api/course/selectThree",{"params":{"courseTypeSubclassId":$scope.courseTypeSubclassId}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success (function (result) {
 			if (result.status == "0") {
@@ -78,38 +76,12 @@ app.controller("knowledgepController", function($scope, $http){
 	   $scope.knowledgep=null;
 	   $scope.checkknowledgep=function(k){
 			
-		   //$scope.adminMenus = [];
-	 		$scope.adminSubMenusName = [];
-			$scope.adminMenusNames = [];
-			 if($scope.selected!=k){
+		   if($scope.selected!=k){
 					$scope.selected=k;
 					$scope.knowledgep=k;
 					$scope.id=k.id;
 			 		$scope.imgUrl=k.firstImage;
-			 		angular.forEach(k.courseTypeNames,function(courseTypeNames){
-			 			$scope.adminMenusNames.push(courseTypeNames);
-					})
-			 		angular.forEach(k.courseTypeSubclassNames,function(courseTypeSubclassNames){
-			 			$scope.adminSubMenusName.push(courseTypeSubclassNames);
-					})
-					/*for (var n = 0; n < $scope.adminMenusNames.length; n++) {
-						for (var t = 0; t < $scope.menus.length; t++) {
-			 				if ($scope.menus[t].courseTypeName==$scope.adminMenusNames[n]) {
-								$scope.adminMenus.push($scope.menus[t]);
-								for (var i = 0; i < $scope.menus[t].adminSubMenus.length; i++) {
-									for (var j = 0; j < $scope.adminSubMenusName.length; j++) {
-										if ($scope.adminSubMenusName[j]==$scope.menus[t].adminSubMenus[i].courseTypeSubclassName) {
-							 				
-											$scope.adminMenus[$scope.adminMenusNames.indexOf($scope.menus[t].courseTypeName)].list.push($scope.menus[t].adminSubMenus[i]);
-										}
-									}
-									
-								}
-								
-						 	}
-						}
-			 			
-			 		}*/
+			 		
 			 }else{
 						$scope.selected=null;
 						$scope.knowledgep=null;
@@ -120,7 +92,7 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 		
 	   $scope.saveKnowledgep=function(){
-		   $scope.knowledgep.courseTypeSubclassName = $scope.courseTypeSubclassName;
+		   $scope.knowledgep.courseTypeSubclassName = $scope.subclass.courseTypeSubclassName;
 		   $scope.knowledgep.miniSubclassName = $scope.miniSubclassName;
 		   
 		   $http.post("/api/KnowledgeVideo/insert",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
@@ -128,8 +100,6 @@ app.controller("knowledgepController", function($scope, $http){
 				if(data.status=="0"){
 					$scope.courseTypeSubclassName = null;
 					alert("保存成功~");
-					//$scope.adminSubMenusName = [];
-					//$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
 					$scope.knowledgep = null;
 					location.reload();
@@ -139,7 +109,7 @@ app.controller("knowledgepController", function($scope, $http){
 		}
 	   
 	   $scope.updateKnowledgep=function(){
-		   $scope.knowledgep.courseTypeSubclassName = $scope.courseTypeSubclassName;
+		   $scope.knowledgep.courseTypeSubclassName = $scope.subclass.courseTypeSubclassName;
 		   $scope.knowledgep.miniSubclassName = $scope.miniSubclassName;
 		   //$scope.knowledgep.firstImage=$scope.imgUrl;
 		   //$scope.knowledgep.courseTypeSubclassNames=$scope.adminSubMenusName;
@@ -148,8 +118,6 @@ app.controller("knowledgepController", function($scope, $http){
 				if(data.status=="0"){
 					$scope.courseTypeSubclassName = null;
 					alert("修改成功~");
-					$scope.adminSubMenusName = [];
-					$scope.adminMenusNames = [];
 					document.getElementById('resource').style.display="none"; 
 					//重置清除缓存
 					$scope.knowledgep = null;
@@ -167,14 +135,17 @@ app.controller("knowledgepController", function($scope, $http){
 		   	$scope.knowledgep=null;
 	 		$scope.id=null;
 	 		$scope.selected=null;
-	 		$scope.adminMenus = [];
-	 		$scope.adminSubMenusName = [];
-			$scope.adminMenusNames = [];
-	 		document.getElementById('resource').style.display="block"; 
+	 		$scope.l=null;
+	 		$scope.subclassList=[];
+			$scope.miniList=[];
+			document.getElementById('resource').style.display="block"; 
 		}
 	   
 	   $scope.update=function(){
-		   if($scope.id==null){
+		   $scope.subclassList=[];
+			$scope.miniList=[];
+			$scope.l=null;
+			if($scope.id==null){
 			   
 			   alert("请选中一条数据");
 			   return;
@@ -183,18 +154,14 @@ app.controller("knowledgepController", function($scope, $http){
 		   document.getElementById('resource').style.display="block"; 
 		}
 	   
-	   //$scope.adminMenus = [];
-
-		$scope.adminSubMenusName = [];
-		$scope.adminMenusNames = [];
-		var updateSelected = function(action, menus) {
+	  /* var updateSelected = function(action, menus) {
 			if ($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1) {
 				//$scope.adminMenus.push(menus);
 				$scope.adminMenusNames.push(menus.courseTypeName);
 				/////他选中的时候默认子菜单全选中
-				/*angular.forEach(, function(singlesub) {
+				angular.forEach(, function(singlesub) {
 					
-				});*/
+				});
 				for(var i=0;i<menus.adminSubMenus.length;i++){
 					$scope.adminSubMenusName.push(menus.adminSubMenus[i].courseTypeSubclassName);
 				}
@@ -247,13 +214,13 @@ app.controller("knowledgepController", function($scope, $http){
 				}
 
 			}else{
-				/*////////如果大菜单不存在的话
+				////////如果大菜单不存在的话
 				 * 
 				if($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1){
 					$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName), 1);
 					
 				}else{/////如果大菜单存在的话
-*/					
+					
 				
 				
 				if($scope.adminMenusNames.indexOf(menus.courseTypeName) == -1){
@@ -278,7 +245,7 @@ app.controller("knowledgepController", function($scope, $http){
 					
 					
 				}
-				/*if($scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.length==1){
+				if($scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.length==1){
 						//////表示只有一个子菜单 并且要移除   所以大类别也要进行移除
 						$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.splice(
 								$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.indexOf(sub), 1);
@@ -292,19 +259,19 @@ app.controller("knowledgepController", function($scope, $http){
 					//////在集合中移除
 						
 						/*$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.splice(
-								$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.indexOf(sub), 1);*/
-						/*$scope.adminMenus.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
+								$scope.adminMenus[$scope.adminMenusNames.indexOf(menus.courseTypeName)].list.indexOf(sub), 1);
+						$scope.adminMenus.splice($scope.adminSubMenusName.indexOf(sub.names), 1);
 						/////在subname中移除
 						
 						$scope.adminSubMenusName.splice($scope.adminSubMenusName.indexOf(sub.courseTypeSubclassName), 1);
 						
-					}*/
+					}
 					
 					
 				//}
 
 			}
-		};
+		};*/
 		
 		$scope.deleteKnowledgep=function(){
 			if($scope.id!=null){
@@ -397,14 +364,14 @@ app.controller("knowledgepController", function($scope, $http){
 			
 		}
 	   $scope.reset=function(){
+		   $scope.l=null;
+		   $scope.subclassList=[];
+		   $scope.miniList=[];
 		   $scope.KnowledgepList();
 		   $scope.selected=null;
 			$scope.knowledgep=null;
 			$scope.id=null;
-			//$scope.adminMenus = [];
-			$scope.adminSubMenusName = [];
-			$scope.adminMenusNames = [];
-		  document.getElementById('resource').style.display="none"; 
+			document.getElementById('resource').style.display="none"; 
 	   }
 	   $scope.updateAll = function () {
 		   $http.get("/api/KnowledgeVideo/updateAll",{'Content-Type': 'application/json;charset=UTF-8'})
