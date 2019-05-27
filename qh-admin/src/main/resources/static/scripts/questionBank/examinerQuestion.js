@@ -11,7 +11,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		$scope.typeId = 1;
 		$scope.typeSelected = null;
 		$scope.selected = null;
-		$scope.questionCategory = null;
+		$scope.qc = null;
 		$scope.id = null;
 
 		$scope.typeList = function(typename, typeId) {
@@ -62,10 +62,11 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		
 		//查询集合
 		$scope.questionList = function () {
-			$http.get("/api/questionbank/questionList",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName}},{'Content-Type' : 'application/json;charset=UTF-8'})
+			$http.get("/api/questionbank/questionList",{"params":{"courseTypeSubclassName":$scope.courseTypeSubclassName,"page":$scope.page}},{'Content-Type' : 'application/json;charset=UTF-8'})
 			.success (function (result) {
 				if (result.status == "0") {
 					$scope.list = result.data;
+					$scope.total = result.count;
 				}
 			})
 		}
@@ -105,6 +106,26 @@ app.controller("examinerQuestionController",function($scope, $http) {
 				}
 			}) 
 		}
+		//修改功能
+		$scope.updateQuestion = function () {
+			console.log("以下是点击提交按钮");
+			console.log($scope.qc.questionAsk);
+			console.log($scope.qc.questionAnswer);
+			$http.post("/api/questionbank/updateQuestion",$scope.qc,{'Content-Type' : 'application/json;charset=UTF-8'})
+			.success (function (result) {
+				if (result.status == "0") {
+					//重置
+					$scope.qc = null;
+					//取消选中状态
+					$scope.selected = null;
+					document.getElementById('add').style.display = "none";
+					alert("修改成功~");
+					$scope.questionList();
+				}else {
+					alert(result.message);
+				}
+			}) 
+		}
 		
 		
 		// 选中的操作
@@ -112,13 +133,14 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			//选中
 			if ($scope.selected != qc) {
 				$scope.selected = qc;
-				$scope.questionCategory = qc;
+				$scope.qc = qc;
 				$scope.id = qc.id;
 				$scope.name = qc.name;
+				$scope.qc = qc;
 			} else {
 				//取消选中
 				$scope.selected = null;
-				$scope.questionCategory = null;
+				$scope.qc = null;
 				$scope.id = null;
 				console.log($scope.id);
 			}
@@ -135,7 +157,19 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		}
 		// 点击添加按钮
 		$scope.add = function() {
+			$scope.id = null;
+			$scope.qc = null;
+			console.log($scope.id);
 			document.getElementById('add').style.display = "block";
+		}
+		//点击修改按钮
+		$scope.update = function () {
+			console.log($scope.id);
+			if($scope.id!=null){
+				document.getElementById('add').style.display="block"; 
+			}else{
+					alert("请选中信息");
+				}
 		}
 		//点击删除按钮
 		$scope.deletequestion = function () {
@@ -144,6 +178,9 @@ app.controller("examinerQuestionController",function($scope, $http) {
 				.success (function (result) {
 					if (result.status == "0") {
 						alert("删除成功~");
+						//重置
+						$scope.qc = null;
+						$scope.id = null;
 						$scope.questionList();
 					}else {
 						alert(result.message);
@@ -160,7 +197,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			document.getElementById('add').style.display = "none";
 			$scope.selected = null;
 			$scope.id = null;
-			$scope.questionCategory = null;
+			$scope.qc = null;
 		}
 
 })

@@ -66,6 +66,7 @@ public interface CourseDao {
 	public Integer deleteCourseTypeSubclass(@Param("courseTypeSubclassId") String courseTypeSubclassId);
 
 	public Integer insert(@Param("id") String id, @Param("courseTypeSubclassId") String courseTypeSubclassId,
+			@Param("courseTypeSubclassName") String courseTypeSubclassName,
 			@Param("miniSubclassName") String miniSubclassName);
 
 	public List<CourseTypeSubclassNames> select(@Param("courseTypeSubclassId") String courseTypeSubclassId);

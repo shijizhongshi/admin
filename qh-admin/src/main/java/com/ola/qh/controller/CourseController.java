@@ -38,7 +38,7 @@ public class CourseController {
 
 	@Autowired
 	private IBuyCourseService buyCourseService;
-	
+
 	@Autowired
 	private ILiveMarkScheduleService liveMarkScheduleService;
 
@@ -369,7 +369,7 @@ public class CourseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/selectThree", method = RequestMethod.GET)
-	public Results<List<CourseTypeSubclassNames>> insertThree(
+	public Results<List<CourseTypeSubclassNames>> selectThree(
 			@RequestParam(name = "courseTypeSubclassId") String courseTypeSubclassId) {
 		Results<List<CourseTypeSubclassNames>> results = new Results<List<CourseTypeSubclassNames>>();
 		results = courseService.selectThree(courseTypeSubclassId);
@@ -386,9 +386,10 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "/insertThree", method = RequestMethod.GET)
 	public Results<String> insertThree(@RequestParam(name = "courseTypeSubclassId") String courseTypeSubclassId,
+			@RequestParam(name = "courseTypeSubclassName") String courseTypeSubclassName,
 			@RequestParam(name = "miniSubclassName") String miniSubclassName) {
 		Results<String> results = new Results<String>();
-		results = courseService.insertThree(courseTypeSubclassId, miniSubclassName);
+		results = courseService.insertThree(courseTypeSubclassId, courseTypeSubclassName, miniSubclassName);
 
 		return results;
 	}
@@ -431,10 +432,10 @@ public class CourseController {
 
 		liveMarkScheduleService.timedPushOneHour();
 	}
-	
+
 	@RequestMapping("/bbb")
-	public void testb () {
-		
+	public void testb() {
+
 		liveMarkScheduleService.timedPushFiveMin();
 	}
 

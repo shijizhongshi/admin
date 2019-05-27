@@ -402,9 +402,11 @@ app.controller("CourseTypeController", function($scope, $http) {
 	}
 	// 添加三级类别
 	$scope.insertThree = function() {
+		console.log("测试打印二级name = "+$scope.courseTypeSubclassName);
 		$http.get("/api/course/insertThree", {
 			"params" : {
 				"courseTypeSubclassId" : $scope.courseTypeSubclassId,
+				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
 				"miniSubclassName" : $scope.miniSubclassName
 			}
 		}, {

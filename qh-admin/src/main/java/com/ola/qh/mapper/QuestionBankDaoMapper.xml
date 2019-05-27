@@ -248,14 +248,37 @@
 	and course_type_subclass_name = #{courseTypeSubclassName}
 	</if>
 	order by addtime desc
+	limit #{pageNo},#{pageSize}
 	</select>
 	
+	<!-- 根据专业名查询数量  -->
+	<select id="selectCount" resultType="int">
+		select count(*) from question_bank_ask where 1=1
+		<if test="courseTypeSubclassName != null and courseTypeSubclassName !=''">
+			and course_type_subclass_name = #{courseTypeSubclassName}
+		</if>
+	</select>
 	<!--添加  -->
 	<insert id="addQuestion"  parameterType="com.ola.qh.entity.QuestionBankAsk" >
 	insert into question_bank_ask (id,question_ask,question_answer,course_type_subclass_name,addtime)
 	values
 	(#{id},#{questionAsk},#{questionAnswer},#{courseTypeSubclassName},#{addtime})
 	</insert>
+	<!-- 修改  -->
+	<update id="updateQuestion" parameterType="com.ola.qh.entity.QuestionBankAsk">
+	update question_bank_ask set
+	<if test="questionAnswer != null and questionAnswer !=''">
+	question_answer = #{questionAnswer},
+	</if>
+	<if test="questionAsk != null and questionAsk!=''">
+	question_ask = #{questionAsk},
+	</if>
+	<if test="courseTypeSubclassName != null and courseTypeSubclassName!=''">
+	course_type_subclass_name = #{courseTypeSubclassName},
+	</if>
+	updatetime = #{updatetime}
+	where id= #{id}
+	</update>
 	
 	<!--根据ID删除  -->
 	<delete id="deleteQuestion">

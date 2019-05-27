@@ -32,12 +32,14 @@ public interface IQuestionBankService {
 
 	public Results<List<PlayLog>> ccVideo(String videoId, String mobile, String date, String numPerPage, String page);
 
-	public Results<List<QuestionBankAsk>> questionList(String courseTypeSubclassName);
+	public Results<List<QuestionBankAsk>> questionList(String courseTypeSubclassName,Integer pageNo,Integer pageSize);
 
 	public Results<String> addQuestion(QuestionBankAsk questionBankAsk);
 
 	public Results<String> deleteQuestion(String id);
 
 	public Results<Integer> uploadExcel(MultipartFile file,String courseTypeSubclassName);
+
+	public Results<String> updateQuestion(QuestionBankAsk questionBankAsk);
 	
 }

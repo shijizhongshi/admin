@@ -16,6 +16,7 @@ import com.ola.qh.entity.QuestionBank;
 import com.ola.qh.entity.QuestionBankAsk;
 import com.ola.qh.entity.UserEnterLeaveActions;
 import com.ola.qh.service.IQuestionBankService;
+import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -24,6 +25,7 @@ public class QuestionBankController {
 
 	@Autowired
 	private IQuestionBankService questionBankService;
+
 	/**
 	 * 题库的上传
 	 * <p>
@@ -39,9 +41,9 @@ public class QuestionBankController {
 	 */
 	@RequestMapping(value = "/improtExcel", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public Results<String> improtExcel(@RequestParam(value = "file") MultipartFile file,
-			@RequestParam(value = "subId") String subId,@RequestParam(value = "status") int status) throws Exception {
+			@RequestParam(value = "subId") String subId, @RequestParam(value = "status") int status) throws Exception {
 
-		return questionBankService.importExcel(file, subId,status);
+		return questionBankService.importExcel(file, subId, status);
 	}
 
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
@@ -151,22 +153,29 @@ public class QuestionBankController {
 		results = questionBankService.liveAccess(notToEnter, liveId, pagenum, pageindex);
 		return results;
 	}
+
 	/**
 	 * 根据子专业名查询考官提问表
+	 * 
 	 * @param courseTypeSubclassName
 	 * @return
 	 */
 	@RequestMapping(value = "/questionList", method = RequestMethod.GET)
 	public Results<List<QuestionBankAsk>> questionList(
-			@RequestParam(value = "courseTypeSubclassName", required = true) String courseTypeSubclassName) {
+			@RequestParam(value = "courseTypeSubclassName", required = true) String courseTypeSubclassName,
+			@RequestParam(value = "page", required = false) Integer page) {
 		Results<List<QuestionBankAsk>> results = new Results<List<QuestionBankAsk>>();
+		Integer pageNo = (page - 1) * Patterns.pageSize;
+		Integer pageSize = Patterns.pageSize;
 
-		results = questionBankService.questionList(courseTypeSubclassName);
-				
+		results = questionBankService.questionList(courseTypeSubclassName, pageNo, pageSize);
+
 		return results;
 	}
+
 	/**
 	 * 考官提问表添加内容
+	 * 
 	 * @param questionBankAsk
 	 * @return
 	 */
@@ -174,23 +183,34 @@ public class QuestionBankController {
 	public Results<String> addQuestion(@RequestBody QuestionBankAsk questionBankAsk) {
 		Results<String> results = new Results<String>();
 		results = questionBankService.addQuestion(questionBankAsk);
-				
+
 		return results;
 	}
+	@RequestMapping(value = "/updateQuestion", method = RequestMethod.POST)
+	public Results<String> updateQuestionS(@RequestBody QuestionBankAsk questionBankAsk) {
+		Results<String> results = new Results<String>();
+		results = questionBankService.updateQuestion(questionBankAsk);
+
+		return results;
+	}
+
 	/**
 	 * 根据ID删除考官提问表内容
+	 * 
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteQuestion",method = RequestMethod.GET)
-	public Results<String> deleteQuestion (@RequestParam(name = "id")String id) {
+	@RequestMapping(value = "/deleteQuestion", method = RequestMethod.GET)
+	public Results<String> deleteQuestion(@RequestParam(name = "id") String id) {
 		Results<String> results = new Results<String>();
 		results = questionBankService.deleteQuestion(id);
-		
+
 		return results;
 	}
+
 	/**
 	 * 使用excel表格批量上传
+	 * 
 	 * @param file
 	 * @param courseTypeSubclassName
 	 * @return
@@ -198,8 +218,8 @@ public class QuestionBankController {
 	 */
 	@RequestMapping(value = "/uploadExcel", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public Results<Integer> uploadExcel(@RequestParam(value = "file") MultipartFile file,
-			@RequestParam(name = "courseTypeSubclassName")String courseTypeSubclassName) throws Exception {
-		
-		return questionBankService.uploadExcel(file,courseTypeSubclassName);
+			@RequestParam(name = "courseTypeSubclassName") String courseTypeSubclassName) throws Exception {
+
+		return questionBankService.uploadExcel(file, courseTypeSubclassName);
 	}
 }

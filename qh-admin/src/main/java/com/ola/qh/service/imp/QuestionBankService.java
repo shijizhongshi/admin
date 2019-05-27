@@ -678,11 +678,15 @@ public class QuestionBankService implements IQuestionBankService {
 	}
 
 	@Override
-	public Results<List<QuestionBankAsk>> questionList(String courseTypeSubclassName) {
+	public Results<List<QuestionBankAsk>> questionList(String courseTypeSubclassName, Integer pageNo,
+			Integer pageSize) {
 		Results<List<QuestionBankAsk>> results = new Results<List<QuestionBankAsk>>();
-		List<QuestionBankAsk> list = questionBankDao.questionList(courseTypeSubclassName);
+		List<QuestionBankAsk> list = questionBankDao.questionList(courseTypeSubclassName, pageNo, pageSize);
+		Integer count = questionBankDao.selectCount(courseTypeSubclassName);
+
 		results.setStatus("0");
 		results.setData(list);
+		results.setCount(count);
 
 		return results;
 	}
@@ -720,12 +724,13 @@ public class QuestionBankService implements IQuestionBankService {
 
 		return results;
 	}
+
 	/**
 	 * 考官提问页面使用excel批量上传
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Results<Integer> uploadExcel(MultipartFile file,String courseTypeSubclassName) {
+	public Results<Integer> uploadExcel(MultipartFile file, String courseTypeSubclassName) {
 		Results<Integer> result = new Results<Integer>();
 		Workbook wb;
 		int count = 0;
@@ -743,7 +748,7 @@ public class QuestionBankService implements IQuestionBankService {
 			for (int i = 0; i < rowNumber && rowIterator.hasNext(); i++) {
 				Row row = rowIterator.next();
 				if (checkNull(0, row) != null && checkNull(1, row) != null) {
-					count ++;
+					count++;
 					QuestionBankAsk questionBankAsk = new QuestionBankAsk();
 					questionBankAsk.setId(KeyGen.uuid());
 					questionBankAsk.setQuestionAsk(checkNull(0, row));
@@ -779,5 +784,23 @@ public class QuestionBankService implements IQuestionBankService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Results<String> updateQuestion(QuestionBankAsk questionBankAsk) {
+		Results<String> results = new Results<String>();
+		
+		questionBankAsk.setUpdatetime(new Date());
+		
+		Integer count = questionBankDao.updateQuestion(questionBankAsk);
+		if (count == 1) {
+			results.setStatus("0");
+
+			return results;
+		}
+		results.setStatus("1");
+		results.setMessage("修改失败");
+
+		return results;
 	}
 }

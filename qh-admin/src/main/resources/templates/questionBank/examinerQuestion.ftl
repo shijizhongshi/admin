@@ -8,6 +8,27 @@
 <script src="/scripts/admin.js"></script>
 <script src="/scripts/student/management.js"></script>
 <script src="/scripts/questionBank/examinerQuestion.js"></script>
+<style>
+		.dd {
+			//border: solid 1px gray;
+			width: 180px;
+			course: hand;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			/* for IE */
+			-o-text-overflow: ellipsis;
+			/* for Opera */
+			-icab-text-overflow: ellipsis;
+			/* for iCab */
+			-khtml-text-overflow: ellipsis;
+			/* for Konqueror Safari */
+			-moz-text-overflow: ellipsis;
+			/* for Firefox,mozilla */
+			-webkit-text-overflow: ellipsis;
+			/* for Safari,Swift*/
+		}
+	</style>
 <@b.body menu="sidebarmenu-questionBank"
 submenu="sidebarmenu-questionBank-examinerQuestion">
 <div ng-controller="examinerQuestionController">
@@ -70,14 +91,11 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 								ng-click="checkquestioncate(qc)"
 								ng-class="{'selected':selected==qc}">
 									
-								<th>{{qc.questionAsk}}</th>
+								<th class="dd">{{qc.questionAsk}}</th>
 								<th>{{qc.questionAnswer}}</th>
 								<th>{{qc.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								<th>{{qc.updatetime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
-
-
-
 						</tbody>
 					</table>
 				</div>
@@ -87,7 +105,7 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 						ng-model="page" items-per-page="pageSize" max-size="5"
 						class="pagination-sm" previous-text="&lsaquo;"
 						next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-						ng-click="questioncate()">
+						ng-click="questionList()()">
 					</ul>
 				</div>
 				
@@ -106,15 +124,15 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入答案内容">
 						</div>
-						<div class="costs-uploadfile-div">
-							使用Excel批量上传<input type="file" name="file" value="选择文件" id="file">
+						<div class="costs-uploadfile-div" ng-show="id==null">
+							也可以使用Excel批量上传<input type="file" name="file" value="选择文件" id="file">
 						</div>	
 					
 						<div class="end">
 							<input name="git" type="submit" value="提交" ng-show="id==null" ng-click="addQuestion()"
 								style="background: #5ED8A9;"> 
 							<input name="git" type="submit" value="修改" ng-show="id!=null"
-								ng-click="update()" style="background: #5ED8A9;"
+								ng-click="updateQuestion()" style="background: #5ED8A9;"
 								class="ng-hide"> 
 							<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc">
 						</div>
