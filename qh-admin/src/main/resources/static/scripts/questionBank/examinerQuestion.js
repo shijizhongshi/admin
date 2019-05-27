@@ -85,13 +85,17 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			    	if (result.status == "0") {
 			    		console.log("添加成功~");
 			    		alert("添加成功，共添加了"+result.data+"条数据");
+			    		//重新加载list
+			    		$scope.questionList();
+			    		//关闭弹窗
+						document.getElementById('add').style.display = "none";
 			    	}else {
 			    		alert(result.message);
 			    	}
 			    })
 			    return;
 			}
-			
+			//普通的添加
 			//子专业名赋值
 			$scope.qc.courseTypeSubclassName = $scope.courseTypeSubclassName;
 			$http.post("/api/questionbank/addQuestion",$scope.qc,{'Content-Type' : 'application/json;charset=UTF-8'})
