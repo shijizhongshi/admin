@@ -142,7 +142,7 @@
 							</div>
 							<div class="select-2">
 								<span>具体开始时间<i class="bitian">*</i></span> 
-								<input type="date" ng-model="startTime" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
+								<input type="datetime-local" ng-model="startTime" name="search" class="ng-pristine ng-untouched ng-valid ng-empty">
 							</div>
 							
 							

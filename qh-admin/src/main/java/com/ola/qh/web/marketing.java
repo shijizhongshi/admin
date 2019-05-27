@@ -26,5 +26,8 @@ public class marketing {
 	public String liveAccess() {
 		return "marketing/liveAccess";
 	}
-
+	@RequestMapping("/livepay")
+	public String livePay() {
+		return "marketing/LivePay";
+	}
 }

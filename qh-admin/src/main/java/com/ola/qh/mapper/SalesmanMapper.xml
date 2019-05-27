@@ -71,6 +71,9 @@
 		<if test="address!=null and address!=''">
 			address=#{address},
 		</if>
+		<if test="imgUrl!=null and imgUrl!=''">
+			img_url=#{imgUrl},
+		</if>
 		updatetime=#{updatetime}
 		where id=#{id}
 	</update>
