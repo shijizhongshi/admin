@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/web/marketing")
-public class marketing {
+public class Marketing {
 
 	@RequestMapping("/questionbankH5")
 	public String courseOrders() {
