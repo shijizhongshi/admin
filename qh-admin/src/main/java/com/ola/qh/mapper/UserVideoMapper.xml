@@ -16,6 +16,7 @@
 		<result column="shopname" property="shopname" />
 		<result column="shop_id" property="shopId" />
 		<result column="status" property="status" />
+		<result column="types" property="types" />
 		<result column="like_number" property="likeNumber" />
 		<result column="comment_number" property="commentNumber" />
 		<result column="addtime" property="addtime" />
@@ -45,8 +46,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.ola.qh.entity.UserVideo">
-	insert into user_video(id,user_id,video_id,title,nickname,addtime,first_image)
-	values(#{id},#{userId},#{videoId},#{title},#{nickname},#{addtime},#{firstImage})
+	insert into user_video(id,user_id,video_id,title,nickname,addtime,first_image,types,status)
+	values(#{id},#{userId},#{videoId},#{title},#{nickname},#{addtime},#{firstImage},#{types},#{status})
 	</insert>
 	
 	<delete id="deleteVideo">
