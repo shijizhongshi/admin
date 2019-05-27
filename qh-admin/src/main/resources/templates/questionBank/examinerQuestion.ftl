@@ -70,6 +70,8 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改问题</li>
 					<li style="background: #F86846;" ng-click="deletequestion()"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除问题</li>
+					<li style="background: #9DE879;" ng-click="batch()"><span
+						class="glyphicon glyphicon-plus"></span>&nbsp;批量上传</li>
 					<!-- <li ng-click="tojie()"><span
 						class="glyphicon glyphicon-briefcase"></span>&nbsp;节内容管理</li> -->
 
@@ -114,19 +116,19 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 					<form id="myform" class="ng-pristine ng-valid">
 						<h3>{{}}问题内容</h3>
 						<p style="padding: 10px 0;">专业类型：&nbsp;{{courseTypeSubclassName}}</p>
-						<div class="select-2">
+						<div class="select-2" ng-show = "batch">
 							<span>问题内容<i class="bitian">*</i></span> <input type="text" ng-model="qc.questionAsk"
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入问题内容">
 						</div>
-						<div class="select-2">
+						<div class="select-2" ng-show = "batch">
 							<span>答案内容<i class="bitian">*</i></span> <input type="text" ng-model="qc.questionAnswer"
 								class="ng-pristine ng-untouched ng-valid ng-empty"
 								placeholder="请输入答案内容">
 						</div>
-						<div class="costs-uploadfile-div" ng-show="id==null">
-							也可以使用Excel批量上传<input type="file" name="file" value="选择文件" id="file">
-						</div>	
+						<!-- <div class="costs-uploadfile-div" ng-show = "!batch">
+							使用Excel批量上传<input type="file" name="file" value="选择文件" id="file">
+						</div>	 -->
 					
 						<div class="end">
 							<input name="git" type="submit" value="提交" ng-show="id==null" ng-click="addQuestion()"
@@ -134,6 +136,23 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 							<input name="git" type="submit" value="修改" ng-show="id!=null"
 								ng-click="updateQuestion()" style="background: #5ED8A9;"
 								class="ng-hide"> 
+							<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc">
+						</div>
+					</form>
+				</div>
+				<!--批量上传弹窗-->
+				<div class="poop" id="batch">
+					<form id="myform" class="ng-pristine ng-valid">
+						<h3>{{}}问题内容</h3>
+						<p style="padding: 10px 0;">专业类型：&nbsp;{{courseTypeSubclassName}}</p>
+						
+						<div class="costs-uploadfile-div">
+							使用Excel批量上传<input type="file" name="file" value="选择文件" id="file">
+						</div>
+						
+						<div class="end">
+							<input name="git" type="submit" value="提交" ng-click="addBantch()"
+								style="background: #5ED8A9;"> 
 							<input name="esc" type="reset" value="取消" ng-click="reset()" class="esc">
 						</div>
 					</form>

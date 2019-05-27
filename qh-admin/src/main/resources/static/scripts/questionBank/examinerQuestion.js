@@ -73,6 +73,22 @@ app.controller("examinerQuestionController",function($scope, $http) {
 		$scope.questionList();//加载页面时加载此方法
 		//添加功能
 		$scope.addQuestion = function () {
+			//子专业名赋值
+			$scope.qc.courseTypeSubclassName = $scope.courseTypeSubclassName;
+			$http.post("/api/questionbank/addQuestion",$scope.qc,{'Content-Type' : 'application/json;charset=UTF-8'})
+			.success (function (results) {
+				if (results.status == "0") {
+					//赋空值
+					$scope.qc = null;
+					$scope.questionList();
+					document.getElementById('add').style.display = "none";
+				}else {
+					alert(results.message);
+				}
+			}) 
+		}
+		//批量上传
+		$scope.addBantch = function () {
 			var file = $("#file")[0].files[0];
 			console.log("测试打印file = "+file);
 			if (file != null) {
@@ -88,27 +104,13 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			    		//重新加载list
 			    		$scope.questionList();
 			    		//关闭弹窗
-						document.getElementById('add').style.display = "none";
+						document.getElementById('batch').style.display = "none";
 			    	}else {
 			    		alert(result.message);
 			    	}
 			    })
 			    return;
 			}
-			//普通的添加
-			//子专业名赋值
-			$scope.qc.courseTypeSubclassName = $scope.courseTypeSubclassName;
-			$http.post("/api/questionbank/addQuestion",$scope.qc,{'Content-Type' : 'application/json;charset=UTF-8'})
-			.success (function (results) {
-				if (results.status == "0") {
-					//赋空值
-					$scope.qc = null;
-					$scope.questionList();
-					document.getElementById('add').style.display = "none";
-				}else {
-					alert(results.message);
-				}
-			}) 
 		}
 		//修改功能
 		$scope.updateQuestion = function () {
@@ -120,6 +122,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 				if (result.status == "0") {
 					//重置
 					$scope.qc = null;
+					$scope.id = null;
 					//取消选中状态
 					$scope.selected = null;
 					document.getElementById('add').style.display = "none";
@@ -166,6 +169,10 @@ app.controller("examinerQuestionController",function($scope, $http) {
 			console.log($scope.id);
 			document.getElementById('add').style.display = "block";
 		}
+		//点击批量上传按钮
+		$scope.batch = function () {
+			document.getElementById('batch').style.display = "block";
+		}
 		//点击修改按钮
 		$scope.update = function () {
 			console.log($scope.id);
@@ -198,6 +205,7 @@ app.controller("examinerQuestionController",function($scope, $http) {
 
 		// 点击取消按钮
 		$scope.reset = function() {
+			document.getElementById('batch').style.display = "none";
 			document.getElementById('add').style.display = "none";
 			$scope.selected = null;
 			$scope.id = null;
