@@ -73,7 +73,7 @@
 			<if test="times!=null and times!=''">
 			times=#{times},
 			</if>
-			<if test="status!=0">
+			<if test="status!=null">
 			status=#{status},
 			</if>
 			updatetime=#{updatetime}
