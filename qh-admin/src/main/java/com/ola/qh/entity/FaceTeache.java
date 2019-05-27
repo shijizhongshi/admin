@@ -20,7 +20,6 @@ public class FaceTeache {
 	@NotEmpty
 	private String courseTypeSubclassName;//////专业
 	
-	@NotEmpty
 	private String detailAddress;///////详细地址
 	
 	@NotEmpty

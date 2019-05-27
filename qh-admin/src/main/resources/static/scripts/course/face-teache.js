@@ -13,8 +13,11 @@ app.controller("faceTeacheController", function($scope, $http) {
 		    var m = date.getMonth() + 1;  
 		    m = m < 10 ? '0' + m : m;  
 		    var d = date.getDate();  
-		    d = d < 10 ? ('0' + d) : d;  
-		    return y + '-' + m + '-' + d;
+		    d = d < 10 ? ('0' + d) : d;
+		    var h = date.getHours();  
+		    var M = date.getMinutes();  
+		    
+		    return y + '-' + m + '-' + d+" "+h+":"+M+":"+"00";
 		} else{
 			return '';
 		}

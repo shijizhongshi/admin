@@ -141,13 +141,13 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 			if (knowledgeVideo.getStatus() == 1) {
 				UserVideo userVideo = new UserVideo();
 				userVideo.setId(KeyGen.uuid());
-				userVideo.setNickname("admin");
+				userVideo.setNickname("云云老师");
 				userVideo.setAddtime(new Date());
 				// 封面添加
 				userVideo.setFirstImage(newImage);
 				userVideo.setVideoId(knowledgeVideo.getVideoId());
 				userVideo.setTitle(knowledgeVideo.getTitle());
-				userVideo.setUserId("1");
+				userVideo.setUserId("ceshi11");
 				userVideoDao.insert(userVideo);
 			}
 			if (insert > 0) {

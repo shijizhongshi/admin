@@ -28,6 +28,8 @@ public class ExportExcel {
 			fileName = "学习记录";
 		}else if(types==4){
 			fileName = "直播访问记录";
+		}else if(types==5){
+			fileName = "直播购买记录";
 		}
 		return fileName;
 	};
@@ -43,6 +45,8 @@ public class ExportExcel {
 			sheetName = "学习记录";
 		}else if(types==4){
 			sheetName = "直播访问记录";
+		}else if(types==5){
+			sheetName = "直播购买记录";
 		}
 		return sheetName;
 	};
@@ -58,6 +62,8 @@ public class ExportExcel {
 			sheetTitle = "学习记录";
 		}else if(types==4){
 			sheetTitle = "直播访问记录";
+		}else if(types==5){
+			sheetTitle = "直播购买记录";
 		}
 		return sheetTitle;
 	};
@@ -98,6 +104,9 @@ public class ExportExcel {
 			sheetFieldsName.add("直播观看时长");
 			sheetFieldsName.add("终端类型");
 			
+		}else if(types==5){
+			sheetFieldsName.add("真实姓名");
+			sheetFieldsName.add("密码");
 		}
 		
 		return sheetFieldsName;
@@ -202,6 +211,18 @@ public class ExportExcel {
 				jo.put("data", arr);
 				jaDatas.add(jo);
 			}
+		}else if(types==5){
+			for (LivePay LivePay : inputExportExcel.getLivePay()) {
+				
+				ArrayList<Object> arr = new ArrayList<Object>();
+				JSONObject jo = new JSONObject();
+				arr.add(LivePay.getRealname());
+				arr.add("zhongshi");
+				
+				jo.put("data", arr);
+				jaDatas.add(jo);
+			}
+			
 		}
 		
 		return jaDatas;
@@ -241,6 +262,10 @@ public class ExportExcel {
 			sheetColWidth.add(3, 10000);
 			sheetColWidth.add(4, 5000);
 			sheetColWidth.add(5, 5000);
+		}else if(types==5){
+			sheetColWidth.add(0, 5000);
+			sheetColWidth.add(1, 5000);
+			
 		}
 		return sheetColWidth;
 	};
