@@ -228,10 +228,10 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public Results<String> insertThree(String courseTypeSubclassId, String miniSubclassName) {
+	public Results<String> insertThree(String courseTypeSubclassId,String courseTypeSubclassName, String miniSubclassName) {
 		Results<String> results = new Results<String>();
 		String id = KeyGen.uuid();
-		Integer count = courseDao.insert(id, courseTypeSubclassId, miniSubclassName);
+		Integer count = courseDao.insert(id, courseTypeSubclassId,courseTypeSubclassName, miniSubclassName);
 		if (count == 1) {
 			results.setStatus("0");
 

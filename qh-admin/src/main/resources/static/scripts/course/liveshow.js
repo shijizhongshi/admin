@@ -158,6 +158,8 @@ app
 													alert("保存成功~");
 													document
 															.getElementById('add').style.display = "none";
+													$scope.headImgUrl = null;
+													$scope.imgUrl = null;
 													$scope.liveBases();
 												} else {
 													alert(data.message)
@@ -192,6 +194,7 @@ app
 						$scope.live = l;
 						$scope.liveId = l.id;
 						$scope.imgUrl = l.imgUrl;
+						$scope.headImgUrl = l.headImgUrl;
 						$scope.starttime = l.starttime;
 						
 						$('#sp1').text(getTime(l.starttime));
@@ -269,6 +272,8 @@ app
 
 						$scope.liveId = null;
 						$scope.live = null;
+						$scope.imgUrl = null;
+						$scope.headImgUrl = null;
 						$scope.selected = null;
 						document.getElementById('add').style.display = "none";
 					}

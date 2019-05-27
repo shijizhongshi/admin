@@ -207,6 +207,10 @@ app.controller("CourseTypeController", function($scope, $http) {
 	};
 	// 添加一级类别
 	$scope.insertOne = function() {
+		if ($scope.courseTypeName == null || $scope.imageurl ==null) {
+			alert("请确认添加信息的完整度~");
+			return;
+		}
 		$http.get("/api/course/insertCourseTypeName", {
 			"params" : {
 				"courseTypeName" : $scope.courseTypeName,
@@ -218,6 +222,9 @@ app.controller("CourseTypeController", function($scope, $http) {
 			if (result.status == "0") {
 				document.getElementById('add').style.display = "none";
 				alert("添加成功");
+				//重置一级类别名和图片地址
+				$scope.imageurl = null;
+				$scope.courseTypeName = null;
 				$scope.shopcateBases();
 			} else {
 				alert(result.message);
@@ -226,7 +233,6 @@ app.controller("CourseTypeController", function($scope, $http) {
 	};
 	// 修改一级类别
 	$scope.updateOne = function() {
-		console.log("修改时新的url = "+$scope.imageurl);
 		$http.get("/api/course/updateOne", {
 			"params" : {
 				"id" : $scope.id,
@@ -246,7 +252,6 @@ app.controller("CourseTypeController", function($scope, $http) {
 	}
 	// 添加二级分类
 	$scope.insertTwo = function() {
-		console.log("测试打印二级图片url = "+$scope.imageurl);
 		$http.get("/api/course/insertCourseTypeSubclassName", {
 			"params" : {
 				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
@@ -281,7 +286,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 			}
 		})
 	}
-	$scope.deletesub = function() {
+	/*$scope.deletesub = function() {
 		if ($scope.subid != null) {
 			// //删除课程/
 			if (confirm("您确定要删出这个子类别吗")) {
@@ -305,7 +310,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 		} else {
 			alert("请选中一个子类别~");
 		}
-	}
+	}*/
 	// 删除一级类别
 	$scope.deletecate = function(list) {
 		if ($scope.id != null) {
@@ -359,14 +364,30 @@ app.controller("CourseTypeController", function($scope, $http) {
 		}
 
 	}
-	// 弹三级类别弹窗
-	$scope.addThree = function() {
+	// 点击三级类别的添加按钮
+	$scope.addWindows = function() {
 		if ($scope.id == null) {
-			alert("青先选中第一类别");
+			alert("请先选中第一类别");
 			return;
 		}
 		if ($scope.courseTypeSubclassId == null) {
 			alert("请选中第二类别");
+			return;
+		}
+		document.getElementById('three').style.display = "block";
+	}
+	//点击三级类别的修改按钮
+	$scope.updateWindows = function() {
+		if ($scope.id == null) {
+			alert("请先选中第一类别");
+			return;
+		}
+		if ($scope.courseTypeSubclassId == null) {
+			alert("请选中第二类别");
+			return;
+		}
+		if ($scope.threeId == null) {
+			alert("请选中要修改的三级类别~");
 			return;
 		}
 		document.getElementById('three').style.display = "block";
@@ -405,6 +426,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 		$http.get("/api/course/insertThree", {
 			"params" : {
 				"courseTypeSubclassId" : $scope.courseTypeSubclassId,
+				"courseTypeSubclassName" : $scope.courseTypeSubclassName,
 				"miniSubclassName" : $scope.miniSubclassName
 			}
 		}, {
@@ -412,6 +434,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 		}).success(function(result) {
 			if (result.status == "0") {
 				document.getElementById('three').style.display = "none";
+				$scope.miniSubclassName = null;
 				$scope.selectThree();
 			}
 		})
@@ -450,7 +473,11 @@ app.controller("CourseTypeController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
 			if (result.status == "0") {
+				$scope.threeId = null;
+				alert("删除三级类别成功~");
 				$scope.selectThree();
+			}else {
+				alert(result.message);
 			}
 		})
 	}
@@ -470,6 +497,8 @@ app.controller("CourseTypeController", function($scope, $http) {
 		location.reload();
 	}
 	$scope.resert = function() {
+		$scope.selectsThree = null;
+		$scope.threeId = null;
 		document.getElementById('three').style.display = "none";
 		document.getElementById('add').style.display = "none";
 

@@ -21,6 +21,11 @@ app.controller("knowledgepController", function($scope, $http){
 		.success (function (result) {
 			if (result.status == "0") {
 				console.log("获取三级类别集合 成功")
+				console.log("测试打印集合 = "+result.data);
+				if (result.data == null || result.data == "") {
+					console.log("集合为空");
+					$scope.miniSubclassName = null;
+				}
 				$scope.miniList = result.data;
 			}
 		})
@@ -116,7 +121,14 @@ app.controller("knowledgepController", function($scope, $http){
 			$http.post("/api/KnowledgeVideo/update",$scope.knowledgep, {'Content-Type': 'application/json;charset=UTF-8'})
 			.success(function(data){
 				if(data.status=="0"){
+					//修改成功  重置
+					//$("#resource").load(location.href + " #resource")
+					location.reload();
+					//$scope.list = null;
+					//$scope.subclassList = null;
+					//$scope.miniSubclassName = null;
 					$scope.courseTypeSubclassName = null;
+					
 					alert("修改成功~");
 					document.getElementById('resource').style.display="none"; 
 					//重置清除缓存

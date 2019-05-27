@@ -13,7 +13,7 @@ public class News {
 	private String title;///标题
 	@NotEmpty(message="图片不能为空")
 	private String imgUrl;///标题图片
-	@NotEmpty(message="内容不能为空")
+	//@NotEmpty(message="内容不能为空")
 	private String content;///内容
 	
 	private Date addtime;

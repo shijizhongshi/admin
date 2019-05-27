@@ -192,6 +192,9 @@
 	<if test="imgUrl!=null">
 	img_url=#{imgUrl},
 	</if>	
+	<if test="headImgUrl!=null">
+	headImgUrl=#{headImgUrl},
+	</if>	
 	<if test="isshow!=null">
 	isshow=#{isshow},
 	</if>
