@@ -211,7 +211,7 @@ submenu="sidebarmenu-system-courseType">
 
 .details-frame-content ul li {
 	float: left;
-	width: 10%;
+	width: 12%;
 	height: 45px;
 	text-align: center;
 	line-height: 45px;

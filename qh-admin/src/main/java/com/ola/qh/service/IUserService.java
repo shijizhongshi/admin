@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.ola.qh.entity.AdminMenus;
 import com.ola.qh.entity.User;
 import com.ola.qh.util.Results;

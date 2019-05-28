@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ola.qh.entity.CourseChapter;
 import com.ola.qh.entity.CourseSection;
 import com.ola.qh.service.ICourseSubclassService;
-import com.ola.qh.util.Patterns;
 import com.ola.qh.util.Results;
 /**
  * 
