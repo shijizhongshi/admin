@@ -167,6 +167,19 @@ public class CourseService implements ICourseService {
 	@Override
 	public Results<String> deleteCourseType(String id) {
 		Results<String> results = new Results<String>();
+		//根据一级ID查询二级集合
+		List<CourseTypeSubclass> list = courseDao.courseTypeSubclassList(id);
+		for (CourseTypeSubclass courseTypeSubclass : list) {
+			//根据二级ID查询三级集合
+			List<CourseTypeSubclassNames> namesList = courseDao.select(courseTypeSubclass.getId());
+			for (CourseTypeSubclassNames courseTypeSubclassNames : namesList) {
+				//根据三级ID删除三级类别
+				courseDao.delete(courseTypeSubclassNames.getId());
+			}
+			//根据二级ID删除二级集合
+			courseDao.deleteCourseTypeSubclass(courseTypeSubclass.getId());
+		}
+		//根据一级ID删除一级类别
 		Integer count = courseDao.deleteCourseType(id);
 		if (count == 1) {
 			results.setStatus("0");
@@ -215,6 +228,13 @@ public class CourseService implements ICourseService {
 	@Override
 	public Results<String> deleteCourseTypeSubclass(String courseTypeSubclassId) {
 		Results<String> results = new Results<String>();
+		//根据二级ID查询出它下面的三级类别集合
+		List<CourseTypeSubclassNames> list = courseDao.select(courseTypeSubclassId);
+		for (CourseTypeSubclassNames courseTypeSubclassNames : list) {
+			//根据三级ID删除三级类别
+			courseDao.delete(courseTypeSubclassNames.getId());
+		}
+		//根据二级ID删除二级类别
 		Integer count = courseDao.deleteCourseTypeSubclass(courseTypeSubclassId);
 		if (count == 1) {
 			results.setStatus("0");

@@ -20,10 +20,7 @@ app.controller("knowledgepController", function($scope, $http){
 		$http.get("/api/course/selectThree",{"params":{"courseTypeSubclassId":$scope.courseTypeSubclassId}},{'Content-Type' : 'application/json;charset=UTF-8'})
 		.success (function (result) {
 			if (result.status == "0") {
-				console.log("获取三级类别集合 成功")
-				console.log("测试打印集合 = "+result.data);
 				if (result.data == null || result.data == "") {
-					console.log("集合为空");
 					$scope.miniSubclassName = null;
 				}
 				$scope.miniList = result.data;
