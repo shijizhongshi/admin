@@ -9,24 +9,16 @@
 <script src="/scripts/student/management.js"></script>
 <script src="/scripts/questionBank/examinerQuestion.js"></script>
 <style>
-		.dd {
-			//border: solid 1px gray;
-			width: 180px;
-			course: hand;
+		.product-buyer-name {
+
+			max-width: 110px;
+
 			overflow: hidden;
-			white-space: nowrap;
+
 			text-overflow: ellipsis;
-			/* for IE */
-			-o-text-overflow: ellipsis;
-			/* for Opera */
-			-icab-text-overflow: ellipsis;
-			/* for iCab */
-			-khtml-text-overflow: ellipsis;
-			/* for Konqueror Safari */
-			-moz-text-overflow: ellipsis;
-			/* for Firefox,mozilla */
-			-webkit-text-overflow: ellipsis;
-			/* for Safari,Swift*/
+
+			white-space: nowrap;
+
 		}
 	</style>
 <@b.body menu="sidebarmenu-questionBank"
@@ -93,8 +85,8 @@ submenu="sidebarmenu-questionBank-examinerQuestion">
 								ng-click="checkquestioncate(qc)"
 								ng-class="{'selected':selected==qc}">
 									
-								<th class="dd">{{qc.questionAsk}}</th>
-								<th>{{qc.questionAnswer}}</th>
+								<th class = "product-buyer-name">{{qc.questionAsk}}</th>
+								<th class = "product-buyer-name">{{qc.questionAnswer}}</th>
 								<th>{{qc.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 								<th>{{qc.updatetime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>

@@ -314,7 +314,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 	// 删除一级类别
 	$scope.deletecate = function(list) {
 		if ($scope.id != null) {
-			if (confirm("您确定删除这个一级类别吗")) {
+			if (confirm("删除该一级分类将会同时删除属于它的二级和三级分类，您仍要删除么？")) {
 				$http.get("/api/course/deleteCourseType", {
 					"params" : {
 						"id" : $scope.id
@@ -326,7 +326,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 						$scope.shopcateBases();
 						alert("删除成功~");
 						$scope.page = 1;
-						// location.reload();
+						location.reload();
 					} else {
 						alert("删除失败~");
 					}
@@ -340,7 +340,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 	// 删除二级类别
 	$scope.deletes = function(clist) {
 		if ($scope.courseTypeSubclassId != null) {
-			if (confirm("您确定删除这个二级类别吗")) {
+			if (confirm("删除此二级分类将会同时删除属于它的三级分类，您仍要删除么？")) {
 				$http.get("/api/course/deleteTwo", {
 					"params" : {
 						"courseTypeSubclassId" : $scope.courseTypeSubclassId
@@ -353,7 +353,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 						alert("删除成功~");
 						$scope.page = 1;
 						$scope.selectCourseTypeSubclass();
-						// location.reload();
+						location.reload();
 					} else {
 						alert("删除失败~");
 					}

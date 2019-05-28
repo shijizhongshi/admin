@@ -302,7 +302,13 @@ public class CourseController {
 
 		return results;
 	}
-
+	/**
+	 * 更新一级分类
+	 * @param id
+	 * @param courseTypeName
+	 * @param imgUrl
+	 * @return
+	 */
 	@RequestMapping(value = "/updateOne", method = RequestMethod.GET)
 	public Results<String> updateOne(@RequestParam(name = "id") String id,
 			@RequestParam(name = "courseTypeName") String courseTypeName,
