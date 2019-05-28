@@ -3,10 +3,6 @@ package com.ola.qh.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class OrdersProductRefund {
 
 	private String id;
