@@ -67,9 +67,9 @@
 			<if test="courseTypeSubclassName!=null and courseTypeSubclassName!=''">
 			course_type_subclass_name=#{courseTypeSubclassName},
 			</if>
-			<if test="miniSubclassName!=null and miniSubclassName!=''">
+			
 			mini_subclass_name=#{miniSubclassName},
-			</if>
+			
 			<if test="times!=null and times!=''">
 			times=#{times},
 			</if>

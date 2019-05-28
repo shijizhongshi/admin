@@ -199,6 +199,7 @@ public class KnowledgeVideoService implements IKnowledgeVideoService {
 				userVideo.setFirstImage(newImage);
 				userVideo.setVideoId(knowledgeVideo.getVideoId());
 				userVideo.setTitle(knowledgeVideo.getTitle());
+				userVideo.setTypes(1);
 				userVideo.setUserId("1");
 				userVideoDao.insert(userVideo);
 			}

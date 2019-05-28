@@ -1,8 +1,9 @@
 package com.ola.qh.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ola.qh.service.IStoreService;
 import com.ola.qh.util.Results;
 
@@ -30,7 +32,18 @@ public class UploadStoreController {
 		return result;
 	}
 
-	
+	@RequestMapping(value = "/api/upload/wangEditor", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public JSONObject uploadTest(@RequestParam(value = "file", required = true) MultipartFile file,
+			HttpServletRequest request) throws Exception {
+		JSONObject obj = new JSONObject();
+		String img = process(file);
+		String [] imgs = {img};
+		obj.put("errno", 0);
+		obj.put("data", imgs);
+
+		return obj;
+	}
+
 	private String process(MultipartFile file) throws Exception {
 		byte[] contents = file.getBytes();
 		String fname = file.getOriginalFilename();
@@ -39,8 +52,7 @@ public class UploadStoreController {
 
 	@RequestMapping(value = "/api/upload/multi", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public Results<List<String>> upload(@RequestParam(value = "file", required = true) MultipartFile[] file)
-			throws Exception 
-	{
+			throws Exception {
 		Results<List<String>> result = new Results<List<String>>();
 		List<String> items = new ArrayList<String>();
 		for (MultipartFile f : file) {
@@ -51,5 +63,5 @@ public class UploadStoreController {
 		result.setData(items);
 		return result;
 	}
-	
+
 }

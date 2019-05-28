@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.ola.qh.entity.CourseLiveCheck;
 import com.ola.qh.entity.QuestionAnswer;
 import com.ola.qh.entity.QuestionBank;
+import com.ola.qh.entity.QuestionBankAsk;
 import com.ola.qh.entity.QuestionUnit;
 
 public interface QuestionBankDao {
@@ -53,4 +54,14 @@ public interface QuestionBankDao {
 
 	public Integer selectLiveVerifyCount(@Param("fromdate") String fromdate,@Param("todate") String todate,@Param("mobile") String mobile,
 			@Param("roomId") String roomId,@Param("courseTypeSubclassName") String courseTypeSubclassName);
+
+	public List<QuestionBankAsk> questionList(@Param("courseTypeSubclassName")String courseTypeSubclassName,@Param("pageNo")Integer pageNo,@Param("pageSize")Integer pageSize);
+
+	public Integer addQuestion(QuestionBankAsk questionBankAsk);
+
+	public Integer deleteQuestion(@Param("id")String id);
+
+	public Integer selectCount(@Param("courseTypeSubclassName")String courseTypeSubclassName);
+
+	public Integer updateQuestion(QuestionBankAsk questionBankAsk);
 }

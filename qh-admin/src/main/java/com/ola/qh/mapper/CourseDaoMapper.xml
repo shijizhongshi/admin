@@ -138,7 +138,7 @@
 	<!--添加 -->
 	<insert id="insert" parameterType="String">
 		insert into
-		course_type_subclass_names(id,mini_subclass_name,course_type_subclass_id)values(#{id},#{miniSubclassName},#{courseTypeSubclassId})
+		course_type_subclass_names(id,mini_subclass_name,course_type_subclass_id,course_type_subclass_name)values(#{id},#{miniSubclassName},#{courseTypeSubclassId},#{courseTypeSubclassName})
 	</insert>
 	<!-- 修改 -->
 	<update id="update" parameterType="String">

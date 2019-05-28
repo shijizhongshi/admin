@@ -143,7 +143,7 @@ submenu="sidebarmenu-patientmanage-knowledgep">
 										<span>所属专业<i class="bitian">*</i></span> <img
 											src="/images/sjk-xl.png"> <select ng-model="l"
 											ng-options="l.courseTypeName for l in list"
-											ng-change="getSuclassName(l)">
+											ng-change="getSubclassName(l)">
 										</select>
 									</div>
 								<!-- 二级类别集合  -->

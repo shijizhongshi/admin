@@ -28,6 +28,8 @@ public class UserVideo {
 	
 	private int status;
 	
+	private int types;
+	
 	private int likeNumber;
 	
 	private int commentNumber;
@@ -162,6 +164,14 @@ public class UserVideo {
 
 	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
+	}
+
+	public int getTypes() {
+		return types;
+	}
+
+	public void setTypes(int types) {
+		this.types = types;
 	}
 
 	

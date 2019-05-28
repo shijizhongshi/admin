@@ -61,6 +61,7 @@ submenu="sidebarmenu-marketing-LivePay">
 								<th>价格</th>
 								<th>折扣价格</th>
 								<th>订单情况</th>
+								<th>订单生成时间</th>
 							</tr>
 							<tr ng-repeat="livepay in LivePaylist" ng-click="checkList(livepay)"
 								ng-class="{'selected':selected == livepay}">
@@ -70,7 +71,7 @@ submenu="sidebarmenu-marketing-LivePay">
 								<th>{{livepay.price}}</th>
 								<th>{{livepay.discount}}</th>
 								<th>{{livepay.status}}</th>
-								
+								<th>{{livepay.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
 							</tr>
 						</tbody>
 					</table>

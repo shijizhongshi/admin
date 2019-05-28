@@ -100,7 +100,7 @@
 					<form id="myform">
 						<h3>添加咨询/话题</h3>
 						<div class="template-add">
-							<div class="template-left" style="padding-right: 5%;">
+							<div class="template-left" >
 
 								<div class=" select-3">
 
@@ -160,13 +160,13 @@
 							</div>
 
 							<!-- 富文本编辑器  -->
-							<div class="template-right">
-								<!--<p style="height: 40px; font-size: 1.3rem;">文本内容</p>-->
+							<div class="template-right" style="width:60%">
 								<div class="grade-text">
 									<span>文本内容</span>
-								    <!-- <div id="div1" style="border:1px solid gray;">
-									</div> -->
-									<textarea ng-model="news.content"></textarea>
+								    <div id="div1" style="height: 500px;" ng-model="news.content">
+								    	<p></p>
+									</div>
+									<!-- <textarea ng-model="news.content"></textarea> -->
 								</div>
 								<!-- <textarea id="editor" ></textarea>
 								<script type="text/javascript">var ue = UE.getEditor('editor');</script>
@@ -207,7 +207,7 @@
 }
 
 .template-left, .template-right {
-	width: 50%;
+	width: 40%;
 	float: left;
 	height: auto;
 }
@@ -228,7 +228,7 @@
 }
 
 .template-right .grade-text {
-	width: 80%;
+	width: 100%;
 }
 
 .template-right .grade-text textarea {
