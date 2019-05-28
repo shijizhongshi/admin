@@ -107,6 +107,7 @@ public class ExportExcel {
 		}else if(types==5){
 			sheetFieldsName.add("真实姓名");
 			sheetFieldsName.add("密码");
+			sheetFieldsName.add("订单时间");
 		}
 		
 		return sheetFieldsName;
@@ -216,9 +217,10 @@ public class ExportExcel {
 				
 				ArrayList<Object> arr = new ArrayList<Object>();
 				JSONObject jo = new JSONObject();
+				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				arr.add(LivePay.getRealname());
 				arr.add("zhongshi");
-				
+				arr.add(sf.format(LivePay.getAddtime()));
 				jo.put("data", arr);
 				jaDatas.add(jo);
 			}
@@ -265,6 +267,7 @@ public class ExportExcel {
 		}else if(types==5){
 			sheetColWidth.add(0, 5000);
 			sheetColWidth.add(1, 5000);
+			sheetColWidth.add(2, 8000);
 			
 		}
 		return sheetColWidth;
