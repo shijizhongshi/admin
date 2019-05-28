@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ola.qh.dao.PlayBackDao">
+	<resultMap type="com.ola.qh.entity.PlayBack" id="PlayBackMap">
+		<result column="id" property="id"/>
+		<result column="playback_name" property="playbackName"/>
+		<result column="video_id" property="videoId"/>
+		<result column="live_id" property="liveId"/>
+		<result column="addtime" property="addtime"/>
+		<result column="updatetime" property="updatetime"/>
+	</resultMap>
+	
+	<select id="playBackList" resultMap="PlayBackMap">
+		select id,playback_name,live_id,addtime,video_id
+		from playback
+		where 1=1 
+		<if test="liveId!=null and liveId!=''">
+		and live_id=#{liveId}
+		</if>
+		<if test="playbackName!=null and playbackName!=''">
+		and playback_name=#{playbackName}
+		</if>
+		<if test="pageSize!=0">
+		limit #{pageNo},#{pageSize}
+		</if>
+	</select>
+	
+	<select id="playBackCount" resultType="int">
+		select count(id)
+		from playback
+		where 1=1 
+		<if test="liveId!=null and liveId!=''">
+		and live_id=#{liveId}
+		</if>
+		<if test="playbackName!=null and playbackName!=''">
+		and playback_name=#{playbackName}
+		</if>
+		
+	</select>
+	
+	<select id="existPlayBack" resultType="int">
+		select count(id) from playback  
+		where live_id=#{liveId}
+	</select>
+	
+	<insert id="insertPlayBack" parameterType="com.ola.qh.entity.PlayBack">
+		insert into playback(id,playback_name,live_id,addtime,video_id) values(#{id},#{playbackName},#{liveId},#{addtime},#{videoId})
+	</insert>
+	
+	<update id="updatePlayBack" parameterType="com.ola.qh.entity.PlayBack">
+		update playback set 
+		<if test="playbackName!=null and playbackName!=''">
+		playback_name=#{playbackName},
+		</if>
+		<if test="videoId!=null and videoId!=''">
+		video_id=#{videoId},
+		</if>
+		updatetime=#{updatetime}
+		where id=#{id}
+	</update>
+	
+	<delete id="deletePlayBack">
+		delete from playback where id=#{id}
+	</delete>
+</mapper>

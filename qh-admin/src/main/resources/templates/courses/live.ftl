@@ -59,6 +59,10 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改直播</li>
 					<li ng-click="deleteLive()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+					<li ng-click="add2()" style="background: #F86846;"><span
+						class="glyphicon glyphicon-trash"></span>&nbsp;添加回放</li>
+					<li ng-click="toplayBack()" style="background: #F86846;"><span
+						class="glyphicon glyphicon-trash"></span>&nbsp;查看回放</li>
 					<li ng-click="liveBases()"
 						style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
@@ -71,6 +75,7 @@
 							<th>直播图片</th>
 							<th>是否可见</th>
 							<th>创建时间</th>
+							<th>是否有回放</th>
 							<th>白名单</th>
 						</tr>
 
@@ -81,6 +86,7 @@
 							<th ng-show="l.isshow==1">是</th>
 							<th ng-show="l.isshow==0">否</th>
 							<th>{{l.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
+							<th>{{l.isPlayBack}}</th>
 							<th><span class="xiangqing"
 								ng-click="toWhite(l.id,l.liveName)">查看白名单</span></th>
 						</tr>
@@ -188,6 +194,41 @@
 							ng-click="addLive()"> <input name="esc" type="reset"
 							value="取消" ng-click="cancel()" class="esc">
 					</div>
+				</div>
+				<!-- 回放弹窗 -->
+				<div class="poop" id="add2" style="display: none">
+					
+						<h3>添加课程</h3>
+						<div class="flex">
+							<div style="width: 80%;">
+								<div class=" select-2">
+									<span>回放名称</span> <input type="text"
+										ng-model="playback.playbackName" placeholder="请输入回放名称" />
+								</div>
+								<div style="width: 100%; clear: both;">
+									<div class=" select-2">
+
+										<span>视频的videoId:</span> 
+										<input type="text"
+								ng-model="playback.videoId" placeholder="视频的videoId"
+								style="width: 230px; text-indent: 2em;" ng-keyup="ccnew(playback.videoId)"/>
+									</div>
+								</div>
+							<div class="costs-uploadfile-div" ng-show="ccvideo">
+								
+								<div style="margin-top: 3px;">
+									<iframe id="{{scriptss2}}" src="{{trustSrc()}}" frameborder="0" height="490" width="600"></iframe>
+								</div>
+							</div>
+							</div>
+						</div>
+						<div class="end">
+							<input name="git" type="submit"
+								value="添加"  ng-click="addPlayBack()"
+								style="background: #5ED8A9;" /> <input name="esc" type="reset"
+								value="取消" ng-click="reset2()" class="esc" />
+						</div>
+					
 				</div>
 			</div>
 		</div>
