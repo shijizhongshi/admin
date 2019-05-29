@@ -85,6 +85,7 @@ app.controller(
 											if (data.status == "0") {
 												alert("保存成功~");
 												document.getElementById('add').style.display = "none";
+												$("#p1").html(null);
 												$scope.loaddata();
 											} else {
 												alert(data.message)
@@ -94,12 +95,23 @@ app.controller(
 					$scope.newsId = null;
 					var content = null;
 					$scope.checkednews = function(news) {
-						$scope.selected = news;
-						$scope.newsId = news.id;
-						$scope.news = news;
-						$scope.imgUrl = news.imgUrl;
-						//先清空再赋值
-						$("p").empty();
+						if ($scope.selected != news) {
+							$scope.selected = news;
+							$scope.newsId = news.id;
+							$scope.news = news;
+							$scope.imgUrl = news.imgUrl;
+							//先清空再赋值
+							$("p").empty();
+							//定位到P标签 赋值回显
+							$("#p1").html($scope.news.content);
+						}else {
+							$scope.selected = null;
+							$scope.newsId = null;
+							$scope.news = null;
+							$scope.imgUrl = null;
+							$("#p1").html(null);
+						}
+						
 					}
 					//点击弹出添加窗口
 					$scope.add = function() {
@@ -107,15 +119,22 @@ app.controller(
 						$scope.news = null;
 						$scope.imgUrl = null;
 						$("p").empty();
+						//取消选中赋空值
+						$("#p1").html(null);
 						
 						document.getElementById('add').style.display = "block";
 					}
+					//点击弹出修改窗口
 					$scope.update = function() {
 						if ($scope.newsId == null) {
 							alert("请选择信息~")
 						} else {
 							if ($scope.news.content != null) {
-								$("p").after($scope.news.content);	
+								
+								//var obj = document.getElementById("p1");
+								//console.log("测试打印obj= "+obj);
+								//console.log("测试打印obj.innerHTML = "+obj.innerHTML);
+								//$("p").after($scope.news.content);	
 							}
 							document.getElementById('add').style.display = "block";
 						}
@@ -139,6 +158,8 @@ app.controller(
 												$("p").empty();
 												alert("更新成功~");
 												document.getElementById('add').style.display = "none";
+												//重置ID
+												$scope.newsId = null;
 												$scope.loaddata();
 											} else {
 												alert(data.message)
@@ -184,7 +205,7 @@ app.controller(
 
 					$scope.cancel = function() {
 						$("p").empty();
-
+					//	$scope.news.content = null;
 						$scope.newsId = null;
 						$scope.news = null;
 						$scope.selected = null;
@@ -192,11 +213,15 @@ app.controller(
 					}
 
 					// 测试 富文本编辑器
-					// 获取元素
-					var div = document.getElementById('div1');
-
+					 //测试
+				    var E = window.wangEditor; 
+				    var editor = new E('#div1'); 
+					
+				    // 获取元素
+					//var div = document.getElementById('div1');
 					// 生成编辑器
-					var editor = new wangEditor(div);
+					//var editor = new wangEditor(div);
+				    
 					// 开启debug模式
 					editor.customConfig.debug = editor.customConfig.debug = location.href
 							.indexOf('wangeditor_debug_mode=1') > 0;
@@ -228,7 +253,9 @@ app.controller(
 				       // 'video',  // 插入视频
 				        //'code',  // 插入代码
 				        'undo',  // 撤销
-				        'redo'  // 重复
+				        'redo' // 重复
+				        //'aaa':'查看源码'
+				        
 				    ]
 
 					// 表情面板可以有多个 tab ，因此要配置成一个数组。数组每个元素代表一个 tab 的配置
@@ -542,5 +569,10 @@ app.controller(
 					// 隐藏“网络图片”tab
 				    editor.customConfig.showLinkImg = false;
 				    
+				   
 					editor.create();
+					//全屏功能
+					//E.fullscreen.init(editor);
+					//查看修改源码功能
+					E.viewSource.init(editor);
 				});
