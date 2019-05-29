@@ -1,7 +1,7 @@
 app
 		.controller(
 				"liveShowController",
-				function($scope, $http,$sce) {
+				function($scope, $http) {
 
 					$scope.courseTypeName = "医师资格";
 					$scope.courseTypeSubclassName = "临床(执业)助理医师";
@@ -79,13 +79,7 @@ app
 										$scope.livelist = data.data;
 										$scope.total = data.count;
 
-										angular.forEach($scope.livelist,function(live){
-											if(live.isPlayBack==0){
-												live.isPlayBack="无回放";
-											}else {
-												live.isPlayBack="有回放"
-											}
-										})
+										
 									}
 								})
 					}
@@ -284,50 +278,5 @@ app
 						location.href = "/web/course/toWhite?liveId=" + liveId
 								+ "&liveName=" + liveName;
 					}
-					$scope.toplayBack = function() {
-
-						location.href = "/web/course/playback?liveId=" + $scope.liveId;
-					}
-					$scope.addPlayBack = function() {
-
-						$scope.playback.liveId=$scope.liveId;
-								$http.post("/api/playback/insert",$scope.playback,{'Content-Type' : 'application/json;charset=UTF-8'})
-								
-								.success(function(data){
-									   if(data.status=="0"){
-										   alert("添加成功");
-										   $scope.playback=null;
-										   document.getElementById('add2').style.display = "none";
-										   $scope.liveBases();
-									   }else{
-										   alert(data.message);
-									   }
-								})
-							
-						
-					}
-					$scope.add2=function(){
-						if($scope.liveId != null){
-							if($scope.live.isPlayBack=="有回放"){
-								return alert("直播已有回放，请前往'查看回放'中修改");
-							}else{
-								document.getElementById('add2').style.display = "block";
-							}
-						}else{
-							alert("请选中信息~");
-						}
-						
-					}
-					$scope.reset2=function(){
-						$scope.playback=null;
-						document.getElementById('add2').style.display = "none";
-					}
-					$scope.ccnew=function(videoId){
-						$scope.ccvideo=true;
-						$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
-						$scope.trustSrc = function() {
-					         return $sce.trustAsResourceUrl($scope.scriptss1);
-					     }
-						$scope.scriptss2="cciframe_"+videoId;
-					};
+					
 				});

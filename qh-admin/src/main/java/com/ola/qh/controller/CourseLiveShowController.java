@@ -16,7 +16,6 @@ import com.ola.qh.entity.CourseLineShow;
 import com.ola.qh.entity.CourseTeacher;
 import com.ola.qh.service.ICourseNofreeService;
 import com.ola.qh.service.ICourseTeacherService;
-import com.ola.qh.service.IPlayBackService;
 import com.ola.qh.util.Results;
 
 @RestController
@@ -27,9 +26,7 @@ public class CourseLiveShowController {
 	private ICourseNofreeService courseNofreeService;
 	@Autowired
 	private ICourseTeacherService courseTeacherService;
-	@Autowired
-	private IPlayBackService playBackService;
-
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Results<String> saveLive(@RequestBody @Valid CourseLineShow cl, BindingResult valid) {
 		Results<String> result = new Results<String>();
@@ -73,11 +70,7 @@ public class CourseLiveShowController {
 		Results<List<CourseLineShow>> result = new Results<List<CourseLineShow>>();
 		List<CourseLineShow> list = courseNofreeService.selectLiveList(pageNo, pageSize, courseTypeName,
 				courseTypeSubclassName, liveName);
-		for (CourseLineShow courseLineShow : list) {
-			
-			int exist=playBackService.existPlayBack(courseLineShow.getId());
-			courseLineShow.setIsPlayBack(exist);
-		}
+		
 		int count = courseNofreeService.selectLiveListCount(courseTypeName, courseTypeSubclassName, liveName);
 		result.setCount(count);
 		result.setData(list);

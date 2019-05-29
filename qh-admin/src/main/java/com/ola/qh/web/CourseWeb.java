@@ -72,10 +72,5 @@ public class CourseWeb{
 	public String faceteache(){
 		return "courses/face-teache";
 	}
-	@RequestMapping("/playback")
-	public String playBack(@RequestParam(name="liveId",required=false)String liveId,
-			HttpServletRequest request){
-		request.getSession().setAttribute("liveId", liveId);
-		return "courses/playback";
-	}
+	
 }

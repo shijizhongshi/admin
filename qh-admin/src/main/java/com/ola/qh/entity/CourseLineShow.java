@@ -48,8 +48,6 @@ public class CourseLineShow {
 
 	private Integer isopen;// 是否是公开课 ，0 不公开，1 公开
 	
-	private int isPlayBack;// 是否有回放，0 无，1 有
-
 	public Date getStoptime() {
 		return stoptime;
 	}
@@ -202,13 +200,6 @@ public class CourseLineShow {
 		this.addtime = addtime;
 	}
 
-	public int getIsPlayBack() {
-		return isPlayBack;
-	}
-
-	public void setIsPlayBack(int isPlayBack) {
-		this.isPlayBack = isPlayBack;
-	}
-
+	
 	
 }
