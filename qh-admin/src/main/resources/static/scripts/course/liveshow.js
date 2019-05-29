@@ -1,7 +1,7 @@
 app
 		.controller(
 				"liveShowController",
-				function($scope, $http) {
+				function($scope, $http,$sce) {
 
 					$scope.courseTypeName = "医师资格";
 					$scope.courseTypeSubclassName = "临床(执业)助理医师";
@@ -79,6 +79,13 @@ app
 										$scope.livelist = data.data;
 										$scope.total = data.count;
 
+										angular.forEach($scope.livelist,function(live){
+											if(live.isPlayBack==0){
+												live.isPlayBack="无回放";
+											}else {
+												live.isPlayBack="有回放"
+											}
+										})
 									}
 								})
 					}
@@ -196,31 +203,34 @@ app
 						$scope.imgUrl = l.imgUrl;
 						$scope.headImgUrl = l.headImgUrl;
 						$scope.starttime = l.starttime;
-						
+
 						$('#sp1').text(getTime(l.starttime));
 						$('#sp2').text(getTime(l.stoptime));
 					}
-					//格式化时间
+					// 格式化时间
 					function getTime(date) {
 						var date = new Date(date);
 
 						Y = date.getFullYear() + '-';
 
-						M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+						M = (date.getMonth() + 1 < 10 ? '0'
+								+ (date.getMonth() + 1) : date.getMonth() + 1)
+								+ '-';
 
 						D = date.getDate() + ' ';
 
 						h = date.getHours() + ':';
-						
-						h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
 
-						m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes());
-						
-						var time  = (Y+M+D+h+m);
+						h = (date.getHours() < 10 ? '0' + date.getHours()
+								: date.getHours())
+								+ ':';
+
+						m = (date.getMinutes() < 10 ? '0' + date.getMinutes()
+								: date.getMinutes());
+
+						var time = (Y + M + D + h + m);
 						return time;
 					}
-					
-					
 
 					$scope.add = function() {
 						$scope.imgUrl = null;
@@ -228,30 +238,21 @@ app
 						$scope.liveId = null;
 						document.getElementById('add').style.display = "block";
 					}
-					//选中
+					// 选中
 					$scope.update = function() {
 						if ($scope.liveId == null) {
 							alert("请先选中信息~");
 						} else {
 							document.getElementById('add').style.display = "block";
-							
+
 						}
 					}
 					$scope.deleteLive = function() {
 						if ($scope.liveId != null) {
 							// //删除课程/
 							if (confirm("您确定要删除这个直播资料吗?")) {
-								$http
-										.get(
-												"/api/courselive/delete",
-												{
-													"params" : {
-														"id" : $scope.liveId
-													}
-												},
-												{
-													'Content-Type' : 'application/json;charset=UTF-8'
-												}).success(function(data) {
+								$http.get("/api/courselive/delete",{"params" : {"id" : $scope.liveId}},{'Content-Type' : 'application/json;charset=UTF-8'})
+								.success(function(data) {
 											if (data.status == '0') {
 												alert("删除成功~");
 												$scope.page = 1;
@@ -283,4 +284,50 @@ app
 						location.href = "/web/course/toWhite?liveId=" + liveId
 								+ "&liveName=" + liveName;
 					}
+					$scope.toplayBack = function() {
+
+						location.href = "/web/course/playback?liveId=" + $scope.liveId;
+					}
+					$scope.addPlayBack = function() {
+
+						$scope.playback.liveId=$scope.liveId;
+								$http.post("/api/playback/insert",$scope.playback,{'Content-Type' : 'application/json;charset=UTF-8'})
+								
+								.success(function(data){
+									   if(data.status=="0"){
+										   alert("添加成功");
+										   $scope.playback=null;
+										   document.getElementById('add2').style.display = "none";
+										   $scope.liveBases();
+									   }else{
+										   alert(data.message);
+									   }
+								})
+							
+						
+					}
+					$scope.add2=function(){
+						if($scope.liveId != null){
+							if($scope.live.isPlayBack=="有回放"){
+								return alert("直播已有回放，请前往'查看回放'中修改");
+							}else{
+								document.getElementById('add2').style.display = "block";
+							}
+						}else{
+							alert("请选中信息~");
+						}
+						
+					}
+					$scope.reset2=function(){
+						$scope.playback=null;
+						document.getElementById('add2').style.display = "none";
+					}
+					$scope.ccnew=function(videoId){
+						$scope.ccvideo=true;
+						$scope.scriptss1="https://p.bokecc.com/playhtml.bo?vid="+videoId+"&siteid=91DD94C27B488135&autoStart=false&playerid=023C4DD30D07346E&playertype=1";
+						$scope.trustSrc = function() {
+					         return $sce.trustAsResourceUrl($scope.scriptss1);
+					     }
+						$scope.scriptss2="cciframe_"+videoId;
+					};
 				});
