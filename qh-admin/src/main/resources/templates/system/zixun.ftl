@@ -11,7 +11,10 @@
 <script src="/scripts/admin.js"></script>
 
 <script src="/scripts/wangEditor.min.js"></script>
+<script src="/scripts/wangEditorExt.js"></script>
+
 <link rel="stylesheet" type="text/css" href="/styles/wangEditor.min.css" />
+<link rel="stylesheet" type="text/css" href="/styles/wangEditor-fullscreen.css" />
 <@b.body menu="sidebarmenu-system" submenu="sidebarmenu-system-zixun">
 <div>
 	<div class="details" style="width: 100%" ng-controller="newController">
@@ -164,7 +167,7 @@
 								<div class="grade-text">
 									<span>文本内容</span>
 								    <div id="div1" style="height: 500px;" ng-model="news.content">
-								    	<p></p>
+								    	<p id="p1">测试...</p>
 									</div>
 									<!-- <textarea ng-model="news.content"></textarea> -->
 								</div>
