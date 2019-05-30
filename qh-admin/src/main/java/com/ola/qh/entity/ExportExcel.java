@@ -106,7 +106,7 @@ public class ExportExcel {
 			
 		}else if(types==5){
 			sheetFieldsName.add("真实姓名");
-			sheetFieldsName.add("密码");
+			sheetFieldsName.add("手机号");
 			sheetFieldsName.add("订单时间");
 		}
 		
@@ -219,7 +219,7 @@ public class ExportExcel {
 				JSONObject jo = new JSONObject();
 				SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				arr.add(LivePay.getRealname());
-				arr.add("zhongshi");
+				arr.add(LivePay.getMobile());
 				arr.add(sf.format(LivePay.getAddtime()));
 				jo.put("data", arr);
 				jaDatas.add(jo);

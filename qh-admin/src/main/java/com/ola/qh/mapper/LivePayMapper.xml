@@ -30,7 +30,12 @@
 		<if test="startTime!=null and startTime!=''">
 		and starttime=#{startTime}
 		</if>
+		<if test="types==0">
 		ORDER BY CONVERT( realname USING gbk ) COLLATE gbk_chinese_ci ASC 
+		</if>
+		<if test="types==1">
+		ORDER BY addtime desc 
+		</if>
 		<if test="pageSize!=0">
 		limit #{pageNo},#{pageSize}
 		</if>

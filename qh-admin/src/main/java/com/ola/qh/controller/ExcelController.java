@@ -157,7 +157,7 @@ public class ExcelController {
 		ExportTest exportTest=new ExportTest();
 		InputExportExcel inputExportExcel=new InputExportExcel();
 		
-		List<LivePay> livePay=livePayDao.livePayList(status,livename,startTime, 0, 0);
+		List<LivePay> livePay=livePayDao.livePayList(status,livename,startTime, 0, 0,0);
 		
 		inputExportExcel.setLivePay(livePay);
 		inputExportExcel.setTypes(types);
