@@ -79,6 +79,7 @@ app
 										$scope.livelist = data.data;
 										$scope.total = data.count;
 
+										
 									}
 								})
 					}
@@ -196,31 +197,34 @@ app
 						$scope.imgUrl = l.imgUrl;
 						$scope.headImgUrl = l.headImgUrl;
 						$scope.starttime = l.starttime;
-						
+
 						$('#sp1').text(getTime(l.starttime));
 						$('#sp2').text(getTime(l.stoptime));
 					}
-					//格式化时间
+					// 格式化时间
 					function getTime(date) {
 						var date = new Date(date);
 
 						Y = date.getFullYear() + '-';
 
-						M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+						M = (date.getMonth() + 1 < 10 ? '0'
+								+ (date.getMonth() + 1) : date.getMonth() + 1)
+								+ '-';
 
 						D = date.getDate() + ' ';
 
 						h = date.getHours() + ':';
-						
-						h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
 
-						m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes());
-						
-						var time  = (Y+M+D+h+m);
+						h = (date.getHours() < 10 ? '0' + date.getHours()
+								: date.getHours())
+								+ ':';
+
+						m = (date.getMinutes() < 10 ? '0' + date.getMinutes()
+								: date.getMinutes());
+
+						var time = (Y + M + D + h + m);
 						return time;
 					}
-					
-					
 
 					$scope.add = function() {
 						$scope.imgUrl = null;
@@ -228,30 +232,21 @@ app
 						$scope.liveId = null;
 						document.getElementById('add').style.display = "block";
 					}
-					//选中
+					// 选中
 					$scope.update = function() {
 						if ($scope.liveId == null) {
 							alert("请先选中信息~");
 						} else {
 							document.getElementById('add').style.display = "block";
-							
+
 						}
 					}
 					$scope.deleteLive = function() {
 						if ($scope.liveId != null) {
 							// //删除课程/
 							if (confirm("您确定要删除这个直播资料吗?")) {
-								$http
-										.get(
-												"/api/courselive/delete",
-												{
-													"params" : {
-														"id" : $scope.liveId
-													}
-												},
-												{
-													'Content-Type' : 'application/json;charset=UTF-8'
-												}).success(function(data) {
+								$http.get("/api/courselive/delete",{"params" : {"id" : $scope.liveId}},{'Content-Type' : 'application/json;charset=UTF-8'})
+								.success(function(data) {
 											if (data.status == '0') {
 												alert("删除成功~");
 												$scope.page = 1;
@@ -283,4 +278,5 @@ app
 						location.href = "/web/course/toWhite?liveId=" + liveId
 								+ "&liveName=" + liveName;
 					}
+					
 				});

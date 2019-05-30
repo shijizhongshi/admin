@@ -26,7 +26,7 @@ public class LivePayService implements ILivePayService{
 		
 		try {
 			
-			List<LivePay> list=livePayDao.livePayList(status,livename,startTime, pageNo, pageSize);
+			List<LivePay> list=livePayDao.livePayList(status,livename,startTime, pageNo, pageSize,1);
 			
 			int count=livePayDao.livePayCount(status,livename,startTime);
 			

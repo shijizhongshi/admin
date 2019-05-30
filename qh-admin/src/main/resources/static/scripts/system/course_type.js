@@ -395,7 +395,7 @@ app.controller("CourseTypeController", function($scope, $http) {
 	// 选中三级列表
 	$scope.threeId = null;
 	$scope.checkedThree = function(tl) {
-		if ($scope.threeId == null) {
+		if ($scope.selectsThree != tl) {
 			$scope.selectsThree = tl;
 			$scope.miniSubclassName = tl.miniSubclassName;
 			$scope.threeId = tl.id;
@@ -454,6 +454,8 @@ app.controller("CourseTypeController", function($scope, $http) {
 			'Content-Type' : 'application/json;charset=UTF-8'
 		}).success(function(result) {
 			if (result.status == "0") {
+				//重置三级ID
+				$scope.threeId = null;
 				document.getElementById('three').style.display = "none";
 				$scope.selectThree();
 			}

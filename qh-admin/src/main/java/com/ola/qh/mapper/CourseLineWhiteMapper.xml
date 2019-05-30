@@ -43,6 +43,7 @@
 		<if test="username!=null and username!=''">
 			and username=#{username}
 		</if>
+		ORDER BY CONVERT( username USING gbk ) COLLATE gbk_chinese_ci ASC 
 		<if test="pageSize!=0">
 			limit #{pageNo},#{pageSize}
 		</if>

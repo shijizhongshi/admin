@@ -26,7 +26,7 @@ public class CourseLiveShowController {
 	private ICourseNofreeService courseNofreeService;
 	@Autowired
 	private ICourseTeacherService courseTeacherService;
-
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public Results<String> saveLive(@RequestBody @Valid CourseLineShow cl, BindingResult valid) {
 		Results<String> result = new Results<String>();
@@ -70,6 +70,7 @@ public class CourseLiveShowController {
 		Results<List<CourseLineShow>> result = new Results<List<CourseLineShow>>();
 		List<CourseLineShow> list = courseNofreeService.selectLiveList(pageNo, pageSize, courseTypeName,
 				courseTypeSubclassName, liveName);
+		
 		int count = courseNofreeService.selectLiveListCount(courseTypeName, courseTypeSubclassName, liveName);
 		result.setCount(count);
 		result.setData(list);

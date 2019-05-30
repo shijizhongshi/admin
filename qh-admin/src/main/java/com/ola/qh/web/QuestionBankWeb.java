@@ -48,10 +48,6 @@ public class QuestionBankWeb {
 		return "questionBank/calendar";
 	}
 
-	@RequestMapping("/dailyPractice")
-	public String dailyPractice() {
-		return "questionBank/dailyPractice";
-	}
 	@RequestMapping("/examinerQuestion")
 	public String examinerQuestion() {
 		return "questionBank/examinerQuestion";

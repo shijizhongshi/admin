@@ -72,4 +72,5 @@ public class CourseWeb{
 	public String faceteache(){
 		return "courses/face-teache";
 	}
+	
 }

@@ -59,6 +59,7 @@
 						class="glyphicon glyphicon-pencil"></span>&nbsp;修改直播</li>
 					<li ng-click="deleteLive()" style="background: #F86846;"><span
 						class="glyphicon glyphicon-trash"></span>&nbsp;删除</li>
+					
 					<li ng-click="liveBases()"
 						style="float: right; margin-right: 20px; background: none;"><img
 						src="/images/sjk-f5.png" name="changyi" /></li>
@@ -71,6 +72,10 @@
 							<th>直播图片</th>
 							<th>是否可见</th>
 							<th>创建时间</th>
+
+							<th>是否有回放</th>
+
+							<th>直播开始时间</th>
 							<th>白名单</th>
 						</tr>
 
@@ -81,6 +86,11 @@
 							<th ng-show="l.isshow==1">是</th>
 							<th ng-show="l.isshow==0">否</th>
 							<th>{{l.addtime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
+
+							<th>{{l.isPlayBack}}</th>
+
+							<th>{{l.starttime | date:'yyyy.MM.dd HH:mm:ss'}}</th>
+
 							<th><span class="xiangqing"
 								ng-click="toWhite(l.id,l.liveName)">查看白名单</span></th>
 						</tr>
@@ -189,6 +199,7 @@
 							value="取消" ng-click="cancel()" class="esc">
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
